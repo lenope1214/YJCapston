@@ -1,0 +1,59 @@
+﻿<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>QRcode-scanner</title>
+    <link href="./css/qrcodecss.css" type="text/css" rel="stylesheet" />
+    <link rel="manifest" href="./js/manifest.json" />
+    <script type="text/javascript" src="./js/grid.js"></script>
+    <script type="text/javascript" src="./js/version.js"></script>
+    <script type="text/javascript" src="./js/detector.js"></script>
+    <script type="text/javascript" src="./js/formatinf.js"></script>
+    <script type="text/javascript" src="./js/errorlevel.js"></script>
+    <script type="text/javascript" src="./js/bitmat.js"></script>
+    <script type="text/javascript" src="./js/datablock.js"></script>
+    <script type="text/javascript" src="./js/bmparser.js"></script>
+    <script type="text/javascript" src="./js/datamask.js"></script>
+    <script type="text/javascript" src="./js/rsdecoder.js"></script>
+    <script type="text/javascript" src="./js/gf256poly.js"></script>
+    <script type="text/javascript" src="./js/gf256.js"></script>
+    <script type="text/javascript" src="./js/decoder.js"></script>
+    <script type="text/javascript" src="./js/qrcode.js"></script>
+    <script type="text/javascript" src="./js/findpat.js"></script>
+    <script type="text/javascript" src="./js/alignpat.js"></script>
+    <script type="text/javascript" src="./js/databr.js"></script>
+    <script type="text/javascript" src="./js/utility.js"></script>
+    <script type="text/javascript" src="./js/bowser.js"></script>
+    <script type="text/javascript" src="./js/main.js" charset="euc-kr"></script>
+</head>
+<body>
+    <!-- 상단 버튼 -->
+    <!-- 플래쉬 버튼 -->
+    <label for="light_button" id="lightBtn">
+        <img class="icon" id="flash" src="images/flash-off.png" />
+        <img class="icon" id="flashoff" src="images/flash.png" />
+    </label>
+    <input type="button" id="light_button" onclick="setLight()">
+    <!-- 앨범 버튼 -->
+    <label for="album_file" id="albumBtn">
+        <img class="icon" src="images/photo-library.png" />
+    </label>
+    <input type="file" id="album_file" accept="image/*" onchange="previewFile(this)" onclick="this.value = null;">
+    <!-- 앨범 이미지 -->
+    <img class="view" id="image_section" src="" />
+    <!-- 비디오 -->
+    <div class="video-container">
+        <!-- 가이드라인 -->
+        <div id="finger">
+            <div id="finger_box">
+                <img id="box" src="images/box.png" alt="">
+                <img id="line" src="images/line.png" alt="">
+                <p id="info">화면에 QR코드를 위치시키세요</p>
+            </div>
+        </div>
+        <!-- 비디오&캔버스 -->
+        <video id="video-preview" data-video-type="user" data-csw-streamid="F35A8axaNBSJHY9vDxVmDewdOdP2vHUthKUN" data-tid="@1ea41ed5-419d-4f04-8683-1f407f0e5a1a@f20a276c-4954-46c6-9b95-2b64495f6c4e" autoplay></video>
+        <canvas id="qr-canvas" class="hidden"></canvas>
+    </div>
+</body>
+</html>
