@@ -5,16 +5,17 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
 @Getter
 @Setter
 @Entity
-@Table(name="account")
-public class Account {
-    @Id
-    @Column(length = 30)
-    private String id; //아이디
+@Table(name="reservation")
+public class reservation {
+    @OneToMany
+    @JoinColumn(name="account")
+    private List<String> id; //아이디
     @Column(length = 30, nullable = false)
     private String pw; // 비밀번호
     @Column(length = 15, nullable = false)
