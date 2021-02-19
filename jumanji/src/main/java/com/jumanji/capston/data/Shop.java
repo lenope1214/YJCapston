@@ -13,19 +13,19 @@ import java.sql.Timestamp;
 @Table(name="shop")
 public class Shop {
     @Id
-    @Column(length = 10)
+    @Column(name="shop_id",length = 10,nullable = false)
     private String s_id; //매장번호
-    @Column(length = 50)
+    @Column(length = 50, nullable = false)
     private String s_name; //매장이름
     @Column(length = 255)
     private String s_intro; //매장소개
-    @Column
+    @Column(nullable = false)
     private Timestamp s_open; //오픈시간
-    @Column
+    @Column(nullable = false)
     private Timestamp s_close; //마감시간
-    @Column(length = 120)
+    @Column(length = 120,nullable = false)
     private String s_addr; //매장주소
-    @Column
+    @Column(length = 2)
     private int s_category; //카테고리
     @Column
     private char s_possible; //예약가능여부

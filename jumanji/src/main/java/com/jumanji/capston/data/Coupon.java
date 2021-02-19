@@ -12,11 +12,11 @@ import java.util.Date;
 @Table(name="coupon")
 public class Coupon {
     @Id
-    @Column(length = 9)
+    @Column(length = 9,nullable = false)
     private String co_no;//쿠폰번호
-    @Column(length = 30)
+    @Column(length = 30,nullable = false)
     private String co_name;//쿠폰이름
     @ManyToOne
-    @JoinColumn(name="account")
+    @JoinColumn(name="account",nullable = false)
     private Account id; //아이디
 }
