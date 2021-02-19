@@ -13,11 +13,11 @@ import java.util.Date;
 @Table(name="account")
 public class Account {
     @Id
-    @Column(length = 30)
+    @Column(name = "account_id", length=30)
     private String id; //아이디
-    @Column(length = 30)
+    @Column(length = 30, nullable = false)
     private String pw; // 비밀번호
-    @Column(length = 15)
+    @Column(length = 15, nullable = false)
     private String name; // 이름
     @Column(length = 70)
     private String email; // 이메일
@@ -25,15 +25,14 @@ public class Account {
     private String address; // 주소
     @Column
     private Date birthday; // 생년월일
-    @Column(length = 11)
+    @Column(length = 11, nullable = false)
     private String phone; // 전화번호
     @Column
-    private char is_wdrw; // 탈퇴여부
+    private char is_wdrw='N'; // 탈퇴여부
     @Column
     private String auth; // 권한
     @Column(length = 2)
     private String social; // 소셜
     @Column(insertable = false, updatable = false) // 업데이트, 인설트 불가
-    @Temporal(TemporalType.TIMESTAMP) // timestamp 테스트 해봐야함.
-    private Date sign_date; // 가입날짜
+    private Date sign_date = new Date(); // 가입날짜
 }
