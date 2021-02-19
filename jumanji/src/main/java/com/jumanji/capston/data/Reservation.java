@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -12,10 +13,11 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name="reservation")
-public class reservation {
-    @OneToMany
-    @JoinColumn(name="account")
-    private List<String> id; //아이디
+public class Reservation implements Serializable {
+    @Id
+    @ManyToOne
+    @JoinColumn(name="account_id")
+    private Account id; //아이디
     @Column(length = 30, nullable = false)
     private String pw; // 비밀번호
     @Column(length = 15, nullable = false)

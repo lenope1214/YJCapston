@@ -1,4 +1,4 @@
-package com.jumanji.capston.Service;
+package com.jumanji.capston.service;
 
 import com.jumanji.capston.data.Account;
 import com.jumanji.capston.repository.AccountRepository;

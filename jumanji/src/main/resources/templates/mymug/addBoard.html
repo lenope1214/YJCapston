@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout::layout(~{::title}, ~{}, ~{::#content})}" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <title th:text="|게시글 등록|"></title>
+</head>
+<body>
+    <div id="content">
+
+            글제목 : <input type="text" id="title" name="title"><br>
+            비밀번호 : <input type="text" id="pw" name="pw"><br>
+            <hr>
+            <textarea id="bContent" cols="100" placeholder="내용을 입력해 주세요" name="bContent"></textarea>
+            <input id="submit" type="submit" value="작성">
+
+        <script>
+            $(function(){
+
+                $('#result').text("로딩완료");
+
+                $('#submit').click((event)=>{
+                    $('#result').text("작성 클릭");
+                    const csrfToken="[[${_csrf.token}]]";
+                    const csrfHeader="[[${_csrf.headerName}]]";
+
+                    // 테스트용
+                    // const csrfToken= "ddd5c66a-6540-4c2e-bf45-2ce88e76055e";
+                    // const csrfHeader="X-XSRF-TOKEN";
+                    const title=$('#title').val();
+                    const pw=$('#pw').val();
+                    const content = $('#bContent').val();
+                    const path='/post/addBoard';
+                    const data = JSON.stringify({
+                        'title':title,
+                        'password':pw,
+                        'content' : content
+                    });
+                    $('#result').text(data);
+                    $.ajax({
+                        url:path,
+                        type:'post',
+                        data:data,
+                        contentType: 'application/json',
+                        beforeSend:function(xhr){
+                            xhr.setRequestHeader(csrfHeader, csrfToken);
+                        },	// json에서 csrf 설정
+                        success: function (response){
+                            alert('성공')
+                        },
+                        error: function (request, status, error){
+                            alert('실패');
+                        }
+                    }).done((result)=>{
+                        console.log(result.title);
+                        location.href = "/";
+                    });
+                    // $('#result').text("작성 종료");
+                });
+            });
+        </script>
+    </div>
+    <div id="result"></div>
+</body>
+
+</html>

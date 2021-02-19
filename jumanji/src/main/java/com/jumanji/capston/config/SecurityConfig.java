@@ -1,6 +1,7 @@
 package com.jumanji.capston.config;
 
-import com.jumanji.capston.Service.UserDetailsServiceImpl;
+
+import com.jumanji.capston.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetails).passwordEncoder(passwordEncoder());
-        System.out.println(passwordEncoder().encode("1111"));
+        System.out.println("암호 : " + passwordEncoder().encode("1111"));
     }
 
     @Override

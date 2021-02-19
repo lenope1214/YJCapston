@@ -1,4 +1,4 @@
-package com.codesample.mymug.config;
+package com.jumanji.capston.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
