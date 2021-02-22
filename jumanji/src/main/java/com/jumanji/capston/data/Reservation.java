@@ -16,8 +16,8 @@ import java.util.List;
 public class Reservation implements Serializable {
     @Id
     @ManyToOne
-    @JoinColumn(name="account_id")
-    private Account id; //아이디
+    @JoinColumn(name="odr_id")
+    private Order id; //아이디
     @Column(length = 30, nullable = false)
     private String pw; // 비밀번호
     @Column(length = 15, nullable = false)
@@ -36,6 +36,6 @@ public class Reservation implements Serializable {
     private String auth; // 권한
     @Column(length = 2)
     private String social; // 소셜
-    @Column(insertable = false, updatable = false) // 업데이트, 인설트 불가
+    @Column(updatable = false) // 업데이트, 인설트 불가
     private Date sign_date = new Date(); // 가입날짜
 }

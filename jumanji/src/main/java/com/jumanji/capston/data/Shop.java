@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.persistence.Table;
 import java.util.Date;
 
 
@@ -13,8 +14,8 @@ import java.util.Date;
 @Table(name="shop")
 public class Shop {
     @Id
-    @Column(length = 10)
-    private String s_no; // 매장번호
+    @Column(name="s_id", length = 10)
+    private String s_id; // 매장번호
     @Column(length = 50, nullable = false)
     private String s_name; // 매장이름
     @Column(length = 240)
@@ -30,6 +31,6 @@ public class Shop {
     @Column
     private char s_possible; // 예약가능여부
     @ManyToOne
-    @JoinColumn(name="account")
+    @JoinColumn(name="account_id")
     private Account id;
 }
