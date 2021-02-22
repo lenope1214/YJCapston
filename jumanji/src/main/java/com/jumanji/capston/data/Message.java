@@ -20,8 +20,8 @@ public class Message {
     private String msg_content;//내용
     @ManyToOne
     @JoinColumn(name="account",nullable = false)
-    private Account id;
+    private Member mem_id;//아이디
     @ManyToOne
     @JoinColumn(name="shop",nullable = false)
-    private Shop s_id;
+    private Shop s_id;//매장번호
 }

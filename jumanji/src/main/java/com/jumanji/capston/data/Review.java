@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 
@@ -11,15 +12,17 @@ import java.sql.Timestamp;
 @Setter
 @Entity
 @Table(name="review")
-public class Review {
+public class Review implements Serializable {
     @Id
-    @Column( length=5,nullable = false)
+    @Column(name="re_no",length=5,nullable = false)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="REVIEW_SEQ_GENERATOR")
     @SequenceGenerator(name="REVIEW_SEQ_GENERATOR", sequenceName="REVIEW_SEQ", allocationSize = 1)
     private int re_no; //리뷰번호
 
-    @Column( length=10,nullable = false)
-    private String s_id;//매장번호 !!복합키설정 필요함!!
+    @Id
+    @ManyToOne
+    @JoinColumn(name="shop")
+    private Shop s_id;//매장번호 !!복합키설정 필요함!!
     @Column( length =500)
     private String re_centent;//리뷰내용
     @Column
@@ -32,7 +35,7 @@ public class Review {
     private String re_img;//이미지경로
     @ManyToOne
     @JoinColumn(name="account",nullable = false)
-    private Account id;
+    private Member mem_id;
 
 
 }

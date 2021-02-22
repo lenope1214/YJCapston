@@ -1,10 +1,10 @@
 package com.jumanji.capston.repository;
 
-import com.jumanji.capston.data.Account;
+import com.jumanji.capston.data.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AccountRepository extends JpaRepository<Account, String> {
+public interface MemberRepository extends JpaRepository<Member, String> {
 
 }

@@ -31,6 +31,6 @@ public class Shop {
     private char s_possible; //예약가능여부
     @ManyToOne
     @JoinColumn(name="account")
-    private Account id;
+    private Member id;
 
 }
