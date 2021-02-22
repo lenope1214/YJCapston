@@ -39,11 +39,11 @@ public class Menu implements Serializable {
 }
 
 
-@Entity
-@SequenceGenerator(
-        name = "MENU_SEQ_GENERATOR",
-        sequenceName = "MENU_SEQ",
-        initialValue = 1,
-        allocationSize = 1
-)
-@Table(name = "")
+//@Entity
+//@SequenceGenerator(
+//        name = "MENU_SEQ_GENERATOR",
+//        sequenceName = "MENU_SEQ",
+//        initialValue = 1,
+//        allocationSize = 1
+//)
+//@Table(name = "")

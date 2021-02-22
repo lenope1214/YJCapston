@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.persistence.Table;
-import java.io.Serializable;
 import java.util.Date;
 
 
@@ -13,11 +11,11 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name="account")
-public class Account{
+public class Account {
     @Id
-    @Column(name = "account_id", length = 30)
+    @Column(name = "account_id", length=30)
     private String id; //아이디
-    @Column(length = 100, nullable = false)
+    @Column(length = 30, nullable = false)
     private String pw; // 비밀번호
     @Column(length = 15, nullable = false)
     private String name; // 이름
