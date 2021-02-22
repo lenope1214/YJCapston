@@ -3,6 +3,7 @@ package com.jumanji.capston.data;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
+import javax.persistence.Table;
 
 @Getter
 @Setter
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Table(name="member")
 public class Member {
     @Id
-    @Column(name = "id", length=30,nullable = false)
+    @Column(name = "mem_id", length=30,nullable = false)
     private String id; //아이디
     @Column(length = 2,nullable = false)
     private String lv; // 등급

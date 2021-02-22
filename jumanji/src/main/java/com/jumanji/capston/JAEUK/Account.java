@@ -1,4 +1,4 @@
-package com.jumanji.capston.data;
+package com.jumanji.capston.JAEUK;
 
 import lombok.Getter;
 import lombok.Setter;

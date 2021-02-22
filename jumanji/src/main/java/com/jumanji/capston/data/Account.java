@@ -17,7 +17,7 @@ public class Account{
     @Id
     @Column(name = "account_id", length = 30)
     private String id; //아이디
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = false) // 암호화를 하는데 여유자리까지 충분하게 100자리.
     private String pw; // 비밀번호
     @Column(length = 15, nullable = false)
     private String name; // 이름

@@ -1,9 +1,10 @@
 package com.jumanji.capston.data;
-
+import com.jumanji.capston.JAEUK.Account;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.persistence.Table;
 import java.sql.Timestamp;
 
 

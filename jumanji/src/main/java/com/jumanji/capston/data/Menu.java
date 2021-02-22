@@ -8,33 +8,33 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
+/*
+last update 2021-02-23
+author 이성복
+ */
 
 @Getter
 @Setter
 @Entity
-@Table(name="odr")
+@Table(name="menu")
 public class Menu implements Serializable {
     @Id
-    @Column(name="m_no", length = 3)
+    @Column(name="menu_id", length = 3)
     private String no ; // 메뉴번호
-    @Id
-    @ManyToOne
-    @JoinColumn(name="s_id")
-    private Shop s_id; // 매장번호
 
-    @Column(name="m_name", length = 30, nullable = false)
+    @Column(name="menu_name", length = 30, nullable = false)
     private String name; // 이름
-    @Column(name="m_content", nullable = false)
-    private String content; // 설명
+    @Column(name="menu_desc", nullable = false)
+    private String desc; // 설명
     @Column
     private char is_sale = 'Y'; // 판매중
     @Column
     private char is_popular = 'N'; // 인기메뉴여부
-    @Column(name="m_price",length = 5, nullable = false)
+    @Column(name="menu_price",length = 5, nullable = false)
     private int price = 0; // 가격
-    @Column(name="m_dur")
+    @Column(name="menu_dur")
     private Date duration; // 소요시간
-    @Column(name="m_img_url", length = 150)
+    @Column(name="menu_img_url", length = 150)
     private String img_url; // 이미지 상대 경로
 }
 

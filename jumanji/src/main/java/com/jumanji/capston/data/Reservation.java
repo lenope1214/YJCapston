@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
 

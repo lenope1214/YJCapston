@@ -12,16 +12,27 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name="odr")
+@Table(name="order")
 public class Order implements Serializable {
     @Id
-    @Column(name="odr_no", length = 16)
+    @Column(name="order_id", length = 16)
     private String no ; // 주문번호 insert 할때 값 yyMMddhhmmss+sequence 설정해주기. 기본값으로 하는거 어렵넹
     @Column(length = 2, nullable = false)
-    private int odr_quantity; // 메뉴 수량
+    private int order_qty; // 메뉴 수량
     @Column(nullable = false)
-    private Date odr_date; // 주문일시
+    private Date order_date; // 주문일시
     @Column(length = 60)
-    private String odr_req; // 요청사항
-
+    private String order_req; // 요청사항
+    @JoinColumn
+    @ManyToOne
+    private Shop shop_id;
+    @JoinColumn
+    @ManyToOne
+    private Member mem_id;
+    @JoinColumn
+    @ManyToOne
+    private Menu menu_id;
+    @JoinColumn
+    @ManyToOne
+    private com.jumanji.capston.data.Table tab_id;
 }
