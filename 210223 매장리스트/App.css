@@ -1,0 +1,95 @@
+@font-face {
+    font-family: 'Wemakeprice-Bold';
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Wemakeprice-Bold.woff") format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.App {
+    margin: 0;
+    text-align: center;
+    background-color: white;
+}
+
+.black-nav {
+    margin: 0;
+    width: 100%;
+    color: white;
+    display: flex;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    font-weight: 600;
+    font-size: 33px;
+    font-family: 'Wemakeprice-Bold';
+    position: fixed;
+    z-index: 1;
+    background-color: black;
+}
+.adimg {
+    position: relative;
+}
+.left-nav {
+    display: flex;
+    padding-left: 15%;
+    flex-grow: 1;
+}
+.center-nav {
+    display: flex;
+    flex-grow: 4;
+    visibility: true;
+}
+
+.right1-nav {
+    display: flex;
+    color: white;
+    font-size: 16px;
+    flex-grow: 0.5;
+    text-align: center;
+    padding-top: 13px;
+}
+.right2-nav {
+    display: flex;
+    color: white;
+    font-size: 16px;
+    flex-grow: 1;
+    text-align: center;
+    padding-top: 13px;
+    padding-right: 10%;
+}
+
+.but-item1 {
+    position: absolute;
+    font-family: 'Wemakeprice-Bold';
+    color: white;
+    font-size: 60px;
+    width: 100%;
+    height: 700px;
+    text-align: left;
+    line-height: 3px;
+    background-color: white;
+}
+
+.but-item1-text {
+    padding-top: 160px;
+    padding-left: 20%;
+    display: inline-block;
+}
+
+.but-item1-text2 {
+    padding-top: 1px;
+    padding-left: 20%;
+    font-size: 14px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: inline-block;
+}
+
+.category {
+    margin-left: 6%;
+    display: inline-block;
+    color: black;
+   
+}
+.category button {
+    font-size: 25px;
+    font-family: 'Wemakeprice-Bold';
+}
