@@ -79,32 +79,46 @@
   text-align: left;
   line-height: 3px;
   background-color: #bead8e;
+  z-index: 2;
 }
 
 .but-item1-text {
+  position: relative;
   padding-top: 160px;
   padding-left: 20%;
   display: inline-block;
+  z-index: 2;
 }
 
 .but-item1-text2 {
+  position: relative;
   padding-top: 1px;
   padding-left: 20%;
   font-size: 14px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   display: block;
+  z-index: 2;
+  
 }
 
 .but-item1-icon {
+  position: relative;
   padding-top: 160px;
   margin-left: 22%;
   display: inline-block;
+  z-index: 2;
 }
 
 .but-item1-but {
 }
 
-.backimg {
+.backimg2 {
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+
+.backimg3 {
   position: absolute;
   width: 100%;
   z-index: 1;
@@ -123,6 +137,7 @@
   height: 700px;
   text-align: left;
   line-height: 3px;
+  z-index: 3;
 }
 
 .but-item2-text {
@@ -141,6 +156,7 @@
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   display: block;
   z-index: 2;
+  margin-top: -30px;
 }
 
 .but-item2-icon {
@@ -168,30 +184,38 @@
   text-align: left;
   line-height: 3px;
   background-color: #bead8e;
+  z-index: 2;
 }
 
 .but-item3-text {
-  padding-top: 160px;
+  position: relative;
+  padding-top: 140px;
   padding-left: 20%;
   display: inline-block;
+  z-index: 2;
 }
 
 .but-item3-text2 {
-  padding-top: 1px;
+  position: relative;
+  margin-top: -30px;
   padding-left: 20%;
   font-size: 14px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   display: block;
+  z-index: 2;
 }
 
 .but-item3-icon {
+  position: relative;
   padding-top: 160px;
-  margin-left: 17%;
+  margin-left: 15%;
   display: inline-block;
+  z-index: 2;
 }
 
 .but-item3-but {
   margin-left: 5%;
+  z-index: 2;
 }
 
 .App-logo {

@@ -6,8 +6,9 @@ import topimg from './topimg.jpg';
 import juminicon from './주민아이콘.png';
 import downimg from './다운로드.png';
 import peopleimg from './주민사람.png';
-import backimg from './backimg.jpg';
+import backimg2 from './backimg.jpg';
 import shopimg from './매장아이콘.png';
+import backimg3 from './종이질감갈색화면.png';
 
 function App() {
   return (
@@ -37,6 +38,20 @@ function App() {
         
         </div>
         <div className="but-item1">
+        <div className="backimg3">
+          <img 
+          src={backimg2}
+          width='100%'
+          height='700px'
+          />
+          </div>
+        <div className="backimg2">
+          <img 
+          src={backimg3}
+          width='100%'
+          height='700px'
+          />
+          </div>
           <div className="but-item1-text">
           <p>주문의민족</p>
           <p>모든 기능</p>
@@ -48,7 +63,7 @@ function App() {
           height='200px'
           />
           <div className="but-item1-but">
-          <button style={{fontSize: '30px',fontFamily: 'Wemakeprice-Bold',height: '130px',width:'210px'
+          <button onClick={ ()=>{console.log(1)} } style={{fontSize: '30px',fontFamily: 'Wemakeprice-Bold',height: '130px',width:'210px'
           ,borderRadius: '60px',border: 0}}>주민앱<br></br>
           다운로드<br></br>
           <img src={downimg} 
@@ -63,9 +78,9 @@ function App() {
           </div>
         </div>
         <div className="but-item2">
-          <div className="backimg">
+          <div className="backimg2">
           <img 
-          src={backimg}
+          src={backimg2}
           width='100%'
           height='700px'
           />
@@ -95,6 +110,13 @@ function App() {
           </div>
         </div>
         <div className="but-item3">
+        <div className="backimg2">
+          <img 
+          src={backimg3}
+          width='100%'
+          height='700px'
+          />
+          </div>
         <div className="but-item3-text">
           <p>집에서</p>
           <p>매장 둘러보고</p>
