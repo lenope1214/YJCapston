@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,15 +12,15 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@javax.persistence.Table(name="tab")
-public class Table implements Serializable {
+@Table (name="tab")
+public class Tab implements Serializable {
     @Id
-    @Column(length = 16)
+    @Column(length = 16, name="tab_id")
     private String id ; // 좌석번호
     @Id
     @ManyToOne
-    @JoinColumn(name="s_id")
-    private Shop s_id; // 매장번호
+    @JoinColumn(name="shop_id")
+    private Shop shop_id; // 매장번호
     @Column(length = 2, nullable = false)
     private int tab_limit; // 좌석수
 }

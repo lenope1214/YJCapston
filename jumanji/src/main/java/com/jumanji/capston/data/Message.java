@@ -1,7 +1,5 @@
 package com.jumanji.capston.data;
 
-import com.jumanji.capston.JAEUK.Account;
-import com.jumanji.capston.data.Shop;
 import lombok.Getter;
 import lombok.Setter;
 

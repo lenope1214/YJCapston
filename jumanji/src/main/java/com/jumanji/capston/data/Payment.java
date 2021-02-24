@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,11 +12,11 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@javax.persistence.Table(name="payment")
+@Table(name="payment")
 public class Payment implements Serializable {
     @Id
+    @ManyToOne
     @JoinColumn
-    @Column(length = 16)
     private Order order_id ; // 주문번호
 
     @Column(length = 5)

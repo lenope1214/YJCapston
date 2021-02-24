@@ -32,7 +32,12 @@ public class Order implements Serializable {
     @JoinColumn
     @ManyToOne
     private Menu menu_id;
-    @JoinColumn
+
     @ManyToOne
-    private com.jumanji.capston.data.Table tab_id;
+    @JoinColumns({
+            @JoinColumn(name = "tab_id", referencedColumnName = "tab_id"),
+            @JoinColumn(name = "shop_id", referencedColumnName = "shop_id")
+
+    })
+    private Tab tab_id;
 }
