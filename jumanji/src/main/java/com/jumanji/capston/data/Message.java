@@ -20,8 +20,8 @@ public class Message {
     @Column(length=300,nullable = false)
     private String msg_content;//내용
     @ManyToOne
-    @JoinColumn(name="acc_id",nullable = false)
-    private Account acc_id;
+    @JoinColumn(name="mem_id",nullable = false)
+    private Member acc_id;
     @ManyToOne
     @JoinColumn(name="shop_id",nullable = false)
     private Shop shop_id;

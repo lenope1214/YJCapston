@@ -1,7 +1,7 @@
 package com.jumanji.capston.service;
 
-import com.jumanji.capston.data.Account;
-import com.jumanji.capston.repository.AccountRepository;
+import com.jumanji.capston.data.Member;
+import com.jumanji.capston.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,10 +18,10 @@ import java.util.Optional;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
-    private AccountRepository accountRepository;
+    private MemberRepository accountRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Account> dbuser = accountRepository.findById(username);
+        Optional<Member> dbuser = accountRepository.findById(username);
         if(dbuser.isEmpty()) {
             throw new UsernameNotFoundException("Invalid username");
         }
