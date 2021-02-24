@@ -12,16 +12,16 @@ import java.sql.Timestamp;
 @Table(name="message")
 public class Message {
     @Id
-    @Column(length=12,nullable = false)
-    private int msg_no;//번호
+    @Column(name="msg_no",length=12,nullable = false)
+    private int msg;//번호
     @Column(nullable = false)
     private Timestamp msg_time;//시간
     @Column(length=200,nullable = false)
     private String msg_content;//내용
     @ManyToOne
-    @JoinColumn(name="account",nullable = false)
+    @JoinColumn(name="member_id",nullable = false)
     private Member mem_id;//아이디
     @ManyToOne
-    @JoinColumn(name="shop",nullable = false)
+    @JoinColumn(name="shop_id",nullable = false)
     private Shop s_id;//매장번호
 }

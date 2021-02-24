@@ -13,7 +13,7 @@ import java.util.Date;
 @Table(name="member")
 public class Member {
     @Id
-    @Column(name = "mem_id", length=30)
+    @Column(name="member_id", length=30)
     private String mem_id; //아이디
     @Column(length = 30, nullable = false)
     private String pw; // 비밀번호
@@ -35,4 +35,8 @@ public class Member {
     private String social; // 소셜
     @Column(insertable = false, updatable = false) // 업데이트, 인설트 불가
     private Date sign_date = new Date(); // 가입날짜
+    @Column(length=2)
+    private String lev;//등급
+    @Column(length=6)
+    private int point;//포인트
 }

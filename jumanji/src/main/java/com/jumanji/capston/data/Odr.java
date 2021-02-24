@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @Table(name="odr")
 public class Odr {
     @Id
-    @Column(name="odr_id",length=16)
+    @Column(name="odrer_id",length=16)
     private String odr_id;//주문번호
     @Column(length=2)
     private int odr_qty;//메뉴수량
@@ -21,15 +21,15 @@ public class Odr {
     @Column(length=60)
     private String odr_req;//요청사항
     @ManyToOne
-    @JoinColumn(name="shop")
+    @JoinColumn(name="shop_id",nullable = false)
     private Shop s_id;//매장번호
     @ManyToOne
-    @JoinColumn(name="member")
+    @JoinColumn(name="member_id",nullable = false)
     private Member mem_id;//아이디
     @ManyToOne
-    @JoinColumn(name="menu")
-    private Menu menu_id;//메뉴번호
+    @JoinColumn(name="menu_id",nullable = false)
+    private Menu menu;//메뉴번호
     @ManyToOne
-    @JoinColumn(name="tab")
-    private Tab tab_id;//좌석번호
+    @JoinColumn(name="tab_id",nullable = false)
+    private Tab tab;//좌석번호
 }

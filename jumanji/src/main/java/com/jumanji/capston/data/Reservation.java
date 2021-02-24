@@ -16,16 +16,16 @@ import java.util.Date;
 public class Reservation implements Serializable {
     @Id
     @ManyToOne
-    @JoinColumn(name="odr")
-    private Odr odr_id;//주문번호
-    @Column(length=2)
+    @JoinColumn(name="odr_id")
+    private Odr odr;//주문번호
+    @Column(length=2,nullable = false)
     private int rs_cus_no;//인원
-    @Column
+    @Column(nullable = false)
     private Timestamp delay;//지연시간
     @Column(length=2)
     private char is_showed='N';//노쇼여부
     @Column(length=2)
     private char is_cancel='N';//취소여부
-    @Column
+    @Column(nullable = false)
     private Date rs_date;//예약일시
 }

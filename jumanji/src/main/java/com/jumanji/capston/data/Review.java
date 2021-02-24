@@ -17,12 +17,12 @@ public class Review implements Serializable {
     @Column(name="re_no",length=5,nullable = false)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="REVIEW_SEQ_GENERATOR")
     @SequenceGenerator(name="REVIEW_SEQ_GENERATOR", sequenceName="REVIEW_SEQ", allocationSize = 1)
-    private int re_no; //리뷰번호
+    private int review; //리뷰번호
 
     @Id
     @ManyToOne
-    @JoinColumn(name="shop")
-    private Shop s_id;//매장번호 !!복합키설정 필요함!!
+    @JoinColumn(name="shop_id",nullable = false)
+    private Shop s_id;//매장번호
     @Column( length =500)
     private String re_centent;//리뷰내용
     @Column
@@ -34,7 +34,7 @@ public class Review implements Serializable {
     @Column(length=150)
     private String re_img;//이미지경로
     @ManyToOne
-    @JoinColumn(name="account",nullable = false)
+    @JoinColumn(name="member_id",nullable = false)
     private Member mem_id;
 
 

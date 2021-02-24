@@ -13,16 +13,16 @@ import java.sql.Timestamp;
 public class Menu {
     @Id
     @Column(name="menu_id",length=13)
-    private String menu_id;//메뉴번호
-    @Column(length=30)
+    private String menu;//메뉴번호
+    @Column(length=30,nullable = false)
     private String menu_name;//메뉴이름
-    @Column(length=100)
+    @Column(length=100,nullable = false)
     private String menu_content;//메뉴설명
-    @Column(length=2)
+    @Column(length=2,nullable = false)
     private String is_sale;//판매중
     @Column(length=2)
     private String is_popular;//인기메뉴여부
-    @Column(length=5)
+    @Column(length=5,nullable = false)
     private int menu_price;//메뉴가격
     @Column
     private Timestamp menu_dur;//소요시간

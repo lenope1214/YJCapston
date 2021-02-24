@@ -17,7 +17,7 @@ public class Shop {
     private String s_id; //매장번호
     @Column(length = 50, nullable = false)
     private String s_name; //매장이름
-    @Column(length = 255)
+    @Column(length = 250)
     private String s_intro; //매장소개
     @Column(nullable = false)
     private Timestamp s_open; //오픈시간
@@ -30,7 +30,8 @@ public class Shop {
     @Column
     private char s_possible; //예약가능여부
     @ManyToOne
-    @JoinColumn(name="account")
-    private Member id;
+    @JoinColumn(name="member_id",nullable = false)
+    private Member mem_id;//아이디
+
 
 }

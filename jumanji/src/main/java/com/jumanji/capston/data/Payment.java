@@ -15,14 +15,17 @@ import java.util.Date;
 public class Payment implements Serializable{
     @Id
     @ManyToOne
-    @JoinColumn(name="odr")
-    private Odr odr_id;//주문번호
+    @JoinColumn(name="odr_id")
+    private Odr odr;//주문번호
     @Column(length=5)
     private int use_point;//사용포인트
-    @Column
+    @Column(nullable = false)
     private Date pm_req_date;//결제일자
-    @Column
+    @Column(nullable = false)
     private String pg;//결제방식
+    @Column(length=6)
+    private int pm_total_price;//총결제금액
+    @Column(length=2)
+    private char refund='N';//환불여부
 
-    //결제금액 !!일단보류!!
 }
