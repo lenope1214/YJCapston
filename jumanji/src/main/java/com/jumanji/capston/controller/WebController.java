@@ -21,4 +21,9 @@ public class WebController {
     public String myPoint(){
         return "myPoint";
     }
+
+    @GetMapping("/joinus")
+    public String joinUs(){
+        return "joinus";
+    }
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <title th:text="|사용자 추가|"></title>
+</head>
+<body>
+<script th:inline="javascript">
+    $(function(){
+        $('#send').click((event)=>{
+            const userid=$('#userid').val();
+            const name=$('#username').val();
+            const path='/api/adduser';
+            const json = JSON.stringify({
+                'userid':userid,
+                'name':name
+            });
+            const csrfToken=/*[[${_csrf.token}]]*/ null;
+            const csrfHeader=/*[[${_csrf.headerName}]]*/ null;
+            $.ajax({
+                url:path,
+                type:'POST',
+                contentType: 'application/json',
+                data:json,
+                beforeSend:function(xhr){ xhr.setRequestHeader(csrfHeader, csrfToken);}
+            }).done((result)=>{
+                console.log(result.userid);
+                $('#result').text(result.userid);
+            });
+        });
+    });
+</script>
+아이디 : <input id="userid" type="text" placeholder="userid">
+비밀번호 : <input id="username" type="text" placeholder="name">
+<label><input type="checkbox" name="owner" value="사업자"> 사업자체크</label>
+<button id="send">회원가입</button>
+<p id="result"></p>
+</body>
+</html>

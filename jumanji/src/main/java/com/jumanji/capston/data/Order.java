@@ -12,32 +12,29 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name="order")
+@Table(name="odr")
 public class Order implements Serializable {
     @Id
     @Column(name="order_id", length = 16)
-    private String no ; // 주문번호 insert 할때 값 yyMMddhhmmss+sequence 설정해주기. 기본값으로 하는거 어렵넹
-    @Column(length = 2, nullable = false)
-    private int order_qty; // 메뉴 수량
-    @Column(nullable = false)
-    private Date order_date; // 주문일시
-    @Column(length = 60)
-    private String order_req; // 요청사항
-    @JoinColumn
+    private String id ; // 주문번호 insert 할때 값 yyMMddhhmmss+sequence 설정해주기. 기본값으로 하는거 어렵넹
+
+    @Column(name="order_qty", length = 2, nullable = false)
+    private int quantity; // 메뉴 수량
+    @Column(name="order_date", nullable = false)
+    private Date date; // 주문일시
+    @Column(name="order_req", length = 60)
+    private String request; // 요청사항
+
     @ManyToOne
+    @JoinColumn(name = "shop_id", insertable = false, updatable = false)
     private Shop shop_id;
-    @JoinColumn
     @ManyToOne
-    private Member mem_id;
-    @JoinColumn
+    @JoinColumn(name = "member_id", insertable = false, updatable = false)
+    private Member member_id;
     @ManyToOne
+    @JoinColumn(name = "menu_id", insertable = false, updatable = false)
     private Menu menu_id;
 
-    @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name = "tab_id", referencedColumnName = "tab_id"),
-            @JoinColumn(name = "shop_id", referencedColumnName = "shop_id")
-
-    })
-    private Tab tab_id;
+    @Embedded // 비 식별 관계
+    private TabId tab_id;
 }

@@ -4,10 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 
 @Getter
@@ -17,8 +16,11 @@ import java.util.List;
 public class Reservation implements Serializable {
     @Id
     @ManyToOne
-    @JoinColumn(name="odr_id")
-    private Order id; //아이디
+    @JoinColumn(name="order_id")
+    private Order order_id; //아이디
+
+
+
     @Column(length = 30, nullable = false)
     private String pw; // 비밀번호
     @Column(length = 15, nullable = false)
