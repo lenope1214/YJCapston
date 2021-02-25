@@ -35,6 +35,6 @@ public class Order implements Serializable {
     @JoinColumn(name = "menu_id", insertable = false, updatable = false)
     private Menu menu_id;
 
-    @Embedded // 비 식별 관계
+    @Embedded // 비 식별 관계 식별관계로 하려면 @EmbeddedId로 변경
     private TabId tab_id;
 }

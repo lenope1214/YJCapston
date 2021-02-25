@@ -7,7 +7,61 @@
     <title th:text="|사용자 추가|"></title>
 </head>
 <body>
+
+아이디 : <input id="userid" type="text" placeholder="아이디"> <br>
+비밀번호 : <input id="password" type="password" placeholder="비밀번호"> <br>
+이름 : <input id="username" type="text" placeholder="이름"> <br>
+
+이메일
+<input id="email1" name="email1" type="text"> @ <input id="email2" name="email2" type="text">
+<select name="select_email" onChange="selectEmail(this)">
+    <option value="" selected>선택하세요</option>
+    <option value="naver.com">naver.com</option>
+    <option value="gmail.com">gmail.com</option>
+    <option value="hanmail.com">hanmail.com</option>
+    <option value="1">직접입력</option>
+</select> <br>
+
+주소 <input id="addr1" name="addr1" type="text"> <br>
+상세주소 <input id="addr2" name="addr2" type="text"> <br>
+생일 <input id="birthday" name="birthday" type="date" value="2000-01-01"> <br>
+
+전화번호
+<input id="phone1" name="phone1" type="text"> -
+<input id="phone2" name="phone2" type="text"> -
+<input id="phone3" name="phone3" type="text"> <br>
+
+<label><input type="checkbox" name="owner" value="사업자" ch> 사업자체크</label> <br>
+<button id="send">회원가입</button>
+
+<!-- 유효성 체크
+ id(필수) : 8~20자
+ pw(필수) : 8~13 소,대,숫,특 필수
+ name(필수) : 2~5 글자
+ email(선택) : @ .com .net 등 체크
+ address(선택) : 얘는 api 써야하지 않을까?
+ address2(선택)
+ birthday(선택) : yyyy MM dd 형식
+ phone(필수) : 화면으론 010-1234-5678 받고 데이터는 01012345678 로 넘길예정
+ social : 얘는 회원가입창 들어오기 전에 결정된걸로..
+ 나머지는 회원가입 하면서 넣어주기
+-->
+<p id="result"></p>
+
+
 <script th:inline="javascript">
+    function selectEmail(ele){
+        var $ele = $(ele);
+        var $email2 = $('#email2'); // '1'인 경우 직접입력
+        if($ele.val() == "1"){
+            $email2.attr('readonly', false);
+            $email2.val('');
+        } else {
+            $email2.attr('readonly', true);
+            $email2.val($ele.val());
+        }
+    } // 여기는 복사 붙여넣기 했슴다 변경가능
+
     $(function(){
         $('#send').click((event)=>{
             const userid=$('#userid').val();
@@ -32,10 +86,5 @@
         });
     });
 </script>
-아이디 : <input id="userid" type="text" placeholder="userid">
-비밀번호 : <input id="username" type="text" placeholder="name">
-<label><input type="checkbox" name="owner" value="사업자"> 사업자체크</label>
-<button id="send">회원가입</button>
-<p id="result"></p>
 </body>
 </html>
