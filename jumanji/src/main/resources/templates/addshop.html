@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>addshop</title>
+</head>
+<body>
+<form th:action="@{'/rest/addshop'}" method="post">
+    <div>
+        <label>매장번호</label>
+        <input type="number" name="id" id="id" >
+    </div>
+    <div>
+<label>매장이름</label>
+<input type="text" name="name" id="name" >
+    </div>
+    <div>
+<label>매장소개</label>
+<input type="text" name="intro" id="intro" >
+
+    </div>
+    <div>
+<label>오픈시간</label>
+<input type="time" name="open" id="open" >
+    </div>
+    <div>
+<label>마감시간</label>
+<input type="time" name="close" id="close">
+    </div>
+    <div>
+<label>매장주소</label>
+<input type="text" name="address" id="address">
+    </div>
+    <div>
+<label>카테고리</label>
+<select >
+    <option value="1">고기</option>
+    <option value="2">한식</option>
+    <option value="3">분식</option>
+    <option value="4">일식</option>
+    <option value="5">중식</option>
+    <option value="6">주점</option>
+    <option value="7">패스트푸드</option>
+    <option value="8">찜,탕</option>
+    <option value="9">카페,디저트</option>
+
+</select>
+    </div>
+    <div>
+<label>예약가능여부</label>
+<input type="radio" name="is_re_pos" value="Y">Y
+<input type="radio" name="is_re_pos" value="N">N
+
+    </div>
+
+    <input type="submit" value="등록">
+    <input type="button" value="취소" onclick="history.back();">
+
+</form>
+</body>
+</html>
