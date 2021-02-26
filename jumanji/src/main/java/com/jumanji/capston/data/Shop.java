@@ -1,5 +1,6 @@
 package com.jumanji.capston.data;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,24 +15,23 @@ import java.sql.Timestamp;
 public class Shop {
     @Id
     @Column(name="shop_id",length = 10,nullable = false)
-    private String s_id; //매장번호
-    @Column(length = 50, nullable = false)
-    private String s_name; //매장이름
-    @Column(length = 250)
-    private String s_intro; //매장소개
-    @Column(nullable = false)
-    private Timestamp s_open; //오픈시간
-    @Column(nullable = false)
-    private Timestamp s_close; //마감시간
-    @Column(length = 120,nullable = false)
-    private String s_addr; //매장주소
-    @Column(length = 2)
-    private int s_category; //카테고리
+    private String id; //매장번호
+    @Column(name="shop_name", length = 50, nullable = false)
+    private String name; //매장이름
+    @Column(name="shop_intro", length = 250)
+    private String intro; //매장소개
+    @Column(name="shop_open", nullable = false)
+    private Timestamp open; //오픈시간
+    @Column(name="shop_close", nullable = false)
+    private Timestamp close; //마감시간
+    @Column(name="shop_addr", length = 120,nullable = false)
+    private String address; //매장주소
+    @Column(name="shop_cat", length = 2)
+    private int category; //카테고리
     @Column
-    private char s_possible; //예약가능여부
+    private char is_re_pos; //예약가능여부
     @ManyToOne
-    @JoinColumn(name="member_id",nullable = false)
-    private Member mem_id;//아이디
-
+    @JoinColumn(name="mem_id")
+    private Member mem_id;
 
 }

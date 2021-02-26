@@ -4,28 +4,46 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import javax.persistence.Table;
+import java.io.Serializable;
+import java.util.Date;
+
+/*
+last update 2021-02-23
+author 이성복
+ */
 
 @Getter
 @Setter
 @Entity
 @Table(name="menu")
-public class Menu {
+public class Menu implements Serializable {
     @Id
-    @Column(name="menu_id",length=13)
-    private String menu;//메뉴번호
-    @Column(length=30,nullable = false)
-    private String menu_name;//메뉴이름
-    @Column(length=100,nullable = false)
-    private String menu_content;//메뉴설명
-    @Column(length=2,nullable = false)
-    private String is_sale;//판매중
-    @Column(length=2)
-    private String is_popular;//인기메뉴여부
-    @Column(length=5,nullable = false)
-    private int menu_price;//메뉴가격
+    @Column(name="menu_id", length = 3)
+    private String no ; // 메뉴번호
+
+    @Column(name="menu_name", length = 30, nullable = false)
+    private String name; // 이름
+    @Column(name="menu_desc", nullable = false)
+    private String desc; // 설명
     @Column
-    private Timestamp menu_dur;//소요시간
-    @Column(length=150)
-    private String menu_img_url;//이미지경로
+    private char is_sale = 'Y'; // 판매중
+    @Column
+    private char is_popular = 'N'; // 인기메뉴여부
+    @Column(name="menu_price",length = 5, nullable = false)
+    private int price = 0; // 가격
+    @Column(name="menu_dur")
+    private Date duration; // 소요시간
+    @Column(name="menu_img_url", length = 150)
+    private String img_url; // 이미지 상대 경로
 }
+
+
+//@Entity
+//@SequenceGenerator(
+//        name = "MENU_SEQ_GENERATOR",
+//        sequenceName = "MENU_SEQ",
+//        initialValue = 1,
+//        allocationSize = 1
+//)
+//@Table(name = "")

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.persistence.Table;
 import java.sql.Timestamp;
 
 @Getter
@@ -12,16 +13,16 @@ import java.sql.Timestamp;
 @Table(name="message")
 public class Message {
     @Id
-    @Column(name="msg_no",length=12,nullable = false)
-    private int msg;//번호
+    @Column(length=12,nullable = false)
+    private int msg_id;//번호
     @Column(nullable = false)
     private Timestamp msg_time;//시간
-    @Column(length=200,nullable = false)
+    @Column(length=300,nullable = false)
     private String msg_content;//내용
     @ManyToOne
-    @JoinColumn(name="member_id",nullable = false)
-    private Member mem_id;//아이디
+    @JoinColumn(name="mem_id",nullable = false)
+    private Member acc_id;
     @ManyToOne
     @JoinColumn(name="shop_id",nullable = false)
-    private Shop s_id;//매장번호
+    private Shop shop_id;
 }
