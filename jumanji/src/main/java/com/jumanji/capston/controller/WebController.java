@@ -26,4 +26,10 @@ public class WebController {
     public String joinUs(){
         return "joinus";
     }
+
+    @GetMapping("/kakaoTest")
+    public String kakaoTest(){
+        return "kakaoApiTest";
+    }
+
 }
