@@ -13,7 +13,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name="account")
+@Table(name="member")
 public class Member {
     @Id
     @Column(name = "member_id", length = 30)
