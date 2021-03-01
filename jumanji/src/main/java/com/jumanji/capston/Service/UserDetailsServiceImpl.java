@@ -1,4 +1,4 @@
-package com.jumanji.capston.service;
+package com.jumanji.capston.Service;
 
 import com.jumanji.capston.data.Member;
 import com.jumanji.capston.repository.MemberRepository;
@@ -27,13 +27,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         List<GrantedAuthority> auths = new ArrayList<>();
         auths.add(new SimpleGrantedAuthority("QUERY"));
-        if(dbuser.get().getAuth().equals("admin"))
-                auths.add(new SimpleGrantedAuthority("WRITE"));
+//        if(dbuser.get().getAuth().equals("admin"))
+        if(dbuser.get().getAuth()=='a') // admin
+            auths.add(new SimpleGrantedAuthority("WRITE"));
         UserDetails ud = User
                 .withUsername(dbuser.get().getId())
                 .password(dbuser.get().getPw())
                 .authorities(auths)
-                .roles(dbuser.get().getAuth())
+                .roles(""+dbuser.get().getAuth()) // String 형이길래 "" 붙였는데 되려나?
                 .build();
         return ud;
     }

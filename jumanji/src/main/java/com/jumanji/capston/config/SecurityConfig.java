@@ -1,7 +1,7 @@
 package com.jumanji.capston.config;
 
 
-import com.jumanji.capston.service.UserDetailsServiceImpl;
+import com.jumanji.capston.Service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

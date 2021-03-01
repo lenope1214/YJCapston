@@ -33,15 +33,15 @@ public class Member {
     @Column
     private char is_wdrw='N'; // 탈퇴여부
     @Column
-    private String auth; // 권한
+    private char auth; // 권한
     @Column(length = 2)
     private String social; // 소셜
     @Column(insertable = false, updatable = false) // 업데이트, 인설트 불가
     private Date sign_date = new Date(); // 가입날짜
-    @Column(length = 2,nullable = false)
+    @Column(name="lv", length = 2,nullable = false)
     private String level; // 등급
     @Column(nullable = false)
     private int point; // 포인트
-    @Column
-    private int penalty; // 경고회수
+//    @Column
+//    private int penalty; // 경고회수
 }
