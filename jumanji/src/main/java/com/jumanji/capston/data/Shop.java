@@ -16,6 +16,7 @@ public class Shop {
     @Id
     @Column(name="shop_id",length = 10,nullable = false)
     private String id; //매장번호
+
     @Column(name="shop_name", length = 50, nullable = false)
     private String name; //매장이름
     @Column(name="shop_intro", length = 250)
@@ -31,7 +32,7 @@ public class Shop {
     @Column
     private char is_re_pos; //예약가능여부
     @ManyToOne
-    @JoinColumn(name="mem_id")
-    private Member mem_id;
+    @JoinColumn(name="member_id")
+    private Member member_id;
 
 }
