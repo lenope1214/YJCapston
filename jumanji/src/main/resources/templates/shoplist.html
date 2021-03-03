@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -21,22 +21,26 @@
                    <th class="col-sm-3">오픈시간</th>
                    <th class="col-sm-3">마감시간</th>
                    <th class="col-sm-3">매장주소</th>
-                   <th class="col-sm-3">카테고리</th>
+                   <th class="col-sm-3">매장상세주소</th>
+<!--                   <th class="col-sm-3">카테고리</th>-->
                    <th class="col-sm-3">예약가능여부</th>
                </tr>
                </thead>
                <tbody>
                <tr th:each="shop : ${shopList}">
+                   <td>
                    <a th:href="@{'/rest/detail/' + ${shop.id}}">
-                   <td th:text="${shop.id}"></td>
+                       <span th:text="${shop.id}"></span>
                    </a>
+                   </td>
                    <td th:text="${shop.name}"></td>
                    <td th:text="${shop.intro}"></td>
-                   <td th:text="${shop.open}"></td>
-                   <td th:text="${shop.close}"></td>
+                   <td th:text="${shop.open_time}"></td>
+                   <td th:text="${shop.close_time}"></td>
                    <td th:text="${shop.address}"></td>
-                   <td th:text="${shop.category}"></td>
-                   <td th:text="${shop.is_re_pos}"></td>
+                   <td th:text="${shop.address_detail}"></td>
+<!--                   <td th:text="${shop.category}"></td>-->
+                   <td th:text="${shop.is_rs_pos}"></td>
                 </tr>
                </tbody>
            </table>

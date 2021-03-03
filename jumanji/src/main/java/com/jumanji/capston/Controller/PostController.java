@@ -29,13 +29,14 @@ public class PostController {
     @PostMapping("/addshop")
     public String addshop(Model model,
         @RequestParam(name="id") String id,
-        @RequestParam(name="name") String name,
-        @RequestParam(name="intro")String intro,
-        @RequestParam(name="open") String open,
-        @RequestParam(name="close")String close,
-        @RequestParam(name="address")String address,
-        @RequestParam(name="is_re_pos")char is_re_pos,
-        @RequestParam(name="category", required = false)String category
+        @RequestParam(name="name" ) String name,
+        @RequestParam(name="intro",required=false)String intro,
+        @RequestParam(name="open_time" ) Integer open,
+        @RequestParam(name="close_time")Integer close,
+        @RequestParam(name="address" )String addr,
+        @RequestParam(name="address_detail",required=false)String addr_detail,
+        @RequestParam(name="is_rs_pos",required=false)char is_rs_pos
+//        @RequestParam(name="category", required = false)String category
 
 
     ){
@@ -43,16 +44,46 @@ public class PostController {
             shop.setId(id);
             shop.setName(name);
             shop.setIntro(intro);
-            shop.setOpen(open);
-            shop.setClose(close);
-            shop.setAddress(address);
-            shop.setIs_re_pos(is_re_pos);
-            shop.setCategory(category);
+            shop.setOpen_time(open);
+            shop.setClose_time(close);
+            shop.setAddress(addr);
+            shop.setAddress_detail(addr_detail);
+            shop.setIs_rs_pos(is_rs_pos);
+//            shop.setCategory(category);
             shopRepository.saveAndFlush(shop);
 
         return "redirect:/rest/shoplist";
     }
 
+    @PostMapping("/detail")
+    public String detail(Model model,
+                          @RequestParam(name="id") String id,
+                          @RequestParam(name="name" ) String name,
+                          @RequestParam(name="intro",required=false)String intro,
+                          @RequestParam(name="open_time" ) Integer open,
+                          @RequestParam(name="close_time")Integer close,
+                          @RequestParam(name="address" )String addr,
+                          @RequestParam(name="address_detail",required=false)String addr_detail,
+                          @RequestParam(name="is_rs_pos",required=false)char is_rs_pos
+//        @RequestParam(name="category", required = false)String category
 
+
+    ){
+        Shop shop = new Shop();
+        shop.setId(id);
+        shop.setName(name);
+        shop.setIntro(intro);
+        shop.setOpen_time(open);
+        shop.setClose_time(close);
+        shop.setAddress(addr);
+        shop.setAddress_detail(addr_detail);
+        shop.setIs_rs_pos(is_rs_pos);
+//            shop.setCategory(category);
+        shopRepository.saveAndFlush(shop);
+
+        return "redirect:/rest/shoplist";
+    }
+
+//    @PostMapping("delet")
 
 }

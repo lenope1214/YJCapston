@@ -29,9 +29,11 @@ public class WebController {
         return "addshop";
     }
 
-//    @GetMapping("/detail/{id}")
-//    public String detail(Model model, @PathVariable("id")int id){
-//        model.addAttribute("detail", shopRepository.findById(id));
-//        return "detail";
-//    }
+
+    @GetMapping("/detail/{id}")
+    public String detail(Model model, @PathVariable("id")String id){
+//        ShopDto shopDto= shopRepository.getPost(id);
+        model.addAttribute("shop", shopRepository.findById(id));
+        return "detail";
+    }
 }
