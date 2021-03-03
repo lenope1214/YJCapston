@@ -1754,6 +1754,7 @@ drawable edge1
 drawable edge2
 drawable edge3
 drawable edge4
+drawable edge5
 drawable fastfood
 drawable google
 drawable googleg_disabled_color_18
@@ -1805,6 +1806,11 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable o_chat
+drawable o_home
+drawable o_menu
+drawable o_res
+drawable o_review
 drawable profile
 drawable profile1
 drawable qr
@@ -1957,6 +1963,7 @@ id counterclockwise
 id custom
 id customPanel
 id cut
+id dangol_button
 id dark
 id date_picker_actions
 id decelerate
@@ -1971,6 +1978,7 @@ id design_menu_item_action_area_stub
 id design_menu_item_text
 id design_navigation_view
 id dessert
+id detail_button
 id dialog_button
 id dimensions
 id direct
@@ -2130,8 +2138,15 @@ id normal
 id notification_background
 id notification_main_column
 id notification_main_column_container
+id o_bottom_navigation
+id o_tab1
+id o_tab2
+id o_tab3
+id o_tab4
+id o_tab5
 id off
 id on
+id open_button
 id outline
 id outward
 id packed
@@ -2147,6 +2162,7 @@ id peekHeight
 id percent
 id pin
 id pos_address
+id pos_button
 id position
 id postLayout
 id profile_address
@@ -2302,6 +2318,7 @@ id up
 id useLogo
 id vertical
 id viewPager2
+id viewPager3
 id view_offset_helper
 id viewpager1
 id visible
@@ -2388,6 +2405,7 @@ layout abc_tooltip
 layout activity_bell
 layout activity_login
 layout activity_main
+layout activity_main_o
 layout activity_menu
 layout activity_qr_reader
 layout activity_signup
@@ -2412,6 +2430,7 @@ layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout fragment_page_one
 layout home_fragment
+layout home_fragment_o
 layout map_fragment
 layout material_chip_input_combo
 layout material_clock_display
@@ -2494,6 +2513,7 @@ layout zxing_barcode_scanner
 layout zxing_capture
 layout zzim_fragment
 menu menu_bottom
+menu menu_bottom_o
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description

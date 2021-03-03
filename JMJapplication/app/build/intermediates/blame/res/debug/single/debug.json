@@ -40,16 +40,20 @@
         "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\src\\main\\res\\drawable\\profile1.png"
     },
     {
-        "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\drawable_search1.png.flat",
-        "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\src\\main\\res\\drawable\\search1.png"
-    },
-    {
         "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_launcher_background.png.flat",
         "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\ic_launcher_background.png"
     },
     {
+        "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\drawable_search1.png.flat",
+        "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\src\\main\\res\\drawable\\search1.png"
+    },
+    {
         "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
         "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\drawable_edge5.xml.flat",
+        "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\src\\main\\res\\drawable\\edge5.xml"
     },
     {
         "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_launcher_background.png.flat",
@@ -70,6 +74,10 @@
     {
         "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\drawable_qr.png.flat",
         "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\src\\main\\res\\drawable\\qr.png"
+    },
+    {
+        "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\drawable_o_menu.png.flat",
+        "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\src\\main\\res\\drawable\\o_menu.png"
     },
     {
         "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\drawable_adv3.jpg.flat",
@@ -98,6 +106,10 @@
     {
         "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_page_one.xml.flat",
         "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\src\\main\\res\\layout\\fragment_page_one.xml"
+    },
+    {
+        "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\drawable_o_home.png.flat",
+        "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\src\\main\\res\\drawable\\o_home.png"
     },
     {
         "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\drawable_edge3.xml.flat",
@@ -156,8 +168,16 @@
         "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\src\\main\\res\\drawable\\item_color.xml"
     },
     {
+        "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\drawable_o_review.png.flat",
+        "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\src\\main\\res\\drawable\\o_review.png"
+    },
+    {
         "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\layout_pos_fragment.xml.flat",
         "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\src\\main\\res\\layout\\pos_fragment.xml"
+    },
+    {
+        "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_main_o.xml.flat",
+        "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\src\\main\\res\\layout\\activity_main_o.xml"
     },
     {
         "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_launcher_background.png.flat",
@@ -200,6 +220,10 @@
         "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\src\\main\\res\\drawable-v24\\edge4.xml"
     },
     {
+        "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\drawable_o_chat.png.flat",
+        "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\src\\main\\res\\drawable\\o_chat.png"
+    },
+    {
         "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\drawable_fastfood.png.flat",
         "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\src\\main\\res\\drawable\\fastfood.png"
     },
@@ -224,6 +248,10 @@
         "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\src\\main\\res\\drawable\\profile.png"
     },
     {
+        "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\drawable_o_res.png.flat",
+        "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\src\\main\\res\\drawable\\o_res.png"
+    },
+    {
         "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\layout_adv3.xml.flat",
         "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\src\\main\\res\\layout\\adv3.xml"
     },
@@ -236,6 +264,10 @@
         "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\src\\main\\res\\layout\\home_fragment.xml"
     },
     {
+        "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\menu_menu_bottom_o.xml.flat",
+        "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\src\\main\\res\\menu\\menu_bottom_o.xml"
+    },
+    {
         "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\drawable_edge1.xml.flat",
         "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\src\\main\\res\\drawable\\edge1.xml"
     },
@@ -246,6 +278,10 @@
     {
         "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\drawable_kimbap.png.flat",
         "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\src\\main\\res\\drawable\\kimbap.png"
+    },
+    {
+        "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\layout_home_fragment_o.xml.flat",
+        "source": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\src\\main\\res\\layout\\home_fragment_o.xml"
     },
     {
         "merged": "C:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
