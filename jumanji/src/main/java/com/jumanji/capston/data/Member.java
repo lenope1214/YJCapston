@@ -16,7 +16,7 @@ import java.util.Date;
 @Table(name="member")
 public class Member {
     @Id
-    @Column(name = "member_id", length = 30)
+    @Column(length = 30)
     private String id; //아이디
     @Column(length = 100, nullable = false) // 암호화를 하는데 여유자리까지 충분하게 100자리.
     private String pw; // 비밀번호
@@ -24,24 +24,28 @@ public class Member {
     private String name; // 이름
     @Column(length = 70)
     private String email; // 이메일
-    @Column(length = 120)
+    @Column(length = 90)
     private String address; // 주소
+    @Column(length = 90)
+    private String address_detail;
     @Column
     private Date birthday; // 생년월일
     @Column(length = 11, nullable = false)
     private String phone; // 전화번호
     @Column
-    private char is_wdrw='N'; // 탈퇴여부
+    private char is_wdrw; // 탈퇴여부
     @Column
     private char auth; // 권한
     @Column(length = 2)
     private String social; // 소셜
     @Column(insertable = false, updatable = false) // 업데이트, 인설트 불가
-    private Date sign_date = new Date(); // 가입날짜
-    @Column(name="lv", length = 2,nullable = false)
+    private Date sign_date; // 가입날짜
+    @Column(name="lv", length = 2)
     private String level; // 등급
     @Column(nullable = false)
     private int point; // 포인트
+//    @Column
+//    private String token; // jwt.io 문서읽기
 //    @Column
 //    private int penalty; // 경고회수
 }
