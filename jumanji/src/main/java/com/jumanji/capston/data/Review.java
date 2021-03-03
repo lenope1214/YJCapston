@@ -1,38 +1,39 @@
 package com.jumanji.capston.data;
+
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import javax.persistence.Table;
 import java.sql.Timestamp;
-
 
 @Getter
 @Setter
 @Entity
 @Table(name="review")
-public class Review {
+    public class Review implements Serializable {
     @Id
-    @Column(name = "rev_id", length=5,nullable = false)
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="REVIEW_SEQ_GENERATOR")
-    @SequenceGenerator(name="REVIEW_SEQ_GENERATOR", sequenceName="REVIEW_SEQ", allocationSize = 1)
-    private int id; //리뷰번호
+    @Column(name = "rev_id", length = 20, nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REVIEW_SEQ_GENERATOR")
+    @SequenceGenerator(name = "REVIEW_SEQ_GENERATOR", sequenceName = "REVIEW_SEQ", allocationSize = 1)
+    private int rev_id; //리뷰번호
+
+    @Id
     @ManyToOne
-    @JoinColumn(nullable = false)
-    private Shop shop_id;//매장번호 !!복합키설정 필요함!!
-    @Column(name = "rev_content", length =500)
+    @JoinColumn(name = "shop_id", nullable = false)
+    private Shop shop_id;//매장번호
+    @Column(name = "content")
     private String content;//리뷰내용
-    @Column(name = "rev_date")
-    private Timestamp date;//등록일
-    @Column(name = "rev_p_no", length=4)
-    private int p_no; //부모글번호
-    @Column(name = "rev_score", length=2,nullable = false)
+    @Column(name = "reg_date")
+    private Timestamp reg_date;//등록일
+    @Column(name = "parent_id", length = 20)
+    private int parent_id; //부모글번호
+    @Column(name = "score", length = 2, nullable = false)
     private int score;//평점
-    @Column(name = "rev_img_url", length=150)
-    private String img_url;//이미지경로
+    @Column(length = 150)
+    private String re_img;//이미지경로
     @ManyToOne
     @JoinColumn(name="member_id",nullable = false)
-    private Member mem_id;
-
-
+    private Member member_id;//아이디
 }

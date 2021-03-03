@@ -15,24 +15,26 @@ import java.sql.Timestamp;
 public class Shop {
     @Id
     @Column(name="shop_id",length = 10,nullable = false)
-    //private Integer id; //매장번호
     private String id; //매장번호
-    @Column(name="shop_name", length = 50, nullable = false)
+
+    @Column(name="name", length = 50, nullable = false)
     private String name; //매장이름
-    @Column(name="shop_intro", length = 250)
+    @Column(name="intro", length = 250)
     private String intro; //매장소개
-    @Column(name="shop_open", nullable = false)
-    private String open; //오픈시간
-    @Column(name="shop_close", nullable = false)
-    private String close; //마감시간
-    @Column(name="shop_addr", length = 120,nullable = false)
+    @Column(name="open_time", length = 4, nullable = false)
+    private int open_time; //오픈시간
+    @Column(name="close_time", length = 4,  nullable = false)
+    private int close_time; //마감시간
+    @Column(name="address", length = 120,nullable = false)
     private String address; //매장주소
-    @Column(name="shop_cat", length = 2)
-    private String category; //카테고리
+    @Column(name="address_detail", length = 120,nullable = false)
+    private String address_detail; //매장상세주소
+//    @Column(name="shop_cat", length = 2)
+//    private int category; //카테고리
     @Column
-    private char is_re_pos; //예약가능여부
+    private char is_rs_pos; //예약가능여부
     @ManyToOne
-    @JoinColumn(name="mem_id")
-    private Member mem_id;
+    @JoinColumn(name="owner_id")
+    private Member owner_id;
 
 }

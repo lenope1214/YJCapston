@@ -13,15 +13,15 @@ import java.sql.Timestamp;
 @Table(name="message")
 public class Message {
     @Id
-    @Column(length=12,nullable = false)
+    @Column(name = "msg_id", length=20,nullable = false)
     private int msg_id;//번호
-    @Column(nullable = false)
-    private Timestamp msg_time;//시간
-    @Column(length=300,nullable = false)
-    private String msg_content;//내용
+    @Column(name="reg_time",nullable = false)
+    private Timestamp reg_time;//시간
+    @Column(name="content",length=300,nullable = false)
+    private String content;//내용
     @ManyToOne
-    @JoinColumn(name="mem_id",nullable = false)
-    private Member acc_id;
+    @JoinColumn(name="member_id",nullable = false)
+    private Member member_id;
     @ManyToOne
     @JoinColumn(name="shop_id",nullable = false)
     private Shop shop_id;

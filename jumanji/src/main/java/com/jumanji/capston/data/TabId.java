@@ -18,11 +18,12 @@ class Tab {
     @EmbeddedId
     private TabId tab_id;
 
-
     @Column(length = 2, nullable = false)
     private int tab_limit; // 좌석수
 }
 
+@Getter
+@Setter
 @EqualsAndHashCode
 @Embeddable
 public class TabId implements Serializable{
@@ -31,7 +32,7 @@ public class TabId implements Serializable{
     private String id ; // 좌석번호
 
     @ManyToOne
-    @JoinColumn(name="shop_id")
+    @JoinColumn(name="tab_shop_id")
     private Shop shop_id; // 매장번호
 
     public TabId(){}

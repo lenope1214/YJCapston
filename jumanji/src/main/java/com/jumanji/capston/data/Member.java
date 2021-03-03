@@ -17,31 +17,33 @@ import java.util.Date;
 public class Member {
     @Id
     @Column(name = "member_id", length = 30)
-    private String id; //아이디
-    @Column(length = 100, nullable = false) // 암호화를 하는데 여유자리까지 충분하게 100자리.
+    private String member_id; //아이디
+    @Column(name="pw",length = 100, nullable = false) // 암호화를 하는데 여유자리까지 충분하게 100자리.
     private String pw; // 비밀번호
-    @Column(length = 15, nullable = false)
+    @Column(name="name",length = 15, nullable = false)
     private String name; // 이름
-    @Column(length = 70)
+    @Column(name="email",length = 70)
     private String email; // 이메일
-    @Column(length = 120)
+    @Column(name="address",length = 90)
     private String address; // 주소
-    @Column
+    @Column(name="address_detail",length = 90)
+    private String address_detail; // 상세주소
+    @Column(name="birthday")
     private Date birthday; // 생년월일
-    @Column(length = 11, nullable = false)
+    @Column(name="phone",length = 11, nullable = false)
     private String phone; // 전화번호
-    @Column
+    @Column(name="is_wdrw")
     private char is_wdrw='N'; // 탈퇴여부
-    @Column
-    private String auth; // 권한
-    @Column(length = 2)
-    private String social; // 소셜
-    @Column(insertable = false, updatable = false) // 업데이트, 인설트 불가
+    @Column(name="auth")
+    private char auth; // 권한
+    @Column(name="social",length = 2)
+    private char social; // 소셜
+    @Column(name="sign_date",insertable = false, updatable = false) // 업데이트, 인설트 불가
     private Date sign_date = new Date(); // 가입날짜
-    @Column(length = 2,nullable = false)
-    private String level; // 등급
-    @Column(nullable = false)
+    @Column(name="lv", length = 2,nullable = false)
+    private int lv; // 등급
+    @Column(name="point",length=6,nullable = false)
     private int point; // 포인트
-    @Column
-    private int penalty; // 경고회수
+//    @Column
+//    private int penalty; // 경고회수
 }
