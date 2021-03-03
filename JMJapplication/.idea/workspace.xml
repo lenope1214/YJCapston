@@ -20,7 +20,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="ce10171a2da52e2c05" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_29" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -153,7 +153,8 @@
       <workItem from="1614685997039" duration="2600000" />
       <workItem from="1614771996054" duration="811000" />
       <workItem from="1614772818722" duration="207000" />
-      <workItem from="1614773050414" duration="3000" />
+      <workItem from="1614773050414" duration="170000" />
+      <workItem from="1614773229147" duration="1000" />
     </task>
     <servers />
   </component>
