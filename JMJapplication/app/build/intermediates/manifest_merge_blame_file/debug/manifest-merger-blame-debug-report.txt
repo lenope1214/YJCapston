@@ -1,0 +1,202 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.jmjapplication"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="16"
+8-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="30" />
+9-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml
+10
+11    <permission
+11-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:5:5-6:55
+12        android:name="com.example.jmjapplication.permission.MAPS_RECEIVE"
+12-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:5:17-82
+13        android:protectionLevel="signature" />
+13-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:6:17-52
+14
+15    <uses-permission android:name="org.techtown.location.permission.MAPS_RECEIVE" />
+15-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:8:5-85
+15-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:8:22-82
+16    <uses-permission android:name="android.permission.INTERNET" />
+16-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:10:5-67
+16-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:10:22-64
+17    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+17-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:11:5-98
+17-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:11:22-95
+18    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+18-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:13:5-79
+18-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:13:22-76
+19    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+19-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:14:5-81
+19-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:14:22-78
+20    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+20-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:15:5-81
+20-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:15:22-78
+21    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+21-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:16:5-79
+21-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:16:22-77
+22    <uses-permission android:name="android.permission.CAMERA" />
+22-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:18:5-64
+22-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:18:22-62
+23
+24    <uses-feature android:name="android.hardware.camera" />
+24-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:19:5-59
+24-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:19:19-57
+25    <uses-feature android:name="android.hardware.camera.autofocus" />
+25-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:20:5-69
+25-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:20:19-67
+26
+27    <!-- Include required permissions for Google Maps API to run. -->
+28    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+28-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\a839635d2d496b87b8285f48671776f3\jetified-play-services-maps-17.0.0\AndroidManifest.xml:23:5-79
+28-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\a839635d2d496b87b8285f48671776f3\jetified-play-services-maps-17.0.0\AndroidManifest.xml:23:22-76
+29
+30    <uses-feature
+30-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\a839635d2d496b87b8285f48671776f3\jetified-play-services-maps-17.0.0\AndroidManifest.xml:26:5-28:35
+31        android:glEsVersion="0x00020000"
+31-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\a839635d2d496b87b8285f48671776f3\jetified-play-services-maps-17.0.0\AndroidManifest.xml:27:9-41
+32        android:required="true" />
+32-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\a839635d2d496b87b8285f48671776f3\jetified-play-services-maps-17.0.0\AndroidManifest.xml:28:9-32
+33    <uses-feature
+33-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8ece9ffa1d078df91f1be94f18806b9e\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:27:5-29:36
+34        android:name="android.hardware.camera.front"
+34-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8ece9ffa1d078df91f1be94f18806b9e\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:28:9-53
+35        android:required="false" />
+35-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8ece9ffa1d078df91f1be94f18806b9e\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:29:9-33
+36    <uses-feature
+36-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8ece9ffa1d078df91f1be94f18806b9e\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:35:5-37:36
+37        android:name="android.hardware.camera.flash"
+37-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8ece9ffa1d078df91f1be94f18806b9e\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:36:9-53
+38        android:required="false" />
+38-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8ece9ffa1d078df91f1be94f18806b9e\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:37:9-33
+39    <uses-feature
+39-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8ece9ffa1d078df91f1be94f18806b9e\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:38:5-40:36
+40        android:name="android.hardware.screen.landscape"
+40-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8ece9ffa1d078df91f1be94f18806b9e\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:39:9-57
+41        android:required="false" />
+41-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8ece9ffa1d078df91f1be94f18806b9e\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:40:9-33
+42    <uses-feature
+42-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8ece9ffa1d078df91f1be94f18806b9e\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:41:5-43:36
+43        android:name="android.hardware.wifi"
+43-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8ece9ffa1d078df91f1be94f18806b9e\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:42:9-45
+44        android:required="false" />
+44-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8ece9ffa1d078df91f1be94f18806b9e\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:43:9-33
+45
+46    <application
+46-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:22:5-79:19
+47        android:allowBackup="true"
+47-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:23:13-39
+48        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+48-->[androidx.core:core:1.3.1] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\905808b10bc47511b6c6896a37787f2b\core-1.3.1\AndroidManifest.xml:24:18-86
+49        android:debuggable="true"
+50        android:hardwareAccelerated="true"
+50-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:30:13-47
+51        android:icon="@mipmap/ic_launcher"
+51-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:24:13-47
+52        android:label="@string/app_name"
+52-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:25:13-45
+53        android:roundIcon="@mipmap/ic_launcher_round"
+53-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:26:13-58
+54        android:supportsRtl="true"
+54-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:27:13-39
+55        android:testOnly="true"
+56        android:theme="@style/AppTheme"
+56-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:28:13-44
+57        android:usesCleartextTraffic="true" >
+57-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:29:13-48
+58        <uses-library android:name="com.google.android.maps" />
+58-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:32:9-64
+58-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:32:23-61
+59        <uses-library
+59-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:33:9-35:44
+60            android:name="org.apache.http.legacy"
+60-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:34:17-54
+61            android:required="false" />
+61-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:35:17-41
+62
+63        <meta-data
+63-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:37:9-39:75
+64            android:name="com.google.android.geo.API_KEY"
+64-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:38:17-62
+65            android:value="AIzaSyDzrU6ZybJOo_RtvrYo7o_Koown_2Ow_1g" />
+65-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:39:17-72
+66        <meta-data
+66-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:41:9-43:73
+67            android:name="com.google.android.gms.version"
+67-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:42:17-62
+68            android:value="@integer/google_play_services_version" />
+68-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:43:17-70
+69
+70        <activity android:name="com.example.jmjapplication.MainActivity" >
+70-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:45:9-51:20
+70-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:45:19-47
+71            <intent-filter>
+71-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:46:13-50:29
+72                <action android:name="android.intent.action.MAIN" />
+72-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:47:17-68
+72-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:47:25-66
+73
+74                <category android:name="android.intent.category.LAUNCHER" />
+74-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:49:17-76
+74-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:49:27-74
+75            </intent-filter>
+76        </activity>
+77        <activity android:name="com.example.jmjapplication.MenuActivity" >
+77-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:53:9-55:20
+77-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:53:19-47
+78        </activity>
+79        <activity android:name="com.example.jmjapplication.BellActivity" >
+79-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:57:9-59:20
+79-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:57:19-47
+80        </activity>
+81        <activity android:name="com.example.jmjapplication.QrReaderActivity" >
+81-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:61:9-63:20
+81-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:61:19-51
+82        </activity>
+83        <activity
+83-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:65:9-70:20
+84            android:name="com.example.jmjapplication.CaptureAct"
+84-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:65:19-45
+85            android:screenOrientation="fullSensor"
+85-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:66:19-57
+86            android:stateNotNeeded="true"
+86-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:67:19-48
+87            android:windowSoftInputMode="stateAlwaysHidden" >
+87-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:68:19-66
+88        </activity>
+89        <activity android:name="com.example.jmjapplication.LoginActivity" >
+89-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:72:9-74:20
+89-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:72:19-48
+90        </activity>
+91        <activity android:name="com.example.jmjapplication.SignupActivity" >
+91-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:76:9-78:20
+91-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:76:19-49
+92        </activity>
+93        <activity
+93-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8ece9ffa1d078df91f1be94f18806b9e\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:46:9-52:63
+94            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+94-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8ece9ffa1d078df91f1be94f18806b9e\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:47:13-74
+95            android:clearTaskOnLaunch="true"
+95-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8ece9ffa1d078df91f1be94f18806b9e\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:48:13-45
+96            android:screenOrientation="sensorLandscape"
+96-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8ece9ffa1d078df91f1be94f18806b9e\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:49:13-56
+97            android:stateNotNeeded="true"
+97-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8ece9ffa1d078df91f1be94f18806b9e\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:50:13-42
+98            android:theme="@style/zxing_CaptureTheme"
+98-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8ece9ffa1d078df91f1be94f18806b9e\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:51:13-54
+99            android:windowSoftInputMode="stateAlwaysHidden" />
+99-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8ece9ffa1d078df91f1be94f18806b9e\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:52:13-60
+100        <activity
+100-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6a27f052584ba14e1bf3f0754d910342\jetified-play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+101            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+101-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6a27f052584ba14e1bf3f0754d910342\jetified-play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+102            android:exported="false"
+102-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6a27f052584ba14e1bf3f0754d910342\jetified-play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+103            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+103-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6a27f052584ba14e1bf3f0754d910342\jetified-play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+104    </application>
+105
+106</manifest>

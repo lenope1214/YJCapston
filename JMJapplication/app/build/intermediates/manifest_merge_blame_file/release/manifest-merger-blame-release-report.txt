@@ -1,0 +1,117 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.jmjapplication"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="16"
+8-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="30" />
+9-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml
+10
+11    <permission
+11-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:5:5-6:55
+12        android:name="com.example.jmjapplication.permission.MAPS_RECEIVE"
+12-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:5:17-82
+13        android:protectionLevel="signature" />
+13-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:6:17-52
+14
+15    <uses-permission android:name="org.techtown.location.permission.MAPS_RECEIVE" />
+15-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:8:5-85
+15-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:8:22-82
+16    <uses-permission android:name="android.permission.INTERNET" />
+16-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:10:5-67
+16-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:10:22-64
+17    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+17-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:11:5-98
+17-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:11:22-95
+18    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+18-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:13:5-79
+18-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:13:22-76
+19    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+19-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:14:5-81
+19-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:14:22-78
+20    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+20-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:15:5-81
+20-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:15:22-78
+21
+22    <!-- Include required permissions for Google Maps API to run. -->
+23    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+23-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\a839635d2d496b87b8285f48671776f3\jetified-play-services-maps-17.0.0\AndroidManifest.xml:23:5-79
+23-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\a839635d2d496b87b8285f48671776f3\jetified-play-services-maps-17.0.0\AndroidManifest.xml:23:22-76
+24
+25    <uses-feature
+25-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\a839635d2d496b87b8285f48671776f3\jetified-play-services-maps-17.0.0\AndroidManifest.xml:26:5-28:35
+26        android:glEsVersion="0x00020000"
+26-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\a839635d2d496b87b8285f48671776f3\jetified-play-services-maps-17.0.0\AndroidManifest.xml:27:9-41
+27        android:required="true" />
+27-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\a839635d2d496b87b8285f48671776f3\jetified-play-services-maps-17.0.0\AndroidManifest.xml:28:9-32
+28
+29    <application
+29-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:17:5-46:19
+30        android:allowBackup="true"
+30-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:18:13-39
+31        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+31-->[androidx.core:core:1.3.1] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\905808b10bc47511b6c6896a37787f2b\core-1.3.1\AndroidManifest.xml:24:18-86
+32        android:icon="@mipmap/ic_launcher"
+32-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:19:13-47
+33        android:label="@string/app_name"
+33-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:20:13-45
+34        android:roundIcon="@mipmap/ic_launcher_round"
+34-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:21:13-58
+35        android:supportsRtl="true"
+35-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:22:13-39
+36        android:testOnly="true"
+37        android:theme="@style/AppTheme"
+37-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:23:13-44
+38        android:usesCleartextTraffic="true" >
+38-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:24:13-48
+39        <uses-library android:name="com.google.android.maps" />
+39-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:26:9-64
+39-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:26:23-61
+40        <uses-library
+40-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:27:9-29:44
+41            android:name="org.apache.http.legacy"
+41-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:28:17-54
+42            android:required="false" />
+42-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:29:17-41
+43
+44        <meta-data
+44-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:31:9-33:75
+45            android:name="com.google.android.geo.API_KEY"
+45-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:32:17-62
+46            android:value="AIzaSyDzrU6ZybJOo_RtvrYo7o_Koown_2Ow_1g" />
+46-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:33:17-72
+47        <meta-data
+47-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:35:9-37:73
+48            android:name="com.google.android.gms.version"
+48-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:36:17-62
+49            android:value="@integer/google_play_services_version" />
+49-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:37:17-70
+50
+51        <activity android:name="com.example.jmjapplication.MainActivity" >
+51-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:39:9-45:20
+51-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:39:19-47
+52            <intent-filter>
+52-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:40:13-44:29
+53                <action android:name="android.intent.action.MAIN" />
+53-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:41:17-68
+53-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:41:25-66
+54
+55                <category android:name="android.intent.category.LAUNCHER" />
+55-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:43:17-76
+55-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\AndroidManifest.xml:43:27-74
+56            </intent-filter>
+57        </activity>
+58        <activity
+58-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6a27f052584ba14e1bf3f0754d910342\jetified-play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+59            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+59-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6a27f052584ba14e1bf3f0754d910342\jetified-play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+60            android:exported="false"
+60-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6a27f052584ba14e1bf3f0754d910342\jetified-play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+61            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+61-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6a27f052584ba14e1bf3f0754d910342\jetified-play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+62    </application>
+63
+64</manifest>
