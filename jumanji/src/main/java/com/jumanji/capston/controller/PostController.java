@@ -1,5 +1,6 @@
 package com.jumanji.capston.controller;
 
+import com.jumanji.capston.controller.exception.MemberNotFoundException;
 import com.jumanji.capston.data.Member;
 import com.jumanji.capston.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ public class PostController {
     MemberRepository memberRepository;
 
     @PostMapping("/join")
-    public String join(@RequestBody Member m){
-        System.out.println("join\nm.toString() : " + m.toString() +"\n" +
+    public String join(@RequestBody Member m) {
+        System.out.println("join\nm.toString() : " + m.toString() + "\n" +
                 "m.getId() : " + m.getId() + "\n" +
                 "m.getPw() : " + m.getPw() + "\n" +
                 "m.getName() : " + m.getName() + "\n" +
@@ -31,35 +32,27 @@ public class PostController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody Member m){
-        Optional<Member> l_member = memberRepository.findById(m.getId());
-
-        System.out.println("login\nm.toString() : " + m.toString() +"\n" +
-                "m.getId() : " + m.getId() + "\n" +
-                "m.getPw() : " + m.getPw() + "\n" +
-                "m.getAuth() : " + m.getAuth()
-        );
-        System.out.println("l_member.get().getPw() : " +  l_member.get().getPw());
-        if(Integer.parseInt(l_member.get().getPw()) == Integer.parseInt(m.getPw())){
-            System.out.println("로그인 성공");
-            return "success";
-        }else{
-            System.out.println("로그인 실패");
-            return null;
-        }
-
+    public Member login(@RequestBody Member m) {
+        System.out.println(">> login");
+        return memberRepository.findById(m.getId())
+                .orElseThrow(()-> new MemberNotFoundException(m.getId()));
 //        return "rest-login.";
     }
 
+    @GetMapping("/memberDelAll")
+    public String memberDelAll(){
+        memberRepository.deleteAll();
+        return "Member 전부 삭제.";
+    }
 
 
     @GetMapping("/test")
-    public String hello(){
+    public String hello() {
         return "안녕하세요?";
     }
 
     @GetMapping("/members")
-    public List<Member> Members(){
+    public List<Member> Members() {
         List<Member> memberList;
         memberList = memberRepository.findAll();
         return memberList;
