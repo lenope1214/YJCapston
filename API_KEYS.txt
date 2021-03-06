@@ -1,0 +1,5 @@
+
+
+네이버 API
+Client ID : 3DwdaAu9DxPsYTNgPQGD
+Client Secret : Fop9WootlX

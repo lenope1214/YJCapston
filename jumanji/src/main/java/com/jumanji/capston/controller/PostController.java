@@ -5,6 +5,7 @@ import com.jumanji.capston.data.Member;
 import com.jumanji.capston.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,13 +14,14 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/rest")
+@RequestMapping("/api")
 public class PostController {
     @Autowired
     MemberRepository memberRepository;
 
     @PostMapping("/join")
-    public String join(@RequestBody Member m) {
+    public Member join(@RequestBody Member _member) {
+        Member m = _member;
         System.out.println("join\nm.toString() : " + m.toString() + "\n" +
                 "m.getId() : " + m.getId() + "\n" +
                 "m.getPw() : " + m.getPw() + "\n" +
@@ -27,10 +29,13 @@ public class PostController {
                 "m.getPhone() : " + m.getPhone() + "\n" +
                 "m.getAuth() : " + m.getAuth()
         );
-        memberRepository.save(m);
-        return "rest-join-success";
+        if(memberRepository.findById(m.getId()).isEmpty())
+            memberRepository.save(m);
+
+        return m;
     }
 
+//    @Transactional(readOnly = true)
     @PostMapping("/login")
     public Member login(@RequestBody Member m) {
         System.out.println(">> login");
@@ -45,12 +50,14 @@ public class PostController {
         return "Member 전부 삭제.";
     }
 
-
-    @GetMapping("/test")
-    public String hello() {
-        return "안녕하세요?";
+//    @Transactional(readOnly = true)
+    @GetMapping("/myInfo/{id}")
+    public Member myInfo(@PathVariable("id") String id){
+        return memberRepository.findById(id)
+                .orElseThrow(()-> new MemberNotFoundException(id));
     }
 
+//    @Transactional(readOnly = true)
     @GetMapping("/members")
     public List<Member> Members() {
         List<Member> memberList;
