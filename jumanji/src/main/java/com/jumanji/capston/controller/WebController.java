@@ -1,15 +1,21 @@
 package com.jumanji.capston.controller;
 
+import com.jumanji.capston.config.auth.PrincipalDetails;
 import com.jumanji.capston.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class WebController {
@@ -20,10 +26,32 @@ public class WebController {
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("/test/login")
-    public @ResponseBody String loginTest(Authentication authentication){
+    public @ResponseBody String testLogin(
+//            Authentication authentication, // DI(의존성 주입) 1번 방식
+            @AuthenticationPrincipal PrincipalDetails userDetails // 2번 방식.
+            ){
         System.out.println("/test/login ==============");
-        System.out.println("authentication : " + authentication.getPrincipal());
+//        PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
+//        System.out.println("authentication : " + principalDetails.getUser());
+
+        System.out.println("userDetails : " + userDetails.getUser());
         return "세션 정보 확인하기";
+    }
+
+    @GetMapping("/test/oauth/login")
+    public @ResponseBody String testOAuthLogin(
+            Authentication authentication // DI(의존성 주입) 1번 방식
+//            ,  @AuthenticationPrincipal PrincipalDetails userDetails // 2번 방식
+            , @AuthenticationPrincipal OAuth2User oAuth
+    ){
+
+
+        System.out.println("/test/login ==============");
+        OAuth2User oAuth2User = (OAuth2User)authentication.getPrincipal();
+        System.out.println("authentication : " + oAuth2User.getAttributes());
+        System.out.println("oauth2User : " + oAuth.getAttributes());
+
+        return "OAuth세션 정보 확인하기";
     }
 
 

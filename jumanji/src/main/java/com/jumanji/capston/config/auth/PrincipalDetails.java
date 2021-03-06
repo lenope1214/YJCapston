@@ -10,19 +10,28 @@ import com.jumanji.capston.data.User;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
-// Security Session -> Authyentication -> UserDetails
+// Security Session -> Authentication -> UserDetails
+
+// 시큐리티 세션은 Authentication이 담기고
+// Authentication 안에는 UserDetails 와 OAuth2User가 담길 수 있는데
+// PrincipalDetails를 UserDetails, OAuth2User를 상속받음으로써
+// PrincipalDetails 하나를 가지고 내부, 외부 로그인을 모두 처리 가능하게함.
 @Data
-public class PrincipalDetails implements UserDetails {
+public class PrincipalDetails implements UserDetails, OAuth2User {
     private User user; // 컴포지션
 
     public PrincipalDetails(User user){
         this.user = user;
     }
+
+
 
     // 해당 유저의 권한을 리턴하는 곳!
     @Override
@@ -75,5 +84,16 @@ public class PrincipalDetails implements UserDetails {
         // ex
         // 현재시간 - 마지막 로그인 시간 => 1년 초과시 false 리턴
         return true;
+    }
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return null;
+    }
+
+
+    @Override
+    public String getName() {
+        return null;
     }
 }

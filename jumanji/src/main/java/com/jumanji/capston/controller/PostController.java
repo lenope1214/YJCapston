@@ -45,20 +45,20 @@ public class PostController {
 
     //spring security 설정 .loginProcessingUrl("/login") 으로 처리
 //    @Transactional(readOnly = true)
-    @PostMapping("/login")
-    public User login(@ModelAttribute User user) {
-        System.out.println(">> login");
-        System.out.println("m.toString() : " + user.toString() + "\n"
-                + "m.getId() : " + user.getId() + "\n"
-                + "m.getPw() : " + user.getPw() + "\n"
-//              + "m.getName() : " + user.getName() + "\n"
-//              + "m.getPhone() : " + user.getPhone() + "\n"
-//              + "m.getRole() : " + user.getRole()
-        );
-        return userRepository.findById(user.getId())
-                .orElseThrow(()-> new MemberNotFoundException(user.getId()));
-//        return "redirect:/";
-    }
+//    @PostMapping("/login")
+//    public String login(@ModelAttribute User user) {
+//        System.out.println(">> login");
+//        System.out.println("m.toString() : " + user.toString() + "\n"
+//                + "m.getId() : " + user.getId() + "\n"
+//                + "m.getPw() : " + user.getPw() + "\n"
+////              + "m.getName() : " + user.getName() + "\n"
+////              + "m.getPhone() : " + user.getPhone() + "\n"
+////              + "m.getRole() : " + user.getRole()
+//        );
+////        return userRepository.findById(user.getId())
+////                .orElseThrow(()-> new MemberNotFoundException(user.getId()));
+//        return "login";
+//    }
 
     @GetMapping("/memberDelAll")
     public String memberDelAll(){
