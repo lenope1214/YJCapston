@@ -1,6 +1,5 @@
 package com.jumanji.capston.data;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,7 +31,7 @@ public class Order implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "member_id", insertable = false, updatable = false)
-    private Member member_id;
+    private User member_id;
 
     @Embedded
     private MenuId menu_id;

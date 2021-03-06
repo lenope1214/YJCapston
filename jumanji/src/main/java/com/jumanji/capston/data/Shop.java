@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 
 
 @Getter
@@ -33,6 +32,6 @@ public class Shop {
     private char is_re_pos; //예약가능여부
     @ManyToOne
     @JoinColumn(name="member_id")
-    private Member member_id;
+    private User member_id;
 
 }

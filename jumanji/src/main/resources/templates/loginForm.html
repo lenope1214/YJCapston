@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -6,9 +7,10 @@
 <body>
 <section>
     <div th:if="${param.error}">Failed. Check username and password.</div>
-    <form th:action="@{/login}" method="post">
-        id <input type="text" id="userId"  name="userId"/><br>
-        Password<input type="password" id="password" name="password"><br>
+    <form th:action="@{/api/login}" method="post">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+        id <input type="text" id="id"  name="id"/><br>
+        Password<input type="password" id="pw" name="pw"><br>
         <input type="submit" value="Login"/>
     </form>
 </section>

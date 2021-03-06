@@ -1,67 +1,83 @@
 package com.jumanji.capston.controller;
 
 import com.jumanji.capston.controller.exception.MemberNotFoundException;
-import com.jumanji.capston.data.Member;
-import com.jumanji.capston.repository.MemberRepository;
+import com.jumanji.capston.data.User;
+import com.jumanji.capston.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api")
 public class PostController {
     @Autowired
-    MemberRepository memberRepository;
+    UserRepository userRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @PostMapping("/join")
-    public Member join(@RequestBody Member _member) {
-        Member m = _member;
-        System.out.println("join\nm.toString() : " + m.toString() + "\n" +
-                "m.getId() : " + m.getId() + "\n" +
-                "m.getPw() : " + m.getPw() + "\n" +
-                "m.getName() : " + m.getName() + "\n" +
-                "m.getPhone() : " + m.getPhone() + "\n" +
-                "m.getAuth() : " + m.getAuth()
+    public String join(@RequestBody User _user) {
+        User user = _user;
+        System.out.println("join\nm.toString() : " + user.toString() + "\n" +
+                "m.getId() : " + user.getId() + "\n" +
+                "m.getPw() : " + user.getPw() + "\n" +
+                "m.getName() : " + user.getName() + "\n" +
+                "m.getPhone() : " + user.getPhone() + "\n" +
+                "m.getRole() : " + user.getRole()
         );
-        if(memberRepository.findById(m.getId()).isEmpty())
-            memberRepository.save(m);
+        // 현재 비밀번호를 받는 족족 그대로 넣고있기 때문에 시큐리티에 걸려 로그인 불가능.
+        // 비밀번호를 암호화 해서 넣어줘야 함.
+        String rawPassword = user.getPw();
+        String encPassword = passwordEncoder.encode(rawPassword);
+        user.setPw(encPassword);
+        if(userRepository.findById(user.getId()).isEmpty())
+            userRepository.save(user);
+        else{
+            System.out.println("이미 있는 아이디. 회원가입 불가.");
+        }
 
-        return m;
+        return "/";
     }
 
+    //spring security 설정 .loginProcessingUrl("/login") 으로 처리
 //    @Transactional(readOnly = true)
     @PostMapping("/login")
-    public Member login(@RequestBody Member m) {
+    public User login(@ModelAttribute User user) {
         System.out.println(">> login");
-        return memberRepository.findById(m.getId())
-                .orElseThrow(()-> new MemberNotFoundException(m.getId()));
-//        return "rest-login.";
+        System.out.println("m.toString() : " + user.toString() + "\n"
+                + "m.getId() : " + user.getId() + "\n"
+                + "m.getPw() : " + user.getPw() + "\n"
+//              + "m.getName() : " + user.getName() + "\n"
+//              + "m.getPhone() : " + user.getPhone() + "\n"
+//              + "m.getRole() : " + user.getRole()
+        );
+        return userRepository.findById(user.getId())
+                .orElseThrow(()-> new MemberNotFoundException(user.getId()));
+//        return "redirect:/";
     }
 
     @GetMapping("/memberDelAll")
     public String memberDelAll(){
-        memberRepository.deleteAll();
+        userRepository.deleteAll();
         return "Member 전부 삭제.";
     }
 
 //    @Transactional(readOnly = true)
     @GetMapping("/myInfo/{id}")
-    public Member myInfo(@PathVariable("id") String id){
-        return memberRepository.findById(id)
+    public User myInfo(@PathVariable("id") String id){
+        return userRepository.findById(id)
                 .orElseThrow(()-> new MemberNotFoundException(id));
     }
 
 //    @Transactional(readOnly = true)
     @GetMapping("/members")
-    public List<Member> Members() {
-        List<Member> memberList;
-        memberList = memberRepository.findAll();
+    public List<User> Members() {
+        List<User> memberList;
+        memberList = userRepository.findAll();
         return memberList;
     }
 }

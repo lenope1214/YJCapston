@@ -32,7 +32,7 @@ public class Review {
     private String img_url;//이미지경로
     @ManyToOne
     @JoinColumn(name="member_id",nullable = false)
-    private Member mem_id;
+    private User mem_id;
 
 
 }

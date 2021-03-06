@@ -21,7 +21,7 @@ public class Message {
     private String msg_content;//내용
     @ManyToOne
     @JoinColumn(name="member_id",nullable = false)
-    private Member member_id;
+    private User member_id;
     @ManyToOne
     @JoinColumn(name="shop_id",nullable = false)
     private Shop shop_id;

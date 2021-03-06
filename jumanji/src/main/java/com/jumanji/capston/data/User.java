@@ -14,8 +14,8 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name="member")
-public class Member {
+@Table(name="user")
+public class User {
     @Id
     @Column(length = 30)
     private String id; //아이디
@@ -36,7 +36,7 @@ public class Member {
     @Column
     private char is_wdrw; // 탈퇴여부
     @Column
-    private char auth; // 권한   u, o, a
+    private String role; // 권한   u, o, a
     @Column(length = 2)
     private String social; // 소셜
     @Column(insertable = false, updatable = false) // 업데이트, 인설트 불가
@@ -46,9 +46,12 @@ public class Member {
     @Column(nullable = false)
     private int point; // 포인트
 
+    private String provider;
+    private String provider_id;
+
     //Test 용. Column 어노테이션 없어도 테이블에 추가 되는가?
     // Column 어노테이션이 없어도 잘 됨.
-    private Timestamp regTime;
+//    private Timestamp regTime;
 //    @Column
 //    private String token; // jwt.io 문서읽기
 //    @Column

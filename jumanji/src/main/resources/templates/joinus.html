@@ -2,15 +2,16 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
-    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <title th:text="|사용자 추가|"></title>
 </head>
 <body>
 
 아이디 : <input type="text" id="userId" placeholder="아이디"> <br>
 비밀번호 : <input type="password" id="password" placeholder="비밀번호"> <br>
-이름 : <input type="text" id="username"  placeholder="이름"> <br>
+이름 : <input type="text" id="username" placeholder="이름"> <br>
 
 이메일
 <input type="text" id="email1" name="email1"> @ <input id="email2" name="email2" type="text">
@@ -22,12 +23,12 @@
     <option value="1">직접입력</option>
 </select> <br>
 
-주소 <input type="text" id="addr1" name="addr1" > <br>
+주소 <input type="text" id="addr1" name="addr1"> <br>
 상세주소 <input type="text" id="addr2" name="addr2"> <br>
-생일 <input type="date" id="birthday" name="birthday"  value="2000-01-01"> <br>
+생일 <input type="date" id="birthday" name="birthday" value="2000-01-01"> <br>
 
 전화번호
-<input type="text" id="phone1" name="phone1" type="text"> -
+<input type="text" id="phone1" name="phone1"> -
 <input type="text" id="phone2" name="phone2"> -
 <input type="text" id="phone3" name="phone3"> <br>
 
@@ -48,43 +49,37 @@
 -->
 <p id="result"></p>
 
+</body>
 
 <script th:inline="javascript">
-    function selectEmail(ele){
-        var $ele = $(ele);
-        var $email2 = $('#email2'); // '1'인 경우 직접입력
-        if($ele.val() == "1"){
-            $email2.attr('readonly', false);
-            $email2.val('');
-        } else {
-            $email2.attr('readonly', true);
-            $email2.val($ele.val());
-        }
-    } // 여기는 복사 붙여넣기 했슴다 변경가능
-
-    $(function(){
-        $('#send').click((event)=>{
-            const userid=$('#userid').val();
-            const name=$('#username').val();
-            const path='/api/adduser';
-            const json = JSON.stringify({
-                'userid':userid,
-                'name':name
-            });
-            const csrfToken=/*[[${_csrf.token}]]*/ null;
-            const csrfHeader=/*[[${_csrf.headerName}]]*/ null;
-            $.ajax({
-                url:path,
-                type:'POST',
-                contentType: 'application/json',
-                data:json,
-                beforeSend:function(xhr){ xhr.setRequestHeader(csrfHeader, csrfToken);}
-            }).done((result)=>{
-                console.log(result.userid);
-                $('#result').text(result.userid);
-            });
+    // alert('로딩완료');
+    $('#send').click((event) => {
+        alert('등록클릭');
+        const userid = $('#userId').val();
+        const password = $('#password').val();
+        const name = $('#username').val();
+        const phone = $('#phone1').val() +$('#phone3').val() +$('#phone2').val();
+        const path = '/api/join';
+        const json = JSON.stringify({
+            'id': userid,
+            'pw' : password,
+            'name': name,
+            'role' : "user",
+            'phone' : phone
+        });
+        const csrfToken =/*[[${_csrf.token}]]*/ null;
+        const csrfHeader =/*[[${_csrf.headerName}]]*/ null;
+        $.ajax({
+            url: path,
+            type: 'POST',
+            contentType: 'application/json',
+            data: json,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(csrfHeader, csrfToken);
+            }
+        }).done((result) => {
+            window.location.href("/");
         });
     });
 </script>
-</body>
 </html>
