@@ -29,7 +29,7 @@
 ////    private UserDetailsServiceImpl userDetails;
 //    @Autowired
 //    private PrincipalOauth2UserService principalOauth2UserService;
-//
+//ㅍ                                                       ㅍ 1   누
 //    //@Bean을 붙여 해당 메소드의 리턴되는 오브젝트를 IOC로 등록해줌.
 //    @Bean
 //    public BCryptPasswordEncoder bCryptPasswordEncoder() {
