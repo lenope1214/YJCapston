@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import MainContainer from "../../containers/Main/MainContainer";
 
 import * as S from "./style";
 
-const Login = ({ id, pw, handleId, handlePw, login, sLogin }) => {
+const Login = ({ id, pw, handleId, handlePw, login, isLogin }) => {
     const [modal, setModal] = useState(true);
     const type = localStorage.getItem("type");
 
@@ -16,10 +15,10 @@ const Login = ({ id, pw, handleId, handlePw, login, sLogin }) => {
 
     return (
         <>
-            {/* <button onClick={openModal}>로그인</button> */}
+            {<button onClick={openModal}>로그인</button>}
             {modal && (
                 <>
-                    {/* <S.Loginback onClick={closeModal}></S.Loginback> */}
+                    {<S.Loginback onClick={closeModal}></S.Loginback>}
                     <S.LoginWrap>
                         <header>
                             <h1>주문의 민족에 오신걸 환영합니다.</h1>

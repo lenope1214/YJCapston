@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const postLogin = (id, pw) => {
-    return axios.post("http://122.202.45.37:8088/rest/join", {
+    return axios.post("http://10.30.3.91:8088/login", {
         id: id,
         pw: pw,
     });

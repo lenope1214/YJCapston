@@ -11,7 +11,7 @@ export const postRegister = (
     address,
     address1
 ) => {
-    return axios.post("http://122.202.45.37:8088/api/join", {
+    return axios.post("hhttp://10.30.3.91:8088/api/join", {
         id: member_id,
         pw: pw,
         name: username,

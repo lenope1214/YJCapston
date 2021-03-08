@@ -33,6 +33,9 @@ const Register = ({
     closeModal,
     handleSearch,
 }) => {
+    // const handleSearch = (e) => {
+    //     const value = e.target.value;
+    // };
     return (
         <>
             <S.RegisterWrap>

@@ -8,6 +8,7 @@ const MainContainer = () => {
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
     const [isLogin, setIsLogin] = useState(false);
+    const [modal, setModal] = useState(false);
 
     const IsLogin = () => {
         setIsLogin(true);
@@ -16,8 +17,6 @@ const MainContainer = () => {
     const logout = () => {
         setIsLogin(false);
     };
-
-    const [modal, setModal] = useState(false);
 
     const openmodal = () => {
         setModal(true);
@@ -39,7 +38,7 @@ const MainContainer = () => {
 
     const login = async () => {
         axios
-            .post("http://122.202.45.37:8088/api/login", {
+            .post("http://10.30.3.91:8088/login", {
                 id: id,
                 pw: pw,
             })

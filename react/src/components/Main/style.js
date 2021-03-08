@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const LoginWrap = styled.div`
     position: fixed;
-    top: 10px;
-    left: 10px;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
     width: 500px;
     margin: 24px auto 0;
