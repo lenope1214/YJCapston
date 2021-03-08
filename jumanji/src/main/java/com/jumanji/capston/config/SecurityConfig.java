@@ -1,20 +1,15 @@
 package com.jumanji.capston.config;
 
 
-import com.jumanji.capston.config.oauth.PrincipalOauth2UserService;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.filter.CorsFilter;
 
 // jwt 설정 securityconfig
@@ -29,6 +24,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final CorsFilter corsFilter;
 
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
@@ -42,9 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().disable()
                 .httpBasic().disable()
                 .authorizeRequests()
-                .antMatchers("/api/v1/user/**").hasAnyRole("ROLE_USER", "ROLE_OWNER", "ROLE_ADMIN")
-                .antMatchers("/api/v1/owner/**").hasAnyRole("ROLE_OWNER", "ROLE_ADMIN")
-                .antMatchers("/api/v1/admin/**").hasRole("ROLE_ADMIN")
+                .antMatchers("/api/v1/user/**").hasAnyRole("USER", "OWNER", "ADMIN")
+                .antMatchers("/api/v1/owner/**").hasAnyRole("OWNER", "ADMIN")
+                .antMatchers("/api/v1/admin/**").hasRole("ADMIN")
                 .anyRequest().permitAll();
     }
 }

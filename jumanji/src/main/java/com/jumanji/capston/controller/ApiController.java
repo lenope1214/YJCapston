@@ -5,7 +5,6 @@ import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -61,7 +60,7 @@ public class ApiController {
 //        return "login";
 //    }
 
-    @GetMapping("/memberDelAll")
+    @GetMapping("/userDelAll")
     public String memberDelAll(){
         userRepository.deleteAll();
         return "Member 전부 삭제.";
@@ -69,13 +68,13 @@ public class ApiController {
 
 //    @Transactional(readOnly = true)
     @GetMapping("/myInfo/{id}")
-    public User myInfo(@PathVariable("id") String id){
+    public User myInfo(@PathVariable("i4d") String id){
         return userRepository.findById(id)
                 .orElseThrow(()-> new MemberNotFoundException(id));
     }
 
 //    @Transactional(readOnly = true)
-    @GetMapping("/members")
+    @GetMapping("/userList")
     public List<User> Members() {
         List<User> memberList;
         memberList = userRepository.findAll();
