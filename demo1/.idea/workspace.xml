@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="fc951080-311e-4618-9ea4-3f442e54bb2d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/java/com/example/demo/Controller/GuestBookController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/.travis.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/css/simple-sidebar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/gulpfile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/bootstrap/css/bootstrap-grid.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/bootstrap/css/bootstrap-grid.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/bootstrap/css/bootstrap-grid.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/bootstrap/css/bootstrap-grid.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/bootstrap/css/bootstrap-reboot.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/bootstrap/css/bootstrap-reboot.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/bootstrap/css/bootstrap-reboot.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/bootstrap/css/bootstrap-reboot.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/bootstrap/css/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/bootstrap/css/bootstrap.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/bootstrap/css/bootstrap.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/bootstrap/js/bootstrap.bundle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/bootstrap/js/bootstrap.bundle.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/bootstrap/js/bootstrap.bundle.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/bootstrap/js/bootstrap.bundle.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/bootstrap/js/bootstrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/bootstrap/js/bootstrap.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/bootstrap/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/bootstrap/js/bootstrap.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/jquery/jquery.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/jquery/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/jquery/jquery.min.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/jquery/jquery.slim.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/jquery/jquery.slim.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/static/vendor/jquery/jquery.slim.min.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/templates/guestbook/exTemplate.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/templates/guestbook/list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/templates/guestbook/test.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/templates/guestbook/test1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/templates/guestbook/test2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/templates/layout/basic.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/resources/templates/layout/layout1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../test/src/main/java/org/zero/test/Service/TestService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../test/src/main/java/org/zero/test/controller/TestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../test/src/main/java/org/zero/test/db/DatabaseConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../test/src/main/java/org/zero/test/dto/Test.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../test/src/main/java/org/zero/test/mapper/TestMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../test/src/main/resources/mapper/TestDB.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../test/src/main/resources/templates/list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testAndroid/app/src/main/java/com/example/testandroid/RegisterActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/6.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/.gradle/6.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/generated/source/buildConfig/debug/com/example/jmjapplication/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/generated/source/buildConfig/debug/com/example/jmjapplication/BuildConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/debug.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-af.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-af.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-am.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-am.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ar.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ar.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-as.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-as.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-az.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-az.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-b+es+419.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-b+es+419.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-b+sr+Latn.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-b+sr+Latn.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-be.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-be.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-bg.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-bg.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-bn.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-bn.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-bs.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-bs.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ca.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ca.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-cs.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-cs.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-da.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-da.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-de.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-de.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-el.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-el.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-en-rAU.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-en-rAU.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-en-rCA.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-en-rCA.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-en-rGB.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-en-rGB.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-en-rIN.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-en-rIN.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-en-rXC.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-en-rXC.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-es-rUS.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-es-rUS.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-es.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-es.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-et.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-et.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-eu.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-eu.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-fa.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-fa.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-fi.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-fi.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-fr-rCA.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-fr-rCA.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-fr.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-fr.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-gl.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-gl.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-gu.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-gu.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-h320dp-port-v13.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-h320dp-port-v13.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-h360dp-land-v13.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-h360dp-land-v13.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-h480dp-land-v13.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-h480dp-land-v13.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-h550dp-port-v13.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-h550dp-port-v13.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-h600dp-port-v13.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-h600dp-port-v13.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-h720dp-v13.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-h720dp-v13.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-hdpi-v4.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-hdpi-v4.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-he.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-he.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-hi.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-hi.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-hr.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-hr.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-hu.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-hu.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-hy.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-hy.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-id.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-id.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-in.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-in.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-is.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-is.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-it.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-it.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-iw.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-iw.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ja.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ja.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ka.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ka.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-kk.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-kk.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-km.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-km.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-kn.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-kn.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ko.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ko.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ky.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ky.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-land.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-land.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-large-v4.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-large-v4.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ldltr-v21.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ldltr-v21.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ldrtl-v17.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ldrtl-v17.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-lo.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-lo.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-lt.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-lt.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-lv.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-lv.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-mk.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-mk.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ml.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ml.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-mn.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-mn.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-mr.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-mr.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ms.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ms.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-my.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-my.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-nb.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-nb.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ne.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ne.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-night-v8.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-night-v8.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-nl.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-nl.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-or.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-or.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-pa.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-pa.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-pl.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-pl.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-port.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-port.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-pt-rBR.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-pt-rBR.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-pt-rPT.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-pt-rPT.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-pt.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-pt.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ro.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ro.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ru.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-si.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-si.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-sk.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-sk.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-sl.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-sl.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-small-v4.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-small-v4.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-sq.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-sq.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-sr.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-sr.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-sv.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-sv.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-sw.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-sw.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-sw600dp-v13.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-sw600dp-v13.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ta.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ta.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-te.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-te.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-th.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-th.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-tl.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-tl.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-tr.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-tr.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-uk.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-uk.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ur.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-ur.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-uz.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-uz.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-v11.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-v11.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-v16.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-v16.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-v17.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-v17.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-v18.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-v18.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-v21.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-v21.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-v22.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-v22.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-v23.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-v23.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-v24.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-v24.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-v25.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-v25.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-v26.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-v26.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-v28.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-v28.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-vi.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-vi.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-w320dp-land-v13.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-w320dp-land-v13.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-w360dp-port-v13.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-w360dp-port-v13.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-w480dp-port-v13.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-w480dp-port-v13.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-w550dp-land-v13.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-w550dp-land-v13.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-w600dp-land-v13.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-w600dp-land-v13.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-watch-v20.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-watch-v20.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-watch-v21.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-watch-v21.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-xlarge-v4.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-xlarge-v4.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-zh-rCN.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-zh-rCN.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-zh-rHK.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-zh-rHK.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-zh-rTW.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-zh-rTW.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-zu.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values-zu.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/multi-v2/values.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/single/debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/blame/res/debug/single/debug.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/bundle_manifest/debug/bundle-manifest/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/bundle_manifest/debug/bundle-manifest/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/bundle_manifest/debug/bundle-manifest/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/bundle_manifest/debug/bundle-manifest/output.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/compatible_screen_manifest/debug/out/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/compatible_screen_manifest/debug/out/output.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/incremental/mergeDebugAssets/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/incremental/mergeDebugAssets/merger.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/incremental/mergeDebugResources/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/incremental/mergeDebugShaders/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/incremental/mergeDebugShaders/merger.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/instant_app_manifest/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/instant_app_manifest/debug/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/instant_app_manifest/debug/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/instant_app_manifest/debug/output.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/merged_manifests/debug/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/merged_manifests/debug/output.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/metadata_feature_manifest/debug/metadata-feature/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/metadata_feature_manifest/debug/metadata-feature/output.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/processed_res/debug/out/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/processed_res/debug/out/output.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/runtime_symbol_list/debug/R.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/runtime_symbol_list/debug/R.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/outputs/apk/debug/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/outputs/apk/debug/output.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jumanji/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../jumanji/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/Service/UserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/Service/UserDetailsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/controller/WebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/controller/WebController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/data/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/data/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/data/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/data/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/data/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/data/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/data/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/data/Payment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/data/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/data/Reservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/data/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/data/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/storage/StorageException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/storage/StorageException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/storage/StorageFileNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/storage/StorageFileNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../jumanji/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../jumanji/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/../jumanji/src/main/resources/templates/login.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1pJqEXLy9gc4ASlpkn1zWRN4VCj" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+  </component>
+  <component name="RunManager">
+    <configuration name="DemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="demo.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.zero.test.demo.DemoApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fc951080-311e-4618-9ea4-3f442e54bb2d" name="Default Changelist" comment="" />
+      <created>1614911431356</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1614911431356</updated>
+      <workItem from="1614911432673" duration="125000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

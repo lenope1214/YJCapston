@@ -27,20 +27,20 @@
     </androidx.appcompat.widget.Toolbar>
 
     <TextView
-            android:id="@+id/tv_nickname"
+            android:id="@+id/tv_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/signup_toolbar"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="20dp"
-            android:text="닉네임"
+            android:text="아이디"
             android:textSize="18sp" />
 
     <EditText
-            android:id="@+id/et_nickname"
+            android:id="@+id/et_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_nickname"
+            android:layout_below="@id/tv_id"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:ems="10"
@@ -48,31 +48,10 @@
             android:inputType="textPersonName" />
 
     <TextView
-            android:id="@+id/tv_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/et_nickname"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="20dp"
-            android:text="이메일 아이디"
-            android:textSize="18sp" />
-
-    <EditText
-            android:id="@+id/et_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_email"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:ems="10"
-            android:hint="example@bamin.com"
-            android:inputType="textPersonName" />
-
-    <TextView
             android:id="@+id/tv_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/et_email"
+            android:layout_below="@id/et_id"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="20dp"
             android:text="비밀번호"
@@ -86,8 +65,75 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:ems="10"
-            android:hint="8-20자로 입력해주세요"
+            android:hint="8~20로 입력해주세요"
+            android:inputType="textPersonName" />
+
+    <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_password"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp"
+            android:text="이름"
+            android:textSize="18sp" />
+
+    <EditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_name"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:ems="10"
+            android:hint="이름을 입력해주세요"
             android:inputType="textPassword" />
+
+    <TextView
+            android:id="@+id/tv_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_name"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp"
+            android:text="전화번호"
+            android:textSize="18sp" />
+
+    <EditText
+            android:id="@+id/et_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_phone"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:ems="10"
+            android:hint="전화번호를 입력해주세요"
+            android:inputType="textPersonName" />
+
+    <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:id="@+id/rg_radiogroup"
+            android:layout_below="@id/et_phone"
+            android:orientation="horizontal">
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="일반회원"
+                android:textColor="#848484"
+                android:layout_marginLeft="230dp"
+                android:id="@+id/rb_user"/>
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="사장회원"
+                android:textColor="#848484"
+                android:id="@+id/rb_owner"/>
+
+
+    </RadioGroup>
+
 
     <Button
             android:id="@+id/btn_next"

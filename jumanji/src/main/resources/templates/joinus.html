@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <title th:text="|사용자 추가|"></title>
+</head>
+<body>
+
+아이디 : <input type="text" id="userId" placeholder="아이디"> <br>
+비밀번호 : <input type="password" id="password" placeholder="비밀번호"> <br>
+이름 : <input type="text" id="username"  placeholder="이름"> <br>
+
+이메일
+<input type="text" id="email1" name="email1"> @ <input id="email2" name="email2" type="text">
+<select name="select_email" onChange="selectEmail(this)">
+    <option value="" selected>선택하세요</option>
+    <option value="naver.com">naver.com</option>
+    <option value="gmail.com">gmail.com</option>
+    <option value="hanmail.com">hanmail.com</option>
+    <option value="1">직접입력</option>
+</select> <br>
+
+주소 <input type="text" id="addr1" name="addr1" > <br>
+상세주소 <input type="text" id="addr2" name="addr2"> <br>
+생일 <input type="date" id="birthday" name="birthday"  value="2000-01-01"> <br>
+
+전화번호
+<input type="text" id="phone1" name="phone1" type="text"> -
+<input type="text" id="phone2" name="phone2"> -
+<input type="text" id="phone3" name="phone3"> <br>
+
+<label><input type="checkbox" name="owner" value="사업자" ch> 사업자체크</label> <br>
+<button id="send">회원가입</button>
+
+<!-- 유효성 체크
+ userid(필수) : 8~20자
+ pw(필수) : 8~13 소,대,숫,특 필수
+ name(필수) : 2~5 글자
+ email(선택) : @ .com .net 등 체크
+ address(선택) : 얘는 api 써야하지 않을까?
+ address2(선택)
+ birthday(선택) : yyyy MM dd 형식
+ phone(필수) : 화면으론 010-1234-5678 받고 데이터는 01012345678 로 넘길예정
+ social : 얘는 회원가입창 들어오기 전에 결정된걸로..
+ 나머지는 회원가입 하면서 넣어주기
+-->
+<p id="result"></p>
+
+
+<script th:inline="javascript">
+    function selectEmail(ele){
+        var $ele = $(ele);
+        var $email2 = $('#email2'); // '1'인 경우 직접입력
+        if($ele.val() == "1"){
+            $email2.attr('readonly', false);
+            $email2.val('');
+        } else {
+            $email2.attr('readonly', true);
+            $email2.val($ele.val());
+        }
+    } // 여기는 복사 붙여넣기 했슴다 변경가능
+
+    $(function(){
+        $('#send').click((event)=>{
+            const userid=$('#userid').val();
+            const name=$('#username').val();
+            const path='/api/adduser';
+            const json = JSON.stringify({
+                'userid':userid,
+                'name':name
+            });
+            const csrfToken=/*[[${_csrf.token}]]*/ null;
+            const csrfHeader=/*[[${_csrf.headerName}]]*/ null;
+            $.ajax({
+                url:path,
+                type:'POST',
+                contentType: 'application/json',
+                data:json,
+                beforeSend:function(xhr){ xhr.setRequestHeader(csrfHeader, csrfToken);}
+            }).done((result)=>{
+                console.log(result.userid);
+                $('#result').text(result.userid);
+            });
+        });
+    });
+</script>
+</body>
+</html>

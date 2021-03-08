@@ -6,9 +6,9 @@
 <body>
 <section>
     <div th:if="${param.error}">Failed. Check username and password.</div>
-    <f orm th:action="@{/login}" method="post">
-        Username <input type="text" name="username"/><br>
-        Password<input type="password" name="password"><br>
+    <form th:action="@{/login}" method="post">
+        id <input type="text" id="userId"  name="userId"/><br>
+        Password<input type="password" id="password" name="password"><br>
         <input type="submit" value="Login"/>
     </form>
 </section>

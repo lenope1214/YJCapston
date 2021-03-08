@@ -12,13 +12,31 @@ public class WebController {
     public String index(){
         return "index";
     }
-    @GetMapping("/login")
-    public String login(){
-        return "login";
+
+    @GetMapping("/corsTest")
+    public String view() {
+        return "/cors";
     }
 
-    @GetMapping("/myPoint")
-    public String myPoint(){
-        return "myPoint";
-    }
+//    @GetMapping("/login")
+//    public String login(){
+//        return "login";
+//    }
+//
+//    @GetMapping("/myPoint")
+//    public String myPoint(){
+//        return "myPoint";
+//    }
+//
+//    @GetMapping("/joinus")
+//    public String joinUs(){
+//        return "joinus";
+//    }
+//
+//    @GetMapping("/kakaoTest")
+//    public String kakaoTest(){
+//        return "kakaoApiTest";
+//    }
+
+
 }
