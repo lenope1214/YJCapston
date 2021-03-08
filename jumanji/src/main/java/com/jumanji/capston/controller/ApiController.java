@@ -4,6 +4,7 @@ import com.jumanji.capston.controller.exception.MemberNotFoundException;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,12 +13,12 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api")
-public class PostController {
+public class ApiController {
     @Autowired
     UserRepository userRepository;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @PostMapping("/join")
     public String join(@RequestBody User _user) {
@@ -32,7 +33,7 @@ public class PostController {
         // 현재 비밀번호를 받는 족족 그대로 넣고있기 때문에 시큐리티에 걸려 로그인 불가능.
         // 비밀번호를 암호화 해서 넣어줘야 함.
         String rawPassword = user.getPw();
-        String encPassword = passwordEncoder.encode(rawPassword);
+        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         user.setPw(encPassword);
         if(userRepository.findById(user.getId()).isEmpty())
             userRepository.save(user);

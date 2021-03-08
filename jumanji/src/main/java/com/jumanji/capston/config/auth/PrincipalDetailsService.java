@@ -26,6 +26,7 @@ public class PrincipalDetailsService implements UserDetailsService {
     // 매개변수가 username 인데 input 태그의 name="username"이 아니라면 안됨. name속성값이랑 매칭.
     // username말고 스려면 SecurityConfig 에서 .loginPage 밑에 .usernameParameter("속성값") 으로 변경
     // 시큐리티 session(내부 Authentication(내부 UserDetails))
+    // 함수 종료시 @AuthenticationPrincipal 어노테이션이 만들어진다.
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> userEntity = userRepository.findById(username);

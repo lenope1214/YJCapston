@@ -1,6 +1,8 @@
 package com.jumanji.capston.data;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
@@ -14,6 +16,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 @Table(name="user")
 public class User {
     @Id
@@ -38,7 +41,7 @@ public class User {
     @Column
     private String role; // 권한   u, o, a
     @Column(length = 2)
-    private String social; // 소셜
+    private String provider; // 소셜
     @Column(insertable = false, updatable = false) // 업데이트, 인설트 불가
     private Date sign_date; // 가입날짜
     @Column(name="lv", length = 2)
@@ -46,10 +49,22 @@ public class User {
     @Column(nullable = false)
     private int point; // 포인트
 
-    private String provider;
     private String provider_id;
 
-    //Test 용. Column 어노테이션 없어도 테이블에 추가 되는가?
+
+    @Builder
+    public User(String id, String pw, String name, String role, String email, Date sign_date, String provider, String provider_id, String phone) {
+        this.id = id;
+        this.pw = pw;
+        this.name = name;
+        this.email = email;
+        this.role = role;
+        this.sign_date = sign_date;
+        this.provider = provider;
+        this.provider_id = provider_id;
+        this.phone = phone;
+    }
+//Test 용. Column 어노테이션 없어도 테이블에 추가 되는가?
     // Column 어노테이션이 없어도 잘 됨.
 //    private Timestamp regTime;
 //    @Column

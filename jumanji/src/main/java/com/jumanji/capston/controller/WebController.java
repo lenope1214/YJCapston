@@ -54,18 +54,25 @@ public class WebController {
         return "OAuth세션 정보 확인하기";
     }
 
-
-    @GetMapping("/")
-    public String index(){
-        return "index";
+    // OAUTH 로그인을 해도 PrincipalDetails 로 받을 수 있고
+    // 일반 로그인을 해도 PrincipalDetails 로그인으로 받을 수 있다.
+    @GetMapping("/user")
+    public @ResponseBody String user(@AuthenticationPrincipal PrincipalDetails principalDetails){
+        System.out.println("principalDetails : " + principalDetails.getUser());
+        return "user";
     }
+
+//    @GetMapping("/")
+//    public String index(){
+//        return "index";
+//    }
 
     @GetMapping("/corsTest")
     public String view() {
         return "/cors";
     }
 
-    @GetMapping("/loginForm")
+    @GetMapping(value = {"/", "/loginForm"})
     public String login(){
         return "loginForm";
     }
