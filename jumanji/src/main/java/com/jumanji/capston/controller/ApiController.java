@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class ApiController {
     @Autowired
     UserRepository userRepository;
@@ -80,5 +80,23 @@ public class ApiController {
         List<User> memberList;
         memberList = userRepository.findAll();
         return memberList;
+    }
+
+    // user 권한만 접근 가능
+    @GetMapping("/user")
+    public String user(){
+        return "user";
+    }
+
+    // admin 권한만 접근 가능
+    @GetMapping("/admin")
+    public String admin(){
+        return "admin";
+    }
+
+    // owner 권한만 접근 가능
+    @GetMapping("/owner")
+    public String owner(){
+        return "owner";
     }
 }

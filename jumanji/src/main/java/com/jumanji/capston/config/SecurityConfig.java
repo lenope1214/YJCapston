@@ -1,8 +1,9 @@
 package com.jumanji.capston.config;
 
 
-import com.jumanji.capston.config.Filter.MyFilter3;
 import com.jumanji.capston.config.jwt.JwtAuthenticationFilter;
+import com.jumanji.capston.config.jwt.JwtAuthorizationFilter;
+import com.jumanji.capston.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 import org.springframework.web.filter.CorsFilter;
 
 // jwt 설정 securityconfig
@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //    private PrincipalOauth2UserService principalOauth2UserService;
 
     private final CorsFilter corsFilter;
+    private final UserRepository userRepository;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -38,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-        http.addFilterBefore(new MyFilter3(), SecurityContextPersistenceFilter.class); // Security Filter Chain 의 BasicAuth...Filter 전에 추가한다는 뜻.
+//        http.addFilterBefore(new MyFilter3(), SecurityContextPersistenceFilter.class); // Security Filter Chain 의 BasicAuth...Filter 전에 추가한다는 뜻.
         http
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 세션을 사용하지 않겠다.
                 .and()
@@ -49,12 +50,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().disable()
                 .httpBasic().disable()
                 .addFilter(new JwtAuthenticationFilter(authenticationManager())) // AuthenticationManager 을 넘겨줘야함. WebSecurityConfigurerAdapter가 들고있음.{
-                .addFilter(new JwtAuthenticationFilter(authenticationManager())) // AuthenticationManager 을 넘겨줘야함. WebSecurityConfigurerAdapter가 들고있음.{
+                .addFilter(new JwtAuthorizationFilter(authenticationManager(), userRepository)) // AuthenticationManager 을 넘겨줘야함. WebSecurityConfigurerAdapter가 들고있음.{
                 .authorizeRequests()
                 .antMatchers("/api/v1/user/**").hasAnyRole("USER", "OWNER", "ADMIN")
                 .antMatchers("/api/v1/owner/**").hasAnyRole("OWNER", "ADMIN")
                 .antMatchers("/api/v1/admin/**").hasRole("ADMIN")
-                .anyRequest().permitAll();
+                .antMatchers("/**").permitAll()
+                .anyRequest().authenticated() ;
 //                .and()
 //                .oauth2Login()
 //                .loginPage("/loginForm")

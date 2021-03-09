@@ -86,14 +86,14 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         String jwtToken = JWT.create()
                 .withSubject(principalDetails.getUsername()) // 얘는 인터페이스라 내용을 ID로 수정했음 subject 지정.
-                .withExpiresAt(new Date(System.currentTimeMillis()+ (30*60*1000))) // 유효시간 지정 현재시간 + n/ms 시간
+                .withExpiresAt(new Date(System.currentTimeMillis()+ JwtProperties.EXPIRATION_TIME)) // 유효시간 지정 현재시간 + n/ms 시간
                 .withClaim("id", principalDetails.getUser().getId())     // json 타입 키 밸류라고 생각.
                 .withClaim("pw", principalDetails.getUser().getPassword()) // 키 : name 밸류 : 유저 이름
 //                .withClaim("")
-                .sign(Algorithm.HMAC512("jmj"));
+                .sign(Algorithm.HMAC512(JwtProperties.SECRET));
         System.out.println("인증 완료 후 처리 단계...");
 
-        response.addHeader("Authorization", "Bearer " + jwtToken);
+        response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + jwtToken);
 //        super.successfulAuthentication(request, response, chain, authResult);
     }
     // 기존 ->

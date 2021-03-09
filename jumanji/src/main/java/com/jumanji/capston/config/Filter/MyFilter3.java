@@ -11,8 +11,7 @@ public class MyFilter3 implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest)request;
         HttpServletResponse res = (HttpServletResponse) response;
-        req.setCharacterEncoding("UTF-8");
-        res.setCharacterEncoding("UTF-8");
+
         if(req.getMethod().equals("POST")){
             String headerAuth = req.getHeader("Authorization");
             System.out.println(headerAuth);
