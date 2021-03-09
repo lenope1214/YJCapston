@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 // Security Session -> Authentication -> UserDetails
@@ -62,7 +63,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     // 유저 아이디 리턴
     @Override
     public String getUsername() {
-        return user.getId();
+        return user.getName();
     }
 
     // false : 계정 만료

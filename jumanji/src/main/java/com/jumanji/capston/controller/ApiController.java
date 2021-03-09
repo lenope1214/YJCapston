@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api")
 public class ApiController {
     @Autowired
@@ -79,10 +79,5 @@ public class ApiController {
         List<User> memberList;
         memberList = userRepository.findAll();
         return memberList;
-    }
-
-    @PostMapping("token")
-    public String token(){
-        return "token";
     }
 }
