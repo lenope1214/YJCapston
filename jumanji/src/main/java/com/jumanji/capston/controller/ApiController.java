@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -15,7 +16,6 @@ import java.util.List;
 public class ApiController {
     @Autowired
     UserRepository userRepository;
-
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -34,6 +34,7 @@ public class ApiController {
         String rawPassword = user.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         user.setPassword(encPassword);
+        user.setSign_date(new Date());
         if(userRepository.findById(user.getId()).isEmpty())
             userRepository.save(user);
         else{
