@@ -23,9 +23,12 @@ import org.springframework.web.filter.CorsFilter;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //    @Autowired
 //    private PrincipalOauth2UserService principalOauth2UserService;
 
+=======
+>>>>>>> parent of 54f6ae7 (24강까지 완료)
 =======
 >>>>>>> parent of 54f6ae7 (24강까지 완료)
     private final CorsFilter corsFilter;
@@ -39,7 +42,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
 <<<<<<< HEAD
+<<<<<<< HEAD
 //        http.addFilterBefore(new MyFilter3(), SecurityContextPersistenceFilter.class); // Security Filter Chain 의 BasicAuth...Filter 전에 추가한다는 뜻.
+=======
+>>>>>>> parent of 54f6ae7 (24강까지 완료)
 =======
 >>>>>>> parent of 54f6ae7 (24강까지 완료)
         http
@@ -52,7 +58,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().disable()
                 .httpBasic().disable()
 <<<<<<< HEAD
+<<<<<<< HEAD
 //                .addFilter(new JwtAuthenticationFilter(authenticationManager())) // AuthenticationManager 을 넘겨줘야함. WebSecurityConfigurerAdapter가 들고있음.
+=======
+>>>>>>> parent of 54f6ae7 (24강까지 완료)
 =======
 >>>>>>> parent of 54f6ae7 (24강까지 완료)
                 .authorizeRequests()
@@ -61,11 +70,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/admin/**").hasRole("ADMIN")
                 .anyRequest().permitAll();
 <<<<<<< HEAD
+<<<<<<< HEAD
 //                .and()
 //                .oauth2Login()
 //                .loginPage("/loginForm")
 //                .userInfoEndpoint()
 //                .userService(principalOauth2UserService);
+=======
+>>>>>>> parent of 54f6ae7 (24강까지 완료)
 =======
 >>>>>>> parent of 54f6ae7 (24강까지 완료)
     }
