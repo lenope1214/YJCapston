@@ -9,14 +9,12 @@ import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-import javax.sound.midi.Soundbank;
 import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
@@ -78,7 +76,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
             userEntity = Optional.ofNullable(User.builder()
                     .id(id)
                     .name(name)
-                    .pw(password)
+                    .password(password)
                     .role(role)
                     .email(email)
                     .provider(provider)

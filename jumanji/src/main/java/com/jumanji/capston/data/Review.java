@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @Entity
-@Table(name="review")
+@Table(name="reviews")
 public class Review {
     @Id
     @Column(name = "rev_id", length=5,nullable = false)

@@ -12,7 +12,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name="ordr")
+@Table(name="orders")
 public class Order implements Serializable {
     @Id
     @Column(name="order_id", length = 16)

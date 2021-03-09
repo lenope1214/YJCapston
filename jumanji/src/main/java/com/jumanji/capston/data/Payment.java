@@ -12,7 +12,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name="payment")
+@Table(name="payments")
 public class Payment implements Serializable {
     @Id
     @ManyToOne

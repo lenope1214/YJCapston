@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @Entity
-@Table(name="message")
+@Table(name="messages")
 public class Message {
     @Id
     @Column(name = "msg_id", length=12,nullable = false)

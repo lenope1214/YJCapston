@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Entity
-@Table(name="coupon")
+@Table(name="coupons")
 public class Coupon {
     @Id
     @Column(length = 9,nullable = false)

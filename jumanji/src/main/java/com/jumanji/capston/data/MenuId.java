@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.persistence.Table;
-import java.awt.*;
 import java.io.Serializable;
-import java.util.Date;
 
 /*
 last update 2021-02-23
@@ -18,7 +15,7 @@ author 이성복
 @Getter
 @Setter
 @Entity
-@Table(name="menu")
+@Table(name="menus")
 class Menu{
 
     @EmbeddedId
@@ -47,8 +44,8 @@ class Menu{
 @EqualsAndHashCode
 public class MenuId  implements Serializable {
     
-    @Column(name="menu_id", length = 3)
-    private int menu_id ; // 메뉴번호
+    @Column(name="id", length = 3)
+    private int id ; // 메뉴번호
     
     @ManyToOne
     @JoinColumn(name="menu_shop_id",nullable = false)
