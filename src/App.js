@@ -1,22 +1,23 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
-import PostListPage from './pages/PostListPage';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
-import WritePage from './pages/WritePage';
-import PostPage from './pages/PostPage';
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import "./App.css";
+import LoginContainer from "./containers/Login/LoginContainer";
+import MainContainer from "./containers/Main/MainContainer";
+import MypageContainer from "./containers/MyPage/MyPageContainer";
+import RegisterContainer from "./containers/Register/RegisterContainer";
+import ShoplistContainer from "./containers/Shoplist/ShoplistContainer";
 
 const App = () => {
-  return(
-    <>
-    <Route component = {PostListPage} path = {['/@:username', '/']} exact />
-    <Route component = {LoginPage} path="/login" />
-    <Route component = {RegisterPage} path="/register" />
-    <Route component = {WritePage} path="/write" />
-    <Route component = {PostPage} path="/@:username/:postId" />
-    </>
-
-  );
+    return (
+        <Router>
+            <Switch>
+                <Route path="/login" component={LoginContainer} />
+                <Route path="/register" component={RegisterContainer} />
+                <Route path="/mypage" component={MypageContainer} />
+                <Route path="/shoplist" component={ShoplistContainer} />
+                <Route path="/" component={MainContainer} />
+            </Switch>
+        </Router>
+    );
 };
 
 export default App;
