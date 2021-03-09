@@ -22,15 +22,9 @@ import org.springframework.web.filter.CorsFilter;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 //    @Autowired
 //    private PrincipalOauth2UserService principalOauth2UserService;
 
-=======
->>>>>>> parent of 54f6ae7 (24강까지 완료)
-=======
->>>>>>> parent of 54f6ae7 (24강까지 완료)
     private final CorsFilter corsFilter;
 
     @Bean
@@ -41,13 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 //        http.addFilterBefore(new MyFilter3(), SecurityContextPersistenceFilter.class); // Security Filter Chain 의 BasicAuth...Filter 전에 추가한다는 뜻.
-=======
->>>>>>> parent of 54f6ae7 (24강까지 완료)
-=======
->>>>>>> parent of 54f6ae7 (24강까지 완료)
         http
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 세션을 사용하지 않겠다.
                 .and()
@@ -57,28 +46,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 인증이 있을때는 시큐리티 필터에 등록을 해줘야 한다.
                 .formLogin().disable()
                 .httpBasic().disable()
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 //                .addFilter(new JwtAuthenticationFilter(authenticationManager())) // AuthenticationManager 을 넘겨줘야함. WebSecurityConfigurerAdapter가 들고있음.
-=======
->>>>>>> parent of 54f6ae7 (24강까지 완료)
-=======
->>>>>>> parent of 54f6ae7 (24강까지 완료)
+
                 .authorizeRequests()
                 .antMatchers("/api/v1/user/**").hasAnyRole("USER", "OWNER", "ADMIN")
                 .antMatchers("/api/v1/owner/**").hasAnyRole("OWNER", "ADMIN")
                 .antMatchers("/api/v1/admin/**").hasRole("ADMIN")
                 .anyRequest().permitAll();
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 //                .and()
 //                .oauth2Login()
 //                .loginPage("/loginForm")
 //                .userInfoEndpoint()
 //                .userService(principalOauth2UserService);
-=======
->>>>>>> parent of 54f6ae7 (24강까지 완료)
-=======
->>>>>>> parent of 54f6ae7 (24강까지 완료)
     }
 }
