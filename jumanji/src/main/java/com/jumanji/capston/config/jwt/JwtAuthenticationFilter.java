@@ -92,7 +92,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 //                .withClaim("")
                 .sign(Algorithm.HMAC512(JwtProperties.SECRET));
         System.out.println("인증 완료 후 처리 단계...");
-
+        
         response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + jwtToken);
 //        super.successfulAuthentication(request, response, chain, authResult);
     }
