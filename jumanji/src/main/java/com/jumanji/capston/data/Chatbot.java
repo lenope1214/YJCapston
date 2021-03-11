@@ -6,7 +6,6 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Getter
-@Setter
 @Entity
 @Table(name="chatbots")
 public class Chatbot {

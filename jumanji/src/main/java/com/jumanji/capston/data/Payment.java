@@ -11,7 +11,6 @@ import java.util.Date;
 
 
 @Getter
-@Setter
 @Entity
 @Table(name="payments")
 public class Payment implements Serializable {

@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Getter
-@Setter
 @Entity
 public class Panelty {
 

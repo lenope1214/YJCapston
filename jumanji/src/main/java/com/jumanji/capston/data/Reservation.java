@@ -11,7 +11,6 @@ import java.util.Date;
 
 
 @Getter
-@Setter
 @Entity
 @Table(name="reservations")
 public class Reservation implements Serializable {

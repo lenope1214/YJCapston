@@ -9,7 +9,6 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 @Getter
-@Setter
 @Entity
 @Table(name="coupons")
 public class Coupon {

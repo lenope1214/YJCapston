@@ -8,7 +8,6 @@ import java.sql.Timestamp;
 
 
 @Getter
-@Setter
 @Entity
 @Table(name="reviews")
 public class Review {

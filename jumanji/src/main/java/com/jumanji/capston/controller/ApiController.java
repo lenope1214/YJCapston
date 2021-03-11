@@ -1,9 +1,12 @@
 package com.jumanji.capston.controller;
 
+import com.jumanji.capston.Service.UserSerivce;
 import com.jumanji.capston.controller.exception.MemberNotFoundException;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,32 +17,13 @@ import java.util.List;
 @RequestMapping("/api")
 public class ApiController {
     @Autowired
-    UserRepository userRepository;
+    UserSerivce userSerivce;
 
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     @PostMapping("/join")
-    public String join(@RequestBody User _user) {
-        User user = _user;
-        System.out.println("join\nm.toString() : " + user.toString() + "\n" +
-                "m.getId() : " + user.getId() + "\n" +
-                "m.getPw() : " + user.getPassword() + "\n" +
-                "m.getName() : " + user.getName() + "\n" +
-                "m.getPhone() : " + user.getPhone() + "\n" +
-                "m.getRole() : " + user.getRole()
-        );
-        // 현재 비밀번호를 받는 족족 그대로 넣고있기 때문에 시큐리티에 걸려 로그인 불가능.
-        // 비밀번호를 암호화 해서 넣어줘야 함.
-        String rawPassword = user.getPassword();
-        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
-        user.setPassword(encPassword);
-        if(userRepository.findById(user.getId()).isEmpty())
-            userRepository.save(user);
-        else{
-            System.out.println("이미 있는 아이디. 회원가입 불가.");
-        }
-
+    public String join(@RequestBody User user) {
+        userSerivce.insert(user);
         return "/";
     }
 
@@ -61,9 +45,8 @@ public class ApiController {
 //    }
 
     @GetMapping("/userDelAll")
-    public String memberDelAll(){
-        userRepository.deleteAll();
-        return "Member 전부 삭제.";
+    public ResponseEntity<?> memberDelAll(){
+        return new ResponseEntity<>(userSerivce.deleteAll(), HttpStatus.OK);
     }
 
 //    @Transactional(readOnly = true)

@@ -16,7 +16,6 @@ author 이성복
  */
 
 @Getter
-@Setter
 @Entity
 @Table(name="menus")
 class Menu{
@@ -35,7 +34,6 @@ class Menu{
 
 
 @Getter
-@Setter
 @Embeddable
 @EqualsAndHashCode
 public class MenuId  implements Serializable {

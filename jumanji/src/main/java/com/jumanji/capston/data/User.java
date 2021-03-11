@@ -1,21 +1,20 @@
 package com.jumanji.capston.data;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Getter
-@Setter
 @Entity
+@ToString
 @NoArgsConstructor
 @Table(name="user")
 public class User {
@@ -51,17 +50,14 @@ public class User {
         this.phone = phone;
     }
 
-    public void info(){
-        System.out.println(
-
-        );
+    public void setPassword(String password) {
+        this.password = password;
     }
-
+}
 //Test 용. Column 어노테이션 없어도 테이블에 추가 되는가?
-    // Column 어노테이션이 없어도 잘 됨.
+// Column 어노테이션이 없어도 잘 됨.
 //    private Timestamp regTime;
 //    @Column
 //    private String token; // jwt.io 문서읽기
 //    @Column
 //    private int penalty; // 경고회수
-}
