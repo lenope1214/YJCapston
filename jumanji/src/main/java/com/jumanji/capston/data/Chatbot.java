@@ -10,15 +10,14 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Entity
-@Table(name="chatbot")
+@Table(name="chatbots")
 public class Chatbot {
     @Id
-    @Column(length=12)
-    private int bot_no;
+    private long id;
     @Column(length=100,nullable = false)
-    private String bot_question;
+    private String question;
     @Column(length=100,nullable = false)
-    private String bot_answer;
+    private String answer;
     @ManyToOne
     @JoinColumn(name="shop_id",nullable = false)
     private Shop shop_id;

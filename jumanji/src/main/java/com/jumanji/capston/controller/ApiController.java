@@ -24,16 +24,16 @@ public class ApiController {
         User user = _user;
         System.out.println("join\nm.toString() : " + user.toString() + "\n" +
                 "m.getId() : " + user.getId() + "\n" +
-                "m.getPw() : " + user.getPw() + "\n" +
+                "m.getPw() : " + user.getPassword() + "\n" +
                 "m.getName() : " + user.getName() + "\n" +
                 "m.getPhone() : " + user.getPhone() + "\n" +
                 "m.getRole() : " + user.getRole()
         );
         // 현재 비밀번호를 받는 족족 그대로 넣고있기 때문에 시큐리티에 걸려 로그인 불가능.
         // 비밀번호를 암호화 해서 넣어줘야 함.
-        String rawPassword = user.getPw();
+        String rawPassword = user.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
-        user.setPw(encPassword);
+        user.setPassword(encPassword);
         if(userRepository.findById(user.getId()).isEmpty())
             userRepository.save(user);
         else{

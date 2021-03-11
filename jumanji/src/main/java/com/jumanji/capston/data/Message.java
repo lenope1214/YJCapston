@@ -10,18 +10,15 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @Entity
-@Table(name="message")
+@Table(name="messages")
 public class Message {
     @Id
-    @Column(name = "msg_id", length=12,nullable = false)
-    private int id;//번호
-    @Column(nullable = false)
-    private Timestamp msg_time;//시간
-    @Column(length=300,nullable = false)
-    private String msg_content;//내용
+    private long id;//번호
+    private Timestamp reg_time;//시간
+    private String content;//내용
     @ManyToOne
-    @JoinColumn(name="member_id",nullable = false)
-    private User member_id;
+    @JoinColumn(name="user_id",nullable = false)
+    private User user_id;
     @ManyToOne
     @JoinColumn(name="shop_id",nullable = false)
     private Shop shop_id;

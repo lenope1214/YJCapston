@@ -12,14 +12,13 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
-@Table (name="tab")
+@Table (name="tables")
 class Tab {
 
     @EmbeddedId
     private TabId tab_id;
 
-    @Column(length = 2, nullable = false)
-    private int tab_limit; // 좌석수
+    private int seat_qty; // 좌석수
 }
 
 @Getter

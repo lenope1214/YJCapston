@@ -78,7 +78,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
             userEntity = Optional.ofNullable(User.builder()
                     .id(id)
                     .name(name)
-                    .pw(password)
+                    .password(password)
                     .role(role)
                     .email(email)
                     .provider(provider)

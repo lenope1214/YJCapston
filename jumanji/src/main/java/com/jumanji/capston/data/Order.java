@@ -30,8 +30,8 @@ public class Order implements Serializable {
     private Shop shop_id;
 
     @ManyToOne
-    @JoinColumn(name = "member_id", insertable = false, updatable = false)
-    private User member_id;
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private User user_id;
 
     @Embedded
     private MenuId menu_id;
