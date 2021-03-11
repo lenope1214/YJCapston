@@ -1,9 +1,12 @@
 package com.jumanji.capston.controller;
 
+import com.jumanji.capston.Service.UserSerivce;
 import com.jumanji.capston.controller.exception.MemberNotFoundException;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +18,8 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class ApiController {
     @Autowired
-    UserRepository userRepository;
+//    UserRepository userRepository;
+    UserSerivce userSerivce;
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -35,8 +39,8 @@ public class ApiController {
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         user.setPassword(encPassword);
         user.setSign_date(new Date());
-        if(userRepository.findById(user.getId()).isEmpty())
-            userRepository.save(user);
+        if(userSerivce.findById(user.getId()) != null)
+            userSerivce.save(user);
         else{
             System.out.println("이미 있는 아이디. 회원가입 불가.");
         }
@@ -99,4 +103,16 @@ public class ApiController {
     public String owner(){
         return "owner";
     }
+
+
+    @GetMapping("/StatusCode")
+    public ResponseEntity<?> statusCode(){
+        int code = 200;
+        if(code == 200)return new ResponseEntity<String>("ok", HttpStatus.OK);
+        if(code == 404)return new ResponseEntity<String>("ok", HttpStatus.NOT_FOUND);
+        if(code == 400)return new ResponseEntity<String>("ok", HttpStatus.BAD_REQUEST);
+        if(code == 500)return new ResponseEntity<String>("ok", HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<String>("ok", HttpStatus.OK);
+    }
+
 }
