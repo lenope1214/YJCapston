@@ -11,10 +11,9 @@ public class MyFilter3 implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest)request;
         HttpServletResponse res = (HttpServletResponse) response;
-        req.setCharacterEncoding("UTF-8");
-        res.setCharacterEncoding("UTF-8");
+
         if(req.getMethod().equals("POST")){
-            String headerAuth = req.getHeader("Authorization");
+            String headerAuth = req.getHeader("Authorization"); // jmj
             System.out.println(headerAuth);
             System.out.println("필터3");
 
@@ -27,6 +26,10 @@ public class MyFilter3 implements Filter {
                 PrintWriter out = res.getWriter();
                 out.println("인증되지 않음.");
             }
+        }else{
+            chain.doFilter(req,res);
         }
+
+//        chain.doFilter(req,res);
     }
 }

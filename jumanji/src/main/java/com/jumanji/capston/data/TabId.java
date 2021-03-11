@@ -1,6 +1,5 @@
 package com.jumanji.capston.data;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +15,7 @@ import java.io.Serializable;
 class Tab {
 
     @EmbeddedId
-    private TabId tab_id;
+    private TabId id;
 
     private int seat_qty; // 좌석수
 }

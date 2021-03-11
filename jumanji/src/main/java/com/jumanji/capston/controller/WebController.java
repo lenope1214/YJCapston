@@ -1,25 +1,28 @@
 package com.jumanji.capston.controller;
 
 import com.jumanji.capston.config.auth.PrincipalDetails;
-import com.jumanji.capston.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class WebController {
 
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    @PostMapping("/login")
+    public String login(){
+        return "index";
+    }
+
+    @GetMapping("/")
+    public String index(){
+        return "index";
+    }
 
     @GetMapping("/test/login")
     public @ResponseBody String testLogin(
@@ -27,7 +30,6 @@ public class WebController {
             @AuthenticationPrincipal PrincipalDetails userDetails // 2번 방식.
             ){
         System.out.println("/test/login ==============");
-//        PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
 //        System.out.println("authentication : " + principalDetails.getUser());
 
         System.out.println("userDetails : " + userDetails.getUser());
@@ -58,18 +60,13 @@ public class WebController {
         return "user";
     }
 
-//    @GetMapping("/")
-//    public String index(){
-//        return "index";
-//    }
-
     @GetMapping("/corsTest")
     public String view() {
         return "/cors";
     }
 
-    @GetMapping(value = {"/", "/loginForm"})
-    public String login(){
+    @GetMapping(value = {"/loginForm"})
+    public String loginForm(){
         return "loginForm";
     }
 
@@ -107,8 +104,6 @@ public class WebController {
     public String kakaoTest(){
         return "kakaoApiTest";
     }
-
-
 
 
 }

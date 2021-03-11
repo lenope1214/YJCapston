@@ -3,7 +3,6 @@ package com.jumanji.capston.config.auth;
 
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,9 +15,7 @@ import java.util.Optional;
 // SecurityConfig에서 loginProcessiongUrl("/login"); 으로 설정했기 때문에
 // /login 요청이 오면 자동으로 UserDetailsService 타입으로 IoC되어 있는 loaduserByusername 함수가 실행.
 
-// http://localhost:8088/login
 @Service
-@RequiredArgsConstructor
 public class PrincipalDetailsService implements UserDetailsService {
 
     @Autowired
@@ -31,8 +28,9 @@ public class PrincipalDetailsService implements UserDetailsService {
     // 시큐리티 session(내부 Authentication(내부 UserDetails))
     // 함수 종료시 @AuthenticationPrincipal 어노테이션이 만들어진다.
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> userEntity = userRepository.findById(username);
+    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
+        System.out.println("PrincipalDetails - loadUserByUsername");
+        Optional<User> userEntity = userRepository.findById(id);
         if(userEntity.isEmpty()) {
             return null;
         }

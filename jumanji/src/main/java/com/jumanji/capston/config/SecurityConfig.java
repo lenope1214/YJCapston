@@ -3,7 +3,8 @@ package com.jumanji.capston.config;
 
 import com.jumanji.capston.config.Filter.MyFilter3;
 import com.jumanji.capston.config.jwt.JwtAuthenticationFilter;
-import com.jumanji.capston.config.oauth.PrincipalOauth2UserService;
+import com.jumanji.capston.config.jwt.JwtAuthorizationFilter;
+import com.jumanji.capston.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -27,10 +28,11 @@ import org.springframework.web.filter.CorsFilter;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private PrincipalOauth2UserService principalOauth2UserService;
-
+//    @Autowired
+//    private PrincipalOauth2UserService principalOauth2UserService;
     private final CorsFilter corsFilter;
+    @Autowired
+    private final UserRepository userRepository;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -50,16 +52,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 인증이 있을때는 시큐리티 필터에 등록을 해줘야 한다.
                 .formLogin().disable()
                 .httpBasic().disable()
-                .addFilter(new JwtAuthenticationFilter(authenticationManager())) // AuthenticationManager 을 넘겨줘야함. WebSecurityConfigurerAdapter가 들고있음.
+                .addFilter(new JwtAuthenticationFilter(authenticationManager())) // AuthenticationManager 을 넘겨줘야함. WebSecurityConfigurerAdapter가 들고있음.{
+                .addFilter(new JwtAuthorizationFilter(authenticationManager(), userRepository)) // AuthenticationManager 을 넘겨줘야함. WebSecurityConfigurerAdapter가 들고있음.{
                 .authorizeRequests()
                 .antMatchers("/api/v1/user/**").hasAnyRole("USER", "OWNER", "ADMIN")
                 .antMatchers("/api/v1/owner/**").hasAnyRole("OWNER", "ADMIN")
                 .antMatchers("/api/v1/admin/**").hasRole("ADMIN")
-                .anyRequest().permitAll()
-                .and()
-                .oauth2Login()
-                .loginPage("/loginForm")
-                .userInfoEndpoint()
-                .userService(principalOauth2UserService);
+                .antMatchers("/**").permitAll()
+                .anyRequest().authenticated();
+
+//                .and()
+//                .oauth2Login()
+//                .loginPage("/loginForm")
+//                .userInfoEndpoint()
+//                .userService(principalOauth2UserService);
     }
 }
