@@ -14,7 +14,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class UserSerivce {
+public class userService {
     private final UserRepository userRepository;
 
     @Autowired
@@ -42,11 +42,11 @@ public class UserSerivce {
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         userEntity.setPassword(encPassword);
         if(userRepository.findById(user.getId()).isEmpty())
-            userRepository.save(userEntity);
+            return userRepository.save(userEntity);
         else{
             System.out.println("이미 있는 아이디. 회원가입 불가.");
         }
-//        return userRepository.save(userEntity);
+        return null;
     }
 
 //    @Transactional
@@ -59,7 +59,7 @@ public class UserSerivce {
 //    }
 
     @Transactional
-    public List<User> findAll(User user){
+    public List<User> findAll(){
         return userRepository.findAll();
     }
 
