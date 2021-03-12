@@ -1,4 +1,4 @@
-package com.jumanji.capston.Service;
+package com.jumanji.capston.service;
 
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.UserRepository;
@@ -8,13 +8,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.print.Book;
 import java.util.List;
 
 
 @RequiredArgsConstructor
 @Service
-public class userService {
+public class UserService {
     private final UserRepository userRepository;
 
     @Autowired

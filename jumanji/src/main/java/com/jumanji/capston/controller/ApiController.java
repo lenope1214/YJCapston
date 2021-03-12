@@ -1,13 +1,10 @@
 package com.jumanji.capston.controller;
 
-import com.jumanji.capston.Service.userService;
-import com.jumanji.capston.controller.exception.MemberNotFoundException;
+import com.jumanji.capston.service.UserService;
 import com.jumanji.capston.data.User;
-import com.jumanji.capston.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class ApiController {
     @Autowired
-    userService userService;
+    UserService userService;
 
 
 
