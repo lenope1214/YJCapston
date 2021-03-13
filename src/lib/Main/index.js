@@ -1,8 +1,8 @@
-import axios from "axios";
+import { apiDefault } from "../client";
 
 export const postLogin = (id, pw) => {
-    return axios.post("http://10.30.3.91:8088/login", {
-        id: id,
-        pw: pw,
+    return apiDefault().post("/login", {
+        id,
+        password: pw,
     });
 };

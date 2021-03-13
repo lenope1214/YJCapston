@@ -8,7 +8,7 @@ import { getLocation, postRegister } from "../../lib/Register";
 
 const RegisterContainer = () => {
     const history = useHistory();
-    const [id, setId] = useState("");   
+    const [id, setId] = useState("");
     const [pw, setPw] = useState("");
     const [username, setUserName] = useState("");
     const [phone1, setPhone1] = useState("");
@@ -138,6 +138,7 @@ const RegisterContainer = () => {
             username,
             phone,
             check,
+            email,
             birthday,
             address,
             address1
@@ -147,9 +148,9 @@ const RegisterContainer = () => {
     };
 
     const search = () => {
-        getLocation(address)
-            .then((res) => {})
-            .catch((err) => {});
+        // getLocation(address)
+            // .then((res) => {})
+            // .catch((err) => {});
     };
 
     return (

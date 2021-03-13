@@ -1,23 +1,13 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Main from "../../components/Main/Main";
 import { postLogin } from "../../lib/Main/index";
 
-const MainContainer = () => {
+const MainContainer = ({ isLogin, handleLogin, handleLogout }) => {
     const history = useHistory();
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
-    const [isLogin, setIsLogin] = useState(false);
     const [modal, setModal] = useState(false);
-
-    const IsLogin = () => {
-        setIsLogin(true);
-    };
-
-    const logout = () => {
-        setIsLogin(false);
-    };
 
     const openmodal = () => {
         setModal(true);
@@ -37,13 +27,26 @@ const MainContainer = () => {
         setPw(value);
     };
 
-    const login = async () => {
+    const login = () => {
         postLogin(id, pw)
-            .then((err) => err)
-            .catch((res) => {
-                IsLogin();
+            .then((res) => {
+                // const accessToken = res.data.access_token;
+
+                handleLogin();
                 setModal(false);
+                // localStorage.setItem("access_token", accessToken);
                 history.push("/");
+            })
+            .catch((err) => {
+                alert("이성 ㅂ일 안ㅇ함 ");
+                const status = err?.response?.status;
+
+                if (status == 401) {
+                    alert("로그이 ㄴ다시 해주");
+                    handleLogout();
+                    localStorage.removeItem("access_token");
+                    setModal(true);
+                }
             });
     };
 
@@ -58,7 +61,7 @@ const MainContainer = () => {
             modal={modal}
             openModal={openmodal}
             closeModal={closemodal}
-            logout={logout}
+            logout={handleLogout}
         />
     );
 };

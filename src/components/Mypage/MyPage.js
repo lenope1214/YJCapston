@@ -16,12 +16,12 @@ const MyPage = ({ Pw, handlePw }) => {
                     <input
                         type="text"
                         id="id"
-                        placeholder="입력하세요"
+                        placeholder="tjdqhr123"
                         disabled
                     />
                     <span>비밀번호</span>
                     <input
-                        type="text"
+                        type="password"
                         id="password"
                         placeholder="입력하세요"
                         onChange={handlePw}
@@ -32,7 +32,8 @@ const MyPage = ({ Pw, handlePw }) => {
                     <input
                         type="text"
                         id="name"
-                        placeholder="니 이름 입력하세요"
+                        placeholder="홍길동"
+                        disabled
                     />
                     <span>이메일</span>
                     <input

@@ -5,8 +5,8 @@ export const LoginWrap = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 500px;
-    margin: 24px auto 0;
+    width: 80%;
+    margin: 1% auto 0;
     padding: 5% 1%;
     border-radius: 8px;
     background-color: black;

@@ -50,7 +50,6 @@ const Main = ({
                                     width: "300px",
                                     border: "0",
                                     borderRadius: "7px 0 0 7px",
-
                                     backgroundColor: "white",
                                 }}
                             ></input>
@@ -71,8 +70,8 @@ const Main = ({
                                 <button className="right1-nav" onClick={logout}>
                                     LOGOUT
                                 </button>
-                                <Link to="/mypage" class="right2-nav">
-                                    MYPAGE
+                                <Link to="/mypage">
+                                    <button class="right2-nav">MYPAGE</button>
                                 </Link>
                             </div>
                         ) : (
@@ -84,8 +83,8 @@ const Main = ({
                                     LOGIN
                                 </button>
 
-                                <Link to="/register" class="right2-nav">
-                                    JOIN
+                                <Link to="/register">
+                                    <button class="right2-nav"> JOIN</button>
                                 </Link>
                             </div>
                         )}
@@ -192,19 +191,22 @@ const Main = ({
                         <div className="but-item3-icon">
                             <img src={shopimg} width="250px" height="250px" />
                             <div className="but-item3-but">
-                                <button
-                                    style={{
-                                        fontSize: "30px",
-                                        fontFamily: "Wemakeprice-Bold",
-                                        height: "130px",
-                                        width: "230px",
-                                        borderRadius: "60px",
-                                        border: 0,
-                                    }}
-                                >
-                                    매장 둘러보고<br></br>
-                                    예약하기<br></br>→
-                                </button>
+                                <Link to="/shoplist">
+                                    <button
+                                        onclick="href='/shoplist'"
+                                        style={{
+                                            fontSize: "30px",
+                                            fontFamily: "Wemakeprice-Bold",
+                                            height: "130px",
+                                            width: "230px",
+                                            borderRadius: "60px",
+                                            border: 0,
+                                        }}
+                                    >
+                                        매장 둘러보고<br></br>
+                                        예약하기<br></br>→
+                                    </button>
+                                </Link>
                             </div>
                         </div>
                         <div className="but-item3-text2">
@@ -233,7 +235,7 @@ const Main = ({
                             placeholder="Password"
                             onChange={handlePw}
                             value={pw}
-                            onKeyPress={(e) => e.key === "Enter" && Login()}
+                            onKeyPress={(e) => e.key === "Enter" && Main()}
                         />
                     </main>
                     <footer>
