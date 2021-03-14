@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
+                android:orientation="vertical"
                 android:layout_height="match_parent"
                 tools:context=".SignupActivity">
 
@@ -36,16 +37,27 @@
             android:text="아이디"
             android:textSize="18sp" />
 
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
     <EditText
             android:id="@+id/et_id"
-            android:layout_width="match_parent"
+            android:layout_width="294dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_id"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:ems="10"
             android:hint="2-10자로 입력해주세요"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"/>
+
+        <Button android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/id_validate"
+                android:layout_marginRight="10dp"
+                android:textStyle="bold"
+                android:text="중복검사"/>
+    </LinearLayout>
 
     <TextView
             android:id="@+id/tv_password"
@@ -66,7 +78,7 @@
             android:layout_marginRight="16dp"
             android:ems="10"
             android:hint="8~20로 입력해주세요"
-            android:inputType="textPersonName" />
+            android:inputType="textPassword" />
 
     <TextView
             android:id="@+id/tv_name"
@@ -86,8 +98,9 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:ems="10"
+            android:privateImeOptions="defaultInputmode=korean"
             android:hint="이름을 입력해주세요"
-            android:inputType="textPassword" />
+             />
 
     <TextView
             android:id="@+id/tv_phone"
@@ -108,7 +121,7 @@
             android:layout_marginRight="16dp"
             android:ems="10"
             android:hint="전화번호를 입력해주세요"
-            android:inputType="textPersonName" />
+            android:inputType="phone" />
 
     <RadioGroup
             android:layout_width="match_parent"
@@ -141,6 +154,7 @@
             android:layout_height="70dp"
             android:layout_alignParentBottom="true"
             android:text="다음"
+            android:layout_marginTop="140dp"
             android:textSize="18sp" />
 
-</RelativeLayout>
+</LinearLayout>

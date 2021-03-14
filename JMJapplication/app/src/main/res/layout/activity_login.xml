@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:id="@+id/login_layout"
                 xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.appcompat.widget.Toolbar
@@ -73,7 +74,7 @@
             android:layout_marginTop="10dp"
             android:text="아이디/비밀번호 찾기" />
 
-    <LinearLayout
+    <com.google.android.gms.common.SignInButton
             android:id="@+id/google_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -82,7 +83,7 @@
             android:background="@drawable/border_with_soso"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            android:layout_above="@+id/kakao_login">
+            android:layout_above="@+id/naver_login">
 
         <ImageView
                 android:layout_width="30dp"
@@ -100,10 +101,10 @@
                 android:layout_gravity="center_vertical"
                 android:text="구글로 로그인"
                 android:textSize="18sp" />
-    </LinearLayout>
+    </com.google.android.gms.common.SignInButton>
 
     <LinearLayout
-            android:id="@+id/kakao_login"
+            android:id="@+id/naver_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -128,9 +129,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="카카오로 로그인"
+                android:text="네이버로 로그인"
                 android:textSize="18sp" />
     </LinearLayout>
+    <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:id="@+id/btn_logout"
+            android:text="naver로그아웃"
+            android:layout_marginTop="400dp"
+            />
 
     <LinearLayout
             android:id="@+id/btn_signup"

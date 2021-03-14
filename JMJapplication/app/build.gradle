@@ -5,7 +5,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.jmjapplication"
+        applicationId "com.example.jmjapplication2"
         minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
@@ -49,15 +49,25 @@ dependencies {
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
 
     // Gson
     implementation 'com.google.code.gson:gson:2.8.5'
 
-    implementation "com.kakao.sdk:v2-user:2.4.0" // 카카오 로그인
-    implementation "com.kakao.sdk:v2-talk:2.4.0" // 친구, 메시지(카카오톡)
-    implementation "com.kakao.sdk:v2-story:2.4.0" // 카카오스토리
-    implementation "com.kakao.sdk:v2-link:2.4.0" // 메시지(카카오링크)
-    implementation "com.kakao.sdk:v2-navi:2.4.0" // 카카오내비
-    implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.30.0'
+    //네이버 로그인
+    implementation 'com.naver.nid:naveridlogin-android-sdk:4.2.6'   // import from jcenter
 
+    // naveridlogin dependencies
+    def android_x_version = "1.0.0"
+    implementation "androidx.appcompat:appcompat:$android_x_version"
+    implementation "androidx.legacy:legacy-support-core-utils:$android_x_version"
+    implementation "androidx.browser:browser:$android_x_version"
+    implementation "androidx.legacy:legacy-support-v4:$android_x_version"
+
+    //google login
+    implementation 'com.google.firebase:firebase-analytics:17.2.0'
+    implementation 'com.google.firebase:firebase-auth:19.0.0'
+    implementation 'com.google.android.gms:play-services-auth:17.0.0'
 }
+
+apply plugin: 'com.google.gms.google-services'
