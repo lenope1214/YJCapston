@@ -56,5 +56,5 @@ interface DeleteAPI {
 interface ValidateAPI {
     @FormUrlEncoded
     @POST("validate/{userid}")
-    Call<Validate> validateOne(@Field("userid") String userid);
+    Call<ResponseBody> validateOne(@Field("userid") String userid);
 }

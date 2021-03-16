@@ -8,6 +8,6 @@ import wlh.wickies.restapi.model.Member;
 import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
-    @Query("select m from Member m where m.userid = :userid")
-    Member findMemberId(@Param("userid") String userid);
+    @Query("select m.userid from Member m where m.userid = :userid")
+    Object findByMemberId(@Param("userid") String userid);
 }

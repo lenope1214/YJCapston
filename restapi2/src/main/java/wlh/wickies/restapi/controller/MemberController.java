@@ -1,10 +1,14 @@
 package wlh.wickies.restapi.controller;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import wlh.wickies.restapi.model.Member;
 import wlh.wickies.restapi.model.Validate;
 import wlh.wickies.restapi.repository.MemberRepository;
+import wlh.wickies.restapi.service.MemberService;
 
 import javax.websocket.server.PathParam;
 import java.util.List;
@@ -13,6 +17,8 @@ import java.util.Optional;
 
 @RequestMapping("/member")
 @RestController
+@RequiredArgsConstructor
+@Log4j2
 public class MemberController {
     @Autowired
     private MemberRepository memberRepository;
@@ -65,12 +71,11 @@ public class MemberController {
     }
 
     @PostMapping("/validate/{userid}") // valudate
-    public boolean validateOne(@PathVariable("userid") String userid) {
-        if(memberRepository.findMemberId(userid) == null) {
-            return true;
-        } else {
-            return  false;
+    public String validateOne(@PathParam("userid") String userid) {
+        if(memberRepository.findByMemberId(userid) == null) {
+            return "중복아님";
         }
+        return null;
     }
 
     int intParser(String age){
