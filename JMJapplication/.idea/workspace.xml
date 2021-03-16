@@ -14,19 +14,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3914f3c3-3012-4f9b-bfe7-8ebf7bb64730" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/ResLogin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/controller/MemberController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/controller/TestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/Member.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/ResLogin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/Validate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/repository/MemberRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/service/MemberService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/service/MemberServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/DataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/DataService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/LoginActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/SignupActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/SignupActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../restapi2/src/main/java/wlh/wickies/restapi/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../restapi2/src/main/java/wlh/wickies/restapi/controller/MemberController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../restapi2/src/main/java/wlh/wickies/restapi/repository/MemberRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../restapi2/src/main/java/wlh/wickies/restapi/repository/MemberRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../restapi2/src/main/java/wlh/wickies/restapi/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../restapi2/src/main/java/wlh/wickies/restapi/service/MemberService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/MemberDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/MemberDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,6 +158,7 @@
       <recent name="com.example.jmjapplication" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.jmjapplication2.dto" />
       <recent name="com.example.jmjapplication.Fragment" />
       <recent name="com.example.jmjapplication.fragment" />
       <recent name="com.example.jmjapplication" />
@@ -263,6 +274,8 @@
       <workItem from="1615682947966" duration="16605000" />
       <workItem from="1615768649487" duration="16057000" />
       <workItem from="1615855425376" duration="1218000" />
+      <workItem from="1615873705576" duration="4708000" />
+      <workItem from="1615890963639" duration="21009000" />
     </task>
     <servers />
   </component>

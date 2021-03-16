@@ -28,6 +28,7 @@ public class DataService {
     UpdateAPI update = retrofitClient.create(UpdateAPI.class);
     DeleteAPI delete = retrofitClient.create(DeleteAPI.class);
     ValidateAPI validate = retrofitClient.create(ValidateAPI.class);
+    LoginAPI login = retrofitClient.create(LoginAPI.class);
 }
 
 interface SelectAPI{
@@ -57,4 +58,11 @@ interface ValidateAPI {
     @FormUrlEncoded
     @POST("validate/{userid}")
     Call<ResponseBody> validateOne(@Field("userid") String userid);
+}
+
+interface LoginAPI {
+    @FormUrlEncoded
+    @POST("login")
+    Call<MemberDTO> LoginOne(@Field("userid") String userid,
+                             @Field("userpw") String userpw);
 }

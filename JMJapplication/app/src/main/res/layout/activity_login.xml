@@ -132,11 +132,11 @@
                 android:text="네이버로 로그인"
                 android:textSize="18sp" />
     </LinearLayout>
-    <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:id="@+id/btn_logout"
-            android:text="naver로그아웃"
-            android:layout_marginTop="400dp"
-            />
+<!--    <Button android:layout_width="wrap_content" android:layout_height="wrap_content"-->
+<!--            android:id="@+id/btn_logout"-->
+<!--            android:text="naver로그아웃"-->
+<!--            android:layout_marginTop="400dp"-->
+<!--            />-->
 
     <LinearLayout
             android:id="@+id/btn_signup"

@@ -13,16 +13,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.example.jmjapplication2.dto.MemberDTO;
-import com.example.jmjapplication2.dto.Validate;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import javax.xml.transform.Result;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class SignupActivity extends AppCompatActivity {
@@ -81,7 +77,7 @@ public class SignupActivity extends AppCompatActivity {
                                     isChecked = false;
                                     et_id.setText("");
                                     et_id.requestFocus();
-                                } else{
+                                } else {
                                     AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
                                     dialog = builder.setMessage("사용 가능한 아이디입니다.").setPositiveButton("확인", null).create();
                                     dialog.show();

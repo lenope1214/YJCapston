@@ -8,12 +8,16 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.jmjapplication2.dto.MemberDTO;
+import com.example.jmjapplication2.dto.ResLogin;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -24,22 +28,41 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.*;
+import com.google.gson.JsonNull;
 import com.nhn.android.naverlogin.OAuthLogin;
 import com.nhn.android.naverlogin.OAuthLoginHandler;
+import okhttp3.ResponseBody;
+import org.json.JSONObject;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
+    DataService dataService = new DataService();
 
     LinearLayout btn_signup;
     LinearLayout naver_login;
 
     Button btn_logout;
+    Button btn_login;
 
     OAuthLogin mOAuthLoginModule;
     Context mContext;
 
+    EditText et_login_id;
+    EditText et_login_pw;
+
     FirebaseAuth mAuth = null;
     GoogleSignInClient mGoogleSignInClient;
+
+
+
+    private AlertDialog dialog;
     private static final int RC_SIGN_IN = 9001;
     private SignInButton signInButton;
 
@@ -56,8 +79,43 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.close);
 
+        et_login_id = (EditText) findViewById(R.id.et_login_id);
+        et_login_pw = (EditText) findViewById(R.id.et_login_pw);
+        btn_login = findViewById(R.id.btn_login);
         naver_login = findViewById(R.id.naver_login);
         btn_logout = findViewById(R.id.btn_logout);
+
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(et_login_id.getText().toString().length() == 0 || et_login_pw.getText().toString().length() ==0) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                    dialog = builder.setMessage("아이디와 비밀번호를 확인해 주세요.").setPositiveButton("확인", null).create();
+                    dialog.show();
+                } else {
+                    String userid = et_login_id.getText().toString();
+                    String userpw = et_login_pw.getText().toString();
+                    dataService.login.LoginOne(userid, userpw).enqueue(new Callback<MemberDTO>() {
+                        @Override
+                        public void onResponse(Call<MemberDTO> call, Response<MemberDTO> response) {
+                            if(response.isSuccessful()) {
+                                if(response.body().getCode() == 200) {
+                                    Toast.makeText(mContext, "성공", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(mContext, "실패", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<MemberDTO> call, Throwable t) {
+
+                        }
+                    });
+                }
+            }
+        });
+
         naver_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,13 +154,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        btn_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mOAuthLoginModule.logout(mContext);
-                Toast.makeText(LoginActivity.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        btn_logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mOAuthLoginModule.logout(mContext);
+//                Toast.makeText(LoginActivity.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         signInButton = findViewById(R.id.google_login);
         mAuth = FirebaseAuth.getInstance();
