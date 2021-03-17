@@ -2,7 +2,9 @@ package com.example.jmjapplication2;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -100,9 +102,45 @@ public class LoginActivity extends AppCompatActivity {
                         public void onResponse(Call<MemberDTO> call, Response<MemberDTO> response) {
                             if(response.isSuccessful()) {
                                 if(response.body().getCode() == 200) {
-                                    Toast.makeText(mContext, "성공", Toast.LENGTH_SHORT).show();
+                                    SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = pref.edit();
+                                    editor.putString("token", response.body().getUserid());
+                                    editor.commit();
+
+                                    ((JMJApplication)getApplication()).setUserid(response.body().getUserid());
+                                    ((JMJApplication)getApplication()).setRole(response.body().getRole());
+
+                                    if(response.body().getRole() == "ROLE_USER") {
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                                        dialog = builder.setMessage("로그인되었습니다").setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        }).create();
+                                        builder.setCancelable(false);
+                                        dialog.show();
+                                    } else {
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                                        dialog = builder.setMessage("로그인되었습니다").setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Intent intent = new Intent(LoginActivity.this, MainActivity_O.class);
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        }).create();
+                                        builder.setCancelable(false);
+                                        dialog.show();
+                                    }
                                 } else {
-                                    Toast.makeText(mContext, "실패", Toast.LENGTH_SHORT).show();
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                                    dialog = builder.setMessage("아이디와 비밀번호를 확인해 주세요.").setPositiveButton("확인", null).create();
+                                    dialog.show();
                                 }
                             }
                         }

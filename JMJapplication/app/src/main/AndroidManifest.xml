@@ -26,6 +26,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
+            android:name=".JMJApplication"
             android:usesCleartextTraffic="true"
             android:hardwareAccelerated="true">
 
@@ -62,6 +63,10 @@
 
         </activity>
 
+        <activity android:name="com.example.jmjapplication2.ProfileUpdateActivity">
+
+        </activity>
+
         <activity android:name="com.example.jmjapplication2.CaptureAct"
                   android:screenOrientation="fullSensor"
                   android:stateNotNeeded="true"
@@ -70,6 +75,10 @@
         </activity>
 
         <activity android:name="com.example.jmjapplication2.LoginActivity">
+
+        </activity>
+
+        <activity android:name="com.example.jmjapplication2.MainActivity_O">
 
         </activity>
 

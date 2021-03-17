@@ -81,7 +81,7 @@ public class MemberController {
                           @PathParam("userpw") String userpw) {
         Member member = memberRepository.findLogin(userid, userpw);
         if(member == null) {
-            return null;
+            return new Member(12345678, "d", "d", "d","d", "d", 400);
         } else {
             member.setCode(200);
             return member;

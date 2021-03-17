@@ -36,6 +36,7 @@ public class Member {
         this.role = role;
     }
 
+
     public Member(String userid, String userpw) {
         this.userid = userid;
         this.userpw = userpw;
