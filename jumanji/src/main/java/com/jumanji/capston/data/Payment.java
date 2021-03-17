@@ -15,6 +15,8 @@ import java.util.Date;
 @Table(name="payments")
 public class Payment implements Serializable {
     @Id
+    private Long id;
+
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order_id ; // 주문번호
@@ -22,5 +24,4 @@ public class Payment implements Serializable {
     private Timestamp pay_time; // 결제 일자 yyyyMMdd
     private String pg; // 결제방식
     private int comple_pay; // 결제 당시 금액
-    private char is_refund; // 환불여부
 }

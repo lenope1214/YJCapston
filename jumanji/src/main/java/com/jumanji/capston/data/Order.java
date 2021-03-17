@@ -14,14 +14,17 @@ import java.util.Date;
 @Table(name="orders")
 public class Order implements Serializable {
     @Id
-    private String id ; // 주문번호 insert 할때 값 yyMMddhhmmss+sequence 설정해주기. 기본값으로 하는거 어렵넹
+//    @GeneratedValue(strategy= GenerationType.IDENTITY)
+//    @Column(insertable = false, updatable = false)
+    private Long id ; // 주문번호 insert 할때 값 yyMMddhhmmss+sequence 설정해주기. 기본값으로 하는거 어렵넹
 
+    @Column(length = 2)
     private int quantity; // 메뉴 수량
     private Date date; // 주문일시
     private String request; // 요청사항
 
     @ManyToOne
-    @JoinColumn(name = "ordr_shop_id", insertable = false, updatable = false)
+    @JoinColumn(name = "shop_id", insertable = false, updatable = false)
     private Shop shop_id;
 
     @ManyToOne

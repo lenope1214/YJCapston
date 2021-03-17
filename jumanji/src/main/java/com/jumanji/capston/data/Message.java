@@ -13,8 +13,9 @@ import java.sql.Timestamp;
 @Table(name="messages")
 public class Message {
     @Id
-    private long id;//번호
+    private Long id;//번호
     private Timestamp reg_time;//시간
+    @Column(length = 1000)
     private String content;//내용
     @ManyToOne
     @JoinColumn(name="user_id",nullable = false)

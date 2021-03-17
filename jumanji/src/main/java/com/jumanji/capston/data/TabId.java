@@ -26,8 +26,8 @@ class Tab {
 @Embeddable
 public class TabId implements Serializable{
 
-    @Column(length = 16, name="tab_id")
-    private String id ; // 좌석번호
+    @Column(length = 2, name="tab_id")
+    private int id ; // 좌석번호
 
     @ManyToOne
     @JoinColumn(name="tab_shop_id")

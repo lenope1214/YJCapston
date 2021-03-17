@@ -3,6 +3,7 @@ package com.jumanji.capston.controller;
 //
 //
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  */
 
+@Slf4j
 @Transactional // 각각의 메소드 종료시 롤백.
 @AutoConfigureMockMvc // 이게 없으면 mockMvc가 IoC에 안들어가있어서 Bean을 못찾음. WebMvcTest에는 담겨져 있음.
 @SpringBootTest(webEnvironment = WebEnvironment.MOCK) // 통합 테스트용. 모든것이 올라감.
@@ -29,9 +31,9 @@ public class ApiControllerIntegreTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Test
-    public void test1(){
-
-    }
+//    @Test
+//    public void test_save(){
+//        log.info("test_save()=======================");
+//    }
 
 }

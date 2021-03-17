@@ -4,6 +4,7 @@ package com.jumanji.capston.config.auth;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -28,13 +29,18 @@ public class PrincipalDetailsService implements UserDetailsService {
     // 시큐리티 session(내부 Authentication(내부 UserDetails))
     // 함수 종료시 @AuthenticationPrincipal 어노테이션이 만들어진다.
     @Override
-    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
+    public PrincipalDetails loadUserByUsername(String id) throws UsernameNotFoundException {
         System.out.println("PrincipalDetails - loadUserByUsername");
-        Optional<User> userEntity = userRepository.findById(id);
-        if(userEntity.isEmpty()) {
+        System.out.println("Id : " + id);
+        User userEntity = userRepository.findById(id)
+                .orElseThrow(() -> new UsernameNotFoundException(id));
+        if(userEntity==null) {
+            System.out.println("load 후.. 유저 null.. 이라는데!");
             return null;
         }
 
-        return new PrincipalDetails(userEntity.get());
+        return new PrincipalDetails(userEntity);
     }
+
+
 }

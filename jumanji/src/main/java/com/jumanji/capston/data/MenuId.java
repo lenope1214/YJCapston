@@ -37,12 +37,15 @@ class Menu{
 @Embeddable
 @EqualsAndHashCode
 public class MenuId  implements Serializable {
-    
-    private int id ; // 메뉴번호
+
+//    column: id (should be mapped with insert="false" update="false"
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(insertable = false, updatable = false)
+    private Long menu_id ; // 메뉴번호
     
     @ManyToOne
-    @JoinColumn(name="menu_shop_id",nullable = false)
-    private Shop shop_id;//매장번호
+    @JoinColumn(name="shop_id",nullable = false)
+    private Shop shop;//매장번호
     
     public MenuId(){}
 }

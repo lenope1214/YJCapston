@@ -10,13 +10,14 @@ import javax.persistence.*;
 @Table(name="chatbots")
 public class Chatbot {
     @Id
-    private long id;
-    @Column(length=100,nullable = false)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
+    @Column(length=250)
     private String question;
-    @Column(length=100,nullable = false)
+    @Column(length=250)
     private String answer;
     @ManyToOne
-    @JoinColumn(name="shop_id",nullable = false)
-    private Shop shop_id;
+    @JoinColumn(nullable = false)
+    private Shop shop;
 
 }

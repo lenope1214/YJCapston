@@ -40,17 +40,23 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     }
 
     // 해당 유저의 권한을 리턴하는 곳!
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        // user.getRole()을 리턴할 수 없어서 Collect를 만들어서 리턴
+//        Collection<GrantedAuthority> collect = new ArrayList<>();
+//        collect.add(new GrantedAuthority() {
+//            @Override
+//            public String getAuthority() {
+//                System.out.println("PrincipalDetails - return role : " + user.getRole());
+//                return user.getRole();
+//            }
+//        });
+//        return collect;
+//    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // user.getRole()을 리턴할 수 없어서 Collect를 만들어서 리턴
-        Collection<GrantedAuthority> collect = new ArrayList<>();
-        collect.add(new GrantedAuthority() {
-            @Override
-            public String getAuthority() {
-                System.out.println(user.getRole());
-                return user.getRole();
-            }
-        });
+        Collection<GrantedAuthority> collect = new ArrayList<GrantedAuthority>();
+        collect.add(()-> user.getRole());
         return collect;
     }
 
@@ -62,9 +68,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 
     // 유저 아이디 리턴
     @Override
-    public String getUsername() {
-        return user.getName();
-    }
+    public String getUsername() { return user.getId(); }
 
     // false : 계정 만료
     @Override
@@ -98,6 +102,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     }
 
 
+    // User의 Primary key id랑 같아서 걍 null 했음..
     @Override
     public String getName() {
         return null;
