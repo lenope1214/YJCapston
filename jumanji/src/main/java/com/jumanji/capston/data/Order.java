@@ -1,12 +1,10 @@
 package com.jumanji.capston.data;
 
 import lombok.Getter;
-import lombok.Setter;
+import oracle.sql.TIMESTAMP;
 
 import javax.persistence.*;
-import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Date;
 
 
 @Getter
@@ -20,21 +18,21 @@ public class Order implements Serializable {
 
     @Column(length = 2)
     private int quantity; // 메뉴 수량
-    private Date date; // 주문일시
+    private TIMESTAMP order_time; // 주문일시
+    @Column(name="order_request")
     private String request; // 요청사항
-
-    @ManyToOne
-    @JoinColumn(name = "shop_id", insertable = false, updatable = false)
-    private Shop shop_id;
 
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user_id;
 
-    @Embedded
-    private MenuId menu_id;
-    @Embedded // 비 식별 관계 식별관계로 하려면 @EmbeddedId로 변경
-    private TabId tab_id;
+    @JoinColumn
+    @ManyToOne
+    private Menu menu_id;
+
+    @JoinColumn // 비 식별 관계 식별관계로 하려면 @EmbeddedId로 변경
+    @ManyToOne
+    private Tab table_id;
 }
 
 //@Getter

@@ -3,15 +3,13 @@ package com.jumanji.capston.controller;
 import com.jumanji.capston.config.auth.PrincipalDetailsService;
 import com.jumanji.capston.config.jwt.JwtResponse;
 import com.jumanji.capston.config.jwt.JwtTokenUtil;
-import com.jumanji.capston.service.UserService;
 import com.jumanji.capston.data.User;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import com.jumanji.capston.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -82,8 +80,8 @@ public class ApiController {
 
 
 
-
     @Transactional(readOnly = true)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/userList")
     public ResponseEntity<?> Members() {
         List<User> memberList;

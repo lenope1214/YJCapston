@@ -2,7 +2,6 @@ package com.jumanji.capston.data;
 
 
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -13,8 +12,7 @@ import java.util.Date;
 @Table(name="shops")
 public class Shop {
     @Id
-    private String id; //매장번호
-
+    private String id; //매장번호 ( 사업자번호 )
     private String name; //매장이름
     private String intro; //매장소개
     private Date open_time; //오픈시간
