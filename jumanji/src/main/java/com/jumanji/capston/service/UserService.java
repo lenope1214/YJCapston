@@ -23,7 +23,7 @@ public class UserService {
     @Transactional
     public User findById(String id){
         return userRepository.findById(id)
-                .orElseThrow(()-> new IllegalArgumentException("Id를 확인해주세요!!!"));
+                .orElseThrow(()-> new IllegalArgumentException("user_id를 확인해주세요!!!"));
     }
 
     @Transactional
@@ -35,7 +35,6 @@ public class UserService {
         return bCryptPasswordEncoder.matches(rawPassword, encodedPassword);
         //                                  입력받은 pw  ,  암호화된 pw
     }
-
 
     @Transactional
     public User insert(User user){
