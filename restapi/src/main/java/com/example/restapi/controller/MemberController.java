@@ -1,7 +1,6 @@
 package com.example.restapi.controller;
 
 import com.example.restapi.model.Member;
-import com.example.restapi.model.ResLogin;
 import com.example.restapi.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -18,8 +17,6 @@ import java.util.Map;
 public class MemberController {
     @Autowired
     private MemberRepository memberRepository;
-
-    private ResLogin resLogin;
 
 //    @GetMapping("/test")
 //    public Member memberTest(){
@@ -39,49 +36,49 @@ public class MemberController {
 
     @PostMapping("/insert") // CREATE
     public Member insert(@RequestBody Map<String,String> map){
-        return memberRepository.save(new Member(map.get("userid"), map.get("userpw"), map.get("name"), map.get("phone"), map.get("role")));
+        return memberRepository.save(new Member(map.get("id"), map.get("pw"), map.get("name"), map.get("phone"), map.get("role")));
     }
 
-    @GetMapping("/select") // READ
-    public List<Member> selectAll(){
-        return memberRepository.findAll();
-    }
+//    @GetMapping("/select") // READ
+//    public List<Member> selectAll(){
+//        return memberRepository.findAll();
+//    }
+//
+//    @GetMapping("/select/{id}") // READ
+//    public Member selectOne(@PathVariable("id") long id){
+//        return memberRepository.findById(id).orElse(null);
+//    }
+//
+//    @PostMapping("/update/{id}") // UPDATE
+//    public Member updateOne(@PathVariable("id") long id, @RequestBody Map<String, String> map){
+//        System.out.println(id);
+//        System.out.println(map);
+//        Member member = memberRepository.findById(id).orElse(null);
+//        member.setId(map.get("id"));
+//        member.setPw(map.get("pw"));
+//        return memberRepository.save(member);
+//    }
 
-    @GetMapping("/select/{id}") // READ
-    public Member selectOne(@PathVariable("id") long id){
-        return memberRepository.findById(id).orElse(null);
-    }
+//    @PostMapping("/delete/{id}") // DELETE
+//    public String deleteOne(@PathVariable("id") long id){
+//        memberRepository.deleteById(id);
+//        return "삭제 완료";
+//    }
 
-    @PostMapping("/update/{id}") // UPDATE
-    public Member updateOne(@PathVariable("id") long id, @RequestBody Map<String, String> map){
-        System.out.println(id);
-        System.out.println(map);
-        Member member = memberRepository.findById(id).orElse(null);
-        member.setUserid(map.get("userid"));
-        member.setUserpw(map.get("userpw"));
-        return memberRepository.save(member);
-    }
-
-    @PostMapping("/delete/{id}") // DELETE
-    public String deleteOne(@PathVariable("id") long id){
-        memberRepository.deleteById(id);
-        return "삭제 완료";
-    }
-
-    @PostMapping("/validate/{userid}") // valudate
-    public String validateOne(@PathParam("userid") String userid) {
-        if(memberRepository.findByMemberId(userid) == null) {
+    @PostMapping("/validate/{id}") // valudate
+    public String validateOne(@PathParam("id") String id) {
+        if(memberRepository.findByMemberId(id) == null) {
             return "중복아님";
         }
         return null;
     }
 
     @PostMapping("/login") // login
-    public Member login(@PathParam("userid") String userid,
-                          @PathParam("userpw") String userpw) {
-        Member member = memberRepository.findLogin(userid, userpw);
+    public Member login(@PathParam("id") String id,
+                          @PathParam("pw") String pw) {
+        Member member = memberRepository.findLogin(id, pw);
         if(member == null) {
-            return new Member(12345678, "d", "d", "d","d", "d", 400);
+            return new Member("d", "d", "d", "d","d", 400);
         } else {
             member.setCode(200);
             return member;
@@ -95,5 +92,13 @@ public class MemberController {
             e.printStackTrace();
             return 0;
         }
+    }
+
+    @PostMapping("findshop/{id}") // 가게여부확인
+    public String findshopOne(@PathParam("id") String id) {
+        if(memberRepository.findByShop(id) == null) {
+            return "가게없음";
+        }
+        return "가게있음";
     }
 }

@@ -82,6 +82,14 @@
 
         </activity>
 
+        <activity android:name="com.example.jmjapplication2.RegisterNoActivity">
+
+        </activity>
+
+        <activity android:name="com.example.jmjapplication2.RegisterShopActivity">
+
+        </activity>
+
         <activity android:name="com.example.jmjapplication2.SignupActivity">
 
         </activity>

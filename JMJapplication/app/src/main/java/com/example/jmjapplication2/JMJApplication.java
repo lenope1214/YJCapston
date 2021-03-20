@@ -3,16 +3,17 @@ package com.example.jmjapplication2;
 import android.app.Application;
 
 public class JMJApplication extends Application {
-    private String userid;
+    private String id;
 
     private String role;
 
-    public String getUserid() {
-        return userid;
+    public String getId() {
+        return id;
     }
 
-    public void setUserid(String userid) {
-        this.userid = userid;
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getRole() {

@@ -45,12 +45,12 @@ public class MyFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        String userid = ((JMJApplication)this.getActivity().getApplication()).getUserid();
+        String id = ((JMJApplication)this.getActivity().getApplication()).getId();
 
-        if(userid != null) {
+        if(id != null) {
             login_btn.setVisibility(View.GONE);
             profile_btn.setVisibility(View.VISIBLE);
-            profile_btn.setText(userid);
+            profile_btn.setText(id);
         } else {
             login_btn.setVisibility(View.VISIBLE);
             profile_btn.setVisibility(View.GONE);

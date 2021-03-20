@@ -1,44 +1,83 @@
 package com.example.restapi.model;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import java.util.Date;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+
+@Getter
+@Setter
 @Entity
+@Table(name="member")
 public class Member {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "member_id", length = 30)
+    private String id; //아이디
 
-    private String userid;
+    @Column(length = 100, nullable = false) // 암호화를 하는데 여유자리까지 충분하게 100자리.
+    private String pw; // 비밀번호
 
-    private String userpw;
+    @Column(length = 15, nullable = false)
+    private String name; // 이름
 
-    private String name;
+    @Column(length = 70)
+    private String email; // 이메일
 
-    private String phone;
+    @Column(length = 120)
+    private String address; // 주소
 
-    private String role;
+    @Column
+    private Date birthday; // 생년월일
 
-    private int code;
+    @Column(length = 11, nullable = false)
+    private String phone; // 전화번호
 
-    public Member(String userid, String userpw, String name, String phone, String role){
-        this.userid = userid;
-        this.userpw = userpw;
+    @Column
+    private char is_wdrw='N'; // 탈퇴여부
+
+    @Column
+    private String role; // 권한
+
+    @Column(length = 2)
+    private String social; // 소셜
+
+    @Column(insertable = false, updatable = false) // 업데이트, 인설트 불가
+    private Date sign_date = new Date(); // 가입날짜
+
+    @Column(name="lv", length = 2)
+    private String level; // 등급
+
+    @Column
+    private int point; // 포인트
+
+    @Column
+    private int code; // 코드
+//    @Column
+//    private int penalty; // 경고회수
+
+    public Member(String id, String pw, String name, String phone, String role, int code) {
+        this.id = id;
+        this.pw = pw;
+        this.name = name;
+        this.phone = phone;
+        this.role = role;
+        this.code = code;
+    }
+
+    public Member(String id, String pw, String name, String phone, String role) {
+        this.id = id;
+        this.pw = pw;
         this.name = name;
         this.phone = phone;
         this.role = role;
     }
 
+    public Member() {
 
-    public Member(String userid, String userpw) {
-        this.userid = userid;
-        this.userpw = userpw;
     }
 }

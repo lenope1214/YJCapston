@@ -2,13 +2,19 @@ package com.example.jmjapplication2;
 
 import android.app.Application;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity_O extends AppCompatActivity {
+
     HomeFragment_O homeFragment_o;
     ReviewFragment_O reviewFragment_o;
     ChattingFragment_O chattingFragment_o;
@@ -32,6 +38,7 @@ public class MainActivity_O extends AppCompatActivity {
 
         final BottomNavigationView bottomNavigation = findViewById(R.id.o_bottom_navigation);
         bottomNavigation.setSelectedItemId(R.id.o_tab3);
+
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -47,6 +54,7 @@ public class MainActivity_O extends AppCompatActivity {
                         return true;
 
                     case R.id.o_tab3:
+
                         Toast.makeText(getApplicationContext(), "세 번째 탭 선택됨", Toast.LENGTH_LONG).show();
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment_o).commit();
                         return true;

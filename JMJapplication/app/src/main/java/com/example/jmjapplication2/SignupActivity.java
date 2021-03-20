@@ -131,8 +131,8 @@ public class SignupActivity extends AppCompatActivity {
                     dialog.show();
                 } else {
                     Map<String, String> map = new HashMap();
-                    map.put("userid", et_id.getText().toString());
-                    map.put("userpw", et_pw.getText().toString());
+                    map.put("id", et_id.getText().toString());
+                    map.put("pw", et_pw.getText().toString());
                     map.put("name", et_name.getText().toString());
                     map.put("phone", et_phone.getText().toString());
 

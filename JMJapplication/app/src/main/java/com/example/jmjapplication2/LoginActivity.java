@@ -19,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.jmjapplication2.dto.MemberDTO;
-import com.example.jmjapplication2.dto.ResLogin;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -30,18 +29,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.*;
-import com.google.gson.JsonNull;
 import com.nhn.android.naverlogin.OAuthLogin;
 import com.nhn.android.naverlogin.OAuthLoginHandler;
 import okhttp3.ResponseBody;
-import org.json.JSONObject;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -61,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth = null;
     GoogleSignInClient mGoogleSignInClient;
-
 
 
     private AlertDialog dialog;
@@ -90,27 +84,32 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(et_login_id.getText().toString().length() == 0 || et_login_pw.getText().toString().length() ==0) {
+                if (et_login_id.getText().toString().length() == 0 || et_login_pw.getText().toString().length() == 0) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                     dialog = builder.setMessage("아이디와 비밀번호를 확인해 주세요.").setPositiveButton("확인", null).create();
                     dialog.show();
                 } else {
-                    String userid = et_login_id.getText().toString();
-                    String userpw = et_login_pw.getText().toString();
-                    dataService.login.LoginOne(userid, userpw).enqueue(new Callback<MemberDTO>() {
+                    String id = et_login_id.getText().toString();
+                    String pw = et_login_pw.getText().toString();
+                    dataService.login.LoginOne(id, pw).enqueue(new Callback<MemberDTO>() {
                         @Override
                         public void onResponse(Call<MemberDTO> call, Response<MemberDTO> response) {
-                            if(response.isSuccessful()) {
-                                if(response.body().getCode() == 200) {
+                            if (response.isSuccessful()) {
+                                if (response.body().getCode() == 200) {
+                                    Log.d("result : ", "로그인 성공!");
+
                                     SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
                                     SharedPreferences.Editor editor = pref.edit();
-                                    editor.putString("token", response.body().getUserid());
-                                    editor.commit();
+                                    editor.putString("token", response.body().getId());
+                                    Log.d("getid:", response.body().getId());
+                                    editor.apply();
 
-                                    ((JMJApplication)getApplication()).setUserid(response.body().getUserid());
-                                    ((JMJApplication)getApplication()).setRole(response.body().getRole());
+                                    ((JMJApplication) getApplication()).setId(response.body().getId());
+                                    ((JMJApplication) getApplication()).setRole(response.body().getRole());
 
-                                    if(response.body().getRole() == "ROLE_USER") {
+                                    if (response.body().getRole().equals("ROLE_USER")) {
+                                        Log.d("result : ", "일반 회원 로그인 성공" + response.body().getId() + "님");
+
                                         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                                         dialog = builder.setMessage("로그인되었습니다").setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                             @Override
@@ -124,18 +123,60 @@ public class LoginActivity extends AppCompatActivity {
                                         builder.setCancelable(false);
                                         dialog.show();
                                     } else {
-                                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                                        dialog = builder.setMessage("로그인되었습니다").setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                        Log.d("result : ", "사업자 회원 로그인 성공" + response.body().getId() + "님");
+
+                                        dataService.findshop.findshopOne(response.body().getId()).enqueue(new Callback<ResponseBody>() {
                                             @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                Intent intent = new Intent(LoginActivity.this, MainActivity_O.class);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                                startActivity(intent);
-                                                finish();
+                                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                                if (response.isSuccessful()) {
+                                                    Log.d("result : ", "연결 성공");
+
+                                                    ResponseBody body = response.body();
+                                                    String result = null;
+                                                    try {
+                                                        result = body.string();
+                                                    } catch (IOException e) {
+                                                        e.printStackTrace();
+                                                    }
+
+                                                    if (result.equals("가게없음")) {
+                                                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                                                        dialog = builder.setMessage("로그인되었습니다").setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                Intent intent = new Intent(LoginActivity.this, RegisterNoActivity.class);
+                                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                                startActivity(intent);
+                                                                finish();
+                                                            }
+                                                        }).create();
+                                                        builder.setCancelable(false);
+                                                        dialog.show();
+                                                    } else {
+                                                        Log.d("result : ", String.valueOf(response.body()));
+                                                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                                                        dialog = builder.setMessage("로그인되었습니다").setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                Intent intent = new Intent(LoginActivity.this, MainActivity_O.class);
+                                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                                startActivity(intent);
+                                                                finish();
+                                                            }
+                                                        }).create();
+                                                        builder.setCancelable(false);
+                                                        dialog.show();
+                                                    }
+                                                } else {
+                                                    Log.d("result : ", "네트워크 오류");
+                                                }
                                             }
-                                        }).create();
-                                        builder.setCancelable(false);
-                                        dialog.show();
+
+                                            @Override
+                                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                                            }
+                                        });
                                     }
                                 } else {
                                     AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
@@ -160,31 +201,33 @@ public class LoginActivity extends AppCompatActivity {
                 mOAuthLoginModule = OAuthLogin.getInstance();
                 mOAuthLoginModule.init(
                         mContext
-                        ,getString(R.string.naver_client_id)
-                        ,getString(R.string.naver_client_secret)
-                        ,getString(R.string.naver_client_name)
+                        , getString(R.string.naver_client_id)
+                        , getString(R.string.naver_client_secret)
+                        , getString(R.string.naver_client_name)
                 );
 
                 @SuppressLint("HandlerLeak")
                 OAuthLoginHandler mOAuthLoginHandler = new OAuthLoginHandler() {
                     @Override
                     public void run(boolean success) {
-                        if(success) {
+                        if (success) {
                             String accessToken = mOAuthLoginModule.getAccessToken(mContext);
                             String refreshToken = mOAuthLoginModule.getRefreshToken(mContext);
                             long expiresAt = mOAuthLoginModule.getExpiresAt(mContext);
                             String tokenType = mOAuthLoginModule.getTokenType(mContext);
 
-                            Log.i("LoginData","accessToken : " + accessToken);
-                            Log.i("LoginData","refreshToken : " + refreshToken);
-                            Log.i("LoginData","expiresAt : " + expiresAt);
-                            Log.i("LoginData","tokenType : " + tokenType);
+                            Log.i("LoginData", "accessToken : " + accessToken);
+                            Log.i("LoginData", "refreshToken : " + refreshToken);
+                            Log.i("LoginData", "expiresAt : " + expiresAt);
+                            Log.i("LoginData", "tokenType : " + tokenType);
                         } else {
                             String errorCode = mOAuthLoginModule.getLastErrorCode(mContext).getCode();
                             String errorDesc = mOAuthLoginModule.getLastErrorDesc(mContext);
                             Toast.makeText(mContext, "errorCode:" + errorCode + ", errorDesc:" + errorDesc, Toast.LENGTH_SHORT).show();
                         }
-                    };
+                    }
+
+                    ;
                 };
                 mOAuthLoginModule.startOauthLoginActivity(LoginActivity.this, mOAuthLoginHandler);
 
@@ -203,7 +246,7 @@ public class LoginActivity extends AppCompatActivity {
         signInButton = findViewById(R.id.google_login);
         mAuth = FirebaseAuth.getInstance();
 
-        if(mAuth.getCurrentUser() != null) {
+        if (mAuth.getCurrentUser() != null) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();
@@ -242,7 +285,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == RC_SIGN_IN) {
+        if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
@@ -259,7 +302,7 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             Snackbar.make(findViewById(R.id.login_layout), "Authentication Successed.", Snackbar.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
@@ -272,7 +315,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser user) {
-        if(user != null) {
+        if (user != null) {
             Intent intent = new Intent(this, LogoutActivity.class);
             startActivity(intent);
             finish();
@@ -281,7 +324,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);

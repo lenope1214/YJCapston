@@ -1,7 +1,6 @@
 package com.example.jmjapplication2;
 
 import com.example.jmjapplication2.dto.MemberDTO;
-import com.example.jmjapplication2.dto.Validate;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -29,6 +28,7 @@ public class DataService {
     DeleteAPI delete = retrofitClient.create(DeleteAPI.class);
     ValidateAPI validate = retrofitClient.create(ValidateAPI.class);
     LoginAPI login = retrofitClient.create(LoginAPI.class);
+    FindShopAPI findshop = retrofitClient.create(FindShopAPI.class);
 }
 
 interface SelectAPI{
@@ -56,13 +56,19 @@ interface DeleteAPI {
 
 interface ValidateAPI {
     @FormUrlEncoded
-    @POST("validate/{userid}")
-    Call<ResponseBody> validateOne(@Field("userid") String userid);
+    @POST("validate/{id}")
+    Call<ResponseBody> validateOne(@Field("id") String id);
 }
 
 interface LoginAPI {
     @FormUrlEncoded
     @POST("login")
-    Call<MemberDTO> LoginOne(@Field("userid") String userid,
-                             @Field("userpw") String userpw);
+    Call<MemberDTO> LoginOne(@Field("id") String id,
+                             @Field("pw") String pw);
+}
+
+interface FindShopAPI {
+    @FormUrlEncoded
+    @POST("findshop/{id}")
+    Call<ResponseBody> findshopOne(@Field("id") String id);
 }
