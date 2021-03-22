@@ -1,8 +1,0 @@
-com/example/restapi3/model/Member.java
- com.example.restapi3.model.Member
-com/example/restapi3/Restapi3Application.java
- com.example.restapi3.Restapi3Application
-com/example/restapi3/repository/MemberRepository.java
- com.example.restapi3.repository.MemberRepository
-com/example/restapi3/controller/MemberController.java
- com.example.restapi3.controller.MemberController
