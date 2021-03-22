@@ -1,6 +1,7 @@
 package com.example.jmjapplication2;
 
 import com.example.jmjapplication2.dto.MemberDTO;
+import com.example.jmjapplication2.dto.Shop;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -29,6 +30,7 @@ public class DataService {
     ValidateAPI validate = retrofitClient.create(ValidateAPI.class);
     LoginAPI login = retrofitClient.create(LoginAPI.class);
     FindShopAPI findshop = retrofitClient.create(FindShopAPI.class);
+    RegisterShopAPI registerShop = retrofitClient.create(RegisterShopAPI.class);
 }
 
 interface SelectAPI{
@@ -71,4 +73,9 @@ interface FindShopAPI {
     @FormUrlEncoded
     @POST("findshop/{id}")
     Call<ResponseBody> findshopOne(@Field("id") String id);
+}
+
+interface RegisterShopAPI {
+    @POST("registerShop")
+    Call<Shop> registerShopOne(@Body Map<String, String> map);
 }

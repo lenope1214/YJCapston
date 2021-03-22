@@ -1,8 +1,7 @@
 package com.example.restapi.model;
 
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -11,6 +10,10 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString
 @Table(name="shop")
 public class Shop {
     @Id
@@ -28,11 +31,10 @@ public class Shop {
     @Column(length = 120,nullable = false)
     private String address; //매장주소
     @Column
-    private int category; //카테고리
+    private String category; //카테고리
     @Column
     private char is_re_pos; //예약가능여부
     @ManyToOne
     @JoinColumn(name="member_id")
     private Member member_id;
-
 }

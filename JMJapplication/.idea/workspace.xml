@@ -14,29 +14,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3914f3c3-3012-4f9b-bfe7-8ebf7bb64730" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/RegisterNoActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/RegisterShopActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/Shop.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_new_shop.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_no_shop.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/Chatbot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/Coupon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/Menu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/MenuId.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/Message.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/Order.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/Payment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/Reservation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/Review.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/Shop.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/Tab.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/TabId.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/mymug_Board.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/mymug_Crew.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/mymug_Menu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/mymug_Point.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/mymug_Reply.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/mymug_User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/values/arrays.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/repository/ShopRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/service/ShopService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/service/ShopServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -48,24 +29,19 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/DataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/DataService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/HomeFragment_O.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/HomeFragment_O.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/JMJApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/JMJApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/MainActivity_O.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/MainActivity_O.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/MyFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/MyFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/ProfileUpdateActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/ProfileUpdateActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/SignupActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/SignupActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/MemberDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/MemberDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/ResLogin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/Validate.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/RegisterShopActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/RegisterShopActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_new_shop.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_new_shop.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MyApplication/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MyApplication/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../restapi/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../restapi/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/controller/MemberController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/ResLogin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/Validate.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/model/Shop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/repository/MemberRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/repository/MemberRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/service/MemberService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/service/MemberServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../restapi/src/main/java/com/example/restapi/service/MemberServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../restapi/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../restapi/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,6 +106,7 @@
         <option value="resourceFile" />
         <option value="Class" />
         <option value="layoutResourceFile" />
+        <option value="valueResourceFile" />
       </list>
     </option>
   </component>
@@ -320,23 +297,14 @@
       <workItem from="1616237476673" duration="3485000" />
       <workItem from="1616251553793" duration="6426000" />
       <workItem from="1616258922301" duration="3198000" />
+      <workItem from="1616296768302" duration="18711000" />
+      <workItem from="1616370511151" duration="5555000" />
+      <workItem from="1616383898572" duration="3581000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-field">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/Shop.java</url>
-          <line>20</line>
-          <properties field="member_id" class="com.example.jmjapplication2.dto.Shop" />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

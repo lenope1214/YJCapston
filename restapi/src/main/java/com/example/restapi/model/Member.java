@@ -1,7 +1,6 @@
 package com.example.restapi.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +11,11 @@ import java.util.Date;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
+@ToString
 @Table(name="member")
 public class Member {
     @Id
@@ -57,27 +60,10 @@ public class Member {
 
     @Column
     private int code; // 코드
+
+
+
 //    @Column
 //    private int penalty; // 경고회수
 
-    public Member(String id, String pw, String name, String phone, String role, int code) {
-        this.id = id;
-        this.pw = pw;
-        this.name = name;
-        this.phone = phone;
-        this.role = role;
-        this.code = code;
-    }
-
-    public Member(String id, String pw, String name, String phone, String role) {
-        this.id = id;
-        this.pw = pw;
-        this.name = name;
-        this.phone = phone;
-        this.role = role;
-    }
-
-    public Member() {
-
-    }
 }

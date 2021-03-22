@@ -14,9 +14,86 @@
 
     <EditText
             android:id="@+id/shop_et_id"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:inputType="textCapWords"
-            android:layout_marginBottom="10dp"
-            android:padding="10dp"/>
+            android:inputType="number"
+            android:layout_gravity="center"
+            android:hint="사업자번호"
+            android:gravity="center"
+            android:layout_marginTop="20dp"/>
+
+    <EditText
+            android:id="@+id/shop_et_name"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:layout_gravity="center"
+            android:hint="매장이름"
+            android:gravity="center"
+            android:layout_marginTop="20dp"/>
+
+    <EditText
+            android:id="@+id/shop_et_intro"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:layout_gravity="center"
+            android:hint="매장소개"
+            android:gravity="center"
+            android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+        <Spinner
+                android:id="@+id/shop_et_open"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"/>
+
+        <Spinner
+                android:id="@+id/shop_et_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"/>
+    </LinearLayout>
+
+    <EditText
+            android:id="@+id/shop_et_addr"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:layout_gravity="center"
+            android:hint="매장주소"
+            android:gravity="center"
+            android:layout_marginTop="20dp"/>
+
+    <Spinner
+            android:id="@+id/shop_et_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"/>
+
+    <Spinner
+            android:id="@+id/shop_et_isres"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"/>
+
+    <Button
+            android:id="@+id/shop_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="등록"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"/>
+
 </LinearLayout>

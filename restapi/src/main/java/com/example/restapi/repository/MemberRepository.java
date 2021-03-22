@@ -16,4 +16,7 @@ public interface MemberRepository extends JpaRepository<Member, String> {
     @Query("select s.member_id from Shop s inner join s.member_id m where m.id = :id")
     Object findByShop(@Param("id") String id);
 
+    @Query("select m from Member m where m.id = :id")
+    Member findByIdd(@Param("id") String id);
+
 }
