@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.websocket.server.PathParam;
+
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/v1")
@@ -53,7 +55,13 @@ public class ApiController {
     }
 
 
-
+    @PostMapping("/validate/{id}") // valudate
+    public String validateOne(@PathParam("id") String id) {
+        if(userService.findById(id) == null) {
+            return "중복아님";
+        }
+        return null;
+    }
 
 
 

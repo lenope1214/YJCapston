@@ -73,12 +73,6 @@ public class UserService {
 
     @Transactional
     public User put(PutUserDTO putgUserDTO){
-        User user = userRepository.findById(putgUserDTO.getId())
-                .orElseThrow(()-> new IllegalArgumentException("유저 ID가 잘못됨!!!"));
-        User _user = putgUserDTO.getUser();
-        if(_user.getPassword() != null) user.setPassword(_user.getPassword());
-
-        user.
         return
     }
 
