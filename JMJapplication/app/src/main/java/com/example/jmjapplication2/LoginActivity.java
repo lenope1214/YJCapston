@@ -37,6 +37,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -90,12 +92,16 @@ public class LoginActivity extends AppCompatActivity {
                     dialog.show();
                 } else {
                     String id = et_login_id.getText().toString();
-                    String pw = et_login_pw.getText().toString();
-                    dataService.login.LoginOne(id, pw).enqueue(new Callback<MemberDTO>() {
+                    String password = et_login_pw.getText().toString();
+                    Map<String, String> map = new HashMap();
+                    map.put("id", id);
+                    map.put("password", password);
+
+                    dataService.login.LoginOne(map).enqueue(new Callback<MemberDTO>() {
                         @Override
                         public void onResponse(Call<MemberDTO> call, Response<MemberDTO> response) {
                             if (response.isSuccessful()) {
-                                if (response.body().getCode() == 200) {
+                                if (response.body() == null) {
                                     Log.d("result : ", "로그인 성공!");
 
                                     SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);

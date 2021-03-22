@@ -11,7 +11,7 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/rest")
+@RequestMapping("/api/v1")
 public class PostController {
     @Autowired
     MemberRepository memberRepository;

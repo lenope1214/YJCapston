@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 public class DataService {
-    private String BASE_URL = "http://192.168.98.1:8885/member/";
+    private String BASE_URL = "http://192.168.1.17:8088/api/v1/";
 
     Retrofit retrofitClient =
             new Retrofit.Builder()
@@ -24,7 +24,7 @@ public class DataService {
                     .addConverterFactory(GsonConverterFactory.create()).build();
 
     SelectAPI select = retrofitClient.create(SelectAPI.class);
-    InsertAPI insert = retrofitClient.create(InsertAPI.class);
+    JoinAPI join = retrofitClient.create(JoinAPI.class);
     UpdateAPI update = retrofitClient.create(UpdateAPI.class);
     DeleteAPI delete = retrofitClient.create(DeleteAPI.class);
     ValidateAPI validate = retrofitClient.create(ValidateAPI.class);
@@ -41,9 +41,9 @@ interface SelectAPI{
     Call<List<MemberDTO>> selectAll();
 }
 
-interface InsertAPI{
-    @POST("insert")
-    Call<MemberDTO> insertOne(@Body Map<String, String> map);
+interface JoinAPI{
+    @POST("join")
+    Call<MemberDTO> join(@Body Map<String, String> map);
 }
 
 interface UpdateAPI{
@@ -62,11 +62,17 @@ interface ValidateAPI {
     Call<ResponseBody> validateOne(@Field("id") String id);
 }
 
+//interface LoginAPI {
+//    @FormUrlEncoded
+//    @POST("login")
+//    Call<MemberDTO> LoginOne(@Field("id") String id,
+//                             @Field("password") String password);
+//}
+
 interface LoginAPI {
     @FormUrlEncoded
     @POST("login")
-    Call<MemberDTO> LoginOne(@Field("id") String id,
-                             @Field("pw") String pw);
+    Call<MemberDTO> LoginOne(@Body Map<String, String> map);
 }
 
 interface FindShopAPI {

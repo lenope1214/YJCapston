@@ -125,14 +125,10 @@ public class SignupActivity extends AppCompatActivity {
                     AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
                     dialog = builder.setMessage("회원 종류를 선택해 주세요.").setPositiveButton("확인", null).create();
                     dialog.show();
-                } else if(isChecked == false) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
-                    dialog = builder.setMessage("아이디 중복체크를 해주세요.").setPositiveButton("확인", null).create();
-                    dialog.show();
-                } else {
+                }  else {
                     Map<String, String> map = new HashMap();
                     map.put("id", et_id.getText().toString());
-                    map.put("pw", et_pw.getText().toString());
+                    map.put("password", et_pw.getText().toString());
                     map.put("name", et_name.getText().toString());
                     map.put("phone", et_phone.getText().toString());
 
@@ -142,7 +138,7 @@ public class SignupActivity extends AppCompatActivity {
                         map.put("role", "ROLE_OWNER");
                     }
 
-                    dataService.insert.insertOne(map).enqueue(new Callback<MemberDTO>() {
+                    dataService.join.join(map).enqueue(new Callback<MemberDTO>() {
                         @Override
                         public void onResponse(Call<MemberDTO> call, Response<MemberDTO> response) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
@@ -180,3 +176,9 @@ public class SignupActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+
+//else if(isChecked == false) {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
+//        dialog = builder.setMessage("아이디 중복체크를 해주세요.").setPositiveButton("확인", null).create();
+//        dialog.show();
+//        }
