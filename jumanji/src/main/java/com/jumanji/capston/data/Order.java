@@ -1,44 +1,38 @@
 package com.jumanji.capston.data;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Setter;
+import oracle.sql.TIMESTAMP;
 
 import javax.persistence.*;
-import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Date;
 
 
 @Getter
-@Setter
 @Entity
-@Table(name="ordr")
+@Table(name="orders")
 public class Order implements Serializable {
     @Id
-    @Column(name="order_id", length = 16)
-    private String id ; // 주문번호 insert 할때 값 yyMMddhhmmss+sequence 설정해주기. 기본값으로 하는거 어렵넹
+//    @GeneratedValue(strategy= GenerationType.IDENTITY)
+//    @Column(insertable = false, updatable = false)
+    private Long id ; // 주문번호 insert 할때 값 yyMMddhhmmss+sequence 설정해주기. 기본값으로 하는거 어렵넹
 
-    @Column(name="quantity", length = 2, nullable = false)
+    @Column(length = 2)
     private int quantity; // 메뉴 수량
-    @Column(name="order_time", nullable = false)
-    private Date date; // 주문일시
-    @Column(name="order_req", length = 60)
+    private TIMESTAMP order_time; // 주문일시
+    @Column(name="order_request")
     private String request; // 요청사항
 
     @ManyToOne
-    @JoinColumn(name = "ordr_shop_id", insertable = false, updatable = false)
-    private Shop shop_id;
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private User user_id;
 
+    @JoinColumn
     @ManyToOne
-    @JoinColumn(name = "member_id", insertable = false, updatable = false)
-    private Member member_id;
+    private Menu menu_id;
 
-    @Embedded
-    private MenuId menu_id;
-
-    @Embedded // 비 식별 관계 식별관계로 하려면 @EmbeddedId로 변경
-    private TabId tab_id;
+    @JoinColumn // 비 식별 관계 식별관계로 하려면 @EmbeddedId로 변경
+    @ManyToOne
+    private Tab table_id;
 }
 
 //@Getter

@@ -3,26 +3,21 @@ package com.jumanji.capston.data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.sql.Timestamp;
 
 @Getter
 @Setter
 @Entity
-@Table(name="message")
+@Table(name="messages")
 public class Message {
-    @Id
-    @Column(name = "msg_id", length=12,nullable = false)
-    private int id;//번호
-    @Column(nullable = false)
-    private Timestamp msg_time;//시간
-    @Column(length=300,nullable = false)
-    private String msg_content;//내용
-    @ManyToOne
-    @JoinColumn(name="member_id",nullable = false)
-    private Member member_id;
-    @ManyToOne
-    @JoinColumn(name="shop_id",nullable = false)
-    private Shop shop_id;
+    @EmbeddedId
+    private MessageId id;
+    @Column(length = 250)
+    private String content;//내용
+
 }
+
+

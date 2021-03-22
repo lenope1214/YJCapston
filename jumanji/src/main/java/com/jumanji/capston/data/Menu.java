@@ -1,12 +1,10 @@
 package com.jumanji.capston.data;
 
 import lombok.Getter;
-import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serializable;
-import java.util.Date;
 
 /*
 last update 2021-02-23
@@ -14,36 +12,35 @@ author 이성복
  */
 
 @Getter
-@Setter
 @Entity
-@Table(name="menu")
-public class Menu implements Serializable {
-    @Id
-    @Column(name="menu_id", length = 3)
-    private String no ; // 메뉴번호
+@Table(name="menus")
+public class Menu{
 
-    @Column(name="menu_name", length = 30, nullable = false)
-    private String name; // 이름
-    @Column(name="menu_desc", nullable = false)
-    private String desc; // 설명
-    @Column
+    @Id
+    private String id; // 메뉴번호 ( 매장번호 + seq(2) )
+    
+    private String name; // 메뉴이름
+    private String description; //메뉴설명
     private char is_sale = 'Y'; // 판매중
-    @Column
     private char is_popular = 'N'; // 인기메뉴여부
-    @Column(name="menu_price",length = 5, nullable = false)
     private int price = 0; // 가격
-    @Column(name="menu_dur")
-    private Date duration; // 소요시간
-    @Column(name="menu_img_url", length = 150)
+    private int duration; // 소요시간
     private String img_url; // 이미지 상대 경로
 }
 
-
-//@Entity
-//@SequenceGenerator(
-//        name = "MENU_SEQ_GENERATOR",
-//        sequenceName = "MENU_SEQ",
-//        initialValue = 1,
-//        allocationSize = 1
-//)
-//@Table(name = "")
+//@Getter
+//@Embeddable
+//@EqualsAndHashCode
+//public class MenuId  implements Serializable {
+//
+////    column: id (should be mapped with insert="false" update="false"
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(insertable = false, updatable = false)
+//    private Long menu_id ; // 메뉴번호
+//
+//    @ManyToOne
+//    @JoinColumn(name="shop_id",nullable = false)
+//    private Shop shop;//매장번호
+//
+//    public MenuId(){}
+//}

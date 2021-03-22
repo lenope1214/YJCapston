@@ -1,0 +1,162 @@
+﻿<html lang="ko">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        header{
+            position:absolute;
+            height:auto;
+        }
+        div.video-container {
+            position: absolute;
+            width: 100%;
+        }
+        .title{
+            width: 100%;
+            text-align:center;
+        }
+        .btn {
+            background-color: white;
+            border: none;
+            color: black;
+            padding: 12px 16px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+            /* Darker background on mouse-over */
+        .btn:hover {
+            color: gray;
+        }
+
+        #finger {
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -250px 0 0 -250px;
+            text-align: center;
+        }
+
+        #finger_box {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        #line {
+            width: 100%;
+            height: 30px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -6px 0 0 -50%;
+            -webkit-animation: line 1.4s linear;
+            animation: line 1.4s linear infinite;
+        }
+        /*왜 있는지 모르겠음*/
+        /*@keyframes line {
+            0% {transform: translateY(-90px);}
+            50% {transform: translateY(90px);}
+            100% {transform: translateY(-90px);}
+        }*/
+
+        @-webkit-keyframes line { /*line animation for web*/
+            0% {
+                -webkit-transform: translateY(-90%);
+            }
+
+            50% {
+                -webkit-transform: translateY(90%);
+            }
+
+            100% {
+                -webkit-transform: translateY(-90%);
+            }
+        }
+
+        video {
+            min-height: 100%;
+            min-width: 100%;
+            object-fit: fill;
+        }
+
+        img {
+            border: 0 none;
+            max-width: 100%;
+            height: auto;
+            width: auto;
+            -ms-interpolation-mode: bicubic;
+            vertical-align: middle;
+        }
+
+        h6 {
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        a {
+            text-align: center;
+        }
+    </style>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="grid.js"></script>
+    <script type="text/javascript" src="version.js"></script>
+    <script type="text/javascript" src="detector.js"></script>
+    <script type="text/javascript" src="formatinf.js"></script>
+    <script type="text/javascript" src="errorlevel.js"></script>
+    <script type="text/javascript" src="bitmat.js"></script>
+    <script type="text/javascript" src="datablock.js"></script>
+    <script type="text/javascript" src="bmparser.js"></script>
+    <script type="text/javascript" src="datamask.js"></script>
+    <script type="text/javascript" src="rsdecoder.js"></script>
+    <script type="text/javascript" src="gf256poly.js"></script>
+    <script type="text/javascript" src="gf256.js"></script>
+    <script type="text/javascript" src="decoder.js"></script>
+    <script type="text/javascript" src="qrcode.js"></script>
+    <script type="text/javascript" src="findpat.js"></script>
+    <script type="text/javascript" src="alignpat.js"></script>
+    <script type="text/javascript" src="databr.js"></script>
+    <script type="text/javascript" src="main2.js" charset="euc-kr"></script>
+</head>
+<body class="all">
+    <div class="header">
+        <button ><i class="fa fa-close"></i></button>
+        <h6 >
+            코드스캐너
+        </h6>
+    </div>
+    <div class="video-container">
+        <div id="finger">
+            <div id="finger_box">
+                <img id="zhiwen" src="images/zhiwen.png" alt="">
+                <img id="line" src="images/line.png" alt="">
+                <p id="info"></p>
+            </div>
+        </div>
+        <video id="video-preview" style="width: 100%; " autoplay></video>
+        <canvas id="qr-canvas" class="hidden" style="display:none"></canvas>
+    </div>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script>
+            $(document).ready(function () {
+                var w = $('div.video-container');
+                var offset = w.offset();
+                console.log(offset.top);
+                console.log(offset.left);
+                $('#finger').css({
+                    "position": "absolute",
+                    "top": ($('div.video-container').height() / 2 -$('#finger').width()/2 + "px"),
+                    "left": ($('div.video-container').width() / 2 - $('#finger').width() / 2 + "px")
+                });
+                var fin = $('#finger');
+                var offset2 = fin.offset();
+                console.log($('#finger').width());
+            });
+    </script>
+</body>
+</html>

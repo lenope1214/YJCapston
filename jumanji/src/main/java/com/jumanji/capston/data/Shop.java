@@ -1,38 +1,32 @@
 package com.jumanji.capston.data;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
 
 
 @Getter
 @Setter
 @Entity
-@Table(name="shop")
+@Table(name="shops")
 public class Shop {
     @Id
-    @Column(name="shop_id",length = 10,nullable = false)
-    private String id; //매장번호
-
-    @Column(name="shop_name", length = 50, nullable = false)
+    private String id; //매장번호 ( 사업자번호 )
     private String name; //매장이름
-    @Column(name="shop_intro", length = 250)
     private String intro; //매장소개
-    @Column(name="shop_open", length = 4, nullable = false)
-    private int open; //오픈시간
-    @Column(name="shop_close", length = 4,  nullable = false)
-    private int close; //마감시간
-    @Column(name="shop_addr", length = 120,nullable = false)
+    @JsonFormat(pattern = "HH:mm:ss")
+    private Date open_time; //오픈시간
+    @JsonFormat(pattern = "HH:mm:ss")
+    private Date close_time; //마감시간
     private String address; //매장주소
-    @Column(name="shop_cat", length = 2)
-    private int category; //카테고리
-    @Column
-    private char is_re_pos; //예약가능여부
+    private String address_detail; //매장주소
+    private char is_rs_pos = 'Y'; //예약가능여부
     @ManyToOne
-    @JoinColumn(name="member_id")
-    private Member member_id;
+    @JoinColumn(name="owner_id")
+    private User owner_id;
 
 }
