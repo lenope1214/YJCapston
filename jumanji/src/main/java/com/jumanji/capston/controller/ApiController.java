@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.websocket.server.PathParam;
+
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/v1")
@@ -45,15 +47,21 @@ public class ApiController {
         final User user = userService.findById(_user.getId());
         if (userService.checkPW(_user, user.getPassword())) {
             System.out.println("비밀번호 체크 성공!");
-            final String token = jwtTokenUtil.generateToken(user.getId());
-            return new ResponseEntity<>(new JwtResponse(token), HttpStatus.OK);
+            final String access_token = jwtTokenUtil.generateToken(user.getId());
+            return new ResponseEntity<>(new JwtResponse(access_token), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
 
-
+    @PostMapping("/validate/{id}") // valudate
+    public String validateOne(@PathParam("id") String id) {
+        if(userService.findById(id) == null) {
+            return "중복아님";
+        }
+        return null;
+    }
 
 
 

@@ -1,13 +1,10 @@
 package com.jumanji.capston.data;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
 
 
 @Getter
@@ -24,4 +21,5 @@ public class Payment implements Serializable {
     private Timestamp pay_time; // 결제 일자 yyyyMMdd
     private String pg; // 결제방식
     private int comple_pay; // 결제 당시 금액
+    private char isRefund; // 환불 여부
 }
