@@ -1,5 +1,6 @@
 package com.jumanji.capston.service;
 
+import com.jumanji.capston.DTO.PutShopDTO;
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.repository.ShopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class ShopService {
 
     public Shop findById(String id){
         return shopRepository.findById(id)
-                .orElseThrow(()-> new IllegalArgumentException("shop_id를 확인해주세요!!!"));
+                .orElseThrow(()-> new IllegalArgumentException("id를 확인해주세요!!!"));
     }
 
 
@@ -24,12 +25,21 @@ public class ShopService {
         return shop;
     }
 
-    public String delete(Shop shop){
+    public String delete(String id){
+        System.out.println("입력 id : " + id);
+        Shop shop = shopRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("id를 확인해주세요!!!"));
         shopRepository.delete(shop);
         return "ok";
     }
 
     public List<Shop> findAll() {
         return shopRepository.findAll();
+    }
+
+    public Shop putShop(PutShopDTO putShopDTO) {
+        Shop shop = shopRepository.findById(putShopDTO.getId())
+                .orElseThrow(()-> new IllegalAccessError("shop_id를 확인해 주세요!!!"));
+        shop = putShopDTO.getShop();
+        return shopRepository.save(shop);
     }
 }

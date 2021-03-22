@@ -1,9 +1,7 @@
 package com.jumanji.capston.data;
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
-import javax.persistence.Table;
 import java.sql.Timestamp;
 
 
@@ -12,7 +10,7 @@ import java.sql.Timestamp;
 @Table(name="reviews")
 public class Review {
     @Id
-    private int id; //리뷰번호
+    private Long id; //리뷰번호
 
     @ManyToOne
     @JoinColumn(nullable = false)

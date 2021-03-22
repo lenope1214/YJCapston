@@ -14,7 +14,7 @@ author 이성복
 @Getter
 @Entity
 @Table(name="menus")
-class Menu{
+public class Menu{
 
     @Id
     private String id; // 메뉴번호 ( 매장번호 + seq(2) )
@@ -27,7 +27,6 @@ class Menu{
     private int duration; // 소요시간
     private String img_url; // 이미지 상대 경로
 }
-
 
 //@Getter
 //@Embeddable

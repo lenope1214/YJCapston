@@ -6,13 +6,14 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 
 @Getter
 @Setter
 @Entity
-@javax.persistence.Table(name="tables")
-class Tab {
+@Table(name="tables")
+public class Tab {
 
 //    @EmbeddedId
 //    private TabId id;
@@ -22,6 +23,9 @@ class Tab {
 
     @Column(length = 2)
     private int seat_qty; // 좌석수
+
+    @Column
+    private char using; // 사용중인지 확인.
 }
 //
 //@Getter

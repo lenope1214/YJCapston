@@ -1,4 +1,4 @@
-package com.jumanji.capston.controller;
+package com.jumanji.capston.controller.Temporary;
 
 import com.jumanji.capston.service.NaverPlaceSearchService;
 import org.springframework.beans.factory.annotation.Autowired;

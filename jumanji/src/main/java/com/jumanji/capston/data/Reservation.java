@@ -1,19 +1,15 @@
 package com.jumanji.capston.data;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
-import javax.persistence.Table;
-import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
 
 
 @Getter
 @Entity
 @Table(name="reservations")
-public class Reservation implements Serializable {
+public class Reservation {
     @Id
     @OneToOne
     @JoinColumn(name="order_id")

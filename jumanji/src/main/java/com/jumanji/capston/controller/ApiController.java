@@ -2,19 +2,17 @@ package com.jumanji.capston.controller;
 
 import com.jumanji.capston.config.jwt.JwtResponse;
 import com.jumanji.capston.config.jwt.JwtTokenUtil;
-import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.service.ShopService;
 import com.jumanji.capston.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
@@ -54,57 +52,10 @@ public class ApiController {
         }
     }
 
-    @Transactional(readOnly = true)
-    @GetMapping("/user/{id}")
-    public ResponseEntity<?> getUserInfo(@PathVariable String id) throws Exception {
-        System.out.println("APIcon user/{id} 진입.");
-        final User userEntity = userService.findById(id);
-        System.out.println("로긘 유저 id : " + SecurityContextHolder.getContext().getAuthentication().getName());
-        System.out.println("찾을 유저 id : " + id + "\ngetUser : " + userEntity.getId());
-
-        if(SecurityContextHolder.getContext().getAuthentication().getName().equals(userEntity.getId())){
-            if(userEntity == null){
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-            return new ResponseEntity<>(userEntity, HttpStatus.OK);
-        }
-
-
-        return new ResponseEntity<>("is not match login id <-> request id.", HttpStatus.FORBIDDEN);
-    }
 
 
 
-    @Transactional
-    @GetMapping("/userDelAll")
-    public ResponseEntity<?> userDelAll() {
-        return new ResponseEntity<>(userService.deleteAll(), HttpStatus.OK);
-    }
 
-
-
-    @Transactional(readOnly = true)
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/userList")
-    public ResponseEntity<?> getUserList() {
-        List<User> userList;
-        userList = userService.findAll();
-        return new ResponseEntity<>(userList, HttpStatus.OK);
-    }
-
-    @Transactional(readOnly = true)
-    @GetMapping("/shopList")
-    public ResponseEntity<?> getShopList(){
-        List<Shop> shopList = shopService.findAll();
-        return new ResponseEntity<>(shopList, HttpStatus.OK);
-    }
-
-    @Transactional
-    @PostMapping("/regShop")
-    public ResponseEntity<?> insertShop(@RequestBody Shop shop){
-        if(shopService.insert(shop) != null)return new ResponseEntity<>(shop, HttpStatus.CREATED);
-        else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
 
     //spring security 설정 .loginProcessingUrl("/login") 으로 처리
 //    @Transactional(readOnly = true)
