@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ApiExceptionHandler {
 
-    @ExceptionHandler(MemberNotFoundException.class)
-    public ResponseEntity<ApiErrorResponse> handleException(MemberNotFoundException ex) {
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> handleException(UserNotFoundException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse("error-0001", "No Member is found with ID : " + ex.getId());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);

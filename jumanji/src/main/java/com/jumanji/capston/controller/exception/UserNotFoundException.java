@@ -1,9 +1,9 @@
 package com.jumanji.capston.controller.exception;
 
-public class MemberNotFoundException extends RuntimeException{
+public class UserNotFoundException extends RuntimeException{
     private String id;
 
-    public MemberNotFoundException(String id) {
+    public UserNotFoundException(String id) {
         this.id = id;
     }
 

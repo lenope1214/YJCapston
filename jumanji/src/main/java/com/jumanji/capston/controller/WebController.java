@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class WebController {
 
-    @PostMapping("/login")
+    @PostMapping("/loginForm")
     public String login(){
-        return "index";
+        return "loginForm";
     }
 
     @GetMapping("/")

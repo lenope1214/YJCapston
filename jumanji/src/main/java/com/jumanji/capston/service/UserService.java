@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -22,7 +23,17 @@ public class UserService {
     @Transactional
     public User findById(String id){
         return userRepository.findById(id)
-                .orElseThrow(()-> new IllegalArgumentException("Id를 확인해주세요!!!"));
+                .orElseThrow(()-> new IllegalArgumentException("user_id를 확인해주세요!!!"));
+    }
+
+    @Transactional
+    public boolean checkPW(User _user, String encodedPassword){
+        String rawPassword = _user.getPassword();
+        System.out.println("encodedPassword : " + encodedPassword);
+        System.out.println("rawPassword : " + rawPassword);
+
+        return bCryptPasswordEncoder.matches(rawPassword, encodedPassword);
+        //                                  입력받은 pw  ,  암호화된 pw
     }
 
     @Transactional
@@ -33,10 +44,12 @@ public class UserService {
                 "m.getPw() : " + userEntity.getPassword() + "\n" +
                 "m.getName() : " + userEntity.getName() + "\n" +
                 "m.getPhone() : " + userEntity.getPhone() + "\n" +
-                "m.getRole() : " + userEntity.getRole()
+                "m.getRole() : " + userEntity.getRole() + "\n"
+//                + "m.getSign_date() : " + userEntity.getSignDate()
         );
         // 현재 비밀번호를 받는 족족 그대로 넣고있기 때문에 시큐리티에 걸려 로그인 불가능.
-        // 비밀번호를 암호화 해서 넣어줘야 함.
+        // 비밀번호를 암호화 해서 넣어줘야 함.i
+        userEntity.setSignDate(new Date());
         String rawPassword = userEntity.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         userEntity.setPassword(encPassword);

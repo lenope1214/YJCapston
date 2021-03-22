@@ -5,9 +5,13 @@ package com.jumanji.capston.controller;
 //   = 컨트롤러 관련 로직만 IoC(메모리)에 올리고 테스트.
 //    => Filter, ControllerAdvice(exception)
 
+import com.jumanji.capston.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 
@@ -19,10 +23,13 @@ public class ApiControllerUnitTest {
     @Autowired // 주소 호출을 해서 테스트 해주는 도구
     private MockMvc mockMvc;
 
-    @Test
-    public void test_save(){
-        log.info("save 테스트() 시작============");
-    }
+    @MockBean // @Mock 로 하면 Mockito 환경에 올라가지만 @MockBean으로 하면 IoC 환경에 bean 등록됨.
+    private UserService userService;
+
+//    @Test
+//    public void test_save(){
+//        log.info("save 테스트() 시작============");
+//    }
 
 
 

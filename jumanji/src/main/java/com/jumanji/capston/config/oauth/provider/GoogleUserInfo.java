@@ -34,4 +34,16 @@ public class GoogleUserInfo implements OAuth2UserInfo{
     public String getPhone(){
         return "";
     }
+
+    public String getGivenName(){
+        return (String) attributes.get("given_name");
+    }
+
+    public String getFamilyName(){
+        return (String) attributes.get("family_name");
+    }
+
+    public boolean getEmailVerified(){
+        return (boolean) attributes.get("email_verified");
+    }
 }
