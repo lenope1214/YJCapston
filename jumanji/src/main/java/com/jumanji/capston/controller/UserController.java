@@ -1,5 +1,6 @@
 package com.jumanji.capston.controller;
 
+import com.jumanji.capston.DTO.PutUserDTO;
 import com.jumanji.capston.data.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,6 +45,12 @@ public class UserController {
         return new ResponseEntity<>(userService.deleteAll(), HttpStatus.OK);
     }
 
+    @Transactional
+    @PutMapping("/user")
+    public ResponseEntity<?> putUser(@RequestBody PutUserDTO putUserDTO){
+        User user = userService.put(putUserDTO);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
 
     @Transactional(readOnly = true)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
