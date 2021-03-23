@@ -27,7 +27,7 @@ public class ShopController {
     }
 
     @Transactional
-    @PostMapping("/shop")
+    @PostMapping("/shop") // 매장등록
     public ResponseEntity<?> insertShop(@RequestBody Shop shop) {
         if (shopService.insert(shop) != null) return new ResponseEntity<>(shop, HttpStatus.CREATED);
         else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -44,4 +44,6 @@ public class ShopController {
     public ResponseEntity<?> putShop(@RequestBody PutShopDTO putShopDTO){
         return new ResponseEntity<>(shopService.putShop(putShopDTO), HttpStatus.OK);
     }
+
+
 }

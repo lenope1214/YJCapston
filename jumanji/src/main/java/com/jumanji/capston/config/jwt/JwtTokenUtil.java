@@ -1,10 +1,11 @@
 package com.jumanji.capston.config.jwt;
 
 import com.jumanji.capston.config.auth.PrincipalDetails;
+import com.jumanji.capston.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -13,11 +14,14 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Component
-public class JwtTokenUtil {
+public class JwtTokenUtil implements JwtProperties {
 
-    private static final String secret = "jumanjiSecretKey";
+//    private static final String secret = "jumanjiSecretKey";
 
-    public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60; // 5 * 3600 = 5시간
+//    public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60; // 5 * 3600 = 5시간
+
+    @Autowired
+    UserRepository userRepository;
 
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getId);
@@ -29,7 +33,7 @@ public class JwtTokenUtil {
     }
 
     private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).getBody();
     }
 
     private Boolean isTokenExpired(String token) {
@@ -50,17 +54,23 @@ public class JwtTokenUtil {
     }
 
     private String doGenerateToken(String id, Map<String, Object> claims) {
-        Map<String, Object> header = new HashMap<>(); header.put("alg", "HS512"); header.put("typ", "JWT");
+        Map<String, Object> header = new HashMap<>();
+        header.put("alg", "HS512"); header.put("typ", "JWT");
 //        Claims claims
+
+        if(userRepository.findById(id).isPresent())
+            claims.put("role", userRepository.findById(id).get().getRole());
+
         System.out.println(">>>>>>>>>>>>>> doGenerateToken's id : " + id);
         return Jwts.builder()
                 .setHeader(header) // 헤더에 토큰 타입과 알고리즘.
                 .setClaims(claims)
-                .setSubject(id)
+                .setSubject("userInfo")
                 .setId(id)
+//                .set
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
-                .signWith(SignatureAlgorithm.HS512, secret)
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
     }
 
@@ -68,5 +78,4 @@ public class JwtTokenUtil {
         final String username = getUsernameFromToken(token);
         return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
-
 }

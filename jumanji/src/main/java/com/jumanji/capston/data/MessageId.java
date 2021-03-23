@@ -18,9 +18,9 @@ public class MessageId implements Serializable {
     private Timestamp reg_time;//시간
     @ManyToOne
     @JoinColumn(name="user_id",nullable = false)
-    private User user_id;
+    private User userId;
     @ManyToOne
     @JoinColumn(name="shop_id",nullable = false)
-    private Shop shop_id;
+    private Shop shopId;
 
 }

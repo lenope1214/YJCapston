@@ -16,10 +16,13 @@ public class Payment implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "order_id")
-    private Order order_id ; // 주문번호
-    private int use_point; // 사용된 포인트
-    private Timestamp pay_time; // 결제 일자 yyyyMMdd
+    private Order orderId ; // 주문번호
+    @Column(name="use_point")
+    private int usePoint; // 사용된 포인트
+    @Column(name="pay_time")
+    private Timestamp payTime; // 결제 일자 yyyyMMdd
     private String pg; // 결제방식
-    private int comple_pay; // 결제 당시 금액
+    @Column(name="comple_pay")
+    private int complePay; // 결제 당시 금액
     private char isRefund; // 환불 여부
 }

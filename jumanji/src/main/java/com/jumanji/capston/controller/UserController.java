@@ -23,6 +23,7 @@ public class UserController {
     @GetMapping("/user/{id}")
     public ResponseEntity<?> getUserInfo(@PathVariable String id) throws Exception {
         System.out.println("APIcon user/{id} 진입.");
+        if(userService.findById(id) == null)return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         final User userEntity = userService.findById(id);
         System.out.println("로긘 유저 id : " + SecurityContextHolder.getContext().getAuthentication().getName());
         System.out.println("찾을 유저 id : " + id + "\ngetUser : " + userEntity.getId());
@@ -38,6 +39,22 @@ public class UserController {
         return new ResponseEntity<>("is not match login id <-> request id.", HttpStatus.FORBIDDEN);
     }
 
+    @GetMapping("/user")
+    public ResponseEntity<?> getMyInfo() throws Exception {
+        System.out.println("APIcon /user 진입.");
+        System.out.println("로긘 유저 id : " + SecurityContextHolder.getContext().getAuthentication().getName());
+
+        User userEntity = userService.findById(SecurityContextHolder.getContext().getAuthentication().getName());
+
+        if (userEntity == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(userEntity, HttpStatus.OK);
+
+
+//        return new ResponseEntity<>("is not match login id <-> request id.", HttpStatus.FORBIDDEN);
+    }
+
 
     @Transactional
     @DeleteMapping("/userDelAll")
@@ -47,9 +64,8 @@ public class UserController {
 
     @Transactional
     @PutMapping("/user")
-    public ResponseEntity<?> putUser(@RequestBody PutUserDTO putUserDTO){
-        User user = userService.put(putUserDTO);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+    public ResponseEntity<?> updateUser(@RequestBody PutUserDTO putUserDTO) {
+        return new ResponseEntity<>(userService.updateUser(putUserDTO), HttpStatus.OK);
     }
 
     @Transactional(readOnly = true)

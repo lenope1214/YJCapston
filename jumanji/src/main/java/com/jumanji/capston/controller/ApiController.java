@@ -50,17 +50,19 @@ public class ApiController {
             final String access_token = jwtTokenUtil.generateToken(user.getId());
             return new ResponseEntity<>(new JwtResponse(access_token), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+            return new ResponseEntity<>("로그인 실패", HttpStatus.BAD_REQUEST);
         }
     }
 
 
-    @PostMapping("/validate/{id}") // valudate
+    @PostMapping("/validate/{id}") // validate
     public String validateOne(@PathParam("id") String id) {
-        if(userService.findById(id) == null) {
-            return "중복아님";
+//        System.out.println("Validate id : " + id);
+        if(userService.findById(id) != null) {
+            return "success";
         }
-        return null;
+        return "fail";
     }
 
 
