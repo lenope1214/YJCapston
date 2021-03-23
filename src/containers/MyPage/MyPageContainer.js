@@ -1,25 +1,26 @@
 import React, { useState } from "react";
 import MyPage from "../../components/Mypage/MyPage";
-import { getMyInfo } from "../../lib/MyPage";
+import { putMypage } from "../../lib/MyPage";
+import { useHistory } from "react-router-dom";
 
 const MyPageContainer = () => {
+    const history = useHistory();
     const [Pw, setPw] = useState("");
-    const [name, setName] = useState("");
+
     const handlePw = (e) => {
         const value = e.target.value;
         setPw(value);
-        console.log(value);
     };
 
-    const getMypage = () => {
-        getMyInfo()
+    const Mypage = () => {
+        putMypage(Pw)
             .then((res) => {
-                setName(res.data.name);
+                history.push("/main");
             })
-            .catch((err) => {});
+            .catch((err) => err);
     };
 
-    return <MyPage Pw={Pw} handlePw={handlePw} />;
+    return <MyPage Pw={Pw} handlePw={handlePw} Mypage={Mypage} />;
 };
 
 export default MyPageContainer;

@@ -23,6 +23,7 @@ const Main = ({
     openModal,
     closeModal,
     logout,
+    getmypage,
 }) => {
     return (
         <>
@@ -71,7 +72,12 @@ const Main = ({
                                     LOGOUT
                                 </button>
                                 <Link to="/mypage">
-                                    <button class="right2-nav">MYPAGE</button>
+                                    <button
+                                        class="right2-nav"
+                                        onClick={getmypage}
+                                    >
+                                        MYPAGE
+                                    </button>
                                 </Link>
                             </div>
                         ) : (
