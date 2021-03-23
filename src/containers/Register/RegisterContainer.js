@@ -19,6 +19,7 @@ const RegisterContainer = () => {
     const [birthday, setBirthday] = useState("");
     const [address, setAddress] = useState("");
     const [address1, setAddress1] = useState("");
+    const [keyword, setKeyword] = useState("");
 
     let check = "u";
 
@@ -113,6 +114,11 @@ const RegisterContainer = () => {
         setAddress1(value);
     };
 
+    const handleKeyword = (e) => {
+        const value = e.target.value;
+        setKeyword(value);
+    };
+
     const register = async () => {
         // 유효성검사
         if (!validateId(id)) {
@@ -148,10 +154,16 @@ const RegisterContainer = () => {
     };
 
     const search = () => {
-        // getLocation(address)
-            // .then((res) => {})
-            // .catch((err) => {});
+        getLocation(keyword)
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch((err) => {
+                alert("");
+            });
     };
+
+    console.log(keyword);
 
     return (
         <Register
@@ -180,6 +192,8 @@ const RegisterContainer = () => {
             openModal={openmodal}
             closeModal={closemodal}
             modal={modal}
+            handleKeyword={handleKeyword}
+            keyword={keyword}
         />
     );
 };

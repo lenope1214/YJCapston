@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Main from "../../components/Main/Main";
 import { postLogin } from "../../lib/Main/index";
-import { getMyInfo, Mypage } from "../../lib/MyPage";
+import { getMyInfo } from "../../lib/MyPage";
 
 const MainContainer = ({ isLogin, handleLogin, handleLogout }) => {
     const history = useHistory();
@@ -50,7 +50,7 @@ const MainContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 history.push("/");
             })
             .catch((err) => {
-                alert("");
+                alert("asdf");
                 const status = err?.response?.status;
 
                 if (status == 401) {

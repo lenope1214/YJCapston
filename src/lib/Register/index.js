@@ -24,3 +24,7 @@ export const postRegister = (
         address_detail: address1,
     });
 };
+
+export const getLocation = (keyword) => {
+    return apiDefault().get(`/addressSearch/${keyword}`);
+};

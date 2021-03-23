@@ -2,9 +2,7 @@ import React, { useState } from "react";
 
 import * as S from "./style";
 
-const MyPage = ({ Pw, handlePw, Mypage, name }) => {
-    console.log(name);
-
+const MyPage = ({ Pw, handlePw, Mypage, user }) => {
     return (
         <>
             <S.MypageWrap>
@@ -12,10 +10,11 @@ const MyPage = ({ Pw, handlePw, Mypage, name }) => {
                     <h1>회원정보수정</h1>
                     <p>회원의 정보를 수정합니다.</p>
                 </header>
+
                 <body>
                     <p>아이디입력</p>
                     <span>사용자id</span>
-                    <input type="text" id="id" placeholder={name} disabled />
+                    <input type="text" id="id" placeholder={user.id} disabled />
                     <span>비밀번호</span>
                     <input
                         type="password"
@@ -29,7 +28,7 @@ const MyPage = ({ Pw, handlePw, Mypage, name }) => {
                     <input
                         type="text"
                         id="name"
-                        placeholder="홍길동"
+                        placeholder={user.name}
                         disabled
                     />
                     <span>이메일</span>
@@ -39,8 +38,13 @@ const MyPage = ({ Pw, handlePw, Mypage, name }) => {
                         placeholder="이메일 입력하세요"
                     />
                     <span class="named">전화번호</span>
-                    <select id="txtMobile1">
-                        <option value="">::선택::</option>
+                    <select
+                        id="txtMobile1"
+                        defaultValue={user.phone.slice(0, 3)}
+                    >
+                        <option value="" disabled={true}>
+                            ::선택::
+                        </option>
                         <option value="010">010</option>
                         <option value="011">011</option>
                         <option value="016">016</option>
@@ -65,6 +69,7 @@ const MyPage = ({ Pw, handlePw, Mypage, name }) => {
                         placeholder="ex)1234"
                     />
                 </body>
+
                 <footer>
                     <button onClick={Mypage}>수정</button>
                     <button>삭제</button>

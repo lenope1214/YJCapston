@@ -31,7 +31,8 @@ const Register = ({
     modal,
     openModal,
     closeModal,
-    handleSearch,
+    handleKeyword,
+    Keyword,
 }) => {
     // const handleSearch = (e) => {
     //     const value = e.target.value;
@@ -170,9 +171,11 @@ const Register = ({
                         <input
                             type="text"
                             placeholder="주소를 입력하세요"
-                            onChange={handleSearch}
+                            onChange={handleKeyword}
+                            value={Keyword}
                         />
                     </body>
+                    <button onClick={search}>검색</button>
                     <button>확인</button>
                     <button onClick={closeModal}>닫기</button>
                 </S.searchWrap>
