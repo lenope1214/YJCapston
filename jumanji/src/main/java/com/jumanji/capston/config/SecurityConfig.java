@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -37,6 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //    @Autowired
 //    private PrincipalOauth2UserService principalOauth2UserService;
     private final CorsFilter corsFilter;
+    private final HttpHeaders httpHeaders = new HttpHeaders();
     @Autowired
     private PrincipalOauth2UserService principalOauth2UserService;
 
@@ -71,6 +73,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(bCryptPasswordEncoder());
     }
+
+    @Bean
+    public HttpHeaders  getHttpHeaders(){return httpHeaders;}
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
@@ -127,5 +132,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .userService(principalOauth2UserService)
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        httpHeaders.add("Content-Type", "text/html; charset=UTF-8");
     }
 }

@@ -3,10 +3,14 @@ package com.jumanji.capston.controller;
 import com.jumanji.capston.Payload.Request.PutShopReqeuest;
 import com.jumanji.capston.Payload.Request.shopIntroRequest;
 import com.jumanji.capston.data.Shop;
+import com.jumanji.capston.data.User;
 import com.jumanji.capston.service.ShopService;
+import com.jumanji.capston.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +23,11 @@ public class ShopController {
     @Autowired
     ShopService shopService;
 
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    HttpHeaders httpHeaders;
 
     @Transactional(readOnly = true)
     @GetMapping("/shopList")
@@ -30,7 +39,11 @@ public class ShopController {
     @Transactional
     @PostMapping("/shop") // 매장등록
     public ResponseEntity<?> insertShop(@RequestBody Shop shop) {
-        if (shopService.insert(shop) != null) return new ResponseEntity<>(shop, HttpStatus.CREATED);
+        User userEntity  =  userService.findById(SecurityContextHolder.getContext().getAuthentication().getName());
+        System.out.println("매장등록 요청 ID : " + userEntity.getId());
+        Object result = shopService.insert(shop, userEntity.getId());
+        if (result.getClass() == Shop.class) return new ResponseEntity<>(shop, HttpStatus.CREATED);
+        else if(result.equals("duplicate"))return new ResponseEntity<>("사업자 번호가 중복입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
@@ -49,10 +62,7 @@ public class ShopController {
     @Transactional
     @GetMapping("/shopIntro")
     public ResponseEntity<?> getShopIntro(@RequestBody shopIntroRequest req){
-//        HttpHeaders httpHeaders = new HttpHeaders();
-//        httpHeaders.add("Content-Type", "text/html; charset=UTF-8");
-//        httpHeaders
-        return new ResponseEntity<>(shopService.getShopIntro(req), HttpStatus.OK);
+        return new ResponseEntity<>(shopService.getShopIntro(req), httpHeaders, HttpStatus.OK);
     }
 
 }
