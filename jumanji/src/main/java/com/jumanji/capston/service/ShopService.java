@@ -1,11 +1,13 @@
 package com.jumanji.capston.service;
 
-import com.jumanji.capston.DTO.PutShopDTO;
+import com.jumanji.capston.Payload.Request.PutShopReqeuest;
+import com.jumanji.capston.Payload.Request.shopIntroRequest;
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.repository.ShopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Service
@@ -36,10 +38,22 @@ public class ShopService {
         return shopRepository.findAll();
     }
 
-    public Shop putShop(PutShopDTO putShopDTO) {
-        Shop shop = shopRepository.findById(putShopDTO.getId())
+    public Shop putShop(PutShopReqeuest putShopReqeuest) {
+        Shop shop = shopRepository.findById(putShopReqeuest.getId())
                 .orElseThrow(()-> new IllegalAccessError("shop_id를 확인해 주세요!!!"));
-        shop = putShopDTO.getShop();
+        shop = putShopReqeuest.getShop();
         return shopRepository.save(shop);
+    }
+
+    public Serializable getShopIntro(shopIntroRequest req){
+        System.out.println("요청 매장 id : " + req.getShopId() );
+        if(shopRepository.findById(req.getShopId()).isPresent()) {
+
+            return shopRepository.findById(req.getShopId()).get().getIntro();
+        }
+        else{
+            System.out.println("매장 id 오류");
+            return new IllegalArgumentException("매장Id가 잘못되었습니다.");
+        }
     }
 }

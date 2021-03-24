@@ -1,11 +1,10 @@
 package com.jumanji.capston.controller;
 
-import com.jumanji.capston.DTO.PutUserDTO;
+import com.jumanji.capston.Payload.Request.PutUserRequest;
 import com.jumanji.capston.data.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -29,9 +28,6 @@ public class UserController {
         System.out.println("찾을 유저 id : " + id + "\ngetUser : " + userEntity.getId());
 
         if (SecurityContextHolder.getContext().getAuthentication().getName().equals(userEntity.getId())) {
-            if (userEntity == null) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
             return new ResponseEntity<>(userEntity, HttpStatus.OK);
         }
 
@@ -63,14 +59,14 @@ public class UserController {
     }
 
     @Transactional
-    @PutMapping("/user")
-    public ResponseEntity<?> updateUser(@RequestBody PutUserDTO putUserDTO) {
+    @PutMapping("/user") // putUser
+    public ResponseEntity<?> updateUser(@RequestBody PutUserRequest putUserDTO) {
         return new ResponseEntity<>(userService.updateUser(putUserDTO), HttpStatus.OK);
     }
 
     @Transactional(readOnly = true)
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/userList")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/userList") // getUserList
     public ResponseEntity<?> getUserList() {
         List<User> userList;
         userList = userService.findAll();

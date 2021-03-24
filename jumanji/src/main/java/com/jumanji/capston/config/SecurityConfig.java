@@ -3,11 +3,9 @@ package com.jumanji.capston.config;
 
 
 
-import com.jumanji.capston.config.auth.PrincipalDetails;
 import com.jumanji.capston.config.auth.PrincipalDetailsService;
 import com.jumanji.capston.config.jwt.JwtRequestFilter;
 import com.jumanji.capston.config.oauth.PrincipalOauth2UserService;
-import com.jumanji.capston.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,10 +18,8 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 import org.springframework.web.filter.CorsFilter;
 
 import javax.sql.DataSource;

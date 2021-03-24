@@ -1,6 +1,7 @@
 package com.jumanji.capston.controller;
 
-import com.jumanji.capston.DTO.PutShopDTO;
+import com.jumanji.capston.Payload.Request.PutShopReqeuest;
+import com.jumanji.capston.Payload.Request.shopIntroRequest;
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +42,17 @@ public class ShopController {
 
     @Transactional
     @PutMapping("/shop")
-    public ResponseEntity<?> putShop(@RequestBody PutShopDTO putShopDTO){
-        return new ResponseEntity<>(shopService.putShop(putShopDTO), HttpStatus.OK);
+    public ResponseEntity<?> putShop(@RequestBody PutShopReqeuest putShopReqeuest){
+        return new ResponseEntity<>(shopService.putShop(putShopReqeuest), HttpStatus.OK);
     }
 
+    @Transactional
+    @GetMapping("/shopIntro")
+    public ResponseEntity<?> getShopIntro(@RequestBody shopIntroRequest req){
+//        HttpHeaders httpHeaders = new HttpHeaders();
+//        httpHeaders.add("Content-Type", "text/html; charset=UTF-8");
+//        httpHeaders
+        return new ResponseEntity<>(shopService.getShopIntro(req), HttpStatus.OK);
+    }
 
 }

@@ -1,10 +1,10 @@
-package com.jumanji.capston.DTO;
+package com.jumanji.capston.Payload.Request;
 
 import com.jumanji.capston.data.Shop;
 import lombok.Data;
 
 @Data
-public class PutShopDTO {
+public class PutShopReqeuest {
     private String id;
     private Shop shop;
 }
