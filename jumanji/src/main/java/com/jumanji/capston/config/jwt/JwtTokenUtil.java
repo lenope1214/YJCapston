@@ -1,6 +1,7 @@
 package com.jumanji.capston.config.jwt;
 
 import com.jumanji.capston.config.auth.PrincipalDetails;
+import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -57,10 +58,12 @@ public class JwtTokenUtil implements JwtProperties {
         Map<String, Object> header = new HashMap<>();
         header.put("alg", "HS512"); header.put("typ", "JWT");
 //        Claims claims
-
-        if(userRepository.findById(id).isPresent())
-            claims.put("role", userRepository.findById(id).get().getRole());
-
+        User user;
+        if(userRepository.findById(id).isPresent()) {
+            user = userRepository.findById(id).get();
+            claims.put("name", user.getName());
+            claims.put("role", user.getRole());
+        }
         System.out.println(">>>>>>>>>>>>>> doGenerateToken's id : " + id);
         return Jwts.builder()
                 .setHeader(header) // 헤더에 토큰 타입과 알고리즘.

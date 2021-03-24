@@ -23,8 +23,9 @@ public class ShopService {
 
     public Shop insert(Shop shop){
         System.out.println(shop.getOwner_id());
-        shopRepository.save(shop);
-        return shop;
+        Shop shopEntity = shopRepository.save(shop);
+        System.out.println("저장 : " + shopEntity);
+        return shopEntity;
     }
 
     public String delete(String id){
