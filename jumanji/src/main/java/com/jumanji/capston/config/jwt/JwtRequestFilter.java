@@ -50,7 +50,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         String username = null;
         String jwtToken = null;
         boolean jwtFlag = false;
-        if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
+        if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) { // 헤더에 Authorization 이 있고 Bearer로 시작하면,
             jwtToken = requestTokenHeader.substring(7);
             System.out.println("Parsing jwtToken : " + jwtToken);
             try {
@@ -90,12 +90,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             }else{ System.out.println("SecurityContextHolder.getContext().getAuthentication() is null"); }
         }else{ System.out.println("username is null"); }
         System.out.println("JWT 체킹 완료!!!");
-//        if(!jwtFlag)
 
-        filterChain.doFilter(request,response);
-//        else{
-//            response.
-//        }
+        if(!jwtFlag) filterChain.doFilter(request,response);
+        else{
+            // chain.doFilter 을 안하면 다음으로 안가기 때문에 여기서 끝나게 됨..
+        }
     }
 
     @Override

@@ -40,7 +40,7 @@ public class ShopController {
     @PostMapping("/shop") // 매장등록
     public ResponseEntity<?> insertShop(@RequestBody Shop shop) {
         User userEntity  =  userService.findById(SecurityContextHolder.getContext().getAuthentication().getName());
-        System.out.println("매장등록 요청 ID : " + userEntity.getId());
+//        System.out.println("매장등록 요청 ID : " + userEntity.getId());
         Object result = shopService.insert(shop, userEntity.getId());
         if (result.getClass() == Shop.class) return new ResponseEntity<>(result, HttpStatus.CREATED);
         else if(result.equals("duplicate"))return new ResponseEntity<>("사업자 번호가 중복입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
