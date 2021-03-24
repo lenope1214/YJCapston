@@ -50,7 +50,7 @@ const MainContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 history.push("/");
             })
             .catch((err) => {
-                alert("asdf");
+                alert("서버 off");
                 const status = err?.response?.status;
 
                 if (status == 401) {

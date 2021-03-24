@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import * as S from "./style";
 
@@ -36,12 +37,10 @@ const MyPage = ({ Pw, handlePw, Mypage, user }) => {
                         type="text"
                         id="email"
                         placeholder="이메일 입력하세요"
+                        value={user.email}
                     />
                     <span class="named">전화번호</span>
-                    <select
-                        id="txtMobile1"
-                        defaultValue={user.phone.slice(0, 3)}
-                    >
+                    <select id="txtMobile1" defaultValue="010">
                         <option value="" disabled={true}>
                             ::선택::
                         </option>
@@ -58,7 +57,7 @@ const MyPage = ({ Pw, handlePw, Mypage, user }) => {
                         id="txtMobile2"
                         size="4"
                         onkeypress="onlyNumber();"
-                        placeholder="ex)1234"
+                        value={user.phone.substring(3, 7)}
                     />
                     <span>-</span>
                     <input
@@ -66,13 +65,26 @@ const MyPage = ({ Pw, handlePw, Mypage, user }) => {
                         type="text"
                         id="txtMobile3"
                         size="4"
-                        placeholder="ex)1234"
+                        onkeypress="onlyNumber();"
+                        value={user.phone.substring(7, 11)}
+                    />
+                    <span>point</span>
+                    <input
+                        class="phone"
+                        type="text"
+                        id="txtMobile3"
+                        size="4"
+                        onkeypress="onlyNumber();"
+                        value={user.point}
+                        disabled
                     />
                 </body>
 
                 <footer>
                     <button onClick={Mypage}>수정</button>
-                    <button>삭제</button>
+                    <Link to="/">
+                        <button>취소</button>
+                    </Link>
                 </footer>
             </S.MypageWrap>
         </>

@@ -241,7 +241,7 @@ const Main = ({
                             placeholder="Password"
                             onChange={handlePw}
                             value={pw}
-                            onKeyPress={(e) => e.key === "Enter" && Main()}
+                            onKeyPress={(e) => e.key === "Enter" && login}
                         />
                     </main>
                     <footer>

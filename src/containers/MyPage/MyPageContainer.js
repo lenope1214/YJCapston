@@ -6,7 +6,6 @@ import { useHistory } from "react-router-dom";
 const MyPageContainer = () => {
     const history = useHistory();
     const [Pw, setPw] = useState("");
-    const [name, setName] = useState("");
     const [user, setUser] = useState({
         name: "",
         phone: "",
@@ -35,7 +34,7 @@ const MyPageContainer = () => {
         getMyInfo()
             .then((res) => {
                 console.log(res.data);
-                setName(res.data.name);
+                
                 setUser(res.data);
             })
             .catch((err) => {
