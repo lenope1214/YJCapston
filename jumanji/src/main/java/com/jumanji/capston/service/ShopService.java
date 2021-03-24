@@ -63,4 +63,8 @@ public class ShopService {
             return new IllegalArgumentException("매장Id가 잘못되었습니다.");
         }
     }
+
+    public Shop haveShop(String id){
+        return shopRepository.findByOwnerId_Id(id);
+    }
 }

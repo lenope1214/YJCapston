@@ -42,7 +42,7 @@ public class ShopController {
         User userEntity  =  userService.findById(SecurityContextHolder.getContext().getAuthentication().getName());
         System.out.println("매장등록 요청 ID : " + userEntity.getId());
         Object result = shopService.insert(shop, userEntity.getId());
-        if (result.getClass() == Shop.class) return new ResponseEntity<>(shop, HttpStatus.CREATED);
+        if (result.getClass() == Shop.class) return new ResponseEntity<>(result, HttpStatus.CREATED);
         else if(result.equals("duplicate"))return new ResponseEntity<>("사업자 번호가 중복입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
@@ -59,10 +59,22 @@ public class ShopController {
         return new ResponseEntity<>(shopService.putShop(putShopReqeuest), HttpStatus.OK);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @GetMapping("/shopIntro")
     public ResponseEntity<?> getShopIntro(@RequestBody shopIntroRequest req){
         return new ResponseEntity<>(shopService.getShopIntro(req), httpHeaders, HttpStatus.OK);
     }
 
+    @Transactional(readOnly = true)
+    @GetMapping("/myShop")
+    public ResponseEntity<?> getMyShop() {
+        User userEntity  =  userService.findById(SecurityContextHolder.getContext().getAuthentication().getName());
+        if(userEntity == null)return new ResponseEntity<>("로그인 되어있지 않습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
+        System.out.println("접속 유저 ID : " + userEntity.getId());
+        Object result = shopService.haveShop(userEntity.getId());
+        if(result == null)return new ResponseEntity<>("매장 등록이 되어있지 않습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
+        if (result.getClass() == Shop.class) return new ResponseEntity<>(result, HttpStatus.OK);
+
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
 }

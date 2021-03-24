@@ -20,13 +20,17 @@ public class Shop {
 //    private Date open_time; //오픈시간
 //    @JsonFormat(pattern = "HH:mm:ss")
 //    private Date close_time; //마감시간
-    private int open_time;
-    private int close_time;
+    @Column(name = "open_time")
+    private int openTime;
+    @Column(name = "close_time")
+    private int closeTime;
     private String address; //매장주소
-    private String address_detail; //매장주소
-    private char is_rs_pos = 'Y'; //예약가능여부
+    @Column(name ="address_detail")
+    private String addressDetail; //매장주소
+    @Column(name = "is_rs_pos")
+    private char isRSPos = 'Y'; //예약가능여부
     @ManyToOne
     @JoinColumn(name="owner_id")
-    private User owner_id;
+    private User ownerId;
 
 }
