@@ -11,6 +11,7 @@ import * as S from "./style";
 import { Link } from "react-router-dom";
 import Login from "../Login/Login";
 import MainContainer from "../../containers/Main/MainContainer";
+import App from "../../App.js";
 
 const Main = ({
     id,
@@ -24,7 +25,11 @@ const Main = ({
     closeModal,
     logout,
     getmypage,
+    scrollToTop,
 }) => {
+    // var location = document.querySelector("#move").offsetTop;
+    // console.log(location);
+
     return (
         <>
             <S.MainWrap>
@@ -44,6 +49,8 @@ const Main = ({
                         </div>
 
                         <div className="center-nav">
+                            <button onclick={scrollToTop}>버튼</button>
+
                             <input
                                 type="text"
                                 placeholder="매장을 검색하세요."
@@ -165,19 +172,21 @@ const Main = ({
                         <div className="but-item2-icon">
                             <img src={peopleimg} width="300px" height="300px" />
                             <div className="but-item2-but">
-                                <button
-                                    style={{
-                                        fontSize: "30px",
-                                        fontFamily: "Wemakeprice-Bold",
-                                        height: "100px",
-                                        width: "210px",
-                                        borderRadius: "60px",
-                                        border: 0,
-                                    }}
-                                >
-                                    사업자<br></br>
-                                    페이지로<br></br>→
-                                </button>
+                                <Link to="/shop">
+                                    <button
+                                        style={{
+                                            fontSize: "30px",
+                                            fontFamily: "Wemakeprice-Bold",
+                                            height: "100px",
+                                            width: "210px",
+                                            borderRadius: "60px",
+                                            border: 0,
+                                        }}
+                                    >
+                                        사업자<br></br>
+                                        페이지로<br></br>→
+                                    </button>
+                                </Link>
                             </div>
                         </div>
                         <div className="but-item2-text2">

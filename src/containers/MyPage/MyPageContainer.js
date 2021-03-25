@@ -34,7 +34,6 @@ const MyPageContainer = () => {
         getMyInfo()
             .then((res) => {
                 console.log(res.data);
-                
                 setUser(res.data);
             })
             .catch((err) => {

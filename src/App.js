@@ -6,9 +6,15 @@ import MainContainer from "./containers/Main/MainContainer";
 import MypageContainer from "./containers/MyPage/MyPageContainer";
 import RegisterContainer from "./containers/Register/RegisterContainer";
 import ShoplistContainer from "./containers/Shoplist/ShoplistContainer";
+import ShopContainer from "./containers/Shop/ShopContainer";
 
 const App = () => {
     const [isLogin, setIsLogin] = useState(false);
+
+    const scrollToTop = (e) => {
+        console.log("asdf");
+        document.getElementById("root").scrollTo(0, 0);
+    };
 
     useEffect(() => {
         const accesstoken = localStorage.getItem("access_token");
@@ -32,7 +38,9 @@ const App = () => {
                 <Route path="/login" component={LoginContainer} />
                 <Route path="/register" component={RegisterContainer} />
                 <Route path="/mypage" component={MypageContainer} />
+                <Route path="/shop" component={ShopContainer} />
                 <Route path="/shoplist" component={ShoplistContainer} />
+
                 <Route
                     path="/"
                     component={() => (
@@ -40,6 +48,7 @@ const App = () => {
                             isLogin={isLogin}
                             handleLogin={handleLogin}
                             handleLogout={handleLogout}
+                            scrollToTop={scrollToTop}
                         />
                     )}
                 />
