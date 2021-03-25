@@ -287,4 +287,24 @@ export const MainWrap = styled.div`
         padding: 12px 0;
         text-align: center;
     }
+    .rightnav {
+        position: fixed;
+        top: 50%;
+        left: 90%;
+        transform: translate(-50%, -50%);
+        margin: 1% auto 0;
+        border-radius: 8px;
+        line-height: 1px;
+        height: 1px;
+        color: white;
+        z-index: 10;
+        border: none;
+    }
+    /* 그림자 이용
+    /* .toptext { 
+        text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
+    }
+    .but-item1-text {
+        text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
+    } */
 `;

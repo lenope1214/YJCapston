@@ -11,11 +11,6 @@ import ShopContainer from "./containers/Shop/ShopContainer";
 const App = () => {
     const [isLogin, setIsLogin] = useState(false);
 
-    const scrollToTop = (e) => {
-        console.log("asdf");
-        document.getElementById("root").scrollTo(0, 0);
-    };
-
     useEffect(() => {
         const accesstoken = localStorage.getItem("access_token");
 
@@ -48,7 +43,6 @@ const App = () => {
                             isLogin={isLogin}
                             handleLogin={handleLogin}
                             handleLogout={handleLogout}
-                            scrollToTop={scrollToTop}
                         />
                     )}
                 />

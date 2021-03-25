@@ -31,7 +31,7 @@ const Shop = ({
         <>
             <S.ShopWrap>
                 <header>
-                    <Link to="/shoplist" class="shoppage">
+                    <Link to="/" class="shoppage">
                         <div className="left-nav">
                             주문
                             <span

@@ -25,10 +25,22 @@ const Main = ({
     closeModal,
     logout,
     getmypage,
-    scrollToTop,
 }) => {
     // var location = document.querySelector("#move").offsetTop;
     // console.log(location);
+
+    const scrollTo1 = () => {
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    };
+    const scrollTo2 = () => {
+        window.scrollTo({ top: 700, left: 0, behavior: "smooth" });
+    };
+    const scrollTo3 = () => {
+        window.scrollTo({ top: 1400, left: 0, behavior: "smooth" });
+    };
+    const scrollTo4 = () => {
+        window.scrollTo({ top: 2100, left: 0, behavior: "smooth" });
+    };
 
     return (
         <>
@@ -47,10 +59,7 @@ const Main = ({
                             </span>
                             민족
                         </div>
-
                         <div className="center-nav">
-                            <button onclick={scrollToTop}>버튼</button>
-
                             <input
                                 type="text"
                                 placeholder="매장을 검색하세요."
@@ -101,6 +110,12 @@ const Main = ({
                                 </Link>
                             </div>
                         )}
+                    </div>
+                    <div className="rightnav">
+                        <button onClick={scrollTo1}>상단바</button>
+                        <button onClick={scrollTo2}>어플다운로드</button>
+                        <button onClick={scrollTo3}>사업자등록</button>
+                        <button onClick={scrollTo4}>매장둘러보기</button>
                     </div>
                     <div className="adimg">
                         <div className="topimg">
@@ -230,6 +245,12 @@ const Main = ({
                         </div>
                     </div>
                 </div>
+                <footer>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                </footer>
             </S.MainWrap>
 
             {modal && (
