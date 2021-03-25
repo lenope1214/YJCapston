@@ -20,23 +20,24 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/jarAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/DataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/DataService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/HomeFragment_O.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/HomeFragment_O.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/JMJApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/JMJApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/MainActivity_O.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/MainActivity_O.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/ProfileUpdateActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/ProfileUpdateActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/RegisterShopActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/RegisterShopActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/SignupActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/SignupActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/MemberDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/MemberDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/controller/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/data/MenuId.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/data/TabId.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/data/mymug_Board.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/data/mymug_Crew.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/data/mymug_Menu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/data/mymug_Point.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/data/mymug_Reply.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/data/mymug_User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_new_shop.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_new_shop.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/home_fragment_o.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/home_fragment_o.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/config/jwt/JwtRequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/config/jwt/JwtRequestFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/controller/ApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/controller/ApiController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -296,6 +297,21 @@
       <workItem from="1616370511151" duration="5555000" />
       <workItem from="1616383898572" duration="3581000" />
       <workItem from="1616399453524" duration="7958000" />
+      <workItem from="1616461584042" duration="24692000" />
+      <workItem from="1616514058931" duration="204000" />
+      <workItem from="1616514271752" duration="397000" />
+      <workItem from="1616515604652" duration="28000" />
+      <workItem from="1616542769968" duration="967000" />
+      <workItem from="1616543897749" duration="2483000" />
+      <workItem from="1616546396190" duration="763000" />
+      <workItem from="1616547166339" duration="292000" />
+      <workItem from="1616547466837" duration="222000" />
+      <workItem from="1616548567929" duration="8514000" />
+      <workItem from="1616575024355" duration="339000" />
+      <workItem from="1616577758187" duration="17059000" />
+      <workItem from="1616629665164" duration="1923000" />
+      <workItem from="1616632967673" duration="8424000" />
+      <workItem from="1616647509830" duration="12077000" />
     </task>
     <servers />
   </component>

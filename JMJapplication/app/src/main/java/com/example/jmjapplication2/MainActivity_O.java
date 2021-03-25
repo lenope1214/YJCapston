@@ -1,6 +1,7 @@
 package com.example.jmjapplication2;
 
 import android.app.Application;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -28,11 +29,20 @@ public class MainActivity_O extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_o);
 
+        Intent intent = getIntent();
+        String owner_number = intent.getStringExtra("owner_number");
+        //Log.d("result :", id);
+
+
         homeFragment_o = new HomeFragment_O();
         reviewFragment_o = new ReviewFragment_O();
         chattingFragment_o = new ChattingFragment_O();
         reservationFragment_o = new ReservationFragment_O();
         menuFragment_o = new MenuFragment_O();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("owner_number", owner_number);
+        homeFragment_o.setArguments(bundle);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment_o).commit();
 

@@ -42,14 +42,15 @@
 
     </RelativeLayout>
 
-    <Button
+    <ToggleButton
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@drawable/edge3"
             android:layout_margin="10dp"
             android:textSize="20sp"
-            android:id="@+id/open_button"
-            android:text="매장 OPEN"/>
+            android:id="@+id/toggle_button"
+            android:textOff="매장 Off"
+            android:textOn="매장 On"/>
 
     <Button
             android:layout_width="match_parent"
@@ -105,7 +106,7 @@
               android:gravity="center"
               android:textSize="30sp"
               android:textColor="@color/colorBlack"
-              android:text="356,000"/>
+              android:text="0"/>
 
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="10dp"

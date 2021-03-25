@@ -48,7 +48,7 @@ public class ApiController {
         if (userService.checkPW(_user, user.getPassword())) {
             System.out.println("비밀번호 체크 성공!");
             final String access_token = jwtTokenUtil.generateToken(user.getId());
-            return new ResponseEntity<>(new JwtResponse(access_token), HttpStatus.OK);
+            return new ResponseEntity<>(new  JwtResponse(access_token), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

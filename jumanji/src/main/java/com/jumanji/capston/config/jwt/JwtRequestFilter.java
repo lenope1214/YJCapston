@@ -36,7 +36,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                             "/authenticate"
                     ));
 
-
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,

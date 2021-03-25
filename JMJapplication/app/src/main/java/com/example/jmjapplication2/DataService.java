@@ -14,7 +14,9 @@ import java.util.List;
 import java.util.Map;
 
 public class DataService {
-    private String BASE_URL = "http://192.168.1.17:8088/api/v1/";
+    //private String BASE_URL = "http://3.34.55.186:8088/api/v1/"; // 학교2
+    private String BASE_URL = "http://192.168.1.17:8088/api/v1/"; // 학교
+    //private String BASE_URL = "http://122.202.45.37:8088/api/v1/"; // 집
 
     Retrofit retrofitClient =
             new Retrofit.Builder()
@@ -29,8 +31,9 @@ public class DataService {
     DeleteAPI delete = retrofitClient.create(DeleteAPI.class);
     ValidateAPI validate = retrofitClient.create(ValidateAPI.class);
     LoginAPI login = retrofitClient.create(LoginAPI.class);
-    FindShopAPI findshop = retrofitClient.create(FindShopAPI.class);
-    RegisterShopAPI registerShop = retrofitClient.create(RegisterShopAPI.class);
+    MyShopAPI myShop = retrofitClient.create(MyShopAPI.class);
+    InsertShop insertShop = retrofitClient.create(InsertShop.class);
+   // CheckUserAPI getUser = retrofitClient.create(CheckUserAPI.class);
 }
 
 interface SelectAPI{
@@ -69,19 +72,29 @@ interface ValidateAPI {
 //                             @Field("password") String password);
 //}
 
+//interface LoginAPI {
+//    @FormUrlEncoded
+//    @POST("login")
+//    Call<MemberDTO> LoginOne(@Body Map<String, String> map);
+//}
+
 interface LoginAPI {
-    @FormUrlEncoded
     @POST("login")
-    Call<MemberDTO> LoginOne(@Body Map<String, String> map);
+    Call<ResponseBody> LoginOne(@Body Map<String, String> map);
 }
 
-interface FindShopAPI {
-    @FormUrlEncoded
-    @POST("findshop/{id}")
-    Call<ResponseBody> findshopOne(@Field("id") String id);
+interface MyShopAPI {
+    @GET("myShop")
+    Call<Shop> myShop(@Header("Authorization") String jwt);
 }
 
-interface RegisterShopAPI {
-    @POST("registerShop")
-    Call<Shop> registerShopOne(@Body Map<String, String> map);
+interface InsertShop {
+    @POST("shop")
+    Call<Shop> insertShop(@Header("Authorization")String jwt , @Body Map<String, Object> map);
 }
+
+//interface CheckUserAPI {
+//    @POST("d")
+//    Call<MemberDTO> getUser(@Header("d") String d);
+//}
+

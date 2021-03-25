@@ -67,22 +67,27 @@ public class SignupActivity extends AppCompatActivity {
                                 String result = null;
                                 try {
                                     result = body.string();
+                                    Log.d("result", result);
                                 } catch (IOException e) {
                                     e.printStackTrace();
+                                } finally {
+                                    if (result.equals("success")) {
+                                        Log.e("result", result);
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
+                                        dialog = builder.setMessage("이미 사용 중인 아이디입니다.").setPositiveButton("확인", null).create();
+                                        dialog.show();
+                                        isChecked = false;
+                                        et_id.setText("");
+                                        et_id.requestFocus();
+                                    } else {
+                                        Log.e("result", result);
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
+                                        dialog = builder.setMessage("사용 가능한 아이디입니다.").setPositiveButton("확인", null).create();
+                                        dialog.show();
+                                        isChecked = true;
+                                    }
                                 }
-                                if (result.trim().length() == 0) {
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
-                                    dialog = builder.setMessage("이미 사용 중인 아이디입니다.").setPositiveButton("확인", null).create();
-                                    dialog.show();
-                                    isChecked = false;
-                                    et_id.setText("");
-                                    et_id.requestFocus();
-                                } else {
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
-                                    dialog = builder.setMessage("사용 가능한 아이디입니다.").setPositiveButton("확인", null).create();
-                                    dialog.show();
-                                    isChecked = true;
-                                }
+
                             }
                         }
 
@@ -125,7 +130,11 @@ public class SignupActivity extends AppCompatActivity {
                     AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
                     dialog = builder.setMessage("회원 종류를 선택해 주세요.").setPositiveButton("확인", null).create();
                     dialog.show();
-                }  else {
+                } else if(isChecked == false) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
+                    dialog = builder.setMessage("아이디 중복체크를 해주세요.").setPositiveButton("확인", null).create();
+                    dialog.show();
+                } else {
                     Map<String, String> map = new HashMap();
                     map.put("id", et_id.getText().toString());
                     map.put("password", et_pw.getText().toString());
@@ -177,8 +186,3 @@ public class SignupActivity extends AppCompatActivity {
     }
 }
 
-//else if(isChecked == false) {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
-//        dialog = builder.setMessage("아이디 중복체크를 해주세요.").setPositiveButton("확인", null).create();
-//        dialog.show();
-//        }

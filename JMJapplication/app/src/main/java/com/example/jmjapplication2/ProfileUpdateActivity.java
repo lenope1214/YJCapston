@@ -39,6 +39,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
 
                 // 앱 변수버리기
                 ((JMJApplication)getApplication()).setId(null);
+                ((JMJApplication)getApplication()).setJwt(null);
             }
         });
     }
