@@ -14,15 +14,18 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    private Shop shop_id;//매장번호 !!복합키설정 필요함!!
+    private Shop shop;//매장번호 !!복합키설정 필요함!!
     private String content;//리뷰내용
-    private Timestamp reg_time;//등록일
-    private int parent_no; //부모글번호
+    @Column(name = "reg_time")
+    private Timestamp regTime;//등록일
+    @Column(name = "parent_no")
+    private int parentNo; //부모글번호
     private int score;//리뷰 점수
-    private String img_url;//이미지경로
+    @Column(name = "img_url")
+    private String imgUrl;//이미지경로
     @ManyToOne
     @JoinColumn(name="user_id",nullable = false)
-    private User user_id;
+    private User user;
 
 
 }

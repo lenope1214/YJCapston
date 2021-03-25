@@ -31,6 +31,6 @@ public class Shop {
     private char isRSPos = 'Y'; //예약가능여부
     @ManyToOne
     @JoinColumn(name="owner_id")
-    private User ownerId;
+    private User owner;
 
 }

@@ -18,21 +18,21 @@ public class Order implements Serializable {
 
     @Column(length = 2)
     private int quantity; // 메뉴 수량
-    private TIMESTAMP order_time; // 주문일시
-    @Column(name="order_request")
+    @Column(name="order_time")
+    private TIMESTAMP orderTime; // 주문일시
     private String request; // 요청사항
 
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    private User user_id;
+    private User user;
 
-    @JoinColumn
     @ManyToOne
-    private Menu menu_id;
+    @JoinColumn(name="menu_id")
+    private Menu menu;
 
-    @JoinColumn // 비 식별 관계 식별관계로 하려면 @EmbeddedId로 변경
     @ManyToOne
-    private Tab table_id;
+    @JoinColumn(name = "tab_id", insertable = false, updatable = false)
+    private Tab table;
 }
 
 //@Getter

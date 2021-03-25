@@ -1,6 +1,6 @@
 package com.jumanji.capston.service;
 
-import com.jumanji.capston.Payload.Request.PutUserRequest;
+import com.jumanji.capston.Payload.Request.UserRequest;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -61,8 +61,8 @@ public class UserService {
             return userRepository.save(user);
         else {
             System.out.println("이미 있는 아이디. 회원가입 불가.");
+            return null;
         }
-        return null;
     }
 
 //    @Transactional
@@ -75,7 +75,7 @@ public class UserService {
 //    }
 
     @Transactional
-    public User updateUser(PutUserRequest putUserDTO) {
+    public User updateUser(UserRequest putUserDTO) {
         System.out.println("Update User in");
         User user = userRepository.findById(SecurityContextHolder.getContext().getAuthentication().getName())
                 .orElseThrow(() -> new IllegalArgumentException("수정할 아이디가 잘못됨."));

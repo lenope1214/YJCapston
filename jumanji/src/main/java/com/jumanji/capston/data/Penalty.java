@@ -1,7 +1,6 @@
 package com.jumanji.capston.data;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -16,9 +15,9 @@ public class Penalty {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user_id;
-
-    private Timestamp reg_time;
+    private User user;
+    @Column(name = "reg_time")
+    private Timestamp regTime;
     private String name;
     private String reason;
 }

@@ -12,7 +12,9 @@ public class UserHasCoupon {
 
     @EmbeddedId
     private UserHasCouponId id;
-    private Date begin_date= new Date(); // 사용 마지막 기간
-    private Date expiry_date; // 만료기간
+    @Column(name = "begin_date")
+    private Date beginDate= new Date(); // 사용 마지막 기간
+    @Column(name = "expiry_date")
+    private Date expiryDate; // 만료기간
 }
 

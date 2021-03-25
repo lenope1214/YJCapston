@@ -1,15 +1,13 @@
 package com.jumanji.capston.data;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 
 @Getter
@@ -25,13 +23,16 @@ public class User {
     private String name; // 이름
     private String email; // 이메일
     private String address; // 주소
-    private String address_detail;
+    @Column(name = "address_detail")
+    private String addressDetail;
     private Date birthday; // 생년월일
     private String phone; // 전화번호
+    @Column(name = "is_wdrw")
     private char isWdrw; // 탈퇴여부
     private String role; // 권한   u, o, a
     @Column(name = "sign_date")
-    private Date signDate; // 가입날짜
+    private Date signDate = new Date(); // 가입날짜
+    @DateTimeFormat(pattern = "yyyyMMdd")
     @Column(name = "vip_level")
     private String level; // 등급
     private int point; // 포인트

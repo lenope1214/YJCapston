@@ -1,6 +1,6 @@
 package com.jumanji.capston.controller;
 
-import com.jumanji.capston.Payload.Request.PutUserRequest;
+import com.jumanji.capston.Payload.Request.UserRequest;
 import com.jumanji.capston.data.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public ResponseEntity<?> getMyInfo() throws Exception {
+    public ResponseEntity<?> getMyInfo() {
         System.out.println("APIcon /user 진입.");
         System.out.println("로긘 유저 id : " + SecurityContextHolder.getContext().getAuthentication().getName());
 
@@ -60,7 +60,7 @@ public class UserController {
 
     @Transactional
     @PutMapping("/user") // putUser
-    public ResponseEntity<?> updateUser(@RequestBody PutUserRequest putUserDTO) {
+    public ResponseEntity<?> updateUser(@RequestBody UserRequest putUserDTO) {
         return new ResponseEntity<>(userService.updateUser(putUserDTO), HttpStatus.OK);
     }
 

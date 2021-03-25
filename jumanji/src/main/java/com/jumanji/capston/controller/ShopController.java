@@ -1,7 +1,6 @@
 package com.jumanji.capston.controller;
 
-import com.jumanji.capston.Payload.Request.PutShopReqeuest;
-import com.jumanji.capston.Payload.Request.shopIntroRequest;
+import com.jumanji.capston.Payload.Request.ShopIntroRequest;
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.service.ShopService;
@@ -41,7 +40,7 @@ public class ShopController {
     public ResponseEntity<?> insertShop(@RequestBody Shop shop) {
         User userEntity  =  userService.findById(SecurityContextHolder.getContext().getAuthentication().getName());
 //        System.out.println("매장등록 요청 ID : " + userEntity.getId());
-        Object result = shopService.insert(shop, userEntity.getId());
+        Object result = shopService.insert(shop, userEntity);
         if (result.getClass() == Shop.class) return new ResponseEntity<>(result, HttpStatus.CREATED);
         else if(result.equals("duplicate"))return new ResponseEntity<>("사업자 번호가 중복입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -55,13 +54,13 @@ public class ShopController {
 
     @Transactional
     @PutMapping("/shop")
-    public ResponseEntity<?> putShop(@RequestBody PutShopReqeuest putShopReqeuest){
-        return new ResponseEntity<>(shopService.putShop(putShopReqeuest), HttpStatus.OK);
+    public ResponseEntity<?> putShop(@RequestBody Shop shop){
+        return new ResponseEntity<>(shopService.insertShop(shop), HttpStatus.OK);
     }
 
     @Transactional(readOnly = true)
     @GetMapping("/shopIntro")
-    public ResponseEntity<?> getShopIntro(@RequestBody shopIntroRequest req){
+    public ResponseEntity<?> getShopIntro(@RequestBody ShopIntroRequest req){
         return new ResponseEntity<>(shopService.getShopIntro(req), httpHeaders, HttpStatus.OK);
     }
 

@@ -71,9 +71,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 jwtFlag = true;
             }
         } else {
-            logger.warn("JWT Token does not begin with Bearer String");
+//            logger.warn("JWT Token does not begin with Bearer String");
         }
-        System.out.println("토큰 체킹 ! ");
+//        System.out.println("토큰 체킹 ! ");
 
         if(username != null) {
             if(SecurityContextHolder.getContext().getAuthentication() == null){
@@ -89,11 +89,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 }
             }else{ System.out.println("SecurityContextHolder.getContext().getAuthentication() is null"); }
         }else{ System.out.println("username is null"); }
-        System.out.println("JWT 체킹 완료!!!");
+//        System.out.println("JWT 체킹 완료!!!");
 
-        if(!jwtFlag) filterChain.doFilter(request,response);
-        else{
-            // chain.doFilter 을 안하면 다음으로 안가기 때문에 여기서 끝나게 됨..
+        if(!jwtFlag){
+            System.out.println("토큰 핉터 넘어감.");
+            filterChain.doFilter(request,response);
         }
     }
 

@@ -30,6 +30,7 @@ public class MenuService {
         return "ok";
     }
 
+    public List<Menu> findByshopId(String shopId){ return menuRepository.findByIdContains(shopId);}
     public List<Menu> findAll() {
         return menuRepository.findAll();
     }

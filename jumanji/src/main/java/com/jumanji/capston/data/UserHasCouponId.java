@@ -14,12 +14,12 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class UserHasCouponId implements Serializable {
-    @JoinColumn
     @ManyToOne
-    private User user_id;//유저번호
-    
-    @JoinColumn
+    @JoinColumn(name = "user_id")
+    private User user;//유저번호
+
     @ManyToOne
-    private Coupon coupon_id; // 쿠폰번호
+    @JoinColumn(name = "coupon_id")
+    private Coupon coupon; // 쿠폰번호
 }
 

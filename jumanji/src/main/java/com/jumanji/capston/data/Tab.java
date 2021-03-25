@@ -21,8 +21,8 @@ public class Tab {
     @Column(length = 12)
     private String id;
 
-    @Column(length = 2)
-    private int seat_qty; // 좌석수
+    @Column(name = "seat_qty", length = 2)
+    private int seatQty; // 좌석수
 
     @Column
     private char using; // 사용중인지 확인.
