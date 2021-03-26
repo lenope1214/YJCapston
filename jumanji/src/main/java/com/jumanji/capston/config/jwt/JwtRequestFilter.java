@@ -33,12 +33,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
 
     private static final List<String> EXCLUDE_URL =
-            Collections.unmodifiableList( // 토큰 무시 경로 설정
+            Collections.unmodifiableList(
                     Arrays.asList(
                             "/api/v1/login"
-                            , "/api/v1/join"
+                            , "/authenticate"  // 얜 필수..!
                             , "/api/v1/shopList"
+                            , "/api/v1/validate"
+                            , "/api/v1/validateDscNo"
                     ));
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,

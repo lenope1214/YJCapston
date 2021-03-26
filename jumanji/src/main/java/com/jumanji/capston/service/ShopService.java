@@ -1,6 +1,6 @@
 package com.jumanji.capston.service;
 
-import com.jumanji.capston.Payload.Request.ShopIntroRequest;
+import com.jumanji.capston.Payload.Request.ShopRequest;
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.ShopRepository;
@@ -53,7 +53,7 @@ public class ShopService {
         return shopRepository.save(shopEntity);
     }
 
-    public Serializable getShopIntro(ShopIntroRequest req){
+    public Serializable getShopIntro(ShopRequest req){
         System.out.println("요청 매장 id : " + req.getShopId() );
         if(shopRepository.findById(req.getShopId()).isPresent()) {
 
@@ -67,5 +67,9 @@ public class ShopService {
 
     public Shop haveShop(String id){
         return shopRepository.findByOwnerId_Id(id);
+    }
+
+    public List<Shop> findByCat(String category) {
+        return shopRepository.findByCategory(category);
     }
 }

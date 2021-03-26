@@ -37,7 +37,6 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 
-
     implementation group: 'com.oracle.database.jdbc', name: 'ojdbc10', version: '19.10.0.0'
 //    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
@@ -60,6 +59,8 @@ dependencies {
     implementation group: 'io.swagger.core.v3', name: 'swagger-annotations', version: '2.1.7'
     implementation group: 'io.swagger.core.v3', name: 'swagger-models', version: '2.1.7'
 
+// https://mvnrepository.com/artifact/org.jsoup/jsoup
+    implementation group: 'org.jsoup', name: 'jsoup', version: '1.13.1'
 
 
 //    compile fileTree(dir: 'lib', include: ['*.jar'])

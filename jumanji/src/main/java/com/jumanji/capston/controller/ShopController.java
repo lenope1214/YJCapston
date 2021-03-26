@@ -1,6 +1,6 @@
 package com.jumanji.capston.controller;
 
-import com.jumanji.capston.Payload.Request.ShopIntroRequest;
+import com.jumanji.capston.Payload.Request.ShopRequest;
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.service.ShopService;
@@ -40,11 +40,12 @@ public class ShopController {
     public ResponseEntity<?> insertShop(@RequestBody Shop shop) {
         System.out.println("주소 : " + shop.getAddress());
         System.out.println("상세주소 : " + shop.getAddressDetail());
-        User userEntity  =  userService.findById(SecurityContextHolder.getContext().getAuthentication().getName());
+        User userEntity = userService.findById(SecurityContextHolder.getContext().getAuthentication().getName());
 //        System.out.println("매장등록 요청 ID : " + userEntity.getId());
         Object result = shopService.insert(shop, userEntity);
         if (result.getClass() == Shop.class) return new ResponseEntity<>(result, HttpStatus.CREATED);
-        else if(result.equals("duplicate"))return new ResponseEntity<>("사업자 번호가 중복입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
+        else if (result.equals("duplicate"))
+            return new ResponseEntity<>("사업자 번호가 중복입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
@@ -62,20 +63,30 @@ public class ShopController {
 
     @Transactional(readOnly = true)
     @GetMapping("/shopIntro")
-    public ResponseEntity<?> getShopIntro(@RequestBody ShopIntroRequest req){
+    public ResponseEntity<?> getShopIntro(@RequestBody ShopRequest req) {
         return new ResponseEntity<>(shopService.getShopIntro(req), httpHeaders, HttpStatus.OK);
     }
 
     @Transactional(readOnly = true)
     @GetMapping("/myShop")
     public ResponseEntity<?> getMyShop() {
-        User userEntity  =  userService.findById(SecurityContextHolder.getContext().getAuthentication().getName());
-        if(userEntity == null)return new ResponseEntity<>("로그인 되어있지 않습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
+        User userEntity = userService.findById(SecurityContextHolder.getContext().getAuthentication().getName());
+        if (userEntity == null) return new ResponseEntity<>("로그인 되어있지 않습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         System.out.println("접속 유저 ID : " + userEntity.getId());
         Object result = shopService.haveShop(userEntity.getId());
-        if(result == null)return new ResponseEntity<>("매장 등록이 되어있지 않습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
+        if (result == null) return new ResponseEntity<>("매장 등록이 되어있지 않습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         if (result.getClass() == Shop.class) return new ResponseEntity<>(result, HttpStatus.OK);
 
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @Transactional(readOnly = true)
+    @GetMapping("/shopList/{category}")
+    public ResponseEntity<?> getShopListByCategory(@PathVariable String category) {
+        System.out.println("캣 : " + category);
+        List<Shop> shopCatList = shopService.findByCat(category);
+        System.out.println("샵캣리스트 :" + shopCatList.get(0));
+        return new ResponseEntity<>(shopCatList, HttpStatus.OK);
+//        return new ResponseEntity<>(shopCatList, httpHeaders, HttpStatus.OK); // 이렇게 하면 오류. 무슨 한글 변환하면서 오류나나봄!
     }
 }
