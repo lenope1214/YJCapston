@@ -31,7 +31,7 @@ public class User {
     private char isWdrw; // 탈퇴여부
     private String role; // 권한   u, o, a
     @Column(name = "sign_date")
-    private Date signDate = new Date(); // 가입날짜
+    private Date signDate; // 가입날짜
     @DateTimeFormat(pattern = "yyyyMMdd")
     @Column(name = "vip_level")
     private String level; // 등급
@@ -40,6 +40,12 @@ public class User {
     @Column(name = "provider_id")
     private String providerId; // 해당 소셜에서의 아이디(primary key)
 
+    @Builder
+    public User(String email, String address, String addressDetail){
+        this.email = email;
+        this.address = address;
+        this.addressDetail = addressDetail;
+    }
 
     @Builder
     public User(String id, String password, String name, String role, String email, Date sign_date, String provider, String provider_id, String phone) {

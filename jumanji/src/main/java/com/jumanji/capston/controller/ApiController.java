@@ -6,6 +6,7 @@ import com.jumanji.capston.data.User;
 import com.jumanji.capston.service.ShopService;
 import com.jumanji.capston.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,8 @@ public class ApiController {
     UserService userService;
     @Autowired
     ShopService shopService;
+    @Autowired
+    HttpHeaders httpHeaders;
 
 
 //    @Autowired
@@ -31,10 +34,10 @@ public class ApiController {
     @PostMapping("/join")
     public ResponseEntity<?> join(@RequestBody User user) {
         User userEntity = userService.insert(user);
-        if (userEntity == null) return new ResponseEntity<>("회원가입 실패", HttpStatus.BAD_REQUEST);
+        if (userEntity == null) return new ResponseEntity<>("회원가입 실패", httpHeaders, HttpStatus.BAD_REQUEST);
         else {
             System.out.println("가입일자 : " + userEntity.getSignDate());
-            return new ResponseEntity<>(userEntity, HttpStatus.CREATED);
+            return new ResponseEntity<>(userEntity.getId(), HttpStatus.CREATED);
         }
         // 얘는 좀 더 세부화 시켜서 리턴해줍시다...!!! 는 너무 어렵고~
     }
@@ -44,13 +47,13 @@ public class ApiController {
     public ResponseEntity<?> createAuthenticationToken(@RequestBody User _user) throws Exception {
         System.out.println("/api/v1/login 요청");
         final User user = userService.findById(_user.getId());
-        if (user == null) return new ResponseEntity<>("없는 유저 입니다.", HttpStatus.BAD_REQUEST);
+        if (user == null) return new ResponseEntity<>("없는 유저 입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         if (userService.checkPW(_user, user.getPassword())) {
             final String access_token = jwtTokenUtil.generateToken(user.getId());
             JwtResponse jwtResponse = new JwtResponse(access_token, user.getRole());
             return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("로그인 실패", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("로그인 실패",  httpHeaders,HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -58,11 +61,10 @@ public class ApiController {
     @GetMapping("/validate/{id}") // validate
     public ResponseEntity<?> validateOne(@PathVariable String id) {
         if (userService.findById(id) != null) {
-            return new ResponseEntity<>("있는 ID", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("있는 ID", httpHeaders, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>("없는 ID", HttpStatus.OK);
+        return new ResponseEntity<>("없는 ID", httpHeaders, HttpStatus.OK);
     }
-
 
     //spring security 설정 .loginProcessingUrl("/login") 으로 처리
 //    @Transactional(readOnly = true)

@@ -1,6 +1,5 @@
 package com.jumanji.capston.service;
 
-import com.jumanji.capston.Payload.Request.UserRequest;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -43,14 +42,6 @@ public class UserService {
 
     @Transactional
     public User insert(User user) {
-        System.out.println("join\nm.toString() : " + user.toString() + "\n" +
-                        "m.getId() : " + user.getId() + "\n" +
-                        "m.getPw() : " + user.getPassword() + "\n" +
-                        "m.getName() : " + user.getName() + "\n" +
-                        "m.getPhone() : " + user.getPhone() + "\n" +
-                        "m.getRole() : " + user.getRole() + "\n"
-//                + "m.getSign_date() : " + userEntity.getSignDate()
-        );
         // 현재 비밀번호를 받는 족족 그대로 넣고있기 때문에 시큐리티에 걸려 로그인 불가능.
         // 비밀번호를 암호화 해서 넣어줘야 함.i
         user.setSignDate(new Date());
@@ -75,13 +66,15 @@ public class UserService {
 //    }
 
     @Transactional
-    public User updateUser(UserRequest putUserDTO) {
+    public User updateUser(User user) {
         System.out.println("Update User in");
-        User user = userRepository.findById(SecurityContextHolder.getContext().getAuthentication().getName())
+        User userEntity = userRepository.findById(SecurityContextHolder.getContext().getAuthentication().getName())
                 .orElseThrow(() -> new IllegalArgumentException("수정할 아이디가 잘못됨."));
-        String rawPassword = putUserDTO.getPassword();
-        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
-        user.setPassword(encPassword);
+        User.builder()
+                .address(user.getAddress())
+                .addressDetail(user.getAddressDetail())
+                .email(user.getEmail())
+                .build();
 //        if(putUserDTO.getUser().getId() != null)System.out.println("아이디 : " + putUserDTO.getUser().getId());
 //        if(putUserDTO.getUser().getName() != null)System.out.println("이름 : " + putUserDTO.getUser().getName());
 //        if(putUserDTO.getUser().getAddress() != null)System.out.println("주소 : " + putUserDTO.getUser().getAddress());
@@ -94,7 +87,6 @@ public class UserService {
 //        System.out.println("포인트 : " + putUserDTO.getUser().getPoint());
 //        if(putUserDTO.getUser().getRole() != null)System.out.println("권한 : " + putUserDTO.getUser().getRole());
 //        if(putUserDTO.getUser().getSignDate() != null)System.out.println("가입일자 : " + putUserDTO.getUser().getSignDate());
-        System.out.println("Update User out");
         return userRepository.save(user);
     }
 

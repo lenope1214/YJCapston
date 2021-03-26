@@ -38,6 +38,8 @@ public class ShopController {
     @Transactional
     @PostMapping("/shop") // 매장등록
     public ResponseEntity<?> insertShop(@RequestBody Shop shop) {
+        System.out.println("주소 : " + shop.getAddress());
+        System.out.println("상세주소 : " + shop.getAddressDetail());
         User userEntity  =  userService.findById(SecurityContextHolder.getContext().getAuthentication().getName());
 //        System.out.println("매장등록 요청 ID : " + userEntity.getId());
         Object result = shopService.insert(shop, userEntity);
@@ -46,17 +48,17 @@ public class ShopController {
         else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @Transactional
-    @DeleteMapping("/shop")
-    public ResponseEntity<?> deleteShop(@RequestBody String id) {
-        return new ResponseEntity<>(shopService.delete(id), HttpStatus.OK);
-    }
+//    @Transactional
+//    @DeleteMapping("/shop")
+//    public ResponseEntity<?> deleteShop(@RequestBody String id) {
+//        return new ResponseEntity<>(shopService.delete(id), HttpStatus.OK);
+//    }
 
-    @Transactional
-    @PutMapping("/shop")
-    public ResponseEntity<?> putShop(@RequestBody Shop shop){
-        return new ResponseEntity<>(shopService.insertShop(shop), HttpStatus.OK);
-    }
+//    @Transactional
+//    @PutMapping("/shop")
+//    public ResponseEntity<?> putShop(@RequestBody Shop shop){
+//        return new ResponseEntity<>(shopService.insertShop(shop), HttpStatus.OK);
+//    }
 
     @Transactional(readOnly = true)
     @GetMapping("/shopIntro")

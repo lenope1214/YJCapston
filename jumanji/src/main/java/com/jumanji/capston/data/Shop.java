@@ -32,5 +32,4 @@ public class Shop {
     @ManyToOne
     @JoinColumn(name="owner_id")
     private User owner;
-
 }
