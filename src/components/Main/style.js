@@ -5,13 +5,16 @@ export const LoginWrap = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
-    margin: 1% auto 0;
+    width: 30%;
+    margin: 0 auto;
     padding: 5% 1%;
     border-radius: 8px;
-    background-color: black;
+    background-color: #3f2f22;
     color: white;
     z-index: 10;
+    border-style: solid;
+    border-color: black;
+    opacity: 0.7;
 `;
 
 export const MainWrap = styled.div`
@@ -66,6 +69,7 @@ export const MainWrap = styled.div`
         display: flex;
         flex-grow: 2;
         visibility: true;
+        height: 55px;
     }
 
     .right1-nav {

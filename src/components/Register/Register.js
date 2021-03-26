@@ -33,6 +33,7 @@ const Register = ({
     closeModal,
     handleKeyword,
     Keyword,
+    IdCheck,
 }) => {
     // const handleSearch = (e) => {
     //     const value = e.target.value;
@@ -66,6 +67,7 @@ const Register = ({
                         onChange={handleId}
                         value={id}
                     />
+                    <button onClick={IdCheck}>중복확인</button>
                     <span>비밀번호</span>
                     <input
                         type="password"

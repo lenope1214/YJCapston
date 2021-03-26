@@ -48,7 +48,7 @@ const Shop = ({
                 </header>
                 <body>
                     <p>매장등록하기</p>
-                    <span>사업자아이디</span>
+                    <span>사업자번호</span>
                     <input
                         type="text"
                         id="Id"

@@ -1,9 +1,7 @@
-
-
 import styled from "styled-components";
 
 export const searchWrap = styled.div`
-    border:1px solid black;
+    border: 1px solid black;
     position: fixed;
     top: 50%;
     left: 50%;

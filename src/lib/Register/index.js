@@ -28,3 +28,9 @@ export const postRegister = (
 export const getLocation = (keyword) => {
     return apiDefault().get(`/addressSearch/${keyword}`);
 };
+
+export const getIdCheck = (member_id) => {
+    return apiDefault().get(`/validate/${member_id}`, {
+        id: member_id,
+    });
+};

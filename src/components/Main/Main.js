@@ -6,29 +6,24 @@ import peopleimg from "./img/주민사람.png";
 import backimg2 from "./img/backimg.jpg";
 import shopimg from "./img/매장아이콘.png";
 import backimg3 from "./img/종이질감갈색화면.png";
-
 import * as S from "./style";
 import { Link } from "react-router-dom";
-import Login from "../Login/Login";
-import MainContainer from "../../containers/Main/MainContainer";
-import App from "../../App.js";
 
 const Main = ({
+    isLogin,
+    logout,
+    openModal,
     id,
     pw,
     handleId,
     handlePw,
     login,
-    isLogin,
-    modal,
-    openModal,
     closeModal,
-    logout,
-    getmypage,
+    modal,
 }) => {
     // var location = document.querySelector("#move").offsetTop;
     // console.log(location);
-
+    console.log(isLogin);
     const scrollTo1 = () => {
         window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     };
@@ -68,6 +63,7 @@ const Main = ({
                                     border: "0",
                                     borderRadius: "7px 0 0 7px",
                                     backgroundColor: "white",
+                                    hegight: "20px",
                                 }}
                             ></input>
                             <button
@@ -88,13 +84,34 @@ const Main = ({
                                     LOGOUT
                                 </button>
                                 <Link to="/mypage">
-                                    <button
-                                        class="right2-nav"
-                                        onClick={getmypage}
-                                    >
-                                        MYPAGE
-                                    </button>
+                                    <button class="right2-nav">MYPAGE</button>
                                 </Link>
+                                <div>
+                                    <button
+                                        className="right1-nav"
+                                        onClick={scrollTo1}
+                                    >
+                                        상단바
+                                    </button>
+                                    <button
+                                        className="right1-nav"
+                                        onClick={scrollTo2}
+                                    >
+                                        어플다운로드
+                                    </button>
+                                    <button
+                                        className="right1-nav"
+                                        onClick={scrollTo3}
+                                    >
+                                        사업자등록
+                                    </button>
+                                    <button
+                                        className="right1-nav"
+                                        onClick={scrollTo4}
+                                    >
+                                        매장둘러보기
+                                    </button>
+                                </div>
                             </div>
                         ) : (
                             <div className="right-nav">
@@ -108,15 +125,36 @@ const Main = ({
                                 <Link to="/register">
                                     <button class="right2-nav"> JOIN</button>
                                 </Link>
+                                <div>
+                                    <button
+                                        className="right1-nav"
+                                        onClick={scrollTo1}
+                                    >
+                                        상단바
+                                    </button>
+                                    <button
+                                        className="right1-nav"
+                                        onClick={scrollTo2}
+                                    >
+                                        어플다운로드
+                                    </button>
+                                    <button
+                                        className="right1-nav"
+                                        onClick={scrollTo3}
+                                    >
+                                        사업자등록
+                                    </button>
+                                    <button
+                                        className="right1-nav"
+                                        onClick={scrollTo4}
+                                    >
+                                        매장둘러보기
+                                    </button>
+                                </div>
                             </div>
                         )}
                     </div>
-                    <div className="rightnav">
-                        <button onClick={scrollTo1}>상단바</button>
-                        <button onClick={scrollTo2}>어플다운로드</button>
-                        <button onClick={scrollTo3}>사업자등록</button>
-                        <button onClick={scrollTo4}>매장둘러보기</button>
-                    </div>
+
                     <div className="adimg">
                         <div className="topimg">
                             <img src={topimg} width="100%" height="700px" />

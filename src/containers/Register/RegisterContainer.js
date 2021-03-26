@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import Register from "../../components/Register/Register";
 import { postLogin } from "../../lib/Login";
-import { getLocation, postRegister } from "../../lib/Register";
+import { getLocation, postRegister, getIdCheck } from "../../lib/Register";
 
 const RegisterContainer = () => {
     const history = useHistory();
@@ -149,8 +149,21 @@ const RegisterContainer = () => {
             address,
             address1
         )
-            .then((res) => history.push("/main"))
+            .then((res) => {
+                history.push("/");
+                alert("회원가입완료");
+            })
             .catch((err) => err);
+    };
+
+    const IdCheck = () => {
+        getIdCheck(id)
+            .then((res) => {
+                alert("사용 가능한 아이디 입니다.");
+            })
+            .catch((err) => {
+                alert("이미 있는 아이디입니다.");
+            });
     };
 
     const search = () => {
@@ -194,6 +207,7 @@ const RegisterContainer = () => {
             modal={modal}
             handleKeyword={handleKeyword}
             keyword={keyword}
+            IdCheck={IdCheck}
         />
     );
 };
