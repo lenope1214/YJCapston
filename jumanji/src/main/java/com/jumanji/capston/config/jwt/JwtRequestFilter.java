@@ -40,6 +40,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                             , "/api/v1/shopList"
                             , "/api/v1/validate"
                             , "/api/v1/validateDscNo"
+                            , "/api/v1/searchAddr"
                     ));
 
 

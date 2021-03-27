@@ -1,0 +1,23 @@
+2021/03/28 00:38:30,858 [DEBUG]  [org.springframework.security.web.FilterChainProxy] [http-nio-8088-exec-6]- Securing GET /
+ -2021/03/28 00:38:30,868 [DEBUG]  [org.springframework.security.web.context.SecurityContextPersistenceFilter] [http-nio-8088-exec-6]- Set SecurityContextHolder to empty SecurityContext
+ -2021/03/28 00:38:30,870 [DEBUG]  [org.springframework.security.web.authentication.AnonymousAuthenticationFilter] [http-nio-8088-exec-6]- Set SecurityContextHolder to anonymous SecurityContext
+ -2021/03/28 00:38:30,874 [DEBUG]  [org.springframework.security.access.intercept.AbstractSecurityInterceptor] [http-nio-8088-exec-6]- Authorized filter invocation [GET /] with attributes [permitAll]
+ -2021/03/28 00:38:30,875 [DEBUG]  [org.springframework.security.web.FilterChainProxy$VirtualFilterChain] [http-nio-8088-exec-6]- Secured GET /
+ -2021/03/28 00:38:30,876 [DEBUG]  [org.springframework.core.log.LogFormatUtils] [http-nio-8088-exec-6]- GET "/", parameters={}
+ -2021/03/28 00:38:30,878 [DEBUG]  [org.springframework.web.servlet.handler.AbstractHandlerMapping] [http-nio-8088-exec-6]- Mapped to com.jumanji.capston.controller.Temporary.WebController#index()
+ -2021/03/28 00:38:30,879 [DEBUG]  [org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor] [http-nio-8088-exec-6]- Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+ -2021/03/28 00:38:31,062 [DEBUG]  [org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor] [http-nio-8088-exec-6]- Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+ -2021/03/28 00:38:31,062 [DEBUG]  [org.springframework.web.servlet.FrameworkServlet] [http-nio-8088-exec-6]- Completed 200 OK
+ -2021/03/28 00:38:31,063 [DEBUG]  [org.springframework.security.web.context.SecurityContextPersistenceFilter] [http-nio-8088-exec-6]- Cleared SecurityContextHolder to complete request
+ -2021/03/28 00:38:32,191 [DEBUG]  [org.springframework.security.web.FilterChainProxy] [http-nio-8088-exec-8]- Securing GET /
+ -2021/03/28 00:38:32,191 [DEBUG]  [org.springframework.security.web.context.SecurityContextPersistenceFilter] [http-nio-8088-exec-8]- Set SecurityContextHolder to empty SecurityContext
+ -2021/03/28 00:38:32,191 [DEBUG]  [org.springframework.security.web.authentication.AnonymousAuthenticationFilter] [http-nio-8088-exec-8]- Set SecurityContextHolder to anonymous SecurityContext
+ -2021/03/28 00:38:32,191 [DEBUG]  [org.springframework.security.access.intercept.AbstractSecurityInterceptor] [http-nio-8088-exec-8]- Authorized filter invocation [GET /] with attributes [permitAll]
+ -2021/03/28 00:38:32,191 [DEBUG]  [org.springframework.security.web.FilterChainProxy$VirtualFilterChain] [http-nio-8088-exec-8]- Secured GET /
+ -2021/03/28 00:38:32,191 [DEBUG]  [org.springframework.core.log.LogFormatUtils] [http-nio-8088-exec-8]- GET "/", parameters={}
+ -2021/03/28 00:38:32,192 [DEBUG]  [org.springframework.web.servlet.handler.AbstractHandlerMapping] [http-nio-8088-exec-8]- Mapped to com.jumanji.capston.controller.Temporary.WebController#index()
+ -2021/03/28 00:38:32,192 [DEBUG]  [org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor] [http-nio-8088-exec-8]- Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+ -2021/03/28 00:38:32,194 [DEBUG]  [org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor] [http-nio-8088-exec-8]- Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+ -2021/03/28 00:38:32,194 [DEBUG]  [org.springframework.web.servlet.FrameworkServlet] [http-nio-8088-exec-8]- Completed 200 OK
+ -2021/03/28 00:38:32,194 [DEBUG]  [org.springframework.security.web.context.SecurityContextPersistenceFilter] [http-nio-8088-exec-8]- Cleared SecurityContextHolder to complete request
+ -

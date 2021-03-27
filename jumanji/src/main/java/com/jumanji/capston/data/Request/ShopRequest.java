@@ -1,4 +1,4 @@
-package com.jumanji.capston.Payload.Request;
+package com.jumanji.capston.data.Request;
 
 import com.jumanji.capston.data.Shop;
 import lombok.Data;

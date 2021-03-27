@@ -1,6 +1,6 @@
 package com.jumanji.capston.controller;
 
-import com.jumanji.capston.Payload.Request.TxprDscNoRequest;
+import com.jumanji.capston.data.Request.TxprDscNoRequest;
 import com.jumanji.capston.service.TxprService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -22,7 +22,6 @@ public class TxprController {
     @GetMapping("/validateDscNo")
     public ResponseEntity<?> getTxprDscNoRes(@RequestBody TxprDscNoRequest req){
         String result = "";
-        System.out.println("TxprDscNoRes's id : " + req.getId());
         result = txprService.getTaxTypeFromNts(req.getId());
         if(result != null) return new ResponseEntity<>(result, httpHeaders, HttpStatus.OK);
         else return new ResponseEntity<>("사업자 번호가 잘못된듯?", httpHeaders, HttpStatus.BAD_REQUEST);

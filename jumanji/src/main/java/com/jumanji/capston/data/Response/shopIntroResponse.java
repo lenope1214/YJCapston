@@ -1,4 +1,4 @@
-package com.jumanji.capston.Payload.Response;
+package com.jumanji.capston.data.Response;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
 package com.jumanji.capston.service;
 
-import com.jumanji.capston.Payload.Request.ShopRequest;
+import com.jumanji.capston.data.Request.ShopRequest;
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.ShopRepository;

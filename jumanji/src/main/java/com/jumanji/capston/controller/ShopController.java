@@ -1,6 +1,6 @@
 package com.jumanji.capston.controller;
 
-import com.jumanji.capston.Payload.Request.ShopRequest;
+import com.jumanji.capston.data.Request.ShopRequest;
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.service.ShopService;
@@ -31,6 +31,7 @@ public class ShopController {
     @Transactional(readOnly = true)
     @GetMapping("/shopList")
     public ResponseEntity<?> getShopList() {
+        System.out.println("샵리스트 >> ");
         List<Shop> shopList = shopService.findAll();
         return new ResponseEntity<>(shopList, HttpStatus.OK);
     }
@@ -85,8 +86,12 @@ public class ShopController {
     public ResponseEntity<?> getShopListByCategory(@PathVariable String category) {
         System.out.println("캣 : " + category);
         List<Shop> shopCatList = shopService.findByCat(category);
-        System.out.println("샵캣리스트 :" + shopCatList.get(0));
-        return new ResponseEntity<>(shopCatList, HttpStatus.OK);
+        if(shopCatList.size() != 0){
+            System.out.println("샵캣리스트 :" + shopCatList.get(0));
+            return new ResponseEntity<>(shopCatList, HttpStatus.OK);
+        }
+        return new ResponseEntity<>("매장이 없습니다.", httpHeaders, HttpStatus.OK);
+
 //        return new ResponseEntity<>(shopCatList, httpHeaders, HttpStatus.OK); // 이렇게 하면 오류. 무슨 한글 변환하면서 오류나나봄!
     }
 }
