@@ -70,11 +70,9 @@ public class UserService {
         System.out.println("Update User in");
         User userEntity = userRepository.findById(SecurityContextHolder.getContext().getAuthentication().getName())
                 .orElseThrow(() -> new IllegalArgumentException("수정할 아이디가 잘못됨."));
-        User.builder()
-                .address(user.getAddress())
-                .addressDetail(user.getAddressDetail())
-                .email(user.getEmail())
-                .build();
+        userEntity.setAddress(user.getAddress());
+        userEntity.setAddressDetail(user.getAddressDetail());
+        userEntity.setEmail(user.getEmail());
 //        if(putUserDTO.getUser().getId() != null)System.out.println("아이디 : " + putUserDTO.getUser().getId());
 //        if(putUserDTO.getUser().getName() != null)System.out.println("이름 : " + putUserDTO.getUser().getName());
 //        if(putUserDTO.getUser().getAddress() != null)System.out.println("주소 : " + putUserDTO.getUser().getAddress());
@@ -87,7 +85,7 @@ public class UserService {
 //        System.out.println("포인트 : " + putUserDTO.getUser().getPoint());
 //        if(putUserDTO.getUser().getRole() != null)System.out.println("권한 : " + putUserDTO.getUser().getRole());
 //        if(putUserDTO.getUser().getSignDate() != null)System.out.println("가입일자 : " + putUserDTO.getUser().getSignDate());
-        return userRepository.save(user);
+        return userRepository.save(userEntity);
     }
 
     @Transactional

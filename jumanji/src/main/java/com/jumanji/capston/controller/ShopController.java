@@ -14,11 +14,16 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/v1")
 public class ShopController {
+    Logger logger;
+
+
     @Autowired
     ShopService shopService;
 
@@ -43,6 +48,7 @@ public class ShopController {
         System.out.println("상세주소 : " + shop.getAddressDetail());
         User userEntity = userService.findById(SecurityContextHolder.getContext().getAuthentication().getName());
 //        System.out.println("매장등록 요청 ID : " + userEntity.getId());
+        logger.log(Level.INFO, "open time and close time\n" + shop.getOpenTime() +"\n" + shop.getCloseTime());
         Object result = shopService.insert(shop, userEntity);
         if (result.getClass() == Shop.class) return new ResponseEntity<>(result, HttpStatus.CREATED);
         else if (result.equals("duplicate"))
@@ -62,10 +68,16 @@ public class ShopController {
 //        return new ResponseEntity<>(shopService.insertShop(shop), HttpStatus.OK);
 //    }
 
+
+
+
+
     @Transactional(readOnly = true)
-    @GetMapping("/shopIntro")
-    public ResponseEntity<?> getShopIntro(@RequestBody ShopRequest req) {
-        return new ResponseEntity<>(shopService.getShopIntro(req), httpHeaders, HttpStatus.OK);
+    @GetMapping("/shop")
+    public ResponseEntity<?> getShopById(@RequestBody ShopRequest shopRequest){
+        Shop shop = shopService.findById(shopRequest.getShopId());
+        if(shop == null)return new ResponseEntity<>("없는 매장번호", httpHeaders, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(shop, HttpStatus.OK);
     }
 
     @Transactional(readOnly = true)
@@ -79,6 +91,12 @@ public class ShopController {
         if (result.getClass() == Shop.class) return new ResponseEntity<>(result, HttpStatus.OK);
 
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @Transactional(readOnly = true)
+    @GetMapping("/shopIntro")
+    public ResponseEntity<?> getShopIntro(@RequestBody ShopRequest shopRequest) {
+        return new ResponseEntity<>(shopService.getShopIntro(shopRequest.getShopId()), httpHeaders, HttpStatus.OK);
     }
 
     @Transactional(readOnly = true)

@@ -40,14 +40,14 @@ public class User {
     @Column(name = "provider_id")
     private String providerId; // 해당 소셜에서의 아이디(primary key)
 
-    @Builder
-    public User(String email, String address, String addressDetail){
-        this.email = email;
-        this.address = address;
-        this.addressDetail = addressDetail;
-    }
+//    @Builder(builderMethodName = "updateUser")
+//    public User(String email, String address, String addressDetail){
+//        this.email = email;
+//        this.address = address;
+//        this.addressDetail = addressDetail;
+//    }
 
-    @Builder
+    @Builder(builderMethodName = "createUser")
     public User(String id, String password, String name, String role, String email, Date sign_date, String provider, String provider_id, String phone) {
         this.id = id;
         this.password = password;
@@ -60,9 +60,9 @@ public class User {
         this.phone = phone;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
 
 //    @Builder(builderMethodName = "userCreation")
 //    public void

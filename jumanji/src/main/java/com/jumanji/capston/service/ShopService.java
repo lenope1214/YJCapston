@@ -53,11 +53,10 @@ public class ShopService {
         return shopRepository.save(shopEntity);
     }
 
-    public Serializable getShopIntro(ShopRequest req){
-        System.out.println("요청 매장 id : " + req.getShopId() );
-        if(shopRepository.findById(req.getShopId()).isPresent()) {
-
-            return shopRepository.findById(req.getShopId()).get().getIntro();
+    public Serializable getShopIntro(String shopId){
+        System.out.println("요청 매장 id : " + shopId );
+        if(shopRepository.findById(shopId).isPresent()) {
+            return shopRepository.findById(shopId).get().getIntro();
         }
         else{
             System.out.println("매장 id 오류");

@@ -1,23 +1,85 @@
-2021/03/28 00:38:30,858 [DEBUG]  [org.springframework.security.web.FilterChainProxy] [http-nio-8088-exec-6]- Securing GET /
- -2021/03/28 00:38:30,868 [DEBUG]  [org.springframework.security.web.context.SecurityContextPersistenceFilter] [http-nio-8088-exec-6]- Set SecurityContextHolder to empty SecurityContext
- -2021/03/28 00:38:30,870 [DEBUG]  [org.springframework.security.web.authentication.AnonymousAuthenticationFilter] [http-nio-8088-exec-6]- Set SecurityContextHolder to anonymous SecurityContext
- -2021/03/28 00:38:30,874 [DEBUG]  [org.springframework.security.access.intercept.AbstractSecurityInterceptor] [http-nio-8088-exec-6]- Authorized filter invocation [GET /] with attributes [permitAll]
- -2021/03/28 00:38:30,875 [DEBUG]  [org.springframework.security.web.FilterChainProxy$VirtualFilterChain] [http-nio-8088-exec-6]- Secured GET /
- -2021/03/28 00:38:30,876 [DEBUG]  [org.springframework.core.log.LogFormatUtils] [http-nio-8088-exec-6]- GET "/", parameters={}
- -2021/03/28 00:38:30,878 [DEBUG]  [org.springframework.web.servlet.handler.AbstractHandlerMapping] [http-nio-8088-exec-6]- Mapped to com.jumanji.capston.controller.Temporary.WebController#index()
- -2021/03/28 00:38:30,879 [DEBUG]  [org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor] [http-nio-8088-exec-6]- Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
- -2021/03/28 00:38:31,062 [DEBUG]  [org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor] [http-nio-8088-exec-6]- Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
- -2021/03/28 00:38:31,062 [DEBUG]  [org.springframework.web.servlet.FrameworkServlet] [http-nio-8088-exec-6]- Completed 200 OK
- -2021/03/28 00:38:31,063 [DEBUG]  [org.springframework.security.web.context.SecurityContextPersistenceFilter] [http-nio-8088-exec-6]- Cleared SecurityContextHolder to complete request
- -2021/03/28 00:38:32,191 [DEBUG]  [org.springframework.security.web.FilterChainProxy] [http-nio-8088-exec-8]- Securing GET /
- -2021/03/28 00:38:32,191 [DEBUG]  [org.springframework.security.web.context.SecurityContextPersistenceFilter] [http-nio-8088-exec-8]- Set SecurityContextHolder to empty SecurityContext
- -2021/03/28 00:38:32,191 [DEBUG]  [org.springframework.security.web.authentication.AnonymousAuthenticationFilter] [http-nio-8088-exec-8]- Set SecurityContextHolder to anonymous SecurityContext
- -2021/03/28 00:38:32,191 [DEBUG]  [org.springframework.security.access.intercept.AbstractSecurityInterceptor] [http-nio-8088-exec-8]- Authorized filter invocation [GET /] with attributes [permitAll]
- -2021/03/28 00:38:32,191 [DEBUG]  [org.springframework.security.web.FilterChainProxy$VirtualFilterChain] [http-nio-8088-exec-8]- Secured GET /
- -2021/03/28 00:38:32,191 [DEBUG]  [org.springframework.core.log.LogFormatUtils] [http-nio-8088-exec-8]- GET "/", parameters={}
- -2021/03/28 00:38:32,192 [DEBUG]  [org.springframework.web.servlet.handler.AbstractHandlerMapping] [http-nio-8088-exec-8]- Mapped to com.jumanji.capston.controller.Temporary.WebController#index()
- -2021/03/28 00:38:32,192 [DEBUG]  [org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor] [http-nio-8088-exec-8]- Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
- -2021/03/28 00:38:32,194 [DEBUG]  [org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor] [http-nio-8088-exec-8]- Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
- -2021/03/28 00:38:32,194 [DEBUG]  [org.springframework.web.servlet.FrameworkServlet] [http-nio-8088-exec-8]- Completed 200 OK
- -2021/03/28 00:38:32,194 [DEBUG]  [org.springframework.security.web.context.SecurityContextPersistenceFilter] [http-nio-8088-exec-8]- Cleared SecurityContextHolder to complete request
+2021/03/29 00:07:10,954 [DEBUG]  [org.springframework.security.web.FilterChainProxy] [http-nio-8088-exec-4]- Securing POST /api/v1/shop
+ -2021/03/29 00:07:10,957 [DEBUG]  [org.springframework.security.web.context.SecurityContextPersistenceFilter] [http-nio-8088-exec-4]- Set SecurityContextHolder to empty SecurityContext
+ -2021/03/29 00:07:10,959 [DEBUG]  [org.springframework.security.web.context.SecurityContextPersistenceFilter] [http-nio-8088-exec-4]- Cleared SecurityContextHolder to complete request
+ -2021/03/29 00:07:10,960 [DEBUG]  [org.springframework.security.web.FilterChainProxy] [http-nio-8088-exec-4]- Securing POST /error
+ -2021/03/29 00:07:10,960 [DEBUG]  [org.springframework.security.web.context.SecurityContextPersistenceFilter] [http-nio-8088-exec-4]- Set SecurityContextHolder to empty SecurityContext
+ -2021/03/29 00:07:10,961 [DEBUG]  [org.springframework.security.web.authentication.AnonymousAuthenticationFilter] [http-nio-8088-exec-4]- Set SecurityContextHolder to anonymous SecurityContext
+ -2021/03/29 00:07:10,961 [DEBUG]  [org.springframework.security.access.intercept.AbstractSecurityInterceptor] [http-nio-8088-exec-4]- Authorized filter invocation [POST /error] with attributes [permitAll]
+ -2021/03/29 00:07:10,961 [DEBUG]  [org.springframework.security.web.FilterChainProxy$VirtualFilterChain] [http-nio-8088-exec-4]- Secured POST /error
+ -2021/03/29 00:07:10,961 [DEBUG]  [org.springframework.core.log.LogFormatUtils] [http-nio-8088-exec-4]- "ERROR" dispatch for POST "/error", parameters={}
+ -2021/03/29 00:07:10,962 [DEBUG]  [org.springframework.web.servlet.handler.AbstractHandlerMapping] [http-nio-8088-exec-4]- Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+ -2021/03/29 00:07:10,962 [DEBUG]  [org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor] [http-nio-8088-exec-4]- Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+ -2021/03/29 00:07:10,963 [DEBUG]  [org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor] [http-nio-8088-exec-4]- Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+ -2021/03/29 00:07:10,963 [DEBUG]  [org.springframework.core.log.LogFormatUtils] [http-nio-8088-exec-4]- Writing [{timestamp=Mon Mar 29 00:07:10 KST 2021, status=401, error=Unauthorized, message=JWT Token has expir (truncated)...]
+ -2021/03/29 00:07:10,964 [DEBUG]  [org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor] [http-nio-8088-exec-4]- Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+ -2021/03/29 00:07:10,964 [DEBUG]  [org.springframework.web.servlet.FrameworkServlet] [http-nio-8088-exec-4]- Exiting from "ERROR" dispatch, status 401
+ -2021/03/29 00:07:10,965 [DEBUG]  [org.springframework.security.web.context.SecurityContextPersistenceFilter] [http-nio-8088-exec-4]- Cleared SecurityContextHolder to complete request
+ -2021/03/29 00:07:13,561 [DEBUG]  [org.springframework.security.web.FilterChainProxy] [http-nio-8088-exec-5]- Securing POST /api/v1/login
+ -2021/03/29 00:07:13,561 [DEBUG]  [org.springframework.security.web.context.SecurityContextPersistenceFilter] [http-nio-8088-exec-5]- Set SecurityContextHolder to empty SecurityContext
+ -2021/03/29 00:07:13,561 [DEBUG]  [org.springframework.security.web.authentication.AnonymousAuthenticationFilter] [http-nio-8088-exec-5]- Set SecurityContextHolder to anonymous SecurityContext
+ -2021/03/29 00:07:13,562 [DEBUG]  [org.springframework.security.access.intercept.AbstractSecurityInterceptor] [http-nio-8088-exec-5]- Authorized filter invocation [POST /api/v1/login] with attributes [permitAll]
+ -2021/03/29 00:07:13,562 [DEBUG]  [org.springframework.security.web.FilterChainProxy$VirtualFilterChain] [http-nio-8088-exec-5]- Secured POST /api/v1/login
+ -2021/03/29 00:07:13,562 [DEBUG]  [org.springframework.core.log.LogFormatUtils] [http-nio-8088-exec-5]- POST "/api/v1/login", parameters={}
+ -2021/03/29 00:07:13,562 [DEBUG]  [org.springframework.web.servlet.handler.AbstractHandlerMapping] [http-nio-8088-exec-5]- Mapped to com.jumanji.capston.controller.ApiController#createAuthenticationToken(User)
+ -2021/03/29 00:07:13,562 [DEBUG]  [org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor] [http-nio-8088-exec-5]- Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+ -2021/03/29 00:07:13,564 [DEBUG]  [org.springframework.core.log.LogFormatUtils] [http-nio-8088-exec-5]- Read "application/json;charset=UTF-8" to [User(id=2, password=2, name=null, email=null, address=null, addressDetail=null, birthday=null, phone (truncated)...]
+ -2021/03/29 00:07:13,564 [DEBUG]  [org.springframework.orm.jpa.JpaTransactionManager] [http-nio-8088-exec-5]- Found thread-bound EntityManager [SessionImpl(1038963453<open>)] for JPA transaction
+ -2021/03/29 00:07:13,565 [DEBUG]  [org.springframework.transaction.support.AbstractPlatformTransactionManager] [http-nio-8088-exec-5]- Creating new transaction with name [com.jumanji.capston.controller.ApiController.createAuthenticationToken]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+ -2021/03/29 00:07:13,578 [DEBUG]  [org.springframework.jdbc.datasource.DataSourceUtils] [http-nio-8088-exec-5]- Setting JDBC Connection [HikariProxyConnection@924137869 wrapping oracle.jdbc.driver.T4CConnection@192bdc31] read-only
+ -2021/03/29 00:07:13,578 [DEBUG]  [org.springframework.orm.jpa.JpaTransactionManager] [http-nio-8088-exec-5]- Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@7217b10b]
+ -2021/03/29 00:07:13,581 [DEBUG]  [org.springframework.orm.jpa.JpaTransactionManager] [http-nio-8088-exec-5]- Found thread-bound EntityManager [SessionImpl(1038963453<open>)] for JPA transaction
+ -2021/03/29 00:07:13,581 [DEBUG]  [org.springframework.transaction.support.AbstractPlatformTransactionManager] [http-nio-8088-exec-5]- Participating in existing transaction
+ -2021/03/29 00:07:13,581 [DEBUG]  [org.springframework.orm.jpa.JpaTransactionManager] [http-nio-8088-exec-5]- Found thread-bound EntityManager [SessionImpl(1038963453<open>)] for JPA transaction
+ -2021/03/29 00:07:13,581 [DEBUG]  [org.springframework.transaction.support.AbstractPlatformTransactionManager] [http-nio-8088-exec-5]- Participating in existing transaction
+ -2021/03/29 00:07:13,597 [DEBUG]  [org.springframework.orm.jpa.JpaTransactionManager] [http-nio-8088-exec-5]- Found thread-bound EntityManager [SessionImpl(1038963453<open>)] for JPA transaction
+ -2021/03/29 00:07:13,597 [DEBUG]  [org.springframework.transaction.support.AbstractPlatformTransactionManager] [http-nio-8088-exec-5]- Participating in existing transaction
+ -2021/03/29 00:07:13,597 [DEBUG]  [org.springframework.orm.jpa.JpaTransactionManager] [http-nio-8088-exec-5]- Found thread-bound EntityManager [SessionImpl(1038963453<open>)] for JPA transaction
+ -2021/03/29 00:07:13,597 [DEBUG]  [org.springframework.transaction.support.AbstractPlatformTransactionManager] [http-nio-8088-exec-5]- Participating in existing transaction
+ -2021/03/29 00:07:13,661 [DEBUG]  [org.springframework.orm.jpa.JpaTransactionManager] [http-nio-8088-exec-5]- Found thread-bound EntityManager [SessionImpl(1038963453<open>)] for JPA transaction
+ -2021/03/29 00:07:13,662 [DEBUG]  [org.springframework.transaction.support.AbstractPlatformTransactionManager] [http-nio-8088-exec-5]- Participating in existing transaction
+ -2021/03/29 00:07:13,662 [DEBUG]  [org.springframework.orm.jpa.JpaTransactionManager] [http-nio-8088-exec-5]- Found thread-bound EntityManager [SessionImpl(1038963453<open>)] for JPA transaction
+ -2021/03/29 00:07:13,662 [DEBUG]  [org.springframework.transaction.support.AbstractPlatformTransactionManager] [http-nio-8088-exec-5]- Participating in existing transaction
+ -2021/03/29 00:07:13,664 [DEBUG]  [org.springframework.transaction.support.AbstractPlatformTransactionManager] [http-nio-8088-exec-5]- Initiating transaction commit
+ -2021/03/29 00:07:13,664 [DEBUG]  [org.springframework.orm.jpa.JpaTransactionManager] [http-nio-8088-exec-5]- Committing JPA transaction on EntityManager [SessionImpl(1038963453<open>)]
+ -2021/03/29 00:07:13,677 [DEBUG]  [org.springframework.jdbc.datasource.DataSourceUtils] [http-nio-8088-exec-5]- Resetting read-only flag of JDBC Connection [HikariProxyConnection@924137869 wrapping oracle.jdbc.driver.T4CConnection@192bdc31]
+ -2021/03/29 00:07:13,677 [DEBUG]  [org.springframework.orm.jpa.JpaTransactionManager] [http-nio-8088-exec-5]- Not closing pre-bound JPA EntityManager after transaction
+ -2021/03/29 00:07:13,678 [DEBUG]  [org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor] [http-nio-8088-exec-5]- Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+ -2021/03/29 00:07:13,679 [DEBUG]  [org.springframework.core.log.LogFormatUtils] [http-nio-8088-exec-5]- Writing [JwtResponse(access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VySW5mbyIsInJvbGUiOiJST0 (truncated)...]
+ -2021/03/29 00:07:13,679 [DEBUG]  [org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor] [http-nio-8088-exec-5]- Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+ -2021/03/29 00:07:13,680 [DEBUG]  [org.springframework.web.servlet.FrameworkServlet] [http-nio-8088-exec-5]- Completed 200 OK
+ -2021/03/29 00:07:13,680 [DEBUG]  [org.springframework.security.web.context.SecurityContextPersistenceFilter] [http-nio-8088-exec-5]- Cleared SecurityContextHolder to complete request
+ -2021/03/29 00:07:26,467 [DEBUG]  [org.springframework.security.web.FilterChainProxy] [http-nio-8088-exec-6]- Securing POST /api/v1/shop
+ -2021/03/29 00:07:26,467 [DEBUG]  [org.springframework.security.web.context.SecurityContextPersistenceFilter] [http-nio-8088-exec-6]- Set SecurityContextHolder to empty SecurityContext
+ -2021/03/29 00:07:26,468 [DEBUG]  [org.springframework.transaction.support.AbstractPlatformTransactionManager] [http-nio-8088-exec-6]- Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+ -2021/03/29 00:07:26,468 [DEBUG]  [org.springframework.orm.jpa.JpaTransactionManager] [http-nio-8088-exec-6]- Opened new EntityManager [SessionImpl(759812064<open>)] for JPA transaction
+ -2021/03/29 00:07:26,481 [DEBUG]  [org.springframework.jdbc.datasource.DataSourceUtils] [http-nio-8088-exec-6]- Setting JDBC Connection [HikariProxyConnection@665953424 wrapping oracle.jdbc.driver.T4CConnection@192bdc31] read-only
+ -2021/03/29 00:07:26,481 [DEBUG]  [org.springframework.orm.jpa.JpaTransactionManager] [http-nio-8088-exec-6]- Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@62b33e02]
+ -2021/03/29 00:07:26,495 [DEBUG]  [org.springframework.transaction.support.AbstractPlatformTransactionManager] [http-nio-8088-exec-6]- Initiating transaction commit
+ -2021/03/29 00:07:26,495 [DEBUG]  [org.springframework.orm.jpa.JpaTransactionManager] [http-nio-8088-exec-6]- Committing JPA transaction on EntityManager [SessionImpl(759812064<open>)]
+ -2021/03/29 00:07:26,508 [DEBUG]  [org.springframework.jdbc.datasource.DataSourceUtils] [http-nio-8088-exec-6]- Resetting read-only flag of JDBC Connection [HikariProxyConnection@665953424 wrapping oracle.jdbc.driver.T4CConnection@192bdc31]
+ -2021/03/29 00:07:26,508 [DEBUG]  [org.springframework.orm.jpa.JpaTransactionManager] [http-nio-8088-exec-6]- Closing JPA EntityManager [SessionImpl(759812064<open>)] after transaction
+ -2021/03/29 00:07:26,509 [DEBUG]  [org.springframework.security.access.intercept.AbstractSecurityInterceptor] [http-nio-8088-exec-6]- Authorized filter invocation [POST /api/v1/shop] with attributes [permitAll]
+ -2021/03/29 00:07:26,510 [DEBUG]  [org.springframework.security.web.FilterChainProxy$VirtualFilterChain] [http-nio-8088-exec-6]- Secured POST /api/v1/shop
+ -2021/03/29 00:07:26,510 [DEBUG]  [org.springframework.core.log.LogFormatUtils] [http-nio-8088-exec-6]- POST "/api/v1/shop", parameters={}
+ -2021/03/29 00:07:26,510 [DEBUG]  [org.springframework.web.servlet.handler.AbstractHandlerMapping] [http-nio-8088-exec-6]- Mapped to com.jumanji.capston.controller.ShopController#insertShop(Shop)
+ -2021/03/29 00:07:26,510 [DEBUG]  [org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor] [http-nio-8088-exec-6]- Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+ -2021/03/29 00:07:26,511 [DEBUG]  [org.springframework.web.method.support.InvocableHandlerMethod] [http-nio-8088-exec-6]- Could not resolve parameter [0] in public org.springframework.http.ResponseEntity<?> com.jumanji.capston.controller.ShopController.insertShop(com.jumanji.capston.data.Shop): JSON parse error: Cannot deserialize value of type `java.util.Date` from String "2018-12-15T10:00:00": expected format "HH:mm"; nested exception is com.fasterxml.jackson.databind.exc.InvalidFormatException: Cannot deserialize value of type `java.util.Date` from String "2018-12-15T10:00:00": expected format "HH:mm"
+ at [Source: (PushbackInputStream); line: 5, column: 18] (through reference chain: com.jumanji.capston.data.Shop["openTime"])
+ -2021/03/29 00:07:26,511 [WARN ]  [org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver] [http-nio-8088-exec-6]- Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `java.util.Date` from String "2018-12-15T10:00:00": expected format "HH:mm"; nested exception is com.fasterxml.jackson.databind.exc.InvalidFormatException: Cannot deserialize value of type `java.util.Date` from String "2018-12-15T10:00:00": expected format "HH:mm"
+ at [Source: (PushbackInputStream); line: 5, column: 18] (through reference chain: com.jumanji.capston.data.Shop["openTime"])]
+ -2021/03/29 00:07:26,511 [DEBUG]  [org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor] [http-nio-8088-exec-6]- Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+ -2021/03/29 00:07:26,511 [DEBUG]  [org.springframework.web.servlet.FrameworkServlet] [http-nio-8088-exec-6]- Completed 400 BAD_REQUEST
+ -2021/03/29 00:07:26,511 [DEBUG]  [org.springframework.security.web.context.SecurityContextPersistenceFilter] [http-nio-8088-exec-6]- Cleared SecurityContextHolder to complete request
+ -2021/03/29 00:07:26,512 [DEBUG]  [org.springframework.security.web.FilterChainProxy] [http-nio-8088-exec-6]- Securing POST /error
+ -2021/03/29 00:07:26,512 [DEBUG]  [org.springframework.security.web.context.SecurityContextPersistenceFilter] [http-nio-8088-exec-6]- Set SecurityContextHolder to empty SecurityContext
+ -2021/03/29 00:07:26,512 [DEBUG]  [org.springframework.security.web.authentication.AnonymousAuthenticationFilter] [http-nio-8088-exec-6]- Set SecurityContextHolder to anonymous SecurityContext
+ -2021/03/29 00:07:26,512 [DEBUG]  [org.springframework.security.web.FilterChainProxy$VirtualFilterChain] [http-nio-8088-exec-6]- Secured POST /error
+ -2021/03/29 00:07:26,512 [DEBUG]  [org.springframework.core.log.LogFormatUtils] [http-nio-8088-exec-6]- "ERROR" dispatch for POST "/error", parameters={}
+ -2021/03/29 00:07:26,512 [DEBUG]  [org.springframework.web.servlet.handler.AbstractHandlerMapping] [http-nio-8088-exec-6]- Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+ -2021/03/29 00:07:26,512 [DEBUG]  [org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor] [http-nio-8088-exec-6]- Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+ -2021/03/29 00:07:26,513 [DEBUG]  [org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor] [http-nio-8088-exec-6]- Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+ -2021/03/29 00:07:26,513 [DEBUG]  [org.springframework.core.log.LogFormatUtils] [http-nio-8088-exec-6]- Writing [{timestamp=Mon Mar 29 00:07:26 KST 2021, status=400, error=Bad Request, trace=org.springframework.ht (truncated)...]
+ -2021/03/29 00:07:26,514 [DEBUG]  [org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor] [http-nio-8088-exec-6]- Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+ -2021/03/29 00:07:26,515 [DEBUG]  [org.springframework.web.servlet.FrameworkServlet] [http-nio-8088-exec-6]- Exiting from "ERROR" dispatch, status 400
+ -2021/03/29 00:07:26,515 [DEBUG]  [org.springframework.security.web.context.SecurityContextPersistenceFilter] [http-nio-8088-exec-6]- Cleared SecurityContextHolder to complete request
  -
