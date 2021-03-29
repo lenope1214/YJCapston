@@ -41,7 +41,7 @@ public class RegisterShopActivity extends AppCompatActivity {
         shop_et_addr_detail = findViewById(R.id.shop_et_addr_detail);
         shop_open = findViewById(R.id.shop_et_open);
         shop_close = findViewById(R.id.shop_et_close);
-        //shop_category = findViewById(R.id.shop_et_category);
+        shop_category = findViewById(R.id.shop_et_category);
         shop_isres = findViewById(R.id.shop_et_isres);
         shop_register = findViewById(R.id.shop_register);
 
@@ -54,9 +54,9 @@ public class RegisterShopActivity extends AppCompatActivity {
         closeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         shop_close.setAdapter(closeAdapter);
 
-//        ArrayAdapter categoryAdapter = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_spinner_item);
-//        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        shop_category.setAdapter(categoryAdapter);
+        ArrayAdapter categoryAdapter = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_spinner_item);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        shop_category.setAdapter(categoryAdapter);
 
         ArrayAdapter isresAdapter = ArrayAdapter.createFromResource(this, R.array.reservation, android.R.layout.simple_spinner_item);
         isresAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -73,9 +73,9 @@ public class RegisterShopActivity extends AppCompatActivity {
                 map.put("addressDetail", shop_et_addr_detail.getText().toString());
                 map.put("openTime", shop_open.getSelectedItem());
                 map.put("closeTime", shop_close.getSelectedItem());
-//                map.put("category", shop_category.getSelectedItem().toString());
+                map.put("category", shop_category.getSelectedItem().toString());
                 map.put("isRePos", shop_isres.getSelectedItem().toString());
-               // map.put("member_id", member_id);
+                //map.put("member_id", member_id);
 
                 SharedPreferences pref =  getSharedPreferences("auth", MODE_PRIVATE);
                 String jwt = pref.getString("token", "");

@@ -44,11 +44,7 @@
                 android:value="@integer/google_play_services_version" />
 
         <activity android:name="com.example.jmjapplication2.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
 
         <activity android:name="com.example.jmjapplication2.MenuActivity">
@@ -79,7 +75,11 @@
         </activity>
 
         <activity android:name="com.example.jmjapplication2.MainActivity_O">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
 
         <activity android:name="com.example.jmjapplication2.RegisterNoActivity">
@@ -91,6 +91,9 @@
         </activity>
 
         <activity android:name="com.example.jmjapplication2.SignupActivity">
+
+        </activity>
+        <activity android:name="com.example.jmjapplication2.ShopDetailActivity">
 
         </activity>
         <activity android:name="com.example.jmjapplication2.LogoutActivity">

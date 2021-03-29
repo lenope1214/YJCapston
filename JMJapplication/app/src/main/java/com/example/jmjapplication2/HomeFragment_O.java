@@ -38,8 +38,8 @@ public class HomeFragment_O extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.home_fragment_o, container, false);
         Bundle bundle = getArguments();
-        String owner_number = bundle.getString("owner_number");
-        Log.d("owner_number@@@@@@@@@@@@", owner_number);
+        //String owner_number = bundle.getString("owner_number");
+        //Log.d("owner_number@@@@@@@@@@@@", owner_number);
 
         toggle_Button = rootView.findViewById(R.id.toggle_button);
         toggle_Button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

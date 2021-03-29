@@ -9,12 +9,13 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Shop {
+public class  Shop {
     private String id;
     private String name;
     private String intro;
-    private int open;
-    private int close;
+    private String openTime;
+    private String closeTime;
     private String address;
-    private char is_res_pos;
+    private char isResPos;
+    private String category;
 }

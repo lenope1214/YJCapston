@@ -2,6 +2,8 @@ package com.example.jmjapplication2;
 
 import com.example.jmjapplication2.dto.MemberDTO;
 import com.example.jmjapplication2.dto.Shop;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -15,15 +17,19 @@ import java.util.Map;
 
 public class DataService {
     //private String BASE_URL = "http://3.34.55.186:8088/api/v1/"; // 학교2
-    private String BASE_URL = "http://192.168.1.17:8088/api/v1/"; // 학교
+    static final public String BASE_URL = "http://192.168.1.17:8088/api/v1/"; // 학교
     //private String BASE_URL = "http://122.202.45.37:8088/api/v1/"; // 집
+
+    Gson gson = new GsonBuilder()
+            .setDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
+            .create();
 
     Retrofit retrofitClient =
             new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .client(new OkHttpClient.Builder().build())
                     .addConverterFactory(ScalarsConverterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create()).build();
+                    .addConverterFactory(GsonConverterFactory.create(gson)).build();
 
     SelectAPI select = retrofitClient.create(SelectAPI.class);
     JoinAPI join = retrofitClient.create(JoinAPI.class);
@@ -33,6 +39,8 @@ public class DataService {
     LoginAPI login = retrofitClient.create(LoginAPI.class);
     MyShopAPI myShop = retrofitClient.create(MyShopAPI.class);
     InsertShop insertShop = retrofitClient.create(InsertShop.class);
+    ShowShopList showShopList = retrofitClient.create(ShowShopList.class);
+    ShowShopOne shop = retrofitClient.create(ShowShopOne.class);
    // CheckUserAPI getUser = retrofitClient.create(CheckUserAPI.class);
 }
 
@@ -60,9 +68,8 @@ interface DeleteAPI {
 }
 
 interface ValidateAPI {
-    @FormUrlEncoded
-    @POST("validate/{id}")
-    Call<ResponseBody> validateOne(@Field("id") String id);
+    @GET("validate/{id}")
+    Call<ResponseBody> validateOne(@Path("id") String id);
 }
 
 //interface LoginAPI {
@@ -97,4 +104,14 @@ interface InsertShop {
 //    @POST("d")
 //    Call<MemberDTO> getUser(@Header("d") String d);
 //}
+
+interface ShowShopList {
+    @GET("shopList")
+    Call<Shop> shopList();
+}
+
+interface ShowShopOne {
+    @GET("shop/{id}")
+    Call<Shop> shop(@Path("id") String id);
+}
 

@@ -35,7 +35,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
                 SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
                 editor.remove("token");
-                editor.commit();
+                editor.apply();
 
                 // 앱 변수버리기
                 ((JMJApplication)getApplication()).setId(null);

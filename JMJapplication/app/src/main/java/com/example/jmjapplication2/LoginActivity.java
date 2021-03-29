@@ -122,8 +122,8 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.putString("token", jwt);
                                 editor.apply();
 
-                                //((JMJApplication)getApplication()).setId(et_login_id.getText().toString());
-                                //((JMJApplication)getApplication()).setJwt(jwt);
+                                ((JMJApplication)getApplication()).setId(et_login_id.getText().toString());
+                                ((JMJApplication)getApplication()).setJwt(jwt);
 
                                 if(role.equals("ROLE_USER")) {
                                     Log.d("result : " , "일반사용자 로그인성공!");
@@ -211,7 +211,7 @@ public class LoginActivity extends AppCompatActivity {
 //                                    SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
 //                                    SharedPreferences.Editor editor = pref.edit();
 //                                    editor.putString("token", response.body().getId());
-//                                    Log.d("getid:", response.body().getId());
+//                                    Log.d("getId:", response.body().getId());
 //                                    editor.apply();
 //
 //                                    ((JMJApplication) getApplication()).setId(response.body().getId());

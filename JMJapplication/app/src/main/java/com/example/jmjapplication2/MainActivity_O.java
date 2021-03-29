@@ -1,26 +1,18 @@
 package com.example.jmjapplication2;
 
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity_O extends AppCompatActivity {
 
     HomeFragment_O homeFragment_o;
-    ReviewFragment_O reviewFragment_o;
-    ChattingFragment_O chattingFragment_o;
-    ReservationFragment_O reservationFragment_o;
-    MenuFragment_O menuFragment_o;
+    PosFragment_O posFragment_o;
+    ShopDetailFragment_O shopDetailFragment_o;
 
     BottomNavigationView bottomNavigation;
 
@@ -29,25 +21,23 @@ public class MainActivity_O extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_o);
 
-        Intent intent = getIntent();
-        String owner_number = intent.getStringExtra("owner_number");
+//        Intent intent = getIntent();
+//        String owner_number = intent.getStringExtra("owner_number");
         //Log.d("result :", id);
 
 
         homeFragment_o = new HomeFragment_O();
-        reviewFragment_o = new ReviewFragment_O();
-        chattingFragment_o = new ChattingFragment_O();
-        reservationFragment_o = new ReservationFragment_O();
-        menuFragment_o = new MenuFragment_O();
+        posFragment_o = new PosFragment_O();
+        shopDetailFragment_o = new ShopDetailFragment_O();
 
-        Bundle bundle = new Bundle();
-        bundle.putString("owner_number", owner_number);
-        homeFragment_o.setArguments(bundle);
+////        Bundle bundle = new Bundle();
+////        bundle.putString("owner_number", owner_number);
+//        homeFragment_o.setArguments(bundle);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment_o).commit();
 
         final BottomNavigationView bottomNavigation = findViewById(R.id.o_bottom_navigation);
-        bottomNavigation.setSelectedItemId(R.id.o_tab3);
+        bottomNavigation.setSelectedItemId(R.id.o_tab2);
 
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -55,29 +45,28 @@ public class MainActivity_O extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.o_tab1:
                         Toast.makeText(getApplicationContext(), "첫 번째 탭 선택됨", Toast.LENGTH_LONG).show();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, reviewFragment_o).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, posFragment_o).commit();
                         return true;
 
                     case R.id.o_tab2:
                         Toast.makeText(getApplicationContext(), "두 번째 탭 선택됨", Toast.LENGTH_LONG).show();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, menuFragment_o).commit();
-                        return true;
-
-                    case R.id.o_tab3:
-
-                        Toast.makeText(getApplicationContext(), "세 번째 탭 선택됨", Toast.LENGTH_LONG).show();
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment_o).commit();
                         return true;
 
-                    case R.id.o_tab4:
-                        Toast.makeText(getApplicationContext(), "네 번째 탭 선택됨", Toast.LENGTH_LONG).show();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, reservationFragment_o).commit();
+                    case R.id.o_tab3:
+                        Toast.makeText(getApplicationContext(), "세 번째 탭 선택됨", Toast.LENGTH_LONG).show();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, shopDetailFragment_o).commit();
                         return true;
 
-                    case R.id.o_tab5:
-                        Toast.makeText(getApplicationContext(), "다섯 번째 탭 선택됨", Toast.LENGTH_LONG).show();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, chattingFragment_o).commit();
-                        return true;
+//                    case R.id.o_tab4:
+//                        Toast.makeText(getApplicationContext(), "네 번째 탭 선택됨", Toast.LENGTH_LONG).show();
+//                        getSupportFragmentManager().beginTransaction().replace(R.id.container, reservationFragment_o).commit();
+//                        return true;
+//
+//                    case R.id.o_tab5:
+//                        Toast.makeText(getApplicationContext(), "다섯 번째 탭 선택됨", Toast.LENGTH_LONG).show();
+//                        getSupportFragmentManager().beginTransaction().replace(R.id.container, chattingFragment_o).commit();
+//                        return true;
                 }
                 return false;
             }
@@ -91,10 +80,11 @@ public class MainActivity_O extends AppCompatActivity {
             bottomNavigation.setSelectedItemId(R.id.tab2);
         } else if(position == 2) {
             bottomNavigation.setSelectedItemId(R.id.tab3);
-        } else if(position == 3) {
-            bottomNavigation.setSelectedItemId(R.id.tab4);
-        } else if(position == 4) {
-            bottomNavigation.setSelectedItemId(R.id.tab5);
         }
+//        else if(position == 3) {
+//            bottomNavigation.setSelectedItemId(R.id.tab4);
+//        } else if(position == 4) {
+//            bottomNavigation.setSelectedItemId(R.id.tab5);
+//        }
     }
 }

@@ -14,6 +14,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3914f3c3-3012-4f9b-bfe7-8ebf7bb64730" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Adapter/DetailPagerAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Adapter/RestaurantRecyclerAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/ApiService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/InfoFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/MenuFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/Net.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/ReviewFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/ShopDetailActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/Menu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/ResShop.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/border_with_bright_color.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/buttonstyle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/buttonstyle2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/drawable_start_image.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/drawable_start_zzimblackimage.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/drawable_start_zzimredimage.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/img_ready.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/o_shopdetail.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/phonecall.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/shop_detail_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/shopedge.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/zzimblack.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/zzimred.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_shop_detail.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_menu.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/restaurant_item_view.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -25,19 +51,36 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/CaptureAct.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/CaptureAct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/ChattingFragment_O.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/ShopDetailFragment_O.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/DataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/DataService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageEightFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageEightFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageFiveFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageFiveFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageFourFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageFourFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageNineFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageNineFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageOneFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageOneFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageSevenFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageSevenFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageSixthFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageSixthFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageThreeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageThreeFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageTwoFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageTwoFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/HomeFragment_O.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/HomeFragment_O.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/JMJApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/JMJApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/LoginActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/MainActivity_O.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/MainActivity_O.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/MenuFragment_O.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/ProfileUpdateActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/ProfileUpdateActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/RegisterShopActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/RegisterShopActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/ReservationFragment_O.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/ReviewFragment_O.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/PosFragment_O.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/SignupActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/SignupActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/MemberDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/MemberDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout-v21/activity_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout-v21/activity_menu.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_new_shop.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_new_shop.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/home_fragment_o.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/home_fragment_o.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/config/jwt/JwtRequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/config/jwt/JwtRequestFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/controller/ApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../jumanji/src/main/java/com/jumanji/capston/controller/ApiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/chatting_fragment_o.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/shop_detail_fragment_o.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/review_fragment_o.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pos_fragment_o.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/menu_bottom_o.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_bottom_o.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/arrays.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/arrays.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,10 +142,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="resourceFile" />
-        <option value="Class" />
-        <option value="layoutResourceFile" />
         <option value="valueResourceFile" />
+        <option value="Interface" />
+        <option value="layoutResourceFile" />
+        <option value="Class" />
+        <option value="resourceFile" />
       </list>
     </option>
   </component>
@@ -124,8 +168,8 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="ce10171a2da52e2c05" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-02-27T03:20:21.398052Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_2_API_29" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-03-28T01:34:14.656321700Z" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
@@ -137,7 +181,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="IntegrationPerformanceTest" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../AndroidStudio/DeviceExplorer/emulator-5554/data/data/com.example.jmjapplication2/shared_prefs" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -146,10 +190,10 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\res\drawable" />
       <recent name="C:\Users\leeym\Documents\AndroidStudio\DeviceExplorer\emulator-5554\data\data\com.example.jmjapplication2\shared_prefs" />
       <recent name="C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app" />
       <recent name="C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\libs" />
-      <recent name="C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\res\drawable" />
       <recent name="C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\res\drawable-v24" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -194,6 +238,17 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="JMJapplication:app [signingReport]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -311,7 +366,14 @@
       <workItem from="1616577758187" duration="17059000" />
       <workItem from="1616629665164" duration="1923000" />
       <workItem from="1616632967673" duration="8424000" />
-      <workItem from="1616647509830" duration="12077000" />
+      <workItem from="1616647509830" duration="21171000" />
+      <workItem from="1616682229184" duration="24558000" />
+      <workItem from="1616750705263" duration="178000" />
+      <workItem from="1616750892126" duration="7788000" />
+      <workItem from="1616774467113" duration="2104000" />
+      <workItem from="1616805432801" duration="31204000" />
+      <workItem from="1616891749134" duration="20204000" />
+      <workItem from="1616974655955" duration="30442000" />
     </task>
     <servers />
   </component>
