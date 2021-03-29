@@ -20,9 +20,9 @@ const Shoplist = ({
     return (
         <>
             <S.ShoplistWrap>
-                <div className="App">
-                    <div className="black-nav">
-                        <div className="left-nav">
+                <div class="App">
+                    <div class="black-nav">
+                        <div class="left-nav">
                             주문
                             <span
                                 style={{
@@ -34,7 +34,7 @@ const Shoplist = ({
                             </span>
                             민족
                         </div>
-                        <div className="center-nav">
+                        <div class="center-nav">
                             <input
                                 type="text"
                                 placeholder="매장을 검색하세요."
@@ -42,8 +42,8 @@ const Shoplist = ({
                             <button>검색</button>
                         </div>
                         {isLogin ? (
-                            <div className="right-nav">
-                                <button className="right1-nav" onClick={logout}>
+                            <div class="right-nav">
+                                <button class="right1-nav" onClick={logout}>
                                     LOGOUT
                                 </button>
                                 <Link to="/mypage">
@@ -51,11 +51,8 @@ const Shoplist = ({
                                 </Link>
                             </div>
                         ) : (
-                            <div className="right-nav">
-                                <button
-                                    className="right1-nav"
-                                    onClick={openModal}
-                                >
+                            <div class="right-nav">
+                                <button class="right1-nav" onClick={openModal}>
                                     LOGIN
                                 </button>
 
@@ -66,7 +63,7 @@ const Shoplist = ({
                         )}
                     </div>
                     <body>
-                        <div className="topCategory">
+                        <div class="topCategory">
                             <li>한식</li>
                             <li>중식</li>
                             <li>일식</li>
@@ -80,21 +77,18 @@ const Shoplist = ({
                             <li class="cityreview">실시간 리뷰</li>
                             <li class="reviewevent">리뷰이벤트</li>
                         </div>
-                        <div className="allbody">
-                            <div className="mainimg">
-                                <img
-                                    className="mainimg-img"
-                                    src={mainpicture}
-                                />
+                        <div class="allbody">
+                            <div class="mainimg">
+                                <img class="mainimg-img" src={mainpicture} />
                             </div>
-                            <div className="leftCategory">
-                                <ul className="moneykind">
+                            <div class="leftCategory">
+                                <ul class="moneykind">
                                     <input type="text" placeholder="최소금액" />
                                     <span>~</span>
                                     <input type="text" placeholder="최대금액" />
                                     <button>검색</button>
                                 </ul>
-                                <ul className="selectcategory">
+                                <ul class="selectcategory">
                                     <button>예약 많은 순</button>
                                     <br />
                                     <button>주문 많은 순</button>
@@ -107,28 +101,53 @@ const Shoplist = ({
                                 </ul>
                             </div>
                             <div clasName="menulist">
-                                <div className="image">
-                                    <img
-                                        className="yangtimjang"
-                                        src={yangtimjang}
-                                    />
+                                <div class="list_shop">
+                                    {restaurant.map((test) => {
+                                        return (
+                                            <Link to="/">
+                                                <button>
+                                                    <div class="testname">
+                                                        <div class="image">
+                                                            <img
+                                                                class="yangtimjang"
+                                                                src={
+                                                                    yangtimjang
+                                                                }
+                                                            />
+                                                        </div>
+                                                        <div class="listcontent">
+                                                            <div class="linesetting">
+                                                                <div class="listname">
+                                                                    {test.name}
+                                                                </div>
+                                                                <div class="listcategory">
+                                                                    {
+                                                                        test.category
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                            <div class="listintro">
+                                                                {test.intro}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                            </Link>
+                                        );
+                                    })}
                                 </div>
-
-                                <div className="content">{restaurant.name}</div>
-
-                                <span>
-                                    세상에서 제일 맛있는 불고기 김밥
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                </span>
-                                <span>메인메뉴 : 김밥</span>
-                                <span>1줄 2000 &#8361;</span>
+                                {/* {restaurant.map((test, i) => {
+                                    return <div test={i}>{test.intro}</div>;
+                                })}
+                                {restaurant.map((test, i) => {
+                                    return <div test={i}>{test.category}</div>;
+                                })} */}
                             </div>
                         </div>
                     </body>
+                    <footer>
+                        copyright 2021 yeongJin university capston WDA team 4.
+                    </footer>
                 </div>
             </S.ShoplistWrap>
 

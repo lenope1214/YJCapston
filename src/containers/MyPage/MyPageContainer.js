@@ -29,6 +29,7 @@ const MyPageContainer = () => {
     useEffect(() => {
         getMyPage();
     }, []);
+    console.log("res", user);
 
     const getMyPage = () => {
         getMyInfo()

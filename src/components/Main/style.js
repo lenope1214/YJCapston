@@ -71,6 +71,9 @@ export const MainWrap = styled.div`
         visibility: true;
         height: 55px;
     }
+    .center-nav button {
+        cursor: pointer;
+    }
 
     .right1-nav {
         width: 100px;
@@ -206,6 +209,9 @@ export const MainWrap = styled.div`
         margin-left: 13%;
         z-index: 2;
     }
+    .but-item2-but button {
+        cursor: pointer;
+    }
 
     .but-item3 {
         position: absolute;
@@ -251,6 +257,10 @@ export const MainWrap = styled.div`
     .but-item3-but {
         margin-left: 5%;
         z-index: 2;
+        cursor: pointer;
+    }
+    .but-item3-but button {
+        cursor: pointer;
     }
 
     .App-logo {

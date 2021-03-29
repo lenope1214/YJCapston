@@ -39,11 +39,21 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
         showShoplist();
     }, []);
 
+    console.log("restaurant :", restaurant);
+
     const showShoplist = () => {
         getShoplist()
             .then((res) => {
-                setRestaurant(res.data);
-                console.log(restaurant);
+                const rstrt = res.data.map((rstrt) => {
+                    return {
+                        address: rstrt.address,
+                        name: rstrt.name,
+                        intro: rstrt.intro,
+                        category: rstrt.category,
+                    };
+                });
+
+                setRestaurant(rstrt);
             })
             .catch((err) => {
                 alert(err);

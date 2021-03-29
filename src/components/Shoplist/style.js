@@ -405,7 +405,7 @@ export const ShoplistWrap = styled.div`
     .moneykind input {
         width: 70px;
         background-color: #fff8f0;
-        border: 1;
+        border: 2;
         color: black;
         padding: 5px 0;
         text-align: center;
@@ -418,5 +418,32 @@ export const ShoplistWrap = styled.div`
         border-style: solid;
     }
     .moneykind button {
+    }
+    .list_shop {
+        margin: 0 auto;
+        padding-top: 10px;
+    }
+    .list_shop button {
+        min-width: 60%;
+        border: none;
+        display: inline-block;
+        margin: 0 auto;
+        background-color: white;
+    }
+    .testname {
+        position: relative;
+        display: flex;
+        float: left;
+        color: black;
+        cursor: pointer;
+    }
+
+    .listname {
+        padding: 15px;
+        font-size: 30px;
+        font-weight: bold;
+    }
+    .linesetting {
+        float: left;
     }
 `;
