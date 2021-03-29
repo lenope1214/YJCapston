@@ -1,6 +1,8 @@
 import React from "react";
 import * as S from "./style";
 import { Link } from "react-router-dom";
+import mainpicture from "./img/사용자페이지메인.jpg";
+import yangtimjang from "./img/yangtimjang.png";
 
 const Shoplist = ({
     isLogin,
@@ -13,8 +15,8 @@ const Shoplist = ({
     login,
     closeModal,
     modal,
+    restaurant,
 }) => {
-    console.log(isLogin);
     return (
         <>
             <S.ShoplistWrap>
@@ -36,25 +38,8 @@ const Shoplist = ({
                             <input
                                 type="text"
                                 placeholder="매장을 검색하세요."
-                                style={{
-                                    width: "300px",
-                                    border: "0",
-                                    borderRadius: "7px 0 0 7px",
-                                    backgroundColor: "white",
-                                    hegight: "10px",
-                                }}
                             ></input>
-                            <button
-                                style={{
-                                    border: "0",
-                                    width: "10%",
-                                    borderRadius: "0 7px 7px 0",
-                                    backgroundColor: "white",
-                                    color: "grey",
-                                }}
-                            >
-                                검색
-                            </button>
+                            <button>검색</button>
                         </div>
                         {isLogin ? (
                             <div className="right-nav">
@@ -80,6 +65,70 @@ const Shoplist = ({
                             </div>
                         )}
                     </div>
+                    <body>
+                        <div className="topCategory">
+                            <li>한식</li>
+                            <li>중식</li>
+                            <li>일식</li>
+                            <li>양식</li>
+                            <li>술집</li>
+                            <li>분식</li>
+                            <li>고기</li>
+                            <li>찜탕</li>
+                            <li>카페 디저트</li>
+                            <li>패스트푸드</li>
+                            <li class="cityreview">실시간 리뷰</li>
+                            <li class="reviewevent">리뷰이벤트</li>
+                        </div>
+                        <div className="allbody">
+                            <div className="mainimg">
+                                <img
+                                    className="mainimg-img"
+                                    src={mainpicture}
+                                />
+                            </div>
+                            <div className="leftCategory">
+                                <ul className="moneykind">
+                                    <input type="text" placeholder="최소금액" />
+                                    <span>~</span>
+                                    <input type="text" placeholder="최대금액" />
+                                    <button>검색</button>
+                                </ul>
+                                <ul className="selectcategory">
+                                    <button>예약 많은 순</button>
+                                    <br />
+                                    <button>주문 많은 순</button>
+                                    <br />
+                                    <button>
+                                        최소주문금액 <br /> ↓
+                                    </button>
+                                    <br />
+                                    <button>별점순</button>
+                                </ul>
+                            </div>
+                            <div clasName="menulist">
+                                <div className="image">
+                                    <img
+                                        className="yangtimjang"
+                                        src={yangtimjang}
+                                    />
+                                </div>
+
+                                <div className="content">{restaurant.name}</div>
+
+                                <span>
+                                    세상에서 제일 맛있는 불고기 김밥
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                </span>
+                                <span>메인메뉴 : 김밥</span>
+                                <span>1줄 2000 &#8361;</span>
+                            </div>
+                        </div>
+                    </body>
                 </div>
             </S.ShoplistWrap>
 

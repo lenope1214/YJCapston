@@ -8,10 +8,6 @@ export const getMyInfo = () => {
     });
 };
 
-export const password = () => {
-    return;
-};
-
 export const putMypage = (pw) => {
     return apiDefault().put(
         "/user",

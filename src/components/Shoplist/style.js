@@ -25,23 +25,38 @@ export const ShoplistWrap = styled.div`
         font-weight: normal;
         font-style: normal;
     }
+    @font-face {
+        font-family: "Wemakeprice-SemiBold";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Wemakeprice-SemiBold.woff")
+            format("woff");
+        font-weight: normal;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: "Wemakeprice-Regular";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Wemakeprice-Regular.woff")
+            format("woff");
+        font-weight: normal;
+        font-style: normal;
+    }
+
     .App {
         text-align: center;
-        background-color: black;
+        background-color: white;
     }
 
     .black-nav {
         width: 100%;
-        color: white;
+        color: black;
         display: flex;
         padding-top: 30px;
-        padding-bottom: 30px;
+        padding-bottom: 10px;
         font-weight: 700;
         font-size: 33px;
         font-family: "Wemakeprice-Bold";
         position: fixed;
         z-index: 8;
-        background-color: black;
+        background-color: white;
     }
     .adimg {
         position: relative;
@@ -54,7 +69,7 @@ export const ShoplistWrap = styled.div`
         position: absolute;
         font-family: "Wemakeprice-Bold";
         font-size: 80px;
-        color: white;
+        color: black;
         text-align: left;
         line-height: 60px;
         margin-top: 300px;
@@ -67,17 +82,40 @@ export const ShoplistWrap = styled.div`
     }
 
     .center-nav {
+        border: 0;
         display: flex;
-        flex-grow: 2;
+        flex-grow: 1;
         visibility: true;
-        height: 55px;
+        height: 40px;
+        opacity: 1;
+    }
+    .center-nav input {
+        width: 300px;
+        border-color: #a7a7a7;
+        border-right: 1;
+        border-radius: 2px 0 0 2px;
+        background-color: white;
+        height: 40px;
+        opacity: 1;
+        border-style: solid;
+    }
+
+    .center-nav button {
+        border-color: #a7a7a7;
+        width: 10%;
+        border-left: 0;
+        border-radius: 0 2px 2px 0;
+        background-color: white;
+        height: 46px;
+        opacity: 1;
+        border-style: solid;
     }
 
     .right1-nav {
         width: 100px;
-        background-color: #f2f2f2bb;
+        background-color: black;
         border: none;
-        color: #fff;
+        color: white;
         padding: 15px 0;
         text-align: center;
         text-decoration: none;
@@ -89,9 +127,9 @@ export const ShoplistWrap = styled.div`
     }
     .right2-nav {
         width: 100px;
-        background-color: #f2f2f2bb;
+        background-color: black;
         border: none;
-        color: #fff;
+        color: white;
         padding: 15px 0;
         text-align: center;
         text-decoration: none;
@@ -304,5 +342,81 @@ export const ShoplistWrap = styled.div`
         color: white;
         z-index: 10;
         border: none;
+    }
+    body {
+        padding-top: 100px;
+        color: black;
+    }
+    .mainimg {
+        box-shadow: 0px 0, 0 1px #a7a7a7, 0px 0 #a7a7a7;
+        margin: 0 auto;
+        padding: 5px;
+    }
+    .mainimg img {
+        width: 900px;
+        height: 500px;
+        margin: 0 auto;
+    }
+    .yangtimjang {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 20px;
+        box-shadow: -2px 0 #a7a7a7, 0 2px #a7a7a7, 2px 0 #a7a7a7, 0 -2px #a7a7a7;
+    }
+    .topCategory li {
+        display: inline-block;
+        font-size: 14px;
+        padding: 0.5% 1% 0.5% 2%;
+    }
+    .topCategory {
+        box-shadow: 0px 0, 0 1px #a7a7a7, 0px 0 #a7a7a7, 0 -1px #a7a7a7;
+        margin: 0 auto;
+    }
+    .cityreview {
+        color: blue;
+    }
+    .reviewevent {
+        color: red;
+    }
+    .leftCategory {
+        position: fixed;
+        float: left;
+        width: 270px;
+        top: 80%;
+        left: 10%;
+        transform: translate(-50%, -50%);
+    }
+    .selectcategory Button {
+        width: 100px;
+        background-color: #fff8f0;
+        border: 1;
+        color: black;
+        padding: 5px 0;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 13px;
+        margin: 10px;
+        cursor: pointer;
+        opacity: 1;
+        border-style: solid;
+    }
+    .moneykind input {
+        width: 70px;
+        background-color: #fff8f0;
+        border: 1;
+        color: black;
+        padding: 5px 0;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 13px;
+        margin: 5px;
+        cursor: pointer;
+        opacity: 1;
+        border-style: solid;
+    }
+    .moneykind button {
     }
 `;

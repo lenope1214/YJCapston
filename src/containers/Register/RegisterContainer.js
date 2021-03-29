@@ -35,10 +35,10 @@ const RegisterContainer = () => {
     };
 
     if (owner === true) {
-        check = "o";
+        check = "ROLE_OWNER";
         console.log("트류");
     } else {
-        check = "u";
+        check = "ROLE_USER";
         console.log("폴스");
     }
 
@@ -162,7 +162,8 @@ const RegisterContainer = () => {
                 alert("사용 가능한 아이디 입니다.");
             })
             .catch((err) => {
-                alert("이미 있는 아이디입니다.");
+                console.log(err);
+                alert("이미 존재하는 아이디 입니다.");
             });
     };
 

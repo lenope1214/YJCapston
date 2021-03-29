@@ -6,3 +6,7 @@ export const postLogin = (id, pw) => {
         password: pw,
     });
 };
+
+export const getShoplist = () => {
+    return apiDefault().get("/shopList", {});
+};

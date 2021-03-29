@@ -21,7 +21,7 @@ export const postRegister = (
         email: email,
         birthday: birthday,
         address: address,
-        address_detail: address1,
+        addressDetail: address1,
     });
 };
 

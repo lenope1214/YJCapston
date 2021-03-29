@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Shoplist from "../../components/Shoplist/Shoplist";
 import { useHistory } from "react-router-dom";
-import { postLogin } from "../../lib/Main/index";
+import { postLogin, getShoplist } from "../../lib/Shoplist/index";
 
 const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
     const history = useHistory();
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
     const [modal, setModal] = useState(false);
+    const [restaurant, setRestaurant] = useState([
+        {
+            name: "",
+            category: "",
+            address: "",
+            intro: "",
+        },
+    ]);
 
     const openmodal = () => {
         setModal(true);
@@ -26,7 +34,21 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
         const value = e.target.value;
         setPw(value);
     };
-    console.log(isLogin);
+
+    useEffect(() => {
+        showShoplist();
+    }, []);
+
+    const showShoplist = () => {
+        getShoplist()
+            .then((res) => {
+                setRestaurant(res.data);
+                console.log(restaurant);
+            })
+            .catch((err) => {
+                alert(err);
+            });
+    };
 
     const login = () => {
         postLogin(id, pw)
@@ -66,6 +88,7 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
             login={login}
             openModal={openmodal}
             closeModal={closemodal}
+            restaurant={restaurant}
         />
     );
 };
