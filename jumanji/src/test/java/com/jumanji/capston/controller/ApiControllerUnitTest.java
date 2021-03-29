@@ -6,16 +6,13 @@ package com.jumanji.capston.controller;
 //    => Filter, ControllerAdvice(exception)
 
 import com.jumanji.capston.service.UserService;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 
-@Slf4j
+
 @WebMvcTest // 얘를 붙이면 Controller, Filter, ControllerAdvice 등이 메모리에 올라감. 단위테스트용.
 // WebMvcTest에 웬만한 어노테이션이 있어서 굉장히 유용.
 public class ApiControllerUnitTest {

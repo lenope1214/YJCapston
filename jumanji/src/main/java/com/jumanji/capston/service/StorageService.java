@@ -1,37 +1,29 @@
-//package com.jumanji.capston.service;
-//import java.io.IOException;
-//import java.io.InputStream;
-//import java.net.MalformedURLException;
-//import java.nio.file.Files;
-//import java.nio.file.Path;
-//import java.nio.file.Paths;
-//import java.nio.file.StandardCopyOption;
-//import java.util.stream.Stream;
-//
-//import com.codesample.mymug.storage.StorageException;
-//import com.codesample.mymug.storage.StorageFileNotFoundException;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.core.io.Resource;
-//import org.springframework.core.io.UrlResource;
-//import org.springframework.stereotype.Service;
-//import com.codesample.mymug.config.StorageConfig;
-//import org.springframework.util.FileSystemUtils;
-//import org.springframework.web.multipart.MultipartFile;
-//
-//@Service
-//public class StorageService {
-//    private final Path rootLocation;
-//    @Autowired
-//    public StorageService(StorageConfig config) {
-//        this.rootLocation = Paths.get(config.getLocation());
-//    }
-//
-//    public void store(MultipartFile file) {
+package com.jumanji.capston.service;
+
+import com.jumanji.capston.config.StorageConfig;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+@Service
+public class StorageService {
+    private final Path rootLocation;
+
+
+    @Autowired
+    public StorageService(StorageConfig config) {
+        System.out.println("StorageServicec constructor...");
+        this.rootLocation = Paths.get(config.getLocation());
+    }
+////
+//    public void store(MultipartFile file, String shopId) {ZX
 //        try {
 //            if (file.isEmpty()) {
 //                throw new StorageException("Failed to store empty file.");
 //            }
-//            Path destinationFile = this.rootLocation.resolve(Paths.get(file.getOriginalFilename()))
+//            Path destinationFile = this.rootLocation.resolve(Paths.get(Objects.requireNonNull(file.getOriginalFilename())) + shopId)
 //                    .normalize().toAbsolutePath();
 //            if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
 //                throw new StorageException("Cannot store file outside current directory.");
@@ -87,4 +79,4 @@
 //            throw new StorageException("Could not initialize storage", e);
 //        }
 //    }
-//}
+}

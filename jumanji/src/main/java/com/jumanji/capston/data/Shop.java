@@ -2,8 +2,7 @@ package com.jumanji.capston.data;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -13,19 +12,16 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name="shops")
+@NoArgsConstructor
 public class Shop {
     @Id
     private String id; //매장번호 ( 사업자번호 )
     private String name; //매장이름
     private String intro; //매장소개
-//    @JsonFormat(pattern = "HH:mm:ss")
-//    private Date open_time; //오픈시간
-//    @JsonFormat(pattern = "HH:mm:ss")
-//    private Date close_time; //마감시간
-    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="HH:mm", timezone="Asia/Seoul")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     @Column(name = "open_time")
     private Date openTime;
-    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="HH:mm", timezone="Asia/Seoul")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     @Column(name = "close_time")
     private Date closeTime;
     private String address; //매장주소
@@ -37,4 +33,17 @@ public class Shop {
     @ManyToOne
     @JoinColumn(name="owner_id")
     private User owner;
+
+    @Builder
+    public Shop(String shopId, String name, String intro, Date openTime, Date closeTime, String address, String addressDetail, String category) {
+        this.id = shopId;
+        this.name = name;
+        this.intro = intro;
+        this.openTime = openTime;
+        this.closeTime = closeTime;
+        this.address = address;
+        this.addressDetail = addressDetail;
+        this.category = category;
+    }
+
 }

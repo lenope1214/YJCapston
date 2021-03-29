@@ -5,12 +5,17 @@ import com.jumanji.capston.repository.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
 public class MenuService {
     @Autowired
     MenuRepository menuRepository;
+
+    public BigDecimal getMenuSeqNextVal() {
+        return menuRepository.getMenuSeqNextVal();
+    }
 
     public Menu findById(String id) {
         return menuRepository.findById(id)
@@ -25,12 +30,15 @@ public class MenuService {
     public String delete(Menu _menu) {
         System.out.println("");
         Menu menu = menuRepository.findById(_menu.getId()).
-        orElseThrow(() -> new IllegalArgumentException("id를 확인해주세요!!!"));
+                orElseThrow(() -> new IllegalArgumentException("id를 확인해주세요!!!"));
         menuRepository.delete(menu);
         return "ok";
     }
 
-    public List<Menu> findByshopId(String shopId){ return menuRepository.findByIdContains(shopId);}
+    public List<Menu> findByshopId(String shopId) {
+        return menuRepository.findByIdContains(shopId);
+    }
+
     public List<Menu> findAll() {
         return menuRepository.findAll();
     }

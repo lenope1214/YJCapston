@@ -18,7 +18,7 @@ public class Reservation implements Serializable {
     @JoinColumn(name="order_id")
     private Order order; //아이디
     private int people; // 사람 수
-    private char delay; // 이름
+    private char delay; // 딜레이
     @Column(name = "arrive_time")
     private Timestamp arriveTime; // 가게 도착시간
 }

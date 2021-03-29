@@ -13,15 +13,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/v1")
 public class ShopController {
-    Logger logger;
+//    Logger logger;
 
 
     @Autowired
@@ -43,13 +44,31 @@ public class ShopController {
 
     @Transactional
     @PostMapping("/shop") // 매장등록
-    public ResponseEntity<?> insertShop(@RequestBody Shop shop) {
-        System.out.println("주소 : " + shop.getAddress());
-        System.out.println("상세주소 : " + shop.getAddressDetail());
+    public ResponseEntity<?> insertShop(@RequestBody ShopRequest shopRequest) throws ParseException {
         User userEntity = userService.findById(SecurityContextHolder.getContext().getAuthentication().getName());
 //        System.out.println("매장등록 요청 ID : " + userEntity.getId());
-        logger.log(Level.INFO, "open time and close time\n" + shop.getOpenTime() +"\n" + shop.getCloseTime());
-        Object result = shopService.insert(shop, userEntity);
+//        logger.log(Level.INFO, "open time and close time\n" + shop.getOpenTime() +"\n" + shop.getCloseTime());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        Date openTime = null;
+        Date closeTime = null;
+        try {
+            openTime = dateFormat.parse(shopRequest.getOpenTime());
+            closeTime = dateFormat.parse(shopRequest.getCloseTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Shop shopEntity =
+                Shop.builder()
+                        .shopId(shopRequest.getShopId())
+                        .name(shopRequest.getName())
+                        .intro(shopRequest.getIntro())
+                        .openTime(openTime)
+                        .closeTime(closeTime)
+                        .address(shopRequest.getAddress())
+                        .addressDetail(shopRequest.getAddressDetail())
+                        .category(shopRequest.getCategory())
+                        .build();
+        Object result = shopService.insert(shopEntity, userEntity);
         if (result.getClass() == Shop.class) return new ResponseEntity<>(result, HttpStatus.CREATED);
         else if (result.equals("duplicate"))
             return new ResponseEntity<>("사업자 번호가 중복입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
@@ -73,9 +92,10 @@ public class ShopController {
 
 
     @Transactional(readOnly = true)
-    @GetMapping("/shop")
-    public ResponseEntity<?> getShopById(@RequestBody ShopRequest shopRequest){
-        Shop shop = shopService.findById(shopRequest.getShopId());
+    @GetMapping("/shop/{shopId}")
+    public ResponseEntity<?> getShopById(@PathVariable String shopId){
+        System.out.println("shop id : " + shopId);
+        Shop shop = shopService.findById(shopId);
         if(shop == null)return new ResponseEntity<>("없는 매장번호", httpHeaders, HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(shop, HttpStatus.OK);
     }
@@ -110,6 +130,6 @@ public class ShopController {
         }
         return new ResponseEntity<>("매장이 없습니다.", httpHeaders, HttpStatus.OK);
 
-//        return new ResponseEntity<>(shopCatList, httpHeaders, HttpStatus.OK); // 이렇게 하면 오류. 무슨 한글 변환하면서 오류나나봄!
+//        return new ResponseEntity<>(shopCatList, httpHeaders, HttpStatus.OK); // 이렇게 하면 오류. 객체를 utf로 변환 시켜서 그런지 무슨 한글 변환하면서 오류나나봄!
     }
 }
