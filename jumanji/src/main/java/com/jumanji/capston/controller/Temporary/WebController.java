@@ -105,5 +105,7 @@ public class WebController {
         return "kakaoApiTest";
     }
 
+    @GetMapping("/uploadForm")
+    public String uploadForm(){ return "uploadForm";}
 
 }
