@@ -35,7 +35,7 @@ public class ApiController {
         User userEntity = userService.insert(user);
         if (userEntity == null) return new ResponseEntity<>("회원가입 실패", httpHeaders, HttpStatus.BAD_REQUEST);
         else {
-            System.out.println("가입일자 : " + userEntity.getSignDate());
+//            System.out.println("가입일자 : " + userEntity.getSignDate());
             return new ResponseEntity<>(userEntity.getId(), HttpStatus.CREATED);
         }
         // 얘는 좀 더 세부화 시켜서 리턴해줍시다...!!! 는 너무 어렵고~
@@ -44,7 +44,7 @@ public class ApiController {
     @Transactional(readOnly = true) // 트랜잭션이긴 한데 읽기 전용으로 속도 업 !
     @PostMapping("/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody User _user) throws Exception {
-        System.out.println("/api/v1/login 요청");
+//        System.out.println("/api/v1/login 요청");
         final User user = userService.findById(_user.getId());
         if (user == null) return new ResponseEntity<>("없는 유저 입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         if (userService.checkPW(_user, user.getPassword())) {

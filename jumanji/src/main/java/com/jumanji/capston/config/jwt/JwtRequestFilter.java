@@ -37,11 +37,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                     Arrays.asList(
                             "/api/v1/login"
                             , "/authenticate"  // 얜 필수..!
+                            , "/api/v1/join"
                             , "/api/v1/shopList"
                             , "/api/v1/validate"
                             , "/api/v1/validateDscNo"
                             , "/api/v1/searchAddr"
                             , "/api/v1/shop"
+                            , "/api/v1/shopList"
+                            , "/api/v1/menu"
+                            , "/api/v1/menuList"
                     ));
 
 
@@ -49,15 +53,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-        System.out.println("In JwtRequestFilter");
+//        System.out.println("In JwtRequestFilter");
         final String requestTokenHeader = request.getHeader("Authorization");
-        System.out.println("TOKEN : " + requestTokenHeader );
+//        System.out.println("TOKEN : " + requestTokenHeader );
         String username = null;
         String jwtToken = null;
         boolean jwtFlag = false;
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) { // 헤더에 Authorization 이 있고 Bearer로 시작하면,
             jwtToken = requestTokenHeader.substring(7);
-            System.out.println("Parsing jwtToken : " + jwtToken);
+//            System.out.println("Parsing jwtToken : " + jwtToken);
             try {
                 username = jwtTokenUtil.getUsernameFromToken(jwtToken);
                 System.out.println("username : " + username);
@@ -82,7 +86,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         if(username != null) {
             if(SecurityContextHolder.getContext().getAuthentication() == null){
-                System.out.println("doFilterInternal -> username != null ... ");
+//                System.out.println("doFilterInternal -> username != null ... ");
                 PrincipalDetails userDetails = this.jwtUserDetailService.loadUserByUsername(username);
 
                 if(jwtTokenUtil.validateToken(jwtToken, userDetails)) {

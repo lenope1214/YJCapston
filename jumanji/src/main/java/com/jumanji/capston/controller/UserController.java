@@ -1,9 +1,11 @@
 package com.jumanji.capston.controller;
 
+import com.jumanji.capston.config.jwt.JwtTokenUtil;
 import com.jumanji.capston.data.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,9 @@ import java.util.List;
 public class UserController {
     @Autowired
     com.jumanji.capston.service.UserService userService;
+
+    @Autowired
+    JwtTokenUtil jwtTokenUtil;
 
     @Transactional(readOnly = true)
     @GetMapping("/user/{id}")
@@ -35,11 +40,12 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public ResponseEntity<?> selectMyInfo() {
+    public ResponseEntity<?> selectMyInfo(@RequestHeader String authorization) {
         System.out.println("APIcon /user 진입.");
-        System.out.println("로긘 유저 id : " + SecurityContextHolder.getContext().getAuthentication().getName());
+        String loginId = jwtTokenUtil.getUsername(authorization);
+        System.out.println("로긘 유저 id : " + loginId);
 
-        User userEntity = userService.findById(SecurityContextHolder.getContext().getAuthentication().getName());
+        User userEntity = userService.findById(loginId);
 
         if (userEntity == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -62,7 +68,7 @@ public class UserController {
     }
 
     @Transactional(readOnly = true)
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/userList") // getUserList
     public ResponseEntity<?> getUserList() {
         List<User> userList;

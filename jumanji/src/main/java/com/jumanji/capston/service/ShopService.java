@@ -1,6 +1,5 @@
 package com.jumanji.capston.service;
 
-import com.jumanji.capston.data.Request.ShopRequest;
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.ShopRepository;
@@ -25,15 +24,14 @@ public class ShopService {
 
     public Object insert(Shop shop, User owner){
         if(shopRepository.findById(shop.getId()).isPresent()){
-            System.out.println("중복이라 일케 보내주잖아 ㅡㅡ");
+//            System.out.println("중복이라 일케 보내주잖아 ㅡㅡ");
             return "duplicate";
         }
-        System.out.println("저장 전");
+//        System.out.println("저장 전");
         shop.setOwner(owner);
-        Shop shopEntity = shopRepository.save(shop);
-        System.out.println("저장 후");
-        System.out.println("저장 : " + shopEntity);
-        return shopEntity;
+        //        System.out.println("저장 후");
+//        System.out.println("저장 : " + shopEntity);
+        return shopRepository.save(shop);
     }
 
     public String delete(String id){
@@ -54,7 +52,7 @@ public class ShopService {
     }
 
     public Serializable getShopIntro(String shopId){
-        System.out.println("요청 매장 id : " + shopId );
+//        System.out.println("요청 매장 id : " + shopId );
         if(shopRepository.findById(shopId).isPresent()) {
             return shopRepository.findById(shopId).get().getIntro();
         }
@@ -64,11 +62,29 @@ public class ShopService {
         }
     }
 
-    public Shop haveShop(String id){
-        return shopRepository.findByOwnerId_Id(id);
+    public List<Shop> haveShop(String id){
+        return shopRepository.findByOwner_Id(id);
     }
 
     public List<Shop> findByCat(String category) {
         return shopRepository.findByCategory(category);
+    }
+
+    public char updateIsOpen(Shop shop){
+        if(shop.getIsOpen() == 'Y')shop.setIsOpen('N');
+        else shop.setIsOpen('Y');
+        shopRepository.save(shop);
+        return shop.getIsOpen();
+    }
+
+    public char updateIsRsPos(Shop shop){
+        if(shop.getIsRsPos() == 'Y')shop.setIsRsPos('N');
+        else shop.setIsRsPos('Y');
+        shopRepository.save(shop);
+        return shop.getIsRsPos();
+    }
+
+    public List<Shop> findByOwnerId(String userId) {
+        return shopRepository.findByOwner_Id(userId);
     }
 }

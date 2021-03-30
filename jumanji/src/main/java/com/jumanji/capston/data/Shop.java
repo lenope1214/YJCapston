@@ -30,11 +30,12 @@ public class Shop {
     @Column(name = "is_rs_pos")
     private char isRsPos = 'Y'; //예약가능여부
     private String category;
+    private char isOpen;
     @ManyToOne
     @JoinColumn(name="owner_id")
     private User owner;
 
-    @Builder
+    @Builder(builderMethodName = "createShop")
     public Shop(String shopId, String name, String intro, Date openTime, Date closeTime, String address, String addressDetail, String category) {
         this.id = shopId;
         this.name = name;
@@ -44,6 +45,8 @@ public class Shop {
         this.address = address;
         this.addressDetail = addressDetail;
         this.category = category;
+        this.isOpen = 'N';
+        this.isRsPos = 'N';
     }
 
 }

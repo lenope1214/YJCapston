@@ -8,7 +8,9 @@ import java.util.List;
 public interface ShopRepository extends JpaRepository<Shop, String> {
 
 
-    Shop findByOwnerId_Id(String id);
+//    Shop findByOwner_Id(String id);
 
     List<Shop> findByCategory(String category);
+
+    List<Shop> findByOwner_Id(String owner_id);
 }

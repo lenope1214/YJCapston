@@ -24,6 +24,10 @@ public class JwtTokenUtil implements JwtProperties {
     @Autowired
     UserRepository userRepository;
 
+    public String getUsername(String token){
+        return getUsernameFromToken(token.replace("Bearer ", ""));
+    }
+
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getId);
     }

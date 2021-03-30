@@ -1,5 +1,6 @@
 package com.jumanji.capston.controller;
 
+import com.jumanji.capston.config.jwt.JwtTokenUtil;
 import com.jumanji.capston.data.Request.ShopRequest;
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.data.User;
@@ -32,21 +33,27 @@ public class ShopController {
     UserService userService;
 
     @Autowired
+    JwtTokenUtil jwtTokenUtil;
+
+    @Autowired
     HttpHeaders httpHeaders;
 
     @Transactional(readOnly = true)
     @GetMapping("/shopList")
     public ResponseEntity<?> getShopList() {
-        System.out.println("샵리스트 >> ");
+//        System.out.println("샵리스트 >> ");
         List<Shop> shopList = shopService.findAll();
         return new ResponseEntity<>(shopList, HttpStatus.OK);
     }
 
     @Transactional
     @PostMapping("/shop") // 매장등록
-    public ResponseEntity<?> insertShop(@RequestBody ShopRequest shopRequest) throws ParseException {
-        User userEntity = userService.findById(SecurityContextHolder.getContext().getAuthentication().getName());
-//        System.out.println("매장등록 요청 ID : " + userEntity.getId());
+    public ResponseEntity<?> insertShop(@RequestBody ShopRequest shopRequest, @RequestHeader String authorization) throws ParseException {
+        System.out.println("Auth : " + authorization);
+        String loginId = jwtTokenUtil.getUsername(authorization);
+        System.out.println("로그인 id : " + loginId);
+        User userEntity = userService.findById(loginId);
+        System.out.println("매장등록 요청 ID : " + userEntity.getId());
 //        logger.log(Level.INFO, "open time and close time\n" + shop.getOpenTime() +"\n" + shop.getCloseTime());
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
         Date openTime = null;
@@ -57,8 +64,9 @@ public class ShopController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        System.out.println("shopRequest.toString() : " + shopRequest.toString());
         Shop shopEntity =
-                Shop.builder()
+                Shop.createShop()
                         .shopId(shopRequest.getShopId())
                         .name(shopRequest.getName())
                         .intro(shopRequest.getIntro())
@@ -88,35 +96,31 @@ public class ShopController {
 //    }
 
 
-
-
-
     @Transactional(readOnly = true)
     @GetMapping("/shop/{shopId}")
-    public ResponseEntity<?> getShopById(@PathVariable String shopId){
+    public ResponseEntity<?> getShopById(@PathVariable String shopId) {
         System.out.println("shop id : " + shopId);
         Shop shop = shopService.findById(shopId);
-        if(shop == null)return new ResponseEntity<>("없는 매장번호", httpHeaders, HttpStatus.BAD_REQUEST);
+        if (shop == null) return new ResponseEntity<>("없는 매장번호", httpHeaders, HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(shop, HttpStatus.OK);
     }
 
     @Transactional(readOnly = true)
     @GetMapping("/myShop")
-    public ResponseEntity<?> getMyShop() {
-        User userEntity = userService.findById(SecurityContextHolder.getContext().getAuthentication().getName());
+    public ResponseEntity<?> getMyShop(@RequestHeader String authorization) {
+        String loginId = jwtTokenUtil.getUsername(authorization);
+        User userEntity = userService.findById(loginId);
         if (userEntity == null) return new ResponseEntity<>("로그인 되어있지 않습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         System.out.println("접속 유저 ID : " + userEntity.getId());
-        Object result = shopService.haveShop(userEntity.getId());
+        List<Shop> result = shopService.haveShop(userEntity.getId());
         if (result == null) return new ResponseEntity<>("매장 등록이 되어있지 않습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
-        if (result.getClass() == Shop.class) return new ResponseEntity<>(result, HttpStatus.OK);
-
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @Transactional(readOnly = true)
-    @GetMapping("/shopIntro")
-    public ResponseEntity<?> getShopIntro(@RequestBody ShopRequest shopRequest) {
-        return new ResponseEntity<>(shopService.getShopIntro(shopRequest.getShopId()), httpHeaders, HttpStatus.OK);
+    @GetMapping("/shopIntro/{shopId}")
+    public ResponseEntity<?> getShopIntro(@PathVariable String shopId) {
+        return new ResponseEntity<>(shopService.getShopIntro(shopId), httpHeaders, HttpStatus.OK);
     }
 
     @Transactional(readOnly = true)
@@ -124,12 +128,36 @@ public class ShopController {
     public ResponseEntity<?> getShopListByCategory(@PathVariable String category) {
         System.out.println("캣 : " + category);
         List<Shop> shopCatList = shopService.findByCat(category);
-        if(shopCatList.size() != 0){
+        if (shopCatList.size() != 0) {
             System.out.println("샵캣리스트 :" + shopCatList.get(0));
             return new ResponseEntity<>(shopCatList, HttpStatus.OK);
         }
         return new ResponseEntity<>("매장이 없습니다.", httpHeaders, HttpStatus.OK);
 
 //        return new ResponseEntity<>(shopCatList, httpHeaders, HttpStatus.OK); // 이렇게 하면 오류. 객체를 utf로 변환 시켜서 그런지 무슨 한글 변환하면서 오류나나봄!
+    }
+
+//    @Transactional
+//    @PutMapping("/shop/isOpen")
+//    public ResponseEntity<?> updateShopIsOpen() {
+//        List<Shop> shopList = getLoginUserShop();
+//        if (shopList.isEmpty()) return new ResponseEntity<>("매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
+//        System.out.println("반전성공");
+//        return new ResponseEntity<>(shopService.updateIsOpen(shopList), HttpStatus.OK);
+//    }
+
+//    @Transactional
+//    @PutMapping("/shop/isRsPos")
+//    public ResponseEntity<?> updateShopIsRsPos() {
+//        Shop shop = getLoginUserShop();
+//        if (shop == null) return new ResponseEntity<>("매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
+//        System.out.println("반전성공");
+//        return new ResponseEntity<>(shopService.updateIsRsPos(shop), HttpStatus.OK);
+//    }
+
+    private List<Shop> getLoginUserShop(){
+        String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+//        System.out.println("userId : " + userId);
+        return shopService.findByOwnerId(userId);
     }
 }

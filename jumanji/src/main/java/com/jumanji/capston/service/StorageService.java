@@ -17,7 +17,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Objects;
 import java.util.stream.Stream;
 
 @Service
@@ -27,17 +26,30 @@ public class StorageService {
 
     @Autowired
     public StorageService(StorageConfig config) {
-        System.out.println("StorageServicec constructor...");
+//        System.out.println("StorageServicec constructor...");
         this.rootLocation = Paths.get(config.getLocation());
     }
-//
-    public void store(MultipartFile file, String shopId) {
+
+    //
+    public String store(MultipartFile file, String idCode, String typeName) {
+        String fileUrl = null;
         try {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file.");
             }
-            Path destinationFile = this.rootLocation.resolve(Paths.get(Objects.requireNonNull(file.getOriginalFilename())) + shopId)
-                    .normalize().toAbsolutePath();
+            String fileExtension = file.getContentType().substring(file.getContentType().indexOf('/') + 1);
+
+//            System.out.println("file.getName() : " + file.getName());
+//            System.out.println("file.getContentType() : " + file.getContentType());
+//            System.out.println("file.getContentType().substring by '/' : " + file.getContentType().substring(file.getContentType().indexOf('/')+1));
+//            System.out.println("file.getOriginalFilename() : " + file.getOriginalFilename());
+//            System.out.println("file.getResource() : " + file.getResource());
+//            System.out.println("file.getClass() : " + file.getClass());
+
+            Path destinationFile = this.rootLocation.resolve(Paths.get( typeName+ idCode + "." + fileExtension))
+                    .normalize().toAbsolutePath(); // file.getOriginalFilename() -> filename.filetype 이런 형태
+//            System.out.println("destinationFile.getParent() : " + destinationFile.getParent());
+//            System.out.println("rootLocation's 절대 주소 : " + this.rootLocation.toAbsolutePath());
             if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
                 throw new StorageException("Cannot store file outside current directory.");
             }
@@ -45,22 +57,23 @@ public class StorageService {
                 Files.copy(inputStream, destinationFile,
                         StandardCopyOption.REPLACE_EXISTING);
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new StorageException("Failed to store file.", e);
         }
+        return rootLocation.getParent().toString();
     }
 
     public Stream<Path> loadAll() {
         try {
+            System.out.println("loadAll()'s this.rootLocation : " + this.rootLocation);
             return Files.walk(this.rootLocation, 1)
                     .filter(path -> !path.equals(this.rootLocation))
                     .map(this.rootLocation::relativize);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new StorageException("Failed to read stored files", e);
         }
     }
+
     public Path load(String filename) {
         return rootLocation.resolve(filename);
     }
@@ -71,8 +84,7 @@ public class StorageService {
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {
                 return resource;
-            }
-            else {
+            } else {
                 throw new StorageFileNotFoundException(
                         "Could not read file: " + filename);
             }
@@ -84,11 +96,11 @@ public class StorageService {
     public void deleteAll() {
         FileSystemUtils.deleteRecursively(rootLocation.toFile());
     }
+
     public void init() {
         try {
             Files.createDirectories(rootLocation);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new StorageException("Could not initialize storage", e);
         }
     }

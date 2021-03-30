@@ -18,17 +18,17 @@ author 이성복
 
 @Getter
 @Entity
-@Table(name="menus")
+@Table(name = "menus")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Menu{
+public class Menu {
 
     @Id
     private String id; // 메뉴번호 ( 매장번호 + seq(2) )
-    
+
     private String name; // 메뉴이름
     private String intro; //메뉴설명
-    @Column(name="is_sale")
+    @Column(name = "is_sale")
     private char isSale = 'Y'; // 판매중
     @Column(name = "is_popular")
     private char isPopular = 'N'; // 인기메뉴여부
@@ -36,14 +36,23 @@ public class Menu{
     private int duration; // 걸리는 시간 = 조리시간 + ...
     @Column(name = "img_url")
     private String imgUrl; // 이미지 상대 경로
-    @Column(name="reg_date", updatable = false)
+    @Column(name = "reg_date", updatable = false)
     private Date regDate = new Date();
     @Column(name = "mod_date")
     private Date modDate = new Date();
 
     @Builder(builderMethodName = "createMenu")
-    public Menu(String id, String name, String intro, int price, int duration){
+    public Menu(String id, String name, String intro, int price, int duration, String imgUrl) {
         this.id = id;
+        this.name = name;
+        this.intro = intro;
+        this.price = price;
+        this.duration = duration;
+        this.imgUrl = imgUrl;
+    }
+
+    @Builder(builderMethodName = "updateMenu")
+    public Menu(String name, String intro, int price, int duration) {
         this.name = name;
         this.intro = intro;
         this.price = price;

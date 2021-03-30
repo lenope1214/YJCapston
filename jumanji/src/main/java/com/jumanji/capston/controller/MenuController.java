@@ -2,12 +2,12 @@ package com.jumanji.capston.controller;
 
 import com.jumanji.capston.data.Menu;
 import com.jumanji.capston.data.Request.MenuRequest;
-import com.jumanji.capston.data.Request.ShopRequest;
 import com.jumanji.capston.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,19 +31,19 @@ public class MenuController {
 //    }
 
     @Transactional(readOnly = true)
-    @GetMapping("/menuList")
-    public ResponseEntity<?> selectMenuList(@RequestBody ShopRequest shopRequest){
-        if(menuService.findByshopId(shopRequest.getShopId()).isEmpty())
+    @GetMapping("/menuList/{shopId}")
+    public ResponseEntity<?> selectMenuList(@PathVariable String shopId){
+        if(menuService.findByshopId(shopId).isEmpty())
             return new ResponseEntity<>("없는 식당번호", httpHeaders, HttpStatus.BAD_REQUEST);
-        return new ResponseEntity<>(menuService.findByshopId(shopRequest.getShopId()), HttpStatus.OK);
+        return new ResponseEntity<>(menuService.findByshopId(shopId), HttpStatus.OK);
     }
 
     @Transactional(readOnly = true)
-    @GetMapping("/menu")
-    public ResponseEntity<?> selectMenuById(@RequestBody MenuRequest menuRequest){
-        if(menuService.findById(menuRequest.getMenuId()) == null)
+    @GetMapping("/menu/{menuId}")
+    public ResponseEntity<?> selectMenuById(@PathVariable String menuId){
+        if(menuService.findById(menuId) == null)
             return new ResponseEntity<>("없는 메뉴번호 입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
-        return new ResponseEntity<>(menuService.findById(menuRequest.getMenuId()), HttpStatus.OK);
+        return new ResponseEntity<>(menuService.findById(menuId), HttpStatus.OK);
     }
 
     @Transactional
@@ -69,12 +69,29 @@ public class MenuController {
     @Transactional
     @PutMapping("/menu")
     public ResponseEntity<?> updateMenu(@RequestBody MenuRequest menuRequest){
+        Menu menu = menuService.findById(menuRequest.getMenuId());
+        if(menu == null)return new ResponseEntity<>("메뉴 ID가 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
 
-        return null;
+        menu = Menu.updateMenu()
+                .name(menuRequest.getName())
+                .intro(menuRequest.getIntro())
+                .price(menuRequest.getPrice())
+                .duration(menuRequest.getDuration())
+                .build();
+
+        return new ResponseEntity<>(menu, HttpStatus.OK);
     }
     @Transactional
     @DeleteMapping("/menu")
     public ResponseEntity<?> deleteMenu(@RequestBody Menu menu){
-        return null;
+        return new ResponseEntity<>("미구현입니다.", httpHeaders, HttpStatus.OK);
     }
+
+    @Transactional(readOnly = true)
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/menuListAll")
+    public ResponseEntity<?> menuListAll(){
+        return new ResponseEntity<>(menuService.findAll(), HttpStatus.OK);
+    }
+
 }
