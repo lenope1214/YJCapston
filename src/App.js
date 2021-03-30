@@ -1,6 +1,5 @@
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import React from "react";
-import MenuListContainer from "./containers/MenuList/MenuListContainer"
 import MenuRegisterFormContainer from "./containers/MenuRegisterFormContainer";
 import ShopInfoContainer from "./containers/ShopInfoContainer";
 import EventContainer from "./containers/EventContainer";
@@ -9,11 +8,11 @@ import MainContainer from "./containers/Main/MainContainer";
 import MypageContainer from "./containers/MyPage/MyPageContainer";
 import RegisterContainer from "./containers/Register/RegisterContainer";
 import ShopContainer from "./containers/Shop/ShopContainer";
-
 import { useEffect, useState } from "react";
-import MenuReadContainer from "./containers/MenuRead/MenuReadContainer";
+import { MenuReadContainer } from "./containers/MenuRead/MenuReadContainer";
+import  MenuListContainer  from "./containers/MenuList/MenuListContainer";
 
-const App = () => {
+const App = (props) => {
   const [isLogin, setIsLogin] = useState(false);
 
     useEffect(() => {

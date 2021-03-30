@@ -27,15 +27,13 @@ const MenuListContainer = () => {
                         price: menu.price,
                     };
                 });
-
                 setMenues(menu);
-                console.log(menues);
             })
             .catch((err) => {
                 alert("err");
             });
     }, []);
-
+    
     return (
         <>
         <Header />
@@ -43,10 +41,9 @@ const MenuListContainer = () => {
         <OwnerNavbar />
         
         <MenuList menues={menues}/>
-
         </>
     );
-
 }
 
 export default MenuListContainer;
+

@@ -7,37 +7,33 @@ import OwnerNavbar from "../../components/OwnerMenubar/OwnerNavbar";
 import Header from "../../components/Header/Header";
 import MenuRead from '../../components/MenuRead/MenuRead';
 import { getMenuRead } from '../../lib/MenuRead';
+import { getNowMenu } from '../../lib/MenuRead';
 
-const MenuReadContainer = () => {
-    const [menuRead, setMenuRead] = useState([]);
-    
+
+export const MenuReadContainer = (props) => {
+    // console.log('View: ', props);
+    const [menuRead, setMenuRead] = useState(null);
+
     useEffect(() => {
-        // console.log(menues);
+        showMenuRead();
     }, []);
 
-    useEffect(() => {
-        getMenuRead()
-            .then((res) => {              
+    const showMenuRead = (() => {
+        getMenuRead(props.match.params.shopId)
+            .then((res) => {
                 setMenuRead(res.data);
-                // console.log(res.data);
-                // console.log(menuRead);
             })
             .catch((err) => {
                 alert("err");
             });
-    });
+    })
 
-    return (
-        <>
-        <Header />
 
-       
-        
-        <MenuRead menuRead={menuRead}/>
-
-        </>
+    return(
+        <div>
+            메뉴상세보기 : 
+            
+            <MenuRead menuRead={menuRead}/>
+        </div>
     );
-
 }
-
-export default MenuReadContainer;

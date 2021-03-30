@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import * as S from "./style";
+import {getMenuRead, getNowMenu} from "../../lib/MenuRead"
+import MenuReadContainer from "../../containers/MenuRead/MenuReadContainer";
 
 const MenuList = ({ menues }) => {
     return (
@@ -28,11 +30,10 @@ const MenuList = ({ menues }) => {
                                 <tr>
                                     
                                     <td>이미지</td>
-                                    <Link to={`/menu/${menu.id}`} className="menu-list">
+                                    <Link to={`/menu/${menu.id}`} className="menu-list">       
                                     <td>{menu.name}</td>
                                     </Link>
                                     <td>{menu.price}</td>
-                                    
                                     <td><button>삭제</button></td>
                                 </tr>
                                 );
