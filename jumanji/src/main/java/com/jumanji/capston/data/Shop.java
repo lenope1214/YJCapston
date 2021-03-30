@@ -30,6 +30,7 @@ public class Shop {
     @Column(name = "is_rs_pos")
     private char isRsPos = 'Y'; //예약가능여부
     private String category;
+    @Column(name = "is_open")
     private char isOpen;
     @ManyToOne
     @JoinColumn(name="owner_id")
