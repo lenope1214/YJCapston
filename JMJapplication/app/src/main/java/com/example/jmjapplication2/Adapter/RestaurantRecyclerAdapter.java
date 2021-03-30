@@ -39,6 +39,12 @@ public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRe
         holder.tv_restaurant_name.setText(shops.get(position).getName());
         holder.tv_restaurant_menu.setText(shops.get(position).getAddress());
 
+        if(shops.get(position).getIsOpen() == 'Y') {
+            holder.tv_status.setText("영업 중");
+        } else {
+            holder.tv_status.setText("영업아님");
+        }
+
         holder.layout_restaurant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

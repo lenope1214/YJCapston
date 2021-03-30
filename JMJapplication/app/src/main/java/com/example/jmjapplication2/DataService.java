@@ -41,6 +41,8 @@ public class DataService {
     InsertShop insertShop = retrofitClient.create(InsertShop.class);
     ShowShopList showShopList = retrofitClient.create(ShowShopList.class);
     ShowShopOne shop = retrofitClient.create(ShowShopOne.class);
+    ShopUpdate updateOpen = retrofitClient.create(ShopUpdate.class);
+    ShopUpdate updateIsRsPos = retrofitClient.create(ShopUpdate.class);
    // CheckUserAPI getUser = retrofitClient.create(CheckUserAPI.class);
 }
 
@@ -115,3 +117,10 @@ interface ShowShopOne {
     Call<Shop> shop(@Path("id") String id);
 }
 
+interface ShopUpdate {
+    @PUT("shop/isOpen")
+    Call<ResponseBody>  updateOpen(@Header("Authorization") String jwt);
+
+    @PUT("shop/isRsPos")
+    Call<ResponseBody> updateIsRsPos(@Header("Authorization") String jwt);
+}

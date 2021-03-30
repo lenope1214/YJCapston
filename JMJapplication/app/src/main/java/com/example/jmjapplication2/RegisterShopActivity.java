@@ -74,7 +74,7 @@ public class RegisterShopActivity extends AppCompatActivity {
                 map.put("openTime", shop_open.getSelectedItem());
                 map.put("closeTime", shop_close.getSelectedItem());
                 map.put("category", shop_category.getSelectedItem().toString());
-                map.put("isRePos", shop_isres.getSelectedItem().toString());
+                //map.put("isRePos", shop_isres.getSelectedItem().toString());
                 //map.put("member_id", member_id);
 
                 SharedPreferences pref =  getSharedPreferences("auth", MODE_PRIVATE);

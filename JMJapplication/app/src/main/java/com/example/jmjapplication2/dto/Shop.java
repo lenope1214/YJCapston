@@ -18,4 +18,5 @@ public class  Shop {
     private String address;
     private char isResPos;
     private String category;
+    private char isOpen;
 }

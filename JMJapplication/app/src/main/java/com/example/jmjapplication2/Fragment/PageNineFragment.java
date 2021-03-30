@@ -69,7 +69,7 @@ public class PageNineFragment extends Fragment {
                         List<Shop> shopList = response.body();
                         for(Shop list : shopList) {
                             Log.e("result : ", list.getCategory());
-                            mItems.add(new Shop(list.getId(), list.getName(), list.getIntro(), list.getCloseTime(), list.getOpenTime(), list.getAddress(), list.getIsResPos(), list.getCategory()));
+                            mItems.add(new Shop(list.getId(), list.getName(), list.getIntro(), list.getCloseTime(), list.getOpenTime(), list.getAddress(), list.getIsResPos(), list.getCategory(), list.getIsOpen()));
                             rv_restaurant_list.setHasFixedSize(true);
                             adapter = new RestaurantRecyclerAdapter(getContext(), mItems);
                             rv_restaurant_list.setLayoutManager(new LinearLayoutManager(getActivity()));

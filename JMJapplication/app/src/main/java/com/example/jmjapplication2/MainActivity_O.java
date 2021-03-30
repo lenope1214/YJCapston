@@ -2,6 +2,7 @@ package com.example.jmjapplication2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -21,18 +22,17 @@ public class MainActivity_O extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_o);
 
-//        Intent intent = getIntent();
-//        String owner_number = intent.getStringExtra("owner_number");
+        Intent intent = getIntent();
+        String owner_number = intent.getStringExtra("owner_number");
         //Log.d("result :", id);
-
 
         homeFragment_o = new HomeFragment_O();
         posFragment_o = new PosFragment_O();
         shopDetailFragment_o = new ShopDetailFragment_O();
 
-////        Bundle bundle = new Bundle();
-////        bundle.putString("owner_number", owner_number);
-//        homeFragment_o.setArguments(bundle);
+        Bundle bundle = new Bundle();
+        bundle.putString("owner_number", owner_number);
+        homeFragment_o.setArguments(bundle);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment_o).commit();
 
