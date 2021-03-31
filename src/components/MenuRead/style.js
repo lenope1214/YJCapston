@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const MenuRegisterWrap = styled.div`
+export const MenuReadWrap = styled.div`
 margin-top: 70px;
 width: 60%;
 margin-left: 20%;

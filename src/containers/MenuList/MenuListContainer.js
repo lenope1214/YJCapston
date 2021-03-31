@@ -28,6 +28,7 @@ const MenuListContainer = () => {
                     };
                 });
                 setMenues(menu);
+                console.log(menues);
             })
             .catch((err) => {
                 alert("err");

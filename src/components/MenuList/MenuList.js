@@ -27,14 +27,16 @@ const MenuList = ({ menues }) => {
                             
                             {!!menues.length && menues.map((menu) => {
                                 return (
-                                <tr>
-                                    
-                                    <td>이미지</td>
-                                    <Link to={`/menu/${menu.id}`} className="menu-list">       
-                                    <td>{menu.name}</td>
-                                    </Link>
-                                    <td>{menu.price}</td>
-                                    <td><button>삭제</button></td>
+                                <tr>         
+                                    <td className="body-item-1">이미지</td>
+                                           
+                                    <td className="body-item-2">
+                                    <Link to={`/menu/${menu.id}`} className="menu-link">
+                                        {menu.name}
+                                        </Link>
+                                    </td>
+                                    <td className="body-item-3">{menu.price}</td>
+                                    <td className="body-item-4"><button>X</button></td>
                                 </tr>
                                 );
                             })}

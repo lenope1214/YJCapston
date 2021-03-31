@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
 export const MenuWrap = styled.div`
-margin-top: 110px;
+margin-top: 70px;
 width: 60%;
 margin-left: 20%;
+
+a { color: black;}
 
 .btn-link, btn-link:visited {
     color: whitesmoke;
@@ -28,18 +30,26 @@ margin-left: 20%;
 
   .menu-list {
       margin-top: 50px;
-      width: 100%;
-      background-color: black;
-      color: white;
-      text-decoration: none;
+      width: 100%; 
+      border-collapse: collapse;   
+  }
+  .menu-link {
+    text-decoration: none;
+    text-align: center;
+  }
+
+  th, td {
+    border-bottom: 1px solid #444444;
   }
 
   .menu-title {
       margin-bottom : 70px;
+      
   }
 
   .item-1 {
       width: 20%;
+      padding: 20px;
       
   }
 
@@ -54,5 +64,16 @@ margin-left: 20%;
   .item-4 {
       width: 5%;
   }
-  
+  .body-item-1 {
+    padding: 15px;
+  }
+  .body-item-2 {
+    padding: 15px 15px 15px 30px;
+}
+.body-item-3 {
+    padding: 15px;
+}
+.body-item-4 {
+    padding: 15px;
+}
 `;

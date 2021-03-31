@@ -12,13 +12,12 @@ const MenuRegisterForm = ({
     menudesc,
     handleMenudesc,
     menu_v1,
-    shopid='022344278',
 }) => {
     return(
         <>
         <S.MenuRegisterWrap>
-        <div className="menu-register-container">
-            
+        <h2 className="menu-title">메뉴 추가</h2>
+        <div className="menu-register-container">   
                 <table className="register-form">
                     <tbody>
                         <tr>
