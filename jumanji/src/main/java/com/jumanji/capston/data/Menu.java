@@ -33,6 +33,7 @@ public class Menu {
     @Column(name = "is_popular")
     private char isPopular = 'N'; // 인기메뉴여부
     private int price = 0; // 가격
+    @Column(length = 3)
     private int duration; // 걸리는 시간 = 조리시간 + ...
     @Column(name = "img_url")
     private String imgUrl; // 이미지 상대 경로
@@ -41,7 +42,7 @@ public class Menu {
     @Column(name = "mod_date")
     private Date modDate = new Date();
 
-    @Builder(builderMethodName = "createMenu")
+    @Builder(builderMethodName = "info")
     public Menu(String id, String name, String intro, int price, int duration, String imgUrl) {
         this.id = id;
         this.name = name;
@@ -49,14 +50,6 @@ public class Menu {
         this.price = price;
         this.duration = duration;
         this.imgUrl = imgUrl;
-    }
-
-    @Builder(builderMethodName = "updateMenu")
-    public Menu(String name, String intro, int price, int duration) {
-        this.name = name;
-        this.intro = intro;
-        this.price = price;
-        this.duration = duration;
     }
 }
 

@@ -2,6 +2,7 @@ package com.jumanji.capston.controller;
 
 import com.jumanji.capston.config.jwt.JwtResponse;
 import com.jumanji.capston.config.jwt.JwtTokenUtil;
+import com.jumanji.capston.data.Request.UserDto;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.service.ShopService;
 import com.jumanji.capston.service.UserService;
@@ -31,14 +32,15 @@ public class ApiController {
 
     @Transactional // 트랜잭션화 시켜서 오류발생시 롤백이 되도록
     @PostMapping("/join")
-    public ResponseEntity<?> join(@RequestBody User user) {
+    public ResponseEntity<?> join(@RequestBody UserDto user) {
+        System.out.println("회원가입 요청 ");
+        System.out.println(user.toString());
         User userEntity = userService.insert(user);
         if (userEntity == null) return new ResponseEntity<>("회원가입 실패", httpHeaders, HttpStatus.BAD_REQUEST);
         else {
-//            System.out.println("가입일자 : " + userEntity.getSignDate());
+            System.out.println("가입일자 : " + userEntity.getSignDate());
             return new ResponseEntity<>(userEntity.getId(), HttpStatus.CREATED);
         }
-        // 얘는 좀 더 세부화 시켜서 리턴해줍시다...!!! 는 너무 어렵고~
     }
 
     @Transactional(readOnly = true) // 트랜잭션이긴 한데 읽기 전용으로 속도 업 !
@@ -64,23 +66,6 @@ public class ApiController {
         }
         return new ResponseEntity<>("없는 ID", httpHeaders, HttpStatus.OK);
     }
-
-    //spring security 설정 .loginProcessingUrl("/login") 으로 처리
-//    @Transactional(readOnly = true)
-//    @PostMapping("/login")
-//    public String login(@ModelAttribute User user) {
-//        System.out.println(">> login");
-//        System.out.println("m.toString() : " + user.toString() + "\n"
-//                + "m.getId() : " + user.getId() + "\n"
-//                + "m.getPw() : " + user.getPw() + "\n"
-////              + "m.getName() : " + user.getName() + "\n"
-////              + "m.getPhone() : " + user.getPhone() + "\n"
-////              + "m.getRole() : " + user.getRole()
-//        );
-////        return userRepository.findById(user.getId())
-////                .orElseThrow(()-> new MemberNotFoundException(user.getId()));
-//        return "login";
-//    }
 }
 
 

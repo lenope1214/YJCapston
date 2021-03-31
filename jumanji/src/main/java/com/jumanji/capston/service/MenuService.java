@@ -18,12 +18,12 @@ public class MenuService {
     }
 
     public Menu findById(String id) {
-        return menuRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("id를 확인해주세요!!!"));
+        if(menuRepository.findById(id).isPresent()) return menuRepository.findById(id).get();
+        else return null;
     }
 
 
-    public Menu insert(Menu _menu) {
+    public Menu save(Menu _menu) {
         return menuRepository.save(_menu);
     }
 

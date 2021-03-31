@@ -63,6 +63,8 @@ public class ShopService {
     }
 
     public List<Shop> haveShop(String id){
+        List<Shop> shopList = shopRepository.findByOwner_Id(id);
+        if(shopList.size() == 0)return null;
         return shopRepository.findByOwner_Id(id);
     }
 

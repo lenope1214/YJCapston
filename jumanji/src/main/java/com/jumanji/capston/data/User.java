@@ -34,7 +34,7 @@ public class User {
     private Date signDate; // 가입날짜
     @DateTimeFormat(pattern = "yyyyMMdd")
     @Column(name = "vip_level")
-    private String level; // 등급
+    private int level; // 등급
     private int point; // 포인트
     private String provider; // 소셜
     @Column(name = "provider_id")
@@ -48,29 +48,25 @@ public class User {
 //    }
 
     @Builder(builderMethodName = "createUser")
-    public User(String id, String password, String name, String role, String email, Date sign_date, String provider, String provider_id, String phone) {
+    public User(String id, String password, String address, String addressDetail, String name, String role, String email, Date sign_date, String provider, String provider_id, String phone) {
         this.id = id;
         this.password = password;
         this.name = name;
         this.email = email;
+        this.address = address;
+        this.addressDetail = addressDetail;
         this.role = role;
         this.signDate = sign_date;
         this.provider = provider;
         this.providerId = provider_id;
         this.phone = phone;
+        this.point = 0;
+        this.level = 1;
     }
-
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
-
-//    @Builder(builderMethodName = "userCreation")
-//    public void
 }
+
+
+
+
 //Test 용. Column 어노테이션 없어도 테이블에 추가 되는가?
 // Column 어노테이션이 없어도 잘 됨.
-//    private Timestamp regTime;
-//    @Column
-//    private String token; // jwt.io 문서읽기
-//    @Column
-//    private int penalty; // 경고회수

@@ -41,10 +41,11 @@ public class ShopController {
     @Transactional(readOnly = true)
     @GetMapping("/shopList")
     public ResponseEntity<?> getShopList() {
-//        System.out.println("샵리스트 >> ");
+        System.out.println("샵리스트 >> ");
         List<Shop> shopList = shopService.findAll();
         return new ResponseEntity<>(shopList, HttpStatus.OK);
     }
+
 
     @Transactional
     @PostMapping("/shop") // 매장등록
@@ -99,6 +100,7 @@ public class ShopController {
     @Transactional(readOnly = true)
     @GetMapping("/shop/{shopId}")
     public ResponseEntity<?> getShopById(@PathVariable String shopId) {
+        System.out.println("ShopController in getShopById");
         System.out.println("shop id : " + shopId);
         Shop shop = shopService.findById(shopId);
         if (shop == null) return new ResponseEntity<>("없는 매장번호", httpHeaders, HttpStatus.BAD_REQUEST);
@@ -108,10 +110,11 @@ public class ShopController {
     @Transactional(readOnly = true)
     @GetMapping("/myShop")
     public ResponseEntity<?> getMyShop(@RequestHeader String authorization) {
+        System.out.println("ShopController in getMyShop");
         String loginId = jwtTokenUtil.getUsername(authorization);
         User userEntity = userService.findById(loginId);
         if (userEntity == null) return new ResponseEntity<>("로그인 되어있지 않습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
-        System.out.println("접속 유저 ID : " + userEntity.getId());
+        System.out.println("요청접속 유저 ID : " + userEntity.getId());
         List<Shop> result = shopService.haveShop(userEntity.getId());
         if (result == null) return new ResponseEntity<>("매장 등록이 되어있지 않습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -137,23 +140,35 @@ public class ShopController {
 //        return new ResponseEntity<>(shopCatList, httpHeaders, HttpStatus.OK); // 이렇게 하면 오류. 객체를 utf로 변환 시켜서 그런지 무슨 한글 변환하면서 오류나나봄!
     }
 
-//    @Transactional
-//    @PutMapping("/shop/isOpen")
-//    public ResponseEntity<?> updateShopIsOpen() {
-//        List<Shop> shopList = getLoginUserShop();
-//        if (shopList.isEmpty()) return new ResponseEntity<>("매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
-//        System.out.println("반전성공");
-//        return new ResponseEntity<>(shopService.updateIsOpen(shopList), HttpStatus.OK);
-//    }
-
-//    @Transactional
-//    @PutMapping("/shop/isRsPos")
-//    public ResponseEntity<?> updateShopIsRsPos() {
-//        Shop shop = getLoginUserShop();
-//        if (shop == null) return new ResponseEntity<>("매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
-//        System.out.println("반전성공");
-//        return new ResponseEntity<>(shopService.updateIsRsPos(shop), HttpStatus.OK);
-//    }
+    @Transactional
+    @PatchMapping("/shop/{shopId}/open")
+    public ResponseEntity<?> updateShopIsOpen(@PathVariable String shopId) {
+        List<Shop> shopList = getLoginUserShop();
+        if (shopList.isEmpty()) return new ResponseEntity<>("매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
+        for (Shop shop : shopList) {
+            if (shop.getId().equals(shopId)) {
+                // 해당 유저의 해당 매장번호가 있음!
+                System.out.println("반전성공");
+                return new ResponseEntity<>(shopService.updateIsOpen(shop), HttpStatus.OK);
+            }
+        }
+     return new ResponseEntity<>("매장번호가 일치하는 매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
+    }
+//
+    @Transactional
+    @PatchMapping("/shop/{shopId}/reserve")
+    public ResponseEntity<?> updateShopIsRsPos(@PathVariable String shopId) {
+        List<Shop> shopList = getLoginUserShop();
+        if (shopList.isEmpty()) return new ResponseEntity<>("매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
+        for (Shop shop : shopList) {
+            if (shop.getId().equals(shopId)) {
+                // 해당 유저의 해당 매장번호가 있음!
+                System.out.println("반전성공");
+                return new ResponseEntity<>(shopService.updateIsRsPos(shop), HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>("매장번호가 일치하는 매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
+    }
 
     private List<Shop> getLoginUserShop(){
         String userId = SecurityContextHolder.getContext().getAuthentication().getName();

@@ -48,18 +48,18 @@ public class MenuController {
 
     @Transactional
     @PostMapping("/menu")
-    public ResponseEntity<?> insertMenu(@RequestBody MenuRequest menuRequest){
+    public ResponseEntity<?> insertMenu( MenuRequest menuRequest){
         Menu menu;
         BigDecimal menuSeq = menuService.getMenuSeqNextVal();
 //        System.out.println("seq : " + menuSeq);
-        menu = Menu.createMenu()
+        menu = Menu.info()
                 .id(menuRequest.getShopId()+""+ menuSeq)
                 .name(menuRequest.getName())
                 .intro(menuRequest.getIntro())
                 .price(menuRequest.getPrice())
                 .duration(menuRequest.getDuration())
                 .build();
-        Object result = menuService.insert(menu);
+        Object result =menuService.save(menu);
         if(result.getClass() != Menu.class)
             return new ResponseEntity<>("저장 실패", httpHeaders, HttpStatus.BAD_REQUEST);
         else
@@ -67,18 +67,23 @@ public class MenuController {
     }
 
     @Transactional
-    @PutMapping("/menu")
+    @PatchMapping("/menu")
     public ResponseEntity<?> updateMenu(@RequestBody MenuRequest menuRequest){
+        System.out.println("메뉴 수정>>> ");
         Menu menu = menuService.findById(menuRequest.getMenuId());
         if(menu == null)return new ResponseEntity<>("메뉴 ID가 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
+        System.out.println("menuId : " + menu.getId());
 
-        menu = Menu.updateMenu()
+        menu = Menu.info()
+                .id(menuRequest.getMenuId())
                 .name(menuRequest.getName())
                 .intro(menuRequest.getIntro())
                 .price(menuRequest.getPrice())
                 .duration(menuRequest.getDuration())
+                .imgUrl("")
                 .build();
-
+       menuService.save(menu);
+        System.out.println("menuId : " + menu.getId());
         return new ResponseEntity<>(menu, HttpStatus.OK);
     }
     @Transactional

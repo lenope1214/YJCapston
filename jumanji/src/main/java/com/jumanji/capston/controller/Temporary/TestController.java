@@ -53,7 +53,7 @@ public class TestController {
         String fileUrl = storageService.store(file, menuRequest.getShopId(), "menu");
         BigDecimal menuSeq = menuService.getMenuSeqNextVal();
 //        System.out.println("seq : " + menuSeq);
-        menu = Menu.createMenu()
+        menu = Menu.info()
                 .id(menuRequest.getShopId() + "" + menuSeq)
                 .name(menuRequest.getName())
                 .intro(menuRequest.getIntro())
@@ -61,11 +61,12 @@ public class TestController {
                 .duration(menuRequest.getDuration())
                 .imgUrl(fileUrl)
                 .build();
-        Object result = menuService.insert(menu);
+        Object result =menuService.save(menu);
         if (result.getClass() != Menu.class)
             return new ResponseEntity<>("저장 실패", httpHeaders, HttpStatus.BAD_REQUEST);
         else
             return new ResponseEntity<>(result, HttpStatus.CREATED);
+
     }
 
     @Transactional

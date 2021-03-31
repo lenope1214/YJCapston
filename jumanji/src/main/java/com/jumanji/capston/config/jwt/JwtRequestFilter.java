@@ -35,7 +35,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private static final List<String> EXCLUDE_URL =
             Collections.unmodifiableList(
                     Arrays.asList(
-                            "/api/v1/login"
+                              "/api/v1/login"
                             , "/authenticate"  // 얜 필수..!
                             , "/api/v1/join"
                             , "/api/v1/shopList"

@@ -62,9 +62,12 @@ public class UserController {
     }
 
     @Transactional
-    @PutMapping("/user") // putUser
-    public ResponseEntity<?> updateUser(@RequestBody User user) {
-        return new ResponseEntity<>(userService.updateUser(user), HttpStatus.OK);
+    @PatchMapping("/user") // putUser
+    public ResponseEntity<?> updateUser(@RequestBody User user, @RequestHeader String authorization) {
+        String loginId = jwtTokenUtil.getUsername(authorization);
+        User userEntity = userService.findById(loginId);
+        userEntity = userService.updateUser(userEntity, user);
+        return new ResponseEntity<>(userEntity, HttpStatus.OK);
     }
 
     @Transactional(readOnly = true)
