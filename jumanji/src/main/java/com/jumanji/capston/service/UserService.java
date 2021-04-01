@@ -1,5 +1,6 @@
 package com.jumanji.capston.service;
 
+import com.jumanji.capston.controller.exception.UserException.UserNotFoundException;
 import com.jumanji.capston.data.Request.UserDto;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.UserRepository;
@@ -23,11 +24,8 @@ public class UserService {
 
     @Transactional
     public User findById(String id) {
-        if( userRepository.findById(id).isPresent()){
-            return  userRepository.findById(id).get();
-        }else{
-            return null;
-        }
+        return userRepository.findById(id)
+                .orElseThrow(()-> new UserNotFoundException(id));
     }
 
     @Transactional

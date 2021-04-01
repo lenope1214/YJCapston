@@ -17,6 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 @Service
@@ -37,7 +38,7 @@ public class StorageService {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file.");
             }
-            String fileExtension = file.getContentType().substring(file.getContentType().indexOf('/') + 1);
+            String fileExtension = Objects.requireNonNull(file.getContentType()).substring(file.getContentType().indexOf('/') + 1);
 
 //            System.out.println("file.getName() : " + file.getName());
 //            System.out.println("file.getContentType() : " + file.getContentType());

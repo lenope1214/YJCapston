@@ -1,10 +1,10 @@
 package com.jumanji.capston.controller.Temporary;
 
-import com.jumanji.capston.data.Menu;
+import com.jumanji.capston.controller.exception.ApiErrorResponse;
 import com.jumanji.capston.data.Request.FileAndData;
-import com.jumanji.capston.data.Request.MenuRequest;
 import com.jumanji.capston.service.MenuService;
 import com.jumanji.capston.service.StorageService;
+import com.jumanji.capston.storage.StorageException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/api/v1/test")
@@ -37,50 +35,55 @@ public class TestController {
 
 
 
-    @Transactional
-    @PostMapping("/menu") // multipart/form-data 형식은 param으로 parsing 해준다는데.,..?
-    public ResponseEntity<?> insertMenu(MenuRequest menuRequest) {
-        System.out.println("메뉴 테스팅중..!");
-        Menu menu;
-        MultipartFile file = menuRequest.getImg();
-        System.out.println("file이 제대로 왔는지 확인 시작==================================");
-        System.out.println("file.getOriginalFilename : " + file.getOriginalFilename());
-        System.out.println("file.getResource : " + file.getResource());
-        System.out.println("file.getContentType : " + file.getContentType());
-        System.out.println("file.getName : " + file.getName());
-        System.out.println("file.getSize : " + file.getSize());
-        System.out.println("============================================================");
-        String fileUrl = storageService.store(file, menuRequest.getShopId(), "menu");
-        BigDecimal menuSeq = menuService.getMenuSeqNextVal();
+//    @Transactional
+//    @PostMapping("/menu") // multipart/form-data 형식은 param으로 parsing 해준다는데.,..?
+//    public ResponseEntity<?> insertMenu(MenuRequest menuRequest) {
+//        System.out.println("메뉴 테스팅중..!");
+//        Menu menu;
+//        MultipartFile file = menuRequest.getImg();
+//        System.out.println("file이 제대로 왔는지 확인 시작==================================");
+//        System.out.println("file.getOriginalFilename : " + file.getOriginalFilename());
+//        System.out.println("file.getResource : " + file.getResource());
+//        System.out.println("file.getContentType : " + file.getContentType());
+//        System.out.println("file.getName : " + file.getName());
+//        System.out.println("file.getSize : " + file.getSize());
+//        System.out.println("============================================================");
+//        String fileUrl = storageService.store(file, menuRequest.getShopId(), "menu");
+//        BigDecimal menuSeq = menuService.getMenuSeqNextVal();
 //        System.out.println("seq : " + menuSeq);
-        menu = Menu.info()
-                .id(menuRequest.getShopId() + "" + menuSeq)
-                .name(menuRequest.getName())
-                .intro(menuRequest.getIntro())
-                .price(menuRequest.getPrice())
-                .duration(menuRequest.getDuration())
-                .imgUrl(fileUrl)
-                .build();
-        Object result =menuService.save(menu);
-        if (result.getClass() != Menu.class)
-            return new ResponseEntity<>("저장 실패", httpHeaders, HttpStatus.BAD_REQUEST);
-        else
-            return new ResponseEntity<>(result, HttpStatus.CREATED);
-
-    }
+//        menu = Menu.info()
+//                .id(menuRequest.getShopId() + "" + menuSeq)
+//                .name(menuRequest.getName())
+//                .intro(menuRequest.getIntro())
+//                .price(menuRequest.getPrice())
+//                .duration(menuRequest.getDuration())
+////                .imgUrl(fileUrl)
+//                .build();
+//        Object result =menuService.save(menu);
+//        if (result.getClass() != Menu.class)
+//            return new ResponseEntity<>("저장 실패", httpHeaders, HttpStatus.BAD_REQUEST);
+//        else
+//            return new ResponseEntity<>(result, HttpStatus.CREATED);
+//    }
 
     @Transactional
     @PostMapping("/uploadTest01")
     public ResponseEntity<?> uploadTest01(MultipartFile multipartFile){
-        String fileUrl = storageService.store(multipartFile, "testCode", "test");
-        if(fileUrl == null)
-            return new ResponseEntity<>("파일이 안온듯?", httpHeaders, HttpStatus.BAD_REQUEST);
-        else
-            return new ResponseEntity<>(fileUrl, HttpStatus.CREATED);
+        try{
+            storageService.store(multipartFile, "testCode", "test");
+        }catch (StorageException e){
+            return new ResponseEntity<>(new ApiErrorResponse("error-9000", e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.CREATED);
+        //        String fileUrl = storageService.store(multipartFile, "testCode", "test");
+//        if(fileUrl == null)
+//            return new ResponseEntity<>("파일이 안온듯?", httpHeaders, HttpStatus.BAD_REQUEST);
+//        else
+//            return new ResponseEntity<>(fileUrl, HttpStatus.CREATED);
     }
 
     @Transactional
-    @PostMapping("/uploadTest02")
+    @PostMapping("/uploadTest02") // api/v1/test/uploadTest02
     public ResponseEntity<?> uploadTest02(FileAndData fileAndData){
         String fileUrl = storageService.store(fileAndData.getFile(), fileAndData.getCode(), "test");
         if(fileUrl == null)

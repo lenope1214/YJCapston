@@ -1,5 +1,6 @@
 package com.jumanji.capston.service;
 
+import com.jumanji.capston.controller.exception.ShopException.ShopNotFoundException;
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.ShopRepository;
@@ -18,7 +19,7 @@ public class ShopService {
 
     public Shop findById(String id){
         return shopRepository.findById(id)
-                .orElseThrow(()-> new IllegalArgumentException("id를 확인해주세요!!!"));
+                .orElseThrow(()-> new ShopNotFoundException("error-1001", "id를 확인해주세요!!!"));
     }
 
 

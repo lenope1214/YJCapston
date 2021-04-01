@@ -17,8 +17,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -33,20 +31,20 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
 
     private static final List<String> EXCLUDE_URL =
-            Collections.unmodifiableList(
-                    Arrays.asList(
-                              "/api/v1/login"
-                            , "/authenticate"  // 얜 필수..!
-                            , "/api/v1/join"
-                            , "/api/v1/shopList"
-                            , "/api/v1/validate"
-                            , "/api/v1/validateDscNo"
-                            , "/api/v1/searchAddr"
-                            , "/api/v1/shop"
-                            , "/api/v1/shopList"
-                            , "/api/v1/menu"
-                            , "/api/v1/menuList"
-                    ));
+            List.of("/api/v1/login"
+                    , "/authenticate"  // 얜 필수..!
+                    , "/api/v1/join"
+                    , "/api/v1/shopList"
+                    , "/api/v1/validate"
+                    , "/api/v1/validateDscNo"
+                    , "/api/v1/searchAddr"
+                    , "/api/v1/shop"
+                    , "/api/v1/shopList"
+                    , "/api/v1/menu"
+                    , "/api/v1/menuList"
+                    , "/api/v1/test/uploadTest01"
+                    , "/api/v1/test/uploadTest02"
+                );
 
 
     @Override
@@ -97,7 +95,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                 }
             }else{ System.out.println("SecurityContextHolder.getContext().getAuthentication() is null"); }
-        }else{ System.out.println("username is null"); }
+        }else{ System.out.println("token's username is null"); }
 //        System.out.println("JWT 체킹 완료!!!");
 
         if(!jwtFlag){

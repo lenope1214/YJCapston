@@ -50,4 +50,9 @@ public class Shop {
         this.isRsPos = 'N';
     }
 
+    @Getter
+    @Setter
+    public class patchShop{
+        private String id;
+    }
 }

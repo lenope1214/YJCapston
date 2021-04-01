@@ -1,7 +1,6 @@
 package com.jumanji.capston.data.Request;
 
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class MenuRequest {
@@ -12,5 +11,5 @@ public class MenuRequest {
 //    private String imgUrl; // 이미지 경로..??
     private int price;  // 가격
     private int duration; // 분단위
-    private MultipartFile img;
+//    private MultipartFile img;
 }

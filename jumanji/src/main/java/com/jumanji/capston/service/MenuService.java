@@ -5,7 +5,6 @@ import com.jumanji.capston.repository.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -13,13 +12,17 @@ public class MenuService {
     @Autowired
     MenuRepository menuRepository;
 
-    public BigDecimal getMenuSeqNextVal() {
-        return menuRepository.getMenuSeqNextVal();
-    }
+//    public BigDecimal getMenuSeqNextVal() {
+//        return menuRepository.getMenuSeqNextVal();
+//    }
 
     public Menu findById(String id) {
         if(menuRepository.findById(id).isPresent()) return menuRepository.findById(id).get();
         else return null;
+    }
+
+    public int count(String id){
+        return menuRepository.countMenusByIdContains(id);
     }
 
 
@@ -35,7 +38,7 @@ public class MenuService {
         return "ok";
     }
 
-    public List<Menu> findByshopId(String shopId) {
+    public List<Menu> findContainsId(String shopId) {
         return menuRepository.findByIdContains(shopId);
     }
 

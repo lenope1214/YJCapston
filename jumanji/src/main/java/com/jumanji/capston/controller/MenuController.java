@@ -1,5 +1,6 @@
 package com.jumanji.capston.controller;
 
+import com.jumanji.capston.controller.exception.ApiErrorResponse;
 import com.jumanji.capston.data.Menu;
 import com.jumanji.capston.data.Request.MenuRequest;
 import com.jumanji.capston.service.MenuService;
@@ -11,7 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
+import java.util.List;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
@@ -31,11 +32,17 @@ public class MenuController {
 //    }
 
     @Transactional(readOnly = true)
-    @GetMapping("/menuList/{shopId}")
+    @GetMapping("/shop/{shopId}/menuList")
     public ResponseEntity<?> selectMenuList(@PathVariable String shopId){
-        if(menuService.findByshopId(shopId).isEmpty())
-            return new ResponseEntity<>("없는 식당번호", httpHeaders, HttpStatus.BAD_REQUEST);
-        return new ResponseEntity<>(menuService.findByshopId(shopId), HttpStatus.OK);
+        System.out.println("menuList >> shopId : " + shopId);
+        List<Menu> menuList;
+        menuList = menuService.findContainsId(shopId);
+        System.out.println("menuList info");
+        System.out.println(menuList.size());
+        if(menuList == null)
+            return new ResponseEntity<>(new ApiErrorResponse("error-1001", "없는 식당번호"), HttpStatus.BAD_REQUEST);
+
+        return new ResponseEntity<>(menuList, HttpStatus.OK);
     }
 
     @Transactional(readOnly = true)
@@ -50,15 +57,21 @@ public class MenuController {
     @PostMapping("/menu")
     public ResponseEntity<?> insertMenu( MenuRequest menuRequest){
         Menu menu;
-        BigDecimal menuSeq = menuService.getMenuSeqNextVal();
+        System.out.println("메뉴 추가");
+//        BigDecimal menuSeq = menuService.getMenuSeqNextVal();
 //        System.out.println("seq : " + menuSeq);
+        int menuQty = menuService.count(menuRequest.getShopId());
+        if(menuQty > 99)return new ResponseEntity<>(new ApiErrorResponse("error-1011", "메뉴를 100개이상 등록. 삭제바람"), HttpStatus.BAD_REQUEST);
+            String menuSeq = String.format("%02d", menuQty+1);
+        System.out.println("menuSeq : " + menuSeq);
         menu = Menu.info()
-                .id(menuRequest.getShopId()+""+ menuSeq)
+                .id(menuRequest.getShopId()+ "" + menuSeq)
                 .name(menuRequest.getName())
                 .intro(menuRequest.getIntro())
                 .price(menuRequest.getPrice())
                 .duration(menuRequest.getDuration())
                 .build();
+//        System.out.println("ㅁㄴㅇㄹ");
         Object result =menuService.save(menu);
         if(result.getClass() != Menu.class)
             return new ResponseEntity<>("저장 실패", httpHeaders, HttpStatus.BAD_REQUEST);
