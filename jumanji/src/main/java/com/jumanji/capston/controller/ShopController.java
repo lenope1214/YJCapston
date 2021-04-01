@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -159,8 +158,8 @@ public class ShopController {
     }
     @Transactional
     @PatchMapping("/shop/{shopId}/open")
-    public ResponseEntity<?> updateShopIsOpen(@PathVariable String shopId) {
-        List<Shop> shopList = getLoginUserShop();
+    public ResponseEntity<?> updateShopIsOpen(@RequestHeader String authorization, @PathVariable String shopId) {
+        List<Shop> shopList = getLoginUserShop(authorization);
         if (shopList.isEmpty()) return new ResponseEntity<>("매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         for (Shop shop : shopList) {
             if (shop.getId().equals(shopId)) {
@@ -176,8 +175,8 @@ public class ShopController {
     //
     @Transactional
     @PatchMapping("/shop/{shopId}/reserve")
-    public ResponseEntity<?> updateShopIsRsPos(@PathVariable String shopId) {
-        List<Shop> shopList = getLoginUserShop();
+    public ResponseEntity<?> updateShopIsRsPos(@RequestHeader String authorization, @PathVariable String shopId) {
+        List<Shop> shopList = getLoginUserShop(authorization);
         if (shopList.isEmpty()) return new ResponseEntity<>("매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         for (Shop shop : shopList) {
             if (shop.getId().equals(shopId)) {
