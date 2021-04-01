@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -36,13 +38,24 @@ public class Shop {
     @JoinColumn(name="owner_id")
     private User owner;
 
+    private Date toDate(String date){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        Date parseDate = null;
+        try {
+            parseDate = dateFormat.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return parseDate;
+    }
+
     @Builder(builderMethodName = "createShop")
-    public Shop(String shopId, String name, String intro, Date openTime, Date closeTime, String address, String addressDetail, String category) {
+    public Shop(String shopId, String name, String intro, String openTime, String closeTime, String address, String addressDetail, String category) {
         this.id = shopId;
         this.name = name;
         this.intro = intro;
-        this.openTime = openTime;
-        this.closeTime = closeTime;
+        this.openTime = toDate(openTime);
+        this.closeTime = toDate(closeTime);
         this.address = address;
         this.addressDetail = addressDetail;
         this.category = category;
@@ -50,9 +63,26 @@ public class Shop {
         this.isRsPos = 'N';
     }
 
+    public void update(Patch patch) {
+        this.intro = patch.getIntro();
+        this.openTime = toDate(patch.getOpenTime());
+        this.closeTime = toDate(patch.getCloseTime());
+        this.address = patch.getAddress();
+        this.addressDetail = patch.getAddressDetail();
+        this.category = patch.getCategory();
+    }
+
     @Getter
     @Setter
-    public class patchShop{
-        private String id;
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class Patch{
+        private String shopId;
+        private String intro;
+        private String openTime;
+        private String closeTime;
+        private String address;
+        private String addressDetail;
+        private String category;
     }
 }

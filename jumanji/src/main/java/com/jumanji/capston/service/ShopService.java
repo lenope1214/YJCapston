@@ -19,7 +19,7 @@ public class ShopService {
 
     public Shop findById(String id){
         return shopRepository.findById(id)
-                .orElseThrow(()-> new ShopNotFoundException("error-1001", "id를 확인해주세요!!!"));
+                .orElseThrow(()-> new ShopNotFoundException("error-1001", "shop id를 확인해주세요!!!"));
     }
 
 
@@ -46,11 +46,7 @@ public class ShopService {
         return shopRepository.findAll();
     }
 
-    public Shop insertShop(Shop shop) {
-        Shop shopEntity = shopRepository.findById(shop.getId())
-                .orElseThrow(()-> new IllegalAccessError("shop_id를 확인해 주세요!!!"));
-        return shopRepository.save(shopEntity);
-    }
+
 
     public Serializable getShopIntro(String shopId){
 //        System.out.println("요청 매장 id : " + shopId );

@@ -23,6 +23,22 @@ public class UserController {
     JwtTokenUtil jwtTokenUtil;
 
     @Transactional(readOnly = true)
+    @GetMapping("/user")
+    public ResponseEntity<?> selectMyInfo(@RequestHeader String authorization) {
+        System.out.println("APIcon /user 진입.");
+        String loginId = jwtTokenUtil.getUsername(authorization);
+        System.out.println("로긘 유저 id : " + loginId);
+
+        User userEntity = userService.findById(loginId);
+
+        if (userEntity == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(userEntity, HttpStatus.OK);
+//        return new ResponseEntity<>("is not match login id <-> request id.", HttpStatus.FORBIDDEN);
+    }
+
+    @Transactional(readOnly = true)
     @GetMapping("/user/{id}")
     public ResponseEntity<?> selectUserInfo(@PathVariable String id) throws Exception {
         System.out.println("APIcon user/{id} 진입.");
@@ -39,20 +55,7 @@ public class UserController {
         return new ResponseEntity<>("is not match login id <-> request id.", HttpStatus.FORBIDDEN);
     }
 
-    @GetMapping("/user")
-    public ResponseEntity<?> selectMyInfo(@RequestHeader String authorization) {
-        System.out.println("APIcon /user 진입.");
-        String loginId = jwtTokenUtil.getUsername(authorization);
-        System.out.println("로긘 유저 id : " + loginId);
 
-        User userEntity = userService.findById(loginId);
-
-        if (userEntity == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<>(userEntity, HttpStatus.OK);
-//        return new ResponseEntity<>("is not match login id <-> request id.", HttpStatus.FORBIDDEN);
-    }
 
 
     @Transactional

@@ -104,23 +104,15 @@ public class ShopController {
         User userEntity = userService.findById(loginId);
         System.out.println("매장등록 요청 ID : " + userEntity.getId());
 //        logger.log(Level.INFO, "open time and close time\n" + shop.getOpenTime() +"\n" + shop.getCloseTime());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        Date openTime = null;
-        Date closeTime = null;
-        try {
-            openTime = dateFormat.parse(shopRequest.getOpen_time());
-            closeTime = dateFormat.parse(shopRequest.getClose_time());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+
         System.out.println("shopRequest.toString() : " + shopRequest.toString());
         Shop shopEntity =
                 Shop.createShop()
                         .shopId(shopRequest.getId())
                         .name(shopRequest.getName())
                         .intro(shopRequest.getIntro())
-                        .openTime(openTime)
-                        .closeTime(closeTime)
+                        .openTime(shopRequest.getOpen_time())
+                        .closeTime(shopRequest.getClose_time())
                         .address(shopRequest.getAddress())
                         .addressDetail(shopRequest.getAddress_detail())
                         .category(shopRequest.getCategory())
@@ -145,15 +137,17 @@ public class ShopController {
 //    }
 
     @Transactional
-    @PatchMapping("/shop/{shopId}")
-    public ResponseEntity<?> updateShopInfo(@PathVariable String shopId,
-                                            @RequestBody ShopRequest shopRequest){
+    @PatchMapping("/shop")
+    public ResponseEntity<?> updateShopInfo(@RequestBody Shop.Patch patch){
         Shop shop;
+        System.out.println("patch.getShopId() : " + patch.getShopId());
         try{
-            shop = shopService.findById(shopId);
+            shop = shopService.findById(patch.getShopId());
         }catch (ShopNotFoundException e){
-            return new ResponseEntity<>(new ApiErrorResponse(e.getCode(), e.getId()),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ApiErrorResponse(e.getCode(), e.getId()),HttpStatus.NOT_FOUND);
         }
+        shop.update(patch);
+
         return null;
     }
     @Transactional
