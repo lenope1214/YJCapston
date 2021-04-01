@@ -69,7 +69,7 @@ public class PageThreeFragment extends Fragment {
                             Log.e("result : ", list.getCategory());
                             mItems.add(new Shop(list.getId(), list.getName(),
                                     list.getIntro(), list.getCloseTime(),
-                                    list.getOpenTime(), list.getAddress(), list.getIsResPos(),
+                                    list.getOpenTime(), list.getAddress(), list.getAddressDetail(), list.getIsResPos(),
                                     list.getCategory(), list.getIsOpen()));
                             rv_restaurant_list.setHasFixedSize(true);
                             adapter = new RestaurantRecyclerAdapter(getContext(), mItems);

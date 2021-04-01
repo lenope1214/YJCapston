@@ -16,7 +16,12 @@ public class  Shop {
     private String openTime;
     private String closeTime;
     private String address;
+    private String addressDetail;
     private char isResPos;
     private String category;
     private char isOpen;
+
+
+    public Shop(String id) {
+    }
 }

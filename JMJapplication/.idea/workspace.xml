@@ -14,9 +14,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3914f3c3-3012-4f9b-bfe7-8ebf7bb64730" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/toggle_button_checked.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/toggle_button_default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/toggle_button_state.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Adapter/RestaurantListRecyclerAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/IntroScreen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/ListShopActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/OwnerJoinActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/OwnerLoginActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/anim/anim_splash_imageview.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/anim/anim_splash_out_down.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/anim/anim_splash_out_top.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/anim/anim_splash_textview.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/anim/fade_in.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/anim/fadein.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/anim/fadeout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v24/edge6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/button_login.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/edittext_login.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/font1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/jmjicon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/loading.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/main_icon.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/main_icon2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/splash.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/splash_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/splash_base.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/splash_base2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/font/we_bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/font/we_regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/font/we_semibold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_list_shop.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_owner_join_o.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_owner_login_o.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_shop.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_splash.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/introscreen.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/loading.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/restaurant_list.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -27,8 +59,10 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Adapter/RestaurantRecyclerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Adapter/RestaurantRecyclerAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/DataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/DataService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageEightFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageEightFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageFiveFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageFiveFragment.java" afterDir="false" />
@@ -39,14 +73,17 @@
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageSixthFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageSixthFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageThreeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageThreeFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageTwoFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/Fragment/PageTwoFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/HomeFragment_O.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/HomeFragment_O.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/MainActivity_O.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/MainActivity_O.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/LoginActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/RegisterShopActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/RegisterShopActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/ShopDetailFragment_O.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/ShopDetailFragment_O.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/SignupActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/SignupActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/MemberDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/MemberDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/jmjapplication2/dto/Shop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/menu_fragment_o.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/reservation_fragment_o.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/shop_detail_fragment_o.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/shop_detail_fragment_o.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/border_with_bright_color.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/border_with_bright_color.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/font/fontfamily.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/font/fontfamily.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,9 +147,9 @@
       <list>
         <option value="valueResourceFile" />
         <option value="Interface" />
-        <option value="layoutResourceFile" />
-        <option value="Class" />
         <option value="resourceFile" />
+        <option value="Class" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
@@ -135,7 +172,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_2_API_29" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-03-30T10:12:17.390412700Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-04-01T11:34:05.967572700Z" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
@@ -147,7 +184,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="IntegrationPerformanceTest" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -156,15 +193,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\res\drawable" />
-      <recent name="C:\Users\leeym\Documents\AndroidStudio\DeviceExplorer\emulator-5554\data\data\com.example.jmjapplication2\shared_prefs" />
-      <recent name="C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app" />
-      <recent name="C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\libs" />
       <recent name="C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\res\drawable-v24" />
+      <recent name="C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\res\drawable" />
+      <recent name="C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\res\anim" />
+      <recent name="C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\res\font" />
+      <recent name="C:\Users\leeym\Documents\AndroidStudio\DeviceExplorer\emulator-5554\data\data\com.example.jmjapplication2\shared_prefs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\java\com\example\jmjapplication\Adapter" />
       <recent name="C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\res\font" />
+    </key>
+    <key name="android.template.-987404365">
+      <recent name="com.example.jmjapplication2" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.jmjapplication" />
@@ -175,6 +215,9 @@
       <recent name="com.example.jmjapplication.Fragment" />
       <recent name="com.example.jmjapplication.fragment" />
       <recent name="com.example.jmjapplication" />
+    </key>
+    <key name="android.template.-1943324327">
+      <recent name="com.example.jmjapplication2" />
     </key>
   </component>
   <component name="RunManager" selected="Android App.JMJapplication.app">
@@ -206,13 +249,15 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -341,7 +386,14 @@
       <workItem from="1616891749134" duration="20204000" />
       <workItem from="1616974655955" duration="30561000" />
       <workItem from="1617061149140" duration="16386000" />
-      <workItem from="1617086032484" duration="13522000" />
+      <workItem from="1617086032484" duration="21144000" />
+      <workItem from="1617147796005" duration="6941000" />
+      <workItem from="1617154978069" duration="2533000" />
+      <workItem from="1617159050153" duration="885000" />
+      <workItem from="1617163767618" duration="16944000" />
+      <workItem from="1617198775435" duration="12128000" />
+      <workItem from="1617234671477" duration="31143000" />
+      <workItem from="1617274700807" duration="2806000" />
     </task>
     <servers />
   </component>

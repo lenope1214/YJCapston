@@ -20,9 +20,7 @@ public class DataService {
     static final public String BASE_URL = "http://192.168.1.17:8088/api/v1/"; // 학교
     //private String BASE_URL = "http://122.202.45.37:8088/api/v1/"; // 집
 
-    Gson gson = new GsonBuilder()
-            .setDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
-            .create();
+    Gson gson = new GsonBuilder().setLenient().create();
 
     Retrofit retrofitClient =
             new Retrofit.Builder()
@@ -40,6 +38,7 @@ public class DataService {
     MyShopAPI myShop = retrofitClient.create(MyShopAPI.class);
     InsertShop insertShop = retrofitClient.create(InsertShop.class);
     ShowShopList showShopList = retrofitClient.create(ShowShopList.class);
+    ShowShopList2 showShopList2 = retrofitClient.create(ShowShopList2.class);
     ShowShopOne shop = retrofitClient.create(ShowShopOne.class);
     ShopUpdate updateOpen = retrofitClient.create(ShopUpdate.class);
     ShopUpdate updateIsRsPos = retrofitClient.create(ShopUpdate.class);
@@ -56,7 +55,7 @@ interface SelectAPI{
 
 interface JoinAPI{
     @POST("join")
-    Call<MemberDTO> join(@Body Map<String, String> map);
+    Call<String> join(@Body Map<String, String> map);
 }
 
 interface UpdateAPI{
@@ -67,6 +66,7 @@ interface UpdateAPI{
 interface DeleteAPI {
     @POST("delete/{id}")
     Call<ResponseBody> deleteOne(@Path("id") long id);
+
 }
 
 interface ValidateAPI {
@@ -95,6 +95,9 @@ interface LoginAPI {
 interface MyShopAPI {
     @GET("myShop")
     Call<Shop> myShop(@Header("Authorization") String jwt);
+
+    @GET("myShop")
+    Call<List<Shop>> myShop2(@Header("Authorization") String jwt);
 }
 
 interface InsertShop {
@@ -110,6 +113,12 @@ interface InsertShop {
 interface ShowShopList {
     @GET("shopList")
     Call<Shop> shopList();
+
+}
+
+interface ShowShopList2 {
+    @GET("shopList")
+    Call<List<Shop>> shopList();
 }
 
 interface ShowShopOne {
@@ -118,7 +127,7 @@ interface ShowShopOne {
 }
 
 interface ShopUpdate {
-    @PUT("shop/isOpen")
+    @PUT("shop/ isOpen")
     Call<ResponseBody>  updateOpen(@Header("Authorization") String jwt);
 
     @PUT("shop/isRsPos")

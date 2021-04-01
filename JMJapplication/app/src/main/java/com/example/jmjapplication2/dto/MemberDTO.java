@@ -16,7 +16,7 @@ public class MemberDTO {
     private String email; // 이메일
     private String address; // 주소
     private String addressDetail;
-    private Date birthday; // 생년월일
+    //private Date birthday; // 생년월일
     private String phone; // 전화번호
     private char isWdrw; // 탈퇴여부
     private String role; // 권한   u, o, a

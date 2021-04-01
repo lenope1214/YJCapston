@@ -50,7 +50,6 @@ public class SignupActivity extends AppCompatActivity {
         et_name = (EditText) findViewById(R.id.et_name);
         et_phone = (EditText) findViewById(R.id.et_phone);
         btn_insert = findViewById(R.id.btn_next);
-        ;
         btn_id_validate = findViewById(R.id.id_validate);
 
         btn_id_validate.setOnClickListener(new View.OnClickListener() {
@@ -138,9 +137,9 @@ public class SignupActivity extends AppCompatActivity {
                         map.put("role", "ROLE_OWNER");
                     }
 
-                    dataService.join.join(map).enqueue(new Callback<MemberDTO>() {
+                    dataService.join.join(map).enqueue(new Callback<String>() {
                         @Override
-                        public void onResponse(Call<MemberDTO> call, Response<MemberDTO> response) {
+                        public void onResponse(Call<String> call, Response<String> response) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
                             dialog = builder.setMessage("회원가입되었습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                 @Override
@@ -159,7 +158,7 @@ public class SignupActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<MemberDTO> call, Throwable t) {
+                        public void onFailure(Call<String> call, Throwable t) {
                             t.printStackTrace();
                         }
                     });

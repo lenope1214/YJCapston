@@ -80,7 +80,7 @@ public class ShopDetailFragment_O extends Fragment {
                     builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Log.d("result", "ㅇ");
+                            Log.d("result", "아니오");
                         }
                     });
                     builder.show();

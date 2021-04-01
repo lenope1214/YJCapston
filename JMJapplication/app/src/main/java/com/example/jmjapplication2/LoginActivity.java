@@ -44,7 +44,9 @@ import retrofit2.Response;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
@@ -66,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth mAuth = null;
     GoogleSignInClient mGoogleSignInClient;
 
+    ArrayList<Shop> mItems = new ArrayList<>();
 
     private AlertDialog dialog;
     private static final int RC_SIGN_IN = 9001;
@@ -141,25 +144,35 @@ public class LoginActivity extends AppCompatActivity {
                                     dialog.show();
                                 } else {
                                     Log.d("result : " , "사장사용자 로그인성공!");
-                                    dataService.myShop.myShop("Bearer " + jwt).enqueue(new Callback<Shop>() {
+                                    dataService.myShop.myShop2("Bearer " + jwt).enqueue(new Callback<List<Shop>>() {
                                         @Override
-                                        public void onResponse(Call<Shop> call, Response<Shop> response) {
+                                        public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response) {
                                             if(response.code() == 200) {
-                                                Log.d("result", response.body().getId());
-                                                Log.d("result : ", "매장있음");
-                                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                                                dialog = builder.setMessage("로그인되었습니다").setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialog, int which) {
-                                                        Intent intent = new Intent(LoginActivity.this, MainActivity_O.class);
-                                                        intent.putExtra("owner_number", response.body().getId());
-                                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                                        startActivity(intent);
-                                                        finish();
-                                                    }
-                                                }).create();
-                                                builder.setCancelable(false);
-                                                dialog.show();
+                                                //Log.d("result", response.body().getId());
+                                                for(int i =0; i < response.body().size(); i++) {
+                                                    Log.d("result : ", "매장있음" + response.body().get(i).getId());
+                                                }
+//                                                for(Shop list : shopList) {
+//                                                   // mItems.add(new Shop(list.getId()));
+//                                                    mItems.add(new Shop(list.getId(), list.getName(), list.getIntro(),
+//                                                            list.getCloseTime(), list.getOpenTime(), list.getAddress(),
+//                                                            list.getAddressDetail(), list.getIsResPos(), list.getCategory(), list.getIsOpen()));
+//
+//                                                }
+
+//                                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+//                                                dialog = builder.setMessage("로그인되었습니다").setPositiveButton("확인", new DialogInterface.OnClickListener() {
+//                                                    @Override
+//                                                    public void onClick(DialogInterface dialog, int which) {
+//                                                        Intent intent = new Intent(LoginActivity.this, MainActivity_O.class);
+//                                                        intent.putExtra("owner_number", response.body().getId());
+//                                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                                                        startActivity(intent);
+//                                                        finish();
+//                                                    }
+//                                                }).create();
+//                                                builder.setCancelable(false);
+//                                                dialog.show();
                                             } else if(response.code() == 400) {
                                                 Log.d("result : ", "매장없음");
                                                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
@@ -180,17 +193,19 @@ public class LoginActivity extends AppCompatActivity {
                                         }
 
                                         @Override
-                                        public void onFailure(Call<Shop> call, Throwable t) {
+                                        public void onFailure(Call<List<Shop>> call, Throwable t) {
 
                                         }
                                     });
                                 }
                             } else if(response.code() == 400){
-                                Log.d("result : " , "로그인실패");
+                                Log.d("result @@@: " , "로그인실패");
+                                Log.d("resul@#$%#@t : " , response.errorBody().string());
                                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                                 dialog = builder.setMessage("아이디와 비밀번호를 확인해 주세요.").setPositiveButton("확인", null).create();
                                 dialog.show();
                             } else {
+                                Log.d("resul@#$%#@t : " , response.errorBody().string());
                                 Log.d("result : " , "연결실패");
                             }
                         }

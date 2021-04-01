@@ -24,6 +24,7 @@ public class RegisterShopActivity extends AppCompatActivity {
     EditText shop_et_id, shop_et_name, shop_et_intro, shop_et_addr, shop_et_addr_detail;
     Spinner shop_open, shop_close, shop_isres, shop_category;
     Button shop_register;
+    private String jwt;
     private AlertDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,7 @@ public class RegisterShopActivity extends AppCompatActivity {
         String member_id = ((JMJApplication)this.getApplication()).getId();
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_new_shop);
+        setContentView(R.layout.activity_register_shop);
 
         shop_et_id = findViewById(R.id.shop_et_id);
         shop_et_name = findViewById(R.id.shop_et_name);
@@ -58,9 +59,9 @@ public class RegisterShopActivity extends AppCompatActivity {
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         shop_category.setAdapter(categoryAdapter);
 
-        ArrayAdapter isresAdapter = ArrayAdapter.createFromResource(this, R.array.reservation, android.R.layout.simple_spinner_item);
-        isresAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        shop_isres.setAdapter(isresAdapter);
+//        ArrayAdapter isresAdapter = ArrayAdapter.createFromResource(this, R.array.reservation, android.R.layout.simple_spinner_item);
+//        isresAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        shop_isres.setAdapter(isresAdapter);
 
         shop_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,15 +71,20 @@ public class RegisterShopActivity extends AppCompatActivity {
                 map.put("name", shop_et_name.getText().toString());
                 map.put("intro", shop_et_intro.getText().toString());
                 map.put("address", shop_et_addr.getText().toString());
-                map.put("addressDetail", shop_et_addr_detail.getText().toString());
-                map.put("openTime", shop_open.getSelectedItem());
-                map.put("closeTime", shop_close.getSelectedItem());
+                map.put("address_detail", shop_et_addr_detail.getText().toString());
+                map.put("open_time", shop_open.getSelectedItem());
+                map.put("close_time", shop_close.getSelectedItem());
                 map.put("category", shop_category.getSelectedItem().toString());
                 //map.put("isRePos", shop_isres.getSelectedItem().toString());
                 //map.put("member_id", member_id);
 
-                SharedPreferences pref =  getSharedPreferences("auth", MODE_PRIVATE);
-                String jwt = pref.getString("token", "");
+//                SharedPreferences pref =  getSharedPreferences("auth", MODE_PRIVATE);
+//                String jwt = pref.getString("token", "");
+//                Log.d("awdkmawd", jwt);
+
+                Intent intent = getIntent();
+                jwt = intent.getStringExtra("jwt");
+                Log.d("awqdw@@@@@",jwt);
 
                 dataService.insertShop.insertShop("Bearer " + jwt, map).enqueue(new Callback<Shop>() {
                     @Override
@@ -99,6 +105,7 @@ public class RegisterShopActivity extends AppCompatActivity {
                             builder.setCancelable(false);
                             dialog.show();
                         } else if(response.code() == 400) {
+
                             Log.d("result : ", "매장등록 실패");
                         } else {
                             Log.d("result : " , "연결실패");
