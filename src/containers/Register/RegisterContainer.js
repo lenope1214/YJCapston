@@ -20,6 +20,9 @@ const RegisterContainer = () => {
     const [address, setAddress] = useState("");
     const [address1, setAddress1] = useState("");
     const [keyword, setKeyword] = useState("");
+    const [showLocation, setShowLocation] = useState({
+        roadAddr: "",
+    });
 
     let check = "u";
 
@@ -170,10 +173,17 @@ const RegisterContainer = () => {
     const search = () => {
         getLocation(keyword)
             .then((res) => {
-                console.log(res.data);
+                const json = JSON.parse(res.data.results.juso);
+                console.log(json);
+                const loca = json.map((loca) => {
+                    return {
+                        roadloca: loca.roadAddr,
+                    };
+                });
+                console.log(loca);
             })
             .catch((err) => {
-                alert("");
+                alert(err);
             });
     };
 
@@ -209,6 +219,7 @@ const RegisterContainer = () => {
             handleKeyword={handleKeyword}
             keyword={keyword}
             IdCheck={IdCheck}
+            showLocation={showLocation}
         />
     );
 };

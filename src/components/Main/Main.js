@@ -9,6 +9,7 @@ import backimg3 from "./img/종이질감갈색화면.png";
 import * as S from "./style";
 import { Link } from "react-router-dom";
 
+
 const Main = ({
     isLogin,
     logout,
@@ -40,9 +41,9 @@ const Main = ({
     return (
         <>
             <S.MainWrap>
-                <div className="App">
-                    <div className="black-nav">
-                        <div className="left-nav">
+                <div class="App">
+                    <div class="black-nav">
+                        <div class="left-nav">
                             주문
                             <span
                                 style={{
@@ -54,7 +55,7 @@ const Main = ({
                             </span>
                             민족
                         </div>
-                        <div className="center-nav">
+                        <div class="center-nav">
                             <input
                                 type="text"
                                 placeholder="매장을 검색하세요."
@@ -79,8 +80,8 @@ const Main = ({
                             </button>
                         </div>
                         {isLogin ? (
-                            <div className="right-nav">
-                                <button className="right1-nav" onClick={logout}>
+                            <div class="right-nav">
+                                <button class="right1-nav" onClick={logout}>
                                     LOGOUT
                                 </button>
                                 <Link to="/mypage">
@@ -88,25 +89,25 @@ const Main = ({
                                 </Link>
                                 <div>
                                     <button
-                                        className="right1-nav"
+                                        class="right1-nav"
                                         onClick={scrollTo1}
                                     >
                                         상단바
                                     </button>
                                     <button
-                                        className="right1-nav"
+                                        class="right1-nav"
                                         onClick={scrollTo2}
                                     >
                                         어플다운로드
                                     </button>
                                     <button
-                                        className="right1-nav"
+                                        class="right1-nav"
                                         onClick={scrollTo3}
                                     >
                                         사업자등록
                                     </button>
                                     <button
-                                        className="right1-nav"
+                                        class="right1-nav"
                                         onClick={scrollTo4}
                                     >
                                         매장둘러보기
@@ -114,11 +115,8 @@ const Main = ({
                                 </div>
                             </div>
                         ) : (
-                            <div className="right-nav">
-                                <button
-                                    className="right1-nav"
-                                    onClick={openModal}
-                                >
+                            <div class="right-nav">
+                                <button class="right1-nav" onClick={openModal}>
                                     LOGIN
                                 </button>
 
@@ -127,25 +125,25 @@ const Main = ({
                                 </Link>
                                 <div>
                                     <button
-                                        className="right1-nav"
+                                        class="right1-nav"
                                         onClick={scrollTo1}
                                     >
                                         상단바
                                     </button>
                                     <button
-                                        className="right1-nav"
+                                        class="right1-nav"
                                         onClick={scrollTo2}
                                     >
                                         어플다운로드
                                     </button>
                                     <button
-                                        className="right1-nav"
+                                        class="right1-nav"
                                         onClick={scrollTo3}
                                     >
                                         사업자등록
                                     </button>
                                     <button
-                                        className="right1-nav"
+                                        class="right1-nav"
                                         onClick={scrollTo4}
                                     >
                                         매장둘러보기
@@ -155,11 +153,11 @@ const Main = ({
                         )}
                     </div>
 
-                    <div className="adimg">
-                        <div className="topimg">
+                    <div class="adimg">
+                        <div class="topimg">
                             <img src={topimg} width="100%" height="700px" />
                         </div>
-                        <div className="toptext">
+                        <div class="toptext">
                             <span>테이블</span>
                             <span style={{ fontSize: "30px" }}>에서</span>
                             <br></br>
@@ -173,21 +171,21 @@ const Main = ({
                             <span style={{ fontSize: "30px" }}>하자</span>
                         </div>
                     </div>
-                    <div className="but-item1">
-                        <div className="backimg3">
+                    <div class="but-item1">
+                        <div class="backimg3">
                             <img src={backimg2} width="100%" height="700px" />
                         </div>
-                        <div className="backimg2">
+                        <div class="backimg2">
                             <img src={backimg3} width="100%" height="700px" />
                         </div>
-                        <div className="but-item1-text">
+                        <div class="but-item1-text">
                             <p>주문의민족</p>
                             <p>모든 기능</p>
                             <p>이용하기!</p>
                         </div>
-                        <div className="but-item1-icon">
+                        <div class="but-item1-icon">
                             <img src={juminicon} width="200px" height="200px" />
-                            <div className="but-item1-but">
+                            <div class="but-item1-but">
                                 <button
                                     onClick={() => {
                                         console.log(1);
@@ -207,24 +205,24 @@ const Main = ({
                                 </button>
                             </div>
                         </div>
-                        <div className="but-item1-text2">
+                        <div class="but-item1-text2">
                             <p>주민 앱 다운시 모든 기능</p>
                             <p>편리하게 사용 가능!</p>
                         </div>
                     </div>
-                    <div className="but-item2">
-                        <div className="backimg2">
+                    <div class="but-item2">
+                        <div class="backimg2">
                             <img src={backimg2} width="100%" height="700px" />
                         </div>
-                        <div className="but-item2-text">
+                        <div class="but-item2-text">
                             <p>웹으로도</p>
                             <p>가능한</p>
                             <p>사업자 등록</p>
                             <p>매장 관리!</p>
                         </div>
-                        <div className="but-item2-icon">
+                        <div class="but-item2-icon">
                             <img src={peopleimg} width="300px" height="300px" />
-                            <div className="but-item2-but">
+                            <div class="but-item2-but">
                                 <Link to="/shop">
                                     <button
                                         style={{
@@ -242,23 +240,23 @@ const Main = ({
                                 </Link>
                             </div>
                         </div>
-                        <div className="but-item2-text2">
+                        <div class="but-item2-text2">
                             <p>주민 앱 다운시 모든 기능</p>
                             <p>편리하게 사용 가능!</p>
                         </div>
                     </div>
-                    <div className="but-item3">
-                        <div className="backimg2">
+                    <div class="but-item3">
+                        <div class="backimg2">
                             <img src={backimg3} width="100%" height="700px" />
                         </div>
-                        <div className="but-item3-text">
+                        <div class="but-item3-text">
                             <p>집에서</p>
                             <p>매장 둘러보고</p>
                             <p>예약하자!</p>
                         </div>
-                        <div className="but-item3-icon">
+                        <div class="but-item3-icon">
                             <img src={shopimg} width="250px" height="250px" />
-                            <div className="but-item3-but">
+                            <div class="but-item3-but">
                                 <Link to="/shoplist">
                                     <button
                                         onclick="href='/shoplist'"
@@ -277,7 +275,7 @@ const Main = ({
                                 </Link>
                             </div>
                         </div>
-                        <div className="but-item3-text2">
+                        <div class="but-item3-text2">
                             <p>웹에서도 매장 둘러보고</p>
                             <p>예약 가능한 주문의 민족</p>
                         </div>
@@ -313,12 +311,7 @@ const Main = ({
                         />
                     </main>
                     <footer>
-                        <div>
-                            <label>
-                                <input type="checkbox" />
-                                <span>기억하기</span>
-                            </label>
-                        </div>
+                        
                         <button onClick={login}>로그인</button>
                         <button onClick={closeModal}>닫기</button>
                     </footer>

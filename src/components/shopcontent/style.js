@@ -1,23 +1,6 @@
 import styled from "styled-components";
 
-export const LoginWrap = styled.div`
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 30%;
-    margin: 0 auto;
-    padding: 5% 1%;
-    border-radius: 8px;
-    background-color: white;
-    color: black;
-    z-index: 10;
-    border-style: solid;
-    border-color: black;
-    opacity: 0.9;
-`;
-
-export const ShoplistWrap = styled.div`
+export const shopcontentWrap = styled.div`
     @font-face {
         font-family: "Wemakeprice-Bold";
         src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Wemakeprice-Bold.woff")
@@ -383,8 +366,8 @@ export const ShoplistWrap = styled.div`
         position: fixed;
         float: left;
         width: 270px;
-        top: 70%;
-        left: 8%;
+        top: 80%;
+        left: 10%;
         transform: translate(-50%, -50%);
     }
     .selectcategory Button {
@@ -446,4 +429,21 @@ export const ShoplistWrap = styled.div`
     .linesetting {
         float: left;
     }
+`;
+
+export const LoginWrap = styled.div`
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    margin: 0 auto;
+    padding: 5% 1%;
+    border-radius: 8px;
+    background-color: black;
+    color: white;
+    z-index: 10;
+    border-style: solid;
+    border-color: black;
+    opacity: 0.9;
 `;

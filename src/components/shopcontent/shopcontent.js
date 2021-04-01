@@ -1,10 +1,8 @@
 import React from "react";
 import * as S from "./style";
 import { Link } from "react-router-dom";
-import mainpicture from "./img/사용자페이지메인.jpg";
-import yangtimjang from "./img/yangtimjang.png";
 
-const Shoplist = ({
+const Shopcontent = ({
     isLogin,
     logout,
     openModal,
@@ -15,11 +13,10 @@ const Shoplist = ({
     login,
     closeModal,
     modal,
-    restaurant,
 }) => {
     return (
         <>
-            <S.ShoplistWrap>
+            <S.shopcontentWrap>
                 <div class="App">
                     <div class="black-nav">
                         <div class="left-nav">
@@ -78,9 +75,6 @@ const Shoplist = ({
                             <li class="reviewevent">리뷰이벤트</li>
                         </div>
                         <div class="allbody">
-                            <div class="mainimg">
-                                <img class="mainimg-img" src={mainpicture} />
-                            </div>
                             <div class="leftCategory">
                                 <ul class="moneykind">
                                     <input type="text" placeholder="최소금액" />
@@ -101,41 +95,7 @@ const Shoplist = ({
                                 </ul>
                             </div>
                             <div clasName="menulist">
-                                <div class="list_shop">
-                                    {restaurant.map((shop) => {
-                                        return (
-                                            <Link to="/shopcontent">
-                                                <button>
-                                                    <div class="testname">
-                                                        <div class="image">
-                                                            <img
-                                                                class="yangtimjang"
-                                                                src={
-                                                                    yangtimjang
-                                                                }
-                                                            />
-                                                        </div>
-                                                        <div class="listcontent">
-                                                            <div class="linesetting">
-                                                                <div class="listname">
-                                                                    {shop.name}
-                                                                </div>
-                                                                <div class="listcategory">
-                                                                    {
-                                                                        shop.category
-                                                                    }
-                                                                </div>
-                                                            </div>
-                                                            <div class="listintro">
-                                                                {shop.intro}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </button>
-                                            </Link>
-                                        );
-                                    })}
-                                </div>
+                                <div class="list_shop"></div>
                                 {/* {restaurant.map((test, i) => {
                                     return <div test={i}>{test.intro}</div>;
                                 })}
@@ -149,13 +109,13 @@ const Shoplist = ({
                         copyright 2021 yeongJin university capston WDA team 4.
                     </footer>
                 </div>
-            </S.ShoplistWrap>
+            </S.shopcontentWrap>
 
             {modal && (
                 <S.LoginWrap>
                     <header>
                         <h1>주문의 민족에 오신걸 환영합니다.</h1>
-                    </header>
+                    </header> 
                     <main>
                         <p>로그인 정보를 입력하세요!!!</p>
                         <input
@@ -188,4 +148,4 @@ const Shoplist = ({
     );
 };
 
-export default Shoplist;
+export default Shopcontent;

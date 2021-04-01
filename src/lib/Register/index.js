@@ -26,7 +26,9 @@ export const postRegister = (
 };
 
 export const getLocation = (keyword) => {
-    return apiDefault().get(`/addressSearch/${keyword}`);
+    return apiDefault().get(
+        `/searchAddr?keyword=${keyword}&currentPage=1&countPerPage=5`
+    );
 };
 
 export const getIdCheck = (member_id) => {
