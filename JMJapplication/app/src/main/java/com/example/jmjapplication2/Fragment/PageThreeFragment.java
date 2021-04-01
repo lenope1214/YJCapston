@@ -54,6 +54,7 @@ public class PageThreeFragment extends Fragment {
     }
 
     private void showList(String category) {
+        Log.d("result1" , "시발 왜안돼1");
         Retrofit retrofit =new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(ApiService.BASEURL)
                 .build();
@@ -63,18 +64,20 @@ public class PageThreeFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response) {
                 if(response.isSuccessful()) {
+                    Log.d("result2" , "시발 왜안돼2");
                     if(response.code() == 200) {
                         List<Shop> shopList = response.body();
+                        Log.d("result3" , "시발 왜안돼3");
                         for(Shop list : shopList) {
-                            Log.e("result : ", list.getCategory());
-                            mItems.add(new Shop(list.getId(), list.getName(),
-                                    list.getIntro(), list.getCloseTime(),
-                                    list.getOpenTime(), list.getAddress(), list.getAddressDetail(), list.getIsResPos(),
-                                    list.getCategory(), list.getIsOpen()));
-                            rv_restaurant_list.setHasFixedSize(true);
-                            adapter = new RestaurantRecyclerAdapter(getContext(), mItems);
-                            rv_restaurant_list.setLayoutManager(new LinearLayoutManager(getActivity()));
-                            rv_restaurant_list.setAdapter(adapter);
+                            Log.e("result : ", response.body().toString());
+//                            mItems.add(new Shop(list.getId(), list.getName(),
+//                                    list.getIntro(), list.getCloseTime(),
+//                                    list.getOpenTime(), list.getAddress(), list.getAddressDetail(), list.getIsResPos(),
+//                                    list.getCategory(), list.getIsOpen()));
+//                            rv_restaurant_list.setHasFixedSize(true);
+//                            adapter = new RestaurantRecyclerAdapter(getContext(), mItems);
+//                            rv_restaurant_list.setLayoutManager(new LinearLayoutManager(getActivity()));
+//                            rv_restaurant_list.setAdapter(adapter);
                         }
                     } else {
                         Toast.makeText(getContext(), "조회 실패", Toast.LENGTH_LONG).show();

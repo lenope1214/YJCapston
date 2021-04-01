@@ -12,7 +12,7 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_menu2);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
         toolbar.setTitle("");
@@ -22,7 +22,7 @@ public class MenuActivity extends AppCompatActivity {
 
         MenuPagerAdapter menuPagerAdapter = new MenuPagerAdapter(getSupportFragmentManager());
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager1);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager4);
         viewPager.setAdapter(menuPagerAdapter);
         viewPager.setCurrentItem(getIntent().getIntExtra("menu", 1));
 

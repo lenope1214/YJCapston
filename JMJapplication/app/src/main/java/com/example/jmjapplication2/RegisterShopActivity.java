@@ -31,6 +31,9 @@ public class RegisterShopActivity extends AppCompatActivity {
         DataService dataService = new DataService();
         
         String member_id = ((JMJApplication)this.getApplication()).getId();
+        String jwt = ((JMJApplication)this.getApplication()).getJwt();
+
+        Log.d("res jwtjwtjwt", jwt);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_shop);
@@ -82,10 +85,6 @@ public class RegisterShopActivity extends AppCompatActivity {
 //                String jwt = pref.getString("token", "");
 //                Log.d("awdkmawd", jwt);
 
-                Intent intent = getIntent();
-                jwt = intent.getStringExtra("jwt");
-                Log.d("awqdw@@@@@",jwt);
-
                 dataService.insertShop.insertShop("Bearer " + jwt, map).enqueue(new Callback<Shop>() {
                     @Override
                     public void onResponse(Call<Shop> call, Response<Shop> response) {
@@ -96,8 +95,8 @@ public class RegisterShopActivity extends AppCompatActivity {
                             dialog = builder.setMessage("매장이 등록되었습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    Intent intent = new Intent(RegisterShopActivity.this, MainActivity_O.class);
-                                    intent.putExtra("owner_number", response.body().getId());
+                                    Intent intent = new Intent(RegisterShopActivity.this, ListShopActivity.class);
+                                    //intent.putExtra("owner_number", response.body().getId());
                                     startActivity(intent);
                                     finish();
                                 }

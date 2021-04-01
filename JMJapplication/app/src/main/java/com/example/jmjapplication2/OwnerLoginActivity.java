@@ -103,7 +103,6 @@ public class OwnerLoginActivity extends AppCompatActivity {
                                                         Intent intent = new Intent(OwnerLoginActivity.this, ListShopActivity.class);
                                                         intent.putExtra("owner_number_size", response.body().size());
                                                         intent.putExtra("owner_id", et_owner_id.getText().toString());
-                                                        intent.putExtra("jwt", jwt);
                                                         for (int i=0; i<response.body().size(); i++) {
                                                             intent.putExtra("owner_number" + i, response.body().get(i).getId());
                                                         }

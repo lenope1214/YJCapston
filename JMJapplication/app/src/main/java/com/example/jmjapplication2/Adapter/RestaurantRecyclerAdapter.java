@@ -19,11 +19,11 @@ import java.util.ArrayList;
 
 public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRecyclerAdapter.ItemViewHolder> {
     Context context;
-    ArrayList<Shop> shops;
+    ArrayList<Shop> mItems;
 
     public RestaurantRecyclerAdapter(Context context, ArrayList<Shop> shopss) {
         this.context = context;
-        shops = shopss;
+        mItems = shopss;
     }
 
     // 새로운 뷰 홀더 생성
@@ -36,10 +36,10 @@ public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRe
     // View 의 내용을 해당 포지션의 데이터로 바꿉니다.
     @Override
     public void onBindViewHolder(final ItemViewHolder holder, final int position) {
-        holder.tv_restaurant_name.setText(shops.get(position).getName());
-        holder.tv_restaurant_menu.setText(shops.get(position).getAddress());
+        holder.tv_restaurant_name.setText(mItems.get(position).getName());
+        holder.tv_restaurant_menu.setText(mItems.get(position).getAddress());
 
-        if(shops.get(position).getIsOpen() == 'Y') {
+        if(mItems.get(position).getIsOpen() == 'Y') {
             holder.tv_status.setText("영업 중");
         } else {
             holder.tv_status.setText("영업아님");
@@ -49,7 +49,7 @@ public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRe
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ShopDetailActivity.class);
-                intent.putExtra("shopNumber", shops.get(position).getId());
+                intent.putExtra("shopNumber", mItems.get(position).getId());
                 //Log.d("result : ", shops.get(position).getId());
                 context.startActivity(intent);
             }
@@ -59,7 +59,7 @@ public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRe
     // 데이터 셋의 크기
     @Override
     public int getItemCount() {
-        return shops.size();
+        return mItems.size();
     }
 
     // 커스텀 뷰홀더
