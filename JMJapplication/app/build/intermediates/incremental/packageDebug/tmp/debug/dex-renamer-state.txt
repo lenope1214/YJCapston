@@ -1,0 +1,4 @@
+#Fri Apr 02 01:20:24 KST 2021
+base.0=C\:\\Users\\leeym\\Documents\\GitHub\\YJCapston\\JMJapplication\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
