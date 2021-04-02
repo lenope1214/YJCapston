@@ -7,6 +7,14 @@ export const postLogin = (id, pw) => {
     });
 };
 
-export const getshopid = (shopId) => {
-    return apiDefault().get(`/menu/${shopId}`, {});
+export const getShoplist = () => {
+    return apiDefault().get("/shopList", {});
+};
+
+export const getshopmenu = (shopId) => {
+    return apiDefault().get(`/shop/${shopId}/menuList`, {});
+};
+
+export const getshopinfo = (shopId) => {
+    return apiDefault().get(`/shop/${shopId}`, {});
 };

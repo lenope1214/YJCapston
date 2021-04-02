@@ -4,12 +4,13 @@ import { apiDefault } from "../../lib/client";
 
 const Fd = () => {
     const [img, setImage] = useState(null);
-
+    
     const onChange = (e) => {
         const image = e.target.files[0];
         setImage(image);
         console.log(img);
     };
+   
 
     const onClick = async () => {
         console.log(img);
@@ -18,8 +19,10 @@ const Fd = () => {
         console.log(formData);
         const res = await apiDefault().post(
             "/test/uploadTest01",
-
-            formData,
+            {
+                formData,
+                
+            },
 
             {
                 headers: {
@@ -39,6 +42,7 @@ const Fd = () => {
                 multiple="multiple"
                 onChange={onChange}
             />
+           
             <button onClick={onClick}>button</button>
         </div>
     );

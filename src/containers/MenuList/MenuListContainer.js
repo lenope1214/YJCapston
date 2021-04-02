@@ -3,8 +3,6 @@ import axios from "axios";
 import MenuList from "../../components/MenuList/MenuList";
 import { useHistory } from "react-router";
 import { getMenuList } from "../../lib/MenuList";
-import OwnerNavbar from "../../components/OwnerMenubar/OwnerNavbar";
-import Header from "../../components/Header/Header";
 
 const MenuListContainer = () => {
     const [menues, setMenues] = useState([]);
@@ -35,10 +33,6 @@ const MenuListContainer = () => {
 
     return (
         <>
-            <Header />
-
-            <OwnerNavbar />
-
             <MenuList menues={menues} />
         </>
     );

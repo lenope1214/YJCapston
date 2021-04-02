@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Shoplist from "../../components/Shoplist/Shoplist";
 import { useHistory } from "react-router-dom";
-import { postLogin, getShoplist } from "../../lib/Shoplist/index";
+import {
+    postLogin,
+    getShoplist,
+    getShoplistkorean,
+} from "../../lib/Shoplist/index";
 import Shopcontent from "../../components/shopcontent/shopcontent";
 
 const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
@@ -42,6 +46,25 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
 
     console.log("restaurant :", restaurant);
 
+    const showkorean = () => {
+        getShoplistkorean()
+            .then((res) => {
+                console.log(res.data);
+                const rstrt = res.data.map((rstrt) => {
+                    return {
+                        address: rstrt.address,
+                        name: rstrt.name,
+                        intro: rstrt.intro,
+                        category: rstrt.category,
+                        id: rstrt.id,
+                    };
+                });
+                setRestaurant(rstrt);
+            })
+            .catch((err) => {
+                alert(err);
+            });
+    };
     const showShoplist = () => {
         getShoplist()
             .then((res) => {
@@ -103,6 +126,7 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 openModal={openmodal}
                 closeModal={closemodal}
                 restaurant={restaurant}
+                showkorean={showkorean}
             />
         </>
     );

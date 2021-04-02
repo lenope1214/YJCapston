@@ -446,4 +446,11 @@ export const ShoplistWrap = styled.div`
     .linesetting {
         float: left;
     }
+    .topCategory button {
+        outline: 0;
+        border: 0;
+        background-color: white;
+        cursor: pointer;
+        width: 50px;
+    }
 `;

@@ -1,6 +1,7 @@
 import React from "react";
 import * as S from "./style";
 import { Link } from "react-router-dom";
+import yangtimjang from "../Shoplist/img/yangtimjang.png";
 
 const Shopcontent = ({
     isLogin,
@@ -13,6 +14,7 @@ const Shopcontent = ({
     login,
     closeModal,
     modal,
+    shopIntro,
 }) => {
     return (
         <>
@@ -96,17 +98,79 @@ const Shopcontent = ({
                             </div>
                             <div clasName="menulist">
                                 <div class="list_shop"></div>
-                                {/* {restaurant.map((test, i) => {
-                                    return <div test={i}>{test.intro}</div>;
-                                })}
-                                {restaurant.map((test, i) => {
-                                    return <div test={i}>{test.category}</div>;
-                                })} */}
+                            </div>
+                            <div class="shopcon">
+                                <div class="shopcon_2">
+                                    <div class="shop_img">
+                                        <img
+                                            class="shop_img2"
+                                            src={yangtimjang}
+                                        />
+                                    </div>
+                                    <div class="shopcon_1">
+                                        <span>
+                                            <span class="shopother1">
+                                                식당 명 : {shopIntro.name}
+                                            </span>
+                                        </span>
+                                        <br />
+                                        <div>
+                                            <div class="shopother2">
+                                                {shopIntro.category}
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div>
+                                            <div class="shopother3">
+                                                주소 : {shopIntro.address}{" "}
+                                                {shopIntro.addressDetail}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="shopother4">
+                                                예약 여부 : {shopIntro.isRsPos}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="shopother5">
+                                                오픈 여부 : {shopIntro.isOpen}
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div class="shopother6">
+                                                오픈 시간 :{" "}
+                                                {shopIntro.openTime.substring(
+                                                    10,
+                                                    16
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div class="shopother7">
+                                                클로즈 시간 :{" "}
+                                                {shopIntro.closeTime.substring(
+                                                    10,
+                                                    16
+                                                )}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="shopother8">
+                                                매장 소개 : {shopIntro.intro}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </body>
                     <footer>
-                        copyright 2021 yeongJin university capston WDA team 4.
+                        {/* <h4>
+                            copyright 2021 yeongJin university capston WDA team
+                            4.
+                        </h4> */}
                     </footer>
                 </div>
             </S.shopcontentWrap>
@@ -115,7 +179,7 @@ const Shopcontent = ({
                 <S.LoginWrap>
                     <header>
                         <h1>주문의 민족에 오신걸 환영합니다.</h1>
-                    </header> 
+                    </header>
                     <main>
                         <p>로그인 정보를 입력하세요!!!</p>
                         <input

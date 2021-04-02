@@ -429,6 +429,73 @@ export const shopcontentWrap = styled.div`
     .linesetting {
         float: left;
     }
+    .shopcon {
+        padding-top: 2%;
+        position: relative;
+        width: 60%;
+        margin: 20px auto;
+        display: block;
+    }
+    .shopcon_2 {
+        position: relative;
+        width: 100%;
+        margin: 0 auto;
+    }
+    .shop_img2 {
+        width: 70%;
+        margin: 3% auto;
+        max-height: 700px;
+        border-radius: 10px;
+    }
+    .shop_img {
+        position: relative;
+        float: left;
+        width: 50%;
+        margin: 0 auto;
+        border: 1px;
+    }
+    .shopcon_1 {
+        padding-top: 14px;
+        position: relative;
+        float: left;
+        width: 50%;
+        margin: 0 auto;
+        border-top: 5px solid #555;
+    }
+    .shopother1 {
+        font-size: 20px;
+        float: left;
+        padding: 10px;
+    }
+    .shopother2 {
+        width: 100%;
+        text-align: left;
+        color: gray;
+    }
+    .shopother3 {
+        width: 100%;
+        text-align: left;
+    }
+    .shopother4 {
+        width: 100%;
+        text-align: left;
+    }
+    .shopother5 {
+        width: 100%;
+        text-align: left;
+    }
+    .shopother6 {
+        width: 100%;
+        text-align: left;
+    }
+    .shopother7 {
+        width: 100%;
+        text-align: left;
+    }
+    .shopother8 {
+        width: 100%;
+        text-align: left;
+    }
 `;
 
 export const LoginWrap = styled.div`

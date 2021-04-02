@@ -14,6 +14,8 @@ import RegisterContainer from "./containers/Register/RegisterContainer";
 import ShopContainer from "./containers/Shop/ShopContainer";
 import ShopcontentContainer from "./containers/shopcontent/shopcontentcontainer";
 import Fdc from "./containers/fd/fdC";
+import MenuListContainer from "./containers/MenuList/MenuListContainer";
+import MenuReadContainer from "./containers/MenuRead/MenuReadContainer";
 
 const App = () => {
     const [isLogin, setIsLogin] = useState(false);
@@ -51,8 +53,9 @@ const App = () => {
                 <Route path="/register" component={RegisterContainer} />
                 <Route path="/mypage" component={MypageContainer} />
                 <Route path="/shop" component={ShopContainer} />
-                <Route path="/fd" component={Fdc} />
+                <Route path="/menulist" component={MenuListContainer} />
 
+                <Route path="/fd" component={Fdc} />
                 <Route
                     path="/shoplist"
                     component={() => (
@@ -63,9 +66,8 @@ const App = () => {
                         />
                     )}
                 />
-
                 <Route
-                    path="/shopcontent"
+                    path="/shopcontent/:shopId"
                     component={() => (
                         <ShopcontentContainer
                             isLogin={isLogin}
@@ -73,8 +75,7 @@ const App = () => {
                             handleLogout={handleLogout}
                         />
                     )}
-                />
-
+                ></Route>
                 <Route
                     path="/"
                     component={() => (

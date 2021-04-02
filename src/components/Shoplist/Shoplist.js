@@ -16,7 +16,9 @@ const Shoplist = ({
     closeModal,
     modal,
     restaurant,
+    showkorean,
 }) => {
+    console.log(restaurant);
     return (
         <>
             <S.ShoplistWrap>
@@ -64,7 +66,10 @@ const Shoplist = ({
                     </div>
                     <body>
                         <div class="topCategory">
-                            <li>한식</li>
+                            <button onClick={showkorean}>
+                                <li>한식</li>
+                            </button>
+
                             <li>중식</li>
                             <li>일식</li>
                             <li>양식</li>
@@ -104,7 +109,9 @@ const Shoplist = ({
                                 <div class="list_shop">
                                     {restaurant.map((shop) => {
                                         return (
-                                            <Link to="/shopcontent">
+                                            <Link
+                                                to={`/shopcontent/${shop.id}`}
+                                            >
                                                 <button>
                                                     <div class="testname">
                                                         <div class="image">

@@ -1,13 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Shopcontent from "../../components/shopcontent/shopcontent";
-import { useHistory } from "react-router-dom";
-import { postLogin } from "../../lib/shopcontent/index";
+import { useHistory, useParams } from "react-router-dom";
+import {
+    getshopinfo,
+    getshopmenu,
+    postLogin,
+} from "../../lib/shopcontent/index";
 
 const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
     const history = useHistory();
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
     const [modal, setModal] = useState(false);
+    const [menu, setMenu] = useState("");
+    const [shopIntro, setShopIntro] = useState({
+        name: "",
+        category: "",
+        address: "",
+        addressDetail: "",
+        intro: "",
+        isOpen: "",
+        closeTime: "",
+        isRsPos: "",
+        openTime: "",
+    });
 
     const openmodal = () => {
         setModal(true);
@@ -25,6 +41,38 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
     const handlePw = (e) => {
         const value = e.target.value;
         setPw(value);
+    };
+
+    const param = useParams();
+    console.log(param);
+
+    useEffect(() => {
+        if (param.shopId === undefined) {
+            return;
+        }
+        getinfo(param.shopId);
+        getmenu(param.shopId);
+    }, [param.shopId]);
+
+    const getinfo = () => {
+        getshopinfo(param.shopId)
+            .then((res) => {
+                console.log(res.data);
+                setShopIntro(res.data);
+            })
+            .catch((err) => {
+                alert(err);
+            });
+    };
+
+    const getmenu = () => {
+        getshopmenu(param.shopId)
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch((err) => {
+                alert(err);
+            });
     };
 
     const login = () => {
@@ -65,6 +113,7 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
             login={login}
             openModal={openmodal}
             closeModal={closemodal}
+            shopIntro={shopIntro}
         />
     );
 };

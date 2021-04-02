@@ -14,6 +14,15 @@ export const searchWrap = styled.div`
     z-index: 10;
 `;
 
+export const postCodeStyle = styled.div`
+    display: block;
+    position: absolute;
+    top: 50%;
+    width: 400px;
+    height: 500px;
+    padding: 7px;
+`;
+
 export const RegisterWrap = styled.div`
     @font-face {
         font-family: "Wemakeprice-Bold";
