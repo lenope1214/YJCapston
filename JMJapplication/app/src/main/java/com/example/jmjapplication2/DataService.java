@@ -42,6 +42,7 @@ interface SelectAPI{
 
     @GET("select")
     Call<List<MemberDTO>> selectAll();
+
 }
 
 interface JoinAPI{
