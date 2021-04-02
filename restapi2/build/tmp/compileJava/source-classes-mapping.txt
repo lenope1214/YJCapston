@@ -1,0 +1,16 @@
+wlh/wickies/restapi/controller/TestController.java
+ wlh.wickies.restapi.controller.TestController
+wlh/wickies/restapi/RestapiApplication.java
+ wlh.wickies.restapi.RestapiApplication
+wlh/wickies/restapi/model/Member.java
+ wlh.wickies.restapi.model.Member
+wlh/wickies/restapi/service/MemberService.java
+ wlh.wickies.restapi.service.MemberService
+wlh/wickies/restapi/service/MemberServiceImpl.java
+ wlh.wickies.restapi.service.MemberServiceImpl
+wlh/wickies/restapi/repository/MemberRepository.java
+ wlh.wickies.restapi.repository.MemberRepository
+wlh/wickies/restapi/controller/MemberController.java
+ wlh.wickies.restapi.controller.MemberController
+wlh/wickies/restapi/model/Validate.java
+ wlh.wickies.restapi.model.Validate
