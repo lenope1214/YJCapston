@@ -4,7 +4,7 @@ import * as S from "./style";
 import {getMenuRead, getNowMenu} from "../../lib/MenuRead"
 import MenuReadContainer from "../../containers/MenuRead/MenuReadContainer";
 
-const MenuList = ({ menues }) => {
+const MenuList = ({ menues, removeMenu }) => {
     return (
         <>
             <S.MenuWrap>
@@ -36,7 +36,7 @@ const MenuList = ({ menues }) => {
                                         </Link>
                                     </td>
                                     <td className="body-item-3">{menu.price}</td>
-                                    <td className="body-item-4"><button>X</button></td>
+                                    <td className="body-item-4" onClick={() => removeMenu(`${menu.id}`)}><button>X</button></td>
                                 </tr>
                                 );
                             })}

@@ -40,13 +40,13 @@ export const MenuReadContainer = (props) => {
     const ReadMenu = () => {
         putMenuRead(
                 menuName,
-                menuPrice,
-                
+                menuPrice,     
                 menuIntro,
                 menuId,
                 )
             .then((res) => {
-                history.push("/menulist")
+                history.push("/menulist");
+                alert("수정되었습니다.");
             })
             .catch((err) => {
                 console.log(menuId, menuName, menuPrice, menuIntro);
@@ -68,6 +68,8 @@ export const MenuReadContainer = (props) => {
                 alert("showMenuRead Err");
             });          
     };
+
+   
 
     return(
         <div>

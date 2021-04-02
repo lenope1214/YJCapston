@@ -65,7 +65,8 @@ const MenuRegisterFormContainer = () => {
             },
         }
         ).then((res) => {
-            history.push("/menulist")
+            history.push("/menulist");
+            alert("메뉴가 추가되었습니다.");
         })
         .catch((err) => {
             alert("Err");
