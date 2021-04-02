@@ -29,7 +29,8 @@
                 app:strokeWidth="1dp"
                 android:background="@drawable/bell"/>
         <TextView
-                android:id="@+id/text_address"
+                android:id="@+id/text_myshop_name"
+                android:fontFamily="@font/we_semibold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"

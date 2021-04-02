@@ -63,6 +63,7 @@ public class PageThreeFragment extends Fragment {
         shopCall.enqueue(new Callback<List<Shop>>() {
             @Override
             public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response) {
+                System.out.println("showList 성복 사랑 "+response.code());
                 if(response.isSuccessful()) {
                     Log.d("result2" , "시발 왜안돼2");
                     if(response.code() == 200) {

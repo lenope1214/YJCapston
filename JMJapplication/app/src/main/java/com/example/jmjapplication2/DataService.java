@@ -127,9 +127,9 @@ interface ShowShopOne {
 }
 
 interface ShopUpdate {
-    @PUT("shop/ isOpen")
-    Call<ResponseBody>  updateOpen(@Header("Authorization") String jwt);
+    @PATCH("shop/{shopid}/open")
+    Call<ResponseBody>  updateOpen(@Header("Authorization") String jwt, @Path("shopid") String shopid);
 
-    @PUT("shop/isRsPos")
-    Call<ResponseBody> updateIsRsPos(@Header("Authorization") String jwt);
+    @PATCH("shop/{shopid}/reserve")
+    Call<ResponseBody> updateIsRsPos(@Header("Authorization") String jwt, @Path("shopid") String shopid);
 }

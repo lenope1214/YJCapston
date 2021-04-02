@@ -23,7 +23,8 @@ public class MainActivity_O extends AppCompatActivity {
         setContentView(R.layout.activity_main_o);
 
         Intent intent = getIntent();
-        String owner_number = intent.getStringExtra("owner_number");
+        String shopNumber = intent.getStringExtra("shopNumber");
+        String shopName = intent.getStringExtra("shopName");
         //Log.d("result :", id);
 
         homeFragment_o = new HomeFragment_O();
@@ -31,7 +32,8 @@ public class MainActivity_O extends AppCompatActivity {
         shopDetailFragment_o = new ShopDetailFragment_O();
 
         Bundle bundle = new Bundle();
-        bundle.putString("owner_number", owner_number);
+        bundle.putString("shopNumber", shopNumber);
+        bundle.putString("shopName", shopName);
         homeFragment_o.setArguments(bundle);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment_o).commit();

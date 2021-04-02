@@ -1,6 +1,9 @@
 package com.example.jmjapplication2;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +23,7 @@ import retrofit2.Response;
 
 
 public class ShopDetailFragment_O extends Fragment {
-    Button toggle_button_on, toggle_button_off, toggle_button_res_on, toggle_button_res_off;
+    Button toggle_button_on, toggle_button_off, toggle_button_res_on, toggle_button_res_off, owner_logout_btn;
     DataService dataService = new DataService();
     boolean is_check = true;
     boolean is_check2 = true;
@@ -44,8 +47,49 @@ public class ShopDetailFragment_O extends Fragment {
         toggle_button_off = rootView.findViewById(R.id.toggle_button_off);
         toggle_button_res_on = rootView.findViewById(R.id.toggle_button_res_on);
         toggle_button_res_off = rootView.findViewById(R.id.toggle_button_res_off);
+        owner_logout_btn = rootView.findViewById(R.id.owner_logout_btn);
 
+        Bundle bundle = getArguments();
+        //String shopNumber = bundle.getString("shopNumber","dwad");
+        String shopNumber = "2";
+        
         String jwt = ((JMJApplication) this.getActivity().getApplication()).getJwt();
+
+        owner_logout_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("알림");
+                builder.setMessage("로그아웃 하시겠습니까?");
+                builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getActivity(), IntroScreen.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+
+                        // 값버리기
+                        Context context = getActivity();
+                        SharedPreferences pref = context.getSharedPreferences("auth", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.remove("token");
+                        editor.apply();
+
+                        // 앱 변수버리기
+                        ((JMJApplication)getContext().getApplicationContext()).setId(null);
+                        ((JMJApplication)getContext().getApplicationContext()).setJwt(null);
+                    }
+                });
+                builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("result", "아니오");
+                    }
+                });
+                builder.show();
+            }
+        });
 
         toggle_button_on.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +101,7 @@ public class ShopDetailFragment_O extends Fragment {
                     builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            dataService.updateOpen.updateOpen("Bearer " + jwt).enqueue(new Callback<ResponseBody>() {
+                            dataService.updateOpen.updateOpen("Bearer " + jwt, shopNumber).enqueue(new Callback<ResponseBody>() {
                                 @Override
                                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                     if (response.isSuccessful()) {
@@ -101,7 +145,7 @@ public class ShopDetailFragment_O extends Fragment {
                     builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            dataService.updateOpen.updateOpen("Bearer " + jwt).enqueue(new Callback<ResponseBody>() {
+                            dataService.updateOpen.updateOpen("Bearer " + jwt, shopNumber).enqueue(new Callback<ResponseBody>() {
                                 @Override
                                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                     if (response.isSuccessful()) {
@@ -145,7 +189,7 @@ public class ShopDetailFragment_O extends Fragment {
                     builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            dataService.updateIsRsPos.updateIsRsPos("Bearer " + jwt).enqueue(new Callback<ResponseBody>() {
+                            dataService.updateIsRsPos.updateIsRsPos("Bearer " + jwt, shopNumber).enqueue(new Callback<ResponseBody>() {
                                 @Override
                                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                     if (response.isSuccessful()) {
@@ -189,7 +233,7 @@ public class ShopDetailFragment_O extends Fragment {
                     builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            dataService.updateIsRsPos.updateIsRsPos("Bearer " + jwt).enqueue(new Callback<ResponseBody>() {
+                            dataService.updateIsRsPos.updateIsRsPos("Bearer " + jwt, shopNumber).enqueue(new Callback<ResponseBody>() {
                                 @Override
                                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                     if (response.isSuccessful()) {

@@ -54,11 +54,13 @@ public class PageOneFragment extends Fragment {
     }
 
     private void showList(String category) {
-        Retrofit retrofit =new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
+        Retrofit retrofit =new Retrofit.Builder().
+                addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(ApiService.BASEURL)
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
         Call<List<Shop>> shopCall = apiService.shopList(category);
+        System.out.println("아 시발 좆같다" + shopCall.isExecuted());
         shopCall.enqueue(new Callback<List<Shop>>() {
             @Override
             public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response) {
@@ -66,8 +68,11 @@ public class PageOneFragment extends Fragment {
                     if(response.code() == 200) {
                         List<Shop> shopList = response.body();
                         for(Shop list : shopList) {
-                            Log.e("result : ", list.getCategory());
-                            mItems.add(new Shop(list.getId(), list.getName(), list.getIntro(), list.getCloseTime(), list.getOpenTime(), list.getAddress(), list.getAddressDetail(), list.getIsResPos(), list.getCategory(), list.getIsOpen()));
+                            Log.e("result : ", list.getCategory() + "이ㅏ니@@@@@@@@@@@@@@@@");
+                            mItems.add(new Shop(list.getId(), list.getName(),
+                                    list.getIntro(), list.getCloseTime(), list.getOpenTime(),
+                                    list.getAddress(), list.getAddressDetail(), list.getIsResPos(),
+                                    list.getCategory(), list.getIsOpen()));
                             rv_restaurant_list.setHasFixedSize(true);
                             adapter = new RestaurantRecyclerAdapter(getContext(), mItems);
                             rv_restaurant_list.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -81,7 +86,7 @@ public class PageOneFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Shop>> call, Throwable t) {
-                Toast.makeText(getContext(), "네트워크 오류", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "네트워크 오류123", Toast.LENGTH_LONG).show();
             }
         });
 

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 import androidx.annotation.Nullable;
@@ -22,6 +23,7 @@ import java.io.IOException;
 
 public class HomeFragment_O extends Fragment {
     ToggleButton toggle_Button;
+    TextView text_myshop_name;
 
     public HomeFragment_O() {
 
@@ -38,8 +40,13 @@ public class HomeFragment_O extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.home_fragment_o, container, false);
         Bundle bundle = getArguments();
-        String owner_number = bundle.getString("owner_number");
-        Log.d("owner_number@@@@@@@@@@@@", owner_number);
+        String shopNumber = bundle.getString("shopNumber");
+        String shopName = bundle.getString("shopName");
+        Log.d("owner_number@@@@@@@@@@@@", shopNumber);
+        Log.d("name@@@@@@@@@@@@", shopName);
+
+        text_myshop_name = rootView.findViewById(R.id.text_myshop_name);
+        text_myshop_name.setText("현재 매장 : " + shopName);
 
         toggle_Button = rootView.findViewById(R.id.toggle_button);
         toggle_Button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

@@ -106,6 +106,8 @@ public class OwnerLoginActivity extends AppCompatActivity {
                                                         for (int i=0; i<response.body().size(); i++) {
                                                             intent.putExtra("owner_number" + i, response.body().get(i).getId());
                                                         }
+                                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                                         startActivity(intent);
                                                         finish();
                                                     }

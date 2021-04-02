@@ -83,7 +83,7 @@ public class PageFiveFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Shop>> call, Throwable t) {
-                Toast.makeText(getContext(), "네트워크 오류", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "네트워크 오류23", Toast.LENGTH_LONG).show();
             }
         });
 

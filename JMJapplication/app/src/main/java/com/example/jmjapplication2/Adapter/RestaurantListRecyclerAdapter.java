@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.jmjapplication2.MainActivity_O;
 import com.example.jmjapplication2.R;
 import com.example.jmjapplication2.ShopDetailActivity;
 import com.example.jmjapplication2.dto.Shop;
@@ -40,10 +41,11 @@ public class RestaurantListRecyclerAdapter extends RecyclerView.Adapter<Restaura
         holder.layout_restaurant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ShopDetailActivity.class);
+                Intent intent = new Intent(context, MainActivity_O.class);
                 intent.putExtra("shopNumber", shops.get(position).getId());
+                intent.putExtra("shopName", shops.get(position).getName());
                 //Log.d("result : ", shops.get(position).getId());
-                context.startActivity(intent);
+                context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         });
     }
