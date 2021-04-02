@@ -28,7 +28,7 @@ const MenuList = ({ menues }) => {
                             {!!menues.length && menues.map((menu) => {
                                 return (
                                 <tr>         
-                                    <td className="body-item-1">이미지</td>
+                                    <td className="body-item-1">{`${menu.img}`}</td>
                                            
                                     <td className="body-item-2">
                                     <Link to={`/menu/${menu.id}`} className="menu-link">
@@ -40,7 +40,6 @@ const MenuList = ({ menues }) => {
                                 </tr>
                                 );
                             })}
-
                         </tbody>
                     </table>
                 </div>

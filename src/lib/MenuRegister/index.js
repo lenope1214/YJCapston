@@ -2,21 +2,25 @@ import axios from "axios";
 import { apiDefault } from "../client";
 
 export const postMenu = (
+    formData,
     menuname,
     price,
-    img,
     menudesc,
 ) => {
     alert("postMenu함수 실행");
     return apiDefault().post("/menu", {
+        formData,
         name: menuname,
         price: price,
-        img: img,
+        // img: formData,
         intro: menudesc,
-        shopId: '022344278'
+        shopId: '0223446783',
+        
     }, {
         headers: {
+            
             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+            "content-type": "multipart/form-data",
         },
     });
 };

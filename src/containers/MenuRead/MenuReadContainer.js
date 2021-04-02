@@ -66,8 +66,7 @@ export const MenuReadContainer = (props) => {
             })
             .catch((err) => {
                 alert("showMenuRead Err");
-            });
-            
+            });          
     };
 
     return(

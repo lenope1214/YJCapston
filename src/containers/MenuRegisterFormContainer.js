@@ -3,17 +3,16 @@ import MenuRegisterForm from "../components/MenuRegisterForm/MenuRegisterForm";
 import OwnerNavbar from "../components/OwnerMenubar/OwnerNavbar";
 import axios from "axios";
 import { useHistory } from "react-router";
-import { postMenu } from "../lib/MenuRegister";
 import Header from "../components/Header/Header";
-
-
+import { apiDefault } from "../lib/client";
 
 const MenuRegisterFormContainer = () => {
     const history = useHistory();
     const [menuname, setMenuname] = useState("");
     const [price, setPrice] = useState("");
-    const [img, setImg] = useState("");
+    const [img, setImg] = useState(null);
     const [menudesc, setMenudesc] = useState("");
+    const [duration, setMenuduration] = useState("");
 
     const handleMenuname = (e) => {
         const value = e.target.value;
@@ -26,8 +25,9 @@ const MenuRegisterFormContainer = () => {
     };
 
     const handleImg = (e) => {
-        const value = e.target.value;
-        setImg(value);
+        const files = e.target.files[0];
+        // console.log("files="+files);
+        setImg(files);
     };
 
     const handleMenudesc = (e) => {
@@ -35,20 +35,51 @@ const MenuRegisterFormContainer = () => {
         setMenudesc(value);
     };
 
-    const menu_v1 = () => {
+    const handleDuration = (e) => {
+        const value = e.target.value;
+        setMenuduration(value);
+    };
+
+    const menu_v1 = async () => {
         alert("추가확인 버튼");
-        postMenu(
-            menuname,
-            price,
-            img,
-            menudesc,        
-        )
-        .then((res) => {
-            history.push("/menulist");
+        const formData = new FormData();
+        formData.append("img", img);
+        formData.append("shopId", '0223446783');
+        formData.append("name", menuname);
+        formData.append("price", price);
+        formData.append("intro", menudesc);
+        formData.append("duration", duration);
+        // console.log(formData);
+        
+        const res = await apiDefault().post("/menu",
+        // {   
+            formData,
+            // name: menuname,
+            // price: price,
+            // intro: menudesc,
+        // },
+        {
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+                "content-type": "multipart/form-data",
+            },
+        }
+        ).then((res) => {
+            history.push("/menulist")
         })
         .catch((err) => {
-            console.log(err);
+            alert("Err");
         });
+        console.log(res);
+        // postMenu(
+        //     formData,     
+        // )
+        // .then((res) => {
+        //     history.push("/menulist");
+        // })
+        // .catch((err) => {
+        //     alert("MenuRegisterContainer Err");
+        // });
         
     };
 
@@ -67,6 +98,8 @@ const MenuRegisterFormContainer = () => {
             handleMenudesc={handleMenudesc}
             menu_v1={menu_v1}
             shopid='022344278'
+            duration={duration}
+            handleDuration={handleDuration}
         />
         </>
     );

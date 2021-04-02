@@ -10,7 +10,7 @@ const MenuListContainer = () => {
     const [menues, setMenues] = useState([]);
 
     useEffect(() => {
-        // console.log(menues);
+        console.log(menues);
     }, []);
 
     useEffect(() => {
@@ -18,9 +18,10 @@ const MenuListContainer = () => {
             .then((res) => {
                 
                 setMenues(res.data);
-                // console.log(res.data);
+                console.log("res.data 출력 - "+res.data);
                 const menu = res.data.map((menu) => {
                     return {
+                        imgUrl: menu.img,
                         id: menu.id,
                         name: menu.name,
                         intro: menu.intro,
@@ -28,10 +29,12 @@ const MenuListContainer = () => {
                     };
                 });
                 setMenues(menu);
-                console.log(menues);
+                console.log("MeLiCon에서 menu : "+menu);
+                console.log("MeLiCon에서 menues : "+menues);
             })
             .catch((err) => {
-                alert("err");
+                
+                alert("MenuListContainer Err");
             });
     }, []);
     

@@ -7,17 +7,19 @@ const MenuRegisterForm = ({
     handleMenuname,
     price,
     handlePrice,
-    img,
     handleImg,
     menudesc,
     handleMenudesc,
     menu_v1,
+    duration,
+    handleDuration,
 }) => {
     return(
         <>
         <S.MenuRegisterWrap>
         <h2 className="menu-title">메뉴 추가</h2>
-        <div className="menu-register-container">   
+        <div className="menu-register-container">
+            <form encType="multipart/form-data">   
                 <table className="register-form">
                     <tbody>
                         <tr>
@@ -36,7 +38,7 @@ const MenuRegisterForm = ({
                             <th className="form-label">메뉴가격</th>
                             <td>
                                 <input
-                                    type="text"
+                                    type="number"
                                     id="price"
                                     placeholder="메뉴가격"
                                     value={price}
@@ -50,9 +52,19 @@ const MenuRegisterForm = ({
                             <td>
                                 <input 
                                     type="file"
-                                    id="img_url"
-                                    value={img}
                                     onChange={handleImg}
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th className="form-label">소요시간</th>
+                            <td>
+                                <input 
+                                    type="number"
+                                    id="duration"
+                                    placeholder="예상 소요시간"
+                                    value={duration}
+                                    onChange={handleDuration}
                                 />
                             </td>
                         </tr>
@@ -70,6 +82,7 @@ const MenuRegisterForm = ({
                         </tr>
                     </tbody>
                 </table>
+                </form>
                 <div className="button-div">
                     <button onClick={menu_v1} className="button">추가</button>
                     <Link to="/menulist" className="button">
