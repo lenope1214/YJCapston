@@ -2,9 +2,11 @@ package com.jumanji.capston.controller.Temporary;
 
 import com.jumanji.capston.controller.exception.ApiErrorResponse;
 import com.jumanji.capston.data.Request.FileAndData;
+import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.service.MenuService;
 import com.jumanji.capston.service.StorageService;
 import com.jumanji.capston.storage.StorageException;
+import com.nimbusds.oauth2.sdk.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -14,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.net.http.HttpResponse;
 
 @RestController
@@ -26,6 +27,8 @@ public class TestController {
     StorageService storageService;
     @Autowired
     HttpHeaders httpHeaders;
+
+
 //    @Autowired
 //    NaverPlaceSearchService naverPlaceSearchService;
 //
@@ -34,7 +37,6 @@ public class TestController {
 ////        System.out.println("Keyword : " + keyword);
 ////        return naverPlaceSearchService.searchPlace(keyword);
 ////    }
-
 
 
 //    @Transactional
@@ -68,21 +70,23 @@ public class TestController {
 //            return new ResponseEntity<>(result, HttpStatus.CREATED);
 //    }
 
-    @GetMapping("/loadImg/{filename}")
-    public ResponseEntity<?> loadFileTest(@PathVariable String filename, HttpServletRequest request){
-        Resource file = storageService.loadAsResource(filename);
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
-                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
-    }
+//    @GetMapping("/loadImg/{filename}")
+//    public ResponseEntity<?> loadFileTest(@PathVariable String filename, HttpServletRequest request) {
+//        Resource file = storageService.loadAsResource(filename);
+//        return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE,
+//                "filename=" + file.getFilename()).body(file);
+////        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+////                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+//    }
 
     @Transactional
     @PostMapping("/uploadTest01")
-    public ResponseEntity<?> uploadTest01(MultipartFile multipartFile, HttpResponse response){
-        try{
+    public ResponseEntity<?> uploadTest01(MultipartFile multipartFile, HttpResponse response) {
+        try {
             System.out.println("저장 전.");
             storageService.store(multipartFile, "testCode", "test");
             System.out.println("저장 후.");
-        }catch (StorageException e){
+        } catch (StorageException e) {
             return new ResponseEntity<>(new ApiErrorResponse("error-9000", e.getMessage()), HttpStatus.BAD_REQUEST);
         }
 
@@ -96,11 +100,50 @@ public class TestController {
 
     @Transactional
     @PostMapping("/uploadTest02") // api/v1/test/uploadTest02
-    public ResponseEntity<?> uploadTest02(FileAndData fileAndData){
+    public ResponseEntity<?> uploadTest02(FileAndData fileAndData) {
         String fileUrl = storageService.store(fileAndData.getFile(), fileAndData.getCode(), "test");
-        if(fileUrl == null)
+        if (fileUrl == null)
             return new ResponseEntity<>("파일이 안온듯?", httpHeaders, HttpStatus.BAD_REQUEST);
         else
             return new ResponseEntity<>(fileUrl, HttpStatus.CREATED);
     }
+
+
+
+    @GetMapping("/loadImg/{fileName}")
+    public ResponseEntity<?> loadFile(@PathVariable String fileName) throws ParseException {
+        return new ResponseEntity<>(storageService.loadAsResource(fileName), HttpStatus.OK);
+    }
+
+    @GetMapping("/loadImg2/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+        Resource file = storageService.loadAsResource(filename);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE,
+//                "image/jpeg; filename=\"" + file.getFilename() + "\"").body(file);
+//                "image/jpeg;Content-Disposition: inline; filename=\"" + file.getFilename() + "\"").body(file);
+        "application/octet-stream;Content-Disposition: inline; filename=\"" + file.getFilename() + "\"").body(file);
+    }
+
+    @GetMapping("/loadImg3/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<?> serveFile2(@PathVariable String filename) {
+        Resource file = storageService.loadAsResource(filename);
+        Shop.Response response = new Shop.Response();
+        response.setImg((MultipartFile) file);
+        response.setIntro("테스트");
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE,
+//                "image/jpeg; filename=\"" + file.getFilename() + "\"").body(file);
+//                "image/jpeg;Content-Disposition: inline; filename=\"" + file.getFilename() + "\"").body(file);
+                "application/;Content-Disposition: inline; filename=\"" + file.getFilename() + "\"").body(response);
+    }
+
+//    @GetMapping("/loadTest1/{filename:.+}")
+//    @ResponseBody
+//    public ResponseEntity<Resource> loadTest1(Shop.Request reqeust) {
+//        Resource file = storageService.loadAsResource(filename);
+//        return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE,
+//                "image/jpeg; filename=\"" + file.getFilename() + "\"").body(file);
+//    }
+
 }

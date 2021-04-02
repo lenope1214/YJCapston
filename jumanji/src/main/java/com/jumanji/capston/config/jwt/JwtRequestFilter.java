@@ -44,6 +44,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                     , "/api/v1/menuList"
                     , "/api/v1/test/uploadTest01"
                     , "/api/v1/test/uploadTest02"
+                    , "/api/v1/test/loadImg/*"
                 );
 
 

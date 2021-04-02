@@ -34,34 +34,51 @@ public class Shop {
     private char isRsPos = 'Y'; //예약가능여부
     private String category;
     @Column(name = "is_open")
-    private char isOpen;
+    private char isOpen = 'N';
+    @Column(name = "img_path")
+    private String imgPath;
     @ManyToOne
     @JoinColumn(name="owner_id")
     private User owner;
 
-    @Getter
-    @Setter
+    @Getter @Setter @AllArgsConstructor
     public static class info{
+        private String id;
         private String name;
         private String intro;
-        private int price;
-        private int duration;
+        private String openTime;
+        private String closeTime;
+        private String address;
+        private String addressDetail;
+        private String category;
         private MultipartFile img;
     }
 
-    private Date toDate(String date){
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        Date parseDate = null;
-        try {
-            parseDate = dateFormat.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return parseDate;
+    @Getter@Setter
+    public static class Request{
+        private String shopId;
+        private String category;
     }
 
+    @Getter @Setter
+    public static class Response{
+        private String name;
+        private String intro;
+        private String address;
+        private String addressDetail;
+        private String category;
+        private String openTime;
+        private String closeTime;
+        private int price;
+        private int duration;
+        private char isOpen;
+        private char isRsPos;
+        private MultipartFile img;
+    }
+
+
     @Builder(builderMethodName = "createShop")
-    public Shop(String shopId, String name, String intro, String openTime, String closeTime, String address, String addressDetail, String category) {
+    public Shop(String shopId, String name, String intro, String openTime, String closeTime, String address, String addressDetail, String category, String imgPath) {
         this.id = shopId;
         this.name = name;
         this.intro = intro;
@@ -72,6 +89,7 @@ public class Shop {
         this.category = category;
         this.isOpen = 'N';
         this.isRsPos = 'N';
+        this.imgPath = imgPath;
     }
 
     public void update(Patch patch) {
@@ -87,7 +105,6 @@ public class Shop {
     @Getter
     @Setter
     @AllArgsConstructor
-    @NoArgsConstructor
     public static class Patch{
         private String shopId;
         private String intro;
@@ -96,5 +113,18 @@ public class Shop {
         private String address;
         private String addressDetail;
         private String category;
+    }
+
+
+
+    private Date toDate(String date){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        Date parseDate = null;
+        try {
+            parseDate = dateFormat.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return parseDate;
     }
 }

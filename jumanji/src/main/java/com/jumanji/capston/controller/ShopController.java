@@ -3,10 +3,10 @@ package com.jumanji.capston.controller;
 import com.jumanji.capston.config.jwt.JwtTokenUtil;
 import com.jumanji.capston.controller.exception.ApiErrorResponse;
 import com.jumanji.capston.controller.exception.ShopException.ShopNotFoundException;
-import com.jumanji.capston.data.Request.ShopRequest;
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.service.ShopService;
+import com.jumanji.capston.service.StorageService;
 import com.jumanji.capston.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -35,7 +35,11 @@ public class ShopController {
     JwtTokenUtil jwtTokenUtil;
 
     @Autowired
+    StorageService storageService;
+
+    @Autowired
     HttpHeaders httpHeaders;
+
 
     @Transactional(readOnly = true)
     @GetMapping("/shop/{shopId}")  // get shop/{shopId} 식당번호로 식당 조회
@@ -95,7 +99,7 @@ public class ShopController {
 
     @Transactional
     @PostMapping("/shop") // 매장등록
-    public ResponseEntity<?> insertShop(@RequestBody ShopRequest shopRequest, @RequestHeader String authorization) throws ParseException {
+    public ResponseEntity<?> insertShop(Shop.info shopInfo, @RequestHeader String authorization) throws ParseException {
         System.out.println("Auth : " + authorization);
         String loginId = jwtTokenUtil.getUsername(authorization);
         System.out.println("로그인 id : " + loginId);
@@ -103,17 +107,19 @@ public class ShopController {
         System.out.println("매장등록 요청 ID : " + userEntity.getId());
 //        logger.log(Level.INFO, "open time and close time\n" + shop.getOpenTime() +"\n" + shop.getCloseTime());
 
-        System.out.println("shopRequest.toString() : " + shopRequest.toString());
+        System.out.println("shopInfo.toString() : " + shopInfo.toString());
+        String imgPath = storageService.store(shopInfo.getImg(), "shop", shopInfo.getId());
         Shop shopEntity =
                 Shop.createShop()
-                        .shopId(shopRequest.getId())
-                        .name(shopRequest.getName())
-                        .intro(shopRequest.getIntro())
-                        .openTime(shopRequest.getOpen_time())
-                        .closeTime(shopRequest.getClose_time())
-                        .address(shopRequest.getAddress())
-                        .addressDetail(shopRequest.getAddress_detail())
-                        .category(shopRequest.getCategory())
+                        .shopId(shopInfo.getId())
+                        .name(shopInfo.getName())
+                        .intro(shopInfo.getIntro())
+                        .openTime(shopInfo.getOpenTime())
+                        .closeTime(shopInfo.getCloseTime())
+                        .address(shopInfo.getAddress())
+                        .addressDetail(shopInfo.getAddressDetail())
+                        .category(shopInfo.getCategory())
+                        .imgPath(imgPath)
                         .build();
         Object result = shopService.insert(shopEntity, userEntity);
         if (result.getClass() == Shop.class) return new ResponseEntity<>(result, HttpStatus.CREATED);

@@ -108,4 +108,7 @@ public class WebController {
     @GetMapping("/uploadForm")
     public String uploadForm(){ return "uploadForm";}
 
+    @GetMapping("/loadFile")
+    public String loadFile(){return "loadFile";}
+
 }

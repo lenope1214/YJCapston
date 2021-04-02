@@ -10,13 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.NotSupportedException;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.nio.file.*;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -32,13 +31,15 @@ public class StorageService {
     }
 
     //
-    public String store(MultipartFile file, String idCode, String typeName) {
-        String fileUrl = null;
+    public String store(MultipartFile file, String typeName, String typeNumber) {
+        String filePath = null;
         try {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file.");
             }
             String fileExtension = Objects.requireNonNull(file.getContentType()).substring(file.getContentType().indexOf('/') + 1);
+            System.out.println("파일 확장자 : " + fileExtension);
+            if(!(fileExtension.equals("jpg") || fileExtension.equals("png") || fileExtension.equals("jpeg")))throw new NotSupportedException("파일 확장자를 맞춰주세요");
 
 //            System.out.println("file.getName() : " + file.getName());
 //            System.out.println("file.getContentType() : " + file.getContentType());
@@ -46,22 +47,34 @@ public class StorageService {
 //            System.out.println("file.getOriginalFilename() : " + file.getOriginalFilename());
 //            System.out.println("file.getResource() : " + file.getResource());
 //            System.out.println("file.getClass() : " + file.getClass());
-
-            Path destinationFile = this.rootLocation.resolve(Paths.get( typeName+ idCode + "." + fileExtension))
+            System.out.println("루트 로케이션 : " + rootLocation );
+            File dirFile = new File(String.valueOf(rootLocation + "\\" + typeName + "\\" + typeNumber));
+            if(!dirFile.exists())Files.createDirectory(dirFile.toPath());
+            File[] fileList = dirFile.listFiles();
+            assert fileList != null;
+//            System.out.println("경로 내 파일 수 : " + (fileList.length));
+            filePath = (fileList.length+1) + "." + fileExtension;
+            System.out.println("파일 경로 :" + filePath);
+            Path destinationFile = this.rootLocation.resolve(Paths.get(dirFile +"\\"+ filePath))
                     .normalize().toAbsolutePath(); // file.getOriginalFilename() -> filename.filetype 이런 형태
-//            System.out.println("destinationFile.getParent() : " + destinationFile.getParent());
+            System.out.println("풀 경로 : " + dirFile +"\\"+ filePath);
+            System.out.println("destinationFile.getParent() : " + destinationFile.getParent());
 //            System.out.println("rootLocation's 절대 주소 : " + this.rootLocation.toAbsolutePath());
-            if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
-                throw new StorageException("Cannot store file outside current directory.");
-            }
+//            if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
+//                throw new StorageException("Cannot store file outside current directory.");
+//            } // 상위 디렉토리 판별기..
+
             try (InputStream inputStream = file.getInputStream()) {
+
                 Files.copy(inputStream, destinationFile,
                         StandardCopyOption.REPLACE_EXISTING);
             }
         } catch (IOException e) {
             throw new StorageException("Failed to store file.", e);
+        } catch (NotSupportedException e) {
+            throw new StorageException("Not supported file extension");
         }
-        return rootLocation.getParent().toString();
+        return filePath;
     }
 
     public Stream<Path> loadAll() {
@@ -101,6 +114,8 @@ public class StorageService {
     public void init() {
         try {
             Files.createDirectories(rootLocation);
+            Files.createDirectories(Path.of(rootLocation + "\\menu"));
+            Files.createDirectories(Path.of(rootLocation + "\\shop"));
         } catch (IOException e) {
             throw new StorageException("Could not initialize storage", e);
         }
