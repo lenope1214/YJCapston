@@ -1,9 +1,7 @@
 package com.jumanji.capston.data;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -50,6 +48,20 @@ public class Menu {
         this.price = price;
         this.duration = duration;
         this.imgUrl = imgUrl;
+    }
+
+    public static class info{
+        private String name;
+        private String intro;
+        private int price;
+        private int duration;
+        private MultipartFile img;
+    }
+
+    @Getter
+    @Setter
+    public static class Request{
+        private String menuId;
     }
 }
 

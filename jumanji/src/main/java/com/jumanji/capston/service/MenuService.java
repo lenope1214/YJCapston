@@ -30,12 +30,8 @@ public class MenuService {
         return menuRepository.save(_menu);
     }
 
-    public String delete(Menu _menu) {
-        System.out.println("");
-        Menu menu = menuRepository.findById(_menu.getId()).
-                orElseThrow(() -> new IllegalArgumentException("id를 확인해주세요!!!"));
-        menuRepository.delete(menu);
-        return "ok";
+    public void delete(Menu _menu) {
+        menuRepository.delete(_menu);
     }
 
     public List<Menu> findContainsId(String shopId) {

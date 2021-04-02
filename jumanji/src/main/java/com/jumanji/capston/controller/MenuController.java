@@ -50,6 +50,7 @@ public class MenuController {
     public ResponseEntity<?> selectMenuById(@PathVariable String menuId){
         if(menuService.findById(menuId) == null)
             return new ResponseEntity<>("없는 메뉴번호 입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
+
         return new ResponseEntity<>(menuService.findById(menuId), HttpStatus.OK);
     }
 
@@ -101,8 +102,11 @@ public class MenuController {
     }
     @Transactional
     @DeleteMapping("/menu")
-    public ResponseEntity<?> deleteMenu(@RequestBody Menu menu){
-        return new ResponseEntity<>("미구현입니다.", httpHeaders, HttpStatus.OK);
+    public ResponseEntity<?> deleteMenu(@RequestBody Menu.Request request){
+        Menu menu = menuService.findById(request.getMenuId());
+        if(menu == null)return new ResponseEntity<>(new ApiErrorResponse("error-2001", "Not Found by menu id"), HttpStatus.NOT_FOUND);
+        menuService.delete(menu);
+        return new ResponseEntity<>("삭제성공", httpHeaders, HttpStatus.OK);
     }
 
     @Transactional(readOnly = true)

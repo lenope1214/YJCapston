@@ -6,14 +6,16 @@ import com.jumanji.capston.service.MenuService;
 import com.jumanji.capston.service.StorageService;
 import com.jumanji.capston.storage.StorageException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import java.net.http.HttpResponse;
 
 @RestController
 @RequestMapping("/api/v1/test")
@@ -66,15 +68,25 @@ public class TestController {
 //            return new ResponseEntity<>(result, HttpStatus.CREATED);
 //    }
 
+    @GetMapping("/loadImg/{filename}")
+    public ResponseEntity<?> loadFileTest(@PathVariable String filename, HttpServletRequest request){
+        Resource file = storageService.loadAsResource(filename);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+    }
+
     @Transactional
     @PostMapping("/uploadTest01")
-    public ResponseEntity<?> uploadTest01(MultipartFile multipartFile){
+    public ResponseEntity<?> uploadTest01(MultipartFile multipartFile, HttpResponse response){
         try{
+            System.out.println("저장 전.");
             storageService.store(multipartFile, "testCode", "test");
+            System.out.println("저장 후.");
         }catch (StorageException e){
             return new ResponseEntity<>(new ApiErrorResponse("error-9000", e.getMessage()), HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(HttpStatus.CREATED);
+
+        return new ResponseEntity<>(multipartFile, HttpStatus.CREATED);
         //        String fileUrl = storageService.store(multipartFile, "testCode", "test");
 //        if(fileUrl == null)
 //            return new ResponseEntity<>("파일이 안온듯?", httpHeaders, HttpStatus.BAD_REQUEST);
