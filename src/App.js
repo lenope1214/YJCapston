@@ -1,21 +1,24 @@
-
+import { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import "./App.css";
+import ShoplistContainer from "./containers/Shoplist/ShoplistContainer";
 import LoginContainer from "./containers/Login/LoginContainer";
 import MainContainer from "./containers/Main/MainContainer";
 import MypageContainer from "./containers/MyPage/MyPageContainer";
 import RegisterContainer from "./containers/Register/RegisterContainer";
-import ShopContainer from "./containers/Shop/ShopContainer";
 import ShopMainContainer from "./containers/ShopMain/ShopMainContainer";
-import ShoplistContainer from "./containers/Shoplist/ShoplistContainer";
-import AddShopContainer from "./containers/AddShop/AddShopContainer";
-import { useEffect, useState } from "react";
-    
+import ShopContainer from "./containers/Shop/ShopContainer";
+import MenuListContainer from "./containers/MenuList/MenuListContainer";
+import MyShopContainer from "./containers/MyShop/MyShopContainer";
+import EventContainer from "./containers/Event/EventContainer";
+import { MenuReadContainer } from "./containers/MenuRead/MenuReadContainer";
+import ShopInfoContainer from "./containers/ShopInfo/ShopInfoContainer";
+
 const App = () => {
-    const [isLogin,setIsLogin] = useState(false);
+    const [isLogin, setIsLogin] = useState(false);
 
     useEffect(() => {
-        const accesstoken = localStorage.getItem("access_token");
+        const accesstoken = sessionStorage.getItem("access_token");
 
         if (accesstoken) {
             setIsLogin(true);
@@ -24,22 +27,38 @@ const App = () => {
 
     const handleLogin = () => {
         setIsLogin(true);
+        alert("회원님 반가워요!");
     };
 
     const handleLogout = () => {
         setIsLogin(false);
+        sessionStorage.removeItem("access_token");
+        alert("로그아웃이 완료 되었습니다.");
     };
+
     return (
         <Router>
             <Switch>
                 <Route path="/login" component={LoginContainer} />
                 <Route path="/register" component={RegisterContainer} />
                 <Route path="/mypage" component={MypageContainer} />
-                <Route path="/shopMain" component={ShopMainContainer} />
                 <Route path="/shop" component={ShopContainer} />
-                <Route path="/shoplist" component={ShoplistContainer} />
-                <Route path="/addshop" component={AddShopContainer} />
-                {/* <Route path="/" component={MainContainer} /> */}
+                <Route path="/shopMain" component={ShopMainContainer} />
+                <Route path="/MenuList" component={MenuListContainer} />
+                <Route path="/MyShop" component={MyShopContainer} />
+                <Route path="/Event" component={EventContainer}/>
+                <Route path='/menu/:shopId' component={MenuReadContainer} />
+                <Route path="/ShopInfo" component={ShopInfoContainer}/>
+                <Route
+                    path="/shoplist"
+                    component={() => (
+                        <ShoplistContainer
+                            isLogin={isLogin}
+                            handleLogin={handleLogin}
+                            handleLogout={handleLogout}
+                        />
+                    )}
+                />
                 <Route
                     path="/"
                     component={() => (

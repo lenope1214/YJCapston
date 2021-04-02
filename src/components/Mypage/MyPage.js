@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import * as S from "./style";
 
 const MyPage = ({ Pw, handlePw, Mypage, user }) => {
+    console.log(user.name);
     return (
         <>
             <S.MypageWrap>

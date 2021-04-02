@@ -18,20 +18,32 @@ export const postShop =(
     close_time,
     address,
     address1,
-    is_rs_pos
+    // is_rs_pos,
+    category,
+    img_url
 ) => {
-    return  apiDefault().post("/regShop",{
-    id: id,
-    name: shopname,
-    intro: intro,
-    open_time: open_time,
-    close_time: close_time,
-    address: address,
-    address_detail: address1,
-    is_rs_pos: is_rs_pos
+    return  apiDefault().post("/shop",{
+     id:id,
+     name:shopname,
+     intro:intro,
+     openTime:open_time,
+     closeTime:close_time,
+     address:address,
+     addressDetail:address1,
+     category: category,
+    // shopId: id,
+    // name: shopname,
+    // intro: intro,
+    // openTime: open_time,
+    // closeTime: close_time,
+    // address: address,
+    // addressDetail: address1,
+    // isRsPos: is_rs_pos,
+    // category: category,  
+    img:img_url
     },{
         headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         },
     });
 };

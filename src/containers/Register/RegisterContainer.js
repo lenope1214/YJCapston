@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import Register from "../../components/Register/Register";
 import { postLogin } from "../../lib/Login";
-import { getLocation, postRegister } from "../../lib/Register";
+import { getLocation, postRegister, getIdCheck } from "../../lib/Register";
 
 const RegisterContainer = () => {
     const history = useHistory();
@@ -20,6 +20,9 @@ const RegisterContainer = () => {
     const [address, setAddress] = useState("");
     const [address1, setAddress1] = useState("");
     const [keyword, setKeyword] = useState("");
+    const [showLocation, setShowLocation] = useState({
+        roadAddr: "",
+    });
 
     let check = "u";
 
@@ -35,10 +38,10 @@ const RegisterContainer = () => {
     };
 
     if (owner === true) {
-        check = "o";
+        check = "ROLE_OWNER";
         console.log("트류");
     } else {
-        check = "u";
+        check = "ROLE_USER";
         console.log("폴스");
     }
 
@@ -149,17 +152,38 @@ const RegisterContainer = () => {
             address,
             address1
         )
-            .then((res) => history.push("/main"))
+            .then((res) => {
+                history.push("/");
+                alert("회원가입완료");
+            })
             .catch((err) => err);
+    };
+
+    const IdCheck = () => {
+        getIdCheck(id)
+            .then((res) => {
+                alert("사용 가능한 아이디 입니다.");
+            })
+            .catch((err) => {
+                console.log(err);
+                alert("이미 존재하는 아이디 입니다.");
+            });
     };
 
     const search = () => {
         getLocation(keyword)
             .then((res) => {
-                console.log(res.data);
+                const json = JSON.parse(res.data.results.juso);
+                console.log(json);
+                const loca = json.map((loca) => {
+                    return {
+                        roadloca: loca.roadAddr,
+                    };
+                });
+                console.log(loca);
             })
             .catch((err) => {
-                alert("");
+                alert(err);
             });
     };
 
@@ -194,6 +218,8 @@ const RegisterContainer = () => {
             modal={modal}
             handleKeyword={handleKeyword}
             keyword={keyword}
+            IdCheck={IdCheck}
+            showLocation={showLocation}
         />
     );
 };

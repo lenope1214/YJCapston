@@ -33,6 +33,8 @@ const Register = ({
     closeModal,
     handleKeyword,
     Keyword,
+    IdCheck,
+    showLocation,
 }) => {
     // const handleSearch = (e) => {
     //     const value = e.target.value;
@@ -66,6 +68,7 @@ const Register = ({
                         onChange={handleId}
                         value={id}
                     />
+                    <button onClick={IdCheck}>중복확인</button>
                     <span>비밀번호</span>
                     <input
                         type="password"
@@ -176,6 +179,7 @@ const Register = ({
                         />
                     </body>
                     <button onClick={search}>검색</button>
+                    {/* <input type="text" value={showLocation} /> */}
                     <button>확인</button>
                     <button onClick={closeModal}>닫기</button>
                 </S.searchWrap>

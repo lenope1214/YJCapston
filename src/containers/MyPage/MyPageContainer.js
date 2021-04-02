@@ -27,18 +27,18 @@ const MyPageContainer = () => {
 
     // 이게 서버에서 코드 받아오는 함수
     useEffect(() => {
-        getmypage();
+        getMyPage();
     }, []);
+    console.log("res", user);
 
-    const getmypage = () => {
+    const getMyPage = () => {
         getMyInfo()
             .then((res) => {
-                console.log(res.data);
-                
+                console.log(res.data.name);
                 setUser(res.data);
             })
             .catch((err) => {
-                alert("");
+                alert("err");
             });
     };
 

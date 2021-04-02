@@ -21,10 +21,18 @@ export const postRegister = (
         email: email,
         birthday: birthday,
         address: address,
-        address_detail: address1,
+        addressDetail: address1,
     });
 };
 
 export const getLocation = (keyword) => {
-    return apiDefault().get(`/addressSearch/${keyword}`);
+    return apiDefault().get(
+        `/searchAddr?keyword=${keyword}&currentPage=1&countPerPage=5`
+    );
+};
+
+export const getIdCheck = (member_id) => {
+    return apiDefault().get(`/validate/${member_id}`, {
+        id: member_id,
+    });
 };
