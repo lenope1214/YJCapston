@@ -16,8 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -138,26 +136,26 @@ public class ShopController {
 
     @Transactional
     @PatchMapping("/shop")
-    public ResponseEntity<?> updateShopInfo(@RequestBody Shop.Patch patch){
+    public ResponseEntity<?> updateShopInfo(@RequestBody Shop.Patch patch) {
         Shop shop;
         System.out.println("patch.getShopId() : " + patch.getShopId());
-        try{
+        try {
             shop = shopService.findById(patch.getShopId());
-        }catch (ShopNotFoundException e){
-            return new ResponseEntity<>(new ApiErrorResponse(e.getCode(), e.getId()),HttpStatus.NOT_FOUND);
+        } catch (ShopNotFoundException e) {
+            return new ResponseEntity<>(new ApiErrorResponse(e.getCode(), e.getId()), HttpStatus.NOT_FOUND);
         }
         shop.update(patch);
 
         return null;
     }
+
     @Transactional
     @PatchMapping("/shop/{shopId}/open")
     public ResponseEntity<?> updateShopIsOpen(@RequestHeader String authorization, @PathVariable String shopId) {
         List<Shop> shopList = getLoginUserShop(authorization);
         if (shopList.isEmpty()) return new ResponseEntity<>("매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         for (Shop shop : shopList) {
-            if (shop.getId().equals(shopId)) {
-                // 해당 유저의 해당 매장번호가 있음!
+            if (shop.getId().equals(shopId)) {                // 해당 유저의 해당 매장번호가 있음!
                 System.out.println("반전성공");
                 return new ResponseEntity<>(shopService.updateIsOpen(shop), HttpStatus.OK);
             }

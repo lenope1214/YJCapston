@@ -3,6 +3,7 @@ package com.jumanji.capston.data;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.text.ParseException;
@@ -38,6 +39,16 @@ public class Shop {
     @JoinColumn(name="owner_id")
     private User owner;
 
+    @Getter
+    @Setter
+    public static class info{
+        private String name;
+        private String intro;
+        private int price;
+        private int duration;
+        private MultipartFile img;
+    }
+
     private Date toDate(String date){
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
         Date parseDate = null;
@@ -71,6 +82,7 @@ public class Shop {
         this.addressDetail = patch.getAddressDetail();
         this.category = patch.getCategory();
     }
+
 
     @Getter
     @Setter
