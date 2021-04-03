@@ -53,8 +53,8 @@ public class MenuController {
 
     @Transactional(readOnly = true)
     @GetMapping("/menu")
-    public ResponseEntity<?> selectMenuById(@RequestBody Menu.Request request){
-        String menuId = request.getShopId() + request.getName();
+    public ResponseEntity<?> selectMenuById(@RequestBody String menuId){
+//        String menuId = request.getShopId() + request.getName();
         Menu menu = menuService.findById(menuId);
         if(menu == null)
             return new ResponseEntity<>("없는 메뉴번호 입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
