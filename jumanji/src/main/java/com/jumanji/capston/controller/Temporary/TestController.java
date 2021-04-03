@@ -2,17 +2,17 @@ package com.jumanji.capston.controller.Temporary;
 
 import com.jumanji.capston.controller.exception.ApiErrorResponse;
 import com.jumanji.capston.data.Request.FileAndData;
-import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.service.MenuService;
 import com.jumanji.capston.service.StorageService;
 import com.jumanji.capston.storage.StorageException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.net.http.HttpResponse;
@@ -124,18 +124,18 @@ public class TestController {
 //        "application/octet-stream;Content-Disposition: inline; filename=\"" + file.getFilename() + "\"").body(file);
 //    }
 
-    @GetMapping("/loadImg3/{filename:.+}")
-    @ResponseBody
-    public ResponseEntity<?> serveFile2(@PathVariable String filename) {
-        Resource file = storageService.loadAsResource(filename, "src\\main\\resources\\uploads\\shop\\0101010107");
-        Shop.Response response = new Shop.Response();
-        response.setImg(file);
-        response.setIntro("테스트");
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE,
-//                "image/jpeg; filename=\"" + file.getFilename() + "\"").body(file);
-//                "image/jpeg;Content-Disposition: inline; filename=\"" + file.getFilename() + "\"").body(response);
-                "image/jpeg; filename=\"" + file.getFilename() + "\"").body(response.getImg());
-    }
+//    @GetMapping("/loadImg3/{filename:.+}")
+//    @ResponseBody
+//    public ResponseEntity<?> serveFile2(@PathVariable String filename) {
+//        Resource file = storageService.loadAsResource(filename, "src\\main\\resources\\uploads\\shop\\0101010107");
+//        Shop.Response response = new Shop.Response();
+//        response.setImg(file);
+//        response.setIntro("테스트");
+//        return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE,
+////                "image/jpeg; filename=\"" + file.getFilename() + "\"").body(file);
+////                "image/jpeg;Content-Disposition: inline; filename=\"" + file.getFilename() + "\"").body(response);
+//                "image/jpeg; filename=\"" + file.getFilename() + "\"").body(response.getImg());
+//    }
 
 //    @GetMapping("/loadTest1/{filename:.+}")
 //    @ResponseBody
