@@ -5,6 +5,7 @@ import com.jumanji.capston.storage.StorageFileNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,21 +15,22 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/files")
-public class FileUploadController {
+public class FileController {
     private final StorageService storageService;
     @Autowired
-    public FileUploadController(StorageService storageService){
+    public FileController(StorageService storageService){
         this.storageService = storageService;
     }
 
     @GetMapping(value={"", "/"})
     public String files(Model model) throws IOException {
         model.addAttribute("files", storageService.loadAll().map(
-                path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
+                path -> MvcUriComponentsBuilder.fromMethodName(FileController.class,
                         "serveFile", path.getFileName().toString()).build().toString())
                 .collect(Collectors.toList()));
         return "uploadForm";
@@ -52,12 +54,12 @@ public class FileUploadController {
     @GetMapping("/loadImg/{shopId}")
     @ResponseBody
     public ResponseEntity<?> loadImg(  @PathVariable String shopId  ) {
+        List<Resource> file = storageService.loadShopThumbNailImg(shopId);
 //        List<Resource> file = storageService.loadShopThumbNailImg(shopId);
-//        List<Resource> file = storageService.loadShopThumbNailImg(shopId);
-//        return new ResponseEntity<>(file, HttpStatus.OK);
+        return new ResponseEntity<>(file, HttpStatus.OK);
 //        return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE,
 //                "image/jpeg; filename=\"" + file.getFilename() + "\"").body(file);
-        return null;
+//        return file;
     }
 
     @GetMapping("/loadImg/{shopId}/{menuName}")

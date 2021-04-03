@@ -3,8 +3,6 @@ package com.jumanji.capston.data;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-import org.springframework.core.io.Resource;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.text.ParseException;
@@ -52,7 +50,7 @@ public class Shop {
         private String address;
         private String addressDetail;
         private String category;
-        private MultipartFile img;
+//        private MultipartFile img;
     }
 
     @Getter@Setter
@@ -74,7 +72,7 @@ public class Shop {
         private int duration;
         private char isOpen;
         private char isRsPos;
-        private Resource img;
+//        private Resource img;
     }
 
 
