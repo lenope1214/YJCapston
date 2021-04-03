@@ -108,7 +108,8 @@ public class ShopController {
 //        logger.log(Level.INFO, "open time and close time\n" + shop.getOpenTime() +"\n" + shop.getCloseTime());
 
         System.out.println("shopInfo.toString() : " + shopInfo.toString());
-        String imgPath = storageService.store(shopInfo.getImg(), "shop", shopInfo.getId());
+        String uri = "shop\\" + shopInfo.getId() +"\\thumbnail\\";
+        String imgPath = storageService.store(shopInfo.getImg(), uri, shopInfo.getImg().getName());
         Shop shopEntity =
                 Shop.createShop()
                         .shopId(shopInfo.getId())

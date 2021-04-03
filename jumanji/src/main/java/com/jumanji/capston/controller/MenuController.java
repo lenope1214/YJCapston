@@ -69,15 +69,15 @@ public class MenuController {
         Menu menu;
         System.out.println("메뉴 추가");
         String menuId = request.getShopId()+ request.getName();
-        String imgPath = storageService.store(request.getImg(), "menu", menuId);
-
+        String path = "shop\\" +request.getShopId() +"\\menu\\";
+        storageService.store(request.getImg(), path, request.getName());
         menu = Menu.init()
                 .id(menuId)
                 .name(request.getName())
                 .intro(request.getIntro())
                 .price(request.getPrice())
                 .duration(request.getDuration())
-                .imgPath(imgPath)
+                .imgPath(path+request.getName())
                 .build();
 //        System.out.println("ㅁㄴㅇㄹ");
         Object result =menuService.save(menu);
@@ -103,8 +103,8 @@ public class MenuController {
     }
     @Transactional
     @DeleteMapping("/menu")
-    public ResponseEntity<?> deleteMenu(@RequestBody Menu.Request request){
-        String menuId = request.getMenuId(request);
+    public ResponseEntity<?> deleteMenu(@RequestBody String menuId){
+//        String menuId = request.getMenuId(request);
         Menu menu = menuService.findById(menuId);
         if(menu == null)return new ResponseEntity<>(new ApiErrorResponse("error-2001", "Not Found by menu id"), HttpStatus.NOT_FOUND);
         menuService.delete(menu);

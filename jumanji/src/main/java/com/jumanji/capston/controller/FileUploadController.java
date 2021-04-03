@@ -3,6 +3,8 @@ package com.jumanji.capston.controller;
 import com.jumanji.capston.service.StorageService;
 import com.jumanji.capston.storage.StorageFileNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,12 +46,34 @@ public class FileUploadController {
 //        Resource file = storageService.loadAsResource(filename);
 //        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
 //                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
-//    }
+//    } // 파일 다운로드 경로
+
+    // 파일 불러오기
+    @GetMapping("/loadImg/{shopId}")
+    @ResponseBody
+    public ResponseEntity<?> loadImg(  @PathVariable String shopId  ) {
+//        List<Resource> file = storageService.loadShopThumbNailImg(shopId);
+//        List<Resource> file = storageService.loadShopThumbNailImg(shopId);
+//        return new ResponseEntity<>(file, HttpStatus.OK);
+//        return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE,
+//                "image/jpeg; filename=\"" + file.getFilename() + "\"").body(file);
+        return null;
+    }
+
+    @GetMapping("/loadImg/{shopId}/{menuName}")
+    @ResponseBody
+    public ResponseEntity<?> loadImg(
+            @PathVariable String shopId,
+            @PathVariable String menuName ) {
+        Resource file = storageService.loadMenuImg(shopId, menuName);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE,
+                "image/jpeg; filename=\"" + file.getFilename() + "\"").body(file);
+    }
 
     @PostMapping(value={"", "/"})
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
                                    RedirectAttributes redirectAttributes) {
-        storageService.store(file, "022344278", "test");
+        storageService.store(file, "022344278\\test", "파일이름");
         redirectAttributes.addFlashAttribute("message",
                 "You successfully uploaded " + file.getOriginalFilename() + "!");
         return "redirect:/files";
