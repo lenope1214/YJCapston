@@ -15,7 +15,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -31,7 +35,7 @@ public class StorageService {
     }
 
     //
-    public String store(MultipartFile file, String typeName, String typeNumber) {
+    public String store(MultipartFile file, String path, String fileName) {
         String newFileName = null;
         File dirFile = null;
         try {
@@ -49,7 +53,7 @@ public class StorageService {
 //            System.out.println("file.getResource() : " + file.getResource());
 //            System.out.println("file.getClass() : " + file.getClass());
             System.out.println("루트 로케이션 : " + rootLocation );
-            dirFile = new File(String.valueOf(rootLocation + "\\" + typeName + "\\" + typeNumber));
+            dirFile = new File(String.valueOf(rootLocation + "\\" + path));
             if(!dirFile.exists())Files.createDirectory(dirFile.toPath());
             File[] fileList = dirFile.listFiles();
             assert fileList != null;
@@ -92,11 +96,6 @@ public class StorageService {
         }
     }
 
-    public Path load(String filename) {
-        System.out.println("load -> rootLocation :" + rootLocation);
-        return rootLocation.resolve(filename);
-    }
-
     public Path load(String filename, String path) {
         System.out.println("load -> path : " + path);
         return Path.of(path).resolve(filename);
@@ -106,6 +105,7 @@ public class StorageService {
         try {
             Path file = load(filename, path);
             Resource resource = new UrlResource(file.toUri());
+//            List<Resource> files;
             System.out.println("loadAsResource's file.toUri() : " + file.toUri());
             System.out.println("Resource is readable ? " + resource.isReadable());
 
@@ -119,6 +119,39 @@ public class StorageService {
             throw new StorageFileNotFoundException("Could not read file: " + filename, e);
         }
     }
+
+    public Resource loadMenuImg(String shopId, String menuName) {
+        try {
+            Path file = load("", "");
+            Resource resource = new UrlResource(file.toUri());
+            System.out.println("loadAsResource's file.toUri() : " + file.toUri());
+            System.out.println("Resource is readable ? " + resource.isReadable());
+
+            if (resource.exists() || resource.isReadable()) {
+                return resource;
+            } else {
+                throw new StorageFileNotFoundException(
+                        "Could not read file: " + "");
+            }
+        } catch (MalformedURLException e) {
+            throw new StorageFileNotFoundException("Could not read file: " + "", e);
+        }
+    }
+
+    public List<Resource> loadShopThumbNailImg(String shopId) {
+        File dirFile = null;
+        dirFile = new File(String.valueOf(rootLocation + "\\shop\\" + shopId + "\\thumbnails" ));
+        if(!dirFile.exists())throw new StorageFileNotFoundException("매장 썸네일이 없습니다.");
+        File[] fileList = dirFile.listFiles();
+        assert fileList != null;
+        System.out.println("경로 내 파일 수 : " + (fileList.length));
+        return null;
+//        return fileList;
+//             List<File> files = Arrays.asList(fileList);
+//            return fileList;
+    }
+
+
 
     public void deleteAll() {
         FileSystemUtils.deleteRecursively(rootLocation.toFile());
