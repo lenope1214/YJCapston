@@ -53,6 +53,7 @@ public class MenuController {
     @GetMapping("/menu")
     public ResponseEntity<?> selectMenuById(@RequestBody String menuId){
 //        String menuId = request.getShopId() + request.getName();
+        System.out.println("메뉴 Id : " + menuId);
         Menu menu = menuService.findById(menuId);
         if(menu == null)
             return new ResponseEntity<>("없는 메뉴번호 입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
@@ -69,14 +70,14 @@ public class MenuController {
         System.out.println("메뉴 추가");
         String menuId = request.getShopId()+ request.getName();
         String path = "shop\\" +request.getShopId() +"\\menu\\";
-        storageService.store(request.getImg(), path, request.getName());
+//        storageService.store(request.getImg(), path, request.getName());
         menu = Menu.init()
                 .id(menuId)
                 .name(request.getName())
                 .intro(request.getIntro())
                 .price(request.getPrice())
                 .duration(request.getDuration())
-                .imgPath(path+request.getName())
+//                .imgPath(path+request.getName())
                 .build();
 //        System.out.println("ㅁㄴㅇㄹ");
         Object result =menuService.save(menu);

@@ -109,7 +109,7 @@ public class ShopController {
 
         System.out.println("shopInfo.toString() : " + shopInfo.toString());
         String uri = "shop\\" + shopInfo.getId() +"\\thumbnail\\";
-        String imgPath = storageService.store(shopInfo.getImg(), uri, shopInfo.getImg().getName());
+//        String imgPath = storageService.store(shopInfo.getImg(), uri, shopInfo.getImg().getName());
         Shop shopEntity =
                 Shop.createShop()
                         .shopId(shopInfo.getId())
@@ -120,7 +120,7 @@ public class ShopController {
                         .address(shopInfo.getAddress())
                         .addressDetail(shopInfo.getAddressDetail())
                         .category(shopInfo.getCategory())
-                        .imgPath(imgPath)
+//                        .imgPath(imgPath)
                         .build();
         Object result = shopService.insert(shopEntity, userEntity);
         if (result.getClass() == Shop.class) return new ResponseEntity<>(result, HttpStatus.CREATED);
