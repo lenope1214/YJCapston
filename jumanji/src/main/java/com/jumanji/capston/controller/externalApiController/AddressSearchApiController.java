@@ -1,4 +1,4 @@
-package com.jumanji.capston.controller;
+package com.jumanji.capston.controller.externalApiController;
 
 import com.jumanji.capston.service.AddressSearchApiService;
 import org.springframework.beans.factory.annotation.Autowired;
