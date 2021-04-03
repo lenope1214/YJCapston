@@ -2,8 +2,8 @@ package com.jumanji.capston.controller;
 
 import com.jumanji.capston.controller.exception.ApiErrorResponse;
 import com.jumanji.capston.data.Menu;
-import com.jumanji.capston.data.Request.MenuRequest;
 import com.jumanji.capston.service.MenuService;
+import com.jumanji.capston.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -23,7 +23,12 @@ public class MenuController {
     MenuService menuService;
 
     @Autowired
+    StorageService storageService;
+
+    @Autowired
     HttpHeaders httpHeaders;
+
+
 
 //    @Transactional(readOnly = true)
 //    @GetMapping("/menu")
@@ -46,31 +51,33 @@ public class MenuController {
     }
 
     @Transactional(readOnly = true)
-    @GetMapping("/menu/{menuId}")
-    public ResponseEntity<?> selectMenuById(@PathVariable String menuId){
-        if(menuService.findById(menuId) == null)
+    @GetMapping("/menu")
+    public ResponseEntity<?> selectMenuById(@RequestBody Menu.Request request){
+        String menuId = request.getShopId() + request.getName();
+        Menu menu = menuService.findById(menuId);
+        if(menu == null)
             return new ResponseEntity<>("없는 메뉴번호 입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
+        Menu.Response response = new Menu.Response();
+        response.parse(menu);
 
-        return new ResponseEntity<>(menuService.findById(menuId), HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Transactional
     @PostMapping("/menu")
-    public ResponseEntity<?> insertMenu( MenuRequest menuRequest){
+    public ResponseEntity<?> insertMenu( Menu.info request){
         Menu menu;
         System.out.println("메뉴 추가");
-//        BigDecimal menuSeq = menuService.getMenuSeqNextVal();
-//        System.out.println("seq : " + menuSeq);
-        int menuQty = menuService.count(menuRequest.getShopId());
-        if(menuQty > 99)return new ResponseEntity<>(new ApiErrorResponse("error-1011", "메뉴를 100개이상 등록. 삭제바람"), HttpStatus.BAD_REQUEST);
-            String menuSeq = String.format("%02d", menuQty+1);
-        System.out.println("menuSeq : " + menuSeq);
-        menu = Menu.info()
-                .id(menuRequest.getShopId()+ "" + menuSeq)
-                .name(menuRequest.getName())
-                .intro(menuRequest.getIntro())
-                .price(menuRequest.getPrice())
-                .duration(menuRequest.getDuration())
+        String menuId = request.getShopId()+ request.getName();
+        String imgPath = storageService.store(request.getImg(), "menu", menuId);
+
+        menu = Menu.init()
+                .id(menuId)
+                .name(request.getName())
+                .intro(request.getIntro())
+                .price(request.getPrice())
+                .duration(request.getDuration())
+                .imgPath(imgPath)
                 .build();
 //        System.out.println("ㅁㄴㅇㄹ");
         Object result =menuService.save(menu);
@@ -82,20 +89,14 @@ public class MenuController {
 
     @Transactional
     @PatchMapping("/menu")
-    public ResponseEntity<?> updateMenu(@RequestBody MenuRequest menuRequest){
+    public ResponseEntity<?> updateMenu(@RequestBody Menu.Request request){
         System.out.println("메뉴 수정>>> ");
-        Menu menu = menuService.findById(menuRequest.getMenuId());
+        String menuId = request.getMenuId(request);
+        Menu menu = menuService.findById(menuId);
         if(menu == null)return new ResponseEntity<>("메뉴 ID가 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         System.out.println("menuId : " + menu.getId());
 
-        menu = Menu.info()
-                .id(menuRequest.getMenuId())
-                .name(menuRequest.getName())
-                .intro(menuRequest.getIntro())
-                .price(menuRequest.getPrice())
-                .duration(menuRequest.getDuration())
-                .imgUrl("")
-                .build();
+
        menuService.save(menu);
         System.out.println("menuId : " + menu.getId());
         return new ResponseEntity<>(menu, HttpStatus.OK);
@@ -103,7 +104,8 @@ public class MenuController {
     @Transactional
     @DeleteMapping("/menu")
     public ResponseEntity<?> deleteMenu(@RequestBody Menu.Request request){
-        Menu menu = menuService.findById(request.getMenuId());
+        String menuId = request.getMenuId(request);
+        Menu menu = menuService.findById(menuId);
         if(menu == null)return new ResponseEntity<>(new ApiErrorResponse("error-2001", "Not Found by menu id"), HttpStatus.NOT_FOUND);
         menuService.delete(menu);
         return new ResponseEntity<>("삭제성공", httpHeaders, HttpStatus.OK);

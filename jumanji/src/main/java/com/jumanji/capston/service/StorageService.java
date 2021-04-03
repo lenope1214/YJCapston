@@ -32,7 +32,8 @@ public class StorageService {
 
     //
     public String store(MultipartFile file, String typeName, String typeNumber) {
-        String filePath = null;
+        String newFileName = null;
+        File dirFile = null;
         try {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file.");
@@ -48,16 +49,18 @@ public class StorageService {
 //            System.out.println("file.getResource() : " + file.getResource());
 //            System.out.println("file.getClass() : " + file.getClass());
             System.out.println("루트 로케이션 : " + rootLocation );
-            File dirFile = new File(String.valueOf(rootLocation + "\\" + typeName + "\\" + typeNumber));
+            dirFile = new File(String.valueOf(rootLocation + "\\" + typeName + "\\" + typeNumber));
             if(!dirFile.exists())Files.createDirectory(dirFile.toPath());
             File[] fileList = dirFile.listFiles();
             assert fileList != null;
 //            System.out.println("경로 내 파일 수 : " + (fileList.length));
-            filePath = (fileList.length+1) + "." + fileExtension;
-            System.out.println("파일 경로 :" + filePath);
-            Path destinationFile = this.rootLocation.resolve(Paths.get(dirFile +"\\"+ filePath))
-                    .normalize().toAbsolutePath(); // file.getOriginalFilename() -> filename.filetype 이런 형태
-            System.out.println("풀 경로 : " + dirFile +"\\"+ filePath);
+            newFileName = (fileList.length+1) + "." + fileExtension;
+            System.out.println("파일 경로 :" + newFileName);
+            Path destinationFile = Path.of((dirFile +"\\"+ newFileName));
+//                    .normalize().toAbsolutePath(); // file.getOriginalFilename() -> filename.filetype 이런 형태
+//            Path destinationFile = this.rootLocation.resolve(Paths.get(dirFile +"\\"+ newFileName))
+//                    .normalize().toAbsolutePath(); // file.getOriginalFilename() -> filename.filetype 이런 형태
+            System.out.println("풀 경로 : " + dirFile +"\\"+ newFileName);
             System.out.println("destinationFile.getParent() : " + destinationFile.getParent());
 //            System.out.println("rootLocation's 절대 주소 : " + this.rootLocation.toAbsolutePath());
 //            if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
@@ -74,7 +77,7 @@ public class StorageService {
         } catch (NotSupportedException e) {
             throw new StorageException("Not supported file extension");
         }
-        return filePath;
+        return dirFile.getPath();
     }
 
     public Stream<Path> loadAll() {

@@ -34,23 +34,27 @@ public class Menu {
     @Column(length = 3)
     private int duration; // 걸리는 시간 = 조리시간 + ...
     @Column(name = "img_url")
-    private String imgUrl; // 이미지 상대 경로
+    private String imgPath; // 이미지 상대 경로
     @Column(name = "reg_date", updatable = false)
     private Date regDate = new Date();
     @Column(name = "mod_date")
     private Date modDate = new Date();
 
-    @Builder(builderMethodName = "info")
-    public Menu(String id, String name, String intro, int price, int duration, String imgUrl) {
+    @Builder(builderMethodName = "init")
+    public Menu(String id, String name, String intro, int price, int duration, String imgPath) {
         this.id = id;
         this.name = name;
         this.intro = intro;
         this.price = price;
         this.duration = duration;
-        this.imgUrl = imgUrl;
+        this.isSale = 'N';
+        this.isPopular = 'N';
+        this.imgPath = imgPath;
     }
 
+    @Getter @Setter
     public static class info{
+        private String shopId;
         private String name;
         private String intro;
         private int price;
@@ -61,8 +65,47 @@ public class Menu {
     @Getter
     @Setter
     public static class Request{
-        private String menuId;
+        private String shopId;
+        private String name;
+        private String intro;
+        private int price;
+        private int duration;
+        private char isSale;
+        private char isPopular;
+
+        public String getMenuId(Menu.Request request){
+            return request.getShopId() + request.getName();
+        }
     }
+
+    @Getter
+    public static class Response{
+        private String name;
+        private String intro;
+        private int price;
+        private int duration;
+        private char isSale;
+        private char isPopular;
+
+        public void parse(Menu menu){
+            this.name = menu.getId().substring(10);
+            this.intro = menu.getIntro();
+            this.price = menu.getPrice();
+            this.duration = menu.getDuration();
+            this.isSale = menu.getIsSale();
+            this.isPopular = menu.getIsPopular();
+        }
+    }
+
+    public void update(Menu.Request request){
+        if(request.getName() != null)this.name = request.getName();
+        if(request.getIntro() != null)this.intro = request.getIntro();
+        if(request.getPrice() != 0)this.price = request.getPrice();
+        if(request.getDuration() != 0)this.duration = request.getDuration();
+        if(request.getIsSale() != '\u0000' )this.isSale = request.getIsSale();
+    }
+
+
 }
 
 //@Getter
