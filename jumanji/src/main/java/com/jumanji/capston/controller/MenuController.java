@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -91,6 +92,7 @@ public class MenuController {
     @PatchMapping("/menu")
     public ResponseEntity<?> updateMenu(@RequestBody Menu.Request request){
         System.out.println("메뉴 수정>>> ");
+        // 권한확인 해야함. 로그인유저 의 매장인지.
         String menuId = request.getMenuId(request);
         Menu menu = menuService.findById(menuId);
         if(menu == null)return new ResponseEntity<>("메뉴 ID가 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
@@ -102,9 +104,11 @@ public class MenuController {
         return new ResponseEntity<>(menu, HttpStatus.OK);
     }
     @Transactional
+    @PostAuthorize("hasAnyRole('OWNER','ADMIN')")
     @DeleteMapping("/menu")
     public ResponseEntity<?> deleteMenu(@RequestBody String menuId){
 //        String menuId = request.getMenuId(request);
+        // 추후에 유저 확인..
         Menu menu = menuService.findById(menuId);
         if(menu == null)return new ResponseEntity<>(new ApiErrorResponse("error-2001", "Not Found by menu id"), HttpStatus.NOT_FOUND);
         menuService.delete(menu);
