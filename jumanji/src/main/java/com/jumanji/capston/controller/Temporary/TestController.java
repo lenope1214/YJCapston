@@ -6,7 +6,6 @@ import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.service.MenuService;
 import com.jumanji.capston.service.StorageService;
 import com.jumanji.capston.storage.StorageException;
-import com.nimbusds.oauth2.sdk.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -110,32 +109,32 @@ public class TestController {
 
 
 
-    @GetMapping("/loadImg/{fileName}")
-    public ResponseEntity<?> loadFile(@PathVariable String fileName) throws ParseException {
-        return new ResponseEntity<>(storageService.loadAsResource(fileName), HttpStatus.OK);
-    }
-
-    @GetMapping("/loadImg2/{filename:.+}")
-    @ResponseBody
-    public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
-        Resource file = storageService.loadAsResource(filename);
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE,
-//                "image/jpeg; filename=\"" + file.getFilename() + "\"").body(file);
-//                "image/jpeg;Content-Disposition: inline; filename=\"" + file.getFilename() + "\"").body(file);
-        "application/octet-stream;Content-Disposition: inline; filename=\"" + file.getFilename() + "\"").body(file);
-    }
+//    @GetMapping("/loadImg/{fileName}")
+//    public ResponseEntity<?> loadFile(@PathVariable String fileName) throws ParseException {
+//        return new ResponseEntity<>(storageService.loadAsResource(fileName), HttpStatus.OK);
+//    }
+//
+//    @GetMapping("/loadImg2/{filename:.+}")
+//    @ResponseBody
+//    public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+//        Resource file = storageService.loadAsResource(filename);
+//        return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE,
+////                "image/jpeg; filename=\"" + file.getFilename() + "\"").body(file);
+////                "image/jpeg;Content-Disposition: inline; filename=\"" + file.getFilename() + "\"").body(file);
+//        "application/octet-stream;Content-Disposition: inline; filename=\"" + file.getFilename() + "\"").body(file);
+//    }
 
     @GetMapping("/loadImg3/{filename:.+}")
     @ResponseBody
     public ResponseEntity<?> serveFile2(@PathVariable String filename) {
-        Resource file = storageService.loadAsResource(filename);
+        Resource file = storageService.loadAsResource(filename, "src\\main\\resources\\uploads\\shop\\0101010107");
         Shop.Response response = new Shop.Response();
-        response.setImg((MultipartFile) file);
+        response.setImg(file);
         response.setIntro("테스트");
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE,
 //                "image/jpeg; filename=\"" + file.getFilename() + "\"").body(file);
-//                "image/jpeg;Content-Disposition: inline; filename=\"" + file.getFilename() + "\"").body(file);
-                "application/;Content-Disposition: inline; filename=\"" + file.getFilename() + "\"").body(response);
+//                "image/jpeg;Content-Disposition: inline; filename=\"" + file.getFilename() + "\"").body(response);
+                "image/jpeg; filename=\"" + file.getFilename() + "\"").body(response.getImg());
     }
 
 //    @GetMapping("/loadTest1/{filename:.+}")

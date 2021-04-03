@@ -71,6 +71,7 @@ public class StorageService {
 
                 Files.copy(inputStream, destinationFile,
                         StandardCopyOption.REPLACE_EXISTING);
+
             }
         } catch (IOException e) {
             throw new StorageException("Failed to store file.", e);
@@ -92,13 +93,22 @@ public class StorageService {
     }
 
     public Path load(String filename) {
+        System.out.println("load -> rootLocation :" + rootLocation);
         return rootLocation.resolve(filename);
     }
 
-    public Resource loadAsResource(String filename) {
+    public Path load(String filename, String path) {
+        System.out.println("load -> path : " + path);
+        return Path.of(path).resolve(filename);
+    }
+
+    public Resource loadAsResource(String filename, String path) {
         try {
-            Path file = load(filename);
+            Path file = load(filename, path);
             Resource resource = new UrlResource(file.toUri());
+            System.out.println("loadAsResource's file.toUri() : " + file.toUri());
+            System.out.println("Resource is readable ? " + resource.isReadable());
+
             if (resource.exists() || resource.isReadable()) {
                 return resource;
             } else {

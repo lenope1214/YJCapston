@@ -3,8 +3,6 @@ package com.jumanji.capston.controller;
 import com.jumanji.capston.service.StorageService;
 import com.jumanji.capston.storage.StorageFileNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,13 +37,14 @@ public class FileUploadController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/{filename:.+}")
-    @ResponseBody
-    public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
-        Resource file = storageService.loadAsResource(filename);
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
-                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
-    }
+//    @GetMapping("/{filename:.+}")
+//    @ResponseBody
+//    public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+//
+//        Resource file = storageService.loadAsResource(filename);
+//        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+//                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+//    }
 
     @PostMapping(value={"", "/"})
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
