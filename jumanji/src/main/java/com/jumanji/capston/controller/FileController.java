@@ -80,4 +80,15 @@ public class FileController {
                 "You successfully uploaded " + file.getOriginalFilename() + "!");
         return "redirect:/files";
     }
+
+    @GetMapping("/pathValidationTest")
+    public String pathValidationTest(@RequestBody String path){
+        try {
+            storageService.pathValidation(path.split("/"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("컨트롤러 정상 종료");
+        return "redirect:/";
+    }
 }
