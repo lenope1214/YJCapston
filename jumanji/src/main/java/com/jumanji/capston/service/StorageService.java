@@ -35,16 +35,20 @@ public class StorageService {
     }
 
     //
-    public String store(MultipartFile file, String path, String fileName) {
+    public String store(MultipartFile file, String fileName, String... filePath) {
         String newFileName = null;
         File dirFile = null;
         try {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file.");
             }
+
             String fileExtension = Objects.requireNonNull(file.getContentType()).substring(file.getContentType().indexOf('/') + 1);
             System.out.println("파일 확장자 : " + fileExtension);
             if(!(fileExtension.equals("jpg") || fileExtension.equals("png") || fileExtension.equals("jpeg")))throw new NotSupportedException("파일 확장자를 맞춰주세요");
+
+            String path = pathValidation(filePath);
+
 
 //            System.out.println("file.getName() : " + file.getName());
 //            System.out.println("file.getContentType() : " + file.getContentType());
@@ -83,6 +87,20 @@ public class StorageService {
             throw new StorageException("Not supported file extension");
         }
         return dirFile.getPath();
+    }
+
+    public String pathValidation(String... paths) throws IOException {
+        System.out.println("pathValidation ... ");
+        File dirFile = null;
+        String filePath = String.valueOf(rootLocation);
+        for(int i=0; i<paths.length-1;i++){
+            filePath = filePath + "\\" + paths[i];
+            dirFile = new File(filePath);
+            System.out.println("now checking path : " + filePath);
+            if(!dirFile.exists())Files.createDirectory(dirFile.toPath());
+        }
+        System.out.println("포문 정상 종료");
+        return null;
     }
 
     public Stream<Path> loadAll() {
@@ -139,13 +157,15 @@ public class StorageService {
     }
 
     public List<Resource> loadShopThumbNailImg(String shopId) {
-        File dirFile = null;
-        dirFile = new File(String.valueOf(rootLocation + "\\shop\\" + shopId + "\\thumbnails" ));
-        if(!dirFile.exists())throw new StorageFileNotFoundException("매장 썸네일이 없습니다.");
-        File[] fileList = dirFile.listFiles();
-        assert fileList != null;
-        System.out.println("경로 내 파일 수 : " + (fileList.length));
-        return null;
+        List<Resource> resourceList = null;
+//        resourceList = Path.of("")
+//        File dirFile = null;
+//        dirFile = new File(String.valueOf(rootLocation + "\\shop\\" + shopId + "\\thumbnails" ));
+//        if(!dirFile.exists())throw new StorageFileNotFoundException("매장 썸네일이 없습니다.");
+//        File[] fileList = dirFile.listFiles();
+//        assert fileList != null;
+//        System.out.println("경로 내 파일 수 : " + (fileList.length));
+        return resourceList;
 //        return fileList;
 //             List<File> files = Arrays.asList(fileList);
 //            return fileList;
@@ -160,7 +180,7 @@ public class StorageService {
     public void init() {
         try {
             Files.createDirectories(rootLocation);
-            Files.createDirectories(Path.of(rootLocation + "\\menu"));
+//            Files.createDirectories(Path.of(rootLocation + "\\menu"));
             Files.createDirectories(Path.of(rootLocation + "\\shop"));
         } catch (IOException e) {
             throw new StorageException("Could not initialize storage", e);
