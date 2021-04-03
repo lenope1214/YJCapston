@@ -38,15 +38,13 @@ public class MenuController {
 //    }
 
     @Transactional(readOnly = true)
-    @GetMapping("/shop/{shopId}/menuList")
+    @GetMapping("/menuList/{shopId}")
     public ResponseEntity<?> selectMenuList(@PathVariable String shopId){
         System.out.println("menuList >> shopId : " + shopId);
         List<Menu> menuList;
         menuList = menuService.findContainsId(shopId);
         System.out.println("menuList info");
         System.out.println(menuList.size());
-        if(menuList == null)
-            return new ResponseEntity<>(new ApiErrorResponse("error-1001", "없는 식당번호"), HttpStatus.BAD_REQUEST);
 
         return new ResponseEntity<>(menuList, HttpStatus.OK);
     }
