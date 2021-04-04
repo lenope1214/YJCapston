@@ -66,6 +66,7 @@ public class Menu {
     @Setter
     public static class Request{
         private String shopId;
+        private String menuId;
         private String name;
         private String intro;
         private int price;

@@ -49,11 +49,11 @@ public class ShopController {
         System.out.println("shop id : " + shopId);
         try {
             shop = shopService.findById(shopId);
-
         } catch (ShopNotFoundException e) {
             return new ResponseEntity<>(new ApiErrorResponse(e.getCode(), e.getId()), HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(shop, HttpStatus.OK);
+        Shop.Response response = new Shop.Response(shop);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Transactional(readOnly = true)
@@ -99,7 +99,7 @@ public class ShopController {
 
     @Transactional
     @PostMapping("/shop") // 매장등록
-    public ResponseEntity<?> insertShop(Shop.info shopInfo, @RequestHeader String authorization) throws ParseException {
+    public ResponseEntity<?> insertShop(Shop.info request, @RequestHeader String authorization) throws ParseException {
         System.out.println("Auth : " + authorization);
         String loginId = jwtTokenUtil.getUsername(authorization);
         System.out.println("로그인 id : " + loginId);
@@ -107,26 +107,23 @@ public class ShopController {
         System.out.println("매장등록 요청 ID : " + userEntity.getId());
 //        logger.log(Level.INFO, "open time and close time\n" + shop.getOpenTime() +"\n" + shop.getCloseTime());
 
-//        System.out.println("shopInfo.toString() : " + shopInfo.toString());
-        System.out.println("매장등록 request shopId : " + shopInfo.getId());
-        String uri = "shop/" + shopInfo.getId() +"/thumbnail/";
-        System.out.println("매장등록 uri : " + uri);
-        String imgPath = storageService.store(shopInfo.getImg(), shopInfo.getImg().getOriginalFilename(), uri.split("/"));
-        Shop shopEntity =
-                Shop.createShop()
-                        .shopId(shopInfo.getId())
-                        .name(shopInfo.getName())
-                        .intro(shopInfo.getIntro())
-                        .openTime(shopInfo.getOpenTime())
-                        .closeTime(shopInfo.getCloseTime())
-                        .address(shopInfo.getAddress())
-                        .addressDetail(shopInfo.getAddressDetail())
-                        .category(shopInfo.getCategory())
+        System.out.println("shopInfo.toString() : " + request.toString());
+        String uri = "shop/" + request.getId() +"/thumbnail/";
+        String imgPath = storageService.store(request.getImg(), request.getImg().getName(), uri.split("/"));
+        Shop shopEntity = null;
+        shopEntity = Shop.createShop()
+                        .id(request.getId())
+                        .name(request.getName())
+                        .intro(request.getIntro())
+                        .openTime(shopEntity.stringToDate(request.getOpenTime()))
+                        .closeTime(shopEntity.stringToDate(request.getCloseTime()))
+                        .address(request.getAddress())
+                        .addressDetail(request.getAddressDetail())
+                        .category(request.getCategory())
                         .imgPath(imgPath)
-                        .owner(userEntity)
                         .build();
-        Object result = shopService.insert(shopEntity);
-//        Object result = shopEntity;
+//        Object result = shopService.insert(shopEntity, userEntity);
+        Shop result = shopEntity;
         if (result.getClass() == Shop.class) return new ResponseEntity<>(result, HttpStatus.CREATED);
         else if (result.equals("duplicate"))
             return new ResponseEntity<>("사업자 번호가 중복입니다.", httpHeaders, HttpStatus.BAD_REQUEST);

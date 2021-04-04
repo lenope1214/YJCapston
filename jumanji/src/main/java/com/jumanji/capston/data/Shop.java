@@ -41,6 +41,8 @@ public class Shop {
     @JoinColumn(name="owner_id")
     private User owner;
 
+
+
     @Getter @Setter @AllArgsConstructor
     public static class info{
         private String id;
@@ -60,7 +62,7 @@ public class Shop {
         private String category;
     }
 
-    @Getter @Setter
+    @Getter @Setter @AllArgsConstructor
     public static class Response{
         private String name;
         private String intro;
@@ -69,34 +71,41 @@ public class Shop {
         private String category;
         private String openTime;
         private String closeTime;
-        private int price;
-        private int duration;
         private char isOpen;
         private char isRsPos;
-//        private Resource img;
+
+        public Response(Shop shop) {
+            this.name = shop.getName();
+            this.intro = shop.getIntro();
+            this.address = shop.getAddress();
+            this.addressDetail = shop.getAddressDetail();
+            this.category = shop.getCategory();
+            this.openTime = shop.dateToString(shop.getOpenTime());
+            this.closeTime = shop.dateToString(shop.getCloseTime());
+            this.isOpen = shop.getIsOpen();
+            this.isRsPos = shop.getIsRsPos();
+        }
     }
 
 
     @Builder(builderMethodName = "createShop")
-    public Shop(String shopId, String name, String intro, String openTime, String closeTime, String address, String addressDetail, String category, String imgPath, User owner) {
-        this.id = shopId;
+    public Shop(String id, String name, String intro, Date openTime, Date closeTime, String address, String addressDetail, String category, String imgPath) {
+        this.id = id;
         this.name = name;
         this.intro = intro;
-        this.openTime = toDate(openTime);
-        this.closeTime = toDate(closeTime);
+        this.openTime = openTime;
+        this.closeTime = closeTime;
         this.address = address;
         this.addressDetail = addressDetail;
         this.category = category;
-        this.isOpen = 'N';
         this.isRsPos = 'N';
         this.imgPath = imgPath;
-        this.owner = owner;
     }
 
     public void update(Patch patch) {
         this.intro = patch.getIntro();
-        this.openTime = toDate(patch.getOpenTime());
-        this.closeTime = toDate(patch.getCloseTime());
+        this.openTime = stringToDate(patch.getOpenTime());
+        this.closeTime = stringToDate(patch.getCloseTime());
         this.address = patch.getAddress();
         this.addressDetail = patch.getAddressDetail();
         this.category = patch.getCategory();
@@ -118,7 +127,7 @@ public class Shop {
 
 
 
-    private Date toDate(String date){
+    public Date stringToDate(String date){
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
         Date parseDate = null;
         try {
@@ -127,5 +136,10 @@ public class Shop {
             e.printStackTrace();
         }
         return parseDate;
+    }
+
+    public String dateToString(Date date){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        return dateFormat.format(date);
     }
 }

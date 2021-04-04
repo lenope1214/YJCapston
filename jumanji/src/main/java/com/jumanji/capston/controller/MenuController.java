@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -51,10 +50,10 @@ public class MenuController {
 
     @Transactional(readOnly = true)
     @GetMapping("/menu")
-    public ResponseEntity<?> selectMenuById(@RequestBody String menuId){
+    public ResponseEntity<?> selectMenuById(@RequestBody Menu.Request request){
 //        String menuId = request.getShopId() + request.getName();
-        System.out.println("메뉴 Id : " + menuId);
-        Menu menu = menuService.findById(menuId);
+        System.out.println("메뉴 Id : " + request.getMenuId());
+        Menu menu = menuService.findById(request.getMenuId());
         if(menu == null)
             return new ResponseEntity<>("없는 메뉴번호 입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         Menu.Response response = new Menu.Response();
@@ -69,20 +68,19 @@ public class MenuController {
         Menu menu;
         System.out.println("메뉴 추가");
         String menuId = request.getShopId()+ request.getName();
-        String uri = "shop/" + request.getShopId() +"/menu/";
-//        storageService.store(request.getImg(), path, request.getName());
-        String imgPath = storageService.store(request.getImg(), request.getImg().getOriginalFilename(), uri.split("/"));
-
+        String path = "shop/" +request.getShopId() +"/menu/";
+        storageService.store(request.getImg() , request.getName(), path.split("/"));
         menu = Menu.init()
                 .id(menuId)
                 .name(request.getName())
                 .intro(request.getIntro())
                 .price(request.getPrice())
                 .duration(request.getDuration())
-                .imgPath(imgPath)
+                .imgPath(path+request.getName())
                 .build();
 //        System.out.println("ㅁㄴㅇㄹ");
-        Object result =menuService.save(menu);
+//        Object result =menuService.save(menu);
+        Menu result = menu;
         if(result.getClass() != Menu.class)
             return new ResponseEntity<>("저장 실패", httpHeaders, HttpStatus.BAD_REQUEST);
         else
@@ -105,12 +103,13 @@ public class MenuController {
         return new ResponseEntity<>(menu, HttpStatus.OK);
     }
     @Transactional
-    @PostAuthorize("hasAnyRole('OWNER','ADMIN')")
+//    @PreAuthorize("hasAnyRole('ADMIN','OWNER')")
     @DeleteMapping("/menu")
-    public ResponseEntity<?> deleteMenu(@RequestBody String menuId){
+    public ResponseEntity<?> deleteMenu(@RequestBody Menu.Request request){
 //        String menuId = request.getMenuId(request);
         // 추후에 유저 확인..
-        Menu menu = menuService.findById(menuId);
+        System.out.println("삭제 메뉴 id " + request.getMenuId());
+        Menu menu = menuService.findById(request.getMenuId());
         if(menu == null)return new ResponseEntity<>(new ApiErrorResponse("error-2001", "Not Found by menu id"), HttpStatus.NOT_FOUND);
         menuService.delete(menu);
         return new ResponseEntity<>("삭제성공", httpHeaders, HttpStatus.OK);
