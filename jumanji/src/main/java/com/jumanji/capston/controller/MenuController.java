@@ -28,16 +28,29 @@ public class MenuController {
     HttpHeaders httpHeaders;
 
 
-
-//    @Transactional(readOnly = true)
+    //    @Transactional(readOnly = true)
 //    @GetMapping("/menu")
 //    public ResponseEntity<?> selectMenu(){
 //        return null;
 //    }
+    @Transactional(readOnly = true)
+    @GetMapping("/menu/{menuId}")
+    public ResponseEntity<?> selectMenuById(@PathVariable String menuId) {
+//        String menuId = request.getShopId() + request.getName();
+        System.out.println("메뉴 Id : " + menuId);
+        Menu menu = menuService.findById(menuId);
+        if (menu == null)
+            return new ResponseEntity<>("없는 메뉴번호 입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
+        Menu.Response response = new Menu.Response();
+        response.parse(menu);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
 
     @Transactional(readOnly = true)
     @GetMapping("/menuList/{shopId}")
-    public ResponseEntity<?> selectMenuList(@PathVariable String shopId){
+    public ResponseEntity<?> selectMenuList(@PathVariable String shopId) {
         System.out.println("menuList >> shopId : " + shopId);
         List<Menu> menuList;
         menuList = menuService.findContainsId(shopId);
@@ -47,40 +60,27 @@ public class MenuController {
         return new ResponseEntity<>(menuList, HttpStatus.OK);
     }
 
-    @Transactional(readOnly = true)
-    @GetMapping("/menu")
-    public ResponseEntity<?> selectMenuById(@RequestBody Menu.Request request){
-//        String menuId = request.getShopId() + request.getName();
-        System.out.println("메뉴 Id : " + request.getMenuId());
-        Menu menu = menuService.findById(request.getMenuId());
-        if(menu == null)
-            return new ResponseEntity<>("없는 메뉴번호 입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
-        Menu.Response response = new Menu.Response();
-        response.parse(menu);
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
 
     @Transactional
     @PostMapping("/menu")
-    public ResponseEntity<?> insertMenu( Menu.info request){
+    public ResponseEntity<?> insertMenu(Menu.info request) {
         Menu menu;
         System.out.println("메뉴 추가");
-        String menuId = request.getShopId()+ request.getName();
-        String path = "shop/" +request.getShopId() +"/menu/";
-//        String imgPath = storageService.store(request.getImg() , request.getName(), path.split("/"));
+        String menuId = request.getShopId() + request.getName();
+        String path = "shop/" + request.getShopId() + "/menu/";
+        String imgPath = storageService.store(request.getImg(), request.getName(), path.split("/"));
         menu = Menu.init()
                 .id(menuId)
                 .name(request.getName())
                 .intro(request.getIntro())
                 .price(request.getPrice())
                 .duration(request.getDuration())
-//                .imgPath(imgPath)
+                .imgPath(imgPath)
                 .build();
 //        System.out.println("ㅁㄴㅇㄹ");
-        Object result =menuService.save(menu);
+        Object result = menuService.save(menu);
 //        Menu result = menu;
-        if(result.getClass() != Menu.class)
+        if (result.getClass() != Menu.class)
             return new ResponseEntity<>("저장 실패", httpHeaders, HttpStatus.BAD_REQUEST);
         else
             return new ResponseEntity<>(result, HttpStatus.CREATED);
@@ -88,28 +88,30 @@ public class MenuController {
 
     @Transactional
     @PatchMapping("/menu")
-    public ResponseEntity<?> updateMenu(@RequestBody Menu.Request request){
+    public ResponseEntity<?> updateMenu(@RequestBody Menu.Request request) {
         System.out.println("메뉴 수정>>> ");
         // 권한확인 해야함. 로그인유저 의 매장인지.
         String menuId = request.getMenuId(request);
         Menu menu = menuService.findById(menuId);
-        if(menu == null)return new ResponseEntity<>("메뉴 ID가 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
+        if (menu == null) return new ResponseEntity<>("메뉴 ID가 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         System.out.println("menuId : " + menu.getId());
 
 
-       menuService.save(menu);
+        menuService.save(menu);
         System.out.println("menuId : " + menu.getId());
         return new ResponseEntity<>(menu, HttpStatus.OK);
     }
+
     @Transactional
 //    @PreAuthorize("hasAnyRole('ADMIN','OWNER')")
     @DeleteMapping("/menu")
-    public ResponseEntity<?> deleteMenu(@RequestBody Menu.Request request){
+    public ResponseEntity<?> deleteMenu(@RequestBody Menu.Request request) {
 //        String menuId = request.getMenuId(request);
         // 추후에 유저 확인..
         System.out.println("삭제 메뉴 id " + request.getMenuId());
         Menu menu = menuService.findById(request.getMenuId());
-        if(menu == null)return new ResponseEntity<>(new ApiErrorResponse("error-2001", "Not Found by menu id"), HttpStatus.NOT_FOUND);
+        if (menu == null)
+            return new ResponseEntity<>(new ApiErrorResponse("error-2001", "Not Found by menu id"), HttpStatus.NOT_FOUND);
         menuService.delete(menu);
         return new ResponseEntity<>("삭제성공", httpHeaders, HttpStatus.OK);
     }
@@ -117,7 +119,7 @@ public class MenuController {
     @Transactional(readOnly = true)
 //    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/menuListAll")
-    public ResponseEntity<?> menuListAll(){
+    public ResponseEntity<?> menuListAll() {
         return new ResponseEntity<>(menuService.findAll(), HttpStatus.OK);
     }
 

@@ -1,11 +1,11 @@
 package com.jumanji.capston.controller;
 
+import com.jumanji.capston.data.Request.FileRequest;
 import com.jumanji.capston.service.StorageService;
 import com.jumanji.capston.storage.StorageFileNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +15,6 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
@@ -50,27 +49,36 @@ public class FileController {
 //                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
 //    } // 파일 다운로드 경로
 
-    // 파일 불러오기
-    @GetMapping("/loadImg/{shopId}")
+    @GetMapping("/loadImg")
     @ResponseBody
-    public ResponseEntity<?> loadImg(  @PathVariable String shopId  ) {
-        List<Resource> file = storageService.loadShopThumbNailImg(shopId);
+    public ResponseEntity<?> loadImg(@RequestBody FileRequest request) {
+        System.out.println("이미지 로드 요청 !!!");
+        Resource img = storageService.loadImg(request.getPath().split("/"));
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE,
+                "image/jpeg; filename=\"" + img.getFilename() + "\"").body(img);
+    }
+    
+    // 파일 불러오기
+//    @GetMapping("/loadImg/{shopId}")
+//    @ResponseBody
+//    public ResponseEntity<?> loadImgbyShopId(  @PathVariable String shopId  ) {
 //        List<Resource> file = storageService.loadShopThumbNailImg(shopId);
-        return new ResponseEntity<>(file, HttpStatus.OK);
+//        List<Resource> file = storageService.loadShopThumbNailImg(shopId);
+//        return new ResponseEntity<>(file, HttpStatus.OK);
 //        return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE,
 //                "image/jpeg; filename=\"" + file.getFilename() + "\"").body(file);
 //        return file;
-    }
+//    }
 
-    @GetMapping("/loadImg/{shopId}/{menuName}")
-    @ResponseBody
-    public ResponseEntity<?> loadImg(
-            @PathVariable String shopId,
-            @PathVariable String menuName ) {
-        Resource file = storageService.loadMenuImg(shopId, menuName);
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE,
-                "image/jpeg; filename=\"" + file.getFilename() + "\"").body(file);
-    }
+//    @GetMapping("/loadImg/{shopId}/{menuName}")
+//    @ResponseBody
+//    public ResponseEntity<?> loadImg(
+//            @PathVariable String shopId,
+//            @PathVariable String menuName ) {
+//        Resource file = storageService.loadMenuImg(shopId, menuName);
+//        return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE,
+//                "image/jpeg; filename=\"" + file.getFilename() + "\"").body(file);
+//    }
 
     @PostMapping(value={"", "/"})
     public String handleFileUpload(@RequestParam("file") MultipartFile file,

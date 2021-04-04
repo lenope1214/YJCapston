@@ -105,11 +105,10 @@ public class ShopController {
         System.out.println("로그인 id : " + loginId);
         User userEntity = userService.findById(loginId);
         System.out.println("매장등록 요청 ID : " + userEntity.getId());
-//        logger.log(Level.INFO, "open time and close time\n" + shop.getOpenTime() +"\n" + shop.getCloseTime());
 
         System.out.println("shopInfo.toString() : " + request.toString());
         String uri = "shop/" + request.getId() +"/thumbnail/";
-//        String imgPath = storageService.store(request.getImg(), request.getImg().getName(), uri.split("/"));
+        String imgPath = storageService.store(request.getImg(), request.getImg().getName(), uri.split("/"));
         Shop shopEntity = null;
         shopEntity = Shop.createShop()
                         .id(request.getId())
@@ -120,7 +119,7 @@ public class ShopController {
                         .address(request.getAddress())
                         .addressDetail(request.getAddressDetail())
                         .category(request.getCategory())
-//                        .imgPath(imgPath)
+                        .imgPath(imgPath)
                         .owner(userEntity)
                         .build();
         Object result = shopService.insert(shopEntity);
