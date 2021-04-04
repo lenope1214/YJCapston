@@ -25,5 +25,4 @@ public class NavSearchController {
         System.out.println("키워드 : " + keyword);
         return new ResponseEntity<>(naverPlaceSearchService.searchPlace(keyword), responseHeaders, HttpStatus.OK);
     }
-
 }

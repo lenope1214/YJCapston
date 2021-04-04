@@ -1,6 +1,7 @@
 package com.jumanji.capston.data;
 
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -58,7 +59,7 @@ public class Menu {
         private String intro;
         private int price;
         private int duration;
-//        private MultipartFile img;
+        private MultipartFile img;
     }
 
     @Getter

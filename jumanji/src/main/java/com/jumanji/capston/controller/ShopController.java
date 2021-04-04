@@ -107,9 +107,11 @@ public class ShopController {
         System.out.println("매장등록 요청 ID : " + userEntity.getId());
 //        logger.log(Level.INFO, "open time and close time\n" + shop.getOpenTime() +"\n" + shop.getCloseTime());
 
-        System.out.println("shopInfo.toString() : " + shopInfo.toString());
-        String uri = "shop\\" + shopInfo.getId() +"\\thumbnail\\";
-//        String imgPath = storageService.store(shopInfo.getImg(), uri, shopInfo.getImg().getName());
+//        System.out.println("shopInfo.toString() : " + shopInfo.toString());
+        System.out.println("매장등록 request shopId : " + shopInfo.getId());
+        String uri = "shop/" + shopInfo.getId() +"/thumbnail/";
+        System.out.println("매장등록 uri : " + uri);
+        String imgPath = storageService.store(shopInfo.getImg(), shopInfo.getImg().getOriginalFilename(), uri.split("/"));
         Shop shopEntity =
                 Shop.createShop()
                         .shopId(shopInfo.getId())
@@ -120,9 +122,11 @@ public class ShopController {
                         .address(shopInfo.getAddress())
                         .addressDetail(shopInfo.getAddressDetail())
                         .category(shopInfo.getCategory())
-//                        .imgPath(imgPath)
+                        .imgPath(imgPath)
+                        .owner(userEntity)
                         .build();
-        Object result = shopService.insert(shopEntity, userEntity);
+        Object result = shopService.insert(shopEntity);
+//        Object result = shopEntity;
         if (result.getClass() == Shop.class) return new ResponseEntity<>(result, HttpStatus.CREATED);
         else if (result.equals("duplicate"))
             return new ResponseEntity<>("사업자 번호가 중복입니다.", httpHeaders, HttpStatus.BAD_REQUEST);

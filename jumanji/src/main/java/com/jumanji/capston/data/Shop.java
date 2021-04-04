@@ -3,6 +3,7 @@ package com.jumanji.capston.data;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.text.ParseException;
@@ -50,7 +51,7 @@ public class Shop {
         private String address;
         private String addressDetail;
         private String category;
-//        private MultipartFile img;
+        private MultipartFile img;
     }
 
     @Getter@Setter
@@ -77,7 +78,7 @@ public class Shop {
 
 
     @Builder(builderMethodName = "createShop")
-    public Shop(String shopId, String name, String intro, String openTime, String closeTime, String address, String addressDetail, String category, String imgPath) {
+    public Shop(String shopId, String name, String intro, String openTime, String closeTime, String address, String addressDetail, String category, String imgPath, User owner) {
         this.id = shopId;
         this.name = name;
         this.intro = intro;
@@ -89,6 +90,7 @@ public class Shop {
         this.isOpen = 'N';
         this.isRsPos = 'N';
         this.imgPath = imgPath;
+        this.owner = owner;
     }
 
     public void update(Patch patch) {

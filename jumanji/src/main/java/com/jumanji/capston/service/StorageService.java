@@ -36,8 +36,9 @@ public class StorageService {
 
     //
     public String store(MultipartFile file, String fileName, String... filePath) {
-        String newFileName = null;
-        File dirFile = null;
+//        String newFileName = null;
+//        File dirFile = null;
+        String path;
         try {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file.");
@@ -47,7 +48,7 @@ public class StorageService {
             System.out.println("파일 확장자 : " + fileExtension);
             if(!(fileExtension.equals("jpg") || fileExtension.equals("png") || fileExtension.equals("jpeg")))throw new NotSupportedException("파일 확장자를 맞춰주세요");
 
-            String path = pathValidation(filePath);
+            path = pathValidation(filePath);
 
 
 //            System.out.println("file.getName() : " + file.getName());
@@ -57,18 +58,18 @@ public class StorageService {
 //            System.out.println("file.getResource() : " + file.getResource());
 //            System.out.println("file.getClass() : " + file.getClass());
             System.out.println("루트 로케이션 : " + rootLocation );
-            dirFile = new File(String.valueOf(rootLocation + "\\" + path));
-            if(!dirFile.exists())Files.createDirectory(dirFile.toPath());
-            File[] fileList = dirFile.listFiles();
-            assert fileList != null;
+//            dirFile = new File(String.valueOf(rootLocation + "\\" + path));
+//            if(!dirFile.exists())Files.createDirectory(dirFile.toPath());
+//            File[] fileList = dirFile.listFiles();
+//            assert fileList != null;
 //            System.out.println("경로 내 파일 수 : " + (fileList.length));
-            newFileName = (fileList.length+1) + "." + fileExtension;
-            System.out.println("파일 경로 :" + newFileName);
-            Path destinationFile = Path.of((dirFile +"\\"+ newFileName));
+//            newFileName = (fileList.length+1) + "." + fileExtension;
+//            System.out.println("파일 경로 :" + newFileName);
+            Path destinationFile = Path.of((path +"\\"+ fileName));
 //                    .normalize().toAbsolutePath(); // file.getOriginalFilename() -> filename.filetype 이런 형태
 //            Path destinationFile = this.rootLocation.resolve(Paths.get(dirFile +"\\"+ newFileName))
 //                    .normalize().toAbsolutePath(); // file.getOriginalFilename() -> filename.filetype 이런 형태
-            System.out.println("풀 경로 : " + dirFile +"\\"+ newFileName);
+            System.out.println("풀 경로 : " + path +"\\"+ fileName);
             System.out.println("destinationFile.getParent() : " + destinationFile.getParent());
 //            System.out.println("rootLocation's 절대 주소 : " + this.rootLocation.toAbsolutePath());
 //            if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
@@ -86,21 +87,21 @@ public class StorageService {
         } catch (NotSupportedException e) {
             throw new StorageException("Not supported file extension");
         }
-        return dirFile.getPath();
+        return path;
     }
 
     public String pathValidation(String... paths) throws IOException {
         System.out.println("pathValidation ... ");
         File dirFile = null;
         String filePath = String.valueOf(rootLocation);
-        for(int i=0; i<paths.length-1;i++){
+        for(int i=0; i<paths.length;i++){
             filePath = filePath + "\\" + paths[i];
             dirFile = new File(filePath);
             System.out.println("now checking path : " + filePath);
             if(!dirFile.exists())Files.createDirectory(dirFile.toPath());
         }
-        System.out.println("포문 정상 종료");
-        return null;
+        System.out.println("포문 정상 종료 filePath : " + filePath);
+        return filePath;
     }
 
     public Stream<Path> loadAll() {
@@ -156,8 +157,37 @@ public class StorageService {
         }
     }
 
-    public List<Resource> loadShopThumbNailImg(String shopId) {
-        List<Resource> resourceList = null;
+    public List<File> loadShopThumbNailImg(String shopId) {
+        List<File> fileList = null;
+        Path files = Paths.get("files\\shop\\" + shopId +"\\thumbnail\\"); // 경로 파일 가져오기
+//        Path file = load("", "");
+        // files.getNameCount() // file 경로가 몇개인지..
+        try {
+            System.out.println("files.getFileName().toUri() : " + files.getFileName().toUri());
+            fileList.add();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        System.out.println();
+//        for(Path file:files){
+//            System.out.println("file .path" + file.getFileName());
+//        }
+//        try {
+//            Path file = load(filename, path);
+//            Resource resource = new UrlResource(file.toUri());
+////            List<Resource> files;
+//            System.out.println("loadAsResource's file.toUri() : " + file.toUri());
+//            System.out.println("Resource is readable ? " + resource.isReadable());
+//
+//            if (resource.exists() || resource.isReadable()) {
+//                return resource;
+//            } else {
+//                throw new StorageFileNotFoundException(
+//                        "Could not read file: " + filename);
+//            }
+//        } catch (MalformedURLException e) {
+//            throw new StorageFileNotFoundException("Could not read file: " + shopId, e);
+//        }
 //        resourceList = Path.of("")
 //        File dirFile = null;
 //        dirFile = new File(String.valueOf(rootLocation + "\\shop\\" + shopId + "\\thumbnails" ));

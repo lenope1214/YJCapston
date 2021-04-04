@@ -23,13 +23,13 @@ public class ShopService {
     }
 
 
-    public Object insert(Shop shop, User owner){
+    public Object insert(Shop shop){
         if(shopRepository.findById(shop.getId()).isPresent()){
 //            System.out.println("중복이라 일케 보내주잖아 ㅡㅡ");
             return "duplicate";
         }
 //        System.out.println("저장 전");
-        shop.setOwner(owner);
+//        shop.setOwner(owner);
         //        System.out.println("저장 후");
 //        System.out.println("저장 : " + shopEntity);
         return shopRepository.save(shop);

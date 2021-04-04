@@ -69,15 +69,17 @@ public class MenuController {
         Menu menu;
         System.out.println("메뉴 추가");
         String menuId = request.getShopId()+ request.getName();
-        String path = "shop\\" +request.getShopId() +"\\menu\\";
+        String uri = "shop/" + request.getShopId() +"/menu/";
 //        storageService.store(request.getImg(), path, request.getName());
+        String imgPath = storageService.store(request.getImg(), request.getImg().getOriginalFilename(), uri.split("/"));
+
         menu = Menu.init()
                 .id(menuId)
                 .name(request.getName())
                 .intro(request.getIntro())
                 .price(request.getPrice())
                 .duration(request.getDuration())
-//                .imgPath(path+request.getName())
+                .imgPath(imgPath)
                 .build();
 //        System.out.println("ㅁㄴㅇㄹ");
         Object result =menuService.save(menu);
