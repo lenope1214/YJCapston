@@ -2,7 +2,6 @@ package com.jumanji.capston.service;
 
 import com.jumanji.capston.controller.exception.ShopException.ShopNotFoundException;
 import com.jumanji.capston.data.Shop;
-import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.ShopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,10 +22,10 @@ public class ShopService {
     }
 
 
-    public Object insert(Shop shop){
+    public Shop insert(Shop shop){
         if(shopRepository.findById(shop.getId()).isPresent()){
 //            System.out.println("중복이라 일케 보내주잖아 ㅡㅡ");
-            return "duplicate";
+            return null;
         }
 //        System.out.println("저장 전");
 //        shop.setOwner(owner);
