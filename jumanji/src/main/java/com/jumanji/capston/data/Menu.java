@@ -87,7 +87,7 @@ public class Menu {
         private int duration;
         private char isSale;
         private char isPopular;
-
+        private String imgPath;
         public void parse(Menu menu){
             this.name = menu.getId().substring(10);
             this.intro = menu.getIntro();
@@ -95,6 +95,7 @@ public class Menu {
             this.duration = menu.getDuration();
             this.isSale = menu.getIsSale();
             this.isPopular = menu.getIsPopular();
+            this.imgPath = menu.getImgPath();
         }
     }
 
