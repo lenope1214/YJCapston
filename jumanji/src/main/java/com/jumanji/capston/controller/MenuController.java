@@ -69,7 +69,8 @@ public class MenuController {
         String menuId = request.getShopId() + request.getName();
         String path = "shop/" + request.getShopId() + "/menu/";
         String imgPath = null;
-        if(request.getImg() != null)imgPath = storageService.store(request.getImg(), request.getName(), path.split("/"));
+        if (request.getImg() != null)
+            imgPath = storageService.store(request.getImg(), request.getName(), path.split("/"));
         menu = Menu.init()
                 .id(menuId)
                 .name(request.getName())
@@ -79,12 +80,12 @@ public class MenuController {
                 .imgPath(imgPath)
                 .build();
 //        System.out.println("ㅁㄴㅇㄹ");
-        Object result = menuService.save(menu);
+        Menu result = menuService.save(menu);
 //        Menu result = menu;
-        if (result.getClass() != Menu.class)
-            return new ResponseEntity<>("저장 실패", httpHeaders, HttpStatus.BAD_REQUEST);
-        else
-            return new ResponseEntity<>(result, HttpStatus.CREATED);
+        Menu.Response response = new Menu.Response();
+        response.parse(result);
+
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @Transactional
