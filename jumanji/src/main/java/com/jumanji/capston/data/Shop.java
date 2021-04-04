@@ -89,7 +89,7 @@ public class Shop {
 
 
     @Builder(builderMethodName = "createShop")
-    public Shop(String id, String name, String intro, Date openTime, Date closeTime, String address, String addressDetail, String category, String imgPath) {
+    public Shop(String id, String name, String intro, Date openTime, Date closeTime, String address, String addressDetail, String category, String imgPath, User owner) {
         this.id = id;
         this.name = name;
         this.intro = intro;
@@ -100,6 +100,7 @@ public class Shop {
         this.category = category;
         this.isRsPos = 'N';
         this.imgPath = imgPath;
+        this.owner = owner;
     }
 
     public void update(Patch patch) {

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -69,18 +68,18 @@ public class MenuController {
         System.out.println("메뉴 추가");
         String menuId = request.getShopId()+ request.getName();
         String path = "shop/" +request.getShopId() +"/menu/";
-        storageService.store(request.getImg() , request.getName(), path.split("/"));
+//        String imgPath = storageService.store(request.getImg() , request.getName(), path.split("/"));
         menu = Menu.init()
                 .id(menuId)
                 .name(request.getName())
                 .intro(request.getIntro())
                 .price(request.getPrice())
                 .duration(request.getDuration())
-                .imgPath(path+request.getName())
+//                .imgPath(imgPath)
                 .build();
 //        System.out.println("ㅁㄴㅇㄹ");
-//        Object result =menuService.save(menu);
-        Menu result = menu;
+        Object result =menuService.save(menu);
+//        Menu result = menu;
         if(result.getClass() != Menu.class)
             return new ResponseEntity<>("저장 실패", httpHeaders, HttpStatus.BAD_REQUEST);
         else
@@ -116,7 +115,7 @@ public class MenuController {
     }
 
     @Transactional(readOnly = true)
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/menuListAll")
     public ResponseEntity<?> menuListAll(){
         return new ResponseEntity<>(menuService.findAll(), HttpStatus.OK);

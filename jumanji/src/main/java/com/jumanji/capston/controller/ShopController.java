@@ -109,7 +109,7 @@ public class ShopController {
 
         System.out.println("shopInfo.toString() : " + request.toString());
         String uri = "shop/" + request.getId() +"/thumbnail/";
-        String imgPath = storageService.store(request.getImg(), request.getImg().getName(), uri.split("/"));
+//        String imgPath = storageService.store(request.getImg(), request.getImg().getName(), uri.split("/"));
         Shop shopEntity = null;
         shopEntity = Shop.createShop()
                         .id(request.getId())
@@ -120,10 +120,11 @@ public class ShopController {
                         .address(request.getAddress())
                         .addressDetail(request.getAddressDetail())
                         .category(request.getCategory())
-                        .imgPath(imgPath)
+//                        .imgPath(imgPath)
+                        .owner(userEntity)
                         .build();
-//        Object result = shopService.insert(shopEntity, userEntity);
-        Shop result = shopEntity;
+        Object result = shopService.insert(shopEntity);
+//        Shop result = shopEntity;
         if (result.getClass() == Shop.class) return new ResponseEntity<>(result, HttpStatus.CREATED);
         else if (result.equals("duplicate"))
             return new ResponseEntity<>("사업자 번호가 중복입니다.", httpHeaders, HttpStatus.BAD_REQUEST);

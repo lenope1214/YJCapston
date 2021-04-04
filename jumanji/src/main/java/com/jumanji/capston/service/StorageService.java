@@ -36,24 +36,47 @@ public class StorageService {
 
     //
     public String store(MultipartFile file, String fileName, String... filePath) {
-        String path = "";
         String newFileName = null;
         File dirFile = null;
+        String fileExtension;
         try {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file.");
             }
 
-            String fileExtension = Objects.requireNonNull(file.getContentType()).substring(file.getContentType().indexOf('/') + 1);
+            fileExtension = Objects.requireNonNull(file.getContentType()).substring(file.getContentType().indexOf('/') + 1);
             System.out.println("파일 확장자 : " + fileExtension);
-            if (!(fileExtension.equals("jpg") || fileExtension.equals("png") || fileExtension.equals("jpeg")))
-                throw new NotSupportedException("파일 확장자를 맞춰주세요");
+            if(!(fileExtension.equals("jpg") || fileExtension.equals("png") || fileExtension.equals("jpeg")))throw new NotSupportedException("파일 확장자를 맞춰주세요");
 
-            path = pathValidation(filePath); // 경로에 없는 폴더 만들어 줌.
+            String path = pathValidation(filePath);
 
-            dirFile = new File(String.valueOf(rootLocation + "\\" + path));
-            if (!dirFile.exists()) Files.createDirectory(dirFile.toPath());
-            Path destinationFile = Path.of((dirFile + "\\" + fileName));
+
+//            System.out.println("file.getName() : " + file.getName());
+//            System.out.println("file.getContentType() : " + file.getContentType());
+//            System.out.println("file.getContentType().substring by '/' : " + file.getContentType().substring(file.getContentType().indexOf('/')+1));
+//            System.out.println("file.getOriginalFilename() : " + file.getOriginalFilename());
+//            System.out.println("file.getResource() : " + file.getResource());
+//            System.out.println("file.getClass() : " + file.getClass());
+            System.out.println("루트 로케이션 : " + rootLocation );
+            dirFile = new File(String.valueOf(rootLocation + "\\" + path + "\\" + fileName + "." + fileExtension));
+            System.out.println("dirFile.toString() : " + dirFile.toString());
+            if(!dirFile.exists())Files.createDirectory(dirFile.toPath());
+            File[] fileList = dirFile.listFiles();
+            assert fileList != null;
+//            System.out.println("경로 내 파일 수 : " + (fileList.length));
+            newFileName = (fileList.length+1) + "." + fileExtension;
+            System.out.println("파일 경로 :" + newFileName);
+            Path destinationFile = Path.of((dirFile +"\\"+ newFileName));
+//                    .normalize().toAbsolutePath(); // file.getOriginalFilename() -> filename.filetype 이런 형태
+//            Path destinationFile = this.rootLocation.resolve(Paths.get(dirFile +"\\"+ newFileName))
+//                    .normalize().toAbsolutePath(); // file.getOriginalFilename() -> filename.filetype 이런 형태
+            System.out.println("풀 경로 : " + dirFile +"\\"+ newFileName);
+            System.out.println("destinationFile.getParent() : " + destinationFile.getParent());
+//            System.out.println("rootLocation's 절대 주소 : " + this.rootLocation.toAbsolutePath());
+//            if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
+//                throw new StorageException("Cannot store file outside current directory.");
+//            } // 상위 디렉토리 판별기..
+
             try (InputStream inputStream = file.getInputStream()) {
 
                 Files.copy(inputStream, destinationFile,
@@ -65,19 +88,18 @@ public class StorageService {
         } catch (NotSupportedException e) {
             throw new StorageException("Not supported file extension");
         }
-        return dirFile.getPath();
+        return dirFile.getPath() + "." + fileExtension;
     }
 
     public String pathValidation(String... paths) throws IOException {
         System.out.println("pathValidation ... ");
         File dirFile = null;
-        String filePath = "";
-//        String filePath = String.valueOf(rootLocation);
-        for (int i = 0; i < paths.length; i++) {
+        String filePath = String.valueOf(rootLocation);
+        for(int i=0; i<paths.length-1;i++){
             filePath = filePath + "\\" + paths[i];
             dirFile = new File(filePath);
             System.out.println("now checking path : " + filePath);
-            if (!dirFile.exists()) Files.createDirectory(dirFile.toPath());
+            if(!dirFile.exists())Files.createDirectory(dirFile.toPath());
         }
         System.out.println("포문 정상 종료");
         return filePath;
@@ -150,6 +172,7 @@ public class StorageService {
 //             List<File> files = Arrays.asList(fileList);
 //            return fileList;
     }
+
 
 
     public void deleteAll() {
