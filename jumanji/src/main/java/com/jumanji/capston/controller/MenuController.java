@@ -62,7 +62,7 @@ public class MenuController {
 
 
     @Transactional
-    @PostMapping("/menu")
+    @PostMapping("/menu") // post
     public ResponseEntity<?> insertMenu(Menu.info request) {
         Menu menu;
         System.out.println("메뉴 추가");
@@ -88,7 +88,7 @@ public class MenuController {
     }
 
     @Transactional
-    @PatchMapping("/menu")
+    @PatchMapping("/menu") // patch
     public ResponseEntity<?> updateMenu(@RequestBody Menu.Request request) {
         System.out.println("메뉴 수정>>> ");
 
@@ -98,6 +98,7 @@ public class MenuController {
         if (menu == null) return new ResponseEntity<>("메뉴 ID가 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         System.out.println("menuId : " + menu.getId());
 
+        menu.update(request);
 
         menuService.save(menu);
         System.out.println("menuId : " + menu.getId());
