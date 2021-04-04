@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login2);
 
         mContext = getApplicationContext();
 
@@ -156,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
 //                                                   // mItems.add(new Shop(list.getId()));
 //                                                    mItems.add(new Shop(list.getId(), list.getName(), list.getIntro(),
 //                                                            list.getCloseTime(), list.getOpenTime(), list.getAddress(),
-//                                                            list.getAddressDetail(), list.getIsResPos(), list.getCategory(), list.getIsOpen()));
+//                                                            list.getAddressDetail(), list.getIsRsPos(), list.getCategory(), list.getIsOpen()));
 //
 //                                                }
 

@@ -96,7 +96,7 @@
                 android:id="@+id/toggle_button_off"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/toggle_button_state"
+                android:background="@drawable/toggle_button_checked"
                 android:text="OFF"/>
 
     </LinearLayout>
@@ -128,7 +128,7 @@
                 android:id="@+id/toggle_button_res_off"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/toggle_button_state"
+                android:background="@drawable/toggle_button_checked"
                 android:text="OFF"/>
 
 

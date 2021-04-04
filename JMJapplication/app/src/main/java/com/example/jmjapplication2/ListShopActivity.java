@@ -79,7 +79,7 @@ public class ListShopActivity extends AppCompatActivity {
                             mItems.add(new Shop(list.getId(), list.getName(),
                                     list.getIntro(), list.getCloseTime(),
                                     list.getOpenTime(), list.getAddress(),
-                                    list.getAddressDetail(), list.getIsResPos(),
+                                    list.getAddressDetail(), list.getIsRsPos(),
                                     list.getCategory(), list.getIsOpen()));
                             rv_restaurant_list.setHasFixedSize(true);
                             adapter = new RestaurantListRecyclerAdapter(getApplicationContext(), mItems);

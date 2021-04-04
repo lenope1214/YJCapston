@@ -71,7 +71,7 @@ public class PageOneFragment extends Fragment {
                             Log.e("result : ", list.getCategory() + "이ㅏ니@@@@@@@@@@@@@@@@");
                             mItems.add(new Shop(list.getId(), list.getName(),
                                     list.getIntro(), list.getCloseTime(), list.getOpenTime(),
-                                    list.getAddress(), list.getAddressDetail(), list.getIsResPos(),
+                                    list.getAddress(), list.getAddressDetail(), list.getIsRsPos(),
                                     list.getCategory(), list.getIsOpen()));
                             rv_restaurant_list.setHasFixedSize(true);
                             adapter = new RestaurantRecyclerAdapter(getContext(), mItems);

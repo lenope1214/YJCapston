@@ -10,7 +10,7 @@
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:background="@drawable/edge">
+            android:background="@drawable/edge1">
 
         <TextView
                 android:id="@+id/profile_address"
@@ -31,106 +31,226 @@
                 android:layout_centerHorizontal="true"
                 app:layout_constraintEnd_toEndOf="parent"/>
     </RelativeLayout>
-    
+
     <LinearLayout android:layout_width="match_parent"
+                  android:background="@drawable/edge2"
                   android:layout_height="match_parent"
-                  android:orientation="vertical"
-                  android:layout_marginTop="10dp"
-                  android:layout_marginLeft="10dp"
-                  android:layout_marginRight="10dp"
-                  android:layout_marginBottom="45dp"
-                  android:background="@drawable/edge2">
+                  android:orientation="vertical">
 
         <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:background="@drawable/edge6"
+                android:id="@+id/login_btn"
+                android:visibility="visible"
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp">
 
-            <Button
-                android:id="@+id/login_btn"
-                android:background="@color/colorWhite"
-                android:layout_marginRight="1dp"
-                android:layout_marginBottom="1dp"
-                android:layout_marginLeft="1dp"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:drawableLeft="@drawable/profile1"
-                android:padding="1dp"
-                android:visibility="visible"
-                android:text="로그인해주세요">
-
-            </Button>
-
-            <Button
-                    android:id="@+id/profile_btn"
-                    android:background="@color/colorWhite"
-                    android:layout_marginRight="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
+            <ImageView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:drawableLeft="@drawable/profile1"
-                    android:padding="1dp"
-                    android:visibility="gone"
-                    android:text="">
+                    android:background="@drawable/profile1"
+                    android:layout_gravity="center"
+                    android:id="@+id/profile_image"/>
 
-            </Button>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="80dp"
+                    android:fontFamily="@font/we_semibold"
+                    android:text="로그인해주세요"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="80dp"
+                    android:fontFamily="@font/we_semibold"
+                    android:text=">"/>
+
+            <!--            <Button-->
+            <!--                    android:id="@+id/login_btn"-->
+            <!--                    android:background="@color/colorWhite"-->
+            <!--                    android:layout_marginRight="1dp"-->
+            <!--                    android:layout_marginBottom="1dp"-->
+            <!--                    android:layout_marginLeft="1dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:drawableLeft="@drawable/profile1"-->
+            <!--                    android:padding="1dp"-->
+            <!--                    android:visibility="visible"-->
+            <!--                    android:text="로그인해주세요">-->
+
+            <!--            </Button>-->
+
+            <!--            <Button-->
+            <!--                    android:id="@+id/profile_btn"-->
+            <!--                    android:background="@color/colorWhite"-->
+            <!--                    android:layout_marginRight="1dp"-->
+            <!--                    android:layout_marginBottom="1dp"-->
+            <!--                    android:layout_marginLeft="1dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:drawableLeft="@drawable/profile1"-->
+            <!--                    android:padding="1dp"-->
+            <!--                    android:visibility="gone"-->
+            <!--                    android:text="">-->
+
+            <!--            </Button>-->
 
         </LinearLayout>
 
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/edge6"
+                android:id="@+id/linear_btn"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/profile1"
+                    android:id="@+id/profile_image2"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="80dp"
+                    android:fontFamily="@font/we_semibold"
+                    android:id="@+id/profile_text"
+                    android:text=""/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="80dp"
+                    android:fontFamily="@font/we_semibold"
+                    android:text=">"/>
+
+            <!--            <Button-->
+            <!--                    android:id="@+id/login_btn"-->
+            <!--                    android:background="@color/colorWhite"-->
+            <!--                    android:layout_marginRight="1dp"-->
+            <!--                    android:layout_marginBottom="1dp"-->
+            <!--                    android:layout_marginLeft="1dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:drawableLeft="@drawable/profile1"-->
+            <!--                    android:padding="1dp"-->
+            <!--                    android:visibility="visible"-->
+            <!--                    android:text="로그인해주세요">-->
+
+            <!--            </Button>-->
+
+            <!--            <Button-->
+            <!--                    android:id="@+id/profile_btn"-->
+            <!--                    android:background="@color/colorWhite"-->
+            <!--                    android:layout_marginRight="1dp"-->
+            <!--                    android:layout_marginBottom="1dp"-->
+            <!--                    android:layout_marginLeft="1dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:drawableLeft="@drawable/profile1"-->
+            <!--                    android:padding="1dp"-->
+            <!--                    android:visibility="gone"-->
+            <!--                    android:text="">-->
+
+            <!--            </Button>-->
+
+        </LinearLayout>
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
                       android:orientation="horizontal">
-            <ImageButton android:layout_width="120dp"
-                         android:layout_height="120dp"
-                         android:layout_weight="1"
-                         android:layout_margin="1dp"
-                         android:background="@color/colorWhite"/>
-            <ImageButton android:layout_width="120dp"
-                         android:layout_height="120dp"
-                         android:layout_weight="1"
-                         android:background="@color/colorWhite"
-                         android:layout_margin="1dp"/>
+
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edge6"
+                    android:layout_weight="1">
+                <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edge6"
+                    android:layout_weight="1">
+
+                <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"/>
+
+            </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
                       android:orientation="horizontal">
-            <ImageButton android:layout_width="120dp"
-                         android:layout_height="120dp"
-                         android:layout_weight="1"
-                         android:layout_margin="1dp"
-                         android:background="@color/colorWhite"/>
-            <ImageButton android:layout_width="120dp"
-                         android:layout_height="120dp"
-                         android:layout_weight="1"
-                         android:background="@color/colorWhite"
-                         android:layout_margin="1dp"/>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edge6"
+                    android:layout_weight="1">
+                <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edge6"
+                    android:layout_weight="1">
+                <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"/>
+
+            </LinearLayout>
+
         </LinearLayout>
 
-        <ImageButton android:layout_width="match_parent"
-                     android:layout_height="48dp"
-                     android:background="@color/colorWhite"
-                     android:layout_marginRight="1dp"
-                     android:layout_marginLeft="1dp"
-                     android:layout_marginTop="7dp"/>
-        <ImageButton android:layout_width="match_parent"
-                     android:layout_height="48dp"
-                     android:background="@color/colorWhite"
-                     android:layout_marginRight="1dp"
-                     android:layout_marginLeft="1dp"
-                     android:layout_marginTop="2dp"/>
-        <ImageButton android:layout_width="match_parent"
-                     android:layout_height="48dp"
-                     android:background="@color/colorWhite"
-                     android:layout_marginRight="1dp"
-                     android:layout_marginLeft="1dp"
-                     android:layout_marginTop="2dp"/>
-        <ImageButton android:layout_width="match_parent"
-                     android:layout_height="48dp"
-                     android:background="@color/colorWhite"
-                     android:layout_marginRight="1dp"
-                     android:layout_marginLeft="1dp"
-                     android:layout_marginTop="2dp"/>
+        <LinearLayout android:layout_width="match_parent"
+                     android:layout_height="50dp"
+                      android:layout_marginTop="5dp"
+                      android:background="@drawable/edge6">
+
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="50dp"
+                      android:background="@drawable/edge6">
+
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="50dp"
+                      android:background="@drawable/edge6">
+
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="50dp"
+                      android:background="@drawable/edge6">
+
+        </LinearLayout>
 
     </LinearLayout>
 

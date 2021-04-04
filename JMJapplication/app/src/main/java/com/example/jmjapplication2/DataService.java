@@ -96,6 +96,9 @@ interface MyShopAPI {
     @GET("myShop")
     Call<Shop> myShop(@Header("Authorization") String jwt);
 
+    @GET("shop/{shopId}")
+    Call<Shop> myShop3(String shopId);
+
     @GET("myShop")
     Call<List<Shop>> myShop2(@Header("Authorization") String jwt);
 }

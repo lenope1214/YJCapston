@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -49,7 +50,7 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.home_fragment, container, false);
+        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.home_fragment2, container, false);
 
         advFragment1 = new AdvFragment1();
         advFragment2 = new AdvFragment2();
@@ -59,7 +60,7 @@ public class HomeFragment extends Fragment {
         pager.setAdapter(new MyPagerAdapter(getChildFragmentManager()));
         pager.setCurrentItem(0);
 
-        ImageButton imageButton = rootView.findViewById(R.id.koreanfood);
+        ImageView imageButton = rootView.findViewById(R.id.koreanfood);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +70,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        ImageButton imageButton2 = rootView.findViewById(R.id.japansesfood);
+        ImageView imageButton2 = rootView.findViewById(R.id.japansesfood);
         imageButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +80,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        ImageButton imageButton3 = rootView.findViewById(R.id.chinesefood);
+        ImageView imageButton3 = rootView.findViewById(R.id.chinesefood);
         imageButton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +90,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        ImageButton imageButton4 = rootView.findViewById(R.id.meat);
+        ImageView imageButton4 = rootView.findViewById(R.id.meat);
         imageButton4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,7 +100,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        ImageButton imageButton5 = rootView.findViewById(R.id.bunsick);
+        ImageView imageButton5 = rootView.findViewById(R.id.bunsick);
         imageButton5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,7 +110,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        ImageButton imageButton6 = rootView.findViewById(R.id.soju);
+        ImageView imageButton6 = rootView.findViewById(R.id.soju);
         imageButton6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,7 +120,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        ImageButton imageButton7 = rootView.findViewById(R.id.fastfood);
+        ImageView imageButton7 = rootView.findViewById(R.id.fastfood);
         imageButton7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,7 +130,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        ImageButton imageButton8 = rootView.findViewById(R.id.tang);
+        ImageView imageButton8 = rootView.findViewById(R.id.tang);
         imageButton8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,7 +140,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        ImageButton imageButton9 = rootView.findViewById(R.id.dessert);
+        ImageView imageButton9 = rootView.findViewById(R.id.dessert);
         imageButton9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

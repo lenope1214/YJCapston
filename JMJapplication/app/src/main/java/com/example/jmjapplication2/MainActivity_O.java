@@ -35,6 +35,7 @@ public class MainActivity_O extends AppCompatActivity {
         bundle.putString("shopNumber", shopNumber);
         bundle.putString("shopName", shopName);
         homeFragment_o.setArguments(bundle);
+        shopDetailFragment_o.setArguments(bundle);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment_o).commit();
 

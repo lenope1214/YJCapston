@@ -17,7 +17,7 @@ public class  Shop {
     private String closeTime;
     private String address;
     private String addressDetail;
-    private char isResPos;
+    private char isRsPos;
     private String category;
     private char isOpen;
 

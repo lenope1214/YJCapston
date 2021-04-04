@@ -37,7 +37,7 @@ public class SignupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_signup2);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.signup_toolbar);
         toolbar.setTitle("");
@@ -93,9 +93,6 @@ public class SignupActivity extends AppCompatActivity {
         btn_insert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RadioGroup rg = (RadioGroup) findViewById(R.id.rg_radiogroup);
-                int id = rg.getCheckedRadioButtonId();
-
                 if (!(et_id.getText().toString().length() >= 2 && et_id.getText().toString().length() <= 10)) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
                     dialog = builder.setMessage("아이디는 2~8자로 입력해 주세요.").setPositiveButton("확인", null).create();
@@ -116,11 +113,7 @@ public class SignupActivity extends AppCompatActivity {
                     dialog = builder.setMessage("전화번호를 정확하게 입력해 주세요.").setPositiveButton("확인", null).create();
                     dialog.show();
                     et_phone.requestFocus();
-                } else if (id != R.id.rb_owner && id != R.id.rb_user) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
-                    dialog = builder.setMessage("회원 종류를 선택해 주세요.").setPositiveButton("확인", null).create();
-                    dialog.show();
-                } else if (isChecked == false) {
+                }  else if (isChecked == false) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
                     dialog = builder.setMessage("아이디 중복체크를 해주세요.").setPositiveButton("확인", null).create();
                     dialog.show();
@@ -130,12 +123,8 @@ public class SignupActivity extends AppCompatActivity {
                     map.put("password", et_pw.getText().toString());
                     map.put("name", et_name.getText().toString());
                     map.put("phone", et_phone.getText().toString());
+                    map.put("role", "ROLE_USER");
 
-                    if (id == R.id.rb_user) {
-                        map.put("role", "ROLE_USER");
-                    } else {
-                        map.put("role", "ROLE_OWNER");
-                    }
 
                     dataService.join.join(map).enqueue(new Callback<String>() {
                         @Override

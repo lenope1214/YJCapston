@@ -21,6 +21,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 public class ShopDetailFragment_O extends Fragment {
     Button toggle_button_on, toggle_button_off, toggle_button_res_on, toggle_button_res_off, owner_logout_btn;
@@ -28,7 +32,9 @@ public class ShopDetailFragment_O extends Fragment {
     boolean is_check = true;
     boolean is_check2 = true;
     private android.app.AlertDialog dialog;
-
+    private String jwt, shopNumber;
+    private String isOpen, isRsPos;
+    private Map<String, String> map = new HashMap();
     public ShopDetailFragment_O() {
 
     }
@@ -50,10 +56,9 @@ public class ShopDetailFragment_O extends Fragment {
         owner_logout_btn = rootView.findViewById(R.id.owner_logout_btn);
 
         Bundle bundle = getArguments();
-        //String shopNumber = bundle.getString("shopNumber","dwad");
-        String shopNumber = "2";
+        shopNumber = bundle.getString("shopNumber","dwad");
         
-        String jwt = ((JMJApplication) this.getActivity().getApplication()).getJwt();
+        jwt = ((JMJApplication) this.getActivity().getApplication()).getJwt();
 
         owner_logout_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +93,47 @@ public class ShopDetailFragment_O extends Fragment {
                     }
                 });
                 builder.show();
+            }
+        });
+
+        dataService.shop.shop(shopNumber).enqueue(new Callback<Shop>() {
+            @Override
+            public void onResponse(Call<Shop> call, Response<Shop> response) {
+                if(response.code() == 200) {
+                    Log.d("re", "성공");
+                    Log.d("RES", String.valueOf(response.body().getIsRsPos()));
+                    Log.d("open", String.valueOf(response.body().getIsOpen()));
+                    isOpen = String.valueOf(response.body().getIsOpen());
+                    isRsPos = String.valueOf(response.body().getIsRsPos());
+
+                    if(isOpen.equals("Y")) {
+                        toggle_button_on.setBackgroundColor(Color.GREEN);
+                        toggle_button_off.setBackgroundColor(Color.LTGRAY);
+                        is_check = false;
+                    } else {
+                        toggle_button_on.setBackgroundColor(Color.LTGRAY);
+                        toggle_button_off.setBackgroundColor(Color.RED);
+                        is_check = true;
+                    }
+
+                    if(isRsPos.equals("Y")) {
+                        toggle_button_res_on.setBackgroundColor(Color.GREEN);
+                        toggle_button_res_off.setBackgroundColor(Color.LTGRAY);
+                        is_check2 = false;
+                    } else {
+                        toggle_button_res_on.setBackgroundColor(Color.LTGRAY);
+                        toggle_button_res_off.setBackgroundColor(Color.RED);
+                        is_check2 = true;
+                    }
+                } else {
+                    Log.d("re", "실패");
+
+                }
+            }
+            @Override
+            public void onFailure(Call<Shop> call, Throwable t) {
+                Log.d("re", "실패");
+
             }
         });
 
@@ -268,4 +314,5 @@ public class ShopDetailFragment_O extends Fragment {
 
         return rootView;
     }
+
 }

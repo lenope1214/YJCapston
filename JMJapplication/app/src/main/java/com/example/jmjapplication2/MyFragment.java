@@ -5,21 +5,20 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.Toast;
+import android.widget.*;
 import androidx.fragment.app.Fragment;
 
 public class MyFragment extends Fragment {
     ImageButton loginButton;
-    Button login_btn;
-    Button profile_btn;
+    LinearLayout login_btn;
+    LinearLayout profile_btn;
+    TextView profile_text;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.my_fragment, container, false);
 
-
+        profile_text = rootView.findViewById(R.id.profile_text);
         login_btn = rootView.findViewById(R.id.login_btn);
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,7 +28,7 @@ public class MyFragment extends Fragment {
             }
         });
 
-        profile_btn = rootView.findViewById(R.id.profile_btn);
+        profile_btn = rootView.findViewById(R.id.linear_btn);
         profile_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,7 +49,7 @@ public class MyFragment extends Fragment {
         if(id != null) {
             login_btn.setVisibility(View.GONE);
             profile_btn.setVisibility(View.VISIBLE);
-            profile_btn.setText(id);
+            profile_text.setText(id + "님 안녕하세요");
         } else {
             login_btn.setVisibility(View.VISIBLE);
             profile_btn.setVisibility(View.GONE);
