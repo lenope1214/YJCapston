@@ -1,6 +1,6 @@
 package com.jumanji.capston.controller;
 
-import com.jumanji.capston.config.jwt.JwtTokenUtil;
+import com.jumanji.capston.controller.Temporary.Controller;
 import com.jumanji.capston.controller.exception.ApiErrorResponse;
 import com.jumanji.capston.controller.exception.ShopException.ShopNotFoundException;
 import com.jumanji.capston.data.Shop;
@@ -16,12 +16,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/v1")
-public class ShopController {
+public class ShopController extends Controller {
 //    Logger logger;
 
 
@@ -31,8 +32,6 @@ public class ShopController {
     @Autowired
     UserService userService;
 
-    @Autowired
-    JwtTokenUtil jwtTokenUtil;
 
     @Autowired
     StorageService storageService;
@@ -66,7 +65,7 @@ public class ShopController {
     @GetMapping("/myShop")
     public ResponseEntity<?> getMyShop(@RequestHeader String authorization) {
         System.out.println("ShopController in getMyShop");
-        String loginId = jwtTokenUtil.getUsername(authorization);
+        String loginId = getMyId(authorization);
         User userEntity = userService.findById(loginId);
         if (userEntity == null) return new ResponseEntity<>("로그인 되어있지 않습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         System.out.println("요청접속 유저 ID : " + userEntity.getId());
@@ -77,7 +76,7 @@ public class ShopController {
 
     @Transactional(readOnly = true)
     @GetMapping("/shopList")
-    public ResponseEntity<?> getShopList() {
+    public ResponseEntity<?> selectShopList() {
         System.out.println("샵리스트 >> ");
         List<Shop> shopList = shopService.findAll();
         return new ResponseEntity<>(shopList, HttpStatus.OK);
@@ -85,7 +84,7 @@ public class ShopController {
 
     @Transactional(readOnly = true)
     @GetMapping("/shopList/{category}")
-    public ResponseEntity<?> getShopListByCategory(@PathVariable String category) {
+    public ResponseEntity<?> selectShopListByCategory(@PathVariable String category) {
         System.out.println("캣 : " + category);
         List<Shop> shopCatList = shopService.findByCat(category);
         if (shopCatList.size() != 0) {
@@ -101,33 +100,39 @@ public class ShopController {
     @PostMapping("/shop") // 매장등록
     public ResponseEntity<?> insertShop(Shop.info request, @RequestHeader String authorization) throws ParseException {
         System.out.println("Auth : " + authorization);
-        String loginId = jwtTokenUtil.getUsername(authorization);
+        String loginId = getMyId(authorization);
         System.out.println("로그인 id : " + loginId);
         User userEntity = userService.findById(loginId);
         System.out.println("매장등록 요청 ID : " + userEntity.getId());
-
+        System.out.println("openTime : " + request.getOpenTime());
+        System.out.println("closeTime : " + request.getCloseTime());
         System.out.println("shopInfo.toString() : " + request.toString());
-        String uri = "shop/" + request.getId() +"/thumbnail/";
+        String uri = "shop/" + request.getId() + "/thumbnail/";
         String imgPath = storageService.store(request.getImg(), request.getImg().getName(), uri.split("/"));
-        Shop shopEntity = null;
+        Date openTime = Shop.stringToDate(request.getOpenTime());
+        Date closeTime = Shop.stringToDate(request.getCloseTime());
+        Shop shopEntity;
         shopEntity = Shop.createShop()
-                        .id(request.getId())
-                        .name(request.getName())
-                        .intro(request.getIntro())
-                        .openTime(shopEntity.stringToDate(request.getOpenTime()))
-                        .closeTime(shopEntity.stringToDate(request.getCloseTime()))
-                        .address(request.getAddress())
-                        .addressDetail(request.getAddressDetail())
-                        .category(request.getCategory())
-                        .imgPath(imgPath)
-                        .owner(userEntity)
-                        .build();
-        Object result = shopService.insert(shopEntity);
+                .id(request.getId())
+                .name(request.getName())
+                .intro(request.getIntro())
+                .openTime(openTime)
+                .closeTime(closeTime)
+                .address(request.getAddress())
+                .addressDetail(request.getAddressDetail())
+                .category(request.getCategory())
+                .imgPath(imgPath)
+                .owner(userEntity)
+                .build();
+        Shop result = shopService.insert(shopEntity);
 //        Shop result = shopEntity;
-        if (result.getClass() == Shop.class) return new ResponseEntity<>(result, HttpStatus.CREATED);
-        else if (result.equals("duplicate"))
+
+        if (result == null)
             return new ResponseEntity<>("사업자 번호가 중복입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
-        else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        Shop.Response response = new Shop.Response(result);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+//            return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
 //    @Transactional
@@ -160,11 +165,12 @@ public class ShopController {
     @Transactional
     @PatchMapping("/shop/{shopId}/open")
     public ResponseEntity<?> updateShopIsOpen(@RequestHeader String authorization, @PathVariable String shopId) {
-        List<Shop> shopList = getLoginUserShop(authorization);
+        String loginId = getMyId(authorization);
+        List<Shop> shopList = getMyShopList(loginId);
         if (shopList.isEmpty()) return new ResponseEntity<>("매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         for (Shop shop : shopList) {
             if (shop.getId().equals(shopId)) {                // 해당 유저의 해당 매장번호가 있음!
-                System.out.println("반전성공");
+                System.out.println(shop.getName() + "의 오픈상태 반전성공");
                 return new ResponseEntity<>(shopService.updateIsOpen(shop), HttpStatus.OK);
             }
         }
@@ -176,21 +182,22 @@ public class ShopController {
     @Transactional
     @PatchMapping("/shop/{shopId}/reserve")
     public ResponseEntity<?> updateShopIsRsPos(@RequestHeader String authorization, @PathVariable String shopId) {
-        List<Shop> shopList = getLoginUserShop(authorization);
+        String loginId = getMyId(authorization);
+        List<Shop> shopList = getMyShopList(loginId);
         if (shopList.isEmpty()) return new ResponseEntity<>("매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         for (Shop shop : shopList) {
             if (shop.getId().equals(shopId)) {
                 // 해당 유저의 해당 매장번호가 있음!
-                System.out.println("반전성공");
+                System.out.println(shop.getName() + "의 예약상태 반전성공");
                 return new ResponseEntity<>(shopService.updateIsRsPos(shop), HttpStatus.OK);
             }
         }
         return new ResponseEntity<>("매장번호가 일치하는 매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
     }
 
-    private List<Shop> getLoginUserShop(String id) {
-        String userId = jwtTokenUtil.getUsername(id);
-//        System.out.println("userId : " + userId);
-        return shopService.findByOwnerId(userId);
+    private List<Shop> getMyShopList(String loginId) {
+        return shopService.findByOwnerId(loginId);
     }
+
+
 }

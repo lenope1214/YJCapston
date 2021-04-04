@@ -43,7 +43,7 @@ public class Shop {
 
 
 
-    @Getter @Setter @AllArgsConstructor
+    @Getter @Setter
     public static class info{
         private String id;
         private String name;
@@ -62,7 +62,7 @@ public class Shop {
         private String category;
     }
 
-    @Getter @Setter @AllArgsConstructor
+    @Getter @Setter
     public static class Response{
         private String name;
         private String intro;
@@ -128,7 +128,7 @@ public class Shop {
 
 
 
-    public Date stringToDate(String date){
+    public static Date stringToDate(String date){
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
         Date parseDate = null;
         try {
@@ -139,7 +139,7 @@ public class Shop {
         return parseDate;
     }
 
-    public String dateToString(Date date){
+    public static String dateToString(Date date){
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
         return dateFormat.format(date);
     }

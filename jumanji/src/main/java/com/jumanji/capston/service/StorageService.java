@@ -35,8 +35,7 @@ public class StorageService {
 
     //
     public String store(MultipartFile file, String fileName,  String... filePath) {
-//        String newFileName = null;
-        File dirFile = null;
+        Path destinationFile;
         String fileExtension;
         try {
             if (file.isEmpty()) {
@@ -63,7 +62,7 @@ public class StorageService {
 //            System.out.println("경로 내 파일 수 : " + (fileList.length));
 //            newFileName = (fileList.length+1) + "." + fileExtension;
             System.out.println("path : " + path);
-            Path destinationFile = Path.of((path + fileName + "." + fileExtension));
+            destinationFile = Path.of((path + fileName + "." + fileExtension));
 //            Path destinationFile = Path.of((dirFile.toURI()));
 //                    .normalize().toAbsolutePath(); // file.getOriginalFilename() -> filename.filetype 이런 형태
 //            Path destinationFile = this.rootLocation.resolve(Paths.get(dirFile +"\\"+ newFileName))
@@ -85,7 +84,7 @@ public class StorageService {
         } catch (NotSupportedException e) {
             throw new StorageException("Not supported file extension");
         }
-        return dirFile.getPath().replace("\\", "/");
+        return destinationFile.toString().replace("\\", "/");
     }
 
     public String pathValidation(String... paths) throws IOException {
