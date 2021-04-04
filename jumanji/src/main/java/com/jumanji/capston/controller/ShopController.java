@@ -1,6 +1,5 @@
 package com.jumanji.capston.controller;
 
-import com.jumanji.capston.config.jwt.JwtTokenUtil;
 import com.jumanji.capston.controller.exception.ApiErrorResponse;
 import com.jumanji.capston.controller.exception.ShopException.ShopNotFoundException;
 import com.jumanji.capston.data.Shop;
@@ -30,9 +29,6 @@ public class ShopController {
 
     @Autowired
     UserService userService;
-
-    @Autowired
-    JwtTokenUtil jwtTokenUtil;
 
     @Autowired
     StorageService storageService;
@@ -66,7 +62,7 @@ public class ShopController {
     @GetMapping("/myShop")
     public ResponseEntity<?> getMyShop(@RequestHeader String authorization) {
         System.out.println("ShopController in getMyShop");
-        String loginId = jwtTokenUtil.getUsername(authorization);
+        String loginId = User.jwtUtil.getLoginId(authorization);
         User userEntity = userService.findById(loginId);
         if (userEntity == null) return new ResponseEntity<>("로그인 되어있지 않습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         System.out.println("요청접속 유저 ID : " + userEntity.getId());
@@ -101,7 +97,7 @@ public class ShopController {
     @PostMapping("/shop") // 매장등록
     public ResponseEntity<?> insertShop(Shop.info request, @RequestHeader String authorization) throws ParseException {
         System.out.println("Auth : " + authorization);
-        String loginId = jwtTokenUtil.getUsername(authorization);
+        String loginId = User.jwtUtil.getLoginId(authorization);
         System.out.println("로그인 id : " + loginId);
         User userEntity = userService.findById(loginId);
         System.out.println("매장등록 요청 ID : " + userEntity.getId());
@@ -160,7 +156,8 @@ public class ShopController {
     @Transactional
     @PatchMapping("/shop/{shopId}/open")
     public ResponseEntity<?> updateShopIsOpen(@RequestHeader String authorization, @PathVariable String shopId) {
-        List<Shop> shopList = getLoginUserShop(authorization);
+        String loginId = User.jwtUtil.getLoginId(authorization);
+        List<Shop> shopList = getLoginUserShop(loginId);
         if (shopList.isEmpty()) return new ResponseEntity<>("매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         for (Shop shop : shopList) {
             if (shop.getId().equals(shopId)) {                // 해당 유저의 해당 매장번호가 있음!
@@ -188,9 +185,7 @@ public class ShopController {
         return new ResponseEntity<>("매장번호가 일치하는 매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
     }
 
-    private List<Shop> getLoginUserShop(String id) {
-        String userId = jwtTokenUtil.getUsername(id);
-//        System.out.println("userId : " + userId);
-        return shopService.findByOwnerId(userId);
+    private List<Shop> getLoginUserShop(String loginId) {
+        return shopService.findByOwnerId(loginId);
     }
 }

@@ -68,7 +68,8 @@ public class MenuController {
         System.out.println("메뉴 추가");
         String menuId = request.getShopId() + request.getName();
         String path = "shop/" + request.getShopId() + "/menu/";
-        String imgPath = storageService.store(request.getImg(), request.getName(), path.split("/"));
+        String imgPath = null;
+        if(request.getImg() != null)imgPath = storageService.store(request.getImg(), request.getName(), path.split("/"));
         menu = Menu.init()
                 .id(menuId)
                 .name(request.getName())
@@ -90,6 +91,7 @@ public class MenuController {
     @PatchMapping("/menu")
     public ResponseEntity<?> updateMenu(@RequestBody Menu.Request request) {
         System.out.println("메뉴 수정>>> ");
+
         // 권한확인 해야함. 로그인유저 의 매장인지.
 //        String menuId = request.getMenuId(request);
         Menu menu = menuService.findById(request.getMenuId());

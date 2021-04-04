@@ -1,6 +1,8 @@
 package com.jumanji.capston.data;
 
+import com.jumanji.capston.config.jwt.JwtTokenUtil;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
@@ -63,6 +65,17 @@ public class User {
         this.point = 0;
         this.level = 1;
     }
+
+    public static class jwtUtil{
+        @Autowired
+        static JwtTokenUtil jwtTokenUtil;
+
+        public static String getLoginId(String authorization){
+            return jwtTokenUtil.getUsername(authorization);
+        }
+    }
+
+
 }
 
 
