@@ -49,7 +49,7 @@ public class ShopController extends Controller {
         try {
             shop = shopService.findById(shopId);
         } catch (ShopNotFoundException e) {
-            return new ResponseEntity<>(new ApiErrorResponse(e.getCode(), e.getId()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ApiErrorResponse(e.getCode(), e.getMessage()), HttpStatus.BAD_REQUEST);
         }
         Shop.Response response = new Shop.Response(shop);
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -99,6 +99,18 @@ public class ShopController extends Controller {
     @Transactional
     @PostMapping("/shop") // 매장등록
     public ResponseEntity<?> insertShop(Shop.info request, @RequestHeader String authorization) throws ParseException {
+        try {
+            if(shopService.findById(request.getId()) != null) throw new Exception();
+
+        } catch (ShopNotFoundException e) {
+            return new ResponseEntity<>(new ApiErrorResponse(e.getCode(), e.getMessage()), HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ApiErrorResponse("error-1002", "이미 등록된 사업자 번호입니다."), HttpStatus.BAD_REQUEST);
+        }
+
+//        if ( == null)
+//            return new ResponseEntity<>("사업자 번호가 중복입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
+
         System.out.println("Auth : " + authorization);
         String loginId = getMyId(authorization);
         System.out.println("로그인 id : " + loginId);
@@ -127,8 +139,6 @@ public class ShopController extends Controller {
         Shop result = shopService.insert(shopEntity);
 //        Shop result = shopEntity;
 
-        if (result == null)
-            return new ResponseEntity<>("사업자 번호가 중복입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
 
         Shop.Response response = new Shop.Response(result);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
@@ -155,7 +165,7 @@ public class ShopController extends Controller {
         try {
             shop = shopService.findById(patch.getShopId());
         } catch (ShopNotFoundException e) {
-            return new ResponseEntity<>(new ApiErrorResponse(e.getCode(), e.getId()), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ApiErrorResponse(e.getCode(), e.getMessage()), HttpStatus.NOT_FOUND);
         }
         shop.update(patch);
 
