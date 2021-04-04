@@ -91,8 +91,8 @@ public class MenuController {
     public ResponseEntity<?> updateMenu(@RequestBody Menu.Request request) {
         System.out.println("메뉴 수정>>> ");
         // 권한확인 해야함. 로그인유저 의 매장인지.
-        String menuId = request.getMenuId(request);
-        Menu menu = menuService.findById(menuId);
+//        String menuId = request.getMenuId(request);
+        Menu menu = menuService.findById(request.getMenuId());
         if (menu == null) return new ResponseEntity<>("메뉴 ID가 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         System.out.println("menuId : " + menu.getId());
 
@@ -104,7 +104,7 @@ public class MenuController {
 
     @Transactional
 //    @PreAuthorize("hasAnyRole('ADMIN','OWNER')")
-    @DeleteMapping("/menu")
+    @DeleteMapping("/menu") // Delete
     public ResponseEntity<?> deleteMenu(@RequestBody Menu.Request request) {
 //        String menuId = request.getMenuId(request);
         // 추후에 유저 확인..
