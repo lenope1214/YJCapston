@@ -23,14 +23,6 @@ public class ShopService {
 
 
     public Shop insert(Shop shop){
-        if(shopRepository.findById(shop.getId()).isPresent()){
-//            System.out.println("중복이라 일케 보내주잖아 ㅡㅡ");
-            return null;
-        }
-//        System.out.println("저장 전");
-//        shop.setOwner(owner);
-        //        System.out.println("저장 후");
-//        System.out.println("저장 : " + shopEntity);
         return shopRepository.save(shop);
     }
 
