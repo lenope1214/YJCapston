@@ -16,6 +16,7 @@ const MenuRead = ({
     menuIntro,
     handleMenuIntro,
     ReadMenu,
+    goBack
 }) => {
     return (
         <>
@@ -61,9 +62,9 @@ const MenuRead = ({
                     </table>
                     <div className="button-div">
                         <button onClick={ReadMenu} className="button">수정</button>
-                        <Link to="/menulist" className="button">
-                        <button className="button">취소</button>
-                        </Link>
+                        
+                        <button className="button" onClick={goBack}>취소</button>
+                        
                     </div>
                 </div>
             </S.MenuReadWrap>

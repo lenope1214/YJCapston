@@ -13,6 +13,7 @@ const MenuRegisterForm = ({
     menu_v1,
     duration,
     handleDuration,
+    shopId,
 }) => {
     return(
         <>
@@ -85,7 +86,7 @@ const MenuRegisterForm = ({
                 </form>
                 <div className="button-div">
                     <button onClick={menu_v1} className="button">추가</button>
-                    <Link to="/menulist" className="button">
+                    <Link to={`/menulist/${shopId}`} className="button">
                         <button className="button">취소</button>
                     </Link>
                 </div>

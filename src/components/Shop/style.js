@@ -1,7 +1,9 @@
+
+
 import styled from "styled-components";
 
 export const searchWrap = styled.div`
-    border: 1px solid black;
+    border:1px solid black;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -15,7 +17,8 @@ export const searchWrap = styled.div`
     z-index: 10;
 `;
 
-export const ShopWrap = styled.div`
+export const ShopsWrap = styled.div`
+
     @font-face {
         font-family: "Wemakeprice-Bold";
         src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Wemakeprice-Bold.woff")
@@ -23,6 +26,7 @@ export const ShopWrap = styled.div`
         font-weight: normal;
         font-style: normal;
     }
+    
     > header {
         padding-left: 5%;
         width: 100%;
@@ -45,6 +49,9 @@ export const ShopWrap = styled.div`
             opacity: 1;
         }
     }
+
+
+
     > body {
         background-color: white;
         color: black;
@@ -97,7 +104,8 @@ export const ShopWrap = styled.div`
         > .check {
             text-align: center;
         }
-    }
+    
+
     > footer {
         background-color: white;
         padding: 5%;
@@ -111,4 +119,5 @@ export const ShopWrap = styled.div`
             font-size: 25px;
         }
     }
+    
 `;

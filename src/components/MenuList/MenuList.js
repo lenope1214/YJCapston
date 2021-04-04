@@ -4,13 +4,13 @@ import * as S from "./style";
 import {getMenuRead, getNowMenu} from "../../lib/MenuRead"
 import MenuReadContainer from "../../containers/MenuRead/MenuReadContainer";
 
-const MenuList = ({ menues, removeMenu }) => {
+const MenuList = ({ menues, removeMenu, shopId }) => {
     return (
         <>
             <S.MenuWrap>
                 <div className="menu-container">
                     <h2 className="menu-title">메뉴 목록</h2>
-                    <Link to="/create" className="btn-link">메뉴 추가하기</Link>
+                    <Link to={`/create/${shopId}`} className="btn-link">메뉴 추가하기</Link>
                     <table className="menu-list">
                         <thead>
                             <th align="center" className="item-1">메뉴사진</th>
@@ -28,10 +28,10 @@ const MenuList = ({ menues, removeMenu }) => {
                             {!!menues.length && menues.map((menu) => {
                                 return (
                                 <tr>         
-                                    <td className="body-item-1">{`${menu.img}`}</td>
+                                    <td className="body-item-1"><img src={`${menu.img}`}>{console.log(`${menu.img}`)}</img></td>
                                            
                                     <td className="body-item-2">
-                                    <Link to={`/menu/${menu.id}`} className="menu-link">
+                                    <Link to={`/menu/${shopId}${menu.name}`} className="menu-link">
                                         {menu.name}
                                         </Link>
                                     </td>

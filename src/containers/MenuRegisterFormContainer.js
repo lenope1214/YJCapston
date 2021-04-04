@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MenuRegisterForm from "../components/MenuRegisterForm/MenuRegisterForm";
 import OwnerNavbar from "../components/OwnerMenubar/OwnerNavbar";
 import axios from "axios";
@@ -6,13 +6,18 @@ import { useHistory } from "react-router";
 import Header from "../components/Header/Header";
 import { apiDefault } from "../lib/client";
 
-const MenuRegisterFormContainer = () => {
+const MenuRegisterFormContainer = (props) => {
     const history = useHistory();
     const [menuname, setMenuname] = useState("");
     const [price, setPrice] = useState("");
     const [img, setImg] = useState(null);
     const [menudesc, setMenudesc] = useState("");
     const [duration, setMenuduration] = useState("");
+    const [shopId, setShopId] = useState("");
+
+    useEffect(()=> {
+        setShopId(props.match.params.shopId);
+    })
 
     const handleMenuname = (e) => {
         const value = e.target.value;
@@ -44,7 +49,7 @@ const MenuRegisterFormContainer = () => {
         alert("추가확인 버튼");
         const formData = new FormData();
         formData.append("img", img);
-        formData.append("shopId", '0223446783');
+        formData.append("shopId", shopId);
         formData.append("name", menuname);
         formData.append("price", price);
         formData.append("intro", menudesc);
@@ -65,23 +70,13 @@ const MenuRegisterFormContainer = () => {
             },
         }
         ).then((res) => {
-            history.push("/menulist");
+            history.push(`/menulist/${shopId}`);
             alert("메뉴가 추가되었습니다.");
         })
         .catch((err) => {
             alert("Err");
         });
         console.log(res);
-        // postMenu(
-        //     formData,     
-        // )
-        // .then((res) => {
-        //     history.push("/menulist");
-        // })
-        // .catch((err) => {
-        //     alert("MenuRegisterContainer Err");
-        // });
-        
     };
 
     return (
@@ -98,7 +93,7 @@ const MenuRegisterFormContainer = () => {
             menudesc={menudesc}
             handleMenudesc={handleMenudesc}
             menu_v1={menu_v1}
-            shopid='022344278'
+            shopId={shopId}
             duration={duration}
             handleDuration={handleDuration}
         />

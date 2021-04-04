@@ -6,6 +6,7 @@ export const postMenu = (
     menuname,
     price,
     menudesc,
+    shopId,
 ) => {
     alert("postMenu함수 실행");
     return apiDefault().post("/menu", {
@@ -14,7 +15,7 @@ export const postMenu = (
         price: price,
         // img: formData,
         intro: menudesc,
-        shopId: '0223446783',
+        shopId: shopId,
         
     }, {
         headers: {

@@ -8,22 +8,25 @@ import Header from "../../components/Header/Header";
 import { apiDefault } from "../../lib/client";
 import { removeMenues } from "../../lib/MenuList/index"
 
-const MenuListContainer = () => {
+const MenuListContainer = (props) => {
     const [menues, setMenues] = useState([]);
     const history = useHistory();
+    const [shopId, setShopId] = useState("");
 
     useEffect(() => {
+        showMenuList(props.match.params.shopId);
+        setShopId(props.match.params.shopId);
         console.log(menues);
     }, []);
 
-    useEffect(() => {
-        getMenuList()
+    const showMenuList = () => {
+        getMenuList(props.match.params.shopId)
             .then((res) => {       
                 setMenues(res.data);
                 console.log("res.data 출력 - "+res.data);
                 const menu = res.data.map((menu) => {
                     return {
-                        imgUrl: menu.img,
+                        imgPath: menu.img,
                         id: menu.id,
                         name: menu.name,
                         intro: menu.intro,
@@ -38,13 +41,13 @@ const MenuListContainer = () => {
                 
                 alert("MenuListContainer Err");
             });
-    }, []);
+    };
 
     const removeMenu = (id) => {
         removeMenues(id)
             .then((res) => {
                 alert("삭제되었습니다.");
-                history.push("/menulist");
+                history.push(`/menulist/${shopId}`);
                 window.location.reload();
             })
             .catch((err) => {
@@ -61,6 +64,7 @@ const MenuListContainer = () => {
         <MenuList 
             menues={menues}
             removeMenu={removeMenu}
+            shopId={shopId}
         />
         </>
     );

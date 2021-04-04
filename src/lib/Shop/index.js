@@ -1,6 +1,7 @@
 import axios from "axios";
 import { apiDefault } from "../client";
 
+
 // export const postShop = () => {
 //     return axios().post(
 //         "/shop",
@@ -9,7 +10,7 @@ import { apiDefault } from "../client";
 //         })
 // }
 
-export const postShop = (
+export const postShop =(
     id,
     shopname,
     intro,
@@ -17,28 +18,34 @@ export const postShop = (
     close_time,
     address,
     address1,
-    is_rs_pos
+    // is_rs_pos,
+    category,
+    img_url
 ) => {
-    return apiDefault().post(
-        "/Shop",
-        {
-            id: id,
-            name: shopname,
-            intro: intro,
-            open_time: open_time,
-            close_time: close_time,
-            address: address,
-            address_detail: address1,
-            is_rs_pos: is_rs_pos,
+    return  apiDefault().post("/shop",{
+     id:id,
+     name:shopname,
+     intro:intro,
+     openTime:open_time,
+     closeTime:close_time,
+     address:address,
+     addressDetail:address1,
+     category: category,
+    // shopId: id,
+    // name: shopname,
+    // intro: intro,
+    // openTime: open_time,
+    // closeTime: close_time,
+    // address: address,
+    // addressDetail: address1,
+    // isRsPos: is_rs_pos,
+    // category: category,  
+    img:img_url
+    },{
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         },
-        {
-            headers: {
-                Authorization: `Bearer ${sessionStorage.getItem(
-                    "access_token"
-                )}`,
-            },
-        }
-    );
+    });
 };
 
 // export const getLocation = (query) => {

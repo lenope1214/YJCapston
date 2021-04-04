@@ -55,12 +55,12 @@ export const MenuReadContainer = (props) => {
     };
 
     useEffect(() => {
-        showMenuRead(props.match.params.shopId);
-        setMenuId(props.match.params.shopId);
+        showMenuRead(props.match.params.menuId);
+        setMenuId(props.match.params.menuId);
     }, []);
   
     const showMenuRead = () => {
-        getMenuRead(props.match.params.shopId)
+        getMenuRead(props.match.params.menuId)
             .then((res) => {
                 setMenuRead(res.data);
             })

@@ -1,7 +1,6 @@
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import React from "react";
 import MenuRegisterFormContainer from "./containers/MenuRegisterFormContainer";
-import ShopInfoContainer from "./containers/ShopInfoContainer";
 import EventContainer from "./containers/EventContainer";
 import LoginContainer from "./containers/Login/LoginContainer";
 import MainContainer from "./containers/Main/MainContainer";
@@ -11,6 +10,9 @@ import ShopContainer from "./containers/Shop/ShopContainer";
 import { useEffect, useState } from "react";
 import { MenuReadContainer } from "./containers/MenuRead/MenuReadContainer";
 import  MenuListContainer  from "./containers/MenuList/MenuListContainer";
+import ShopInfoContainer from "./containers/ShopInfo/ShopInfoContainer";
+import MyShopContainer from "./containers/MyShop/MyShopContainer";
+import ShoplistContainer from "./containers/Shoplist/ShoplistContainer";
 
 const App = (props) => {
   const [isLogin, setIsLogin] = useState(false);
@@ -41,11 +43,22 @@ const App = (props) => {
               <Route path="/register" component={RegisterContainer} />
               <Route path="/mypage" component={MypageContainer} />
               <Route path="/shop" component={ShopContainer} />
-              <Route component={MenuListContainer} path="/menulist" />
-              <Route component={MenuRegisterFormContainer} path="/create" />
-              <Route component={ShopInfoContainer} path="/info" />
-              <Route component={EventContainer} path="/event" />
-              <Route component={MenuReadContainer} path='/menu/:shopId' />
+              <Route path="/MyShop" component={MyShopContainer} />
+              <Route component={MenuListContainer} path="/menuList/:shopId" />
+              <Route component={MenuRegisterFormContainer} path="/create/:shopId" />
+              <Route path="/ShopInfo" component={ShopInfoContainer} />
+              <Route component={EventContainer} path="/event" exact />
+              <Route component={MenuReadContainer} path='/menu/:menuId' />
+              <Route
+                    path="/shoplist"
+                    component={() => (
+                        <ShoplistContainer
+                            isLogin={isLogin}
+                            handleLogin={handleLogin}
+                            handleLogout={handleLogout}
+                        />
+                    )}
+                />
               <Route
                 path="/"
                 component={() => (
