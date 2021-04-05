@@ -1,0 +1,15 @@
+<!DOCTYPE>
+<html LANG="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>updatePoint</title>
+</head>
+<body>
+    <form action="/update" method="post">
+        <input type="text" name="userid">
+        <input type="text" name="point"> <!-- name 속성이 변수명이 될 예정. -->
+        <input type="submit" value="저장">
+    </form>
+<p th:text="${result}"></p>
+</body>
+</html>
