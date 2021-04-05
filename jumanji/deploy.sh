@@ -37,3 +37,5 @@ JAR_NAME=$(ls $REPOSITORY/ |grep 'jumanji' | tail -n 1)
 echo "> JAR Name: $JAR_NAME"
 
 nohup java -jar $REPOSITORY/$JAR_NAME & CapstonApplication
+
+git-bash & > /dev/null 2&>1
