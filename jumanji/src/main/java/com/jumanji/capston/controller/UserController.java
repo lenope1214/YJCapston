@@ -1,6 +1,7 @@
 package com.jumanji.capston.controller;
 
 import com.jumanji.capston.config.jwt.JwtTokenUtil;
+import com.jumanji.capston.controller.commons.Controller;
 import com.jumanji.capston.data.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +16,7 @@ import java.util.List;
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/v1")
-public class UserController {
+public class UserController extends Controller {
     @Autowired
     com.jumanji.capston.service.UserService userService;
 

@@ -1,5 +1,6 @@
 package com.jumanji.capston.controller;
 
+import com.jumanji.capston.controller.commons.Controller;
 import com.jumanji.capston.data.Order;
 import com.jumanji.capston.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/v1")
-public class OrderController {
+public class OrderController extends Controller {
     @Autowired
     OrderService orderService;
 
