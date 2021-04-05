@@ -63,28 +63,5 @@ jobs:
       run: |
         aws deploy create-deployment \
           --application-name YJCapston-jumanji \
-          --deployment-group-name 	YJCpaston-jumanji-group \
-          --s3-location bucket=${{ secrets.AWS_S3_BUCKET_NAME }},key=community-build/buildFile.zip,bundleType=zip > deploymentId.txt
-          
-           aws deploy create-deployment 
-           --application-name testapp 
-           --deployment-config-name CodeDeployDefault.OneAtATime 
-           --deployment-group-name dev 
-           --s3-location bucket=isntyet-deploy,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
-
-        DEPLOYMENT_ID=$(cat deploymentId.txt | jq -r '.deploymentId')
-
-        echo "Wait 60 seconds for deployment and test"
-        sleep 60
-
-        IS_SUCCESS=$(aws deploy get-deployment --deployment-id $DEPLOYMENT_ID | jq -r '.deploymentInfo.status')
-
-        echo $IS_SUCCESS;
-
-        if [ "$IS_SUCCESS" = "Succeeded" ];
-        then
-          echo "SUCCESS DEPLOY!"
-        else
-          echo "FAIL DEPLOY!"
-          exit 1
-        fi
+          --deployment-group-name YJCpaston-jumanji-group \
+          --s3-location bucket=${{ secrets.AWS_S3_BUCKET_NAME }},key=$PROJECT_NAME/$GITHUB_SHA.zip,bundleType=zip
