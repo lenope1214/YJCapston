@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 REPOSITORY=c:\build
 cd $REPOSITORY
