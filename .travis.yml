@@ -1,12 +1,12 @@
 language: java
 jdk:
-  - openjdk8
+  - openjdk11
 
 branches:
   only:
     - master
 
-before_install:
+before_install: # 실행하기 전에 먼저 해야함.
   - cd jumanji # 빌드 하기 전에 jumanji 프로젝트로 이동.
   - chmod +x gradlew
 
