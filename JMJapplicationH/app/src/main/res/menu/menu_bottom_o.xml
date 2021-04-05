@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+            android:id="@+id/o_tab1"
+            android:icon="@drawable/o_review"
+            android:title="리뷰"/>
+
+    <item
+            android:id="@+id/o_tab2"
+            android:icon="@drawable/o_menu"
+            android:title="메뉴"/>
+
+    <item
+            android:id="@+id/o_tab3"
+            android:icon="@drawable/o_chat"
+            android:title="채팅방"/>
+
+    <item
+            android:id="@+id/o_tab4"
+            android:icon="@drawable/o_res"
+            android:title="예약"/>
+
+    <item
+            android:id="@+id/o_tab5"
+            android:icon="@drawable/o_home"
+            android:title="운영"/>
+</menu>
