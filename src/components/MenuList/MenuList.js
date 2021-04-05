@@ -3,6 +3,7 @@ import React from "react";
 import * as S from "./style";
 
 const MenuList = ({ menues, removeMenu, shopId }) => {
+    
     return (
         <>
             <S.MenuWrap>
@@ -24,13 +25,16 @@ const MenuList = ({ menues, removeMenu, shopId }) => {
                             )}
 
                             {!!menues.length && menues.map((menu) => {
+                                // console.log("MENULIST"+menu.id);
+                                // console.log(menu.img)
                                 return (
+                                    
                                     <tr>
                                         <td className="body-item-1">
-                                            <img src={`${menu.img}`}
-                                                width='100'
-                                                height='100'>
-                                                {console.log(`${menu.img}`)}
+                                            <img src={`http://192.168.1.17:8088/${menu.img}`}
+                                                width='150'
+                                                height='150'
+                                                className="img-box">
                                             </img>
                                         </td>
                                         <td className="body-item-2">

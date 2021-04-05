@@ -7,7 +7,11 @@ import Header from "../../components/Header/Header";
 import { removeMenues } from "../../lib/MenuList/index"
 
 const MenuListContainer = (props) => {
-    const [menues, setMenues] = useState([]);
+    const [menues, setMenues] = useState([
+    {   id: "",
+    img: "",
+    }
+    ]);
     const history = useHistory();
     const [shopId, setShopId] = useState("");
 
@@ -23,8 +27,9 @@ const MenuListContainer = (props) => {
                 setMenues(res.data);
                 console.log("res.data 출력 - "+res.data);
                 const menu = res.data.map((menu) => {
+                    console.log(menu.id);
                     return {
-                        imgPath: menu.img,
+                        img: menu.imgPath,
                         id: menu.id,
                         name: menu.name,
                         intro: menu.intro,

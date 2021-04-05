@@ -34,6 +34,7 @@ export const MenuReadContainer = (props) => {
 
     const ReadMenu = () => {
         putMenuRead(
+                menuImg,
                 menuPrice,     
                 menuIntro,
                 menuId,
@@ -80,7 +81,7 @@ export const MenuReadContainer = (props) => {
                 menuId={menuId}
                 menuPrice={menuPrice}
                 handleMenuPrice={handleMenuPrice}
-                img={menuRead.img}
+                img={menuRead.imgPath}
                 handleMenuImg={handleMenuImg}
                 menuIntro={menuIntro}
                 handleMenuIntro={handleMenuIntro}

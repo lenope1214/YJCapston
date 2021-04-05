@@ -1,10 +1,10 @@
 import React from "react"
 import * as S from "./style";
 
-const MenuRead = ({ 
-    name, 
-    intro, 
-    price, 
+const MenuRead = ({
+    name,
+    intro,
+    price,
     menuPrice,
     handleMenuPrice,
     menuImg,
@@ -21,19 +21,18 @@ const MenuRead = ({
     return (
         <>
             <S.MenuReadWrap>
-            <h2 className="menu-title">메뉴 상세</h2>
-                <div className="menu-register-container">       
+                <h2 className="menu-title">메뉴 상세</h2>
+                <div className="menu-register-container">
                     <table className="register-form">
                         <tbody>
-                            <tr>
-                                <th className="form-label"></th>
-                                
-                                    <img src={img}
-                                    width='200'
-                                    height='200'>
-                                        {console.log(menuImg)}
-                                    </img>
-                                
+                            <tr> 
+                                <th colSpan='2' align='center' className="img-box">
+                                    <img src={`http://192.168.1.17:8088/${img}`}
+                                        width='80%'
+                                        height='80%'
+                                        className="img-box-box"
+                                    />
+                                </th>
                             </tr>
                             <tr>
                                 <th className="form-label">상품명</th>
@@ -48,7 +47,7 @@ const MenuRead = ({
                                 <th className="form-label">상품가격</th>
                                 <td>
                                     <input
-                                        type="text"  
+                                        type="text"
                                         placeholder={price}
                                         onChange={handleMenuPrice}
                                         value={menuPrice}
@@ -59,7 +58,7 @@ const MenuRead = ({
                                 <th className="form-label">소요시간</th>
                                 <td>
                                     <input
-                                        type="text"  
+                                        type="text"
                                         placeholder={duration}
                                         onChange={handleDuration}
                                         value={menuDuration}
@@ -81,9 +80,9 @@ const MenuRead = ({
                     </table>
                     <div className="button-div">
                         <button onClick={ReadMenu} className="button">수정</button>
-                        
+
                         <button className="button" onClick={goBack}>취소</button>
-                        
+
                     </div>
                 </div>
             </S.MenuReadWrap>

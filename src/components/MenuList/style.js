@@ -29,9 +29,10 @@ a { color: black;}
   }
 
   .menu-list {
-      margin-top: 50px;
+      margin-top: 100px;
       width: 100%; 
-      border-collapse: collapse;   
+      border-collapse: collapse;
+      margin-bottom: 70px;   
   }
   .menu-link {
     text-decoration: none;
@@ -65,8 +66,11 @@ a { color: black;}
       width: 5%;
   }
   .body-item-1 {
-    padding: 5px 15px 5px 15px;
+    padding: 3px 10px 2px 10px;
     text-align:center;
+  }
+  .img-box {
+      border-radius: 15%;
   }
   .body-item-2 {
     padding: 15px 15px 15px 30px;
