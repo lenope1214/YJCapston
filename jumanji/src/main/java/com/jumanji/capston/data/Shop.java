@@ -64,6 +64,7 @@ public class Shop {
 
     @Getter @Setter
     public static class Response{
+        private String id;
         private String name;
         private String intro;
         private String address;
@@ -75,13 +76,14 @@ public class Shop {
         private char isRsPos;
 
         public Response(Shop shop) {
-            this.name = shop.getName();
+            this.id = shop.getId();
+            this.name = shop.getName().replace("_" , " ");
             this.intro = shop.getIntro();
             this.address = shop.getAddress();
             this.addressDetail = shop.getAddressDetail();
             this.category = shop.getCategory();
-            this.openTime = shop.dateToString(shop.getOpenTime());
-            this.closeTime = shop.dateToString(shop.getCloseTime());
+            this.openTime = dateToString(shop.getOpenTime());
+            this.closeTime = dateToString(shop.getCloseTime());
             this.isOpen = shop.getIsOpen();
             this.isRsPos = shop.getIsRsPos();
         }

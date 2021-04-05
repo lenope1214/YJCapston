@@ -12,7 +12,7 @@ public class Controller {
     @Autowired
     JwtTokenUtil jwtTokenUtil;
 
-    protected String getMyId(String authorization){
+    protected String getLoginUserId(String authorization){
         return jwtTokenUtil.getUsername(authorization);
     }
 }

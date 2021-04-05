@@ -1,8 +1,10 @@
 package com.jumanji.capston.controller;
 
+import com.jumanji.capston.controller.Temporary.Controller;
 import com.jumanji.capston.controller.exception.ApiErrorResponse;
 import com.jumanji.capston.data.Menu;
 import com.jumanji.capston.service.MenuService;
+import com.jumanji.capston.service.ShopService;
 import com.jumanji.capston.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -16,10 +18,12 @@ import java.util.List;
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/v1")
-public class MenuController {
+public class MenuController extends Controller {
 
     @Autowired
     MenuService menuService;
+    @Autowired
+    ShopService shopService;
 
     @Autowired
     StorageService storageService;
@@ -41,8 +45,7 @@ public class MenuController {
         Menu menu = menuService.findById(menuId);
         if (menu == null)
             return new ResponseEntity<>("없는 메뉴번호 입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
-        Menu.Response response = new Menu.Response();
-        response.parse(menu);
+        Menu.Response response = new Menu.Response(menu);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -64,16 +67,17 @@ public class MenuController {
     @Transactional
     @PostMapping("/menu") // post
     public ResponseEntity<?> insertMenu(Menu.info request) {
+        if(menuService.findById(request.getShopId()+request.getName()) != null)return new ResponseEntity<>("있는 메뉴입니다.", httpHeaders, HttpStatus.LOCKED);
         Menu menu;
         System.out.println("메뉴 추가");
         String menuId = request.getShopId() + request.getName();
         String path = "shop/" + request.getShopId() + "/menu/";
         String imgPath = null;
         if (request.getImg() != null)
-            imgPath = storageService.store(request.getImg(), request.getName(), path.split("/"));
+            imgPath = storageService.store(request.getImg(), request.getName().replace(" ", "_"), path.split("/"));
         menu = Menu.init()
                 .id(menuId)
-                .name(request.getName())
+                .name(request.getName().replace(" ", "_"))
                 .intro(request.getIntro())
                 .price(request.getPrice())
                 .duration(request.getDuration())
@@ -82,8 +86,7 @@ public class MenuController {
 //        System.out.println("ㅁㄴㅇㄹ");
         Menu result = menuService.save(menu);
 //        Menu result = menu;
-        Menu.Response response = new Menu.Response();
-        response.parse(result);
+        Menu.Response response = new Menu.Response(result);
 
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
@@ -108,16 +111,18 @@ public class MenuController {
 
     @Transactional
 //    @PreAuthorize("hasAnyRole('ADMIN','OWNER')")
-    @DeleteMapping("/menu") // Delete
-    public ResponseEntity<?> deleteMenu(@RequestBody Menu.Request request) {
+    @DeleteMapping("/menu/{menuId}") // Delete
+    public ResponseEntity<?> deleteMenu(@RequestHeader String authorization, @PathVariable String menuId) {
 //        String menuId = request.getMenuId(request);
         // 추후에 유저 확인..
-        System.out.println("삭제 메뉴 id " + request.getMenuId());
-        Menu menu = menuService.findById(request.getMenuId());
-        if (menu == null)
-            return new ResponseEntity<>(new ApiErrorResponse("error-2001", "Not Found by menu id"), HttpStatus.NOT_FOUND);
-        menuService.delete(menu);
-        return new ResponseEntity<>("삭제성공", httpHeaders, HttpStatus.OK);
+        String loginId = getLoginUserId(authorization);
+//        System.out.println("0, 10 : " + menuId.substring(0, 10));
+//        return null;
+        if(loginId.equals(shopService.findById(menuId.substring(0, 10)).getOwner().getId())) {
+            menuService.delete(menuId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        else return new ResponseEntity<>(new ApiErrorResponse("error-0000", "권한이 없습니다."), HttpStatus.FORBIDDEN);
     }
 
     @Transactional(readOnly = true)

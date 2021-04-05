@@ -16,10 +16,14 @@ public class MenuService {
 //        return menuRepository.getMenuSeqNextVal();
 //    }
 
-    public Menu findById(String id) {
-        if(menuRepository.findById(id).isPresent()) return menuRepository.findById(id).get();
+    public Menu findById(String menuId) {
+        if(menuRepository.findById(menuId).isPresent()) return menuRepository.findById(menuId).get();
         else return null;
     }
+
+//    public boolean findShopIdByMenuId(String menuId){
+//        return menuRepository.findShopIdByMenuId(menuId);
+//    }
 
     public int count(String id){
         return menuRepository.countMenusByIdContains(id);
@@ -30,8 +34,8 @@ public class MenuService {
         return menuRepository.save(_menu);
     }
 
-    public void delete(Menu _menu) {
-        menuRepository.delete(_menu);
+    public void delete(String _menu) {
+        menuRepository.delete( findById(_menu));
     }
 
     public List<Menu> findContainsId(String shopId) {

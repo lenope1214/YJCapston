@@ -88,8 +88,9 @@ public class Menu {
         private char isSale;
         private char isPopular;
         private String imgPath;
-        public void parse(Menu menu){
-            this.name = menu.getId().substring(10);
+
+        public Response(Menu menu){
+            this.name = menu.getId().substring(10).replace("_", " ");
             this.intro = menu.getIntro();
             this.price = menu.getPrice();
             this.duration = menu.getDuration();
@@ -97,6 +98,9 @@ public class Menu {
             this.isPopular = menu.getIsPopular();
             this.imgPath = menu.getImgPath();
         }
+//        public void parse(Menu menu){
+//
+//        }
     }
 
     public void update(Menu.Request request){
