@@ -1,8 +1,8 @@
 #!/bin/bash
 
-REPOSITORY=c:\build
+REPOSITORY=C:\Users\Administrator\Documents\GitHub\YJCapston
 
-cd $REPOSITORY/springboot-service/
+cd $REPOSITORY
 
 echo "> Git Pull"
 
