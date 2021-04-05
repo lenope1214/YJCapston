@@ -111,7 +111,6 @@ public class MenuController extends Controller {
     }
 
     @Transactional
-//    @PreAuthorize("hasAnyRole('ADMIN','OWNER')")
     @DeleteMapping("/menu/{menuId}") // Delete
     public ResponseEntity<?> deleteMenu(@RequestHeader String authorization, @PathVariable String menuId) {
         String loginId = getLoginUserId(authorization);
@@ -123,7 +122,6 @@ public class MenuController extends Controller {
     }
 
     @Transactional(readOnly = true)
-//    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/menuListAll")
     public ResponseEntity<?> menuListAll() {
         return new ResponseEntity<>(menuService.findAll(), HttpStatus.OK);
