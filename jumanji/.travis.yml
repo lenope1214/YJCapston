@@ -15,7 +15,7 @@ cache:
 script: "./gradlew clean build"
 
 before_install:
-  - cd project
+#  - cd project
   - chmod +x gradlew
 
 #before_deploy:
