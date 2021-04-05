@@ -6,15 +6,16 @@ branches:
   only:
     - master
 
-before_install: # 실행하기 전에 먼저 해야함.
-  - cd jumanji # 빌드 하기 전에 jumanji 프로젝트로 이동.
+before_install: # 실행하기 전에 먼저 해야함. # 빌드 하기 전에 jumanji 프로젝트로 이동.
+  - cd jumanji
   - chmod +x gradlew
+
 
 # Travis CI 서버의 Home
 cache:
   directories:
     - '$HOME/.m2/repository'
-    - '$HOME/.gradle' 
+    - '$HOME/.gradle'
 
 script: "./gradlew clean build"
 
@@ -55,5 +56,4 @@ script: "./gradlew clean build"
 notifications:
   email:
     recipients:
-#      - adsl1664@gmail.com
       - dltjdqhr1000@gmail.com
