@@ -52,12 +52,16 @@ jobs:
       # 압축파일 형태로 전달
     - name: Make zip file
       run: zip -r -qq -j ./jumanji-project-build.zip ./deploy
+      
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ap-northeast-2
 
     # S3 Bucket으로 copy
     - name: Deliver to AWS S3
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
         aws s3 cp \
         --region ap-northeast-2 \
@@ -65,14 +69,10 @@ jobs:
           ./jumanji-project-build.zip s3://jumanji-project-build/
 
     - name: Deploy ec2
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
         aws deploy create-deployment \
-          --region ap-northeast-2 \
           --application-name YJCapston-jumanji \
-          --file-exists-behavior OVERWRITE \
           --deployment-group-name YJCpaston-jumanji-group \
+          --file-exists-behavior OVERWRITE \
           --s3-location bucket=${{ secrets.AWS_S3_BUCKET_NAME }},key=$PROJECT_NAME/$GITHUB_SHA.zip,bundleType=zip
 
