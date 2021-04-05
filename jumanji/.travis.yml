@@ -5,6 +5,7 @@ jdk:
 branches:
   only:
     - master
+    - chmod +x gradlew
 
 # Travis CI 서버의 Home
 cache:
@@ -16,8 +17,7 @@ script: "./gradlew clean build"
 
 
 
-before_install:
-  - chmod +x gradlew
+
 
 # CI 실행 완료 시 메일로 알람
 notifications:
