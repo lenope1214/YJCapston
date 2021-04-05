@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REPOSITORY=C:\\Users\\Administrator\\Documents\\GitHub\\YJCapston\\jumanji
+REPOSITORY=C:/Users/Administrator/Documents/GitHub/YJCapston/jumanji
 
 cd $REPOSITORY
 
