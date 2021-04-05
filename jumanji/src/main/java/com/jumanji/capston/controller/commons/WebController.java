@@ -111,4 +111,6 @@ public class WebController {
     @GetMapping("/loadFile")
     public String loadFile(){return "loadFile";}
 
+    @GetMapping("daumAddr")
+    public String daumAddr(){ return "daumAddr";}
 }

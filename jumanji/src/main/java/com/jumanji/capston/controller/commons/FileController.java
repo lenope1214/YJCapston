@@ -1,6 +1,5 @@
-package com.jumanji.capston.controller;
+package com.jumanji.capston.Controller.commons;
 
-import com.jumanji.capston.data.Request.FileRequest;
 import com.jumanji.capston.service.StorageService;
 import com.jumanji.capston.storage.StorageFileNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,15 +48,24 @@ public class FileController {
 //                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
 //    } // 파일 다운로드 경로
 
-    @GetMapping("/loadImg")
+    @GetMapping("/shop/{shopId}/menu/{fileName:.+}")
     @ResponseBody
-    public ResponseEntity<?> loadImg(@RequestBody FileRequest request) {
+    public ResponseEntity<?> loadImg(@PathVariable String shopId, @PathVariable String fileName) {
         System.out.println("이미지 로드 요청 !!!");
-        Resource img = storageService.loadImg(request.getPath().split("/"));
+        Resource img = storageService.loadImg("files", "shop", shopId, "menu", fileName);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE,
                 "image/jpeg; filename=\"" + img.getFilename() + "\"").body(img);
     }
-    
+
+    @GetMapping("/shop/{shopId}/thumbNail/{fileName:.+}")
+    @ResponseBody
+    public ResponseEntity<?> loadThumbNail(@PathVariable String shopId, @PathVariable String fileName) {
+        System.out.println("이미지 로드 요청 !!!");
+        Resource img = storageService.loadImg("files", "shop", shopId, "thumbNail", fileName);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE,
+                "image/jpeg; filename=\"" + img.getFilename() + "\"").body(img);
+    }
+
     // 파일 불러오기
 //    @GetMapping("/loadImg/{shopId}")
 //    @ResponseBody

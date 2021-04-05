@@ -62,7 +62,7 @@ public class StorageService {
 //            System.out.println("경로 내 파일 수 : " + (fileList.length));
 //            newFileName = (fileList.length+1) + "." + fileExtension;
             System.out.println("path : " + path);
-            destinationFile = Path.of((path + fileName + "." + fileExtension));
+            destinationFile = Path.of((path +"\\"+ fileName + "." + fileExtension));
 //            Path destinationFile = Path.of((dirFile.toURI()));
 //                    .normalize().toAbsolutePath(); // file.getOriginalFilename() -> filename.filetype 이런 형태
 //            Path destinationFile = this.rootLocation.resolve(Paths.get(dirFile +"\\"+ newFileName))
