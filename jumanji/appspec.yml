@@ -13,4 +13,4 @@ hooks:
     # location은 프로젝트의 root경로를 기준
     - location: deploy.sh
       timeout: 60
-      runas: root
+      # runas: root  windows에선 지원x
