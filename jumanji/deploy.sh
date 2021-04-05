@@ -1,8 +1,8 @@
 #!/bin/bash
 
-REPOSITORY=C:/Users/Administrator/Documents/GitHub/YJCapston/jumanji
+REPOSITORY=C:/Users/Administrator/Documents/GitHub/YJCapston
 
-cd $REPOSITORY
+cd $REPOSITORY/jumanji
 
 echo "> Git Pull"
 
@@ -18,7 +18,7 @@ cp ./build/libs/*.jar $REPOSITORY/
 
 echo "> 현재 구동중인 애플리케이션 pid 확인"
 
-CURRENT_PID=$(pgrep -f springboot-webservice)
+CURRENT_PID=$(pgrep -f jumanji)
 
 echo "$CURRENT_PID"
 
@@ -32,7 +32,7 @@ fi
 
 echo "> 새 어플리케이션 배포"
 
-JAR_NAME=$(ls $REPOSITORY/ |grep 'springboot-webservice' | tail -n 1)
+JAR_NAME=$(ls $REPOSITORY/ |grep 'jumanji' | tail -n 1)
 
 echo "> JAR Name: $JAR_NAME"
 
