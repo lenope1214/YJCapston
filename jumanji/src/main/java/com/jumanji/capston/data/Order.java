@@ -33,6 +33,11 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "tab_id", insertable = false, updatable = false)
     private Tab table;
+
+    @Getter
+    class Request{
+        private Long id;
+    }
 }
 
 //@Getter
