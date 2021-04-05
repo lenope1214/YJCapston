@@ -49,13 +49,13 @@ dependencies {
     implementation 'org.projectlombok:lombok:1.18.16'
     annotationProcessor "org.projectlombok:lombok:1.18.16"
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.18'
 
 
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    testImplementation 'org.springframework.security:spring-security-test'
+//    testImplementation 'org.springframework.security:spring-security-test'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
 //    implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
@@ -74,6 +74,6 @@ dependencies {
 //    compile fileTree(dir: 'lib', include: ['*.jar'])
 }
 
-test {
-    useJUnitPlatform()
-}
+//test {
+//    useJUnitPlatform()
+//}
