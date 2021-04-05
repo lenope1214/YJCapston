@@ -76,11 +76,11 @@ public class UserService {
 //    }
 
     @Transactional
-    public User updateUser(User oldData, User newData) {
+    public User updateUser(User oldData, User.Request newData) {
         System.out.println("Update User in");
         oldData.setAddress(newData.getAddress());
         oldData.setAddressDetail(newData.getAddressDetail());
-        oldData.setEmail(newData.getEmail());
+        oldData.setPassword(bCryptPasswordEncoder.encode(newData.getPassword()));
         return userRepository.save(oldData);
     }
 

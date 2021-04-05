@@ -63,6 +63,38 @@ public class User {
         this.point = 0;
         this.level = 1;
     }
+
+    @Getter
+    public static class Request {
+        private String password;
+        private String address; // 주소
+        private String addressDetail; // 상세주소
+    }
+
+    @Getter
+    public static class Response{
+        private String name;
+        private String address;
+        private String addressDetail;
+        private Date birthday; // 생년월일
+        private String phone; // 전화번호
+        private String role; // 권한   u, o, a
+        private Date signDate; // 가입날짜
+        private int level; // 등급
+        private int point; // 포인트
+
+        public Response(User user) {
+            this.name = user.getName();
+            this.address = user.getAddress();
+            this.addressDetail = user.getAddressDetail();
+            this.birthday = user.getBirthday();
+            this.phone = user.phone;
+            this.role = user.getRole();
+            this.level = user.getLevel();
+            this.point = user.getPoint();
+            this.signDate = user.getSignDate();
+        }
+    }
 }
 
 

@@ -114,7 +114,10 @@ public class ShopController extends Controller {
         String loginId = getLoginUserId(authorization);
         User userEntity = userService.findById(loginId);
         String uri = "shop/" + request.getId() + "/thumbnail/";
-        String imgPath = storageService.store(request.getImg(), request.getImg().getName(), uri.split("/"));
+        String imgPath=null;
+        System.out.println("openTime : " + request.getOpenTime());
+        System.out.println("closeTime : " + request.getCloseTime());
+        if(request.getImg() != null) imgPath = storageService.store(request.getImg(), request.getImg().getName(), uri.split("/"));
         Date openTime = Shop.stringToDate(request.getOpenTime());
         Date closeTime = Shop.stringToDate(request.getCloseTime());
         Shop shopEntity;
@@ -160,7 +163,6 @@ public class ShopController extends Controller {
             return new ResponseEntity<>(new ApiErrorResponse(e.getCode(), e.getMessage()), HttpStatus.NOT_FOUND);
         }
         shop.update(patch);
-
         return null;
     }
 
