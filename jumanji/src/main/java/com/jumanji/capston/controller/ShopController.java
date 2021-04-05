@@ -100,6 +100,7 @@ public class ShopController extends Controller {
     @Transactional
     @PostMapping("/shop") // 매장등록     Form-data로 받음 => Param.
     public ResponseEntity<?> insertShop(Shop.info request, @RequestHeader String authorization) throws ParseException {
+        System.out.println("매장등록's shopId : " + request.getId());
         try {
             if(shopService.findById(request.getId()) != null) throw new ShopHasExistException();
         } catch (ShopNotFoundException ignored) { // null 이면 없는 사업자번호 이므로 된다 !!
