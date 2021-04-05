@@ -9,8 +9,8 @@ branches:
 # Travis CI 서버의 Home
 cache:
   directories:
-    - 'jumanji/.m2/repository'
-    - 'jumanji/.gradle' # 여기서 위치 정해주는거 같음 YJCapston/jumanji
+    - '$HOME/jumanji/.m2/repository'
+    - '$HOME/jumanji/.gradle' # 여기서 위치 정해주는거 같음 YJCapston/jumanji
 
 script: "./gradlew clean build"
 
