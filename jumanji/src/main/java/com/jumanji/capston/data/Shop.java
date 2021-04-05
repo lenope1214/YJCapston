@@ -90,6 +90,7 @@ public class Shop {
     }
 
 
+
     @Builder(builderMethodName = "createShop")
     public Shop(String id, String name, String intro, Date openTime, Date closeTime, String address, String addressDetail, String category, String imgPath, User owner) {
         this.id = id;
