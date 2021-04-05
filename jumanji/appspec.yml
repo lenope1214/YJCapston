@@ -1,5 +1,5 @@
 version: 0.0
-os: linux # windows도 linux로 하라고 나와있음.
+os: windows # windows도 linux로 하라고 나와있음.
 files:
   - source: /
     destination: /build # 배포 파일 도착 폴더
