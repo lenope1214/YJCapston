@@ -114,6 +114,7 @@ public class Menu {
         if(request.getPrice() != 0)this.price = request.getPrice();
         if(request.getDuration() != 0)this.duration = request.getDuration();
         if(request.getIsSale() != '\u0000' )this.isSale = request.getIsSale();
+        this.modDate = new Date();
     }
 
 

@@ -105,8 +105,9 @@ public class MenuController extends Controller {
         menu.update(request);
 
         menuService.save(menu);
+        Menu.Response response = new Menu.Response(menu);
         System.out.println("menuId : " + menu.getId());
-        return new ResponseEntity<>(menu, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Transactional
