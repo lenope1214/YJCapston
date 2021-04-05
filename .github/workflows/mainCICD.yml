@@ -62,7 +62,7 @@ jobs:
     - name: Deploy ec2
       run: |
         aws deploy create-deployment \
-          --application-name codedeploy-from-s3 \
+          --YJCapston-jumanji codedeploy-from-s3 \
           --deployment-group-name codedeploy-from-s3 \
           --s3-location bucket=${{ secrets.AWS_S3_BUCKET_NAME }},key=community-build/buildFile.zip,bundleType=zip > deploymentId.txt
 
