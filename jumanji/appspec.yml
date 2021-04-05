@@ -8,7 +8,8 @@ files:
     # 제대로 되지않는다면, 아래 hooks BeforeInstall 를 추가하여, 존재하는 파일을 삭제하는 방법이 있습니다
 
 hooks:
-  AfterInstall: # 파일이 도착 후 실행
-    - location: c:\build\deploy.sh
-      timeout: 60 # 60 안에 실행, 60 뒤엔 배포 실패로 변경
+  AfterInstall:
+    # location은 프로젝트의 root경로를 기준
+    - location: deploy.sh
+      timeout: 60
       runas: root
