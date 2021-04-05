@@ -19,3 +19,4 @@ notifications:  # 실행 완료 시 자동으로 알람이 가도록 설정.
   email:
     recipients:
       - dltjdqhr1000@gmail.com
+
