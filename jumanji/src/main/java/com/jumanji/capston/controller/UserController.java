@@ -72,6 +72,8 @@ public class UserController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    
+
     @Transactional(readOnly = true)
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/userList") // getUserList
