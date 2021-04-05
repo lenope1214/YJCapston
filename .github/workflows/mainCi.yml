@@ -13,12 +13,14 @@ on:
   pull_request:
     branches: [ master ]
 
+defaults:
+  run:
+      working-directory: ./jumanji
+
 jobs:
   build:
     # 실행 환경 지정
     runs-on: ubuntu-latest
-    env:
-        working-directory: ./jumanji
 
     # Task의 sequence를 명시한다.
     steps:
