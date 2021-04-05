@@ -74,5 +74,5 @@ jobs:
           --application-name YJCapston-jumanji \
           --deployment-group-name YJCpaston-jumanji-group \
           --file-exists-behavior OVERWRITE \
-          --s3-location bucket=${{ secrets.AWS_S3_BUCKET_NAME }},key=$PROJECT_NAME/$GITHUB_SHA.zip,bundleType=zip
+          --s3-location bucket=${{ secrets.AWS_S3_BUCKET_NAME }},key=jumanji-project-build.zip,bundleType=zip
 
