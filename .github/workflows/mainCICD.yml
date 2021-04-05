@@ -58,3 +58,27 @@ jobs:
         aws s3 cp \
         --region ap-northeast-2 \
           ./build/libs/*.jar s3://jumanji-project-build
+
+    - name: Deploy ec2
+      run: |
+        aws deploy create-deployment \
+          --application-name codedeploy-from-s3 \
+          --deployment-group-name codedeploy-from-s3 \
+          --s3-location bucket=${{ secrets.AWS_S3_BUCKET_NAME }},key=community-build/buildFile.zip,bundleType=zip > deploymentId.txt
+
+        DEPLOYMENT_ID=$(cat deploymentId.txt | jq -r '.deploymentId')
+
+        echo "Wait 60 seconds for deployment and test"
+        sleep 60
+
+        IS_SUCCESS=$(aws deploy get-deployment --deployment-id $DEPLOYMENT_ID | jq -r '.deploymentInfo.status')
+
+        echo $IS_SUCCESS;
+
+        if [ "$IS_SUCCESS" = "Succeeded" ];
+        then
+          echo "SUCCESS DEPLOY!"
+        else
+          echo "FAIL DEPLOY!"
+          exit 1
+        fi
