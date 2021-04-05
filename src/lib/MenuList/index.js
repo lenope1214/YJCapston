@@ -12,10 +12,8 @@ export const getMenuList = (shopId) => {
 export const removeMenues = (
     id
 ) => {
-    return apiDefault().delete("/menu"
-        , {
-            data: { menuId: id },
-        }, {
+    return apiDefault().delete(`/menu/${id}`
+        ,  {
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         },

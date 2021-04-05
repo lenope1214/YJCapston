@@ -73,7 +73,7 @@ const MenuRegisterForm = ({
                             <th className="form-label">메뉴설명</th>
                             <td>
                                 <textarea 
-                                    row="5"
+                                    row="8"
                                     placeholder="메뉴설명"
                                     id="description"
                                     value={menudesc}

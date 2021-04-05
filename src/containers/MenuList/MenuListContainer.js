@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import axios from "axios";
 import MenuList from '../../components/MenuList/MenuList';
 import { useHistory } from 'react-router';
 import { getMenuList, removeMenu } from '../../lib/MenuList';
 import OwnerNavbar from "../../components/OwnerMenubar/OwnerNavbar";
 import Header from "../../components/Header/Header";
-import { apiDefault } from "../../lib/client";
 import { removeMenues } from "../../lib/MenuList/index"
 
 const MenuListContainer = (props) => {

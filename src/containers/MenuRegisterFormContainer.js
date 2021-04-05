@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MenuRegisterForm from "../components/MenuRegisterForm/MenuRegisterForm";
 import OwnerNavbar from "../components/OwnerMenubar/OwnerNavbar";
-import axios from "axios";
 import { useHistory } from "react-router";
 import Header from "../components/Header/Header";
 import { apiDefault } from "../lib/client";
@@ -19,6 +18,21 @@ const MenuRegisterFormContainer = (props) => {
         setShopId(props.match.params.shopId);
     })
 
+    function isName(menuname) {
+        let menunameRegExp = /^[가-힣]{2,20}$/;
+        return menunameRegExp.test(menuname);
+    }
+
+    function isPrice(price) {
+        let priceRegExp = /^[0-9]{2,6}$/;
+        return priceRegExp.test(price);
+    }
+
+    function isDuration(duration) {
+        let durationRegExp = /^[0-9]{1,3}$/;
+        return durationRegExp.test(duration);
+    }
+
     const handleMenuname = (e) => {
         const value = e.target.value;
         setMenuname(value);
@@ -31,7 +45,6 @@ const MenuRegisterFormContainer = (props) => {
 
     const handleImg = (e) => {
         const files = e.target.files[0];
-        // console.log("files="+files);
         setImg(files);
     };
 
@@ -46,7 +59,22 @@ const MenuRegisterFormContainer = (props) => {
     };
 
     const menu_v1 = async () => {
-        alert("추가확인 버튼");
+        if(!isName(menuname)) {
+            return alert(
+                "메뉴명은 2~20자리로 입력해야 합니다."
+            );
+        }
+        if(!isPrice(price)) {
+            return alert(
+                "가격은 숫자 2~6자리로 입력해야 합니다."
+            );
+        }
+        if(!isDuration(duration)) {
+            return alert(
+                "예상 소요시간은 숫자 1~3자리로 입력해야 합니다."
+            );
+        }
+
         const formData = new FormData();
         formData.append("img", img);
         formData.append("shopId", shopId);
@@ -54,15 +82,9 @@ const MenuRegisterFormContainer = (props) => {
         formData.append("price", price);
         formData.append("intro", menudesc);
         formData.append("duration", duration);
-        // console.log(formData);
         
         const res = await apiDefault().post("/menu",
-        // {   
             formData,
-            // name: menuname,
-            // price: price,
-            // intro: menudesc,
-        // },
         {
             headers: {
                 Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
@@ -70,11 +92,11 @@ const MenuRegisterFormContainer = (props) => {
             },
         }
         ).then((res) => {
-            history.push(`/menulist/${shopId}`);
+            history.goBack();
             alert("메뉴가 추가되었습니다.");
         })
         .catch((err) => {
-            alert("Err");
+            alert("메뉴 추가 실패!");
         });
         console.log(res);
     };

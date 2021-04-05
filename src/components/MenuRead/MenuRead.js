@@ -1,22 +1,22 @@
 import React from "react"
-import { Link } from "react-router-dom"
 import * as S from "./style";
 
 const MenuRead = ({ 
-    menuId,
     name, 
     intro, 
     price, 
-    menuName,
-    handleMenuName,
     menuPrice,
     handleMenuPrice,
     menuImg,
+    img,
     handleMenuImg,
     menuIntro,
     handleMenuIntro,
     ReadMenu,
-    goBack
+    goBack,
+    duration,
+    handleDuration,
+    menuDuration
 }) => {
     return (
         <>
@@ -26,13 +26,21 @@ const MenuRead = ({
                     <table className="register-form">
                         <tbody>
                             <tr>
+                                <th className="form-label"></th>
+                                
+                                    <img src={img}
+                                    width='200'
+                                    height='200'>
+                                        {console.log(menuImg)}
+                                    </img>
+                                
+                            </tr>
+                            <tr>
                                 <th className="form-label">상품명</th>
                                 <td>
                                     <input
                                         type="text"
-                                        placeholder={name}
-                                        onChange={handleMenuName}
-                                        value={menuName}
+                                        value={name}
                                     />
                                 </td>
                             </tr>
@@ -44,6 +52,17 @@ const MenuRead = ({
                                         placeholder={price}
                                         onChange={handleMenuPrice}
                                         value={menuPrice}
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th className="form-label">소요시간</th>
+                                <td>
+                                    <input
+                                        type="text"  
+                                        placeholder={duration}
+                                        onChange={handleDuration}
+                                        value={menuDuration}
                                     />
                                 </td>
                             </tr>

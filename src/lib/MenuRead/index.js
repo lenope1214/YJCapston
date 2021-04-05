@@ -4,10 +4,8 @@ import { apiDefault } from "../client";
 export const getMenuRead = (
     menuId
 ) => {
-    return apiDefault().get("/menu"
+    return apiDefault().get(`/menu/${menuId}`
         , {
-             data:{menuId: menuId}, 
-        }, {
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         },
@@ -15,17 +13,19 @@ export const getMenuRead = (
 };
 
 export const putMenuRead = (
-    menuName,
+    // menuName,
     menuPrice,
     menuIntro,
     menuId,
+    duration,
 ) => {
     return apiDefault().patch("/menu"
         , {
-            name: menuName,
+            // name: menuName,
             price: menuPrice,
             intro: menuIntro,
             menuId: menuId,
+            duration: duration,
         }, {
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,

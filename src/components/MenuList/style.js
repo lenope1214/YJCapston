@@ -65,7 +65,8 @@ a { color: black;}
       width: 5%;
   }
   .body-item-1 {
-    padding: 15px;
+    padding: 5px 15px 5px 15px;
+    text-align:center;
   }
   .body-item-2 {
     padding: 15px 15px 15px 30px;

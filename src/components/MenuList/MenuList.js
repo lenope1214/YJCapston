@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import * as S from "./style";
-import {getMenuRead, getNowMenu} from "../../lib/MenuRead"
-import MenuReadContainer from "../../containers/MenuRead/MenuReadContainer";
 
 const MenuList = ({ menues, removeMenu, shopId }) => {
     return (
@@ -24,20 +22,25 @@ const MenuList = ({ menues, removeMenu, shopId }) => {
                                     <td colSpan="3">목록이 비었습니다.</td>
                                 </tr>
                             )}
-                            
+
                             {!!menues.length && menues.map((menu) => {
                                 return (
-                                <tr>         
-                                    <td className="body-item-1"><img src={`${menu.img}`}>{console.log(`${menu.img}`)}</img></td>
-                                           
-                                    <td className="body-item-2">
-                                    <Link to={`/menu/${shopId}${menu.name}`} className="menu-link">
-                                        {menu.name}
-                                        </Link>
-                                    </td>
-                                    <td className="body-item-3">{menu.price}</td>
-                                    <td className="body-item-4" onClick={() => removeMenu(`${menu.id}`)}><button>X</button></td>
-                                </tr>
+                                    <tr>
+                                        <td className="body-item-1">
+                                            <img src={`${menu.img}`}
+                                                width='100'
+                                                height='100'>
+                                                {console.log(`${menu.img}`)}
+                                            </img>
+                                        </td>
+                                        <td className="body-item-2">
+                                            <Link to={`/menu/${shopId}${menu.name}`} className="menu-link">
+                                                {menu.name}
+                                            </Link>
+                                        </td>
+                                        <td className="body-item-3">{menu.price}</td>
+                                        <td className="body-item-4" onClick={() => removeMenu(`${menu.id}`)}><button>X</button></td>
+                                    </tr>
                                 );
                             })}
                         </tbody>
