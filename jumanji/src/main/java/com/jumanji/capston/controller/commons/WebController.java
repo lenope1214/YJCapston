@@ -1,4 +1,4 @@
-package com.jumanji.capston.controller.Temporary;
+package com.jumanji.capston.controller.commons;
 
 import com.jumanji.capston.config.auth.PrincipalDetails;
 import org.springframework.security.access.annotation.Secured;

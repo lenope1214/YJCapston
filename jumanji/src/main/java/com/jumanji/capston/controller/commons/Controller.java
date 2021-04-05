@@ -1,4 +1,4 @@
-package com.jumanji.capston.controller.Temporary;
+package com.jumanji.capston.controller.commons;
 
 import com.jumanji.capston.config.jwt.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;

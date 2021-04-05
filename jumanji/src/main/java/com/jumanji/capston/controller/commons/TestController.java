@@ -1,4 +1,4 @@
-package com.jumanji.capston.controller.Temporary;
+package com.jumanji.capston.controller.commons;
 
 import com.jumanji.capston.controller.exception.ApiErrorResponse;
 import com.jumanji.capston.data.Request.FileAndData;

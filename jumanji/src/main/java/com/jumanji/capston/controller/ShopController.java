@@ -1,7 +1,8 @@
 package com.jumanji.capston.controller;
 
-import com.jumanji.capston.controller.Temporary.Controller;
+import com.jumanji.capston.controller.commons.Controller;
 import com.jumanji.capston.controller.exception.ApiErrorResponse;
+import com.jumanji.capston.controller.exception.ShopException.ShopHasExistException;
 import com.jumanji.capston.controller.exception.ShopException.ShopNotFoundException;
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.data.User;
@@ -100,10 +101,10 @@ public class ShopController extends Controller {
     @PostMapping("/shop") // 매장등록     Form-data로 받음 => Param.
     public ResponseEntity<?> insertShop(Shop.info request, @RequestHeader String authorization) throws ParseException {
         try {
-            if(shopService.findById(request.getId()) != null) throw new Exception();
+            if(shopService.findById(request.getId()) != null) throw new ShopHasExistException();
         } catch (ShopNotFoundException ignored) { // null 이면 없는 사업자번호 이므로 된다 !!
-        } catch (Exception e) { // 사업자번호 중복 에러 체킹!!
-            return new ResponseEntity<>(new ApiErrorResponse("error-1002", "이미 등록된 사업자 번호입니다."), HttpStatus.LOCKED);
+        } catch (ShopHasExistException e) { // 사업자번호 중복 에러 체킹!!
+            return new ResponseEntity<>(new ApiErrorResponse(e.getCode(), e.getMessage()), HttpStatus.LOCKED);
         }
 
 //        if ( == null)

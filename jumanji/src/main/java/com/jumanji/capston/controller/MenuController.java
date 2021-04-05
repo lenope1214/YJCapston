@@ -1,6 +1,6 @@
 package com.jumanji.capston.controller;
 
-import com.jumanji.capston.controller.Temporary.Controller;
+import com.jumanji.capston.controller.commons.Controller;
 import com.jumanji.capston.controller.exception.ApiErrorResponse;
 import com.jumanji.capston.data.Menu;
 import com.jumanji.capston.service.MenuService;
@@ -113,11 +113,7 @@ public class MenuController extends Controller {
 //    @PreAuthorize("hasAnyRole('ADMIN','OWNER')")
     @DeleteMapping("/menu/{menuId}") // Delete
     public ResponseEntity<?> deleteMenu(@RequestHeader String authorization, @PathVariable String menuId) {
-//        String menuId = request.getMenuId(request);
-        // 추후에 유저 확인..
         String loginId = getLoginUserId(authorization);
-//        System.out.println("0, 10 : " + menuId.substring(0, 10));
-//        return null;
         if(loginId.equals(shopService.findById(menuId.substring(0, 10)).getOwner().getId())) {
             menuService.delete(menuId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

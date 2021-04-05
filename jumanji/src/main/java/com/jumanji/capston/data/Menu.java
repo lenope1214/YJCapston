@@ -22,7 +22,7 @@ author 이성복
 public class Menu {
 
     @Id
-    private String id; // 메뉴번호 ( 매장번호 + seq(2) )
+    private String id; // 메뉴번호 ( 매장번호 + seq ( 2 ) )
 
     private String name; // 메뉴이름
     private String intro; //메뉴설명
@@ -61,6 +61,8 @@ public class Menu {
         private int duration;
         private MultipartFile img;
     }
+
+    public static String subShopId(String menuId){ return menuId.substring(0, 10) ;}
 
     @Getter
     @Setter
@@ -104,7 +106,10 @@ public class Menu {
     }
 
     public void update(Menu.Request request){
-        if(request.getName() != null)this.name = request.getName();
+//        if(request.getName() != null){
+//            this.id = Menu.subShopId(request.menuId) + request.getName();
+//            this.name = request.getName();
+//        }
         if(request.getIntro() != null)this.intro = request.getIntro();
         if(request.getPrice() != 0)this.price = request.getPrice();
         if(request.getDuration() != 0)this.duration = request.getDuration();
