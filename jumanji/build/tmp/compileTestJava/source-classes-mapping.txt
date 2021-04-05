@@ -1,2 +1,0 @@
-com/jumanji/capston/repository/UserRepositoryIntegreTest.java
- com.jumanji.capston.repository.UserRepositoryIntegreTest
