@@ -61,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
 // 인증하지 않을 주소 추가.
-        web.ignoring().antMatchers("/css/**", "/js/**", "/image/**");
+        web.ignoring().antMatchers("/html/**", "/css/**", "/js/**", "/image/**");
     }
 
     @Override
