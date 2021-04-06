@@ -1,13 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Shoplist from "../../components/Shoplist/Shoplist";
 import { useHistory } from "react-router-dom";
-import { postLogin } from "../../lib/Main/index";
+import {
+    postLogin,
+    getShoplist,
+    getShoplistkorean,
+} from "../../lib/Shoplist/index";
+import Shopcontent from "../../components/shopcontent/shopcontent";
 
 const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
     const history = useHistory();
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
     const [modal, setModal] = useState(false);
+    const [restaurant, setRestaurant] = useState([
+        {
+            name: "",
+            category: "",
+            address: "",
+            intro: "",
+            addressDetail: "",
+        },
+    ]);
 
     const openmodal = () => {
         setModal(true);
@@ -26,7 +40,53 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
         const value = e.target.value;
         setPw(value);
     };
-    console.log(isLogin);
+
+    useEffect(() => {
+        showShoplist();
+    }, []);
+
+    console.log("restaurant :", restaurant);
+
+    const showkorean = () => {
+        getShoplistkorean()
+            .then((res) => {
+                console.log(res.data);
+                const rstrt = res.data.map((rstrt) => {
+                    return {
+                        address: rstrt.address,
+                        name: rstrt.name,
+                        intro: rstrt.intro,
+                        category: rstrt.category,
+                        id: rstrt.id,
+                    };
+                });
+                setRestaurant(rstrt);
+            })
+            .catch((err) => {
+                alert(err);
+            });
+    };
+    const showShoplist = () => {
+        getShoplist()
+            .then((res) => {
+                console.log(res.data);
+                const rstrt = res.data.map((rstrt) => {
+                    return {
+                        address: rstrt.address,
+                        name: rstrt.name,
+                        intro: rstrt.intro,
+                        category: rstrt.category,
+                        id: rstrt.id,
+                        addressDetail: rstrt.addressDetail,
+                    };
+                });
+
+                setRestaurant(rstrt);
+            })
+            .catch((err) => {
+                alert(err);
+            });
+    };
 
     const login = () => {
         postLogin(id, pw)
@@ -55,18 +115,22 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
     };
 
     return (
-        <Shoplist
-            id={id}
-            pw={pw}
-            isLogin={isLogin}
-            modal={modal}
-            logout={handleLogout}
-            handleId={handleId}
-            handlePw={handlePw}
-            login={login}
-            openModal={openmodal}
-            closeModal={closemodal}
-        />
+        <>
+            <Shoplist
+                id={id}
+                pw={pw}
+                isLogin={isLogin}
+                modal={modal}
+                logout={handleLogout}
+                handleId={handleId}
+                handlePw={handlePw}
+                login={login}
+                openModal={openmodal}
+                closeModal={closemodal}
+                restaurant={restaurant}
+                showkorean={showkorean}
+            />
+        </>
     );
 };
 

@@ -37,7 +37,7 @@ const Shop = ({
     return (
         <>
             <S.ShopsWrap>
-                <header>
+                {/* <header>
                     <Link to="/MyShop" class="shoppage">
                         <div className="left-nav">
                             주문
@@ -52,11 +52,11 @@ const Shop = ({
                             민족
                         </div>
                     </Link>
-                </header>
+                </header> */}
                 
                 <body>
                     <p>매장등록하기</p>
-            <form encType="multipart/form-data" className="form">
+            {/* <form encType="multipart/form-data" className="form"> */}
                     <span>사업자아이디</span>
                     <input
                         type="text"
@@ -87,13 +87,21 @@ const Shop = ({
                     
                     
                     <span>매장소개</span>
+                    {/* <div contenteditable="true"
+                         type="textarea"
+                         id="intro"
+                         placeholder="매장소개"
+                         onChange={handleIntro}
+                         value={intro}
+                    ></div> */}
                     <input
-                        type="text"
+                        type="textarea"
                         id="intro"
                         placeholder="매장소개"
                         onChange={handleIntro}
                         value={intro}
                     />
+                   
 
                     <span>오픈시간</span>
                     <input
@@ -186,12 +194,12 @@ const Shop = ({
                         </span>     */}
 
 
-            </form>
+            {/* </form> */}
                 </body>
                 
                 <footer>
                     
-                    <button onClick={shop_v1}>등록</button>
+                    <button onClick={shop_v1} className="button1">등록</button>
                     
                 </footer>
             </S.ShopsWrap>

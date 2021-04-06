@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 const OwnerNavbar = ({shopId}) => {
     const [thisShopId, setThisShopId] = useState("");
     useEffect(() => {
-        setThisShopId(`${shopId}`);
+        setThisShopId(shopId);
     })
     return(
         <>
@@ -18,9 +18,9 @@ const OwnerNavbar = ({shopId}) => {
                 <NavLink to={"/shopInfo/"+thisShopId} activeClassName="active">
                     <li className="nav-item">매장 소개</li>
                 </NavLink>
-                {/* <NavLink to="/event" activeClassName="active"> */}
-                    <li className="nav-item">이벤트</li>
-                {/* </NavLink> */}
+                <NavLink to="/myshop" activeClassName="active">
+                    <li className="nav-item">매장 목록</li>
+                </NavLink>
             </ul>
         </nav>
         </S.NavWrap>

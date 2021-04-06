@@ -4,94 +4,124 @@ import { useHistory } from "react-router";
 import Header from "../../components/Header/Header";
 import OwnerNavbar from "../../components/OwnerMenubar/OwnerNavbar";
 import ShopInfo from "../../components/ShopInfo/ShopInfo";
-import { getShopList, putShopInfo} from '../../lib/ShopInfo';
+import { getShopInfo, getShopList, putShopInfo} from '../../lib/ShopInfo';
 
 
-const ShopInfoContainer = () => {
+const ShopInfoContainer = (props) => {
+    
     const history = useHistory();
-    const [name, setName] = useState("");
-    const [intro, setIntro] = useState("");
-    const [open_time, setOpen_time] = useState("");
-    const [close_time, setClose_time] = useState("");
-    const [category, setCategory] = useState("");
-    const [address, setAddress] = useState("");
-    const [addressDetail, setAddressDetail] = useState("");
-    const [isRsPos, setIsRsPos] = useState("");
-    const [shop, setShop] = useState({
-        id: "",
-        name:"",
-    });
+    const [shopInfo, setShopInfo] = useState([]);
+    const [shopId, setShopId] = useState("");
+    const [shopName, setShopName] = useState(null);
+    const [shopIntro, setShopIntro] = useState(null);
+    const [shopOpenTime, setShopOpenTime] = useState(null);
+    const [shopCloseTime, setShopCloseTime] = useState(null);
+    const [shopAddress, setShopAddress] = useState(null);
+    const [shopAddressDetail, setShopAddressDetail] =useState(null);
+    const [shopIsRsPos, setShopIsRsPos] = useState(null);
+    const [shopCategory, setShopCategory] = useState(null);
 
-    const handleName= (e) => {
+    const handleShopName = (e) =>{
         const value = e.target.value;
-        setName(value);
-    };
-    const handleIntro= (e) => {
-        const value = e.taeget.value;
-        setIntro(value);
+        setShopName(value);
     }
-    const handleOpen_time= (e) => {
+    const handleShopIntro = (e) => {
         const value = e.target.value;
-        setOpen_time(value);
+        setShopIntro(value);
     }
-    const handleClose_time= (e) => {
+    const handleShopOpenTime =(e) => {
         const value = e.target.value;
-        setClose_time(value);
+        setShopOpenTime(value);
     }
-    const handleCategory = (e) => {
-        const value = e.taeget.value;
-        setCategory(value);
-    }
-    const handleAddress = (e) => {
+    const handleShopCloseTime = (e) => {
         const value = e.target.value;
-        setAddress(value);
+        setShopCloseTime(value);
     }
-    const handleAddressDetail = (e) => {
+    const handleShopAddress = (e) => {
         const value = e.target.value;
-        setAddressDetail(value);
+        setShopAddress(value);
     }
-    const handleIsRsPos = (e) => {
+    const handleShopAddressDetail = (e) => {
         const value = e.target.value;
-        setIsRsPos(value);
+        setShopAddressDetail(value);
+    }
+    const handleShopIsRsPos = (e) => {
+        const value = e.target.value;
+        setShopIsRsPos(value);
+    }
+    const handleShopCategory = (e) => {
+        const value = e.target.value;
+        setShopCategory(value);
     }
 
-    useEffect(() => {
-        getShopInfo();
-    },[]);
-
-    const getShopInfo = () => {
-        getShopList()
+    const Shop_v1 = () => {
+        putShopInfo(
+            shopId,
+            shopIntro,
+            shopOpenTime,
+            shopCloseTime,
+            shopAddress,
+            shopAddressDetail,
+            shopCategory
+        )
         .then((res) => {
-            console.log(res.data);
-            setShop(res.data);
-            
+            history.push("/myShop");
+            alert("수정되었습니다.");
         })
         .catch((err) => {
-            alert("err");
+            alert("putshopInfo err");
+        });
+    };
+   
+    useEffect(() => {
+        ShowShopInfo(props.match.params.shopId);
+        setShopId(props.match.params.shopId);
+    },[]);
+    
+    const ShowShopInfo = () => {
+        getShopInfo(props.match.params.shopId)
+        .then((res) => {
+            setShopInfo(res.data);
+        })
+        .catch((err) => {
+            alert("showshopInfo err");
         });
     };
 
-    console.log(shop.id);
-    
-
     return(
         <>
-        <Header 
-        
-        />
+        <Header />
         <OwnerNavbar 
-        shopId={shop.id}
+        shopId={shopId}
         />   
         <ShopInfo
-        shopname={shop}
-        handleName={handleName}
-        handleIntro={handleIntro}
-        handleOpen_time={handleOpen_time}
-        handleClose_time={handleClose_time}
-        handleCategory={handleCategory}
-        handleAddress={handleAddress}
-        handleAddressDetail={handleAddressDetail}
-        handleIsRsPos={handleIsRsPos}
+        id={shopInfo.id}
+        name={shopInfo.name}
+        intro={shopInfo.intro}
+        openTime={shopInfo.openTime}
+        closeTime={shopInfo.closeTime}
+        category={shopInfo.category}
+        address={shopInfo.address}
+        addressDetail={shopInfo.addressDetail}
+        isRsPos={shopInfo.isRsPos}
+        shopId={shopId}
+        shopName={shopName}
+        handleShopName={handleShopName}
+        shopIntro={shopIntro}
+        handleShopIntro={handleShopIntro}
+        shopOpenTime={shopOpenTime}
+        handleShopOpenTime={handleShopOpenTime}
+        shopCloseTime={shopCloseTime}
+        handleShopCloseTime={handleShopCloseTime}
+        shopAddress={shopAddress}
+        handleShopAddress={handleShopAddress}
+        shopAddressDetail={shopAddressDetail}
+        handleShopAddressDetail={handleShopAddressDetail}
+        shopIsRsPos={shopIsRsPos}
+        handleShopIsRsPos={handleShopIsRsPos}
+        shopCategory={shopCategory}
+        handleShopCategory={handleShopCategory}
+        Shop_v1={Shop_v1}
              />
         </>
     )

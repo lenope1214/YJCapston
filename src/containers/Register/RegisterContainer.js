@@ -20,6 +20,12 @@ const RegisterContainer = () => {
     const [address, setAddress] = useState("");
     const [address1, setAddress1] = useState("");
     const [keyword, setKeyword] = useState("");
+    const [roadAddr, setRoadAddr] = useState("주소를 입력하세요.");
+    const [showLocation, setShowLocation] = useState([
+        {
+            roadAddr: "",
+        },
+    ]);
 
     let check = "u";
 
@@ -35,10 +41,10 @@ const RegisterContainer = () => {
     };
 
     if (owner === true) {
-        check = "o";
+        check = "ROLE_OWNER";
         console.log("트류");
     } else {
-        check = "u";
+        check = "ROLE_USER";
         console.log("폴스");
     }
 
@@ -105,6 +111,12 @@ const RegisterContainer = () => {
         const value = e.target.value;
         setBirthday(value);
     };
+
+    const handleRoadAddr = (roadAddr) => {
+        setRoadAddr(roadAddr);
+        closemodal();
+    };
+
     const handleAddress = (e) => {
         const value = e.target.value;
         setAddress(value);
@@ -121,22 +133,22 @@ const RegisterContainer = () => {
 
     const register = async () => {
         // 유효성검사
-        if (!validateId(id)) {
-            return alert(
-                "아이디는 영문 대소문자와 숫자 4~12자리로 입력해야합니다!"
-            );
-        }
-        if (!isPassword(pw)) {
-            return alert(
-                "비밀번호는 영문과 숫자 조합하여 8~10자리로 입력해야합니다!"
-            );
-        }
-        if (!isName(username)) {
-            return alert("이름을 제대로 적어주세요");
-        }
-        if (!validateEmail(email)) {
-            return alert("이메일이 형식을 맞춰주세요");
-        }
+        // if (!validateId(id)) {
+        //     return alert(
+        //         "아이디는 영문 대소문자와 숫자 4~12자리로 입력해야합니다!"
+        //     );
+        // }
+        // if (!isPassword(pw)) {
+        //     return alert(
+        //         "비밀번호는 영문과 숫자 조합하여 8~10자리로 입력해야합니다!"
+        //     );
+        // }
+        // if (!isName(username)) {
+        //     return alert("이름을 제대로 적어주세요");
+        // }
+        // if (!validateEmail(email)) {
+        //     return alert("이메일이 형식을 맞춰주세요");
+        // }
 
         postRegister(
             id,
@@ -147,7 +159,8 @@ const RegisterContainer = () => {
             email,
             birthday,
             address,
-            address1
+            address1,
+            roadAddr
         )
             .then((res) => {
                 history.push("/");
@@ -162,21 +175,46 @@ const RegisterContainer = () => {
                 alert("사용 가능한 아이디 입니다.");
             })
             .catch((err) => {
-                alert("이미 있는 아이디입니다.");
+                console.log(err);
+                alert("이미 존재하는 아이디 입니다.");
             });
     };
 
     const search = () => {
         getLocation(keyword)
             .then((res) => {
-                console.log(res.data);
+                const a = JSON.parse(res.data);
+                const regilo = a.results.juso.map((j) => {
+                    return {
+                        roadAddr: j.roadAddr,
+                    };
+                });
+                setShowLocation(regilo);
             })
             .catch((err) => {
-                alert("");
+                alert(err);
             });
     };
 
-    console.log(keyword);
+    const handleComplete = (data) => {
+        let fullAddress = data.address;
+        let extraAddress = "";
+
+        if (data.addressType === "R") {
+            if (data.bname !== "") {
+                extraAddress += data.bname;
+            }
+            if (data.buildingName !== "") {
+                extraAddress +=
+                    extraAddress !== ""
+                        ? `, ${data.buildingName}`
+                        : data.buildingName;
+            }
+            fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
+        }
+
+        handleRoadAddr(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+    };
 
     return (
         <Register
@@ -208,6 +246,9 @@ const RegisterContainer = () => {
             handleKeyword={handleKeyword}
             keyword={keyword}
             IdCheck={IdCheck}
+            showLocation={showLocation}
+            roadAddr={roadAddr}
+            handleComplete={handleComplete}
         />
     );
 };

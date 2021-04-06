@@ -81,13 +81,14 @@ export const MainWrap = styled.div`
     .center-nav {
         display: flex;
         flex-grow: 2;
-        visibility: true;
+        visibility: false;
+        display: none;
         height: 55px;
     }
 
     
     .right2-nav {
-        width: 100px;
+        width: 200px;
         background-color: #f2f2f2bb;
         border: none;
         color: #fff;
@@ -95,10 +96,12 @@ export const MainWrap = styled.div`
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 15px;
+        font-size: 16px;
         margin: 4px;
         cursor: pointer;
-        opacity: 1;
+        background: none;
+        
+        font-family: "Wemakeprice-Bold";
     }
     .right-nav {
         padding-right: 2%;
@@ -265,7 +268,7 @@ export const MainWrap = styled.div`
         font-size: 15px;
         margin-bottom: 16px;
         cursor: pointer;
-        opacity: 1;
+        opacity: 0.9;
         border-radius: 0 20% 20% 0;
         box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.4);
     }

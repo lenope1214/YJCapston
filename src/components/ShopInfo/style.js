@@ -12,54 +12,71 @@ export const InfoWrap = styled.div`
     .menu-container{
     margin-top: 70px;
     width: 60%;
-    margin-left: 20%;
+    margin-left: 40%;
     font-size:20px;
     }
     .info-1 {
         margin-top:50px;
-        margin-left: 20%;
+        margin-left: 40%;
         font-size:10px;
     }
     .info-2 {
         margin-top:20px;
-        margin-left: 20%;
+        margin-left: 40%;
         font-size:10px;
     }
     .info-3 {
         margin-top:20px;
-        margin-left: 20%;
+        margin-left: 40%;
         font-size:10px;
     }
     .info-4 {
         margin-top:20px;
-        margin-left: 20%;
+        margin-left: 40%;
         font-size:10px;
     }
     .info-5 {
         margin-top:20px;
-        margin-left: 20%;
+        margin-left: 40%;
         font-size:10px;
     }
     .info-6 {
         margin-top:20px;
-        margin-left: 20%;
+        margin-left: 40%;
         font-size:10px;
     }
     .info-7 {
         margin-top:20px;
-        margin-left: 20%;
+        margin-left: 40%;
         font-size:10px;
     }
     .info-8 {
         margin-top:20px;
-        margin-left: 20%;
+        margin-left: 40%;
         font-size:10px;
     }
     .info-9 {
         margin-top:20px;
-        margin-left: 20%;
+        margin-left: 40%;
         font-size:10px;
     }
-
-
+    .info-10 {
+        margin-top:2px;
+        margin-left: 40%;
+        font-size:10px;
+    }
+    .info-11 {
+        margin-top:2px;
+        font-size:10px;
+    }
+    >input{
+        margin-left:40%;
+    }
+    >select{
+        margin-left:40%;
+    }
+    .button-div{
+        margin-top: 20px;
+        margin-left:40%;
+    }
 `;

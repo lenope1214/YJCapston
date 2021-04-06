@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-
+import OwnerNavbar from "../../components/OwnerMenubar/OwnerNavbar";
+import Header from "../../components/Header/Header";
 import Shop from "../../components/Shop/Shop";
 import { apiDefault } from "../../lib/client";
 import { postShop } from "../../lib/Shop";
@@ -49,6 +50,7 @@ const ShopContainer = () => {
     const handleIntro = (e) => {
         const value = e.target.value;
         setIntro(value);
+        console.log(value);
     };
 
     const handleOpen_time = (e) => {
@@ -175,6 +177,10 @@ const ShopContainer = () => {
     // };
     return (
         <>
+        <Header/>
+
+        {/* <OwnerNavbar /> */}
+         
         <Shop
             id={id}
             handleId={handleId}

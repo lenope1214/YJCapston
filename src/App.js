@@ -14,7 +14,7 @@ import ShopInfoContainer from "./containers/ShopInfo/ShopInfoContainer";
 import MyShopContainer from "./containers/MyShop/MyShopContainer";
 import ShoplistContainer from "./containers/Shoplist/ShoplistContainer";
 
-const App = (props) => {
+const App = () => {
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
@@ -46,7 +46,7 @@ const App = (props) => {
           <Route path="/MyShop" component={MyShopContainer} />
           <Route component={MenuListContainer} path="/menuList/:shopId" />
           <Route component={MenuRegisterFormContainer} path="/create/:shopId" />
-          <Route path="/ShopInfo" component={ShopInfoContainer} />
+          <Route path="/ShopInfo/:shopId" component={ShopInfoContainer} />
           <Route component={EventContainer} path="/event" />
           <Route component={MenuReadContainer} path='/menu/:menuId' />
           <Route

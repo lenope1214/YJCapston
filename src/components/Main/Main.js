@@ -104,10 +104,10 @@ const Main = ({
                             <>
                             <div className="right-nav">
                                 <button className="right2-nav" onClick={logout}>
-                                    LOGOUT
+                                    LOG OUT
                                 </button>
                                 <Link to="/mypage">
-                                    <button class="right2-nav">MYPAGE</button>
+                                    <button class="right2-nav">MY PAGE</button>
                                 </Link>
                             </div>
                             <div className="scroll-nav">
@@ -255,7 +255,7 @@ const Main = ({
                         <div className="but-item2-icon">
                             <img src={peopleimg} width="300px" height="300px" />
                             <div className="but-item2-but">
-                                <Link to="/shop">
+                                <Link to="/myshop">
                                     <button
                                         style={{
                                             fontSize: "30px",

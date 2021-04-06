@@ -8,15 +8,13 @@ export const getMyInfo = () => {
     });
 };
 
-export const password = () => {
-    return;
-};
-
-export const putMypage = (pw) => {
-    return apiDefault().put(
+export const putMypage = (pw, roadAddr, addressDetail) => {
+    return apiDefault().patch(
         "/user",
         {
             password: pw,
+            address: roadAddr,
+            addressDetail: addressDetail,
         },
         {
             headers: {
