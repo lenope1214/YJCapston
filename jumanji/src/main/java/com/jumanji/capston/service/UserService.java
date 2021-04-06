@@ -25,7 +25,7 @@ public class UserService {
     @Transactional
     public User findById(String id) {
         return userRepository.findById(id)
-                .orElseThrow(()-> new UserNotFoundException(id));
+                .orElseThrow(()-> new UserNotFoundException("error-0001", "해당 유저를 찾을 수 없습니다."));
     }
 
     @Transactional
