@@ -1,17 +1,9 @@
 package com.jumanji.capston.controller.exception.UserException;
 
-public class UserNotFoundException extends RuntimeException {
-    private String id;
+import com.jumanji.capston.controller.exception.BasicException;
 
-    public UserNotFoundException(String id) {
-        this.id = id;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+public class UserNotFoundException extends BasicException {
+    public UserNotFoundException(String code, String message) {
+        super(code, message);
     }
 }

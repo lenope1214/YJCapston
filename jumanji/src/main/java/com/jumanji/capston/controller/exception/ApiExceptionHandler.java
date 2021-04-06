@@ -13,7 +13,7 @@ public class ApiExceptionHandler {
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ApiErrorResponse> idHandleException(UserNotFoundException ex) {
         ApiErrorResponse response =
-                new ApiErrorResponse("error-0001", "No User is found with ID : " + ex.getId());
+                new ApiErrorResponse("error-0001", "No User is found by ID");
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 

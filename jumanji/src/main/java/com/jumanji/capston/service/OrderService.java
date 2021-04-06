@@ -1,5 +1,6 @@
 package com.jumanji.capston.service;
 
+import com.jumanji.capston.controller.exception.OrderException.OrderNotFoundException;
 import com.jumanji.capston.data.Order;
 import com.jumanji.capston.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class OrderService {
 
     public Order findById(Long id) {
         return orderRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("id를 확인해주세요!!!"));
+                .orElseThrow(() -> new OrderNotFoundException("error-3001", "없는 주문번호 입니다."));
     }
 
 
