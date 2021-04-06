@@ -2,7 +2,10 @@ package com.jumanji.capston.data;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
@@ -14,7 +17,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name="shops")
+@Table(name = "shops")
 @NoArgsConstructor
 public class Shop {
     @Id
@@ -28,7 +31,7 @@ public class Shop {
     @Column(name = "close_time")
     private Date closeTime;
     private String address; //매장주소
-    @Column(name ="address_detail")
+    @Column(name = "address_detail")
     private String addressDetail; //매장주소
     @Column(name = "is_rs_pos")
     private char isRsPos = 'Y'; //예약가능여부
@@ -38,13 +41,13 @@ public class Shop {
     @Column(name = "img_path")
     private String imgPath;
     @ManyToOne
-    @JoinColumn(name="owner_id")
+    @JoinColumn(name = "owner_id")
     private User owner;
 
 
-
-    @Getter @Setter
-    public static class info{
+    @Getter
+    @Setter
+    public static class info {
         private String id;
         private String name;
         private String intro;
@@ -56,14 +59,21 @@ public class Shop {
         private MultipartFile img;
     }
 
-    @Getter@Setter
-    public static class Request{
+    @Getter
+    @Setter
+    public static class Request {
         private String shopId;
+        private String intro;
+        private String openTime;
+        private String closeTime;
+        private String address;
+        private String addressDetail;
         private String category;
     }
 
-    @Getter @Setter
-    public static class Response{
+    @Getter
+    @Setter
+    public static class Response {
         private String id;
         private String name;
         private String intro;
@@ -77,7 +87,7 @@ public class Shop {
 
         public Response(Shop shop) {
             this.id = shop.getId();
-            this.name = shop.getName().replace("_" , " ");
+            this.name = shop.getName().replace("_", " ");
             this.intro = shop.getIntro();
             this.address = shop.getAddress();
             this.addressDetail = shop.getAddressDetail();
@@ -88,7 +98,6 @@ public class Shop {
             this.isRsPos = shop.getIsRsPos();
         }
     }
-
 
 
     @Builder(builderMethodName = "createShop")
@@ -106,31 +115,17 @@ public class Shop {
         this.owner = owner;
     }
 
-    public void update(Patch patch) {
-        if(patch.getIntro()!=null)this.intro = patch.getIntro();
-        if(!patch.getOpenTime().isEmpty() || !patch.getOpenTime().isBlank())this.openTime = stringToDate(patch.getOpenTime());
-        if(!patch.getCloseTime().isEmpty() || !patch.getCloseTime().isBlank())this.closeTime = stringToDate(patch.getCloseTime());
-        if(patch.getAddress()!=null)this.address = patch.getAddress();
-        if(patch.getAddressDetail()!=null)this.addressDetail = patch.getAddressDetail();
-        if(patch.getCategory()!=null)this.category = patch.getCategory();
+    public void update(Shop.Request patch) {
+        if (patch.getIntro() != null) this.intro = patch.getIntro();
+        if (patch.getOpenTime() != null) this.openTime = stringToDate(patch.getOpenTime());
+        if (patch.getCloseTime() != null) this.closeTime = stringToDate(patch.getCloseTime());
+        if (patch.getAddress() != null) this.address = patch.getAddress();
+        if (patch.getAddressDetail() != null) this.addressDetail = patch.getAddressDetail();
+        if (patch.getCategory() != null) this.category = patch.getCategory();
     }
 
 
-    @Getter
-    @AllArgsConstructor @NoArgsConstructor
-    public static class Patch{
-        private String shopId;
-        private String intro;
-        private String openTime;
-        private String closeTime;
-        private String address;
-        private String addressDetail;
-        private String category;
-    }
-
-
-
-    public static Date stringToDate(String date){
+    public static Date stringToDate(String date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
         Date parseDate = null;
         try {
@@ -141,7 +136,7 @@ public class Shop {
         return parseDate;
     }
 
-    public static String dateToString(Date date){
+    public static String dateToString(Date date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
         return dateFormat.format(date);
     }

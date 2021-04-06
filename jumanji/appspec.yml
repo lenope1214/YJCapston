@@ -12,6 +12,9 @@ files:
 #    pattern: "**" # 모든 파일의 권한 설정
 
 hooks:
+  BeforeInstall:
+    - location: killport.bat
+      timeout: 300
   AfterInstall:
     # location은 프로젝트의 root경로를 기준
     - location: deploy.bat

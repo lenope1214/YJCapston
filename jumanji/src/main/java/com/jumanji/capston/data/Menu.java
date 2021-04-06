@@ -64,8 +64,7 @@ public class Menu {
 
     public static String subShopId(String menuId){ return menuId.substring(0, 10) ;}
 
-    @Getter
-    @Setter
+    @Getter @Setter
     public static class Request{
         private String shopId;
         private String menuId;
@@ -76,9 +75,9 @@ public class Menu {
         private char isSale;
         private char isPopular;
 
-        public String getMenuId(Menu.Request request){
-            return request.getShopId() + request.getName();
-        }
+//        public String getMenuId(Menu.Request request){
+//            return request.getShopId() + request.getName();
+//        }
     }
 
     @Getter
