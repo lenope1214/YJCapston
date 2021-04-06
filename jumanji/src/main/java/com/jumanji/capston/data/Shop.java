@@ -118,7 +118,7 @@ public class Shop {
 
     @Getter
     @Setter
-    @AllArgsConstructor
+    @AllArgsConstructor @NoArgsConstructor
     public static class Patch{
         private String shopId;
         private String intro;
