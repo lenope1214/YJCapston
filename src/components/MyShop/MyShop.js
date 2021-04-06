@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Shop from "../Shop/Shop";
 import * as S from "./style";
+
 
 const MyShop = ({
     isLogin,
     logout,
-    openModal, 
+    openModal,
     shop,
     Id
 }) => {
@@ -72,59 +72,59 @@ const MyShop = ({
                         </div>
                     )}
                     <Link to="/shop" class="shop">
-                    <button className="shop">
-                          매장등록하러가기
+                        <button className="shop">
+                            매장등록하러가기
                     </button>
                     </Link>
                 </header>
-                
-                <body>
-                
- 
- <table border= "1px" solid ="#bababa" className="shoplist">
-        <thead>
-        <tr>
-            <th align="center" className="id">매장번호</th>
-            <th align="center" className="shopname">매장이름</th>
-            <th align="center" className="intro">매장소개</th>
-            <th align="center" className="openTime">오픈시간</th>
-            <th align="center" className="closeTime">마감시간</th>
-            <th align="center" className="address">매장주소</th>
-            <th align="center" className="addressDetail">매장상세주소</th>
-            {/* <th class="is_rs_pos">예약가능여부</th> */}
-            
-        </tr>
-        </thead>
 
-        <tbody>
-        
-                {/* {!shop.length && (
+                <body>
+
+
+                    <table border="1px" solid="#bababa" className="shoplist">
+                        <thead>
+                            <tr>
+                                <th align="center" className="id">매장번호</th>
+                                <th align="center" className="shopname">매장이름</th>
+                                <th align="center" className="intro">매장소개</th>
+                                <th align="center" className="openTime">오픈시간</th>
+                                <th align="center" className="closeTime">마감시간</th>
+                                <th align="center" className="address">매장주소</th>
+                                <th align="center" className="addressDetail">매장상세주소</th>
+                                {/* <th class="is_rs_pos">예약가능여부</th> */}
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {/* {!shop.length && (
                     <tr>
                         <td colSpan="3">목록이 비었습니다.</td>
                     </tr>
                 )} */}
 
-        {!!shop.length && shop.map((shop) => {
-            console.log(shop.closeTime);
-            return(
-        <tr>
-            <Link to={`/menuList/${shop.id}`}>
-            <td>{shop.id}</td>
-            </Link>
-            <td>{shop.shopname}</td>
-            <td>{shop.intro}</td>
-            <td>{shop.openTime}</td>
-            <td>{shop.closeTime}</td>
-            <td>{shop.address}</td>
-            <td>{shop.addressDetail}</td>
-            {/* <td>{shop.isRsPos}</td> */}
-        </tr>
+                            {!!shop.length && shop.map((shop) => {
+                                console.log(shop.closeTime);
+                                return (
+                                    <tr>
+                                        <Link to={`/menuList/${shop.id}`}>
+                                            <td>{shop.id}</td>
+                                        </Link>
+                                        <td>{shop.shopname}</td>
+                                        <td>{shop.intro}</td>
+                                        <td>{shop.openTime}</td>
+                                        <td>{shop.closeTime}</td>
+                                        <td>{shop.address}</td>
+                                        <td>{shop.addressDetail}</td>
+                                        {/* <td>{shop.isRsPos}</td> */}
+                                    </tr>
 
-            );
-        })}
+                                );
+                            })}
 
-        </tbody>
-    </table>
+                        </tbody>
+                    </table>
                 </body>
                 <footer></footer>
             </S.MyShopWrap>

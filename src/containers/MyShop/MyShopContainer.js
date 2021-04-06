@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import MyShop from "../../components/MyShop/MyShop";
 import { getmyShop } from "../../lib/MyShop";
-import { useHistory } from "react-router";
+
 
 const MyShopContainer = () => {
     const [shop, setShop] = useState([]);
+    
     useEffect(() => {
     }, []);
     // 이게 서버에서 코드 받아오는 함수
@@ -39,3 +40,5 @@ const MyShopContainer = () => {
 }
 
 export default MyShopContainer;
+
+

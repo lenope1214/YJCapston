@@ -13,11 +13,11 @@ export const removeMenues = (
     id
 ) => {
     return apiDefault().delete(`/menu/${id}`
-        ,  {
-        headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
-        },
-    });
+        , {
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+            },
+        });
 };
 
 

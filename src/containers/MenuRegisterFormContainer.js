@@ -61,7 +61,7 @@ const MenuRegisterFormContainer = (props) => {
     const menu_v1 = async () => {
         if(!isName(menuname)) {
             return alert(
-                "메뉴명은 2~20자리로 입력해야 합니다."
+                "메뉴명은 한글 2~20자리로 입력해야 합니다."
             );
         }
         if(!isPrice(price)) {
@@ -104,7 +104,7 @@ const MenuRegisterFormContainer = (props) => {
     return (
         <>
         <Header />
-        <OwnerNavbar />
+        {/* <OwnerNavbar /> */}
         <MenuRegisterForm 
             menuname={menuname}
             handleMenuname={handleMenuname}

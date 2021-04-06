@@ -34,17 +34,16 @@ export const MenuReadContainer = (props) => {
 
     const ReadMenu = () => {
         putMenuRead(
-                menuImg,
-                menuPrice,     
-                menuIntro,
-                menuId,
-                menuDuration,
-                )
+            menuPrice,
+            menuIntro,
+            menuId,
+            menuDuration,
+        )
             .then((res) => {
                 history.goBack();
                 alert("수정되었습니다.");
             })
-            .catch((err) => {           
+            .catch((err) => {
                 alert("putMenuRead Err");
             });
     };
@@ -53,7 +52,7 @@ export const MenuReadContainer = (props) => {
         showMenuRead(props.match.params.menuId);
         setMenuId(props.match.params.menuId);
     }, []);
-  
+
     const showMenuRead = () => {
         getMenuRead(props.match.params.menuId)
             .then((res) => {
@@ -62,18 +61,18 @@ export const MenuReadContainer = (props) => {
             .catch((err) => {
                 console.log(props.match.params.menuId)
                 alert("showMenuRead Err");
-            });          
+            });
     };
 
     const goBack = () => {
         history.goBack();
     }
 
-    return(
+    return (
         <div>
             <Header />
-            <OwnerNavbar />
-            <MenuRead 
+            {/* <OwnerNavbar /> */}
+            <MenuRead
                 id={menuRead.id, console.log(menuId)}
                 name={menuRead.name}
                 price={menuRead.price}

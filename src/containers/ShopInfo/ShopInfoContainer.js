@@ -76,8 +76,12 @@ const ShopInfoContainer = () => {
 
     return(
         <>
-        <Header />
-        <OwnerNavbar />   
+        <Header 
+        
+        />
+        <OwnerNavbar 
+        shopId={shop.id}
+        />   
         <ShopInfo
         shopname={shop}
         handleName={handleName}

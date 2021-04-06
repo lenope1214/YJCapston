@@ -48,6 +48,12 @@ export const MainWrap = styled.div`
     .topimg {
         position: absolute;
         width: 100%;
+        height: 100vh;
+        object-fit: fill;
+        
+    }
+    .topimg-img {
+        object-fit: fill;
     }
     .toptext {
         position: absolute;
@@ -56,8 +62,8 @@ export const MainWrap = styled.div`
         color: white;
         text-align: left;
         line-height: 60px;
-        margin-top: 300px;
-        margin-left: 55%;
+        margin-top: 50vh;
+        margin-left: 55vw;
     }
     .left-nav {
         display: flex;
@@ -72,20 +78,7 @@ export const MainWrap = styled.div`
         height: 55px;
     }
 
-    .right1-nav {
-        width: 100px;
-        background-color: #f2f2f2bb;
-        border: none;
-        color: #fff;
-        padding: 15px 0;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 15px;
-        margin: 4px;
-        cursor: pointer;
-        opacity: 1;
-    }
+    
     .right2-nav {
         width: 100px;
         background-color: #f2f2f2bb;
@@ -106,12 +99,12 @@ export const MainWrap = styled.div`
 
     .but-item1 {
         position: absolute;
-        margin-top: 700px;
+        margin-top: 100vh;
         font-family: "Wemakeprice-Bold";
         color: white;
         font-size: 70px;
         width: 100%;
-        height: 700px;
+        height: 100vh;
         text-align: left;
         line-height: 3px;
         background-color: #bead8e;
@@ -120,7 +113,7 @@ export const MainWrap = styled.div`
 
     .but-item1-text {
         position: relative;
-        padding-top: 160px;
+        margin-top: 30vh;
         padding-left: 20%;
         display: inline-block;
         z-index: 2;
@@ -128,7 +121,7 @@ export const MainWrap = styled.div`
 
     .but-item1-text2 {
         position: relative;
-        padding-top: 1px;
+        
         padding-left: 20%;
         font-size: 14px;
         font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
@@ -138,7 +131,7 @@ export const MainWrap = styled.div`
 
     .but-item1-icon {
         position: relative;
-        padding-top: 160px;
+        
         margin-left: 22%;
         display: inline-block;
         z-index: 2;
@@ -148,36 +141,42 @@ export const MainWrap = styled.div`
     }
 
     .backimg2 {
+        margin-top: 100vh;
         position: absolute;
         width: 100%;
+        height: 100vh;
+        object-fit: fill;
         z-index: 1;
     }
 
     .backimg3 {
         position: absolute;
         width: 100%;
+        height: 100vh;
         z-index: 1;
+    }
+    .backimg-img {
+        object-fit: fill;
     }
 
     .but-item2 {
         position: absolute;
         text-align: center;
         width: 100%;
-        height: 700px;
-        margin-top: 1400px;
+        height: 100vh;
+        margin-top: 100vh;
         font-family: "Wemakeprice-Bold";
         color: white;
         font-size: 70px;
-        width: 100%;
-        height: 700px;
         text-align: left;
         line-height: 3px;
         z-index: 3;
+        object-fit: fill;
     }
 
     .but-item2-text {
         position: relative;
-        padding-top: 160px;
+        margin-top: 130vh;
         padding-left: 20%;
         display: inline-block;
         z-index: 2;
@@ -185,18 +184,18 @@ export const MainWrap = styled.div`
 
     .but-item2-text2 {
         position: relative;
-        padding-top: 1px;
+        
         padding-left: 20%;
         font-size: 14px;
         font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
         display: block;
         z-index: 2;
-        margin-top: -30px;
+       
     }
 
     .but-item2-icon {
         position: relative;
-        padding-top: 160px;
+        
         margin-left: 20%;
         display: inline-block;
         z-index: 2;
@@ -210,8 +209,8 @@ export const MainWrap = styled.div`
     .but-item3 {
         position: absolute;
         width: 100%;
-        height: 700px;
-        margin-top: 2100px;
+        height: 100vh;
+        margin-top: 200vh;
         z-index: 1;
         font-family: "Wemakeprice-Bold";
         color: white;
@@ -224,7 +223,7 @@ export const MainWrap = styled.div`
 
     .but-item3-text {
         position: relative;
-        padding-top: 140px;
+        margin-top: 130vh;
         padding-left: 20%;
         display: inline-block;
         z-index: 2;
@@ -232,17 +231,40 @@ export const MainWrap = styled.div`
 
     .but-item3-text2 {
         position: relative;
-        margin-top: -30px;
+        
         padding-left: 20%;
         font-size: 14px;
         font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
         display: block;
         z-index: 2;
     }
+    .scroll-nav {
+        width: 10px;        
+        margin-top: 20vh;
+        position: fixed;
+        z-index: 3;
+        margin-left: 0;
+    }
+    .right1-nav {
+        width: 60px;
+        height: 60px;
+        background-color: #AE905E;
+        opacity: 0.2;
+        border: none;
+        color: #fff;
+        padding: 15px 0;
+        text-align: center;
+        text-decoration: none;      
+        font-size: 15px;
+        margin-bottom: 16px;
+        cursor: pointer;
+        opacity: 1;
+        border-radius: 0 20% 20% 0;
+    }
 
     .but-item3-icon {
         position: relative;
-        padding-top: 160px;
+        
         margin-left: 15%;
         display: inline-block;
         z-index: 2;

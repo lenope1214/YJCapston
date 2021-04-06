@@ -1,4 +1,3 @@
-import MenuRead from "../../components/MenuRead/MenuRead";
 import { apiDefault } from "../client";
 
 export const getMenuRead = (
@@ -6,14 +5,13 @@ export const getMenuRead = (
 ) => {
     return apiDefault().get(`/menu/${menuId}`
         , {
-        headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
-        },
-    });
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+            },
+        });
 };
 
 export const putMenuRead = (
-    // menuName,
     menuPrice,
     menuIntro,
     menuId,
@@ -21,7 +19,6 @@ export const putMenuRead = (
 ) => {
     return apiDefault().patch("/menu"
         , {
-            // name: menuName,
             price: menuPrice,
             intro: menuIntro,
             menuId: menuId,

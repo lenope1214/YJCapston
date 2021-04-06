@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import MenuList from '../../components/MenuList/MenuList';
 import { useHistory } from 'react-router';
-import { getMenuList, removeMenu } from '../../lib/MenuList';
+import { getMenuList } from '../../lib/MenuList';
 import OwnerNavbar from "../../components/OwnerMenubar/OwnerNavbar";
 import Header from "../../components/Header/Header";
 import { removeMenues } from "../../lib/MenuList/index"
 
+
 const MenuListContainer = (props) => {
     const [menues, setMenues] = useState([
-    {   id: "",
-    img: "",
-    }
+        {
+            id: "",
+            img: "",
+        }
     ]);
     const history = useHistory();
     const [shopId, setShopId] = useState("");
@@ -23,9 +25,8 @@ const MenuListContainer = (props) => {
 
     const showMenuList = () => {
         getMenuList(props.match.params.shopId)
-            .then((res) => {       
+            .then((res) => {
                 setMenues(res.data);
-                console.log("res.data 출력 - "+res.data);
                 const menu = res.data.map((menu) => {
                     console.log(menu.id);
                     return {
@@ -37,11 +38,8 @@ const MenuListContainer = (props) => {
                     };
                 });
                 setMenues(menu);
-                console.log("MeLiCon에서 menu : "+ menu);
-                console.log("MeLiCon에서 menues : "+ menues);
             })
             .catch((err) => {
-                
                 alert("MenuListContainer Err");
             });
     };
@@ -57,18 +55,20 @@ const MenuListContainer = (props) => {
                 alert("메뉴 삭제 에러");
             });
     };
-    
+
     return (
         <>
-        <Header />
+            <Header />
 
-        <OwnerNavbar />
-        
-        <MenuList 
-            menues={menues}
-            removeMenu={removeMenu}
-            shopId={shopId}
-        />
+            <OwnerNavbar 
+                shopId={shopId}
+            />
+
+            <MenuList
+                menues={menues}
+                removeMenu={removeMenu}
+                shopId={shopId}
+            />
         </>
     );
 };

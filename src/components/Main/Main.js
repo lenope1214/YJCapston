@@ -8,6 +8,7 @@ import shopimg from "./img/매장아이콘.png";
 import backimg3 from "./img/종이질감갈색화면.png";
 import * as S from "./style";
 import { Link } from "react-router-dom";
+import buttonimg from "./img/버튼 배경.jpg";
 
 const Main = ({
     isLogin,
@@ -23,6 +24,7 @@ const Main = ({
 }) => {
     // var location = document.querySelector("#move").offsetTop;
     // console.log(location);
+
     console.log(isLogin);
     const scrollTo1 = () => {
         window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
@@ -86,49 +88,26 @@ const Main = ({
                                 <Link to="/mypage">
                                     <button class="right2-nav">MYPAGE</button>
                                 </Link>
-                                <div>
-                                    <button
-                                        className="right1-nav"
-                                        onClick={scrollTo1}
-                                    >
-                                        상단바
-                                    </button>
-                                    <button
-                                        className="right1-nav"
-                                        onClick={scrollTo2}
-                                    >
-                                        어플다운로드
-                                    </button>
-                                    <button
-                                        className="right1-nav"
-                                        onClick={scrollTo3}
-                                    >
-                                        사업자등록
-                                    </button>
-                                    <button
-                                        className="right1-nav"
-                                        onClick={scrollTo4}
-                                    >
-                                        매장둘러보기
-                                    </button>
-                                </div>
+
                             </div>
                         ) : (
-                            <div className="right-nav">
-                                <button
-                                    className="right1-nav"
-                                    onClick={openModal}
-                                >
-                                    LOGIN
+                            <>
+                                <div className="right-nav">
+                                    <button
+                                        className="right2-nav"
+                                        onClick={openModal}
+                                    >
+                                        LOGIN
                                 </button>
-
-                                <Link to="/register">
-                                    <button class="right2-nav"> JOIN</button>
-                                </Link>
-                                <div>
+                                    <Link to="/register">
+                                        <button class="right2-nav"> JOIN</button>
+                                    </Link>
+                                </div>
+                                <div className="scroll-nav">
                                     <button
                                         className="right1-nav"
                                         onClick={scrollTo1}
+                                        
                                     >
                                         상단바
                                     </button>
@@ -136,28 +115,30 @@ const Main = ({
                                         className="right1-nav"
                                         onClick={scrollTo2}
                                     >
-                                        어플다운로드
+                                        어플
                                     </button>
                                     <button
                                         className="right1-nav"
                                         onClick={scrollTo3}
                                     >
-                                        사업자등록
+                                        사업자
                                     </button>
                                     <button
                                         className="right1-nav"
                                         onClick={scrollTo4}
                                     >
-                                        매장둘러보기
+                                        매장
                                     </button>
                                 </div>
-                            </div>
+                            </>
                         )}
                     </div>
 
                     <div className="adimg">
                         <div className="topimg">
-                            <img src={topimg} width="100%" height="700px" />
+                            <img src={topimg} width="100%" height="100%" className="topimg-img"
+
+                            />
                         </div>
                         <div className="toptext">
                             <span>테이블</span>
@@ -174,11 +155,12 @@ const Main = ({
                         </div>
                     </div>
                     <div className="but-item1">
-                        <div className="backimg3">
+                        {/* <div className="backimg2">
                             <img src={backimg2} width="100%" height="700px" />
-                        </div>
-                        <div className="backimg2">
-                            <img src={backimg3} width="100%" height="700px" />
+                        </div> */}
+                        <div className="backimg3">
+                            <img src={backimg3} width="100%" height="100%"
+                                className="backimg-img" />
                         </div>
                         <div className="but-item1-text">
                             <p>주문의민족</p>
@@ -214,7 +196,7 @@ const Main = ({
                     </div>
                     <div className="but-item2">
                         <div className="backimg2">
-                            <img src={backimg2} width="100%" height="700px" />
+                            <img src={backimg2} width="100%" height="100%" className="backimg-img" />
                         </div>
                         <div className="but-item2-text">
                             <p>웹으로도</p>
@@ -249,7 +231,7 @@ const Main = ({
                     </div>
                     <div className="but-item3">
                         <div className="backimg2">
-                            <img src={backimg3} width="100%" height="700px" />
+                            <img src={backimg3} width="100%" height="100%" className="backimg-img" />
                         </div>
                         <div className="but-item3-text">
                             <p>집에서</p>
