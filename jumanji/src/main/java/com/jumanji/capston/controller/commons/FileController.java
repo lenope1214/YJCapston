@@ -1,4 +1,4 @@
-package com.jumanji.capston.Controller.commons;
+package com.jumanji.capston.controller.commons;
 
 import com.jumanji.capston.service.StorageService;
 import com.jumanji.capston.storage.StorageFileNotFoundException;

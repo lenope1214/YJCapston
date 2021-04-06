@@ -20,7 +20,7 @@ defaults:
 jobs:
   build:
     # 실행 환경 지정
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
 
     # Task의 sequence를 명시한다.
     steps:
@@ -45,40 +45,46 @@ jobs:
     - name: Copy Jar
       run: cp ./build/libs/*.jar ./deploy/
       
+      # appspec.yml Copy
+    - name: Copy appspec
+      run: cp appspec.yml ./deploy/
+      
+    # killport batch file Copy
+    - name: Copy killport.bat
+      run: cp killport.bat ./deploy/
+      
+    # killport batch file Copy
+    - name: Copy deletejar.bat
+      run: cp deletejar.bat ./deploy/
+      
+    # deploy batch file Copy
+    - name: Copy deploy.bat
+      run: cp deploy.bat ./deploy/
+      
       # 압축파일 형태로 전달
     - name: Make zip file
-      run: zip -r -qq -j ./springboot-intro-build.zip ./deploy
+      run: zip -r -qq -j ./jumanji-project-build.zip ./deploy
+      
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ap-northeast-2
 
     # S3 Bucket으로 copy
     - name: Deliver to AWS S3
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
         aws s3 cp \
         --region ap-northeast-2 \
-          ./build/libs/*.jar s3://jumanji-project-build
+        --acl private \
+          ./jumanji-project-build.zip s3://jumanji-project-build/
 
     - name: Deploy ec2
       run: |
         aws deploy create-deployment \
-          --application-name codedeploy-from-s3 \
-          --deployment-group-name codedeploy-from-s3 \
-          --s3-location bucket=${{ secrets.AWS_S3_BUCKET_NAME }},key=community-build/buildFile.zip,bundleType=zip > deploymentId.txt
+          --application-name YJCapston-jumanji \
+          --deployment-group-name YJCpaston-jumanji-group \
+          --file-exists-behavior OVERWRITE \
+          --s3-location bucket=${{ secrets.AWS_S3_BUCKET_NAME }},key=jumanji-project-build.zip,bundleType=zip
 
-        DEPLOYMENT_ID=$(cat deploymentId.txt | jq -r '.deploymentId')
-
-        echo "Wait 60 seconds for deployment and test"
-        sleep 60
-
-        IS_SUCCESS=$(aws deploy get-deployment --deployment-id $DEPLOYMENT_ID | jq -r '.deploymentInfo.status')
-
-        echo $IS_SUCCESS;
-
-        if [ "$IS_SUCCESS" = "Succeeded" ];
-        then
-          echo "SUCCESS DEPLOY!"
-        else
-          echo "FAIL DEPLOY!"
-          exit 1
-        fi
