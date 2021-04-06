@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import topimg from "./img/topimg.jpg";
 import juminicon from "./img/주민아이콘.png";
 import downimg from "./img/다운로드.png";
@@ -8,7 +8,6 @@ import shopimg from "./img/매장아이콘.png";
 import backimg3 from "./img/종이질감갈색화면.png";
 import * as S from "./style";
 import { Link } from "react-router-dom";
-import buttonimg from "./img/버튼 배경.jpg";
 
 const Main = ({
     isLogin,
@@ -24,19 +23,40 @@ const Main = ({
 }) => {
     // var location = document.querySelector("#move").offsetTop;
     // console.log(location);
-
-    console.log(isLogin);
+    function getWindowDimensions() {
+        const { innerWidth: width, innerHeight: height } = window;
+        return {
+          width,
+          height
+        };
+      }
+      
+    function useWindowDimensions() {
+        const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+      
+        useEffect(() => {
+          function handleResize() {
+            setWindowDimensions(getWindowDimensions());
+          }
+      
+          window.addEventListener('resize', handleResize);
+          return () => window.removeEventListener('resize', handleResize);
+        }, []);
+      
+        return windowDimensions;
+      }
+    const { height, width } = useWindowDimensions();
     const scrollTo1 = () => {
         window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     };
     const scrollTo2 = () => {
-        window.scrollTo({ top: 700, left: 0, behavior: "smooth" });
+        window.scrollTo({ top: height, left: 0, behavior: "smooth" });
     };
     const scrollTo3 = () => {
-        window.scrollTo({ top: 1400, left: 0, behavior: "smooth" });
+        window.scrollTo({ top: height*2, left: 0, behavior: "smooth" });
     };
     const scrollTo4 = () => {
-        window.scrollTo({ top: 2100, left: 0, behavior: "smooth" });
+        window.scrollTo({ top: height*3, left: 0, behavior: "smooth" });
     };
 
     return (
@@ -81,15 +101,43 @@ const Main = ({
                             </button>
                         </div>
                         {isLogin ? (
+                            <>
                             <div className="right-nav">
-                                <button className="right1-nav" onClick={logout}>
+                                <button className="right2-nav" onClick={logout}>
                                     LOGOUT
                                 </button>
                                 <Link to="/mypage">
                                     <button class="right2-nav">MYPAGE</button>
                                 </Link>
-
                             </div>
+                            <div className="scroll-nav">
+                            <button
+                                className="right1-nav"
+                                onClick={scrollTo1}
+                                
+                            >
+                                상단바
+                            </button>
+                            <button
+                                className="right1-nav"
+                                onClick={scrollTo2}
+                            >
+                                어플
+                            </button>
+                            <button
+                                className="right1-nav"
+                                onClick={scrollTo3}
+                            >
+                                사업자
+                            </button>
+                            <button
+                                className="right1-nav"
+                                onClick={scrollTo4}
+                            >
+                                매장
+                            </button>
+                        </div>
+                        </>
                         ) : (
                             <>
                                 <div className="right-nav">

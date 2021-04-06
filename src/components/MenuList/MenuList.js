@@ -27,7 +27,7 @@ const MenuList = ({ menues, removeMenu, shopId }) => {
                                 return (
                                     <tr>
                                         <td className="body-item-1">
-                                            <img src={`http://3.34.55.186:8088/${menu.img}`}
+                                            <img src={`http://192.168.1.17:8088/${menu.img}`}
                                                 width='150'
                                                 height='150'
                                                 className="img-box">

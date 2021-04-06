@@ -7,7 +7,9 @@ export const LoginWrap = styled.div`
     transform: translate(-50%, -50%);
     width: 30%;
     margin: 0 auto;
+    margin-top: 0px;
     padding: 5% 1%;
+    padding-top: 0px;
     border-radius: 8px;
     background-color: #3f2f22;
     color: white;
@@ -18,6 +20,7 @@ export const LoginWrap = styled.div`
 `;
 
 export const MainWrap = styled.div`
+
     @font-face {
         font-family: "Wemakeprice-Bold";
         src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Wemakeprice-Bold.woff")
@@ -28,6 +31,7 @@ export const MainWrap = styled.div`
     .App {
         text-align: center;
         background-color: #d1c1a3;
+        margin: 0 auto;
     }
 
     .black-nav {
@@ -41,15 +45,18 @@ export const MainWrap = styled.div`
         font-family: "Wemakeprice-Bold";
         position: fixed;
         z-index: 8;
+        margin-top: 0px;
     }
     .adimg {
         position: relative;
+        margin-top: 0px;
     }
     .topimg {
         position: absolute;
         width: 100%;
         height: 100vh;
         object-fit: fill;
+        margin-top: 0px;
         
     }
     .topimg-img {
@@ -113,7 +120,7 @@ export const MainWrap = styled.div`
 
     .but-item1-text {
         position: relative;
-        margin-top: 30vh;
+        margin-top: 40vh;
         padding-left: 20%;
         display: inline-block;
         z-index: 2;
@@ -176,7 +183,7 @@ export const MainWrap = styled.div`
 
     .but-item2-text {
         position: relative;
-        margin-top: 130vh;
+        margin-top: 140vh;
         padding-left: 20%;
         display: inline-block;
         z-index: 2;
@@ -223,7 +230,7 @@ export const MainWrap = styled.div`
 
     .but-item3-text {
         position: relative;
-        margin-top: 130vh;
+        margin-top: 140vh;
         padding-left: 20%;
         display: inline-block;
         z-index: 2;
@@ -247,7 +254,7 @@ export const MainWrap = styled.div`
     }
     .right1-nav {
         width: 60px;
-        height: 60px;
+        height: 50px;
         background-color: #AE905E;
         opacity: 0.2;
         border: none;
@@ -260,6 +267,7 @@ export const MainWrap = styled.div`
         cursor: pointer;
         opacity: 1;
         border-radius: 0 20% 20% 0;
+        box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.4);
     }
 
     .but-item3-icon {
