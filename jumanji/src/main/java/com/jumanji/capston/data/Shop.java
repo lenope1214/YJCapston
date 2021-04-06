@@ -107,17 +107,16 @@ public class Shop {
     }
 
     public void update(Patch patch) {
-        this.intro = patch.getIntro();
-        this.openTime = stringToDate(patch.getOpenTime());
-        this.closeTime = stringToDate(patch.getCloseTime());
-        this.address = patch.getAddress();
-        this.addressDetail = patch.getAddressDetail();
-        this.category = patch.getCategory();
+        if(patch.getIntro()!=null)this.intro = patch.getIntro();
+        if(!patch.getOpenTime().isEmpty() || !patch.getOpenTime().isBlank())this.openTime = stringToDate(patch.getOpenTime());
+        if(!patch.getCloseTime().isEmpty() || !patch.getCloseTime().isBlank())this.closeTime = stringToDate(patch.getCloseTime());
+        if(patch.getAddress()!=null)this.address = patch.getAddress();
+        if(patch.getAddressDetail()!=null)this.addressDetail = patch.getAddressDetail();
+        if(patch.getCategory()!=null)this.category = patch.getCategory();
     }
 
 
     @Getter
-    @Setter
     @AllArgsConstructor @NoArgsConstructor
     public static class Patch{
         private String shopId;
