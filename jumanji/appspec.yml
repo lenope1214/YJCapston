@@ -13,10 +13,10 @@ files:
 
 hooks:
   BeforeInstall:
-    - location: C:\jumanji-service\killport.bat
+    - location: killport.bat
       timeout: 300
   AfterInstall:
     # location은 프로젝트의 root경로를 기준
-    - location: C:\jumanji-service\deploy.bat
+    - location: deploy.bat
       timeout: 60
       # runas: root  windows에선 지원x
