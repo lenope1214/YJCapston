@@ -1,0 +1,5 @@
+구글 로그인
+id = google_{sub}
+pw = "암호화{주만지}"
+email = {email}
+role = ROLE_USER
