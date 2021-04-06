@@ -1,0 +1,1 @@
+start "jumanji" java -Xmx1048m -Xms512m -XX:+UseParallelGC -jar C:/Users/Administrator/Documents/GitHub/YJCapston\capston-0.0.1-SNAPSHOT.jar
