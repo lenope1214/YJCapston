@@ -53,6 +53,10 @@ jobs:
     - name: Copy killport.bat
       run: cp killport.bat ./deploy/
       
+    # killport batch file Copy
+    - name: Copy deletejar.bat
+      run: cp deletejar.bat ./deploy/
+      
     # deploy batch file Copy
     - name: Copy deploy.bat
       run: cp deploy.bat ./deploy/
