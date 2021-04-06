@@ -154,16 +154,21 @@ public class ShopController extends Controller {
 
     @Transactional
     @PatchMapping("/shop")
-    public ResponseEntity<?> updateShopInfo(@RequestBody Shop.Patch patch) {
+    public ResponseEntity<?> updateShopInfo(@RequestBody Shop.Request request) {
         Shop shop;
-        System.out.println("patch.getShopId() : " + patch.getShopId());
+        System.out.println("patch.getShopId() : " + request.getShopId());
         try {
-            shop = shopService.findById(patch.getShopId());
+            shop = shopService.findById(request.getShopId());
         } catch (ShopNotFoundException e) {
             return new ResponseEntity<>(new ApiErrorResponse(e.getCode(), e.getMessage()), HttpStatus.NOT_FOUND);
         }
-        shop.update(patch);
-        return null;
+        System.out.println(
+                "매장 수정 patch.toString()" +"\n" +
+                "patch.getOpenTime : " + request.getOpenTime() +"\n" +
+                        "patch.getCloseTime : " + request.getCloseTime()
+        );
+        shop.update(request);
+        return new ResponseEntity<>(shop, HttpStatus.OK);
     }
 
     @Transactional
