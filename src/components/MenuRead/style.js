@@ -15,6 +15,7 @@ text-align: left;
     display: table; 
     margin-left: auto; 
     margin-right: auto;
+    margin-top: 50px;
 }
 
 .button {
@@ -29,5 +30,15 @@ text-align: left;
     margin-left: auto; 
     margin-right: auto;
     margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.img-box {
+    text-align: center;
+}
+
+.img-box-box {
+    border-radius: 10%;
+    margin-bottom: 20px;
 }
 `;

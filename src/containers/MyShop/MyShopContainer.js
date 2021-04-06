@@ -2,16 +2,18 @@ import React, { useEffect, useState } from "react";
 import MyShop from "../../components/MyShop/MyShop";
 import {getmyShop} from "../../lib/MyShop";
 import { useHistory } from "react-router";
+import Header from "../../components/Header/Header";
+import { ShopsWrap } from "../../components/Shop/style";
+import { removeShops } from "../../lib/MyShop/index"
 
-const MyShopContainer = () => {
-    
+
+const MyShopContainer = (props) => {
+    const history = useState();
     const [shop, setShop] = useState([]); 
+    const [shopId, setShopId] =useState("");
 
-    useEffect(()=> {   
-
+    useEffect(() => {
     }, []);
-
-    // 이게 서버에서 코드 받아오는 함수
     useEffect(() => {
         getmyShop()
         .then((res) => {
@@ -23,11 +25,12 @@ const MyShopContainer = () => {
                     id: shop.id,
                     shopname:shop.name,
                     intro:shop.intro,
+                    category:shop.category,
                     open_time:shop.openTime,
                     close_time:shop.closeTime,
                     address:shop.address,
                     addressDetail:shop.addressDetail,
-                    is_rs_pos:shop.isRsPos
+                    isRsPos:shop.isRsPos
                 };
             });
             setShop(shop);
@@ -38,34 +41,32 @@ const MyShopContainer = () => {
         });
     }, []);
 
+    const removeShop = (id) => {
+        removeShops(id)
+            .then((res) => {
+                alert("삭제되었습니다.");
+                history.push(`/myshop/${shopId}`);
+                window.location.reload();
+            })
+            .catch((err) => {
+                alert("메장삭제에러");
+            });
+    };
+
     return (
+        <>
+        <Header />
 
-        <MyShop shop={shop}/>
+
+        <MyShop 
+        shop={shop}
+        removeShop={removeShop}
+        shopId={shopId}
+        />
+        </>
     );
-}
+};
 
-//     useEffect(() => {
-//         getshopmain();
-//     },[]);
-
-//     const getshopmain = () => {
-//         getmyShop()
-//         .then((res) => {
-//             console.log(res.data);
-//             setShop(res.data);
-
-
-//         })
-//         .catch((err) => {
-//             console.log(err);
-//         });
-//     };
-
-//     return <ShopMain 
-//         shop={shop}
-        
-//         />;
-// };
 
 
 export default MyShopContainer;

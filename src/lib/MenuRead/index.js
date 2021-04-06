@@ -1,9 +1,11 @@
 import MenuRead from "../../components/MenuRead/MenuRead";
 import { apiDefault } from "../client";
 
-export const getMenuRead = async (shopId) => {
-    return apiDefault().get(`/menu/${shopId}`
-    , {
+export const getMenuRead = (
+    menuId
+) => {
+    return apiDefault().get(`/menu/${menuId}`
+        , {
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         },
@@ -11,18 +13,20 @@ export const getMenuRead = async (shopId) => {
 };
 
 export const putMenuRead = (
-    menuName,
+    // menuName,
     menuPrice,
     menuIntro,
     menuId,
-    ) => {
+    duration,
+) => {
     return apiDefault().patch("/menu"
-    , {
-        name: menuName,
-        price: menuPrice,
-        intro: menuIntro,
-        menuId: menuId,
-    },{
+        , {
+            // name: menuName,
+            price: menuPrice,
+            intro: menuIntro,
+            menuId: menuId,
+            duration: duration,
+        }, {
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         },

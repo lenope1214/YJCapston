@@ -223,7 +223,7 @@ const Main = ({
                         <div class="but-item2-icon">
                             <img src={peopleimg} width="300px" height="300px" />
                             <div class="but-item2-but">
-                                <Link to="/shop">
+                                <Link to="/myshop">
                                     <button
                                         style={{
                                             fontSize: "30px",

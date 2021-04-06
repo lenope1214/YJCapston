@@ -63,6 +63,9 @@ export const ShopsWrap = styled.div`
         > span {
             font-size: 30px;
         }
+        > div {
+            border: 1px solid #bababa;
+        }
         > select {
             width: 30%;
             margin: 12px 0;
@@ -118,6 +121,17 @@ export const ShopsWrap = styled.div`
             font-family: "Wemakeprice-Bold";
             font-size: 25px;
         }
+        > button1 {
+            margin-left:30%;
+        }
     }
-    
+    .button {
+        width:100px;
+        height:40px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .button1 {
+        margin_left:30%;
+    }
 `;

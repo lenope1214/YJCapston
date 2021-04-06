@@ -9,7 +9,14 @@ export const getmyShop = () => {
     });
 };
 
-// export const id = () => {
-//     return;
-// };
+export const removeShops = (
+    shopId
+) => {
+    return apiDefault().delete(`/shop/${shopId}`
+        , {
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        },
+    });
+};
 

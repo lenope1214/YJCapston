@@ -1,17 +1,42 @@
 import axios from "axios";
 import {apiDefault} from "../client";
-const shopid = "1111111111";
+// const shopid = "1111111111";
 
-export const getShopList = () => {
-    return apiDefault().get(`/shop/${shopid}`,{
+export const getShopInfo = (shopId) => {
+    return apiDefault().get(`/shop/${shopId}`,{
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         }, 
     })
 }
 
-// export const getShopInfo = async(shopid) => {
-//     return apiDefault().get("/shop",{
+export const putShopInfo = (
+    shopId,
+    shopIntro,
+    shopOpenTime,
+    shopCloseTime,
+    shopAddress,
+    shopAddressDetail,
+    shopCategory
+) => {
+    return apiDefault().patch("/shop"
+    ,{
+        shopId:shopId,
+        intro:shopIntro,
+        openTime:shopOpenTime,
+        closeTime:shopCloseTime,
+        address:shopAddress,
+        addressDetail:shopAddressDetail,
+        category:shopCategory
+    },{
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,    
+        },
+    });
+};
+
+// export const getShopInfo = async(shopid) =>
+
 //         headers: {
 //             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
 //         },
@@ -19,29 +44,29 @@ export const getShopList = () => {
 // };
 
 // //여기부터 
-// export const putShopInfo = (
-//     shopid,
-//     shopname,
-//     intro,
-//     open_time,
-//     close_time,
-//     address,
-//     address1,
-//     category
-//     ) => {
-//     return apiDefault().patch(`/shop/${shopid}`,{
-//         id: shopid,
-//         name: shopname,
-//         intro: intro,
-//         open_time: open_time,
-//         close_time: close_time,
-//         address: address,
-//         address_detail: address1,
-//         category: category,  
-//     },{
-//         headers: {
-//             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
-//         },
-//     });
-// };
+export const putShopList = (
+    shopid,
+    shopname,
+    intro,
+    open_time,
+    close_time,
+    address,
+    address_detail,
+    category
+    ) => {
+    return apiDefault().patch("/shop",{
+        shopId: shopid,
+        name: shopname,
+        intro: intro,
+        openTime: open_time,
+        closeTime: close_time,
+        address: address,
+        addressDetail: address_detail,
+        category: category,  
+    },{
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        },
+    });
+};
 

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import MenuRegisterForm from "../components/MenuRegisterForm/MenuRegisterForm";
-import OwnerNavbar from "../components/OwnerMenubar/OwnerNavbar";
+import MenuRegisterForm from "../../components/MenuRegisterForm/MenuRegisterForm";
+import OwnerNavbar from "../../components/OwnerMenubar/OwnerNavbar";
 import axios from "axios";
 import { useHistory } from "react-router";
-import Header from "../components/Header/Header";
-import { apiDefault } from "../lib/client";
+import Header from "../../components/Header/Header";
+import { apiDefault } from "../../lib/client";
 
 const MenuRegisterFormContainer = () => {
     const history = useHistory();

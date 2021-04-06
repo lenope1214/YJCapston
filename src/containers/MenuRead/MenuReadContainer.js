@@ -1,29 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import axios from "axios";
-import MenuList from '../../components/MenuList/MenuList';
 import { useHistory } from 'react-router';
-import { getMenuList } from '../../lib/MenuList';
 import OwnerNavbar from "../../components/OwnerMenubar/OwnerNavbar";
 import Header from "../../components/Header/Header";
 import MenuRead from '../../components/MenuRead/MenuRead';
 import { getMenuRead, putMenuRead } from '../../lib/MenuRead';
-import { getNowMenu } from '../../lib/MenuRead';
-
 
 export const MenuReadContainer = (props) => {
-    // console.log('View: ', props);
     const history = useHistory();
     const [menuRead, setMenuRead] = useState([]);
-    const [menuName, setMenuName] = useState("");
-    const [menuPrice, setMenuPrice] = useState("");
-    const [menuImg, setMenuImg] = useState("");
-    const [menuIntro, setMenuIntro] = useState("");
+    const [menuPrice, setMenuPrice] = useState(null);
+    const [menuImg, setMenuImg] = useState(null);
+    const [menuIntro, setMenuIntro] = useState(null);
     const [menuId, setMenuId] = useState("");
+    const [menuDuration, setMenuDuration] = useState(null);
 
-    const handleMenuName = (e) => {
-        const value = e.target.value;
-        setMenuName(value)
-    }
     const handleMenuPrice = (e) => {
         const value = e.target.value;
         setMenuPrice(value)
@@ -37,59 +27,69 @@ export const MenuReadContainer = (props) => {
         setMenuImg(value);
     }
 
+    const handleDuration = (e) => {
+        const value = e.target.value;
+        setMenuDuration(value)
+    }
+
     const ReadMenu = () => {
         putMenuRead(
-                menuName,
-                menuPrice,
-                
+                menuImg,
+                menuPrice,     
                 menuIntro,
                 menuId,
+                menuDuration,
                 )
             .then((res) => {
-                history.push("/menulist")
+                history.goBack();
+                alert("수정되었습니다.");
             })
-            .catch((err) => {
-                console.log(menuId, menuName, menuPrice, menuIntro);
+            .catch((err) => {           
                 alert("putMenuRead Err");
             });
     };
 
     useEffect(() => {
-        showMenuRead(props.match.params.shopId);
-        setMenuId(props.match.params.shopId);
+        showMenuRead(props.match.params.menuId);
+        setMenuId(props.match.params.menuId);
     }, []);
   
     const showMenuRead = () => {
-        getMenuRead(props.match.params.shopId)
+        getMenuRead(props.match.params.menuId)
             .then((res) => {
                 setMenuRead(res.data);
             })
             .catch((err) => {
+                console.log(props.match.params.menuId)
                 alert("showMenuRead Err");
-            });
-            
+            });          
     };
+
+    const goBack = () => {
+        history.goBack();
+    }
 
     return(
         <div>
             <Header />
             <OwnerNavbar />
             <MenuRead 
-                // menuRead={menuRead}
                 id={menuRead.id, console.log(menuId)}
                 name={menuRead.name}
                 price={menuRead.price}
                 intro={menuRead.intro}
                 menuId={menuId}
-                menuName={menuName}
-                handleMenuName={handleMenuName}
                 menuPrice={menuPrice}
                 handleMenuPrice={handleMenuPrice}
-                menuImg={menuImg}
+                img={menuRead.imgPath}
                 handleMenuImg={handleMenuImg}
                 menuIntro={menuIntro}
                 handleMenuIntro={handleMenuIntro}
                 ReadMenu={ReadMenu}
+                goBack={goBack}
+                menuDuration={menuDuration}
+                duration={menuRead.duration}
+                handleDuration={handleDuration}
             />
         </div>
     );
