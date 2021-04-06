@@ -16,6 +16,8 @@ public class OrderController extends Controller {
     @Autowired
     OrderService orderService;
 
+
+
     @Transactional(readOnly = true)
     @GetMapping("/order/{orderId}")
     public ResponseEntity<?> selectOrderByOrderId(@PathVariable long orderId){
@@ -24,7 +26,7 @@ public class OrderController extends Controller {
 
     @Transactional
     @PostMapping("/order")
-    public ResponseEntity<?> insertOrder(@RequestBody Order order){
+    public ResponseEntity<?> insertOrder(@RequestBody Order.Request order){
         return new ResponseEntity<>(orderService.insert(order), HttpStatus.OK);
     }
 

@@ -30,9 +30,9 @@ public class User {
     @Column(name = "is_wdrw")
     private char isWdrw; // 탈퇴여부
     private String role; // 권한   u, o, a
+    @DateTimeFormat(pattern = "yyyyMMdd")
     @Column(name = "sign_date")
     private Date signDate; // 가입날짜
-    @DateTimeFormat(pattern = "yyyyMMdd")
     @Column(name = "vip_level")
     private int level; // 등급
     private int point; // 포인트
@@ -66,9 +66,15 @@ public class User {
 
     @Getter
     public static class Request {
-        private String password;
+        private String id; //아이디
+        private String password; // 비밀번호
+        private String name; // 이름
+        private String email; // 이메일
         private String address; // 주소
         private String addressDetail; // 상세주소
+        private Date birthday; // 생년월일
+        private String phone; // 전화번호
+        private String role; // 권한   ROLE_USER, ROLE_OWNER, ROLE_ADMIN
     }
 
     @Getter

@@ -64,7 +64,7 @@ public class ShopController extends Controller {
 
     @Transactional(readOnly = true)
     @GetMapping("/myShop")
-    public ResponseEntity<?> getMyShop(@RequestHeader String authorization) {
+    public ResponseEntity<?> getMyShop(@RequestHeader String authorization) { // 수정해야함.
         System.out.println("ShopController in getMyShop");
         String loginId = getLoginUserId(authorization);
         User userEntity = userService.findById(loginId);
@@ -121,7 +121,7 @@ public class ShopController extends Controller {
         Date openTime = Shop.stringToDate(request.getOpenTime());
         Date closeTime = Shop.stringToDate(request.getCloseTime());
         Shop shopEntity;
-        shopEntity = Shop.createShop()
+        shopEntity = Shop.insertShop()
                 .id(request.getId())
                 .name(request.getName().replace(" ", "_"))
                 .intro(request.getIntro())
