@@ -1,3 +1,5 @@
-@echo off
-for /f "tokens=5" %%A in ('netstat -ab ^| find /i "8088"') do (set PID=%%A)
-taskkill /f /fi "PID eq %PID%"
+@ECHO OFF
+SET killport=8088
+for /f "tokens=5" %%p in ('netstat -aon ^| find /i "listening" ^| find "%killport%"') do taskkill /F /PID %%p
+
+pause
