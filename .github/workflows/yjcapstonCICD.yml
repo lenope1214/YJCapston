@@ -49,9 +49,13 @@ jobs:
     - name: Copy appspec
       run: cp appspec.yml ./deploy/
       
-#     # deploy script file Copy
-#     - name: Copy deploy.bat
-#       run: cp deploy.bat ./deploy/
+    # killport batch file Copy
+    - name: Copy killport.bat
+      run: cp killport.bat ./deploy/
+      
+    # deploy batch file Copy
+    - name: Copy deploy.bat
+      run: cp deploy.bat ./deploy/
       
       # 압축파일 형태로 전달
     - name: Make zip file
