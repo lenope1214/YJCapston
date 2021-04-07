@@ -54,7 +54,7 @@ public class StorageService {
 //            System.out.println("file.getOriginalFilename() : " + file.getOriginalFilename());
 //            System.out.println("file.getResource() : " + file.getResource());
 //            System.out.println("file.getClass() : " + file.getClass());
-            System.out.println("루트 로케이션 : " + rootLocation );
+//            System.out.println("루트 로케이션 : " + rootLocation );
 //            dirFile = new File(String.valueOf(path + "\\" + (fileList.length+1) + "." + fileExtension));
 //            System.out.println("dirFile.toString() : " + dirFile.toString());
 //           File[] fileList = path.listFiles();

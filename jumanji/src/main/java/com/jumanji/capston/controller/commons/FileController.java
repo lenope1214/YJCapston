@@ -57,7 +57,7 @@ public class FileController {
                 "image/jpeg; filename=\"" + img.getFilename() + "\"").body(img);
     }
 
-    @GetMapping("/shop/{shopId}/thumbNail/{fileName:.+}")
+    @GetMapping("/shop/{shopId}/thumbnail/{fileName:.+}")
     @ResponseBody
     public ResponseEntity<?> loadThumbNail(@PathVariable String shopId, @PathVariable String fileName) {
         System.out.println("이미지 로드 요청 !!!");

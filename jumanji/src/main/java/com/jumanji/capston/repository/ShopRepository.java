@@ -12,5 +12,7 @@ public interface ShopRepository extends JpaRepository<Shop, String> {
 
     List<Shop> findByCategory(String category);
 
-    List<Shop> findByOwner_Id(String owner_id);
+    List<Shop> findAllByOwner_Id(String owner_id);
+
+    String findOwner_Id();
 }

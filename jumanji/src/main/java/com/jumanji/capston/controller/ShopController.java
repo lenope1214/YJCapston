@@ -2,22 +2,18 @@ package com.jumanji.capston.controller;
 
 import com.jumanji.capston.controller.commons.Controller;
 import com.jumanji.capston.controller.exception.ApiErrorResponse;
-import com.jumanji.capston.controller.exception.ShopException.ShopHasExistException;
 import com.jumanji.capston.controller.exception.ShopException.ShopNotFoundException;
 import com.jumanji.capston.data.Shop;
-import com.jumanji.capston.data.User;
 import com.jumanji.capston.service.ShopService;
 import com.jumanji.capston.service.StorageService;
 import com.jumanji.capston.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -38,7 +34,6 @@ public class ShopController extends Controller {
     StorageService storageService;
 
 
-
     @Transactional(readOnly = true)
     @GetMapping("/shop/{shopId}")  // get shop/{shopId} 식당번호로 식당 조회
     public ResponseEntity<?> getShopById(@PathVariable String shopId) {
@@ -57,7 +52,7 @@ public class ShopController extends Controller {
     @Transactional(readOnly = true)
     @GetMapping("/shopIntro/{shopId}")
     public ResponseEntity<?> getShopIntro(@PathVariable String shopId) {
-        return new ResponseEntity<>(shopService.getShopIntro(shopId), httpHeaders, HttpStatus.OK);
+        return shopService.getShopIntro(shopId);
     }
 
     @Transactional(readOnly = true)
@@ -70,20 +65,13 @@ public class ShopController extends Controller {
     @GetMapping("/shopList")
     public ResponseEntity<?> selectShopList() {
         System.out.println("샵리스트 >> ");
-        List<Shop> shopList = shopService.findAll();
-        return new ResponseEntity<>(shopList, HttpStatus.OK);
+        return shopService.findAll();
     }
 
     @Transactional(readOnly = true)
     @GetMapping("/shopList/{category}")
     public ResponseEntity<?> selectShopListByCategory(@PathVariable String category) {
-        System.out.println("캣 : " + category);
-        List<Shop> shopCatList = shopService.findByCat(category);
-        if (shopCatList.size() != 0) {
-            System.out.println("샵캣리스트 :" + shopCatList.get(0));
-            return new ResponseEntity<>(shopCatList, HttpStatus.OK);
-        }
-        return new ResponseEntity<>("매장이 없습니다.", httpHeaders, HttpStatus.OK);
+        return shopService.findByCat(category);
 
 //        return new ResponseEntity<>(shopCatList, httpHeaders, HttpStatus.OK); // 이렇게 하면 오류. 객체를 utf로 변환 시켜서 그런지 무슨 한글 변환하면서 오류나나봄!
     }
@@ -91,90 +79,31 @@ public class ShopController extends Controller {
     @Transactional
     @PostMapping("/shop") // 매장등록     Form-data로 받음 => Param.
     public ResponseEntity<?> insertShop(Shop.info request, @RequestHeader String authorization) throws ParseException {
-        System.out.println("매장등록's shopId : " + request.getId());
-        try {
-            if(shopService.findById(request.getId()) != null) throw new ShopHasExistException();
-        } catch (ShopNotFoundException ignored) { // null 이면 없는 사업자번호 이므로 된다 !!
-        } catch (ShopHasExistException e) { // 사업자번호 중복 에러 체킹!!
-            return new ResponseEntity<>(new ApiErrorResponse(e.getCode(), e.getMessage()), HttpStatus.LOCKED);
-        }
-
-//        if ( == null)
-//            return new ResponseEntity<>("사업자 번호가 중복입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
-
-        String loginId = getLoginUserId(authorization);
-        User userEntity = userService.findById(loginId);
-        String uri = "shop/" + request.getId() + "/thumbnail/";
-        String imgPath=null;
-        System.out.println("openTime : " + request.getOpenTime());
-        System.out.println("closeTime : " + request.getCloseTime());
-        if(request.getImg() != null) imgPath = storageService.store(request.getImg(), request.getImg().getName(), uri.split("/"));
-        Date openTime = Shop.stringToDate(request.getOpenTime());
-        Date closeTime = Shop.stringToDate(request.getCloseTime());
-        Shop shopEntity;
-        shopEntity = Shop.insertShop()
-                .id(request.getId())
-                .name(request.getName().replace(" ", "_"))
-                .intro(request.getIntro())
-                .openTime(openTime)
-                .closeTime(closeTime)
-                .address(request.getAddress())
-                .addressDetail(request.getAddressDetail())
-                .category(request.getCategory())
-                .imgPath(imgPath)
-                .owner(userEntity)
-                .build();
-        Shop result = shopService.insert(shopEntity);
-        Shop.Response response = new Shop.Response(result);
-        return new ResponseEntity<>(response, HttpStatus.CREATED); // 생성이므로 201번을 리턴.
+        return shopService.insert(request, authorization);
     }
 
     @Transactional
     @DeleteMapping("/shop/{shopId}")
     public ResponseEntity<?> deleteShop(@RequestHeader String authorization, @PathVariable String shopId) {
-        String loginId = getLoginUserId(authorization);
-        if(loginId.equals(shopService.findById(shopId).getOwner().getId())) return new ResponseEntity<>(shopService.delete(shopId), HttpStatus.NO_CONTENT);
-        else return new ResponseEntity<>(new ApiErrorResponse("error-0000", "권한이 없습니다."), HttpStatus.FORBIDDEN);
+        return shopService.delete(authorization, shopId);
     }
 
-//    @Transactional
-//    @PutMapping("/shop")
-//    public ResponseEntity<?> putShop(@RequestBody Shop shop){
-//        return new ResponseEntity<>(shopService.insertShop(shop), HttpStatus.OK);
-//    }
+    @Transactional
+    @PutMapping("/shop")
+    public ResponseEntity<?> putShop(@RequestHeader String authorization, @RequestBody Shop.Request shop) {
+        return shopService.putShop(authorization, shop);
+    }
 
     @Transactional
     @PatchMapping("/shop")
-    public ResponseEntity<?> updateShopInfo(@RequestBody Shop.Request request) {
-        Shop shop;
-        System.out.println("patch.getShopId() : " + request.getShopId());
-        try {
-            shop = shopService.findById(request.getShopId());
-        } catch (ShopNotFoundException e) {
-            return new ResponseEntity<>(new ApiErrorResponse(e.getCode(), e.getMessage()), HttpStatus.NOT_FOUND);
-        }
-        System.out.println(
-                "매장 수정 patch.toString()" +"\n" +
-                "patch.getOpenTime : " + request.getOpenTime() +"\n" +
-                        "patch.getCloseTime : " + request.getCloseTime()
-        );
-        shop.update(request);
-        return new ResponseEntity<>(shop, HttpStatus.OK);
+    public ResponseEntity<?> patchShop(@RequestHeader String authorization, @RequestBody Shop.Request request) {
+        return shopService.patchShop(authorization, request);
     }
 
     @Transactional
     @PatchMapping("/shop/{shopId}/open")
     public ResponseEntity<?> updateShopIsOpen(@RequestHeader String authorization, @PathVariable String shopId) {
-        String loginId = getLoginUserId(authorization);
-        List<Shop> shopList = getMyShopList(loginId);
-        if (shopList.isEmpty()) return new ResponseEntity<>("매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
-        for (Shop shop : shopList) {
-            if (shop.getId().equals(shopId)) {                // 해당 유저의 해당 매장번호가 있음!
-                System.out.println(shop.getName() + "의 오픈상태 반전성공");
-                return new ResponseEntity<>(shopService.updateIsOpen(shop), HttpStatus.OK);
-            }
-        }
-        return new ResponseEntity<>("매장번호가 일치하는 매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
+        return shopService.patchShopIsOpen(authorization, shopId);
     }
 
 
@@ -182,17 +111,7 @@ public class ShopController extends Controller {
     @Transactional
     @PatchMapping("/shop/{shopId}/reserve")
     public ResponseEntity<?> updateShopIsRsPos(@RequestHeader String authorization, @PathVariable String shopId) {
-        String loginId = getLoginUserId(authorization);
-        List<Shop> shopList = getMyShopList(loginId);
-        if (shopList.isEmpty()) return new ResponseEntity<>("매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
-        for (Shop shop : shopList) {
-            if (shop.getId().equals(shopId)) {
-                // 해당 유저의 해당 매장번호가 있음!
-                System.out.println(shop.getName() + "의 예약상태 반전성공");
-                return new ResponseEntity<>(shopService.updateIsRsPos(shop), HttpStatus.OK);
-            }
-        }
-        return new ResponseEntity<>("매장번호가 일치하는 매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
+        return shopService.patchSHopIsRsPos(authorization, shopId);
     }
 
     private List<Shop> getMyShopList(String loginId) {

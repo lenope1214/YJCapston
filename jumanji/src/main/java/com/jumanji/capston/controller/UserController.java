@@ -6,7 +6,6 @@ import com.jumanji.capston.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 public class UserController extends Controller {
     @Autowired
     UserService userService;
-
 
 
     @Transactional(readOnly = true)
@@ -39,11 +37,11 @@ public class UserController extends Controller {
         return userService.findById(id);
     }
 
-    @Transactional
-    @DeleteMapping("/userDelAll")
-    public ResponseEntity<?> userDelAll() {
-        return new ResponseEntity<>(userService.deleteAll(), HttpStatus.OK);
-    }
+//    @Transactional
+//    @DeleteMapping("/userDelAll")
+//    public ResponseEntity<?> userDelAll( @RequestHeader String authorization) {
+//        return userService.deleteAll(authorization);
+//    }
 
     @Transactional
     @PatchMapping("/user") // putUser
@@ -51,8 +49,6 @@ public class UserController extends Controller {
         String loginId = userService.getMyId(authorization);
         return userService.updateUser(loginId);
     }
-
-    
 
 
 }

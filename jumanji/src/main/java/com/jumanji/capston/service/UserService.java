@@ -42,6 +42,10 @@ public class UserService {
     }
 
     @Transactional
+    public User getMyInfo(String id){
+        return userRepository.findById(id).get();
+    }
+    @Transactional
     public ResponseEntity<?> findById(String id) {
         if (userRepository.findById(id).isPresent())
             return new ResponseEntity<>(userRepository.findById(id), HttpStatus.OK);
@@ -51,6 +55,8 @@ public class UserService {
     @Transactional
     public boolean checkPW(User.Request _user, String encodedPassword) {
         String rawPassword = _user.getPassword();
+        System.out.println("rawPw : " + rawPassword);
+        System.out.println("encPw : " + encodedPassword);
         return bCryptPasswordEncoder.matches(rawPassword, encodedPassword);
         //                                  입력받은 pw  ,  암호화된 pw
     }
@@ -91,9 +97,13 @@ public class UserService {
 //    }
 
     @Transactional
-    public ResponseEntity<?> updateUser(String id) {
-        if (userRepository.findById(id).isPresent())
-            return new ResponseEntity<>(new User.Response(userRepository.findById(id).get()), HttpStatus.OK);
+    public ResponseEntity<?> updateUser(String authorization) {
+        String loginId = getMyId(authorization);
+        User loginUser = null;
+        if (userRepository.findById(loginId).isPresent()){
+            loginUser = userRepository.findById(loginId).get();
+            return new ResponseEntity<>(new User.Response(loginUser), HttpStatus.OK);
+        }
         return new ResponseEntity<>(new ApiErrorResponse("0001"), HttpStatus.BAD_REQUEST);
     }
 
@@ -126,27 +136,28 @@ public class UserService {
         return "ok"; // 삭제가 잘 되면 ok 반환.
     }
 
-    public String deleteAll() {
-        userRepository.deleteAll();
-        return "ok";
-    }
+//    public ResponseEntity<?> deleteAll(String authorization) {
+//        if()
+//        userRepository.deleteAll();
+//        return ;
+//    }
 
 
     private User getUserByToken(String authorization) {
         String id = getMyId(authorization);
         if (userRepository.findById(id).isPresent()) return userRepository.findById(id).get();
-        return null;
+        throw new UserNotFoundException("0001", "없음");
     }
 
     public ResponseEntity<?> login(User.Request user) {
 
-        if (userRepository.findById(user.getId()).isEmpty())
+        if (!userRepository.findById(user.getId()).isPresent())
             return new ResponseEntity<>(new ApiErrorResponse("0002"), HttpStatus.BAD_REQUEST);
         User userEntity = userRepository.findById(user.getId()).get();
 //         아이디 오류 후에 아이디, 비번 오류 통합.. 현재는 있는지 확인하기 위해 이렇게 둠.
-        if (checkPW(user, user.getPassword())) {
-            final String access_token = jwtTokenUtil.generateToken(user.getId());
-            JwtResponse jwtResponse = new JwtResponse(access_token, user.getRole());
+        if (checkPW(user, userEntity.getPassword())) {
+            final String access_token = jwtTokenUtil.generateToken(userEntity.getId());
+            JwtResponse jwtResponse = new JwtResponse(access_token, userEntity.getRole());
             return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
         } else { // 비밀번호 오류
             return new ResponseEntity<>(new ApiErrorResponse("error-0002", "faild login"), HttpStatus.BAD_REQUEST);
@@ -159,7 +170,7 @@ public class UserService {
         User userEntity = userRepository.findById(loginId).get();
         if (userEntity == null) return new ResponseEntity<>("로그인 되어있지 않습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         System.out.println("요청접속 유저 ID : " + userEntity.getId());
-        List<Shop> result = .haveShop(userEntity.getId());
+        List<Shop> result = shopService.getShopListByOwnerId(userEntity.getId());
         if (result == null) return new ResponseEntity<>("매장 등록이 되어있지 않습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
