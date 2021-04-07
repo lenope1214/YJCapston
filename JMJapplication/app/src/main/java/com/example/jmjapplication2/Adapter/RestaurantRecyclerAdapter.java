@@ -26,6 +26,14 @@ public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRe
         mItems = shopss;
     }
 
+    public RestaurantRecyclerAdapter(Context context) {
+        this.context = context;
+    }
+
+    public void setItems(ArrayList<Shop> shopss){
+        this.mItems = shopss;
+    }
+
     // 새로운 뷰 홀더 생성
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -59,7 +67,7 @@ public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRe
     // 데이터 셋의 크기
     @Override
     public int getItemCount() {
-        return mItems.size();
+        return mItems==null? 0:mItems.size();
     }
 
     // 커스텀 뷰홀더

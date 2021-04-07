@@ -12,18 +12,28 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+import com.example.jmjapplication2.dto.Menu;
 import com.example.jmjapplication2.dto.Shop;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Multipart;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterShopActivity extends AppCompatActivity {
+    private static final int SEARCH_ADDRESS_ACTIVITY = 10000;
+
     EditText shop_et_id, shop_et_name, shop_et_intro, shop_et_addr, shop_et_addr_detail;
     Spinner shop_open, shop_close, shop_isres, shop_category;
-    Button shop_register;
+    Button shop_register, search_addr;
+
     private String jwt;
     private AlertDialog dialog;
     @Override
@@ -33,7 +43,7 @@ public class RegisterShopActivity extends AppCompatActivity {
         String member_id = ((JMJApplication)this.getApplication()).getId();
         String jwt = ((JMJApplication)this.getApplication()).getJwt();
 
-        Log.d("res jwtjwtjwt", jwt);
+        //Log.d("res jwtjwtjwt", jwt);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_shop);
@@ -48,6 +58,7 @@ public class RegisterShopActivity extends AppCompatActivity {
         shop_category = findViewById(R.id.shop_et_category);
         shop_isres = findViewById(R.id.shop_et_isres);
         shop_register = findViewById(R.id.shop_register);
+        search_addr = findViewById(R.id.search_addr);
 
         //spinner
         ArrayAdapter openAdapter = ArrayAdapter.createFromResource(this, R.array.open_time, android.R.layout.simple_spinner_item);
@@ -66,18 +77,45 @@ public class RegisterShopActivity extends AppCompatActivity {
 //        isresAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //        shop_isres.setAdapter(isresAdapter);
 
+        search_addr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterShopActivity.this, WebViewActivity.class);
+                startActivityForResult(intent, SEARCH_ADDRESS_ACTIVITY);
+            }
+        });
+
         shop_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Map<String, Object> map = new HashMap();
-                map.put("id", shop_et_id.getText().toString());
-                map.put("name", shop_et_name.getText().toString());
-                map.put("intro", shop_et_intro.getText().toString());
-                map.put("address", shop_et_addr.getText().toString());
-                map.put("address_detail", shop_et_addr_detail.getText().toString());
-                map.put("open_time", shop_open.getSelectedItem());
-                map.put("close_time", shop_close.getSelectedItem());
-                map.put("category", shop_category.getSelectedItem().toString());
+                RequestBody idBody = RequestBody.create(MediaType.parse("text/plain"), shop_et_id.getText().toString());
+                RequestBody nameBody = RequestBody.create(MediaType.parse("text/plain"), shop_et_name.getText().toString());
+                RequestBody introBody = RequestBody.create(MediaType.parse("text/plain"), shop_et_intro.getText().toString());
+                RequestBody addressBody = RequestBody.create(MediaType.parse("text/plain"), shop_et_addr.getText().toString());
+                RequestBody address_detailBody = RequestBody.create(MediaType.parse("text/plain"), shop_et_addr_detail.getText().toString());
+                RequestBody open_timeBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(shop_open.getSelectedItem()));
+                RequestBody close_timeBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(shop_close.getSelectedItem()));
+                RequestBody categoryBody = RequestBody.create(MediaType.parse("text/plain"), shop_category.getSelectedItem().toString());
+
+                Map<String, RequestBody> map = new HashMap();
+                map.put("id", idBody);
+                map.put("name", nameBody);
+                map.put("intro", introBody);
+                map.put("address", addressBody);
+                map.put("addressDetail", address_detailBody);
+                map.put("openTime", open_timeBody);
+                map.put("closeTime", close_timeBody);
+                map.put("category", categoryBody);
+
+
+//                map.put("id", shop_et_id.getText().toString());
+//                map.put("name", shop_et_name.getText().toString());
+//                map.put("intro", shop_et_intro.getText().toString());
+//                map.put("address", shop_et_addr.getText().toString());
+//                map.put("address_detail", shop_et_addr_detail.getText().toString());
+//                map.put("open_time", shop_open.getSelectedItem());
+//                map.put("close_time", shop_close.getSelectedItem());
+//                map.put("category", shop_category.getSelectedItem().toString());
                 //map.put("isRePos", shop_isres.getSelectedItem().toString());
                 //map.put("member_id", member_id);
 
@@ -133,5 +171,19 @@ public class RegisterShopActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        switch (requestCode) {
+            case SEARCH_ADDRESS_ACTIVITY:
+                if(resultCode == RESULT_OK) {
+                    String data = intent.getExtras().getString("data");
+                    if(data != null) {
+                        shop_et_addr.setText(data);
+                    }
+                }
+                break;
+        }
     }
 }

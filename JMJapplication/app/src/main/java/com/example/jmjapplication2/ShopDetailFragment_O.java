@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -22,12 +21,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
 public class ShopDetailFragment_O extends Fragment {
-    Button toggle_button_on, toggle_button_off, toggle_button_res_on, toggle_button_res_off, owner_logout_btn;
+    Button toggle_button_on, toggle_button_off, toggle_button_res_on, toggle_button_res_off, owner_logout_btn, shop_detail_menu_button;
     DataService dataService = new DataService();
     boolean is_check = true;
     boolean is_check2 = true;
@@ -309,6 +307,33 @@ public class ShopDetailFragment_O extends Fragment {
                 } else {
                     return;
                 }
+            }
+        });
+
+        shop_detail_menu_button = rootView.findViewById(R.id.shop_detail_menu_button);
+        shop_detail_menu_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("메뉴 관리");
+                builder.setMessage("메뉴 관리로 이동하시겠습니까?");
+                builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        System.out.println("ㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂ");
+                        Intent intent = new Intent(getActivity(), MenuDetailActivity.class);
+                        intent.putExtra("shopNumber",shopNumber);
+                        startActivity(intent);
+                        System.out.println("ㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅ");
+                    }
+                });
+                builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("result", "아니오");
+                    }
+                });
+                builder.show();
             }
         });
 

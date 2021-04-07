@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/layout_menu"
+              android:layout_width="match_parent"
+              android:layout_height="160dp"
+              android:layout_margin="5dp"
+              android:layout_weight="100"
+              android:background="@drawable/border_with_bright_color"
+              android:orientation="vertical">
+
+    <ImageView
+            android:id="@+id/iv_menu_img"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="60"
+            android:padding="10dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/img_ready" />
+
+    <TextView
+            android:id="@+id/tv_menu_name"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="20"
+            android:gravity="center"
+            android:text="메뉴 이름"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+    <TextView
+            android:id="@+id/tv_menu_price"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="20"
+            android:gravity="center"
+            android:text="가격"
+            android:textSize="18sp" />
+
+</LinearLayout>

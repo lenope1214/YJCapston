@@ -76,15 +76,15 @@ public class OwnerLoginActivity extends AppCompatActivity {
                                 Log.d("jsonobject :: role >> ", role);
                                 Log.d("jsonobject :: userid >> ", et_owner_id.getText().toString());
 
-                                SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
-                                SharedPreferences.Editor editor = pref.edit();
-                                editor.putString("token", jwt);
-                                editor.apply();
-
-                                ((JMJApplication)getApplication()).setId(et_owner_id.getText().toString());
-                                ((JMJApplication)getApplication()).setJwt(jwt);
-
                                 if(role.equals("ROLE_OWNER")) {
+                                    SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = pref.edit();
+                                    editor.putString("token", jwt);
+                                    editor.apply();
+
+                                    ((JMJApplication)getApplication()).setId(et_owner_id.getText().toString());
+                                    ((JMJApplication)getApplication()).setJwt(jwt);
+
                                     Log.d("result : ", "사업자 로그인 성공");
                                     dataService.myShop.myShop2("Bearer " + jwt).enqueue(new Callback<List<Shop>>() {
                                         @Override

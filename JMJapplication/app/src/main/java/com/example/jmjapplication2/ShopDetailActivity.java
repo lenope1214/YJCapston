@@ -25,17 +25,25 @@ import java.util.Map;
 
 public class ShopDetailActivity extends AppCompatActivity {
     DataService dataService = new DataService();
+
     static public String shopNumber;
+    static public String shopIntro;
+    static public String shopOpen;
+    static public String shopClose;
+    static public char shopIsOpen;
+    static public char shopIsRsPos;
+    static public String shopAddress;
+    static public String shopDetailAddress;
 
     TextView shop_detail_shopname, shop_detail_review, shop_detail_reply, shop_detail_avgtext;
     ImageView shop_detail_avgstar;
-    LinearLayout shop_detail_phonecall;
-    LinearLayout shop_detail_zzim;
+    TextView shop_detail_phonecall;
+    TextView shop_detail_zzim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shop_detail);
+        setContentView(R.layout.activity_shop_detail2);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.shop_detail_toolbar);
         toolbar.setTitle("");
@@ -48,8 +56,8 @@ public class ShopDetailActivity extends AppCompatActivity {
         shop_detail_reply = (TextView) findViewById(R.id.shop_detail_reply);
         shop_detail_avgtext = (TextView) findViewById(R.id.shop_detail_avgtext);
         shop_detail_avgstar = (ImageView) findViewById(R.id.shop_detail_avgstar);
-        shop_detail_phonecall = (LinearLayout) findViewById(R.id.shop_detail_phonecall);
-        shop_detail_zzim = (LinearLayout) findViewById(R.id.shop_detail_zzim);
+        shop_detail_phonecall = (TextView) findViewById(R.id.shop_detail_phonecall);
+        shop_detail_zzim = (TextView) findViewById(R.id.shop_detail_zzim);
         
         shop_detail_phonecall.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,14 +94,23 @@ public class ShopDetailActivity extends AppCompatActivity {
             public void onResponse(Call<Shop> call, Response<Shop> response) {
                 if(response.code() == 200) {
                     Shop shop = response.body();
-                    //Log.d("resultfianjeo;fki", shop.getName());
                     shop_detail_shopname.setText(shop.getName());
 
-//                    DetailPagerAdapter detailPagerAdapter = new DetailPagerAdapter(getSupportFragmentManager());
-//                    ViewPager viewPager = (ViewPager)findViewById(R.id.shop_detail_viewpager);
-//                    viewPager.setAdapter(detailPagerAdapter);
-//                    TabLayout tabLayout = (TabLayout)findViewById(R.id.shop_detail_tabs);
-//                    tabLayout.setupWithViewPager(viewPager);
+                    shopIntro = shop.getIntro();
+                    shopOpen = shop.getOpenTime();
+                    shopClose = shop.getCloseTime();
+                    shopIsOpen = shop.getIsOpen();
+                    shopIsRsPos = shop.getIsRsPos();
+                    shopAddress = shop.getAddress();
+                    shopDetailAddress = shop.getAddressDetail();
+                    Log.d("rawa@@@@@@@@w",shopIntro + "@" + shopOpen + "@"  + shopClose + "@" + shopIsOpen + "@"
+                            + shopIsRsPos + "@" + shopAddress + "@" + shopDetailAddress);
+
+                    DetailPagerAdapter detailPagerAdapter = new DetailPagerAdapter(getSupportFragmentManager());
+                    ViewPager viewPager = (ViewPager)findViewById(R.id.shop_detail_viewpager);
+                    viewPager.setAdapter(detailPagerAdapter);
+                    TabLayout tabLayout = (TabLayout)findViewById(R.id.shop_detail_tabs);
+                    tabLayout.setupWithViewPager(viewPager);
                 } else {
                     Log.d("result : ", "상세 조회 실패");
                 }

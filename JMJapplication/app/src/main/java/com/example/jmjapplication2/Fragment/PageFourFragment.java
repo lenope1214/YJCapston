@@ -23,7 +23,7 @@ import java.util.List;
 
 public class PageFourFragment extends Fragment {
     View view;
-    private RecyclerView.Adapter adapter;
+    private RestaurantRecyclerAdapter adapter;
     private RecyclerView rv_restaurant_list;
     ArrayList<Shop> mItems = new ArrayList<>();
 
@@ -42,6 +42,7 @@ public class PageFourFragment extends Fragment {
             view = inflater.inflate(R.layout.fragment_page_one, container, false);
 
             rv_restaurant_list = (RecyclerView)view.findViewById(R.id.rv_restaurant_list);
+            adapter = new RestaurantRecyclerAdapter(getContext());
             showList("고기");
         }
 
@@ -71,7 +72,7 @@ public class PageFourFragment extends Fragment {
                             Log.e("result : ", list.getCategory());
                             mItems.add(new Shop(list.getId(), list.getName(), list.getIntro(), list.getCloseTime(), list.getOpenTime(), list.getAddress(), list.getAddressDetail(), list.getIsRsPos(), list.getCategory(), list.getIsOpen()));
                             rv_restaurant_list.setHasFixedSize(true);
-                            adapter = new RestaurantRecyclerAdapter(getContext(), mItems);
+                            adapter.setItems(mItems);
                             rv_restaurant_list.setLayoutManager(new LinearLayoutManager(getActivity()));
                             rv_restaurant_list.setAdapter(adapter);
                         }
@@ -83,7 +84,7 @@ public class PageFourFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Shop>> call, Throwable t) {
-                Toast.makeText(getContext(), "네트워크 오류", Toast.LENGTH_LONG).show();
+
             }
         });
 

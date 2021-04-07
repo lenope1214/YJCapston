@@ -41,7 +41,7 @@ public class DetailPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return "메뉴";
             case 1:
-                return "정보";
+                return "상세정보";
             case 2:
                 return "리뷰";
             default:
