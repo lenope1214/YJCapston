@@ -1,7 +1,6 @@
 package com.jumanji.capston.controller;
 
 import com.jumanji.capston.controller.commons.Controller;
-import com.jumanji.capston.controller.exception.ApiErrorResponse;
 import com.jumanji.capston.data.Menu;
 import com.jumanji.capston.service.MenuService;
 import com.jumanji.capston.service.ShopService;
@@ -67,33 +66,12 @@ public class MenuController extends Controller {
     @Transactional
     @PostMapping("/menu") // post
     public ResponseEntity<?> insertMenu(Menu.info request) {
-        if(menuService.findById(request.getShopId()+request.getName()) != null)return new ResponseEntity<>("있는 메뉴입니다.", httpHeaders, HttpStatus.LOCKED);
-        Menu menu;
-        System.out.println("메뉴 추가");
-        String menuId = request.getShopId() + request.getName();
-        String path = "shop/" + request.getShopId() + "/menu/";
-        String imgPath = null;
-        if (request.getImg() != null)
-            imgPath = storageService.store(request.getImg(), request.getName().replace(" ", "_"), path.split("/"));
-        menu = Menu.init()
-                .id(menuId)
-                .name(request.getName().replace(" ", "_"))
-                .intro(request.getIntro())
-                .price(request.getPrice())
-                .duration(request.getDuration())
-                .imgPath(imgPath)
-                .build();
-//        System.out.println("ㅁㄴㅇㄹ");
-        Menu result = menuService.save(menu);
-//        Menu result = menu;
-        Menu.Response response = new Menu.Response(result);
-
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        menuService.postMenu(request);
     }
 
     @Transactional
     @PatchMapping("/menu") // patch
-    public ResponseEntity<?> updateMenu(@RequestBody Menu.Request request) {
+    public ResponseEntity<?> patchMenu(@RequestBody Menu.Request request) {
         System.out.println("메뉴 수정>>> ");
 
         // 권한확인 해야함. 로그인유저 의 매장인지.
@@ -113,12 +91,13 @@ public class MenuController extends Controller {
     @Transactional
     @DeleteMapping("/menu/{menuId}") // Delete
     public ResponseEntity<?> deleteMenu(@RequestHeader String authorization, @PathVariable String menuId) {
-        String loginId = getLoginUserId(authorization);
-        if(loginId.equals(shopService.findById(menuId.substring(0, 10)).getOwner().getId())) {
-            menuService.delete(menuId);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        else return new ResponseEntity<>(new ApiErrorResponse("error-0000", "권한이 없습니다."), HttpStatus.FORBIDDEN);
+//        String loginId = getLoginUserId(authorization);
+//        if(loginId.equals(shopService.findById(menuId.substring(0, 10)).getOwner().getId())) {
+//            menuService.delete(menuId);
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//        else return new ResponseEntity<>(new ApiErrorResponse("error-0000", "권한이 없습니다."), HttpStatus.FORBIDDEN);
+        return null;
     }
 
     @Transactional(readOnly = true)

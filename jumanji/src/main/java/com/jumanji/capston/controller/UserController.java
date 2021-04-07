@@ -45,9 +45,8 @@ public class UserController extends Controller {
 
     @Transactional
     @PatchMapping("/user") // putUser
-    public ResponseEntity<?> updateUser(@RequestBody User.Request request, @RequestHeader String authorization) {
-        String loginId = userService.getMyId(authorization);
-        return userService.updateUser(loginId);
+    public ResponseEntity<?> patchUser(@RequestBody User.Request request, @RequestHeader String authorization) {
+        return userService.patchUser(authorization, request);
     }
 
 

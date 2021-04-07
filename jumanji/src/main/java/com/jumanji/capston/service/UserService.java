@@ -97,22 +97,23 @@ public class UserService {
 //    }
 
     @Transactional
-    public ResponseEntity<?> updateUser(String authorization) {
+    public ResponseEntity<?> patchUser(String authorization, User.Request request) {
         String loginId = getMyId(authorization);
         User loginUser = null;
         if (userRepository.findById(loginId).isPresent()){
             loginUser = userRepository.findById(loginId).get();
+            updateUser(loginUser, request);
             return new ResponseEntity<>(new User.Response(loginUser), HttpStatus.OK);
         }
         return new ResponseEntity<>(new ApiErrorResponse("0001"), HttpStatus.BAD_REQUEST);
     }
 
     @Transactional
-    public User updateUser1(User oldData, User.Request newData) {
+    public User updateUser(User oldData, User.Request newData) {
         System.out.println("Update User in");
-        oldData.setAddress(newData.getAddress());
-        oldData.setAddressDetail(newData.getAddressDetail());
-        oldData.setPassword(bCryptPasswordEncoder.encode(newData.getPassword()));
+        if(newData.getAddress()!= null)oldData.setAddress(newData.getAddress());
+        if(newData.getAddressDetail()!= null)oldData.setAddressDetail(newData.getAddressDetail());
+        if(newData.getPassword()!= null)oldData.setPassword(bCryptPasswordEncoder.encode(newData.getPassword()));
         return userRepository.save(oldData);
     }
 
@@ -149,13 +150,11 @@ public class UserService {
         throw new UserNotFoundException("0001", "없음");
     }
 
-    public ResponseEntity<?> login(User.Request user) {
-
-        if (!userRepository.findById(user.getId()).isPresent())
-            return new ResponseEntity<>(new ApiErrorResponse("0002"), HttpStatus.BAD_REQUEST);
-        User userEntity = userRepository.findById(user.getId()).get();
+    public ResponseEntity<?> login(User.Request request) {
+        isPresent(request.getId());
+        User userEntity = userRepository.findById(request.getId()).get();
 //         아이디 오류 후에 아이디, 비번 오류 통합.. 현재는 있는지 확인하기 위해 이렇게 둠.
-        if (checkPW(user, userEntity.getPassword())) {
+        if (checkPW(request, userEntity.getPassword())) {
             final String access_token = jwtTokenUtil.generateToken(userEntity.getId());
             JwtResponse jwtResponse = new JwtResponse(access_token, userEntity.getRole());
             return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
@@ -168,11 +167,13 @@ public class UserService {
         System.out.println("ShopController in getMyShop");
         String loginId = getMyId(authorization);
         User userEntity = userRepository.findById(loginId).get();
-        if (userEntity == null) return new ResponseEntity<>("로그인 되어있지 않습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
-        System.out.println("요청접속 유저 ID : " + userEntity.getId());
         List<Shop> result = shopService.getShopListByOwnerId(userEntity.getId());
-        if (result == null) return new ResponseEntity<>("매장 등록이 되어있지 않습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    public boolean isPresent(String id){
+        if(userRepository.findById(id).isPresent())return true;
+        throw new UserNotFoundException(id);
     }
 }
 
