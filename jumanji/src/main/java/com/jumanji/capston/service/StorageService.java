@@ -153,19 +153,4 @@ public class StorageService {
             throw new StorageFileNotFoundException("Could not read file: " + "", e);
         }
     }
-
-    public String getFilenameParsePath(String imgPath) {
-        System.out.println("getFilenameParsePath's return filename : " + imgPath.split("/")[imgPath.split("/").length-1]);
-        return imgPath.split("/")[imgPath.split("/").length-1];
-    }
-
-    public String getPathParsePath(String imgPath) {
-        String path = "";
-        String paths[] = imgPath.split("/");
-        for(int i=0; i<paths.length-1; i++){
-            path += paths[i];
-        }
-        System.out.println("getPathParsePath's return path : " + path);
-        return path;
-    }
 }

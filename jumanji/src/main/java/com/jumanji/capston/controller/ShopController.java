@@ -46,7 +46,6 @@ public class ShopController extends Controller {
             return new ResponseEntity<>(new ApiErrorResponse(e.getCode(), e.getMessage()), HttpStatus.BAD_REQUEST);
         }
         Shop.Response response = new Shop.Response(shop);
-        response.setImg(storageService.loadImg(shop.getImgPath()));
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
