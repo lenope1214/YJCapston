@@ -63,11 +63,11 @@ export const InfoWrap = styled.div`
     .info-10 {
         margin-top:2px;
         margin-left: 40%;
-        font-size:10px;
+        font-size:20px;
     }
     .info-11 {
         margin-top:2px;
-        font-size:10px;
+        font-size:20px;
     }
     >input{
         margin-left:40%;

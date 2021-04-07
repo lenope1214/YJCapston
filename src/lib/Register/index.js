@@ -10,7 +10,8 @@ export const postRegister = (
     email,
     birthday,
     address,
-    address1
+    address1,
+    roadAddr
 ) => {
     return apiDefault().post("/join", {
         id: member_id,
@@ -20,7 +21,7 @@ export const postRegister = (
         role: auth,
         email: email,
         birthday: birthday,
-        address: address,
+        address: roadAddr,
         addressDetail: address1,
     });
 };

@@ -20,9 +20,12 @@ const RegisterContainer = () => {
     const [address, setAddress] = useState("");
     const [address1, setAddress1] = useState("");
     const [keyword, setKeyword] = useState("");
-    const [showLocation, setShowLocation] = useState({
-        roadAddr: "",
-    });
+    const [roadAddr, setRoadAddr] = useState("주소를 입력하세요.");
+    const [showLocation, setShowLocation] = useState([
+        {
+            roadAddr: "",
+        },
+    ]);
 
     let check = "u";
 
@@ -108,6 +111,12 @@ const RegisterContainer = () => {
         const value = e.target.value;
         setBirthday(value);
     };
+
+    const handleRoadAddr = (roadAddr) => {
+        setRoadAddr(roadAddr);
+        closemodal();
+    };
+
     const handleAddress = (e) => {
         const value = e.target.value;
         setAddress(value);
@@ -124,22 +133,22 @@ const RegisterContainer = () => {
 
     const register = async () => {
         // 유효성검사
-        if (!validateId(id)) {
-            return alert(
-                "아이디는 영문 대소문자와 숫자 4~12자리로 입력해야합니다!"
-            );
-        }
-        if (!isPassword(pw)) {
-            return alert(
-                "비밀번호는 영문과 숫자 조합하여 8~10자리로 입력해야합니다!"
-            );
-        }
-        if (!isName(username)) {
-            return alert("이름을 제대로 적어주세요");
-        }
-        if (!validateEmail(email)) {
-            return alert("이메일이 형식을 맞춰주세요");
-        }
+        // if (!validateId(id)) {
+        //     return alert(
+        //         "아이디는 영문 대소문자와 숫자 4~12자리로 입력해야합니다!"
+        //     );
+        // }
+        // if (!isPassword(pw)) {
+        //     return alert(
+        //         "비밀번호는 영문과 숫자 조합하여 8~10자리로 입력해야합니다!"
+        //     );
+        // }
+        // if (!isName(username)) {
+        //     return alert("이름을 제대로 적어주세요");
+        // }
+        // if (!validateEmail(email)) {
+        //     return alert("이메일이 형식을 맞춰주세요");
+        // }
 
         postRegister(
             id,
@@ -150,7 +159,8 @@ const RegisterContainer = () => {
             email,
             birthday,
             address,
-            address1
+            address1,
+            roadAddr
         )
             .then((res) => {
                 history.push("/");
@@ -173,21 +183,38 @@ const RegisterContainer = () => {
     const search = () => {
         getLocation(keyword)
             .then((res) => {
-                const json = JSON.parse(res.data.results.juso);
-                console.log(json);
-                const loca = json.map((loca) => {
+                const a = JSON.parse(res.data);
+                const regilo = a.results.juso.map((j) => {
                     return {
-                        roadloca: loca.roadAddr,
+                        roadAddr: j.roadAddr,
                     };
                 });
-                console.log(loca);
+                setShowLocation(regilo);
             })
             .catch((err) => {
                 alert(err);
             });
     };
 
-    console.log(keyword);
+    const handleComplete = (data) => {
+        let fullAddress = data.address;
+        let extraAddress = "";
+
+        if (data.addressType === "R") {
+            if (data.bname !== "") {
+                extraAddress += data.bname;
+            }
+            if (data.buildingName !== "") {
+                extraAddress +=
+                    extraAddress !== ""
+                        ? `, ${data.buildingName}`
+                        : data.buildingName;
+            }
+            fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
+        }
+
+        handleRoadAddr(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+    };
 
     return (
         <Register
@@ -220,6 +247,8 @@ const RegisterContainer = () => {
             keyword={keyword}
             IdCheck={IdCheck}
             showLocation={showLocation}
+            roadAddr={roadAddr}
+            handleComplete={handleComplete}
         />
     );
 };

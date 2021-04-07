@@ -23,15 +23,17 @@ const ShopInfo = ({
     shopClostTime,
     handleShopCloseTime,
     shopAddress,
+    handleShopAddress,
+    shopCategory,
     handleShopCategory,
     shopAddressDetail,
-    handleShopAddress,
     handleShopAddressDetail,
     shopIsRsPos,
     handleShopIsRsPos,
     Shop_v1,
 }
 ) => {
+
         // console.log(shopname.id);
     return(
         <>
@@ -95,8 +97,9 @@ const ShopInfo = ({
             </div>
             <select
                 id="category"
-                value={category}
+                placeholder={category}
                 onChange={handleShopCategory}
+                // value={shopCategory}
                 >
                 <option value="" disable={true}>선택</option>
                 <option value="한식">한식</option>
@@ -136,34 +139,35 @@ const ShopInfo = ({
             <h1>예약가능여부</h1>
             </div>
             <span className="info-10"
-                style={{
-                    fontSize:"20px",
-                    paddingTop:"20px",
-                }}
+                // style={{
+                //     fontSize:"20px",
+                //     paddingTop:"20px",
+                // }}
             >
             가능
-            <input className="info-11"
+            <input 
                 type="radio"
                 id="is_rs_pos1"
                 name="is_rs_pos"
-                placeholder={isRsPos ="Y"}
-                // value={is_rs_pos = "Y"}
+                // placeholder={isRsPos ="Y"}
+            
+                value={isRsPos = "Y"}
                 // onChange={handleIs_rs_pos}
             />
             </span>
-            <span
-                style={{
-                    fontSize:"20px",
-                    paddingTop:"20px",
-                }}
+            <span className="info-11"
+                // style={{
+                //     fontSize:"20px",
+                //     paddingTop:"20px",
+                // }}
             >
             불가능
             <input
                 type="radio"
-                id="is_rs_pos"
+                id="is_rs_pos2"
                 name="is_rs_pos"
-                placeholder={isRsPos ="N"}
-                // value={isRsPos = "N"}
+                // placeholder={isRsPos ="N"}
+                value={isRsPos = "N"}
                 // onChange={handleIs_rs_pos}
             />
             </span>

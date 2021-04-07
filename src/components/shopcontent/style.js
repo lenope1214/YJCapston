@@ -1,23 +1,6 @@
 import styled from "styled-components";
 
-export const LoginWrap = styled.div`
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 30%;
-    margin: 0 auto;
-    padding: 5% 1%;
-    border-radius: 8px;
-    background-color: white;
-    color: black;
-    z-index: 10;
-    border-style: solid;
-    border-color: black;
-    opacity: 0.9;
-`;
-
-export const ShoplistWrap = styled.div`
+export const shopcontentWrap = styled.div`
     @font-face {
         font-family: "Wemakeprice-Bold";
         src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Wemakeprice-Bold.woff")
@@ -383,8 +366,8 @@ export const ShoplistWrap = styled.div`
         position: fixed;
         float: left;
         width: 270px;
-        top: 70%;
-        left: 8%;
+        top: 80%;
+        left: 10%;
         transform: translate(-50%, -50%);
     }
     .selectcategory Button {
@@ -446,11 +429,211 @@ export const ShoplistWrap = styled.div`
     .linesetting {
         float: left;
     }
-    .topCategory button {
-        outline: 0;
-        border: 0;
-        background-color: white;
-        cursor: pointer;
-        width: 50px;
+    .shopcon {
+        padding-top: 2%;
+        position: relative;
+        width: 60%;
+        margin: 20px auto;
+        display: block;
     }
+    .shopcon_2 {
+        position: relative;
+        width: 100%;
+        margin: 0 auto;
+    }
+    .shop_img2 {
+        width: 70%;
+        margin: 3% auto;
+        max-height: 700px;
+        border-radius: 10px;
+    }
+    .shop_img {
+        position: relative;
+        float: left;
+        width: 50%;
+        margin: 0 auto;
+        border: 1px;
+    }
+    .shopcon_1 {
+        padding-top: 14px;
+        position: relative;
+        float: left;
+        width: 50%;
+        margin: 0 auto;
+        border-top: 5px solid #555;
+    }
+    .shopother1 {
+        font-size: 23px;
+        float: left;
+        padding: 2%;
+        margin: 2px;
+        font-weight: bolder;
+    }
+    .shopother2 {
+        padding-top: 3px;
+        width: 100%;
+        text-align: left;
+        color: gray;
+        font-size: 13px;
+        padding-bottom: 2%;
+    }
+    .shopother3 {
+        width: 98%;
+        text-align: left;
+        padding-left: 2%;
+        border-top: 1px solid #e8e8e8;
+        padding-top: 3%;
+        padding-bottom: 3%;
+        min-height: 100px;
+        max-height: 250px;
+    }
+    .shopother4 {
+        padding-left: 2%;
+        width: 98%;
+        text-align: left;
+        border-top: 1px solid #e8e8e8;
+        padding-top: 3%;
+        padding-bottom: 3%;
+    }
+    .shopother5 {
+        padding-left: 2%;
+        width: 98%;
+        text-align: left;
+        border-top: 1px solid #e8e8e8;
+        padding-top: 3%;
+        padding-bottom: 3%;
+    }
+    .shopother6 {
+        padding-left: 2%;
+        width: 98%;
+        text-align: left;
+        border-top: 1px solid #e8e8e8;
+        padding-top: 3%;
+        padding-bottom: 3%;
+    }
+    .shopother7 {
+        padding-left: 2%;
+        width: 98%;
+        text-align: left;
+        border-top: 1px solid #e8e8e8;
+        padding-top: 3%;
+        padding-bottom: 3%;
+    }
+    .shopother8 {
+        padding-left: 2%;
+        width: 98%;
+        text-align: left;
+        border-top: 1px solid #e8e8e8;
+        padding-top: 3%;
+        padding-bottom: 3%;
+        border-bottom: 5px solid #555;
+    }
+    .menulist {
+        position: relative;
+        float: left;
+        padding: 100px;
+        width: 100%;
+    }
+
+    .tablehead {
+        background-color: white;
+
+        width: 100%;
+    }
+    thead {
+        min-width: 100%;
+    }
+    .tablebody {
+        padding-top: 40%;
+    }
+    table {
+        margin: auto;
+        width: 60%;
+        text-align: center;
+        border-top: 1px solid #e8e8e8;
+    }
+    th {
+        padding: 10px;
+        border-bottom: 1px solid #e8e8e8;
+    }
+    .tablecontent {
+        text-align: center;
+        margin: 10% auto;
+        padding: 2%;
+
+        float: left;
+        width: 100%;
+    }
+    .tablecontent1 {
+        text-align: center;
+        margin: auto;
+        padding: 2%;
+        height: 100px;
+        float: left;
+        width: 100%;
+    }
+    .tablecontent1 img {
+        border-radius: 10px;
+    }
+    .showjm {
+        position: fixed;
+        z-index: 100;
+        top: 40%;
+        left: 90%;
+        transform: translate(-50%, -50%);
+        border: 1px solid #000000;
+        min-height: 300px;
+        width: 200px;
+    }
+    .jmlist {
+        background-color: #282c34;
+        color: white;
+        float: left;
+        padding: 2% 0px;
+        border-bottom: 1px solid #e8e8e8;
+        width: 100%;
+        margin: 0 auto;
+    }
+    .jmcontent {
+        min-height: 80%;
+        height: 200px;
+    }
+    .jmallprice {
+        background-color: #282c34;
+        color: white;
+        float: left;
+        padding: 2% 0px;
+        border-bottom: 1px solid #e8e8e8;
+        width: 100%;
+        margin: 0 auto;
+    }
+    .jmprice {
+    }
+    .gojm {
+        width: 100%;
+        height: 50px;
+        border-radius: 0;
+        background-color: #282c34;
+        border: 0px;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+    }
+`;
+
+export const LoginWrap = styled.div`
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    margin: 0 auto;
+    padding: 5% 1%;
+    border-radius: 8px;
+    background-color: black;
+    color: white;
+    z-index: 10;
+    border-style: solid;
+    border-color: black;
+    opacity: 0.9;
 `;

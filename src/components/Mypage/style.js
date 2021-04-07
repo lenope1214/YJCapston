@@ -10,7 +10,8 @@ export const MypageWrap = styled.div`
     padding: 24px;
     border-radius: 40px;
     box-shadow: 0 3px 15px black;
-    z-index: 10;
+    z-index: -1;
+
     > header {
         padding: 12px 0;
         text-align: center;
@@ -21,8 +22,7 @@ export const MypageWrap = styled.div`
             margin: 0;
             padding: 10px;
         }
-        span {
-        }
+
         > input {
             width: 100%;
             margin: 12px 0;
@@ -36,5 +36,11 @@ export const MypageWrap = styled.div`
         width: 100%;
         padding: 8px;
         box-sizing: border-box;
+    }
+    .abc {
+        z-index: 30;
+        color: black;
+        background-color: black;
+        z-index: 300;
     }
 `;

@@ -6,10 +6,10 @@ export const NavWrap = styled.div`
     padding: 0;
 }
 
-a { color: white;
+a { color:black;
 }
 a:hover {
-    color: black;
+    color: gray;
 }
 
 nav {
@@ -19,9 +19,10 @@ nav {
     left: 0;
     right: 0;
     padding: 1rem;
-    color: white;
-    background: teal;
+    color: black;
     font-weight: bold;
+    border-top: 1px solid #444444;
+    border-bottom: 1px solid #444444;
 }
 
 ul {

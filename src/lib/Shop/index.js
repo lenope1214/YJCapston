@@ -48,6 +48,13 @@ export const postShop =(
     });
 };
 
+export const getLocation = (keyword) => {
+    return apiDefault().get(
+        `/searchAddr?keyword=${keyword}&currentPage=1&countPerPage=5`
+    );
+};
+
+
 // export const getLocation = (query) => {
 //     return axios.post(
 //         // `https://openapi.naver.com/v1/search/local.json?query=${query}display=5`

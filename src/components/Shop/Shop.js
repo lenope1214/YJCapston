@@ -2,6 +2,7 @@ import React from "react";
 
 import * as S from "./style";
 import { Link } from "react-router-dom";
+import DaumPostcode from "react-daum-postcode";
 
 
 
@@ -29,35 +30,30 @@ const Shop = ({
     modal,
     openModal,
     closeModal,
-    handleSearch,
+    handleComplete,
     category,
     handleCategory,
     shop_v1,
 }) => {
+    const postCodeStyle = {
+        display: "block",
+        position: "fixed",
+        top: "50%",
+        width: "400px",
+        height: "500px",
+        padding: "7px",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+    };
     return (
         <>
             <S.ShopsWrap>
-                {/* <header>
-                    <Link to="/MyShop" class="shoppage">
-                        <div className="left-nav">
-                            주문
-                            <span
-                                style={{
-                                    fontSize: "23px",
-                                    paddingTop: "10px",
-                                }}
-                            >
-                                의
-                            </span>
-                            민족
-                        </div>
-                    </Link>
-                </header> */}
                 
-                <body>
+                
                     <p>매장등록하기</p>
-            {/* <form encType="multipart/form-data" className="form"> */}
-                    <span>사업자아이디</span>
+                    <body>
+            <form encType="multipart/form-data" className="form">
+                    <div>사업자아이디</div>
                     <input
                         type="text"
                         id="Id"
@@ -66,7 +62,7 @@ const Shop = ({
                         value={id}
                     />
 
-                    <span>매장이름</span>
+                    <div>매장이름</div>
                     <input
                         type="text"
                         id="name"
@@ -75,7 +71,7 @@ const Shop = ({
                         value={shopname}
                     />
 
-                    <span>사진등록</span>
+                    <div>사진등록</div>
                         
                         <input
                             type="file"
@@ -86,7 +82,7 @@ const Shop = ({
                         />
                     
                     
-                    <span>매장소개</span>
+                    <div>매장소개</div>
                     {/* <div contenteditable="true"
                          type="textarea"
                          id="intro"
@@ -103,27 +99,27 @@ const Shop = ({
                     />
                    
 
-                    <span>오픈시간</span>
+                    <div>오픈시간</div>
                     <input
                         type="text"
                         id="open_time"
                         name="open_time"
-                        //    value="00:00"
+                        placeholder="00:00"
                         onChange={handleOpen_time}
                         value={open_time}
                     />
 
-                    <span>마감시간</span>
+                    <div>마감시간</div>
                     <input
                         type="text"
                         id="close_time"
                         name="close_time"
-                        //    vlaue="00:00"
+                        placeholder="00:00"
                         onChange={handleClose_time}
                         value={close_time}
                     />
 
-                    <span class="category">카테고리</span>
+                    <div class="category">카테고리</div>
                     <select 
                         id="category" 
                         onChange={handleCategory} 
@@ -140,7 +136,7 @@ const Shop = ({
                             <option value="카페.디저트">카페.디저트</option>
 
                     </select>
-
+                    <div>매장주소</div>
                     <input
                         type="text"
                         id="address"
@@ -150,6 +146,7 @@ const Shop = ({
                         // disabled
                     />
                     <button onClick={openModal}>검색</button>
+                    <div>매장상세주소</div>
                     <input
                         type="text"
                         id="address1"
@@ -194,32 +191,56 @@ const Shop = ({
                         </span>     */}
 
 
-            {/* </form> */}
+            </form>
                 </body>
                 
                 <footer>
-                    
-                    <button onClick={shop_v1} className="button1">등록</button>
-                    
+                    <div>
+                        <button onClick={shop_v1} className="button">등록</button>
+                    <Link to="/myshop">
+                        <button className="button">취소</button>
+                        </Link>
+                    </div>             
                 </footer>
             </S.ShopsWrap>
 
             {modal && (
-                <S.searchWrap>
-                    <header>
-                        <h1>주소를 검색해주세요</h1>
-                    </header>
-                    <body>
-                        <input
-                            type="text"
-                            placeholder="주소를 입력하세요"
-                            onChange={handleSearch}
-                        />
-                        
-                    </body>
-                    <button>확인</button>
-                    <button onClick={closeModal}>닫기</button>
-                </S.searchWrap>
+                <DaumPostcode
+                    onComplete={handleComplete}
+                    style={postCodeStyle}
+                    height={700}
+                />
+                // <S.searchWrap>
+                //     <header>
+                //         <h1>주소를 검색해주세요</h1>
+                //     </header>
+                //     <body>
+                //         <input
+                //             type="text"
+                //             placeholder="주소를 입력하세요"
+                //             onChange={handleKeyword}
+                //             value={Keyword}
+                //         />
+                //     </body>
+                //     <button onClick={openModal}>검색</button>
+                //     {showLocation.map((loca) => {
+                //         return (
+                //             <div>
+                //                 <button
+                //                     onClick={() =>
+                //                         handleRoadAddr(loca.roadAddr)
+                //                     }
+                //                 >
+                //                     {loca.roadAddr}
+                //                 </button>
+                //                 <br />
+                //             </div>
+                //         );
+                //     })}
+                //     {/* <input type="text" value={showLocation} /> */}
+                //     <button>확인</button>
+                //     <button onClick={closeModal}>닫기</button>
+                // </S.searchWrap>
             )}
         </>
     );

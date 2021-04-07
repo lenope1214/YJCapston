@@ -11,11 +11,11 @@ text-align: left;
 }
 
 .menu-register-container {
-    
     display: table; 
     margin-left: auto; 
     margin-right: auto;
-    margin-top: 50px;
+    margin-top: 70px;
+    margin-bottom: 80px;
 }
 
 .button {
@@ -29,7 +29,7 @@ text-align: left;
     display: table; 
     margin-left: auto; 
     margin-right: auto;
-    margin-top: 30px;
+    margin-top: 60px;
     margin-bottom: 50px;
 }
 
@@ -40,5 +40,18 @@ text-align: left;
 .img-box-box {
     border-radius: 10%;
     margin-bottom: 20px;
+}
+
+.input-box {
+    width: 320px;
+    height: 40px;
+    padding-left: 10px;
+    font-size: 16px;
+}
+.input-box-area {
+    width: 320px;
+    height: 80px;
+    padding-left: 10px;
+    font-size: 16px;
 }
 `;

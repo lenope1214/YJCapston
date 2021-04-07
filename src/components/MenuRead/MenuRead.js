@@ -25,11 +25,11 @@ const MenuRead = ({
                 <div className="menu-register-container">
                     <table className="register-form">
                         <tbody>
-                            <tr> 
+                            <tr>
                                 <th colSpan='2' align='center' className="img-box">
                                     <img src={`http://3.34.55.186:8088/${img}`}
                                         width='80%'
-                                        height='80%'
+                                        // height='60%'
                                         className="img-box-box"
                                     />
                                 </th>
@@ -40,6 +40,8 @@ const MenuRead = ({
                                     <input
                                         type="text"
                                         value={name}
+                                        className="input-box"
+                                        readOnly
                                     />
                                 </td>
                             </tr>
@@ -51,6 +53,7 @@ const MenuRead = ({
                                         placeholder={price}
                                         onChange={handleMenuPrice}
                                         value={menuPrice}
+                                        className="input-box"
                                     />
                                 </td>
                             </tr>
@@ -62,6 +65,7 @@ const MenuRead = ({
                                         placeholder={duration}
                                         onChange={handleDuration}
                                         value={menuDuration}
+                                        className="input-box"
                                     />
                                 </td>
                             </tr>
@@ -69,10 +73,11 @@ const MenuRead = ({
                                 <th className="form-label">상품소개</th>
                                 <td>
                                     <textarea
-                                        row="3"
+                                        row="4"
                                         placeholder={intro}
                                         onChange={handleMenuIntro}
                                         value={menuIntro}
+                                        className="input-box-area"
                                     />
                                 </td>
                             </tr>
@@ -80,9 +85,7 @@ const MenuRead = ({
                     </table>
                     <div className="button-div">
                         <button onClick={ReadMenu} className="button">수정</button>
-
                         <button className="button" onClick={goBack}>취소</button>
-
                     </div>
                 </div>
             </S.MenuReadWrap>

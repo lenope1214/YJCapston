@@ -3,10 +3,45 @@ import { Link } from "react-router-dom";
 
 import * as S from "./style";
 
-const MyPage = ({ Pw, handlePw, Mypage, user }) => {
-    console.log(user.name);
+import DaumPostcode from "react-daum-postcode";
+
+const MyPage = ({
+    Pw,
+    handlePw,
+    Mypage,
+    user,
+    modal,
+    openmodal,
+    handleComplete,
+    roadAddr,
+    handleAddress,
+    handleAddressDetail,
+    addressDetail,
+    handleRoadAddr,
+}) => {
+    const postCodeStyle = {
+        display: "block",
+        position: "fixed",
+        top: "50%",
+        width: "400px",
+        height: "500px",
+        padding: "7px",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        border: "1px",
+    };
+
     return (
         <>
+            <div class="abc">
+                {modal && (
+                    <DaumPostcode
+                        onComplete={handleComplete}
+                        style={postCodeStyle}
+                        height={700}
+                    />
+                )}
+            </div>
             <S.MypageWrap>
                 <header>
                     <h1>회원정보수정</h1>
@@ -78,6 +113,19 @@ const MyPage = ({ Pw, handlePw, Mypage, user }) => {
                         onkeypress="onlyNumber();"
                         value={user.point}
                         disabled
+                    />
+                    <span>주소</span>
+                    <input
+                        placeholder={user.address}
+                        value={roadAddr}
+                        onChange={handleRoadAddr}
+                    />
+                    <button onClick={openmodal}>검색</button>
+                    <span>상세주소</span>
+                    <input
+                        placeholder={user.addressDetail}
+                        onChange={handleAddressDetail}
+                        value={addressDetail}
                     />
                 </body>
 

@@ -6,6 +6,7 @@ import Header from "../../components/Header/Header";
 import Shop from "../../components/Shop/Shop";
 import { apiDefault } from "../../lib/client";
 import { postShop } from "../../lib/Shop";
+import { getLocation} from "../../lib/Register";
 
 const ShopContainer = () => {
     const history = useHistory();
@@ -19,6 +20,14 @@ const ShopContainer = () => {
     // const [is_rs_pos, setIs_rs_pos] = useState("");
     const [category, setCategory] = useState("");
     const [img_url, setImg_url] = useState("");
+    const [keyword, setKeyword] = useState("");
+    const [roadAddr, setRoadAddr] = useState("주소를 입력하세요.");
+    const [showLocation, setShowLocation] = useState([
+        {
+            roadAddr: "",
+        },
+    ]);
+    const [modal, setModal] = useState(false);
 
     // const [modal, setModal] = useState(false);
 
@@ -36,7 +45,15 @@ const ShopContainer = () => {
     //     setInputStatus(value);
     // }
     
-    
+    const openmodal = () => {
+        setModal(true);
+        console.log("true");
+    };
+    const closemodal = () => {
+        setModal(false);
+        console.log("false");
+    };
+
     const handleId = (e) => {
         const value = e.target.value;
         setId(value);
@@ -67,8 +84,7 @@ const ShopContainer = () => {
     };
     const handleAddress1 = (e) => {
         const value = e.target.value;
-        setAddress1(value);
-        
+        setAddress1(value);  
     };
     // const handleIs_rs_pos = (e) => {
     //     const value = e.target.value;
@@ -82,7 +98,16 @@ const ShopContainer = () => {
     const handleImg_url = (e) => {
         const files = e.target.files[0];
         setImg_url(files);
-    }
+    };
+
+    const handleRoadAddr = (roadAddr) => {
+        setRoadAddr(roadAddr);
+        closemodal();
+    };
+    const handleKeyword = (e) => {
+        const value = e.target.value;
+        setKeyword(value);
+    };
     
     const shop_v1 = async () => {
         const formData = new FormData();
@@ -97,6 +122,7 @@ const ShopContainer = () => {
         formData.append("img",img_url);
         console.log(formData);
     
+
         const res = await apiDefault().post("/shop",
            
             formData,
@@ -116,65 +142,43 @@ const ShopContainer = () => {
         console.log(res);
     }
 
-    // const shop_v1 = () => {
-    //     postShop(
-    //         id,
-    //         shopname,
-    //         intro,
-    //         open_time,
-    //         close_time,
-    //         address,
-    //         address1,
-    //         // is_rs_pos,
-    //         category,
-    //         img_url
-    //     )
-    //         // .then((res) => history.push("/shopmain"))
-    //         // .catch((err) => err);
-    //         .then((res) => 
+    const search = () => {
+        getLocation(keyword)
+            .then((res) => {
+                const a = JSON.parse(res.data);
+                const regilo = a.results.juso.map((j) => {
+                    return {
+                        roadAddr: j.roadAddr,
+                    };
+                });
+                setShowLocation(regilo);
+            })
+            .catch((err) => {
+                alert(err);
+            });
+    };
 
-    //             history.push("/Myshop")
-    //         )
-    //         .catch((err) => 
-    //             console.log(err)
-    //         );
-    // };
 
-    // const search = () => {
-    //     getLocation(keyword)
-    //         .then((res) => {
-    //             console.log(res.data);
-    //         })
-    //         .catch((err) => {
-    //             alert("");
-    //         });
-    // }
+    const handleComplete = (data) => {
+        let fullAddress = data.address;
+        let extraAddress = "";
 
-    //     const Shop = () => {
-    //     postShop(
-    //         id,
-    //         shopname,
-    //         intro,y
-    //         open_time,
-    //         close_time,
-    //         address,
-    //         address1,
-    //         is_rs_pos
-    //     )
-    //     .then((res) => {
+        if (data.addressType === "R") {
+            if (data.bname !== "") {
+                extraAddress += data.bname;
+            }
+            if (data.buildingName !== "") {
+                extraAddress +=
+                    extraAddress !== ""
+                        ? `, ${data.buildingName}`
+                        : data.buildingName;
+            }
+            fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
+        }
 
-    //         alert("등록성록");
-    //         history.push("/shoplist");
-    //     })
-    //     .catch((err) => {
-    //         alert("등록실패");
-    //     });
-    // };
-    // const search = () => {
-    //     getLocation(address)
-    //        .then((res) => {})
-    //        .catch((err) => {});
-    // };
+        handleRoadAddr(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+    };
+
     return (
         <>
         <Header/>
@@ -203,10 +207,14 @@ const ShopContainer = () => {
             img_url={img_url}
             handleImg_url={handleImg_url}
             shop_v1={shop_v1}
-            // search={search}
-            //   modal={modal}
-            //   openModal={openmodal}
-            //   closeModal={closemodal}
+            showLocation={showLocation}
+            roadAddr={roadAddr}
+            handleComplete={handleComplete}
+            search={search}
+            modal={modal}
+            openModal={openmodal}
+            closeModal={closemodal}
+            handleKeyword={handleKeyword}
         />
         </>
     );
