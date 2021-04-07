@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
@@ -84,7 +85,7 @@ public class Shop {
         private String closeTime;
         private char isOpen;
         private char isRsPos;
-        private MultipartFile img;
+        private Resource img;
 
         public Response(Shop shop) {
             this.id = shop.getId();
@@ -97,6 +98,9 @@ public class Shop {
             this.closeTime = dateToString(shop.getCloseTime());
             this.isOpen = shop.getIsOpen();
             this.isRsPos = shop.getIsRsPos();
+        }
+        public void setImg(Resource img){
+            this.img = img;
         }
     }
 
