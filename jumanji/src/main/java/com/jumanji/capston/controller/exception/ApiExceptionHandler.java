@@ -20,7 +20,7 @@ public class ApiExceptionHandler {
     @ExceptionHandler(PasswordMissMatchException.class)
     public ResponseEntity<ApiErrorResponse> pwHandleException(PasswordMissMatchException ex) {
         ApiErrorResponse response =
-                new ApiErrorResponse("error-0002", "password miss match : " + ex.getPassword());
+                new ApiErrorResponse("error-0002", "faild login : " + ex.getPassword());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 }

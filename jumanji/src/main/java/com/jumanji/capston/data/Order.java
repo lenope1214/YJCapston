@@ -1,10 +1,12 @@
 package com.jumanji.capston.data;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Builder;
 import lombok.Getter;
-import oracle.sql.TIMESTAMP;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 
 @Getter
@@ -12,15 +14,21 @@ import java.io.Serializable;
 @Table(name="orders")
 public class Order implements Serializable {
     @Id
-//    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
 //    @Column(insertable = false, updatable = false)
-    private Long id ; // 주문번호 insert 할때 값 yyMMddhhmmss+sequence 설정해주기. 기본값으로 하는거 어렵넹
+    private Long id ; // 주문번호 insert 할때 값 sequence 설정해주기. 기본값으로 하는거 어렵넹
 
     @Column(length = 2)
     private int quantity; // 메뉴 수량
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     @Column(name="order_time")
-    private TIMESTAMP orderTime; // 주문일시
-    private String request; // 요청사항
+    private Date orderTime; // 주문일시
+    @Column(name="order_request")
+    private String orderRequest; // 요청사항
+
+    @ManyToOne
+    @JoinColumn(name = "shop_id", insertable = false, updatable = false)
+    private Shop shop;
 
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
@@ -32,11 +40,34 @@ public class Order implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "tab_id", insertable = false, updatable = false)
-    private Tab table;
+    private Tab tab;
 
     @Getter
+    public
     class Request{
-        private Long id;
+        private int quantity;
+        private String orderRequest;
+//        private Date orderTime;
+        private String shopId;
+        private String userId;
+        private String menuId;
+        private String tabId; // 테이블번호 : 사업자번호 + 테이블번호 ( 2 )
+
+        public Request(Order order){
+
+        }
+    }
+
+    @Builder(builderMethodName = "insertOrder")
+    public Order(Long id, int quantity, String orderRequest, Shop shop, User user, Menu menu, Tab tab) {
+        this.id = id;
+        this.quantity = quantity;
+        this.orderRequest = orderRequest;
+        this.orderTime = new Date();
+        this.shop = shop;
+        this.user = user;
+        this.menu = menu;
+        this.tab = tab;
     }
 }
 
