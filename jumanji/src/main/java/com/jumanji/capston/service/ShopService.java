@@ -56,8 +56,10 @@ public class ShopService {
     }
 
     public ResponseEntity<?> findAll() {
-        if(shopRepository.findAll().size() != 0)
+        if(shopRepository.findAll().size() != 0) {
+            // shop.response로 parsing 해서 보내기.
             return new ResponseEntity<>(shopRepository.findAll(), HttpStatus.OK);
+        }
         else
             return new ResponseEntity<>("1001", HttpStatus.NO_CONTENT);
     }
