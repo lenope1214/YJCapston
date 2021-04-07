@@ -40,13 +40,7 @@ public class MenuController extends Controller {
     @GetMapping("/menu/{menuId}")
     public ResponseEntity<?> selectMenuById(@PathVariable String menuId) {
 //        String menuId = request.getShopId() + request.getName();
-        System.out.println("메뉴 Id : " + menuId);
-        Menu menu = menuService.findById(menuId);
-        if (menu == null)
-            return new ResponseEntity<>("없는 메뉴번호 입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
-        Menu.Response response = new Menu.Response(menu);
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return menuService.findById(menuId);
     }
 
 
@@ -72,20 +66,7 @@ public class MenuController extends Controller {
     @Transactional
     @PatchMapping("/menu") // patch
     public ResponseEntity<?> patchMenu(@RequestBody Menu.Request request) {
-        System.out.println("메뉴 수정>>> ");
-
-        // 권한확인 해야함. 로그인유저 의 매장인지.
-//        String menuId = request.getMenuId(request);
-        Menu menu = menuService.findById(request.getMenuId());
-        if (menu == null) return new ResponseEntity<>("메뉴 ID가 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
-        System.out.println("menuId : " + menu.getId());
-
-        menu.update(request);
-
-        menuService.save(menu);
-        Menu.Response response = new Menu.Response(menu);
-        System.out.println("menuId : " + menu.getId());
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return menuService.patchMenu(request);
     }
 
     @Transactional
