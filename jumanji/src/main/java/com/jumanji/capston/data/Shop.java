@@ -6,10 +6,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -74,7 +74,7 @@ public class Shop {
 
     @Getter
     @Setter
-    public static class Response {
+    public static class Response implements Serializable {
         private String id;
         private String name;
         private String intro;
@@ -85,7 +85,7 @@ public class Shop {
         private String closeTime;
         private char isOpen;
         private char isRsPos;
-        private Resource img;
+        private String imgPath;
 
         public Response(Shop shop) {
             this.id = shop.getId();
@@ -98,10 +98,9 @@ public class Shop {
             this.closeTime = dateToString(shop.getCloseTime());
             this.isOpen = shop.getIsOpen();
             this.isRsPos = shop.getIsRsPos();
+            this.imgPath = shop.getImgPath();
         }
-        public void setImg(Resource img){
-            this.img = img;
-        }
+
     }
 
 
