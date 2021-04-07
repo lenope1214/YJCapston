@@ -1,7 +1,12 @@
 package com.jumanji.capston.controller;
 
+
+
 import com.jumanji.capston.controller.commons.Controller;
+import com.jumanji.capston.controller.exception.ApiErrorResponse;
+
 import com.jumanji.capston.data.Shop;
+import com.jumanji.capston.data.User;
 import com.jumanji.capston.service.ShopService;
 import com.jumanji.capston.service.StorageService;
 import com.jumanji.capston.service.UserService;
@@ -46,6 +51,7 @@ public class ShopController extends Controller {
     @GetMapping("/myShop")
     public ResponseEntity<?> getMyShop(@RequestHeader String authorization) { // 수정해야함.
         return userService.getMyShop(authorization);
+
     }
 
     @Transactional(readOnly = true)
