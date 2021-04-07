@@ -556,22 +556,7 @@ export const shopcontentWrap = styled.div`
         padding: 10px;
         border-bottom: 1px solid #e8e8e8;
     }
-    .tablecontent {
-        text-align: center;
-        margin: 10% auto;
-        padding: 2%;
 
-        float: left;
-        width: 100%;
-    }
-    .tablecontent1 {
-        text-align: center;
-        margin: auto;
-        padding: 2%;
-        height: 100px;
-        float: left;
-        width: 100%;
-    }
     .tablecontent1 img {
         border-radius: 10px;
     }
@@ -585,6 +570,11 @@ export const shopcontentWrap = styled.div`
         min-height: 300px;
         width: 200px;
     }
+    .menu-item {
+        text-align: center;
+        padding: 10px 0 10px 0;
+    }
+
     .jmlist {
         background-color: #282c34;
         color: white;
@@ -618,6 +608,9 @@ export const shopcontentWrap = styled.div`
         color: white;
         font-size: 20px;
         cursor: pointer;
+    }
+    h4 {
+        padding-top: 10%;
     }
 `;
 

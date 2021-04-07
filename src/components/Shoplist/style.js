@@ -439,12 +439,13 @@ export const ShoplistWrap = styled.div`
     }
 
     .listname {
-        padding: 15px;
+        display: block;
+        float: left;
+        padding: 10px;
         font-size: 30px;
         font-weight: bold;
     }
     .linesetting {
-        float: left;
     }
     .topCategory button {
         outline: 0;
@@ -452,5 +453,21 @@ export const ShoplistWrap = styled.div`
         background-color: white;
         cursor: pointer;
         width: 50px;
+    }
+
+    .listcategory {
+        display: block;
+        float: left;
+        padding-top: 30px;
+        padding-bottom: 10px;
+        color: #dddddd;
+    }
+    .listAddress {
+        padding-top: 15%;
+        display: block;
+        float: left;
+        padding-left: 40px;
+        font-size: 20px;
+        color: #555555;
     }
 `;

@@ -1,16 +1,14 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import * as S from "./style";
-import {getMenuRead, getNowMenu} from "../../lib/MenuRead"
-import MenuReadContainer from "../../containers/MenuRead/MenuReadContainer";
 
-const MenuList = ({ menues }) => {
+const MenuList = ({ menues, removeMenu, shopId }) => {
     return (
         <>
             <S.MenuWrap>
                 <div className="menu-container">
                     <h2 className="menu-title">메뉴 목록</h2>
-                    <Link to="/create" className="btn-link">메뉴 추가하기</Link>
+                    <Link to={`/create/${shopId}`} className="btn-link">메뉴 추가하기</Link>
                     <table className="menu-list">
                         <thead>
                             <th align="center" className="item-1">메뉴사진</th>
@@ -24,21 +22,27 @@ const MenuList = ({ menues }) => {
                                     <td colSpan="3">목록이 비었습니다.</td>
                                 </tr>
                             )}
-                            
+
                             {!!menues.length && menues.map((menu) => {
                                 return (
-                                <tr>
-                                    
-                                    <td>이미지</td>
-                                    <Link to={`/menu/${menu.id}`} className="menu-list">       
-                                    <td>{menu.name}</td>
-                                    </Link>
-                                    <td>{menu.price}</td>
-                                    <td><button>삭제</button></td>
-                                </tr>
+                                    <tr>
+                                        <td className="body-item-1">
+                                            <img src={`http://3.34.55.186:8088/${menu.img}`}
+                                                width='150'
+                                                height='150'
+                                                className="img-box">
+                                            </img>
+                                        </td>
+                                        <td className="body-item-2">
+                                            <Link to={`/menu/${shopId}${menu.name}`} className="menu-link">
+                                                {menu.name}
+                                            </Link>
+                                        </td>
+                                        <td className="body-item-3">{menu.price}</td>
+                                        <td className="body-item-4" onClick={() => removeMenu(`${menu.id}`)}><button className="delete-button">X</button></td>
+                                    </tr>
                                 );
                             })}
-
                         </tbody>
                     </table>
                 </div>

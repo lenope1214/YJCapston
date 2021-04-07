@@ -24,13 +24,20 @@ const Register = ({
     handleEmail,
     birthday,
     handleBirthday,
+    address,
     address1,
     handleAddress,
     handleAddress1,
+    search,
     modal,
     openModal,
+    closeModal,
+    handleKeyword,
+    Keyword,
     IdCheck,
+    showLocation,
     roadAddr,
+    handleRoadAddr,
     handleComplete,
 }) => {
     const postCodeStyle = {
@@ -149,7 +156,6 @@ const Register = ({
                         onChange={handleBirthday}
                         value={birthday}
                     />
-                    <span>주소</span>
                     <input
                         type="address"
                         id="address"

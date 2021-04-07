@@ -180,22 +180,6 @@ const RegisterContainer = () => {
             });
     };
 
-    const search = () => {
-        getLocation(keyword)
-            .then((res) => {
-                const a = JSON.parse(res.data);
-                const regilo = a.results.juso.map((j) => {
-                    return {
-                        roadAddr: j.roadAddr,
-                    };
-                });
-                setShowLocation(regilo);
-            })
-            .catch((err) => {
-                alert(err);
-            });
-    };
-
     const handleComplete = (data) => {
         let fullAddress = data.address;
         let extraAddress = "";
@@ -239,7 +223,6 @@ const RegisterContainer = () => {
             handleBirthday={handleBirthday}
             handleAddress={handleAddress}
             handleAddress1={handleAddress1}
-            search={search}
             openModal={openmodal}
             closeModal={closemodal}
             modal={modal}

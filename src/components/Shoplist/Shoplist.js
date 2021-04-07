@@ -19,6 +19,7 @@ const Shoplist = ({
     showkorean,
 }) => {
     console.log(restaurant);
+    let AWS_BASE_URL = "http://3.34.55.186:8088/";
     return (
         <>
             <S.ShoplistWrap>
@@ -118,7 +119,8 @@ const Shoplist = ({
                                                             <img
                                                                 class="yangtimjang"
                                                                 src={
-                                                                    yangtimjang
+                                                                    AWS_BASE_URL +
+                                                                    shop.img
                                                                 }
                                                             />
                                                         </div>
@@ -133,8 +135,9 @@ const Shoplist = ({
                                                                     }
                                                                 </div>
                                                             </div>
-                                                            <div class="listintro">
-                                                                {shop.address}
+                                                            <br></br>
+                                                            <div class="listAddress">
+                                                                {shop.address}{" "}
                                                                 {
                                                                     shop.addressDetail
                                                                 }

@@ -20,6 +20,7 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
             address: "",
             intro: "",
             addressDetail: "",
+            img: "",
         },
     ]);
 
@@ -78,9 +79,10 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         category: rstrt.category,
                         id: rstrt.id,
                         addressDetail: rstrt.addressDetail,
+                        img: rstrt.imgPath,
                     };
                 });
-
+                console.log(rstrt);
                 setRestaurant(rstrt);
             })
             .catch((err) => {

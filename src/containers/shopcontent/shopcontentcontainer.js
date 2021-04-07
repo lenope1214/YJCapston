@@ -30,8 +30,13 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
         closeTime: "",
         isRsPos: "",
         openTime: "",
+        imgPath: "",
     });
-    const [jmMenu, setJmMenu] = useState("qerrtew");
+
+    const [jmMenu, setJmMenu] = useState({
+        id: "",
+        price: "",
+    });
 
     const openmodal = () => {
         setModal(true);
@@ -68,9 +73,14 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
                 console.log(res.data);
                 setShopIntro(res.data);
             })
+
             .catch((err) => {
                 alert(err);
             });
+    };
+
+    const handleMenu = () => {
+        setJmMenu();
     };
 
     const getmenu = () => {
@@ -86,14 +96,11 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
                     };
                 });
                 setMenu(getmenulist);
+                console.log(menu);
             })
             .catch((err) => {
                 console.log(err);
             });
-    };
-
-    const handleMenu = () => {
-        setJmMenu(jmMenu);
     };
 
     const login = () => {
@@ -121,7 +128,6 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
                 }
             });
     };
-    console.log(jmMenu);
 
     return (
         <Shopcontent
