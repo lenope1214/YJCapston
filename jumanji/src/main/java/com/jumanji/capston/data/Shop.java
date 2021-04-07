@@ -84,6 +84,7 @@ public class Shop {
         private String closeTime;
         private char isOpen;
         private char isRsPos;
+        private MultipartFile img;
 
         public Response(Shop shop) {
             this.id = shop.getId();
