@@ -7,6 +7,7 @@ import com.jumanji.capston.controller.exception.ShopException.ShopNotFoundExcept
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.ShopRepository;
+import com.jumanji.capston.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,8 @@ import java.util.List;
 public class ShopService {
     @Autowired
     ShopRepository shopRepository;
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     UserService userService;
@@ -147,9 +150,8 @@ public class ShopService {
     public ResponseEntity<?> putShop(String authorization, Shop.Request shop) {
         isShopPresent(shop.getShopId()); // 있는 매장번호 인가?
         String loginId = userService.getMyId(authorization);
-        System.out.println("shop owner id : " + shopRepository.findOwner_Id());
-        if(isUserShop(loginId)){ // 로그인한 아이디가 해당 매장을 가지고 있는가?
-            Shop shopEntity = shopRepository.findById(shop.getShopId()).get();
+        Shop shopEntity = shopRepository.findById(shop.getShopId()).get();
+        if(isUserShop(loginId, shopEntity)){ // 로그인한 아이디가 해당 매장을 가지고 있는가?
             shopEntity.update(shop);
             return new ResponseEntity<>(shopEntity, HttpStatus.OK);
         }
@@ -163,8 +165,8 @@ public class ShopService {
     }
 
     // 로그인 유저의 매장인지 확인 아니면 에러 반환
-    private boolean isUserShop(String userId){
-        if(shopRepository.findOwner_Id().equals(userId))return true;
+    private boolean isUserShop(String userId, Shop shop){
+        if(shopRepository.findByOwner_Id(userId).getOwner().getId().equals(shop.getOwner().getId()))return true;
         throw new UnAuthorizedException();
     }
 
@@ -172,10 +174,10 @@ public class ShopService {
     public ResponseEntity<?> patchShop(String authorization, Shop.Request request) {
         System.out.println("patch.getShopId() : " + request.getShopId());
         String userId = userService.getMyId(authorization);
+        Shop shop = shopRepository.findById(request.getShopId()).get();
         isShopPresent(request.getShopId());
-        isUserShop(userId);
-        Shop shop;
-        shop = shopRepository.findById(request.getShopId()).get();
+        isUserShop(userId, shop);
+
 
         System.out.println(
                 "매장 수정 patch.toString()" +"\n" +
@@ -190,8 +192,6 @@ public class ShopService {
         String userId = userService.getMyId(authorization);
         List<Shop> shopList = getShopListByOwnerId(userId);
         isShopPresent(shopId);
-        isUserShop(userId);
-        if (shopList.isEmpty()) return new ResponseEntity<>("매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
         for (Shop shop : shopList) {
             if (shop.getId().equals(shopId)) {                // 해당 유저의 해당 매장번호가 있음!
                 System.out.println(shop.getName() + "의 오픈상태 반전성공");
@@ -205,7 +205,6 @@ public class ShopService {
         String userId = userService.getMyId(authorization);
         List<Shop> shopList = getShopListByOwnerId(userId);
         isShopPresent(shopId);
-        isUserShop(userId);
         for (Shop shop : shopList) {
             if (shop.getId().equals(shopId)) {
                 // 해당 유저의 해당 매장번호가 있음!
