@@ -4,9 +4,11 @@ import com.jumanji.capston.config.jwt.JwtResponse;
 import com.jumanji.capston.config.jwt.JwtTokenUtil;
 import com.jumanji.capston.controller.exception.ApiErrorResponse;
 import com.jumanji.capston.controller.exception.UserException.UserNotFoundException;
+import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Service
@@ -26,6 +29,12 @@ public class UserService {
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    HttpHeaders httpHeaders;
+
+    @Autowired
+    ShopService shopService;
 
     @Transactional
     public String getMyId(String authorization) {
@@ -142,6 +151,17 @@ public class UserService {
         } else { // 비밀번호 오류
             return new ResponseEntity<>(new ApiErrorResponse("error-0002", "faild login"), HttpStatus.BAD_REQUEST);
         }
+    }
+
+    public ResponseEntity<?> getMyShop(String authorization) {
+        System.out.println("ShopController in getMyShop");
+        String loginId = getMyId(authorization);
+        User userEntity = userRepository.findById(loginId).get();
+        if (userEntity == null) return new ResponseEntity<>("로그인 되어있지 않습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
+        System.out.println("요청접속 유저 ID : " + userEntity.getId());
+        List<Shop> result = .haveShop(userEntity.getId());
+        if (result == null) return new ResponseEntity<>("매장 등록이 되어있지 않습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }
 

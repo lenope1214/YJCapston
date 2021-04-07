@@ -37,8 +37,6 @@ public class ShopController extends Controller {
     @Autowired
     StorageService storageService;
 
-    @Autowired
-    HttpHeaders httpHeaders;
 
 
     @Transactional(readOnly = true)
@@ -65,14 +63,7 @@ public class ShopController extends Controller {
     @Transactional(readOnly = true)
     @GetMapping("/myShop")
     public ResponseEntity<?> getMyShop(@RequestHeader String authorization) { // 수정해야함.
-        System.out.println("ShopController in getMyShop");
-        String loginId = getLoginUserId(authorization);
-        User userEntity = userService.findById(loginId);
-        if (userEntity == null) return new ResponseEntity<>("로그인 되어있지 않습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
-        System.out.println("요청접속 유저 ID : " + userEntity.getId());
-        List<Shop> result = shopService.haveShop(userEntity.getId());
-        if (result == null) return new ResponseEntity<>("매장 등록이 되어있지 않습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return userService.getMyShop(authorization);
     }
 
     @Transactional(readOnly = true)

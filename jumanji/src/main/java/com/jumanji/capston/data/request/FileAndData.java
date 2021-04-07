@@ -1,4 +1,4 @@
-package com.jumanji.capston.data.Request;
+package com.jumanji.capston.data.request;
 
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
