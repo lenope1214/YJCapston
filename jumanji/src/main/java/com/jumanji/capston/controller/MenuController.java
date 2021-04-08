@@ -1,6 +1,5 @@
 package com.jumanji.capston.controller;
 
-import com.jumanji.capston.controller.commons.Controller;
 import com.jumanji.capston.data.Menu;
 import com.jumanji.capston.service.MenuService;
 import com.jumanji.capston.service.ShopService;
@@ -17,7 +16,7 @@ import javax.security.sasl.AuthenticationException;
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/v1")
-public class MenuController extends Controller {
+public class MenuController  {
 
     @Autowired
     MenuService menuService;

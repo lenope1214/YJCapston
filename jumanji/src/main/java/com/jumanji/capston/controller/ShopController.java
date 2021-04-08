@@ -2,7 +2,6 @@ package com.jumanji.capston.controller;
 
 
 
-import com.jumanji.capston.controller.commons.Controller;
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.service.ShopService;
 import com.jumanji.capston.service.StorageService;
@@ -17,7 +16,7 @@ import java.text.ParseException;
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/v1")
-public class ShopController extends Controller {
+public class ShopController  {
 //    Logger logger;
 
 
