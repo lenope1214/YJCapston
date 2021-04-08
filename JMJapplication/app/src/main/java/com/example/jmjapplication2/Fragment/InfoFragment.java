@@ -6,23 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.jmjapplication2.Adapter.InfoRecyclerAdapter;
-import com.example.jmjapplication2.Adapter.RestaurantRecyclerAdapter;
 import com.example.jmjapplication2.R;
-import com.example.jmjapplication2.ShopDetailActivity;
-import com.example.jmjapplication2.dto.Shop;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import com.example.jmjapplication2.user.ShopDetailActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class InfoFragment extends Fragment {
     private static String shopNumber;

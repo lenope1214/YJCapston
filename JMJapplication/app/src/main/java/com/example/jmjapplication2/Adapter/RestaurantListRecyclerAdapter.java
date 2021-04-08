@@ -6,16 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.jmjapplication2.MainActivity_O;
+import com.example.jmjapplication2.owner.MainActivity_O;
 import com.example.jmjapplication2.R;
-import com.example.jmjapplication2.ShopDetailActivity;
 import com.example.jmjapplication2.dto.Shop;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class RestaurantListRecyclerAdapter extends RecyclerView.Adapter<RestaurantListRecyclerAdapter.ItemViewHolder> {

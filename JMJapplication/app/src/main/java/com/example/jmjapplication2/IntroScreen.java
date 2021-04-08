@@ -2,14 +2,13 @@ package com.example.jmjapplication2;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.example.jmjapplication2.owner.OwnerLoginActivity;
+import com.example.jmjapplication2.user.MainActivity;
 
 public class IntroScreen extends AppCompatActivity {
     ImageView user_jmj_img, owner_jmj_img;

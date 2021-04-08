@@ -6,7 +6,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical"
               android:weightSum="100"
-              tools:context=".BellActivity">
+              tools:context=".user.BellActivity">
 
     <androidx.appcompat.widget.Toolbar
             android:id="@+id/bell_toolbar"

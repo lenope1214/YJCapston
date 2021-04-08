@@ -28,13 +28,13 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
-        <activity android:name=".MenuRegisterActivity">
+        <activity android:name=".owner.MenuRegisterActivity">
         </activity>
-        <activity android:name=".MenuDetailActivity">
+        <activity android:name=".owner.MenuDetailActivity">
         </activity>
-        <activity android:name=".ListShopActivity">
+        <activity android:name=".owner.ListShopActivity">
         </activity>
-        <activity android:name=".OwnerLoginActivity">
+        <activity android:name=".owner.OwnerLoginActivity">
         </activity>
 
         <uses-library android:name="com.google.android.maps"/>
@@ -49,15 +49,15 @@
                 android:name="com.google.android.gms.version"
                 android:value="@integer/google_play_services_version"/>
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".user.MainActivity">
         </activity>
-        <activity android:name=".MenuActivity">
+        <activity android:name=".user.MenuActivity">
         </activity>
-        <activity android:name=".BellActivity">
+        <activity android:name=".user.BellActivity">
         </activity>
-        <activity android:name=".QrReaderActivity">
+        <activity android:name=".user.QrReaderActivity">
         </activity>
-        <activity android:name=".ProfileUpdateActivity">
+        <activity android:name=".user.ProfileUpdateActivity">
         </activity>
         <activity android:name=".IntroScreen">
             <intent-filter>
@@ -67,28 +67,28 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".CaptureAct"
+                android:name=".user.CaptureAct"
                 android:screenOrientation="fullSensor"
                 android:stateNotNeeded="true"
                 android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".user.LoginActivity">
         </activity>
-        <activity android:name=".MainActivity_O">
+        <activity android:name=".owner.MainActivity_O">
         </activity>
-        <activity android:name=".RegisterNoActivity">
+        <activity android:name=".owner.RegisterNoActivity">
         </activity>
-        <activity android:name=".RegisterShopActivity">
+        <activity android:name=".owner.RegisterShopActivity">
         </activity>
-        <activity android:name=".SignupActivity">
+        <activity android:name=".user.JoinActivity">
         </activity>
-        <activity android:name=".ShopDetailActivity">
+        <activity android:name=".user.ShopDetailActivity">
         </activity>
-        <activity android:name=".LogoutActivity">
+        <activity android:name=".user.LogoutActivity">
         </activity>
-        <activity android:name=".OwnerJoinActivity">
+        <activity android:name=".owner.OwnerJoinActivity">
         </activity>
-        <activity android:name=".WebViewActivity">
+        <activity android:name=".owner.WebViewActivity">
         </activity>
     </application>
 
