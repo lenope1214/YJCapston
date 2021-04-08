@@ -59,6 +59,10 @@
         android:testOnly="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true" >
+        <activity android:name="com.example.jmjapplication2.MenuRegisterActivity" >
+        </activity>
+        <activity android:name="com.example.jmjapplication2.MenuDetailActivity" >
+        </activity>
         <activity android:name="com.example.jmjapplication2.ListShopActivity" >
         </activity>
         <activity android:name="com.example.jmjapplication2.OwnerLoginActivity" >
@@ -114,6 +118,8 @@
         <activity android:name="com.example.jmjapplication2.LogoutActivity" >
         </activity>
         <activity android:name="com.example.jmjapplication2.OwnerJoinActivity" >
+        </activity>
+        <activity android:name="com.example.jmjapplication2.WebViewActivity" >
         </activity>
         <activity
             android:name="com.nhn.android.naverlogin.ui.OAuthLoginActivity"
