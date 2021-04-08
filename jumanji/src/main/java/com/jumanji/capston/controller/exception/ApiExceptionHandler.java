@@ -23,4 +23,10 @@ public class ApiExceptionHandler {
                 new ApiErrorResponse("error-0002", "faild login : " + ex.getPassword());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
+
+//    @ExceptionHandler(ShopNotFoundException.class)
+//    public ResponseEntity<ApiErrorResponse> shopExistException(ShopNotFoundException ex){
+//        ApiErrorResponse response =
+//                new ApiErrorResponse("error-1001", "not exist shop id");
+//    }
 }

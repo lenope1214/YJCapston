@@ -1,5 +1,6 @@
 package com.jumanji.capston.service;
 
+import com.jumanji.capston.controller.exception.MenuException.MenuAlreadUsedException;
 import com.jumanji.capston.controller.exception.MenuException.MenuNotFoundException;
 import com.jumanji.capston.data.Menu;
 import com.jumanji.capston.repository.MenuRepository;
@@ -58,7 +59,7 @@ public class MenuService {
 
     public ResponseEntity<?> postMenu(Menu.info request) {
         String menuId = request.getShopId() + request.getName();
-        isPresent(menuId);
+        isEmpty(menuId);
         Menu menu;
         System.out.println("메뉴 추가");
         String path = "";
@@ -82,7 +83,7 @@ public class MenuService {
     // 있는 메뉴인지 확인
     public boolean isEmpty(String id){
         if(!menuRepository.findById(id).isPresent())return true;
-        return true;
+        throw new MenuAlreadUsedException();
     }
 
     public boolean isPresent(String menuId){
