@@ -1,5 +1,6 @@
 package com.jumanji.capston.controller.exception;
 
+import com.jumanji.capston.controller.exception.ShopException.ShopNotFoundException;
 import com.jumanji.capston.controller.exception.UserException.PasswordMissMatchException;
 import com.jumanji.capston.controller.exception.UserException.UserNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -24,9 +25,10 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
-//    @ExceptionHandler(ShopNotFoundException.class)
-//    public ResponseEntity<ApiErrorResponse> shopExistException(ShopNotFoundException ex){
-//        ApiErrorResponse response =
-//                new ApiErrorResponse("error-1001", "not exist shop id");
-//    }
+    @ExceptionHandler(ShopNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> shopExistException(ShopNotFoundException ex){
+        ApiErrorResponse response =
+                new ApiErrorResponse("error-1001", "not exist shop id");
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
 }
