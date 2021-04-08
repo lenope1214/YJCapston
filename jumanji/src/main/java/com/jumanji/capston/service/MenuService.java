@@ -1,8 +1,10 @@
 package com.jumanji.capston.service;
 
+import com.jumanji.capston.controller.exception.ApiErrorResponse;
 import com.jumanji.capston.controller.exception.MenuException.MenuAlreadUsedException;
 import com.jumanji.capston.controller.exception.MenuException.MenuNotFoundException;
 import com.jumanji.capston.data.Menu;
+import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -10,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.security.sasl.AuthenticationException;
 import java.util.List;
 
 @Service
@@ -20,7 +23,10 @@ public class MenuService {
     HttpHeaders httpHeaders;
     @Autowired
     StorageService storageService;
-
+    @Autowired
+    UserService userService;
+    @Autowired
+    ShopService shopService;
 //    public BigDecimal getMenuSeqNextVal() {
 //        return menuRepository.getMenuSeqNextVal();
 //    }
@@ -49,8 +55,14 @@ public class MenuService {
         return menuRepository.save(_menu);
     }
 
-    public void delete(String menuId) {
-        menuRepository.delete( menuRepository.findById(menuId).get());
+    public ResponseEntity<?> delete(String authorization, String menuId) throws AuthenticationException {
+        String loginId = userService.getMyId(authorization);
+        User loginUser = userService.getMyInfo(loginId);
+        if(shopService.isOwnShop(loginId, menuId.substring(0, 10))) {
+            menuRepository.delete( menuRepository.findById(menuId).get());
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(new ApiErrorResponse("error", "권한없음"), HttpStatus.FORBIDDEN);
     }
 
     public List<Menu> findAll() {
@@ -62,10 +74,11 @@ public class MenuService {
         isEmpty(menuId);
         Menu menu;
         System.out.println("메뉴 추가");
-        String path = "";
+        String path = "shop/" + request.getShopId() +"/" + "menu";
         String imgPath = null;
         if (request.getImg() != null)
             imgPath = storageService.store(request.getImg(), request.getName().replace(" ", "_"), path.split("/"));
+        System.out.println("메뉴 이미지 path : " + imgPath);
         menu = Menu.init()
                 .id(menuId)
                 .name(request.getName().replace(" ", "_"))
@@ -80,16 +93,7 @@ public class MenuService {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    // 있는 메뉴인지 확인
-    public boolean isEmpty(String id){
-        if(!menuRepository.findById(id).isPresent())return true;
-        throw new MenuAlreadUsedException();
-    }
 
-    public boolean isPresent(String menuId){
-        if(menuRepository.findById(menuId).isPresent())return true;
-        throw new MenuNotFoundException();
-    }
 
     public ResponseEntity<?> patchMenu(Menu.Request request) {
         System.out.println("메뉴 수정>>> ");
@@ -115,5 +119,16 @@ public class MenuService {
         System.out.println(menuList.size());
 
         return new ResponseEntity<>(menuList, HttpStatus.OK);
+    }
+
+    // 있는 메뉴인지 확인
+    public boolean isEmpty(String id){
+        if(!menuRepository.findById(id).isPresent())return true;
+        throw new MenuAlreadUsedException();
+    }
+
+    public boolean isPresent(String menuId){
+        if(menuRepository.findById(menuId).isPresent())return true;
+        throw new MenuNotFoundException();
     }
 }

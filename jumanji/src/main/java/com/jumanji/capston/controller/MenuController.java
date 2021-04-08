@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.security.sasl.AuthenticationException;
+
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/v1")
@@ -63,14 +65,8 @@ public class MenuController extends Controller {
 
     @Transactional
     @DeleteMapping("/menu/{menuId}") // Delete
-    public ResponseEntity<?> deleteMenu(@RequestHeader String authorization, @PathVariable String menuId) {
-//        String loginId = getLoginUserId(authorization);
-//        if(loginId.equals(shopService.findById(menuId.substring(0, 10)).getOwner().getId())) {
-//            menuService.delete(menuId);
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//        else return new esponseEntity<>(new ApiErrorResponse("error-0000", "권한이 없습니다."), HttpStatus.FORBIDDEN);
-        return null;
+    public ResponseEntity<?> deleteMenu(@RequestHeader String authorization, @PathVariable String menuId) throws AuthenticationException {
+        return menuService.delete(authorization, menuId);
     }
 
     @Transactional(readOnly = true)

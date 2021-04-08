@@ -225,4 +225,17 @@ public class ShopService {
     }
 
 
+    public boolean isOwnShop(String loginId, String shopId) {
+        System.out.println("삭제 유저아디 : " + loginId);
+        System.out.println("삭제 매장번호 : " + shopId);
+        User loginUser = userService.getMyInfo(loginId);
+        System.out.println("로긘 유저 이름 : " + loginUser.getName());
+        if(shopRepository.findByOwnerId(loginId) != null){
+            Shop shopEntity = shopRepository.findByOwnerId(loginId); // OWNER_ID로 비교..!
+            System.out.println("ShopEntity => " + shopEntity);
+            System.out.println("삭제할 메뉴의 매장번호 : " + shopEntity.getId());
+            if(shopEntity.getId().equals(shopId))return true;
+        }
+        return false;
+    }
 }

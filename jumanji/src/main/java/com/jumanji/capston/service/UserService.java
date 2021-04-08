@@ -122,17 +122,13 @@ public class UserService {
         String loginId = getMyId(authorization);
         isPresent(loginId);
         System.out.println("로그인 아이디의 권한 : " + userRepository.findById(loginId).get().getRole());
-        if (!isUsed(jwtTokenUtil.getUsername(authorization)) ||
+        if (isEmpty(jwtTokenUtil.getUsername(authorization)) ||
                 !userRepository.findById(loginId).get().getRole().equals("ROLE_ADMIN")) {
             return new ResponseEntity<>(new ApiErrorResponse("0000"), HttpStatus.UNAUTHORIZED);
         }
         return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
     }
 
-    private boolean isUsed(String id) {
-        if (userRepository.findById(id).isPresent()) return true;
-        throw new UserNotFoundException("error-0001", "Not Found User with id");
-    }
 
     @Transactional
     public String delete(String id) {
@@ -146,12 +142,6 @@ public class UserService {
 //        return ;
 //    }
 
-
-    private User getUserByToken(String authorization) {
-        String id = getMyId(authorization);
-        if (userRepository.findById(id).isPresent()) return userRepository.findById(id).get();
-        throw new UserNotFoundException("0001", "없음");
-    }
 
     public ResponseEntity<?> login(User.Request request) {
         isPresent(request.getId());
@@ -173,6 +163,12 @@ public class UserService {
         List<Shop> result = shopService.getShopListByOwnerId(userEntity.getId());
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
+    private boolean isEmpty(String id) {
+        if (userRepository.findById(id).isEmpty()) return true;
+        throw new UserNotFoundException("error-0001", "Not Found User with id");
+    }
+
 
     public boolean isPresent(String id){
         if(userRepository.findById(id).isPresent())return true;
