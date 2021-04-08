@@ -49,5 +49,10 @@ public class ApiController {
     public ResponseEntity<?> validateOne(@PathVariable String id) {
         return userService.findById(id);
     }
+
+    @GetMapping("/ok")
+    public ResponseEntity<?> updateOk(){
+        return new ResponseEntity<>("update successfully", HttpStatus.OK);
+    }
 }
 
