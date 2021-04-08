@@ -70,8 +70,10 @@
             android:text="로그아웃 >>"
             android:textSize="17sp"
             tools:ignore="MissingConstraints"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="@+id/textView24"
-            app:layout_constraintBottom_toBottomOf="@+id/textView24" android:layout_marginEnd="28dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView24"
+            app:layout_constraintBottom_toBottomOf="@+id/textView24"
+            android:layout_marginEnd="28dp"
             app:layout_constraintVertical_bias="0.0"/>
 
     <TextView
