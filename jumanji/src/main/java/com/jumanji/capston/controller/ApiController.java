@@ -47,7 +47,7 @@ public class ApiController {
 
     @GetMapping("/validate/{id}") // validate
     public ResponseEntity<?> validateOne(@PathVariable String id) {
-        return userService.findById(id);
+        return userService.validationId(id);
     }
 
 //    @GetMapping("/ok")

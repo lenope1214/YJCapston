@@ -7,6 +7,10 @@ import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -22,6 +26,9 @@ import java.util.regex.Pattern;
 @Service
 public class TxprService {
 
+    @Autowired
+    HttpHeaders httpHeaders;
+
     private Gson gson;
     final String APIURL = "https://teht.hometax.go.kr/wqAction.do?actionId=ATTABZAA001R08&screenId=UTEABAAA13&popupYn=false&realScreenId=";
 
@@ -30,7 +37,8 @@ public class TxprService {
         gson = new GsonBuilder().create();
     }
 
-    public String getTaxTypeFromNts(String txprDscmNo) {
+    public ResponseEntity<?> getTaxTypeFromNts(String txprDscmNo) {
+        if(txprDscmNo.length()!=10)return null;
         Map<String, String> requestHeaders = new HashMap<>();
         requestHeaders.put("Accept", "application/xml; charset=UTF-8");
         requestHeaders.put("Accept-Encoding", "gzip, deflate, br");
@@ -79,7 +87,9 @@ public class TxprService {
                 trtCntn = matcher.group(2);
 
             }
-            return trtCntn;
+            if(trtCntn.equals("등록되어 있지 않은 사업자등록번호 입니다."))return new ResponseEntity<>(trtCntn, httpHeaders, HttpStatus.NO_CONTENT);
+            if(trtCntn != null) return new ResponseEntity<>(trtCntn, httpHeaders, HttpStatus.OK);
+            else return new ResponseEntity<>("10자리 입력.", httpHeaders, HttpStatus.BAD_REQUEST);
 
         } catch (IOException e) {
             //logger.error("Jsoup 오류", e);

@@ -3,6 +3,7 @@ package com.jumanji.capston.service;
 import com.jumanji.capston.config.jwt.JwtResponse;
 import com.jumanji.capston.config.jwt.JwtTokenUtil;
 import com.jumanji.capston.controller.exception.ApiErrorResponse;
+import com.jumanji.capston.controller.exception.BasicException;
 import com.jumanji.capston.controller.exception.UserException.UserNotFoundException;
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.data.User;
@@ -15,6 +16,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -48,8 +51,9 @@ public class UserService {
     @Transactional
     public ResponseEntity<?> findById(String id) {
         if (userRepository.findById(id).isPresent())
-            return new ResponseEntity<>(userRepository.findById(id), HttpStatus.OK);
-        return new ResponseEntity<>(new ApiErrorResponse("0001"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new User.Response(userRepository.findById(id).get()), HttpStatus.OK);
+        throw new UserNotFoundException(); // ApiExceptionHandler가 잡아채서 반환해줌.
+//        return new ResponseEntity<>(new BasicException.CodeMessage(new UserNotFoundException()), HttpStatus.NOT_FOUND);
     }
 
     @Transactional
@@ -122,11 +126,14 @@ public class UserService {
         String loginId = getMyId(authorization);
         isPresent(loginId);
         System.out.println("로그인 아이디의 권한 : " + userRepository.findById(loginId).get().getRole());
-        if (isEmpty(jwtTokenUtil.getUsername(authorization)) ||
-                !userRepository.findById(loginId).get().getRole().equals("ROLE_ADMIN")) {
-            return new ResponseEntity<>(new ApiErrorResponse("0000"), HttpStatus.UNAUTHORIZED);
+        if (!userRepository.findById(loginId).get().getRole().equals("ROLE_ADMIN")) {
+            return new ResponseEntity<>(new ApiErrorResponse("0000"), HttpStatus.FORBIDDEN);
         }
-        return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
+        List<User.Response> userList = new ArrayList<>();
+        for (User user: userRepository.findAll()) {
+            userList.add(new User.Response(user));
+        }
+        return new ResponseEntity<>(userList, HttpStatus.OK);
     }
 
 
@@ -166,13 +173,18 @@ public class UserService {
 
     private boolean isEmpty(String id) {
         if (userRepository.findById(id).isEmpty()) return true;
-        throw new UserNotFoundException("error-0001", "Not Found User with id");
+        throw new UserNotFoundException();
     }
 
 
     public boolean isPresent(String id){
         if(userRepository.findById(id).isPresent())return true;
         throw new UserNotFoundException(id);
+    }
+
+    public ResponseEntity<?> validationId(String id) {
+        if(userRepository.findById(id).isEmpty())return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }
 

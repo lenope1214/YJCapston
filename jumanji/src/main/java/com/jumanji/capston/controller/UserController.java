@@ -27,7 +27,7 @@ public class UserController  {
     @Transactional(readOnly = true)
     @GetMapping("/userList") // getUserList
     public ResponseEntity<?> getUserList(@RequestHeader String authorization) {
-        return new ResponseEntity<>(userService.findAll(authorization), HttpStatus.OK);
+        return userService.findAll(authorization);
     }
 
     @Transactional(readOnly = true)

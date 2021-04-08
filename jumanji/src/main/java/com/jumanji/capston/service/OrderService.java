@@ -32,16 +32,17 @@ public class OrderService {
 
     public Order insert(Order.Request request) {
         Order order = null;
-        order = Order.insertOrder()
-                .id(orderRepository.getOrderSeqNextVal())
-                .quantity(request.getQuantity())
-                .orderRequest(request.getOrderRequest())
-                .shop(shopRepository.findById(request.getShopId()).get())
-                .user(userRepository.findById(request.getUserId()).get())
-                .menu(menuRepository.findById(request.getMenuId()).get())
-                .tab(tableRepository.findById(request.getTabId()).get())
-                .build();
-        return orderRepository.save(order);
+        return null;
+//        order = Order.insertOrder()
+//                .id(orderRepository.getOrderSeqNextVal())
+//                .quantity(request.getQuantity())
+//                .orderRequest(request.getOrderRequest())
+//                .shop(shopRepository.findById(request.getShopId()).get())
+//                .user(userRepository.findById(request.getUserId()).get())
+//                .menu(menuRepository.findById(request.getMenuId()).get())
+//                .tab(tableRepository.findById(request.getTabId()).get())
+//                .build();
+//        return orderRepository.save(order);
     }
 
     public String delete(Order _order) {
