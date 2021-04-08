@@ -11,8 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import com.example.jmjapplication2.dto.Shop;
 import okhttp3.ResponseBody;
@@ -25,12 +27,14 @@ import java.util.Map;
 
 
 public class ShopDetailFragment_O extends Fragment {
-    Button toggle_button_on, toggle_button_off, toggle_button_res_on, toggle_button_res_off, owner_logout_btn, shop_detail_menu_button;
+    Button toggle_button_on, toggle_button_off, toggle_button_res_on, toggle_button_res_off;
+    TextView owner_logout_btn, owner_name_tv;
+    ConstraintLayout shop_detail_menu_button;
     DataService dataService = new DataService();
     boolean is_check = true;
     boolean is_check2 = true;
     private android.app.AlertDialog dialog;
-    private String jwt, shopNumber;
+    private String jwt, shopNumber, owner_id;
     private String isOpen, isRsPos;
     private Map<String, String> map = new HashMap();
     public ShopDetailFragment_O() {
@@ -45,18 +49,22 @@ public class ShopDetailFragment_O extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.shop_detail_fragment_o, container, false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.shop_detail_fragment_o2, container, false);
 
         toggle_button_on = rootView.findViewById(R.id.toggle_button_on);
         toggle_button_off = rootView.findViewById(R.id.toggle_button_off);
         toggle_button_res_on = rootView.findViewById(R.id.toggle_button_res_on);
         toggle_button_res_off = rootView.findViewById(R.id.toggle_button_res_off);
         owner_logout_btn = rootView.findViewById(R.id.owner_logout_btn);
+        owner_name_tv = rootView.findViewById(R.id.owner_name_tv);
 
         Bundle bundle = getArguments();
         shopNumber = bundle.getString("shopNumber","dwad");
         
         jwt = ((JMJApplication) this.getActivity().getApplication()).getJwt();
+        owner_id = ((JMJApplication) this.getActivity().getApplication()).getId();
+
+        owner_name_tv.setText(owner_id + "님");
 
         owner_logout_btn.setOnClickListener(new View.OnClickListener() {
             @Override

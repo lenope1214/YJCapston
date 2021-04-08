@@ -26,7 +26,7 @@ public class MenuDetailActivity extends AppCompatActivity {
     private String shopNumber;
     DataService dataService = new DataService();
     private MenuListRecyclerAdapter adapter;
-    private RecyclerView rv_menu_list;
+    private RecyclerView menu_list;
     ArrayList<Menu> mItems = new ArrayList<>();
 
     @Override
@@ -36,7 +36,7 @@ public class MenuDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         shopNumber = intent.getStringExtra("shopNumber");
-        Log.d("awd",shopNumber);
+        //Log.d("awd",shopNumber);
 
         menu_register = findViewById(R.id.menu_register);
         menu_register.setOnClickListener(new View.OnClickListener() {
@@ -48,26 +48,33 @@ public class MenuDetailActivity extends AppCompatActivity {
             }
         });
 
-        rv_menu_list = findViewById(R.id.rv_menu_list2);
-        showMenuList();
+        menu_list = findViewById(R.id.menu_list);
+
+
+        //adapter.notifyDataSetChanged();
+
 
     }
 
-    private void showMenuList() {
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter = new MenuListRecyclerAdapter(getApplicationContext());
         dataService.menuList.menuList(shopNumber).enqueue(new Callback<List<Menu>>() {
             @Override
             public void onResponse(Call<List<Menu>> call, Response<List<Menu>> response) {
                 if(response.isSuccessful()) {
                     if(response.code() == 200) {
                         List<Menu> menuList = response.body();
+                        mItems.clear();
                         for(Menu list : menuList) {
                             mItems.add(new Menu(list.getId(), list.getName(), list.getIntro(),
                                     list.getIs_sale(), list.getIs_popular(),list.getPrice(),
                                     list.getDuration(), list.getImg_url()));
-                            rv_menu_list.setHasFixedSize(true);
-                            adapter = new MenuListRecyclerAdapter(getApplicationContext(), mItems);
-                            rv_menu_list.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                            rv_menu_list.setAdapter(adapter);
+                            menu_list.setHasFixedSize(true);
+                            adapter.setItems(mItems);
+                            menu_list.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                            menu_list.setAdapter(adapter);
                         }
                     } else {
                         Toast.makeText(getApplicationContext(), "조회 실패", Toast.LENGTH_LONG).show();
@@ -81,4 +88,5 @@ public class MenuDetailActivity extends AppCompatActivity {
             }
         });
     }
+
 }

@@ -43,7 +43,7 @@ public class ShopDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shop_detail2);
+        setContentView(R.layout.activity_shop_detail3);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.shop_detail_toolbar);
         toolbar.setTitle("");
@@ -54,8 +54,8 @@ public class ShopDetailActivity extends AppCompatActivity {
         shop_detail_shopname = (TextView)findViewById(R.id.shop_detail_shopname);
         shop_detail_review = (TextView) findViewById(R.id.shop_detail_review);
         shop_detail_reply = (TextView) findViewById(R.id.shop_detail_reply);
-        shop_detail_avgtext = (TextView) findViewById(R.id.shop_detail_avgtext);
-        shop_detail_avgstar = (ImageView) findViewById(R.id.shop_detail_avgstar);
+        //shop_detail_avgtext = (TextView) findViewById(R.id.shop_detail_avgtext);
+        //shop_detail_avgstar = (ImageView) findViewById(R.id.shop_detail_avgstar);
         shop_detail_phonecall = (TextView) findViewById(R.id.shop_detail_phonecall);
         shop_detail_zzim = (TextView) findViewById(R.id.shop_detail_zzim);
         
@@ -107,7 +107,7 @@ public class ShopDetailActivity extends AppCompatActivity {
                             + shopIsRsPos + "@" + shopAddress + "@" + shopDetailAddress);
 
                     DetailPagerAdapter detailPagerAdapter = new DetailPagerAdapter(getSupportFragmentManager());
-                    ViewPager viewPager = (ViewPager)findViewById(R.id.shop_detail_viewpager);
+                    ViewPager viewPager = (ViewPager)findViewById(R.id.shop_detail_viewpager3);
                     viewPager.setAdapter(detailPagerAdapter);
                     TabLayout tabLayout = (TabLayout)findViewById(R.id.shop_detail_tabs);
                     tabLayout.setupWithViewPager(viewPager);

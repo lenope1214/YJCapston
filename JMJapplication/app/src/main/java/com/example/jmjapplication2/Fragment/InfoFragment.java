@@ -31,7 +31,7 @@ public class InfoFragment extends Fragment {
     private RecyclerView rv_restaurant_list;
     private RecyclerView rv_info_list;
     ArrayList mItems = new ArrayList<>();
-    TextView name_et;
+    TextView shop_detail_intro, shop_detail_time, shop_detail_addr;
 
     public static InfoFragment newInstance() {
         // Required empty public constructor
@@ -48,11 +48,15 @@ public class InfoFragment extends Fragment {
 
             //rv_restaurant_list = (RecyclerView)view.findViewById(R.id.rv_info_list);
 
-            name_et = view.findViewById(R.id.name_et);
+            shop_detail_intro = view.findViewById(R.id.shop_detail_intro);
+            shop_detail_time = view.findViewById(R.id.shop_detail_time);
+            shop_detail_addr = view.findViewById(R.id.shop_detail_addr);
 
             shopNumber = ShopDetailActivity.shopNumber;
             Log.d("Daw",shopNumber);
-            name_et.setText("@@@@@@@@@@@@@@@@");
+            shop_detail_intro.setText(ShopDetailActivity.shopIntro);
+            shop_detail_time.setText(ShopDetailActivity.shopOpen + " ~ " + ShopDetailActivity.shopClose);
+            shop_detail_addr.setText(ShopDetailActivity.shopAddress + ShopDetailActivity.shopDetailAddress);
 //            Shop shop = new Shop(ShopDetailActivity.shopIntro);
 //
 //            rv_info_list.setHasFixedSize(true);

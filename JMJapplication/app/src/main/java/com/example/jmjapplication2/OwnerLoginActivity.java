@@ -67,6 +67,7 @@ public class OwnerLoginActivity extends AppCompatActivity {
                         @SneakyThrows
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            Log.d("Raawdawdw", String.valueOf(response.code()));
                             if(response.code() == 200) {
                                 JSONObject jsonObject = new JSONObject(response.body().string());
                                 Log.d("result ", String.valueOf(jsonObject));
@@ -114,7 +115,7 @@ public class OwnerLoginActivity extends AppCompatActivity {
                                                 }).create();
                                                 builder.setCancelable(false);
                                                 dialog.show();
-                                            } else if(response.code() == 400) {
+                                            } else if(response.code() == 404) {
                                                 Log.d("result : " , response.message());
                                                 Log.d("result : ", "매장없음");
                                                 Intent intent = new Intent(OwnerLoginActivity.this, ListShopActivity.class);

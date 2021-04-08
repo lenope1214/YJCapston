@@ -43,9 +43,8 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
     public void onBindViewHolder(final ItemViewHolder holder, final int position) {
         holder.shop_menu_name.setText(mItems.get(position).getName());
         holder.shop_menu_price.setText(mItems.get(position).getPrice() + "원");
-        holder.shop_menu_duration.setText(mItems.get(position).getDuration());
-        holder.shop_menu_name.setText(mItems.get(position).getName());
-
+        holder.shop_menu_intro.setText(mItems.get(position).getIntro());
+        holder.shop_menu_duration.setText(String.valueOf(mItems.get(position).getDuration())+ "분");
     }
 
     // 데이터 셋의 크기
@@ -59,7 +58,7 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
     class ItemViewHolder extends RecyclerView.ViewHolder{
         private ImageView shop_menu_img;
         private TextView shop_menu_name;
-        private TextView shop_menu_price;
+        private TextView shop_menu_price, shop_menu_intro;
         private TextView shop_menu_duration;
         private CheckBox checkbox_soldout;
         private CheckBox checkbox_popular;
@@ -67,6 +66,7 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
             super(itemView);
             shop_menu_img = (ImageView) itemView.findViewById(R.id.shop_menu_img);
             shop_menu_name = (TextView)itemView.findViewById(R.id.shop_menu_name);
+            shop_menu_intro = (TextView)itemView.findViewById(R.id.shop_menu_intro);
             shop_menu_price = (TextView)itemView.findViewById(R.id.shop_menu_price);
             shop_menu_duration = (TextView) itemView.findViewById(R.id.shop_menu_duration);
             checkbox_soldout = (CheckBox)itemView.findViewById(R.id.checkbox_soldout);

@@ -11,8 +11,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.example.jmjapplication2.dto.Menu;
+import lombok.SneakyThrows;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
+import org.json.JSONObject;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -63,17 +65,15 @@ public class MenuRegisterActivity extends AppCompatActivity {
                 map.put("duration", timeBody);
 
                 dataService.insertShop.insertMenu(map).enqueue(new Callback<Menu>() {
+                    @SneakyThrows
                     @Override
                     public void onResponse(Call<Menu> call, Response<Menu> response) {
                         if(response.code() == 201) {
                             Log.d("result : " , "메뉴등록 성공");
                             AlertDialog.Builder builder = new AlertDialog.Builder(MenuRegisterActivity.this);
-                            dialog = builder.setMessage("매장이 등록되었습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            dialog = builder.setMessage("메뉴가 등록되었습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    Intent intent = new Intent(MenuRegisterActivity.this, MenuDetailActivity.class);
-                                    //intent.putExtra("owner_number", response.body().getId());
-                                    startActivity(intent);
                                     finish();
                                 }
                             }).create();
