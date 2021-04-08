@@ -62,13 +62,13 @@ public class SignupActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-                            if (response.code() == 200) {
+                            if (response.code() == 400) {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
                                 dialog = builder.setMessage("사용 가능한 아이디입니다.").setPositiveButton("확인", null).create();
                                 dialog.show();
                                 isChecked = true;
 
-                            } else if (response.code() == 400) {
+                            } else if (response.code() == 200) {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
                                 dialog = builder.setMessage("이미 사용 중인 아이디입니다.").setPositiveButton("확인", null).create();
                                 dialog.show();
@@ -134,6 +134,7 @@ public class SignupActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);
                                     finish();
                                 }

@@ -1,10 +1,12 @@
 package com.example.jmjapplication2;
 
 import com.example.jmjapplication2.dto.MemberDTO;
+import com.example.jmjapplication2.dto.Menu;
 import com.example.jmjapplication2.dto.Shop;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -42,6 +44,8 @@ public class DataService {
     ShowShopOne shop = retrofitClient.create(ShowShopOne.class);
     ShopUpdate updateOpen = retrofitClient.create(ShopUpdate.class);
     ShopUpdate updateIsRsPos = retrofitClient.create(ShopUpdate.class);
+    SearchAPI searchAPI = retrofitClient.create(SearchAPI.class);
+    ShowMenuList menuList = retrofitClient.create(ShowMenuList.class);
    // CheckUserAPI getUser = retrofitClient.create(CheckUserAPI.class);
 }
 
@@ -104,8 +108,13 @@ interface MyShopAPI {
 }
 
 interface InsertShop {
+    @Multipart
     @POST("shop")
-    Call<Shop> insertShop(@Header("Authorization")String jwt , @Body Map<String, Object> map);
+    Call<Shop> insertShop(@Header("Authorization")String jwt ,  @PartMap Map<String, RequestBody> map);
+
+    @Multipart
+    @POST("menu")
+    Call<Menu> insertMenu(@PartMap Map<String, RequestBody> map);
 }
 
 //interface CheckUserAPI {
@@ -116,7 +125,11 @@ interface InsertShop {
 interface ShowShopList {
     @GET("shopList")
     Call<Shop> shopList();
+}
 
+interface ShowMenuList {
+    @GET("menuList/{shopId}")
+    Call<List<Menu>> menuList(@Path("shopId") String shopId);
 }
 
 interface ShowShopList2 {
@@ -136,3 +149,9 @@ interface ShopUpdate {
     @PATCH("shop/{shopid}/reserve")
     Call<ResponseBody> updateIsRsPos(@Header("Authorization") String jwt, @Path("shopid") String shopid);
 }
+
+interface SearchAPI {
+    @GET("searchAddr")
+    Call<ResponseBody> searchAddr();
+}
+

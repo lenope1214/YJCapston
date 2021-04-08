@@ -1,5 +1,6 @@
 package com.example.jmjapplication2.Fragment;
 
+import com.example.jmjapplication2.dto.Menu;
 import com.example.jmjapplication2.dto.Shop;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -19,4 +20,10 @@ public interface ApiService {
 
     @GET("shopList")
     Call<List<Shop>> shopList();
+
+    @GET("shop/{id}")
+    Call<Shop> shop(@Path("id") String id);
+
+    @GET("menuList/{shopId}")
+    Call<List<Menu>> menuList(@Path("shopId") String shopId);
 }

@@ -32,6 +32,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3914f3c3-3012-4f9b-bfe7-8ebf7bb64730" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -953,6 +954,10 @@
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/shop_detail_fragment_o2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/shop_detail_fragment_o2.xml" afterDir="false" />
+>>>>>>> d75b9294c9ccd82632675256ae4c346604d4e6c6
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1016,9 +1021,9 @@
       <list>
         <option value="valueResourceFile" />
         <option value="Interface" />
+        <option value="resourceFile" />
         <option value="Class" />
         <option value="layoutResourceFile" />
-        <option value="resourceFile" />
       </list>
     </option>
   </component>
@@ -1040,8 +1045,8 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="ce10171a2da52e2c05" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-04-04T04:43:18.118179400Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_2_API_29" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-04-08T07:39:13.681488300Z" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
@@ -1053,7 +1058,11 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="IntegrationPerformanceTest" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
+<<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable" />
+>>>>>>> d75b9294c9ccd82632675256ae4c346604d4e6c6
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -1062,9 +1071,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\res\drawable" />
       <recent name="C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\res\layout" />
       <recent name="C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\res\drawable-v24" />
-      <recent name="C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\res\drawable" />
       <recent name="C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\res\anim" />
       <recent name="C:\Users\leeym\Documents\GitHub\YJCapston\JMJapplication\app\src\main\res\font" />
     </key>
@@ -1075,15 +1084,18 @@
     <key name="android.template.-987404365">
       <recent name="com.example.jmjapplication2" />
     </key>
+    <key name="android.template.-1542321377">
+      <recent name="com.example.jmjapplication2" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.jmjapplication" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.jmjapplication2.Adapter" />
       <recent name="com.example.jmjapplication2" />
       <recent name="com.example.jmjapplication2.dto" />
       <recent name="com.example.jmjapplication.Fragment" />
       <recent name="com.example.jmjapplication.fragment" />
-      <recent name="com.example.jmjapplication" />
     </key>
     <key name="android.template.-1943324327">
       <recent name="com.example.jmjapplication2" />
@@ -1297,7 +1309,27 @@
       <workItem from="1617498104281" duration="5679000" />
       <workItem from="1617509491705" duration="6367000" />
       <workItem from="1617534806862" duration="11373000" />
-      <workItem from="1617546257927" duration="2742000" />
+      <workItem from="1617546257927" duration="3185000" />
+      <workItem from="1617550761383" duration="1061000" />
+      <workItem from="1617579400645" duration="8438000" />
+      <workItem from="1617588270717" duration="20663000" />
+      <workItem from="1617632499571" duration="3872000" />
+      <workItem from="1617666437302" duration="22297000" />
+      <workItem from="1617703538714" duration="5083000" />
+      <workItem from="1617720738934" duration="7835000" />
+      <workItem from="1617752141936" duration="1143000" />
+      <workItem from="1617753311344" duration="4272000" />
+      <workItem from="1617769627387" duration="2686000" />
+      <workItem from="1617772645941" duration="12769000" />
+      <workItem from="1617791346508" duration="1289000" />
+      <workItem from="1617792717803" duration="2000" />
+      <workItem from="1617793543333" duration="2410000" />
+      <workItem from="1617795970633" duration="345000" />
+      <workItem from="1617805642224" duration="12333000" />
+      <workItem from="1617845082717" duration="10280000" />
+      <workItem from="1617860339372" duration="6416000" />
+      <workItem from="1617866797522" duration="873000" />
+      <workItem from="1617867974728" duration="732000" />
     </task>
     <servers />
   </component>

@@ -18,6 +18,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            android:theme="@style/Widget.BottomNavigationView"
             app:itemBackground="@color/colorWhite2"
             app:itemIconTint="@drawable/item_color"
             app:itemTextColor="@drawable/item_color"
