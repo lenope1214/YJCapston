@@ -47,17 +47,14 @@ public class MainActivity_O extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.o_tab1:
-                        Toast.makeText(getApplicationContext(), "첫 번째 탭 선택됨", Toast.LENGTH_LONG).show();
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, posFragment_o).commit();
                         return true;
 
                     case R.id.o_tab2:
-                        Toast.makeText(getApplicationContext(), "두 번째 탭 선택됨", Toast.LENGTH_LONG).show();
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment_o).commit();
                         return true;
 
                     case R.id.o_tab3:
-                        Toast.makeText(getApplicationContext(), "세 번째 탭 선택됨", Toast.LENGTH_LONG).show();
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, shopDetailFragment_o).commit();
                         return true;
 

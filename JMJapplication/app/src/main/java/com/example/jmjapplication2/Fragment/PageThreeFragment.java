@@ -23,7 +23,7 @@ import java.util.List;
 
 public class PageThreeFragment extends Fragment {
     View view;
-    private RecyclerView.Adapter adapter;
+    private RestaurantRecyclerAdapter adapter;
     private RecyclerView rv_restaurant_list;
     ArrayList<Shop> mItems = new ArrayList<>();
 
@@ -42,6 +42,7 @@ public class PageThreeFragment extends Fragment {
             view = inflater.inflate(R.layout.fragment_page_one, container, false);
 
             rv_restaurant_list = (RecyclerView)view.findViewById(R.id.rv_restaurant_list);
+            adapter = new RestaurantRecyclerAdapter(getContext());
             showList("중식");
         }
         return view;
@@ -54,7 +55,6 @@ public class PageThreeFragment extends Fragment {
     }
 
     private void showList(String category) {
-        Log.d("result1" , "시발 왜안돼1");
         Retrofit retrofit =new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(ApiService.BASEURL)
                 .build();
@@ -63,22 +63,19 @@ public class PageThreeFragment extends Fragment {
         shopCall.enqueue(new Callback<List<Shop>>() {
             @Override
             public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response) {
-                System.out.println("showList 성복 사랑 "+response.code());
                 if(response.isSuccessful()) {
-                    Log.d("result2" , "시발 왜안돼2");
                     if(response.code() == 200) {
                         List<Shop> shopList = response.body();
-                        Log.d("result3" , "시발 왜안돼3");
                         for(Shop list : shopList) {
                             Log.e("result : ", response.body().toString());
-//                            mItems.add(new Shop(list.getId(), list.getName(),
-//                                    list.getIntro(), list.getCloseTime(),
-//                                    list.getOpenTime(), list.getAddress(), list.getAddressDetail(), list.getIsRsPos(),
-//                                    list.getCategory(), list.getIsOpen()));
-//                            rv_restaurant_list.setHasFixedSize(true);
-//                            adapter = new RestaurantRecyclerAdapter(getContext(), mItems);
-//                            rv_restaurant_list.setLayoutManager(new LinearLayoutManager(getActivity()));
-//                            rv_restaurant_list.setAdapter(adapter);
+                            mItems.add(new Shop(list.getId(), list.getName(),
+                                    list.getIntro(), list.getCloseTime(),
+                                    list.getOpenTime(), list.getAddress(), list.getAddressDetail(), list.getIsRsPos(),
+                                    list.getCategory(), list.getIsOpen()));
+                            rv_restaurant_list.setHasFixedSize(true);
+                            adapter.setItems(mItems);
+                            rv_restaurant_list.setLayoutManager(new LinearLayoutManager(getActivity()));
+                            rv_restaurant_list.setAdapter(adapter);
                         }
                     } else {
                         Toast.makeText(getContext(), "조회 실패", Toast.LENGTH_LONG).show();
@@ -88,7 +85,7 @@ public class PageThreeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Shop>> call, Throwable t) {
-                Toast.makeText(getContext(), "네트워크 오류", Toast.LENGTH_LONG).show();
+
             }
         });
 

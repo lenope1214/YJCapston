@@ -24,4 +24,7 @@ public class  Shop {
 
     public Shop(String id) {
     }
+
+    public Shop(String id, String name, String intro, String openTime, String closeTime, String address, String addressDetail, char isRsPos, char isOpen, String category) {
+    }
 }
