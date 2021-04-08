@@ -15,10 +15,21 @@ const Shoplist = ({
     login,
     closeModal,
     modal,
+    showShoplist,
     restaurant,
     showkorean,
+    showchinese,
+    showJapan,
+    showforign,
+    showdrink,
+    showboon,
+    showmeat,
+    showjjimtang,
+    showcafe,
+    showfastfood,
 }) => {
     console.log(restaurant);
+    let AWS_BASE_URL = "http://3.34.55.186:8088/";
     return (
         <>
             <S.ShoplistWrap>
@@ -69,18 +80,39 @@ const Shoplist = ({
                             <button onClick={showkorean}>
                                 <li>한식</li>
                             </button>
-
-                            <li>중식</li>
-                            <li>일식</li>
-                            <li>양식</li>
-                            <li>술집</li>
-                            <li>분식</li>
-                            <li>고기</li>
-                            <li>찜탕</li>
-                            <li>카페 디저트</li>
-                            <li>패스트푸드</li>
-                            <li class="cityreview">실시간 리뷰</li>
-                            <li class="reviewevent">리뷰이벤트</li>
+                            <button onClick={showchinese}>
+                                <li>중식</li>
+                            </button>
+                            <button onClick={showJapan}>
+                                <li>일식</li>
+                            </button>
+                            <button onClick={showforign}>
+                                <li>양식</li>
+                            </button>
+                            <button onClick={showdrink}>
+                                <li>술집</li>
+                            </button>
+                            <button onClick={showboon}>
+                                <li>분식</li>
+                            </button>
+                            <button onClick={showmeat}>
+                                <li>고기</li>
+                            </button>
+                            <button onClick={showjjimtang}>
+                                <li>찜탕</li>
+                            </button>
+                            <button onClick={showcafe}>
+                                <li>카페 디저트</li>
+                            </button>
+                            <button onClick={showfastfood}>
+                                <li>패스트푸드</li>
+                            </button>
+                            <button>
+                                <li class="cityreview">실시간 리뷰</li>
+                            </button>
+                            <button onClick={showShoplist}>
+                                <li class="reviewevent">모두보기</li>
+                            </button>
                         </div>
                         <div class="allbody">
                             <div class="mainimg">
@@ -118,7 +150,8 @@ const Shoplist = ({
                                                             <img
                                                                 class="yangtimjang"
                                                                 src={
-                                                                    yangtimjang
+                                                                    AWS_BASE_URL +
+                                                                    shop.img
                                                                 }
                                                             />
                                                         </div>
@@ -133,8 +166,9 @@ const Shoplist = ({
                                                                     }
                                                                 </div>
                                                             </div>
-                                                            <div class="listintro">
-                                                                {shop.address}
+                                                            <br></br>
+                                                            <div class="listAddress">
+                                                                {shop.address}{" "}
                                                                 {
                                                                     shop.addressDetail
                                                                 }

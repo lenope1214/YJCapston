@@ -13,6 +13,7 @@ import MenuListContainer from "./containers/MenuList/MenuListContainer";
 import ShopInfoContainer from "./containers/ShopInfo/ShopInfoContainer";
 import MyShopContainer from "./containers/MyShop/MyShopContainer";
 import ShoplistContainer from "./containers/Shoplist/ShoplistContainer";
+import ShopcontentContainer from "./containers/shopcontent/shopcontentcontainer";
 
 const App = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -49,6 +50,16 @@ const App = () => {
           <Route path="/ShopInfo/:shopId" component={ShopInfoContainer} />
           <Route component={EventContainer} path="/event" />
           <Route component={MenuReadContainer} path='/menu/:menuId' />
+          <Route
+                    path="/shopcontent/:shopId"
+                    component={() => (
+                        <ShopcontentContainer
+                            isLogin={isLogin}
+                            handleLogin={handleLogin}
+                            handleLogout={handleLogout}
+                        />
+                    )}
+                ></Route>
           <Route
             path="/shoplist"
             component={() => (

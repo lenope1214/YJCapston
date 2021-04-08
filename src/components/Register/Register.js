@@ -2,6 +2,7 @@ import React from "react";
 
 import * as S from "./style";
 import { Link } from "react-router-dom";
+import DaumPostcode from "react-daum-postcode";
 
 const Register = ({
     id,
@@ -34,10 +35,22 @@ const Register = ({
     handleKeyword,
     Keyword,
     IdCheck,
+    showLocation,
+    roadAddr,
+    handleRoadAddr,
+    handleComplete,
 }) => {
-    // const handleSearch = (e) => {
-    //     const value = e.target.value;
-    // };
+    const postCodeStyle = {
+        display: "block",
+        position: "fixed",
+        top: "50%",
+        width: "400px",
+        height: "500px",
+        padding: "7px",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+    };
+
     return (
         <>
             <S.RegisterWrap>
@@ -68,6 +81,8 @@ const Register = ({
                         value={id}
                     />
                     <button onClick={IdCheck}>중복확인</button>
+                    <br></br>
+                    <br></br>
                     <span>비밀번호</span>
                     <input
                         type="password"
@@ -146,9 +161,9 @@ const Register = ({
                     <input
                         type="address"
                         id="address"
-                        placeholder="주소를 입력하세요"
+                        placeholder={roadAddr}
                         onChange={handleAddress}
-                        value={address}
+                        value={roadAddr}
                         disabled
                     />
                     <button onClick={openModal}>검색</button>
@@ -165,22 +180,42 @@ const Register = ({
                 </footer>
             </S.RegisterWrap>
             {modal && (
-                <S.searchWrap>
-                    <header>
-                        <h1>주소를 검색해주세요</h1>
-                    </header>
-                    <body>
-                        <input
-                            type="text"
-                            placeholder="주소를 입력하세요"
-                            onChange={handleKeyword}
-                            value={Keyword}
-                        />
-                    </body>
-                    <button onClick={search}>검색</button>
-                    <button>확인</button>
-                    <button onClick={closeModal}>닫기</button>
-                </S.searchWrap>
+                <DaumPostcode
+                    onComplete={handleComplete}
+                    style={postCodeStyle}
+                    height={700}
+                />
+                // <S.searchWrap>
+                //     <header>
+                //         <h1>주소를 검색해주세요</h1>
+                //     </header>
+                //     <body>
+                //         <input
+                //             type="text"
+                //             placeholder="주소를 입력하세요"
+                //             onChange={handleKeyword}
+                //             value={Keyword}
+                //         />
+                //     </body>
+                //     <button onClick={openModal}>검색</button>
+                //     {showLocation.map((loca) => {
+                //         return (
+                //             <div>
+                //                 <button
+                //                     onClick={() =>
+                //                         handleRoadAddr(loca.roadAddr)
+                //                     }
+                //                 >
+                //                     {loca.roadAddr}
+                //                 </button>
+                //                 <br />
+                //             </div>
+                //         );
+                //     })}
+                //     {/* <input type="text" value={showLocation} /> */}
+                //     <button>확인</button>
+                //     <button onClick={closeModal}>닫기</button>
+                // </S.searchWrap>
             )}
         </>
     );

@@ -104,6 +104,7 @@ const MenuRegisterFormContainer = (props) => {
     return (
         <>
         <Header />
+        <hr />
         {/* <OwnerNavbar /> */}
         <MenuRegisterForm 
             menuname={menuname}
