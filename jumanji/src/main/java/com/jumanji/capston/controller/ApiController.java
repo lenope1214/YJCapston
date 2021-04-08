@@ -1,7 +1,6 @@
 package com.jumanji.capston.controller;
 
 import com.jumanji.capston.config.jwt.JwtTokenUtil;
-import com.jumanji.capston.controller.exception.UserException.UserNotFoundException;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.service.ShopService;
 import com.jumanji.capston.service.UserService;
@@ -48,12 +47,7 @@ public class ApiController {
 
     @GetMapping("/validate/{id}") // validate
     public ResponseEntity<?> validateOne(@PathVariable String id) {
-        try {
-            userService.findById(id);
-            return new ResponseEntity<>("있는 ID", httpHeaders, HttpStatus.BAD_REQUEST);
-        } catch (UserNotFoundException e) {
-            return new ResponseEntity<>("없는 ID", httpHeaders, HttpStatus.OK);
-        }
+        return userService.findById(id);
     }
 }
 
