@@ -201,6 +201,7 @@ public class ShopService {
         Shop shop;
         System.out.println("ShopController in getShopById");
         System.out.println("shop id : " + shopId);
+        isShopPresent(shopId);
         try {
             shop = shopRepository.findById(shopId).get();
         } catch (ShopNotFoundException e) {
