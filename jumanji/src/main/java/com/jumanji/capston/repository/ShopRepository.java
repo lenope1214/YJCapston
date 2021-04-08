@@ -17,5 +17,5 @@ public interface ShopRepository extends JpaRepository<Shop, String> {
     Shop findByOwner(String id);
 
     @Query(value = "select s from Shop s where s.owner.id=?1")
-    Shop findByOwnerId(String ownerId);
+    List<Shop> findByOwnerId(String ownerId);
 }
