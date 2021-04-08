@@ -1,5 +1,6 @@
 package com.jumanji.capston.config.jwt;
 
+
 import com.jumanji.capston.config.auth.PrincipalDetails;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.UserRepository;

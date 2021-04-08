@@ -33,17 +33,6 @@ public class ShopService {
     @Autowired
     HttpHeaders httpHeaders;
 
-
-    public Shop findById(String id){
-        return shopRepository.findById(id)
-                .orElseThrow(()-> new ShopNotFoundException("error-1001", "shop id를 확인해주세요!!!"));
-    }
-
-
-    public Shop insert(Shop shop){
-        return shopRepository.save(shop);
-    }
-
     public ResponseEntity<?> delete(String authorization, String shopId){
         String loginId = userService.getMyId(authorization); // jwt가 있다는 것은 유저 인증이 완료. isPresent 필요 없음.
         Shop shopEntity = shopRepository.findById(shopId).get();
@@ -55,10 +44,15 @@ public class ShopService {
             return new ResponseEntity<>(new ApiErrorResponse("error-0000"), HttpStatus.FORBIDDEN);
     }
 
-    public ResponseEntity<?> findAll() {
+    public ResponseEntity<?> getShopList() {
         if(shopRepository.findAll().size() != 0) {
             // shop.response로 parsing 해서 보내기.
-            return new ResponseEntity<>(shopRepository.findAll(), HttpStatus.OK);
+            List<Shop.Response> responseList = null;
+            for(Shop shop :  shopRepository.findAll()){
+                Shop.Response response = new Shop.Response(shop);
+                responseList.add(response);
+            }
+            return new ResponseEntity<>(responseList, HttpStatus.OK);
         }
         else
             return new ResponseEntity<>("1001", HttpStatus.NO_CONTENT);
@@ -78,11 +72,11 @@ public class ShopService {
 
     public List<Shop> getShopListByOwnerId(String id){
         List<Shop> shopList = shopRepository.findAllByOwner_Id(id);
-        if(shopList.size() == 0)return null;
+        if(shopList.size() == 0)throw new ShopNotFoundException();
         return shopList;
     }
 
-    public ResponseEntity<?> findByCat(String category) {
+    public ResponseEntity<?> getShopListByCat(String category) {
         System.out.println("캣 : " + category);
         List<Shop> shopCatList = shopRepository.findByCategory(category);
         if (shopCatList.size() != 0) {
@@ -106,11 +100,7 @@ public class ShopService {
         return shop.getIsRsPos();
     }
 
-    public List<Shop> findByOwnerId(String userId) {
-        return shopRepository.findAllByOwner_Id(userId);
-    }
-
-    public ResponseEntity<?> insert(Shop.info request, String authorization) {
+    public ResponseEntity<?> postShop(Shop.info request, String authorization) {
         System.out.println("매장등록's shopId : " + request.getId());
         try {
             if(shopRepository.findById(request.getId()).isPresent()) throw new ShopHasExistException();
@@ -160,17 +150,6 @@ public class ShopService {
         return new ResponseEntity<>("not defined error ", HttpStatus.BAD_REQUEST);
     }
 
-    // 89있는 매장번호 인지 확인. 없으면 error를 반환하게 된다. ㅂㅂ
-    public void isShopPresent(String shopId)  {
-        if(shopRepository.findById(shopId).isPresent())return;
-        throw new ShopNotFoundException();
-    }
-
-    // 로그인 유저의 매장인지 확인 아니면 에러 반환
-    private boolean isUserShop(String userId, Shop shop){
-        if(shopRepository.findByOwner_Id(userId).getOwner().getId().equals(shop.getOwner().getId()))return true;
-        throw new UnAuthorizedException();
-    }
 
 
     public ResponseEntity<?> patchShop(String authorization, Shop.Request request) {
@@ -216,4 +195,32 @@ public class ShopService {
         }
         return new ResponseEntity<>("매장번호가 일치하는 매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
     }
+
+    public ResponseEntity<?> getShopByShopId(String shopId) {
+        Shop shop;
+        System.out.println("ShopController in getShopById");
+        System.out.println("shop id : " + shopId);
+        try {
+            shop = shopRepository.findById(shopId).get();
+        } catch (ShopNotFoundException e) {
+            return new ResponseEntity<>(new ApiErrorResponse(e.getCode(), e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+        Shop.Response response = new Shop.Response(shop);
+//        if(shop.getImgPath()!=null)response.setImg(storageService.loadImg(shop.getImgPath()));
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    // 89있는 매장번호 인지 확인. 없으면 error를 반환하게 된다. ㅂㅂ
+    public boolean isShopPresent(String shopId)  {
+        if(shopRepository.findById(shopId).isPresent())return true;
+        throw new ShopNotFoundException();
+    }
+
+    // 로그인 유저의 매장인지 확인 아니면 에러 반환
+    private boolean isUserShop(String userId, Shop shop){
+        if(shop.getOwner().getId().equals(userId))return true;
+        throw new UnAuthorizedException();
+    }
+
+
 }
