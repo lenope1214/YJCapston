@@ -230,11 +230,11 @@ public class ShopService {
         System.out.println("삭제 매장번호 : " + shopId);
         User loginUser = userService.getMyInfo(loginId);
         System.out.println("로긘 유저 이름 : " + loginUser.getName());
-        if(shopRepository.findByOwnerId(loginId) != null){
-            Shop shopEntity = shopRepository.findByOwnerId(loginId); // OWNER_ID로 비교..!
-            System.out.println("ShopEntity => " + shopEntity);
-            System.out.println("삭제할 메뉴의 매장번호 : " + shopEntity.getId());
-            if(shopEntity.getId().equals(shopId))return true;
+        for(Shop shop : shopRepository.findByOwnerId(loginId)){
+            if(shop.getId().equals(shopId)){
+                System.out.println("삭제할 메뉴의 매장번호 : " + shop.getId());
+                return true;
+            }
         }
         return false;
     }

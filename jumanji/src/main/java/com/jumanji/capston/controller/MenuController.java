@@ -66,6 +66,7 @@ public class MenuController extends Controller {
     @Transactional
     @DeleteMapping("/menu/{menuId}") // Delete
     public ResponseEntity<?> deleteMenu(@RequestHeader String authorization, @PathVariable String menuId) throws AuthenticationException {
+        System.out.println("메뉴 삭제 요청");
         return menuService.delete(authorization, menuId);
     }
 
