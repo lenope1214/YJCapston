@@ -1,20 +1,62 @@
 import styled from "styled-components";
 
 export const LoginWrap = styled.div`
+@font-face {
+   font-family: "Wemakeprice-Bold";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Wemakeprice-Bold.woff")
+        format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 30%;
+    width: 300px;
     margin: 0 auto;
-    padding: 5% 1%;
+    margin-top: 0px;
+    padding: 5%;
+    padding-top: 2%;
     border-radius: 8px;
     background-color: white;
     color: black;
     z-index: 10;
     border-style: solid;
-    border-color: black;
-    opacity: 0.9;
+    border: 0;
+
+    .login-title {
+        font-family: "Wemakeprice-Bold";
+        text-align: center;
+        padding-bottom: 12px;
+        margin-bottom: 30px;
+        font-size: 24px;
+        border-bottom: 1px solid black;
+    }
+    .login-text {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .login-input {
+        height: 30px;
+        width: 250px;
+        margin-bottom: 10px;
+        margin-left: 20px;
+    }
+    .remeber {
+        margin: 10px 0 20px 20px;
+    }
+    .login-but-box {
+        width: 100%;
+        text-align: center;
+    }
+    .login-but {
+        width: 120px;
+        margin: 3px;
+        height: 40px;
+        border: 0;
+        background: gray;
+        color: white;
+    }
 `;
 
 export const ShoplistWrap = styled.div`
@@ -364,13 +406,16 @@ export const ShoplistWrap = styled.div`
         border-radius: 20px;
         box-shadow: -2px 0 #a7a7a7, 0 2px #a7a7a7, 2px 0 #a7a7a7, 0 -2px #a7a7a7;
     }
+
     .topCategory li {
         display: inline-block;
         font-size: 14px;
-        padding: 0.5% 1% 0.5% 2%;
+        margin: 0 auto;
     }
+
     .topCategory {
         box-shadow: 0px 0, 0 1px #a7a7a7, 0px 0 #a7a7a7, 0 -1px #a7a7a7;
+
         margin: 0 auto;
     }
     .cityreview {
@@ -452,7 +497,10 @@ export const ShoplistWrap = styled.div`
         border: 0;
         background-color: white;
         cursor: pointer;
-        width: 50px;
+        display: inline-block;
+        font-size: 14px;
+        margin: 0 auto;
+        padding: 0.5% 1% 0.5% 2%;
     }
 
     .listcategory {

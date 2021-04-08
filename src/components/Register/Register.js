@@ -81,6 +81,8 @@ const Register = ({
                         value={id}
                     />
                     <button onClick={IdCheck}>중복확인</button>
+                    <br></br>
+                    <br></br>
                     <span>비밀번호</span>
                     <input
                         type="password"

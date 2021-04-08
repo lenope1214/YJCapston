@@ -8,6 +8,7 @@ import shopimg from "./img/매장아이콘.png";
 import backimg3 from "./img/종이질감갈색화면.png";
 import * as S from "./style";
 import { Link } from "react-router-dom";
+import { debounce } from "lodash";
 
 const Main = ({
     isLogin,
@@ -21,30 +22,31 @@ const Main = ({
     closeModal,
     modal,
 }) => {
-    // var location = document.querySelector("#move").offsetTop;
-    // console.log(location);
     function getWindowDimensions() {
         const { innerWidth: width, innerHeight: height } = window;
         return {
-          width,
-          height
+            width,
+            height,
         };
-      }
-      
+    }
+
     function useWindowDimensions() {
-        const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
-      
+        const [windowDimensions, setWindowDimensions] = useState(
+            getWindowDimensions()
+        );
+
         useEffect(() => {
-          function handleResize() {
-            setWindowDimensions(getWindowDimensions());
-          }
-      
-          window.addEventListener('resize', handleResize);
-          return () => window.removeEventListener('resize', handleResize);
+            function handleResize() {
+                setWindowDimensions(getWindowDimensions());
+            }
+
+            window.addEventListener("resize", handleResize);
+            return () => window.removeEventListener("resize", handleResize);
         }, []);
-      
+
         return windowDimensions;
-      }
+    }
+
     const { height, width } = useWindowDimensions();
     const scrollTo1 = () => {
         window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
@@ -53,11 +55,112 @@ const Main = ({
         window.scrollTo({ top: height, left: 0, behavior: "smooth" });
     };
     const scrollTo3 = () => {
-        window.scrollTo({ top: height*2, left: 0, behavior: "smooth" });
+        window.scrollTo({ top: height * 2, left: 0, behavior: "smooth" });
     };
     const scrollTo4 = () => {
-        window.scrollTo({ top: height*3, left: 0, behavior: "smooth" });
+        window.scrollTo({ top: height * 3, left: 0, behavior: "smooth" });
     };
+    const useScrollDirection = () => {
+        const [scrollDirection, setScrollDirection] = useState("");
+        const [prevOffset, setPrevOffset] = useState(0);
+        const toggleScrollDirection = debounce(() => {
+            let scrollY = window.scrollY;
+            if (scrollY === 0) {
+                setScrollDirection("");
+            }
+            if (scrollY > prevOffset) {
+                setScrollDirection("down");
+            } else if (scrollY < prevOffset) {
+                setScrollDirection("up");
+            }
+            setPrevOffset(scrollY);
+        }, 20);
+        useEffect(() => {
+            window.addEventListener("scroll", toggleScrollDirection);
+            return () => {
+                window.removeEventListener("scroll", toggleScrollDirection);
+            };
+        });
+        return scrollDirection;
+    };
+
+    const [but1, setbut1] = useState("");
+    const [but2, setbut2] = useState("");
+    const [but3, setbut3] = useState("");
+    const [but4, setbut4] = useState("");
+    const direction = useScrollDirection("");
+    console.log(direction);
+
+    useEffect(() => {
+        if (0 <= window.scrollY && window.scrollY < height) {
+            setbut1("-selected");
+            setbut2("");
+            setbut3("");
+            setbut4("");
+        } else if (height <= window.scrollY && window.scrollY < height * 2) {
+            setbut1("");
+            setbut2("-selected");
+            setbut3("");
+            setbut4("");
+        } else if (
+            height * 2 <= window.scrollY &&
+            window.scrollY < height * 3
+        ) {
+            setbut1("");
+            setbut2("");
+            setbut3("-selected");
+            setbut4("");
+        } else if (window.scrollY === height * 3) {
+            setbut1("");
+            setbut2("");
+            setbut3("");
+            setbut4("-selected");
+        }
+        if (window.scrollY < height) {
+            console.log(window.scrollY);
+            if (direction === "down") {
+                window.scrollTo({ top: height, left: 0, behavior: "smooth" });
+                setbut1("");
+                setbut2("-selected");
+                setbut3("");
+                setbut4("");
+            } else if (direction === "up") {
+                window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+            }
+        } else if (window.scrollY > height && window.scrollY < height * 2) {
+            if (direction === "down") {
+                window.scrollTo({
+                    top: height * 2,
+                    left: 0,
+                    behavior: "smooth",
+                });
+                setbut1("");
+                setbut2("");
+                setbut3("-selected");
+                setbut4("");
+            } else if (direction === "up") {
+                window.scrollTo({ top: height, left: 0, behavior: "smooth" });
+            }
+        } else if (window.scrollY > height * 2 && window.scrollY < height * 3) {
+            if (direction === "down") {
+                window.scrollTo({
+                    top: height * 3,
+                    left: 0,
+                    behavior: "smooth",
+                });
+                setbut1("");
+                setbut2("");
+                setbut3("");
+                setbut4("-selected");
+            } else if (direction === "up") {
+                window.scrollTo({
+                    top: height * 2,
+                    left: 0,
+                    behavior: "smooth",
+                });
+            }
+        }
+    });
 
     return (
         <>
@@ -102,42 +205,47 @@ const Main = ({
                         </div>
                         {isLogin ? (
                             <>
-                            <div className="right-nav">
-                                <button className="right2-nav" onClick={logout}>
-                                    LOG OUT
-                                </button>
-                                <Link to="/mypage">
-                                    <button class="right2-nav">MY PAGE</button>
-                                </Link>
-                            </div>
-                            <div className="scroll-nav">
-                            <button
-                                className="right1-nav"
-                                onClick={scrollTo1}
-                                
-                            >
-                                상단바
-                            </button>
-                            <button
-                                className="right1-nav"
-                                onClick={scrollTo2}
-                            >
-                                어플
-                            </button>
-                            <button
-                                className="right1-nav"
-                                onClick={scrollTo3}
-                            >
-                                사업자
-                            </button>
-                            <button
-                                className="right1-nav"
-                                onClick={scrollTo4}
-                            >
-                                매장
-                            </button>
-                        </div>
-                        </>
+                                <div className="right-nav">
+                                    <button
+                                        className="right2-nav"
+                                        onClick={logout}
+                                    >
+                                        LOG OUT
+                                    </button>
+                                    <Link to="/mypage">
+                                        <button class="right2-nav">
+                                            MY PAGE
+                                        </button>
+                                    </Link>
+                                </div>
+                                <div className="scroll-nav">
+                                    <button
+                                        className={"right1-nav" + but1}
+                                        onClick={scrollTo1}
+                                    >
+                                        메인
+                                        {console.log(but1)}
+                                    </button>
+                                    <button
+                                        className={"right1-nav" + but2}
+                                        onClick={scrollTo2}
+                                    >
+                                        어플
+                                    </button>
+                                    <button
+                                        className={"right1-nav" + but3}
+                                        onClick={scrollTo3}
+                                    >
+                                        사업자
+                                    </button>
+                                    <button
+                                        className={"right1-nav" + but4}
+                                        onClick={scrollTo4}
+                                    >
+                                        매장
+                                    </button>
+                                </div>
+                            </>
                         ) : (
                             <>
                                 <div className="right-nav">
@@ -145,34 +253,36 @@ const Main = ({
                                         className="right2-nav"
                                         onClick={openModal}
                                     >
-                                        LOGIN
-                                </button>
+                                        LOG IN
+                                    </button>
                                     <Link to="/register">
-                                        <button class="right2-nav"> JOIN</button>
+                                        <button class="right2-nav">
+                                            {" "}
+                                            JOIN
+                                        </button>
                                     </Link>
                                 </div>
                                 <div className="scroll-nav">
                                     <button
-                                        className="right1-nav"
+                                        className={"right1-nav" + but1}
                                         onClick={scrollTo1}
-                                        
                                     >
-                                        상단바
+                                        메인
                                     </button>
                                     <button
-                                        className="right1-nav"
+                                        className={"right1-nav" + but2}
                                         onClick={scrollTo2}
                                     >
                                         어플
                                     </button>
                                     <button
-                                        className="right1-nav"
+                                        className={"right1-nav" + but3}
                                         onClick={scrollTo3}
                                     >
                                         사업자
                                     </button>
                                     <button
-                                        className="right1-nav"
+                                        className={"right1-nav" + but4}
                                         onClick={scrollTo4}
                                     >
                                         매장
@@ -184,8 +294,11 @@ const Main = ({
 
                     <div className="adimg">
                         <div className="topimg">
-                            <img src={topimg} width="100%" height="100%" className="topimg-img"
-
+                            <img
+                                src={topimg}
+                                width="100%"
+                                height="100%"
+                                className="topimg-img"
                             />
                         </div>
                         <div className="toptext">
@@ -202,13 +315,18 @@ const Main = ({
                             <span style={{ fontSize: "30px" }}>하자</span>
                         </div>
                     </div>
+
                     <div className="but-item1">
                         {/* <div className="backimg2">
                             <img src={backimg2} width="100%" height="700px" />
                         </div> */}
                         <div className="backimg3">
-                            <img src={backimg3} width="100%" height="100%"
-                                className="backimg-img" />
+                            <img
+                                src={backimg3}
+                                width="100%"
+                                height="100%"
+                                className="backimg-img"
+                            />
                         </div>
                         <div className="but-item1-text">
                             <p>주문의민족</p>
@@ -244,7 +362,12 @@ const Main = ({
                     </div>
                     <div className="but-item2">
                         <div className="backimg2">
-                            <img src={backimg2} width="100%" height="100%" className="backimg-img" />
+                            <img
+                                src={backimg2}
+                                width="100%"
+                                height="100%"
+                                className="backimg-img"
+                            />
                         </div>
                         <div className="but-item2-text">
                             <p>웹으로도</p>
@@ -279,7 +402,12 @@ const Main = ({
                     </div>
                     <div className="but-item3">
                         <div className="backimg2">
-                            <img src={backimg3} width="100%" height="100%" className="backimg-img" />
+                            <img
+                                src={backimg3}
+                                width="100%"
+                                height="100%"
+                                className="backimg-img"
+                            />
                         </div>
                         <div className="but-item3-text">
                             <p>집에서</p>
@@ -291,6 +419,7 @@ const Main = ({
                             <div className="but-item3-but">
                                 <Link to="/shoplist">
                                     <button
+                                        className="but-item3-but"
                                         onclick="href='/shoplist'"
                                         style={{
                                             fontSize: "30px",
@@ -324,33 +453,52 @@ const Main = ({
             {modal && (
                 <S.LoginWrap>
                     <header>
-                        <h1>주문의 민족에 오신걸 환영합니다.</h1>
+                        <h1 className="login-title">
+                            주문
+                            <span
+                                style={{
+                                    fontSize: "17px",
+                                    paddingTop: "10px",
+                                }}
+                            >
+                                의
+                            </span>
+                            민족
+                        </h1>
                     </header>
                     <main>
-                        <p>로그인 정보를 입력하세요!!!</p>
+                        <p className="login-text">로그인 정보를 입력</p>
                         <input
                             type="text"
-                            placeholder="Your ID"
+                            placeholder="ID"
                             onChange={handleId}
                             value={id}
+                            className="login-input"
                         />
                         <input
                             type="password"
                             placeholder="Password"
                             onChange={handlePw}
                             value={pw}
+                            className="login-input"
                             onKeyPress={(e) => e.key === "Enter" && login}
                         />
                     </main>
                     <footer>
-                        <div>
+                        <div className="remeber">
                             <label>
                                 <input type="checkbox" />
                                 <span>기억하기</span>
                             </label>
                         </div>
-                        <button onClick={login}>로그인</button>
-                        <button onClick={closeModal}>닫기</button>
+                        <div className="login-but-box">
+                            <button onClick={login} className="login-but">
+                                로그인
+                            </button>
+                            <button onClick={closeModal} className="login-but">
+                                닫기
+                            </button>
+                        </div>
                     </footer>
                 </S.LoginWrap>
             )}

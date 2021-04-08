@@ -33,10 +33,8 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
         imgPath: "",
     });
 
-    const [jmMenu, setJmMenu] = useState({
-        id: "",
-        price: "",
-    });
+    const [priceSum, setPriceSum] = useState(0);
+    const [jmMenu, setJmMenu] = useState([]);
 
     const openmodal = () => {
         setModal(true);
@@ -79,8 +77,29 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
             });
     };
 
-    const handleMenu = () => {
-        setJmMenu();
+    const handleMenu = (id, price) => {
+        let a = 0;
+        if (a === 0) {
+            setJmMenu([...jmMenu, { id, price, count: 1 }]);
+            a = 1;
+        }
+        for (let i = 0; i < jmMenu.length; i++) {
+            if (jmMenu[i].id === id) {
+                const copy = [...jmMenu];
+                copy[i].count++;
+                setJmMenu(copy);
+                break;
+            }
+        }
+    };
+    // ... < 앞에 있는것을 지우지않고 추가하는 것
+
+    const handleDeleteMenu = (id) => {
+        const filteredMenu = jmMenu.filter(({ id: filterId }) => {
+            console.log(id, filterId);
+            return id !== filterId;
+        });
+        setJmMenu(filteredMenu);
     };
 
     const getmenu = () => {
@@ -110,11 +129,11 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
                 handleLogin();
                 setModal(false);
                 sessionStorage.setItem("access_token", accessToken);
-                history.push("/shopcontent");
+                history.push("/shoplist");
             })
             .catch((err) => {
+                alert(err);
                 const status = err?.response?.status;
-
                 if (status == 400) {
                     alert(
                         "없는 계정이거나 아이디 비밀번호가 일치하지 않습니다."
@@ -124,7 +143,7 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
                 } else if (status == 500) {
                     alert("서버 문제");
                 } else {
-                    alert("서버 off");
+                    alert("로그인서버문제");
                 }
             });
     };
@@ -145,6 +164,7 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
             menu={menu}
             handleMenu={handleMenu}
             jmMenu={jmMenu}
+            handleDeleteMenu={handleDeleteMenu}
         />
     );
 };

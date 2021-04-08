@@ -9,7 +9,7 @@ export const searchWrap = styled.div`
     margin: 24px auto 0;
     padding: 5% 1%;
     border-radius: 8px;
-    background-color: black;
+    background-color: white;
     color: white;
     z-index: 10;
 `;
@@ -34,7 +34,7 @@ export const RegisterWrap = styled.div`
     > header {
         padding-left: 5%;
         width: 100%;
-        color: white;
+        color: black;
         display: flex;
         padding-top: 30px;
         padding-bottom: 30px;
@@ -42,10 +42,10 @@ export const RegisterWrap = styled.div`
         font-size: 33px;
         font-family: "Wemakeprice-Bold";
         position: relative;
-        background-color: black;
+        background-color: white;
         > .movemainpage {
             border: none;
-            color: #fff;
+            color: black;
             text-align: center;
             text-decoration: none;
             display: inline-block;
@@ -54,8 +54,8 @@ export const RegisterWrap = styled.div`
         }
     }
     > body {
-        background-color: black;
-        color: white;
+        background-color: white;
+        color: black;
         font-family: "Wemakeprice-Bold";
         padding: 5% 20% 0%;
         > p {
@@ -84,6 +84,7 @@ export const RegisterWrap = styled.div`
         }
         > .phone {
             width: 32%;
+            margin: 3px;
         }
         > .named {
             padding-right: 75%;
@@ -107,7 +108,7 @@ export const RegisterWrap = styled.div`
         }
     }
     > footer {
-        background-color: black;
+        background-color: white;
         padding: 5%;
         text-align: center;
         > button {

@@ -27,6 +27,10 @@ export const shopcontentWrap = styled.div`
         text-align: center;
         background-color: white;
     }
+    .jmmjlink {
+        color: black;
+        text-decoration: none;
+    }
 
     .black-nav {
         width: 100%;
@@ -440,12 +444,14 @@ export const shopcontentWrap = styled.div`
         position: relative;
         width: 100%;
         margin: 0 auto;
+        height: 100%;
     }
     .shop_img2 {
         width: 70%;
         margin: 3% auto;
         max-height: 700px;
         border-radius: 10px;
+        height: 100%;
     }
     .shop_img {
         position: relative;
@@ -563,12 +569,12 @@ export const shopcontentWrap = styled.div`
     .showjm {
         position: fixed;
         z-index: 100;
-        top: 40%;
+        top: 45%;
         left: 90%;
         transform: translate(-50%, -50%);
         border: 1px solid #000000;
         min-height: 300px;
-        width: 200px;
+        width: 220px;
     }
     .menu-item {
         text-align: center;
@@ -587,6 +593,8 @@ export const shopcontentWrap = styled.div`
     .jmcontent {
         min-height: 80%;
         height: 200px;
+        width: 100%;
+        overflow-y: scroll;
     }
     .jmallprice {
         background-color: #282c34;
@@ -612,21 +620,88 @@ export const shopcontentWrap = styled.div`
     h4 {
         padding-top: 10%;
     }
+    .jmList_1 {
+        float: left;
+    }
+    .jmList_2 {
+        float: left;
+    }
+    .jmList_3 {
+        text-align: right;
+    }
+    .jmList_4 {
+        background-color: #282c34;
+        float: right;
+        border: 0px solid;
+        border-radius: 5%;
+        color: white;
+        cursor: pointer;
+    }
+    .jmList_all {
+        border-bottom: 1px solid #555;
+    }
+    .menu-item-button {
+        border: 0;
+        outline: none;
+        cursor: pointer;
+    }
 `;
 
 export const LoginWrap = styled.div`
+    @font-face {
+        font-family: "Wemakeprice-Bold";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Wemakeprice-Bold.woff")
+            format("woff");
+        font-weight: normal;
+        font-style: normal;
+    }
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 30%;
+    width: 300px;
     margin: 0 auto;
-    padding: 5% 1%;
+    margin-top: 0px;
+    padding: 5%;
+    padding-top: 2%;
     border-radius: 8px;
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     z-index: 10;
     border-style: solid;
-    border-color: black;
-    opacity: 0.9;
+    border: 0;
+
+    .login-title {
+        font-family: "Wemakeprice-Bold";
+        text-align: center;
+        padding-bottom: 12px;
+        margin-bottom: 30px;
+        font-size: 24px;
+        border-bottom: 1px solid black;
+    }
+    .login-text {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .login-input {
+        height: 30px;
+        width: 250px;
+        margin-bottom: 10px;
+        margin-left: 20px;
+    }
+    .remeber {
+        margin: 10px 0 20px 20px;
+    }
+    .login-but-box {
+        width: 100%;
+        text-align: center;
+    }
+    .login-but {
+        width: 120px;
+        margin: 3px;
+        height: 40px;
+        border: 0;
+        background: gray;
+        color: white;
+    }
 `;

@@ -18,8 +18,9 @@ const Shopcontent = ({
     menu,
     handleMenu,
     jmMenu,
+    handleDeleteMenu,
 }) => {
-    console.log(shopIntro);
+    console.log(isLogin);
     let HOUSE_BASE_URL = "http://122.202.45.37:8088/";
     let SCHOOL_BASE_URL = "http://192.168.1.17:8088/";
     let AWS_BASE_URL = "http://3.34.55.186:8088/";
@@ -30,17 +31,20 @@ const Shopcontent = ({
                 <div class="App">
                     <div class="black-nav">
                         <div class="left-nav">
-                            주문
-                            <span
-                                style={{
-                                    fontSize: "23px",
-                                    paddingTop: "10px",
-                                }}
-                            >
-                                의
-                            </span>
-                            민족
+                            <Link to="/shoplist" class="jmmjlink">
+                                주문
+                                <span
+                                    style={{
+                                        fontSize: "23px",
+                                        paddingTop: "10px",
+                                    }}
+                                >
+                                    의
+                                </span>
+                                민족
+                            </Link>
                         </div>
+
                         <div class="center-nav">
                             <input
                                 type="text"
@@ -85,26 +89,6 @@ const Shopcontent = ({
                             <li class="reviewevent">리뷰이벤트</li>
                         </div>
                         <div class="allbody">
-                            <div class="leftCategory">
-                                <ul class="moneykind">
-                                    <input type="text" placeholder="최소금액" />
-                                    <span>~</span>
-                                    <input type="text" placeholder="최대금액" />
-                                    <button>검색</button>
-                                </ul>
-                                <ul class="selectcategory">
-                                    <button>예약 많은 순</button>
-                                    <br />
-                                    <button>주문 많은 순</button>
-                                    <br />
-                                    <button>
-                                        최소주문금액 <br /> ↓
-                                    </button>
-                                    <br />
-                                    <button>별점순</button>
-                                </ul>
-                            </div>
-
                             <div class="shopcon">
                                 <div class="shopcon_2">
                                     <div class="shop_img">
@@ -178,22 +162,29 @@ const Shopcontent = ({
                                             return (
                                                 <tr>
                                                     <td class="menu-item">
-                                                        <img
-                                                            src={
-                                                                AWS_BASE_URL +
-                                                                menukind.img
-                                                            }
-                                                            width="100px"
-                                                        ></img>
-                                                    </td>
-                                                    <td class="menu-item">
                                                         <button
-                                                            onClick={handleMenu}
+                                                            class="menu-item-button"
+                                                            onClick={() =>
+                                                                handleMenu(
+                                                                    menukind.id,
+                                                                    menukind.price
+                                                                )
+                                                            }
                                                         >
-                                                            {menukind.id.substring(
-                                                                10
-                                                            )}
+                                                            <img
+                                                                src={
+                                                                    AWS_BASE_URL +
+                                                                    menukind.img
+                                                                }
+                                                                width="100px"
+                                                            ></img>
                                                         </button>
+                                                    </td>
+
+                                                    <td class="menu-item">
+                                                        {menukind.id.substring(
+                                                            10
+                                                        )}
                                                     </td>
 
                                                     <td class="menu-item">
@@ -213,12 +204,44 @@ const Shopcontent = ({
                             <div class="jmlist">주문 목록</div>
                             <br></br>
                             <div class="jmcontent">
-                                <div></div>
+                                {jmMenu.map((jmlist) => {
+                                    return (
+                                        <div>
+                                            <div class="jmList_all">
+                                                <div class="jmList_1">
+                                                    {jmlist.id.substring(10)}
+                                                </div>
+                                                <div class="jmList_3">
+                                                    {jmlist.count}개
+                                                </div>
+                                                <div class="jmList_2">
+                                                    {jmlist.price}원
+                                                </div>
+
+                                                <button
+                                                    class="jmList_4"
+                                                    onClick={() =>
+                                                        handleDeleteMenu(
+                                                            jmlist.id
+                                                        )
+                                                    }
+                                                >
+                                                    삭제
+                                                </button>
+                                                <br></br>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
                             </div>
                             <div class="jmallprice">
                                 <span>합계</span>
+                                {jmMenu.map((jmlist) => {
+                                    const priceall = (jmlist.price *= 1);
+
+                                    return <div class="jmprice"></div>;
+                                })}
                             </div>
-                            <div class="jmprice"></div>
 
                             <button class="gojm">주문하기</button>
                         </div>
@@ -235,33 +258,52 @@ const Shopcontent = ({
             {modal && (
                 <S.LoginWrap>
                     <header>
-                        <h1>주문의 민족에 오신걸 환영합니다.</h1>
+                        <h1 className="login-title">
+                            주문
+                            <span
+                                style={{
+                                    fontSize: "17px",
+                                    paddingTop: "10px",
+                                }}
+                            >
+                                의
+                            </span>
+                            민족
+                        </h1>
                     </header>
                     <main>
-                        <p>로그인 정보를 입력하세요!!!</p>
+                        <p className="login-text">로그인 정보를 입력</p>
                         <input
                             type="text"
-                            placeholder="Your ID"
+                            placeholder="ID"
                             onChange={handleId}
                             value={id}
+                            className="login-input"
                         />
                         <input
                             type="password"
                             placeholder="Password"
                             onChange={handlePw}
                             value={pw}
+                            className="login-input"
                             onKeyPress={(e) => e.key === "Enter" && login}
                         />
                     </main>
                     <footer>
-                        <div>
+                        <div className="remeber">
                             <label>
                                 <input type="checkbox" />
                                 <span>기억하기</span>
                             </label>
                         </div>
-                        <button onClick={login}>로그인</button>
-                        <button onClick={closeModal}>닫기</button>
+                        <div className="login-but-box">
+                            <button onClick={login} className="login-but">
+                                로그인
+                            </button>
+                            <button onClick={closeModal} className="login-but">
+                                닫기
+                            </button>
+                        </div>
                     </footer>
                 </S.LoginWrap>
             )}

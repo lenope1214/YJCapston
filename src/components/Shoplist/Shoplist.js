@@ -15,8 +15,18 @@ const Shoplist = ({
     login,
     closeModal,
     modal,
+    showShoplist,
     restaurant,
     showkorean,
+    showchinese,
+    showJapan,
+    showforign,
+    showdrink,
+    showboon,
+    showmeat,
+    showjjimtang,
+    showcafe,
+    showfastfood,
 }) => {
     console.log(restaurant);
     let AWS_BASE_URL = "http://3.34.55.186:8088/";
@@ -70,18 +80,39 @@ const Shoplist = ({
                             <button onClick={showkorean}>
                                 <li>한식</li>
                             </button>
-
-                            <li>중식</li>
-                            <li>일식</li>
-                            <li>양식</li>
-                            <li>술집</li>
-                            <li>분식</li>
-                            <li>고기</li>
-                            <li>찜탕</li>
-                            <li>카페 디저트</li>
-                            <li>패스트푸드</li>
-                            <li class="cityreview">실시간 리뷰</li>
-                            <li class="reviewevent">리뷰이벤트</li>
+                            <button onClick={showchinese}>
+                                <li>중식</li>
+                            </button>
+                            <button onClick={showJapan}>
+                                <li>일식</li>
+                            </button>
+                            <button onClick={showforign}>
+                                <li>양식</li>
+                            </button>
+                            <button onClick={showdrink}>
+                                <li>술집</li>
+                            </button>
+                            <button onClick={showboon}>
+                                <li>분식</li>
+                            </button>
+                            <button onClick={showmeat}>
+                                <li>고기</li>
+                            </button>
+                            <button onClick={showjjimtang}>
+                                <li>찜탕</li>
+                            </button>
+                            <button onClick={showcafe}>
+                                <li>카페 디저트</li>
+                            </button>
+                            <button onClick={showfastfood}>
+                                <li>패스트푸드</li>
+                            </button>
+                            <button>
+                                <li class="cityreview">실시간 리뷰</li>
+                            </button>
+                            <button onClick={showShoplist}>
+                                <li class="reviewevent">모두보기</li>
+                            </button>
                         </div>
                         <div class="allbody">
                             <div class="mainimg">
@@ -167,33 +198,52 @@ const Shoplist = ({
             {modal && (
                 <S.LoginWrap>
                     <header>
-                        <h1>주문의 민족에 오신걸 환영합니다.</h1>
+                        <h1 className="login-title">
+                            주문
+                            <span
+                                style={{
+                                    fontSize: "17px",
+                                    paddingTop: "10px",
+                                }}
+                            >
+                                의
+                            </span>
+                            민족
+                        </h1>
                     </header>
                     <main>
-                        <p>로그인 정보를 입력하세요!!!</p>
+                        <p className="login-text">로그인 정보를 입력</p>
                         <input
                             type="text"
-                            placeholder="Your ID"
+                            placeholder="ID"
                             onChange={handleId}
                             value={id}
+                            className="login-input"
                         />
                         <input
                             type="password"
                             placeholder="Password"
                             onChange={handlePw}
                             value={pw}
+                            className="login-input"
                             onKeyPress={(e) => e.key === "Enter" && login}
                         />
                     </main>
                     <footer>
-                        <div>
+                        <div className="remeber">
                             <label>
                                 <input type="checkbox" />
                                 <span>기억하기</span>
                             </label>
                         </div>
-                        <button onClick={login}>로그인</button>
-                        <button onClick={closeModal}>닫기</button>
+                        <div className="login-but-box">
+                            <button onClick={login} className="login-but">
+                                로그인
+                            </button>
+                            <button onClick={closeModal} className="login-but">
+                                닫기
+                            </button>
+                        </div>
                     </footer>
                 </S.LoginWrap>
             )}

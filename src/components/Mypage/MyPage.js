@@ -50,8 +50,9 @@ const MyPage = ({
 
                 <body>
                     <p>아이디입력</p>
-                    <span>사용자id</span>
+                    <span class="id">사용자id</span>
                     <input type="text" id="id" placeholder={user.id} disabled />
+                    <br></br>
                     <span>비밀번호</span>
                     <input
                         type="password"
@@ -61,32 +62,32 @@ const MyPage = ({
                         value={Pw}
                     />
                     <p>개인정보입력</p>
-                    <span>이름</span>
+                    <span class="name">이름</span>
                     <input
                         type="text"
                         id="name"
                         placeholder={user.name}
                         disabled
                     />
-                    <span>이메일</span>
+                    <br></br>
+                    <span class="email">이메일</span>
                     <input
                         type="text"
                         id="email"
                         placeholder="이메일 입력하세요"
                         value={user.email}
                     />
-                    <span class="named">전화번호</span>
-                    <select id="txtMobile1" defaultValue="010">
-                        <option value="" disabled={true}>
-                            ::선택::
-                        </option>
+                    <br></br>
+                    <span class="phone">전화번호</span>
+                    <select id="txtMobile1" defaultValue="010" disabled>
+                        <option value="">::선택::</option>
                         <option value="010">010</option>
                         <option value="011">011</option>
                         <option value="016">016</option>
                         <option value="017">017</option>
                         <option value="019">019</option>
                     </select>
-                    <span>-</span>
+                    -
                     <input
                         class="phone"
                         type="text"
@@ -95,7 +96,7 @@ const MyPage = ({
                         onkeypress="onlyNumber();"
                         value={user.phone.substring(3, 7)}
                     />
-                    <span>-</span>
+                    -
                     <input
                         class="phone"
                         type="text"
@@ -104,7 +105,8 @@ const MyPage = ({
                         onkeypress="onlyNumber();"
                         value={user.phone.substring(7, 11)}
                     />
-                    <span>point</span>
+                    <br></br>
+                    <span class="point">point</span>
                     <input
                         class="phone"
                         type="text"
@@ -114,14 +116,18 @@ const MyPage = ({
                         value={user.point}
                         disabled
                     />
-                    <span>주소</span>
+                    <br></br>
+                    <span class="address">주소</span>
                     <input
+                        id="address"
                         placeholder={user.address}
                         value={roadAddr}
                         onChange={handleRoadAddr}
+                        disabled
                     />
                     <button onClick={openmodal}>검색</button>
-                    <span>상세주소</span>
+                    <br></br>
+                    <span class="addressDetail">상세주소</span>
                     <input
                         placeholder={user.addressDetail}
                         onChange={handleAddressDetail}

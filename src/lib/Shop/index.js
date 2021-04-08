@@ -20,7 +20,8 @@ export const postShop =(
     address1,
     // is_rs_pos,
     category,
-    img_url
+    img_url,
+    roadAddr
 ) => {
     return  apiDefault().post("/shop",{
      id:id,
@@ -28,7 +29,7 @@ export const postShop =(
      intro:intro,
      openTime:open_time,
      closeTime:close_time,
-     address:address,
+     address:roadAddr,
      addressDetail:address1,
      category: category,
     // shopId: id,

@@ -40,7 +40,7 @@ export const getShoplistmeat = () => {
 };
 
 export const getShoplistjjimtang = () => {
-    return apiDefault().get(`shopList/찜탕`, {});
+    return apiDefault().get(`shopList/찜.탕`, {});
 };
 
 export const getShoplistcafe = () => {

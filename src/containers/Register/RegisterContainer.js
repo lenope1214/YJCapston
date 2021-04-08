@@ -175,7 +175,7 @@ const RegisterContainer = () => {
                 alert("사용 가능한 아이디 입니다.");
             })
             .catch((err) => {
-                console.log(err);
+                alert(err);
                 alert("이미 존재하는 아이디 입니다.");
             });
     };
