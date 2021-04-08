@@ -84,7 +84,7 @@ public class ShopService {
             System.out.println("샵캣리스트 :" + shopCatList.get(0));
             return new ResponseEntity<>(shopCatList, HttpStatus.OK);
         }
-        return new ResponseEntity<>("매장이 없습니다.", httpHeaders, HttpStatus.OK);
+        return new ResponseEntity<>("매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
     }
 
     public char reverseIsOpen(Shop shop){
