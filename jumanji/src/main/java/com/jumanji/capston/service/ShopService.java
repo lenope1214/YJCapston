@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class ShopService {
     public ResponseEntity<?> getShopList() {
         if(shopRepository.findAll().size() != 0) {
             // shop.response로 parsing 해서 보내기.
-            List<Shop.Response> responseList = null;
+            ArrayList<Shop.Response> responseList = new ArrayList<>();
             for(Shop shop :  shopRepository.findAll()){
                 Shop.Response response = new Shop.Response(shop);
                 responseList.add(response);
