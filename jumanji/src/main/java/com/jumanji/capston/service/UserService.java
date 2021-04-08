@@ -119,8 +119,11 @@ public class UserService {
 
     @Transactional
     public ResponseEntity<?> findAll(String authorization) {
+        String loginId = getMyId(authorization);
+        isPresent(loginId);
+        System.out.println("로그인 아이디의 권한 : " + userRepository.findById(loginId).get().getRole());
         if (!isUsed(jwtTokenUtil.getUsername(authorization)) ||
-                !userRepository.findById(jwtTokenUtil.getUsername(authorization)).get().getRole().equals("ADMIN")) {
+                !userRepository.findById(loginId).get().getRole().equals("ROLE_ADMIN")) {
             return new ResponseEntity<>(new ApiErrorResponse("0000"), HttpStatus.UNAUTHORIZED);
         }
         return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);

@@ -218,7 +218,7 @@ public class ShopService {
 
     // 로그인 유저의 매장인지 확인 아니면 에러 반환
     private boolean isUserShop(String userId, Shop shop){
-        if(shopRepository.findByOwner_Id(userId).getOwner().getId().equals(shop.getOwner().getId()))return true;
+        if(shop.getOwner().getId().equals(userId))return true;
         throw new UnAuthorizedException();
     }
 

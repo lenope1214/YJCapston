@@ -1,6 +1,5 @@
 package com.jumanji.capston.service;
 
-import com.jumanji.capston.controller.exception.MenuException.MenuAlreadUsedException;
 import com.jumanji.capston.controller.exception.MenuException.MenuNotFoundException;
 import com.jumanji.capston.data.Menu;
 import com.jumanji.capston.repository.MenuRepository;
@@ -51,10 +50,6 @@ public class MenuService {
 
     public void delete(String menuId) {
         menuRepository.delete( menuRepository.findById(menuId).get());
-    }
-
-    public List<Menu> findContainsId(String shopId) {
-        return menuRepository.findByIdContains(shopId);
     }
 
     public List<Menu> findAll() {
@@ -109,5 +104,15 @@ public class MenuService {
         Menu.Response response = new Menu.Response(menu);
         System.out.println("menuId : " + menu.getId());
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    public ResponseEntity<?> getMenuListByShopId(String shopId) {
+        System.out.println("menuList >> shopId : " + shopId);
+        List<Menu> menuList;
+        menuList = menuRepository.findByIdContains(shopId);
+        System.out.println("menuList info");
+        System.out.println(menuList.size());
+
+        return new ResponseEntity<>(menuList, HttpStatus.OK);
     }
 }

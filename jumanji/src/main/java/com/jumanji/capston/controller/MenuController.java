@@ -12,8 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/v1")
@@ -47,20 +45,14 @@ public class MenuController extends Controller {
     @Transactional(readOnly = true)
     @GetMapping("/menuList/{shopId}")
     public ResponseEntity<?> selectMenuList(@PathVariable String shopId) {
-        System.out.println("menuList >> shopId : " + shopId);
-        List<Menu> menuList;
-        menuList = menuService.findContainsId(shopId);
-        System.out.println("menuList info");
-        System.out.println(menuList.size());
-
-        return new ResponseEntity<>(menuList, HttpStatus.OK);
+        return menuService.getMenuListByShopId(shopId);
     }
 
 
     @Transactional
     @PostMapping("/menu") // post
     public ResponseEntity<?> insertMenu(Menu.info request) {
-        menuService.postMenu(request);
+        return menuService.postMenu(request);
     }
 
     @Transactional
@@ -77,7 +69,7 @@ public class MenuController extends Controller {
 //            menuService.delete(menuId);
 //            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 //        }
-//        else return new ResponseEntity<>(new ApiErrorResponse("error-0000", "권한이 없습니다."), HttpStatus.FORBIDDEN);
+//        else return new esponseEntity<>(new ApiErrorResponse("error-0000", "권한이 없습니다."), HttpStatus.FORBIDDEN);
         return null;
     }
 
