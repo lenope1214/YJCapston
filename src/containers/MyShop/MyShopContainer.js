@@ -43,7 +43,7 @@ const MyShopContainer = (props) => {
             
         })
         .catch((err) => {
-            alert("err");
+            alert("errrrr");
         });
     }, []);
 

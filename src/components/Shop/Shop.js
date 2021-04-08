@@ -1,11 +1,8 @@
 import React from "react";
 
 import * as S from "./style";
-import { Link } from "react-router-dom";
 import DaumPostcode from "react-daum-postcode";
-
-
-
+import { Link } from "react-router-dom";
 
 const Shop = ({
     id,
@@ -30,10 +27,12 @@ const Shop = ({
     modal,
     openModal,
     closeModal,
-    handleComplete,
+    handleSearch,
     category,
     handleCategory,
     shop_v1,
+    roadAddr,
+    handleComplete,
 }) => {
     const postCodeStyle = {
         display: "block",
@@ -48,11 +47,10 @@ const Shop = ({
     return (
         <>
             <S.ShopsWrap>
-                
-                
                     <p>매장등록하기</p>
-                    <body>
-            <form encType="multipart/form-data" className="form">
+                <body>
+                    
+                    {/* <form encType="multipart/form-data" className="form"> */}
                     <div>사업자아이디</div>
                     <input
                         type="text"
@@ -72,32 +70,23 @@ const Shop = ({
                     />
 
                     <div>사진등록</div>
-                        
-                        <input
-                            type="file"
-                            // id="img_url"
-                            name="img_url"
-                            // value={img_url}
-                            onChange={handleImg_url}
-                        />
-                    
-                    
-                    <div>매장소개</div>
-                    {/* <div contenteditable="true"
-                         type="textarea"
-                         id="intro"
-                         placeholder="매장소개"
-                         onChange={handleIntro}
-                         value={intro}
-                    ></div> */}
+
                     <input
-                        type="textarea"
+                        type="file"
+                        // id="img_url"
+                        name="img_url"
+                        // value={img_url}
+                        onChange={handleImg_url}
+                    />
+
+                    <div>매장소개</div>
+                    <textarea
+                        row="8"
                         id="intro"
                         placeholder="매장소개"
                         onChange={handleIntro}
                         value={intro}
                     />
-                   
 
                     <div>오픈시간</div>
                     <input
@@ -120,33 +109,34 @@ const Shop = ({
                     />
 
                     <div class="category">카테고리</div>
-                    <select 
-                        id="category" 
-                        onChange={handleCategory} 
-                        value={category}>
-                            <option value="" disable={true}>선택</option>
-                            <option value="한식">한식</option>
-                            <option value="일식">일식</option>
-                            <option value="중식">중식</option>
-                            <option value="고기">고기</option>
-                            <option value="분식">분식</option>
-                            <option value="술집">술집</option>
-                            <option value="패스트푸드">패스트푸드</option>
-                            <option value="찜.탕">찜.탕</option>
-                            <option value="카페.디저트">카페.디저트</option>
-
+                    <select
+                        id="category"
+                        onChange={handleCategory}
+                        value={category}
+                    >
+                        <option value="" disable={true}>
+                            선택
+                        </option>
+                        <option value="한식">한식</option>
+                        <option value="일식">일식</option>
+                        <option value="중식">중식</option>
+                        <option value="고기">고기</option>
+                        <option value="분식">분식</option>
+                        <option value="술집">술집</option>
+                        <option value="패스트푸드">패스트푸드</option>
+                        <option value="찜.탕">찜.탕</option>
+                        <option value="카페.디저트">카페.디저트</option>
                     </select>
-                    <div>매장주소</div>
+
                     <input
                         type="text"
                         id="address"
-                        placeholder="주소를 입력하세요"
+                        placeholder={roadAddr}
                         onChange={handleAddress}
-                        value={address}
-                        // disabled
+                        value={roadAddr}
+                        disabled
                     />
                     <button onClick={openModal}>검색</button>
-                    <div>매장상세주소</div>
                     <input
                         type="text"
                         id="address1"
@@ -154,7 +144,7 @@ const Shop = ({
                         onChange={handleAddress1}
                         value={address1}
                     />
-                    
+
                     {/* <span>예약 가능여부</span>
                     <br></br>
 
@@ -190,19 +180,32 @@ const Shop = ({
                         />
                         </span>     */}
 
-
-            </form>
+                    {/* </form> */}
                 </body>
-                
+
                 <footer>
-                    <div>
-                        <button onClick={shop_v1} className="button">등록</button>
-                    <Link to="/myshop">
-                        <button className="button">취소</button>
-                        </Link>
-                    </div>             
+                    <button onClick={shop_v1} className="button1">
+                        등록
+                    </button>
                 </footer>
             </S.ShopsWrap>
+
+            {/* {modal && (
+                <S.searchWrap>
+                    <header>
+                        <h1>주소를 검색해주세요</h1>
+                    </header>
+                    <body>
+                        <input
+                            type="text"
+                            placeholder="주소를 입력하세요"
+                            onChange={handleSearch}
+                        />
+                        
+                    </body>
+                    <button>확인</button>
+                    <button onClick={closeModal}>닫기</button>
+                </S.searchWrap> */}
 
             {modal && (
                 <DaumPostcode
@@ -210,40 +213,9 @@ const Shop = ({
                     style={postCodeStyle}
                     height={700}
                 />
-                // <S.searchWrap>
-                //     <header>
-                //         <h1>주소를 검색해주세요</h1>
-                //     </header>
-                //     <body>
-                //         <input
-                //             type="text"
-                //             placeholder="주소를 입력하세요"
-                //             onChange={handleKeyword}
-                //             value={Keyword}
-                //         />
-                //     </body>
-                //     <button onClick={openModal}>검색</button>
-                //     {showLocation.map((loca) => {
-                //         return (
-                //             <div>
-                //                 <button
-                //                     onClick={() =>
-                //                         handleRoadAddr(loca.roadAddr)
-                //                     }
-                //                 >
-                //                     {loca.roadAddr}
-                //                 </button>
-                //                 <br />
-                //             </div>
-                //         );
-                //     })}
-                //     {/* <input type="text" value={showLocation} /> */}
-                //     <button>확인</button>
-                //     <button onClick={closeModal}>닫기</button>
-                // </S.searchWrap>
             )}
         </>
     );
-}
+};
 
 export default Shop;

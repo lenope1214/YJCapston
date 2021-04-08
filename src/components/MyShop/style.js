@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 export const MyShopWrap = styled.div`
 margin-top: 70px;
-width: 60%;
-margin-left: 20%;
+width: 70%;
+margin-left: 15%;
 
 a { color: black;}
 

@@ -15,6 +15,10 @@ export const InfoWrap = styled.div`
     margin-left: 40%;
     font-size:20px;
     }
+    > textarea {
+        margin-left: 40%;
+        width:200px;
+    }
     .info-1 {
         margin-top:50px;
         margin-left: 40%;
@@ -71,6 +75,7 @@ export const InfoWrap = styled.div`
     }
     >input{
         margin-left:40%;
+        width:200px;
     }
     >select{
         margin-left:40%;

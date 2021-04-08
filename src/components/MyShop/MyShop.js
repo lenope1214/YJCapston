@@ -43,7 +43,7 @@ const MyShop = ({
         
                 {!shop.length && (
                     <tr>
-                        <td colSpan="3">목록이 비었습니다.</td>
+                        <td colSpan="6">목록이 비었습니다.</td>
                     </tr>
                 )}
 

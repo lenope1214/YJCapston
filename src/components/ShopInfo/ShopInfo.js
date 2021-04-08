@@ -57,19 +57,28 @@ const ShopInfo = ({
                 onChange={handleShopName}
                 // value={name}
                 value={shopName}
-                disabled
+                // disabled
             />
             <div className="info-3">
                 <h1>매장소개</h1>
             </div>
-            <input
+            <textarea
+            className="input-box-area"
+            fow="10"
+            placeholder={intro}
+            id="intro"
+            value={shopIntro}
+            onChange={handleShopIntro}
+            />
+
+            {/* <input
                 type="text"
                 id="intro"
                 placeholder={intro}
                 onChange={handleShopIntro}
                 // value={intro}
                 value={shopIntro}
-            />
+            /> */}
             <div className="info-4">
                 <h1>오픈시간</h1>
             </div>
@@ -97,9 +106,10 @@ const ShopInfo = ({
             </div>
             <select
                 id="category"
-                placeholder={category}
+                // placeholder={category}
                 onChange={handleShopCategory}
                 // value={shopCategory}
+                value={category}
                 >
                 <option value="" disable={true}>선택</option>
                 <option value="한식">한식</option>
