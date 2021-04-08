@@ -7,7 +7,8 @@ margin-left: 20%;
 text-align: left;
 
 .form-label {
-    padding: 40px 0 40px 0;
+    padding: 40px 0 40px 40px;
+    text-align: center;
 }
 
 .menu-register-container {
@@ -16,6 +17,7 @@ text-align: left;
     margin-right: auto;
     margin-top: 70px;
     margin-bottom: 80px;
+    text-align: center;
 }
 
 .button {

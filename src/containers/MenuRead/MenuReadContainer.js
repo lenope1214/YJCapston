@@ -71,6 +71,7 @@ export const MenuReadContainer = (props) => {
     return (
         <div>
             <Header />
+            <hr />
             {/* <OwnerNavbar /> */}
             <MenuRead
                 id={menuRead.id, console.log(menuId)}

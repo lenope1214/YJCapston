@@ -19,7 +19,7 @@ const ShopInfoContainer = (props) => {
     const [shopAddress, setShopAddress] = useState(null);
     const [shopAddressDetail, setShopAddressDetail] =useState(null);
     const [shopIsRsPos, setShopIsRsPos] = useState(null);
-    const [shopCategory, setShopCategory] = useState(null);
+    const [shopCategory, setShopCategory] = useState("");
 
     const handleShopName = (e) =>{
         const value = e.target.value;

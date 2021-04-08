@@ -9,7 +9,12 @@ import { removeShops } from "../../lib/MyShop/index"
 
 const MyShopContainer = (props) => {
     const history = useState();
-    const [shop, setShop] = useState([]); 
+    const [shop, setShop] = useState([
+        {
+            id:"",
+            img: "",
+        }
+    ]); 
     const [shopId, setShopId] =useState("");
 
     useEffect(() => {
@@ -22,6 +27,7 @@ const MyShopContainer = (props) => {
             
             const shop = res.data.map((shop) => {
                 return {
+                    img: shop.imgPath,
                     id: shop.id,
                     shopname:shop.name,
                     intro:shop.intro,
@@ -37,7 +43,7 @@ const MyShopContainer = (props) => {
             
         })
         .catch((err) => {
-            alert("err");
+            alert("errrrr");
         });
     }, []);
 
@@ -49,7 +55,7 @@ const MyShopContainer = (props) => {
                 window.location.reload();
             })
             .catch((err) => {
-                alert("메장삭제에러");
+                alert("매장삭제에러");
             });
     };
 

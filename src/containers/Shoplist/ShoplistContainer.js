@@ -5,6 +5,15 @@ import {
     postLogin,
     getShoplist,
     getShoplistkorean,
+    getShoplistchinese,
+    getShoplistjapan,
+    getShoplistforign,
+    getShoplistdrink,
+    getShoplistboon,
+    getShoplistmeat,
+    getShoplistjjimtang,
+    getShoplistcafe,
+    getShoplistfastfood,
 } from "../../lib/Shoplist/index";
 import Shopcontent from "../../components/shopcontent/shopcontent";
 
@@ -20,6 +29,7 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
             address: "",
             intro: "",
             addressDetail: "",
+            img: "",
         },
     ]);
 
@@ -46,11 +56,10 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
     }, []);
 
     console.log("restaurant :", restaurant);
-
+    //한식
     const showkorean = () => {
         getShoplistkorean()
             .then((res) => {
-                console.log(res.data);
                 const rstrt = res.data.map((rstrt) => {
                     return {
                         address: rstrt.address,
@@ -58,14 +67,227 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         intro: rstrt.intro,
                         category: rstrt.category,
                         id: rstrt.id,
+                        addressDetail: rstrt.addressDetail,
+                        img: rstrt.imgPath,
                     };
                 });
                 setRestaurant(rstrt);
             })
             .catch((err) => {
-                alert(err);
+                alert("매장이없습니다.");
             });
     };
+    //중식
+    const showchinese = () => {
+        getShoplistchinese()
+            .then((res) => {
+                const rstrt = res.data.map((rstrt) => {
+                    return {
+                        address: rstrt.address,
+                        name: rstrt.name,
+                        intro: rstrt.intro,
+                        category: rstrt.category,
+                        id: rstrt.id,
+                        addressDetail: rstrt.addressDetail,
+                        img: rstrt.imgPath,
+                    };
+                });
+                setRestaurant(rstrt);
+            })
+            .catch((err) => {
+                alert("매장이없습니다.");
+            });
+    };
+    //일식
+    const showJapan = () => {
+        getShoplistjapan()
+            .then((res) => {
+                const rstrt = res.data.map((rstrt) => {
+                    return {
+                        address: rstrt.address,
+                        name: rstrt.name,
+                        intro: rstrt.intro,
+                        category: rstrt.category,
+                        id: rstrt.id,
+                        addressDetail: rstrt.addressDetail,
+                        img: rstrt.imgPath,
+                    };
+                });
+                setRestaurant(rstrt);
+            })
+            .catch((err) => {
+                alert("매장이없습니다.");
+            });
+    };
+    //양식
+    const showforign = () => {
+        getShoplistforign()
+            .then((res) => {
+                const rstrt = res.data.map((rstrt) => {
+                    return {
+                        address: rstrt.address,
+                        name: rstrt.name,
+                        intro: rstrt.intro,
+                        category: rstrt.category,
+                        id: rstrt.id,
+                        addressDetail: rstrt.addressDetail,
+                        img: rstrt.imgPath,
+                    };
+                });
+                setRestaurant(rstrt);
+            })
+            .catch((err) => {
+                alert("매장이없습니다.");
+            });
+    };
+    //술집
+    const showdrink = () => {
+        getShoplistdrink()
+            .then((res) => {
+                const rstrt = res.data.map((rstrt) => {
+                    return {
+                        address: rstrt.address,
+                        name: rstrt.name,
+                        intro: rstrt.intro,
+                        category: rstrt.category,
+                        id: rstrt.id,
+                        addressDetail: rstrt.addressDetail,
+                        img: rstrt.imgPath,
+                    };
+                });
+                setRestaurant(rstrt);
+            })
+            .catch((err) => {
+                alert("매장이없습니다.");
+            });
+    };
+    //분식
+    const showboon = () => {
+        getShoplistboon()
+            .then((res) => {
+                const rstrt = res.data.map((rstrt) => {
+                    return {
+                        address: rstrt.address,
+                        name: rstrt.name,
+                        intro: rstrt.intro,
+                        category: rstrt.category,
+                        id: rstrt.id,
+                        addressDetail: rstrt.addressDetail,
+                        img: rstrt.imgPath,
+                    };
+                });
+                setRestaurant(rstrt);
+            })
+            .catch((err) => {
+                alert("매장이없습니다.");
+            });
+    };
+    //고기
+    const showmeat = () => {
+        getShoplistmeat()
+            .then((res) => {
+                const rstrt = res.data.map((rstrt) => {
+                    return {
+                        address: rstrt.address,
+                        name: rstrt.name,
+                        intro: rstrt.intro,
+                        category: rstrt.category,
+                        id: rstrt.id,
+                        addressDetail: rstrt.addressDetail,
+                        img: rstrt.imgPath,
+                    };
+                });
+                setRestaurant(rstrt);
+            })
+            .catch((err) => {
+                alert("매장이없습니다.");
+            });
+    };
+    //찜탕
+    const showjjimtang = () => {
+        getShoplistjjimtang()
+            .then((res) => {
+                const rstrt = res.data.map((rstrt) => {
+                    return {
+                        address: rstrt.address,
+                        name: rstrt.name,
+                        intro: rstrt.intro,
+                        category: rstrt.category,
+                        id: rstrt.id,
+                        addressDetail: rstrt.addressDetail,
+                        img: rstrt.imgPath,
+                    };
+                });
+                setRestaurant(rstrt);
+            })
+            .catch((err) => {
+                alert("매장이없습니다.");
+            });
+    };
+    //카페디저트
+    const showcafe = () => {
+        getShoplistcafe()
+            .then((res) => {
+                const rstrt = res.data.map((rstrt) => {
+                    return {
+                        address: rstrt.address,
+                        name: rstrt.name,
+                        intro: rstrt.intro,
+                        category: rstrt.category,
+                        id: rstrt.id,
+                        addressDetail: rstrt.addressDetail,
+                        img: rstrt.imgPath,
+                    };
+                });
+                setRestaurant(rstrt);
+            })
+            .catch((err) => {
+                alert("매장이없습니다.");
+            });
+    };
+    //패스트푸드
+    const showfastfood = () => {
+        getShoplistfastfood()
+            .then((res) => {
+                const rstrt = res.data.map((rstrt) => {
+                    return {
+                        address: rstrt.address,
+                        name: rstrt.name,
+                        intro: rstrt.intro,
+                        category: rstrt.category,
+                        id: rstrt.id,
+                        addressDetail: rstrt.addressDetail,
+                        img: rstrt.imgPath,
+                    };
+                });
+                setRestaurant(rstrt);
+            })
+            .catch((err) => {
+                alert("매장이없습니다.");
+            });
+    };
+    // 실시간리뷰
+    // const showdrink = () => {
+    //     getShoplistdrink()
+    //         .then((res) => {
+    //             const rstrt = res.data.map((rstrt) => {
+    //                 return {
+    //                     address: rstrt.address,
+    //                     name: rstrt.name,
+    //                     intro: rstrt.intro,
+    //                     category: rstrt.category,
+    //                     id: rstrt.id,
+    //                     addressDetail: rstrt.addressDetail,
+    //                     img: rstrt.imgPath,
+    //                 };
+    //             });
+    //             setRestaurant(rstrt);
+    //         })
+    //         .catch((err) => {
+    //             alert("매장이없습니다.");
+    //         });
+    // };
+    //모두보기
     const showShoplist = () => {
         getShoplist()
             .then((res) => {
@@ -78,13 +300,14 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         category: rstrt.category,
                         id: rstrt.id,
                         addressDetail: rstrt.addressDetail,
+                        img: rstrt.imgPath,
                     };
                 });
-
+                console.log(rstrt);
                 setRestaurant(rstrt);
             })
             .catch((err) => {
-                alert(err);
+                alert("매장이없습니다.");
             });
     };
 
@@ -129,6 +352,16 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 closeModal={closemodal}
                 restaurant={restaurant}
                 showkorean={showkorean}
+                showchinese={showchinese}
+                showJapan={showJapan}
+                showforign={showforign}
+                showdrink={showdrink}
+                showboon={showboon}
+                showmeat={showmeat}
+                showjjimtang={showjjimtang}
+                showcafe={showcafe}
+                showfastfood={showfastfood}
+                showShoplist={showShoplist}
             />
         </>
     );

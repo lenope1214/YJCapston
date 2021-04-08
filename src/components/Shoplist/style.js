@@ -364,13 +364,16 @@ export const ShoplistWrap = styled.div`
         border-radius: 20px;
         box-shadow: -2px 0 #a7a7a7, 0 2px #a7a7a7, 2px 0 #a7a7a7, 0 -2px #a7a7a7;
     }
+
     .topCategory li {
         display: inline-block;
         font-size: 14px;
-        padding: 0.5% 1% 0.5% 2%;
+        margin: 0 auto;
     }
+
     .topCategory {
         box-shadow: 0px 0, 0 1px #a7a7a7, 0px 0 #a7a7a7, 0 -1px #a7a7a7;
+
         margin: 0 auto;
     }
     .cityreview {
@@ -439,18 +442,38 @@ export const ShoplistWrap = styled.div`
     }
 
     .listname {
-        padding: 15px;
+        display: block;
+        float: left;
+        padding: 10px;
         font-size: 30px;
         font-weight: bold;
     }
     .linesetting {
-        float: left;
     }
     .topCategory button {
         outline: 0;
         border: 0;
         background-color: white;
         cursor: pointer;
-        width: 50px;
+        display: inline-block;
+        font-size: 14px;
+        margin: 0 auto;
+        padding: 0.5% 1% 0.5% 2%;
+    }
+
+    .listcategory {
+        display: block;
+        float: left;
+        padding-top: 30px;
+        padding-bottom: 10px;
+        color: #dddddd;
+    }
+    .listAddress {
+        padding-top: 15%;
+        display: block;
+        float: left;
+        padding-left: 40px;
+        font-size: 20px;
+        color: #555555;
     }
 `;

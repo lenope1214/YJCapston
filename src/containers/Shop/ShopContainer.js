@@ -19,24 +19,33 @@ const ShopContainer = () => {
     // const [is_rs_pos, setIs_rs_pos] = useState("");
     const [category, setCategory] = useState("");
     const [img_url, setImg_url] = useState("");
+    const [roadAddr, setRoadAddr] = useState("주소를 입력하세요.");
+    const [modal, setModal] = useState(false);
+    const [showLocation, setShowLocation] = useState([
+        {
+            roadAddr: "",
+        },
+    ]);
 
-    // const [modal, setModal] = useState(false);
+    const openmodal = () => {
+        setModal(true);
+        console.log("true");
+    };
+    const closemodal = () => {
+        setModal(false);
+        console.log("false");
+    };
 
-    // const openmodal = () => {
-    //     setModal(true);
-    //     console.log("true");
-    // };
-    // const closemodal = () => {
-    //     setModal(false);
-    //     console.log("false");
-    // };
+    const handleRoadAddr = (roadAddr) => {
+        setRoadAddr(roadAddr);
+        closemodal();
+    };
 
     // const handleIs_rs_pos = (e) => {
     //     const value = e.target.value;
     //     setInputStatus(value);
     // }
-    
-    
+
     const handleId = (e) => {
         const value = e.target.value;
         setId(value);
@@ -68,7 +77,6 @@ const ShopContainer = () => {
     const handleAddress1 = (e) => {
         const value = e.target.value;
         setAddress1(value);
-        
     };
     // const handleIs_rs_pos = (e) => {
     //     const value = e.target.value;
@@ -82,39 +90,43 @@ const ShopContainer = () => {
     const handleImg_url = (e) => {
         const files = e.target.files[0];
         setImg_url(files);
-    }
-    
+    };
+
     const shop_v1 = async () => {
         const formData = new FormData();
-        formData.append("id",id);
-        formData.append("name",shopname);
-        formData.append("intro",intro);
-        formData.append("openTime",open_time);
-        formData.append("closeTime",close_time);
-        formData.append("address",address);
-        formData.append("addressDetail",address1);
-        formData.append("category",category);
-        formData.append("img",img_url);
+        formData.append("id", id);
+        formData.append("name", shopname);
+        formData.append("intro", intro);
+        formData.append("openTime", open_time);
+        formData.append("closeTime", close_time);
+        formData.append("address", roadAddr);
+        formData.append("addressDetail", address1);
+        formData.append("category", category);
+        formData.append("img", img_url);
         console.log(formData);
-    
-        const res = await apiDefault().post("/shop",
-           
-            formData,
-          
-        {
-            headers: {
-                Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
-                "content-type": "multipart/form-data",
-            },
-        }
-        ).then((res) => {
-            history.push("/myShop")
-        })
-        .catch((err) => {
-            alert("Err");
-        });
+
+        const res = await apiDefault()
+            .post("/shop",
+
+                formData,
+
+                {
+                    headers: {
+                        Authorization: `Bearer ${sessionStorage.getItem(
+                            "access_token"
+                        )}`,
+                        "content-type": "multipart/form-data",
+                    },
+                }
+            )
+            .then((res) => {
+                history.push("/myShop");
+            })
+            .catch((err) => {
+                alert("Err");
+            });
         console.log(res);
-    }
+    };
 
     // const shop_v1 = () => {
     //     postShop(
@@ -131,11 +143,11 @@ const ShopContainer = () => {
     //     )
     //         // .then((res) => history.push("/shopmain"))
     //         // .catch((err) => err);
-    //         .then((res) => 
+    //         .then((res) =>
 
     //             history.push("/Myshop")
     //         )
-    //         .catch((err) => 
+    //         .catch((err) =>
     //             console.log(err)
     //         );
     // };
@@ -175,39 +187,61 @@ const ShopContainer = () => {
     //        .then((res) => {})
     //        .catch((err) => {});
     // };
+
+    const handleComplete = (data) => {
+        let fullAddress = data.address;
+        let extraAddress = "";
+
+        if (data.addressType === "R") {
+            if (data.bname !== "") {
+                extraAddress += data.bname;
+            }
+            if (data.buildingName !== "") {
+                extraAddress +=
+                    extraAddress !== ""
+                        ? `, ${data.buildingName}`
+                        : data.buildingName;
+            }
+            fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
+        }
+
+        handleRoadAddr(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+    };
     return (
         <>
-        <Header/>
+            <Header />
 
-        {/* <OwnerNavbar /> */}
-         
-        <Shop
-            id={id}
-            handleId={handleId}
-            shopname={shopname}
-            handleShopname={handleShopname}
-            intro={intro}
-            handleIntro={handleIntro}
-            open_time={open_time}
-            handleOpen_time={handleOpen_time}
-            close_time={close_time}
-            handleClose_time={handleClose_time}
-            address={address}
-            handleAddress={handleAddress}
-            address1={address1}
-            handleAddress1={handleAddress1}
-            // is_rs_pos={is_rs_pos}
-            // handleIs_rs_pos={handleIs_rs_pos}
-            category={category}
-            handleCategory={handleCategory}
-            img_url={img_url}
-            handleImg_url={handleImg_url}
-            shop_v1={shop_v1}
-            // search={search}
-            //   modal={modal}
-            //   openModal={openmodal}
-            //   closeModal={closemodal}
-        />
+            {/* <OwnerNavbar /> */}
+
+            <Shop
+                id={id}
+                handleId={handleId}
+                shopname={shopname}
+                handleShopname={handleShopname}
+                intro={intro}
+                handleIntro={handleIntro}
+                open_time={open_time}
+                handleOpen_time={handleOpen_time}
+                close_time={close_time}
+                handleClose_time={handleClose_time}
+                address={address}
+                handleAddress={handleAddress}
+                address1={address1}
+                handleAddress1={handleAddress1}
+                // is_rs_pos={is_rs_pos}
+                // handleIs_rs_pos={handleIs_rs_pos}
+                category={category}
+                handleCategory={handleCategory}
+                img_url={img_url}
+                handleImg_url={handleImg_url}
+                shop_v1={shop_v1}
+                // search={search}
+                modal={modal}
+                openModal={openmodal}
+                closeModal={closemodal}
+                handleComplete={handleComplete}
+                roadAddr={roadAddr}
+            />
         </>
     );
 };
