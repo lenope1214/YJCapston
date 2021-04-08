@@ -50,9 +50,9 @@ public class ApiController {
         return userService.findById(id);
     }
 
-    @GetMapping("/ok")
-    public ResponseEntity<?> updateOk(){
-        return new ResponseEntity<>("update successfully", HttpStatus.OK);
-    }
+//    @GetMapping("/ok")
+//    public ResponseEntity<?> updateOk(){
+//        return new ResponseEntity<>("update successfully", HttpStatus.OK);
+//    }
 }
 
