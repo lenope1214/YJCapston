@@ -1,5 +1,6 @@
 package com.jumanji.capston.controller.exception;
 
+import com.jumanji.capston.controller.exception.OrderException.OrderNotFoundException;
 import com.jumanji.capston.controller.exception.ShopException.ShopNotFoundException;
 import com.jumanji.capston.controller.exception.UserException.PasswordMissMatchException;
 import com.jumanji.capston.controller.exception.UserException.UserNotFoundException;
@@ -29,6 +30,13 @@ public class ApiExceptionHandler {
     public ResponseEntity<ApiErrorResponse> shopExistException(ShopNotFoundException ex){
         ApiErrorResponse response =
                 new ApiErrorResponse("error-1001", "not exist shop id");
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(OrderNotFoundException.class)
+    public ResponseEntity<?> orderNotFoundException(OrderNotFoundException ex){
+        ApiErrorResponse response=
+                new ApiErrorResponse("error-3001", "not found order");
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 }
