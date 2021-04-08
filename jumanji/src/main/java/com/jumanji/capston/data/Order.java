@@ -58,7 +58,7 @@ public class Order implements Serializable {
         }
     }
 
-    @Builder(builderMethodName = "insertOrder")
+    @Builder
     public Order(Long id, int quantity, String orderRequest, Shop shop, User user, Menu menu, Tab tab) {
         this.id = id;
         this.quantity = quantity;

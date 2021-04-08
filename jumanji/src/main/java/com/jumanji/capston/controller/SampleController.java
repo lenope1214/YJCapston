@@ -1,6 +1,5 @@
 package com.jumanji.capston.controller;
 
-import com.jumanji.capston.controller.commons.Controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/samples")
 @RequiredArgsConstructor
-public class SampleController extends Controller {
+public class SampleController  {
 
 //    private static final Logger logger = LogManager.getLogger(SampleController.class);
 //

@@ -4,6 +4,8 @@ import com.jumanji.capston.controller.exception.OrderException.OrderNotFoundExce
 import com.jumanji.capston.data.Order;
 import com.jumanji.capston.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,16 +32,17 @@ public class OrderService {
 
     public Order insert(Order.Request request) {
         Order order = null;
-        order = Order.insertOrder()
-                .id(orderRepository.getOrderSeqNextVal())
-                .quantity(request.getQuantity())
-                .orderRequest(request.getOrderRequest())
-                .shop(shopRepository.findById(request.getShopId()).get())
-                .user(userRepository.findById(request.getUserId()).get())
-                .menu(menuRepository.findById(request.getMenuId()).get())
-                .tab(tableRepository.findById(request.getTabId()).get())
-                .build();
-        return orderRepository.save(order);
+        return null;
+//        order = Order.insertOrder()
+//                .id(orderRepository.getOrderSeqNextVal())
+//                .quantity(request.getQuantity())
+//                .orderRequest(request.getOrderRequest())
+//                .shop(shopRepository.findById(request.getShopId()).get())
+//                .user(userRepository.findById(request.getUserId()).get())
+//                .menu(menuRepository.findById(request.getMenuId()).get())
+//                .tab(tableRepository.findById(request.getTabId()).get())
+//                .build();
+//        return orderRepository.save(order);
     }
 
     public String delete(Order _order) {
@@ -51,4 +54,24 @@ public class OrderService {
     public List<Order> findAll() {
         return orderRepository.findAll();
     }
+
+    public ResponseEntity<?> getOrderByOrderId(long orderId) {
+
+        return new ResponseEntity<>(orderRepository.findById(orderId), HttpStatus.OK);
+    }
+
+    public boolean isPresent(Long orderId){
+        if(orderRepository.findById(orderId).isPresent())return true;
+        throw new OrderNotFoundException();
+    }
+
+//    public ResponseEntity<?> postOrder(Order.Request request) {
+//        Order order;
+//        Order.builder()
+//                .id(orderRepository.getOrderSeqNextVal())
+//                .orderRequest(request.getOrderRequest())
+//                .quantity(request.getQuantity())
+//                .tab()
+//
+//    }
 }

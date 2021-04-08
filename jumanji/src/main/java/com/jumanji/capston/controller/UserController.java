@@ -1,6 +1,5 @@
 package com.jumanji.capston.controller;
 
-import com.jumanji.capston.controller.commons.Controller;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/v1")
-public class UserController extends Controller {
+public class UserController  {
     @Autowired
     UserService userService;
 
@@ -28,7 +27,7 @@ public class UserController extends Controller {
     @Transactional(readOnly = true)
     @GetMapping("/userList") // getUserList
     public ResponseEntity<?> getUserList(@RequestHeader String authorization) {
-        return new ResponseEntity<>(userService.findAll(authorization), HttpStatus.OK);
+        return userService.findAll(authorization);
     }
 
     @Transactional(readOnly = true)

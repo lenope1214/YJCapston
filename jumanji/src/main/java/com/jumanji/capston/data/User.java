@@ -98,7 +98,7 @@ public class User {
             this.role = user.getRole();
             this.level = user.getLevel();
             this.point = user.getPoint();
-            this.signDate = user.getSignDate();
+//            this.signDate = user.getSignDate();
         }
     }
 }
