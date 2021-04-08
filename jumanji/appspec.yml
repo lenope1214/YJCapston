@@ -18,5 +18,5 @@ hooks:
   AfterInstall:
     # location은 프로젝트의 root경로를 기준
     - location: deploy.bat
-      timeout: 70000
+      timeout: 15
       # runas: root  windows에선 지원x
