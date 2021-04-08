@@ -1058,6 +1058,7 @@ color colorEdittext
 color colorPrimary
 color colorPrimaryDark
 color colorWhite
+color colorWhite2
 color common_google_signin_btn_text_dark
 color common_google_signin_btn_text_dark_default
 color common_google_signin_btn_text_dark_disabled
@@ -1785,7 +1786,9 @@ drawable edge3
 drawable edge4
 drawable edge5
 drawable edge6
+drawable edge7
 drawable edittext_login
+drawable edittext_login2
 drawable fastfood
 drawable font1
 drawable google
@@ -1809,6 +1812,7 @@ drawable loading
 drawable login_btn_img
 drawable main_icon
 drawable main_icon2
+drawable main_image2
 drawable map
 drawable material_cursor_drawable
 drawable material_ic_calendar_black_24dp
@@ -1991,6 +1995,7 @@ id btn_next
 id btn_revoke
 id btn_signup
 id bunsick
+id bunsicktv
 id buttonPanel
 id cache_measures
 id cancel_action
@@ -2003,6 +2008,7 @@ id chain
 id chains
 id checkbox
 id checked
+id chinatv
 id chinesefood
 id chip
 id chip1
@@ -2042,6 +2048,7 @@ id design_menu_item_action_area_stub
 id design_menu_item_text
 id design_navigation_view
 id dessert
+id desserttv
 id detail_button
 id dialog_button
 id dimensions
@@ -2085,10 +2092,12 @@ id expand_activities_button
 id expanded_menu
 id fade
 id fastfood
+id fastfoodtv
 id fill
 id fill_horizontal
 id fill_vertical
 id filled
+id findidpw
 id fitCenter
 id fitToContents
 id fitXY
@@ -2127,10 +2136,12 @@ id inward
 id italic
 id item_touch_helper_previous_elevation
 id japansesfood
+id japantv
 id join_toolbar
 id jumpToEnd
 id jumpToStart
 id koreanfood
+id koreantv
 id labelGroup
 id labeled
 id largeLabel
@@ -2143,6 +2154,7 @@ id light
 id line1
 id line3
 id linear
+id linear_btn
 id listMode
 id list_item
 id login_btn
@@ -2172,6 +2184,7 @@ id material_timepicker_ok_button
 id material_timepicker_view
 id material_value_index
 id meat
+id meattv
 id media_actions
 id message
 id middle
@@ -2250,7 +2263,9 @@ id pos_button
 id position
 id postLayout
 id profile_address
-id profile_btn
+id profile_image
+id profile_image2
+id profile_text
 id progressBar
 id progress_circular
 id progress_horizontal
@@ -2351,6 +2366,7 @@ id snackbar_text
 id snap
 id snapMargins
 id soju
+id sojutv
 id spacer
 id spline
 id split_action_bar
@@ -2406,6 +2422,7 @@ id textView3
 id textView4
 id textView5
 id textView6
+id textView7
 id textView8
 id text_address
 id text_input_end_icon
@@ -2492,6 +2509,7 @@ id zxing_prewiew_size_ready
 id zxing_status_view
 id zxing_viewfinder_view
 id zzim_address
+id zzimtang
 integer abc_config_activityDefaultDur
 integer abc_config_activityShortDur
 integer app_bar_elevation_anim_duration
@@ -2557,6 +2575,7 @@ layout activity_after_login
 layout activity_bell
 layout activity_list_shop
 layout activity_login
+layout activity_login2
 layout activity_main
 layout activity_main_o
 layout activity_menu
@@ -2570,6 +2589,7 @@ layout activity_register_no_shop
 layout activity_register_shop
 layout activity_shop_detail
 layout activity_signup
+layout activity_signup2
 layout activity_splash
 layout adv1
 layout adv2
@@ -2596,6 +2616,7 @@ layout fragment_custom_tab_dialog
 layout fragment_menu
 layout fragment_page_one
 layout home_fragment
+layout home_fragment2
 layout home_fragment_o
 layout introscreen
 layout loading
