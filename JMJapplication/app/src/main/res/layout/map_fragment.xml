@@ -10,7 +10,7 @@
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:background="@drawable/edge">
+            android:background="@drawable/edge1">
 
         <TextView
                 android:id="@+id/map_address"
