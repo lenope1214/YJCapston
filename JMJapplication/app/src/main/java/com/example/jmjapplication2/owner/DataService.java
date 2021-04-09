@@ -4,6 +4,7 @@ import com.example.jmjapplication2.dto.Menu;
 import com.example.jmjapplication2.dto.Shop;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -43,7 +44,8 @@ interface CreateAPI {
 
     @Multipart
     @POST("menu") // 메뉴 등록
-    Call<Menu> insertMenu(@PartMap Map<String, RequestBody> map);
+    Call<ResponseBody> insertMenu(@PartMap Map<String, RequestBody> map, @Part MultipartBody.Part file);
+    //
 
     @POST("join") // 회원가입
     Call<String> join(@Body Map<String, String> map);
