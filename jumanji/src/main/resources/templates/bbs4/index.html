@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"> <!-- 레이아
+	웃 폴더의 레이아웃의 header를 들고옴-->
+</head>
+<body class="is-preload">
+<!--<div th:replace="layout/layout :: header"></div>-->
+<div th:replace="layout/layout :: topbar"></div>
+
+<div id="main">
+    <section class="two">
+        <h1>게시판</h1>
+        <br>
+        <div class="container">
+            <table class="table">
+<!--                <thead class="thead-light">-->
+                <thead>
+                <tr>
+                    <th>글번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>작성일</th>
+                    <th>조회수</th>
+                    <th>추천수</th>
+                    <!--                        <th>-</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="boardList : ${boardList}">
+                    <th class="thBoard"><span th:text="${boardList.bno}"></span></th>
+                    <th class="thBoard" th:if="${session.user == null}">
+                        <a><span th:text="${boardList.title}"></span> </a>
+                    </th>
+                    <th class="thBoard" th:unless="${session.user == null}">
+                        <a th:href="@{'/select/' + ${boardList.bno}}"><span th:text="${boardList.title}"></span> </a>
+                    </th>
+
+                    <th class="thBoard"><span th:text="${boardList.writer}" .></span></th>
+                    <th class="thBoard"><span th:text="${#dates.format(boardList.regDate, 'yyy-MM-dd HH:mm:ss')}"></span></th>
+                    <th class="thBoard"><span th:text="${boardList.count}" .></span></th>
+                    <th class="thBoard"><span th:text="${boardList.reco}" .></span></th>
+                    <!--                        <th>-->
+                    <!--                            <button type="button" id="writeModify">수정</button>-->
+                    <!--                            <button type="button" id="writeDelete">삭제</button>-->
+                    <!--                        </th>-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <BR>
+        <!-- paging button-->
+        <div style="display: inline-block" aria-label="Page navigation example ">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" th:href="@{/?page=1}" aria-label="Previous">
+                        <span aria-hidden="true">처음</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" th:href="@{/?page={page} (page = ${pagination.prevBlock})}"
+                       aria-label="Previous">
+                        <span aria-hidden="true">이전</span>
+                    </a>
+                </li>
+                <th:block th:with="start = ${pagination.startPage}, end = ${pagination.endPage}">
+                    <li class="page-item"
+                        th:with="start = ${pagination.startPage}, end = ${pagination.endPage}"
+                        th:each="pageButton : ${#numbers.sequence(start, end)}">
+                        <a class="page-link" th:href="@{/?page={page} (page = ${pageButton})}"
+                           th:text=${pageButton}></a>
+                    </li>
+                </th:block>
+                <li class="page-item">
+                    <a class="page-link" th:href="@{?page={page} (page = ${pagination.nextBlock})}" aria-label="Next">
+                        <span aria-hidden="true">다음</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" th:href="@{?page={page} (page = ${pagination.totalPageCnt})}"
+                       aria-label="Previous">
+                        <span aria-hidden="true">끝</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </section>
+
+</div>
+<!--<div id="searchBoard" style="position:fixed; right:10px; bottom:30px;">-->
+<!--    <span style="position:relative; top:20px">-->
+<!--        <textarea cols="25" id="searchTxt" placeholder="제목 또는 글 번호 검색" style="resize:none;"></textarea>-->
+<!--    </span>-->
+<!--    <span>-->
+<!--        <button id="searchBtn" style="border-radius: 10px">검색</button>-->
+<!--    </span>-->
+<!--</div>-->
+<div th:replace="layout/layout :: footer"></div>
+<div class="modal fade" id="loginBtn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">로그인</h5>
+            </div>
+            <div class="modal-body">
+                아이디<input type="text" id="loginId" placeholder="아이디를 입력해주세요." class="form-control"><br>
+                비밀번호<input type="password" id="loginPW" placeholder="비밀번호를 입력해주세요." class="form-control"><br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="login">로그인</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="joinBtn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">회원가입</h5>
+            </div>
+            <div class="modal-body">
+                아이디<input type="text" id="joinId" placeholder="아이디를 입력해주세요." class="form-control"><br>
+                비밀번호<input type="password" id="joinPW" placeholder="비밀번호를 입력해주세요." class="form-control"><br>
+                이름<input type="text" id="name" placeholder="이름을 입력해주세요." class="form-control"><br>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-10">
+                            <input type="text" id="email" class="form-control" placeholder="이메일을 입력해주세요.">
+                        </div>
+                        <div class="col-2" style="margin: auto;">
+                            <button class="btn btn-primary" style="font-size:10px;" id="sendEmail">전송</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-10">
+                            <input type="text" placeholder="인증번호 8자리를 입력해주세요." id="confirmCode" class="form-control">
+                        </div>
+                        <div class="col-2" style=" margin: auto;">
+                            <button class="btn btn-primary" style="font-size:10px;" id="confirm">인증</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="join">회원가입</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

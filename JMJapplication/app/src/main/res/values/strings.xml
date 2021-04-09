@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">JMJapplication</string>
+
+    <string name="naver_client_id">wba7CMWQuFgjbn0mJjgE</string>
+    <string name="naver_client_secret">UMIP9mr0Ho</string>
+    <string name="naver_client_name">JMJApplication</string>
+<!--    <string name="default_web_client_id">819641226270-oluglh5uc59bqvq8u60s6kcb9r0anbqp.apps.googleusercontent.com</string>-->
+</resources>
