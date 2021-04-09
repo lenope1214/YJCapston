@@ -238,4 +238,12 @@ public class ShopService {
         }
         return false;
     }
+
+    public ResponseEntity<?> getMyShop(String authorization) {
+        System.out.println("ShopController in getMyShop");
+        String loginId = userService.getMyId(authorization);
+        User userEntity = userRepository.findById(loginId).get();
+        List<Shop> result = getShopListByOwnerId(userEntity.getId());
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 }

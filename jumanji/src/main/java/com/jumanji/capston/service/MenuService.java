@@ -113,11 +113,12 @@ public class MenuService {
 
     public ResponseEntity<?> getMenuListByShopId(String shopId) {
         System.out.println("menuList >> shopId : " + shopId);
+        shopService.isShopPresent(shopId);
         List<Menu> menuList;
         menuList = menuRepository.findByIdContains(shopId);
         System.out.println("menuList info");
         System.out.println(menuList.size());
-
+        if(menuList.isEmpty())return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         return new ResponseEntity<>(menuList, HttpStatus.OK);
     }
 
