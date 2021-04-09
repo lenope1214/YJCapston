@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".MainActivity">
+        tools:context=".user.MainActivity">
 
     <RelativeLayout
             android:layout_width="match_parent"
@@ -29,7 +29,8 @@
                 app:strokeWidth="1dp"
                 android:background="@drawable/bell"/>
         <TextView
-                android:id="@+id/text_address"
+                android:id="@+id/text_myshop_name"
+                android:fontFamily="@font/we_semibold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"

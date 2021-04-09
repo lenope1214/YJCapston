@@ -4,27 +4,27 @@
 
     <item
             android:id="@+id/o_tab1"
-            android:icon="@drawable/o_review"
-            android:title="리뷰"/>
+            android:icon="@drawable/monitor"
+            android:title="포스관리"/>
 
     <item
             android:id="@+id/o_tab2"
-            android:icon="@drawable/o_menu"
-            android:title="메뉴"/>
+            android:icon="@drawable/o_home"
+            android:title="홈"/>
     <item
             android:id="@+id/o_tab3"
-            android:icon="@drawable/o_home"
-            android:title="운영"/>
+            android:icon="@drawable/o_shopdetail"
+            android:title="매장관리"/>
 
-    <item
-            android:id="@+id/o_tab4"
-            android:icon="@drawable/o_res"
-            android:title="예약"/>
+<!--    <item-->
+<!--            android:id="@+id/o_tab4"-->
+<!--            android:icon="@drawable/o_res"-->
+<!--            android:title="예약"/>-->
 
-    <item
-            android:id="@+id/o_tab5"
-            android:icon="@drawable/o_chat"
-            android:title="채팅방"/>
+<!--    <item-->
+<!--            android:id="@+id/o_tab5"-->
+<!--            android:icon="@drawable/o_chat"-->
+<!--            android:title="채팅방"/>-->
 
 
 

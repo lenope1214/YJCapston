@@ -84,12 +84,12 @@
             android:gravity="center"
             android:layout_marginTop="20dp"/>
 
-<!--    <Spinner-->
-<!--            android:id="@+id/shop_et_category"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_marginTop="20dp"/>-->
+    <Spinner
+            android:id="@+id/shop_et_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"/>
 
     <Spinner
             android:id="@+id/shop_et_isres"
