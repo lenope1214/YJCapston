@@ -1,9 +1,9 @@
 package com.jumanji.capston.controller;
 
 import com.jumanji.capston.data.Menu;
-import com.jumanji.capston.service.MenuService;
-import com.jumanji.capston.service.ShopService;
-import com.jumanji.capston.service.StorageService;
+import com.jumanji.capston.service.MenuServiceImpl;
+import com.jumanji.capston.service.ShopServiceImpl;
+import com.jumanji.capston.service.StorageServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,12 +19,12 @@ import javax.security.sasl.AuthenticationException;
 public class MenuController  {
 
     @Autowired
-    MenuService menuService;
+    MenuServiceImpl menuService;
     @Autowired
-    ShopService shopService;
+    ShopServiceImpl shopService;
 
     @Autowired
-    StorageService storageService;
+    StorageServiceImpl storageService;
 
     @Autowired
     HttpHeaders httpHeaders;

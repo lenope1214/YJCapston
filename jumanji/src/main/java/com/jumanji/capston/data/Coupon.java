@@ -22,4 +22,8 @@ public class Coupon {
 //    @ManyToOne
 //    @JoinColumn(name="account",nullable = false)
 //    private Account id; //아이디
+
+    public class Request{
+
+    }
 }

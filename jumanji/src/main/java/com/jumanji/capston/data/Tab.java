@@ -26,6 +26,10 @@ public class Tab {
 
     @Column
     private char using; // 사용중인지 확인.
+
+    public class Request{
+
+    }
 }
 //
 //@Getter

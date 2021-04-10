@@ -26,4 +26,8 @@ public class Payment implements Serializable {
     private int complePay; // 결제 당시 금액
     @Column(name = "is_refund")
     private char isRefund; // 환불 여부
+
+    public class Request{
+
+    }
 }

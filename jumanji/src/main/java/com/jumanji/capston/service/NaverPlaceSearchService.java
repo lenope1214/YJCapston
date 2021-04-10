@@ -6,16 +6,12 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class NaverPlaceSearchService implements ExternalApiService{
+public class NaverPlaceSearchService implements ExternalApiServiceImpl {
 
     private Gson gson;
 

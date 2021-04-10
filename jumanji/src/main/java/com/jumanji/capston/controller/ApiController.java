@@ -2,8 +2,8 @@ package com.jumanji.capston.controller;
 
 import com.jumanji.capston.config.jwt.JwtTokenUtil;
 import com.jumanji.capston.data.User;
-import com.jumanji.capston.service.ShopService;
-import com.jumanji.capston.service.UserService;
+import com.jumanji.capston.service.ShopServiceImpl;
+import com.jumanji.capston.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +17,9 @@ public class ApiController {
     private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    UserService userService;
+    UserServiceImpl userService;
     @Autowired
-    ShopService shopService;
+    ShopServiceImpl shopService;
     @Autowired
     HttpHeaders httpHeaders;
 
@@ -32,7 +32,7 @@ public class ApiController {
     public ResponseEntity<?> join(@RequestBody User.Request user) {
         System.out.println("회원가입 요청 ");
         System.out.println(user.toString());
-        return userService.insert(user);
+        return userService.post(user);
     }
 
     @Transactional(readOnly = true) // 트랜잭션이긴 한데 읽기 전용으로 속도 업 !

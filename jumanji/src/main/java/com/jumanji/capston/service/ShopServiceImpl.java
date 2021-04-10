@@ -18,17 +18,17 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class ShopService {
+public class ShopServiceImpl {
     @Autowired
     ShopRepository shopRepository;
     @Autowired
     UserRepository userRepository;
 
     @Autowired
-    UserService userService;
+    UserServiceImpl userService;
 
     @Autowired
-    StorageService storageService;
+    StorageServiceImpl storageService;
 
     @Autowired
     HttpHeaders httpHeaders;

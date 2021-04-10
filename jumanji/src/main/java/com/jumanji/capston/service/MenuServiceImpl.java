@@ -17,17 +17,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class MenuService {
+public class MenuServiceImpl {
     @Autowired
     MenuRepository menuRepository;
     @Autowired
     HttpHeaders httpHeaders;
     @Autowired
-    StorageService storageService;
+    StorageServiceImpl storageService;
     @Autowired
-    UserService userService;
+    UserServiceImpl userService;
     @Autowired
-    ShopService shopService;
+    ShopServiceImpl shopService;
 //    public BigDecimal getMenuSeqNextVal() {
 //        return menuRepository.getMenuSeqNextVal();
 //    }

@@ -6,6 +6,7 @@ import lombok.Getter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 
 @Getter
@@ -14,7 +15,7 @@ import java.io.Serializable;
 public class Bucket implements Serializable {
     @Id
 //    @Column(insertable = false, updatable = false)
-    private String id; // 주문번호 insert 할때 값 sequence 설정해주기. 기본값으로 하는거 어렵넹
+    private Timestamp id; // 바구니번호 yyyyMMddhhmmss
 
     @Column(length = 2)
     private int quantity; // 메뉴 수량
@@ -29,7 +30,7 @@ public class Bucket implements Serializable {
     private User user;
 
     @Builder
-    public Bucket(String id, int quantity, String orderRequest, Shop shop, User user) {
+    public Bucket(Timestamp id, int quantity, String orderRequest, Shop shop, User user) {
         this.id = id;
         this.quantity = quantity;
         this.orderRequest = orderRequest;

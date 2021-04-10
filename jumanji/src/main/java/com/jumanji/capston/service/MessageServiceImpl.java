@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class MessageService {
+public class MessageServiceImpl {
     @Autowired
     MessageRepository messageRepository;
 

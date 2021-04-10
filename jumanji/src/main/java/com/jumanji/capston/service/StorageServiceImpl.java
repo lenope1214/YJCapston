@@ -23,12 +23,12 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 @Service
-public class StorageService {
+public class StorageServiceImpl {
     private final Path rootLocation;
 
 
     @Autowired
-    public StorageService(StorageConfig config) {
+    public StorageServiceImpl(StorageConfig config) {
 //        System.out.println("StorageServicec constructor...");
         this.rootLocation = Paths.get(config.getLocation());
     }

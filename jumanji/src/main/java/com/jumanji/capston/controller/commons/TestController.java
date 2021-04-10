@@ -2,8 +2,8 @@ package com.jumanji.capston.controller.commons;
 
 import com.jumanji.capston.controller.exception.ApiErrorResponse;
 import com.jumanji.capston.data.request.FileAndData;
-import com.jumanji.capston.service.MenuService;
-import com.jumanji.capston.service.StorageService;
+import com.jumanji.capston.service.MenuServiceImpl;
+import com.jumanji.capston.service.StorageServiceImpl;
 import com.jumanji.capston.storage.StorageException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -21,9 +21,9 @@ import java.net.http.HttpResponse;
 @RequestMapping("/api/v1/test")
 public class TestController {
     @Autowired
-    MenuService menuService;
+    MenuServiceImpl menuService;
     @Autowired
-    StorageService storageService;
+    StorageServiceImpl storageService;
     @Autowired
     HttpHeaders httpHeaders;
 

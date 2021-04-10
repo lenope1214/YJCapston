@@ -20,4 +20,8 @@ public class Penalty {
     private Timestamp regTime;
     private String name;
     private String reason;
+
+    public class Request{
+
+    }
 }

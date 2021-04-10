@@ -10,7 +10,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-public interface ExternalApiService {
+public interface ExternalApiServiceImpl {
 
     default String get(String apiUrl, Map<String, String> requestHeaders, String Method){
         HttpURLConnection con = connect(apiUrl);

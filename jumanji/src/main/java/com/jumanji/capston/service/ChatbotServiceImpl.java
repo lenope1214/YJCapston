@@ -2,13 +2,14 @@ package com.jumanji.capston.service;
 
 import com.jumanji.capston.data.Chatbot;
 import com.jumanji.capston.repository.ChatbotRepository;
+import com.jumanji.capston.service.interfaces.ChatbotService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class ChatbotService {
+public class ChatbotServiceImpl implements ChatbotService {
 
     @Autowired
     ChatbotRepository chatbotRepository;
@@ -31,5 +32,25 @@ public class ChatbotService {
 
     public List<Chatbot> findAll() {
         return chatbotRepository.findAll();
+    }
+
+    @Override
+    public ResponseEntity<?> get(String chatbotId) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<?> post(Chatbot.Request request) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<?> patch(Chatbot.Request request) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<?> delete(String chatbotId) {
+        return null;
     }
 }

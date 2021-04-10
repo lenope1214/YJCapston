@@ -16,5 +16,9 @@ public class UserHasCoupon {
     private Date beginDate= new Date(); // 사용 마지막 기간
     @Column(name = "expiry_date")
     private Date expiryDate; // 만료기간
+
+    public class Request{
+
+    }
 }
 

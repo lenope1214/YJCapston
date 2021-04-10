@@ -4,7 +4,6 @@ import com.jumanji.capston.config.jwt.JwtResponse;
 import com.jumanji.capston.config.jwt.JwtTokenUtil;
 import com.jumanji.capston.controller.exception.ApiErrorResponse;
 import com.jumanji.capston.controller.exception.UserException.UserNotFoundException;
-import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ import java.util.List;
 
 
 @Service
-public class UserService {
+public class UserServiceImpl {
     @Autowired
     UserRepository userRepository;
 
@@ -35,7 +34,7 @@ public class UserService {
     HttpHeaders httpHeaders;
 
     @Autowired
-    ShopService shopService;
+    ShopServiceImpl shopService;
 
     @Transactional
     public String getMyId(String authorization) {
@@ -64,8 +63,8 @@ public class UserService {
     }
 
     @Transactional
-    public ResponseEntity<?> insert(User.Request user) {
-        if (userRepository.findById(user.getId()).isEmpty()) {
+    public ResponseEntity<?> post(User.Request user) {
+        if (isEmpty(user.getId())) {
             String rawPassword = user.getPassword();
             String encPassword = bCryptPasswordEncoder.encode(rawPassword);
             User userEntity = User.createUser()

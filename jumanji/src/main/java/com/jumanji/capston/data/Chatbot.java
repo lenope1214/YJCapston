@@ -18,4 +18,7 @@ public class Chatbot {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Shop shop;
+
+    public class Request {
+    }
 }
