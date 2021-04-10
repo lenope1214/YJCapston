@@ -16,7 +16,7 @@ public class ReservationService {
     @Autowired
     OrderRepository orderRepository;
 
-    public Reservation findById(Long id){
+    public Reservation findById(String id){
         Order order = orderRepository.findById(id)
                 .orElseThrow(()-> new IllegalArgumentException("id를 확인해주세요!!!"));
 
@@ -30,7 +30,7 @@ public class ReservationService {
         return reservationRepository.save(_reservation);
     }
 
-    public String delete(Long order_id){
+    public String delete(String order_id){
         Order order = orderRepository.findById(order_id).orElseThrow(()-> new IllegalArgumentException("주문번호를 확인해주세요!!!"));
         Reservation reservation = reservationRepository.findById(order)
                 .orElseThrow(()-> new IllegalArgumentException("Order를 제대로 못가져옴! 확인해주세요!!!"));

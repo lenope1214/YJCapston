@@ -11,6 +11,11 @@ public class ApiErrorResponse{
 //    private String status;
 //    private String
 
+    public ApiErrorResponse(BasicException e){
+        this.code = e.getCode();
+        this.message = e.getMessage();
+    }
+
     public ApiErrorResponse(String code, String message) {
         super();
         this.code = code;

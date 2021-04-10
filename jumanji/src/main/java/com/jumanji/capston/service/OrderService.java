@@ -24,11 +24,6 @@ public class OrderService {
     @Autowired
     MenuRepository menuRepository;
 
-    public Order findById(Long id) {
-        return orderRepository.findById(id)
-                .orElseThrow(() -> new OrderNotFoundException("error-3001", "없는 주문번호 입니다."));
-    }
-
 
     public Order insert(Order.Request request) {
         Order order = null;
@@ -45,9 +40,9 @@ public class OrderService {
 //        return orderRepository.save(order);
     }
 
-    public String delete(Order _order) {
-        Order order = orderRepository.findById(_order.getId()).orElseThrow(() -> new IllegalArgumentException("id를 확인해주세요!!!"));
-        orderRepository.delete(order);
+    public String delete(Order order) {
+        Order orderEntity = orderRepository.findById(order.getId()).orElseThrow(() -> new IllegalArgumentException("id를 확인해주세요!!!"));
+        orderRepository.delete(orderEntity);
         return "ok";
     }
 
@@ -55,12 +50,12 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    public ResponseEntity<?> getOrderByOrderId(long orderId) {
+    public ResponseEntity<?> getOrderByOrderId(String orderId) {
 
         return new ResponseEntity<>(orderRepository.findById(orderId), HttpStatus.OK);
     }
 
-    public boolean isPresent(Long orderId){
+    public boolean isPresent(String orderId){
         if(orderRepository.findById(orderId).isPresent())return true;
         throw new OrderNotFoundException();
     }

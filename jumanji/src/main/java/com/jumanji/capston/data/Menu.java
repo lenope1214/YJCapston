@@ -22,9 +22,9 @@ author 이성복
 public class Menu {
 
     @Id
-    private String id; // 메뉴번호 ( 매장번호 + seq ( 2 ) )
+    private String id; // 메뉴번호 ( 매장번호 + 메뉴이름 )
 
-    private String name; // 메뉴이름
+//    private String name; // 메뉴이름
     private String intro; //메뉴설명
     @Column(name = "is_sale")
     private char isSale = 'Y'; // 판매중
@@ -42,8 +42,8 @@ public class Menu {
 
     @Builder(builderMethodName = "init")
     public Menu(String id, String name, String intro, int price, int duration, String imgPath) {
-        this.id = id;
-        this.name = name;
+        this.id = id + name;
+//        this.name = name;
         this.intro = intro;
         this.price = price;
         this.duration = duration;
@@ -82,6 +82,7 @@ public class Menu {
 
     @Getter
     public static class Response{
+        private String id;
         private String name;
         private String intro;
         private int price;
@@ -91,6 +92,7 @@ public class Menu {
         private String imgPath;
 
         public Response(Menu menu){
+            this.id = menu.getId().substring(0,10);
             this.name = menu.getId().substring(10).replace("_", " ");
             this.intro = menu.getIntro();
             this.price = menu.getPrice();
