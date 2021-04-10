@@ -100,7 +100,7 @@ public class ShopService {
         return shop.getIsRsPos();
     }
 
-    public ResponseEntity<?> postShop(Shop.info request, String authorization) {
+    public ResponseEntity<?> postShop(Shop.Request request, String authorization) {
         System.out.println("매장등록's shopId : " + request.getId());
         try {
             if(shopRepository.findById(request.getId()).isPresent()) throw new ShopHasExistException();

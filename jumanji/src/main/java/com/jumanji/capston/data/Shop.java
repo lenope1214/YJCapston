@@ -2,10 +2,7 @@ package com.jumanji.capston.data;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
@@ -46,9 +43,8 @@ public class Shop {
     private User owner;
 
 
-    @Getter
-    @Setter
-    public static class info {
+    @Getter @AllArgsConstructor
+    public static class Request {
         private String id;
         private String name;
         private String intro;
@@ -57,19 +53,8 @@ public class Shop {
         private String address;
         private String addressDetail;
         private String category;
-        private MultipartFile img;
-    }
-
-    @Getter
-    @Setter
-    public static class Request {
         private String shopId;
-        private String intro;
-        private String openTime;
-        private String closeTime;
-        private String address;
-        private String addressDetail;
-        private String category;
+        private MultipartFile img;
     }
 
     @Getter

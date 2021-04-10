@@ -1,5 +1,6 @@
 package com.jumanji.capston.data;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -27,22 +28,6 @@ public class Bucket implements Serializable {
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
 
-    @Getter
-    public
-    class Request {
-        private int quantity;
-        private String orderRequest;
-        //        private Date orderTime;
-        private String shopId;
-        private String userId;
-        private String menuId;
-        private String tabId; // 테이블번호 : 사업자번호 + 테이블번호 ( 2 )
-
-        public Request(Bucket order) {
-
-        }
-    }
-
     @Builder
     public Bucket(String id, int quantity, String orderRequest, Shop shop, User user) {
         this.id = id;
@@ -51,18 +36,27 @@ public class Bucket implements Serializable {
         this.shop = shop;
         this.user = user;
     }
-}
 
-//@Getter
-//@Setter
-//@Embeddable
-//@EqualsAndHashCode
-//public class shop_menu_tab implements Serializable {
-//
-//    @Column(name="menu_id", length = 3)
-//    private int menu_id ; // 메뉴번호
-//
-//    @Embedded
-//    private TabId tab_id;
-//    public shop_menu_tab(){}
-//}
+    @Getter @AllArgsConstructor
+    public class Request {
+        private int quantity;
+        private String orderRequest;
+        private String shopId;
+        private String userId;
+    }
+
+    @Getter
+    public class Response{
+        private int quantity;
+        private String orderRequest;
+        private String shopId;
+        private String userId;
+
+        public Response(Bucket bucket) {
+            this.quantity = bucket.quantity;
+            this.orderRequest = bucket.getOrderRequest();
+            this.shopId = bucket.getShop().getId();
+            this.userId = bucket.getUser().getId();
+        }
+    }
+}

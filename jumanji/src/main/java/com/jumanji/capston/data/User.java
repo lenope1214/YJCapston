@@ -64,7 +64,7 @@ public class User {
         this.level = 1;
     }
 
-    @Getter
+    @Getter @Setter
     public static class Request {
         private String id; //아이디
         private String password; // 비밀번호

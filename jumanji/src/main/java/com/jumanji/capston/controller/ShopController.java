@@ -66,7 +66,7 @@ public class ShopController  {
 
     @Transactional
     @PostMapping("/shop") // post /shop 매장등록     Form-data로 받음 => Param. requestbody를 안적으면 자동 param 매핑 해주는듯
-    public ResponseEntity<?> insertShop(Shop.info request, @RequestHeader String authorization) throws ParseException {
+    public ResponseEntity<?> insertShop(Shop.Request request, @RequestHeader String authorization) throws ParseException {
         return shopService.postShop(request, authorization);
     }
 

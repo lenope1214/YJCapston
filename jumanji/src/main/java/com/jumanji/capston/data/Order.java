@@ -12,7 +12,6 @@ import java.io.Serializable;
 @Table(name = "orders")
 public class Order implements Serializable {
     @Id
-//    @Column(insertable = false, updatable = false)
     private String id; // 주문번호 insert 할때 값 sequence 설정해주기. 기본값으로 하는거 어렵넹
 
     @Column(length = 2)
@@ -26,28 +25,36 @@ public class Order implements Serializable {
     @JoinColumn(name = "tab_id", insertable = false, updatable = false)
     private Tab tab;
 
-    @Getter
-    public
-    class Request {
-        private int quantity;
-        private String orderRequest;
-        //        private Date orderTime;
-        private String shopId;
-        private String userId;
-        private String menuId;
-        private String tabId; // 테이블번호 : 사업자번호 + 테이블번호 ( 2 )
-
-        public Request(Order order) {
-
-        }
-    }
-
     @Builder
     public Order(String id, int quantity, Menu menu, Tab tab) {
         this.id = id;
         this.quantity = quantity;
         this.menu = menu;
         this.tab = tab;
+    }
+
+    @Getter
+    public
+    class Request {
+        private String bucketId;
+        private int quantity;
+        private String menuId;
+        private String tabId; // 테이블번호 : 사업자번호 + 테이블번호 ( 2 )
+    }
+
+    @Getter
+    public class Response{
+        private String orderId;
+        private int quantity;
+        private String menuId;
+        private String tabId;
+
+        Response(Order order){
+            this.orderId = order.getId();
+            this.quantity = order.getQuantity();
+            this.menuId = order.getMenu().getId();
+            this.tabId = order.getTab().getId();
+        }
     }
 }
 

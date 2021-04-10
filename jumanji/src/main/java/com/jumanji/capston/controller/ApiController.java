@@ -6,7 +6,6 @@ import com.jumanji.capston.service.ShopService;
 import com.jumanji.capston.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -33,8 +32,7 @@ public class ApiController {
     public ResponseEntity<?> join(@RequestBody User.Request user) {
         System.out.println("회원가입 요청 ");
         System.out.println(user.toString());
-        return new ResponseEntity<>(userService.insert(user), HttpStatus.CREATED);
-
+        return userService.insert(user);
     }
 
     @Transactional(readOnly = true) // 트랜잭션이긴 한데 읽기 전용으로 속도 업 !

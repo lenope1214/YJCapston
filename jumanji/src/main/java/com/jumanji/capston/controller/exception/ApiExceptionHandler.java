@@ -5,6 +5,7 @@ import com.jumanji.capston.controller.exception.OrderException.OrderNotFoundExce
 import com.jumanji.capston.controller.exception.ShopException.ShopNotFoundException;
 import com.jumanji.capston.controller.exception.UserException.PasswordMissMatchException;
 import com.jumanji.capston.controller.exception.UserException.UserNotFoundException;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -45,6 +46,13 @@ public class ApiExceptionHandler {
     public ResponseEntity<?> menuAlreadUsedException(MenuAlreadUsedException ex){
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<?> dataDuplicateKeyException(ConstraintViolationException ex){
+        ApiErrorResponse response =
+                new ApiErrorResponse("ORA-00001", ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }

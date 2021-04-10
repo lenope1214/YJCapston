@@ -92,7 +92,7 @@ public class Menu {
         private String imgPath;
 
         public Response(Menu menu){
-            this.id = menu.getId().substring(0,10);
+//            this.id = menu.getId().substring(0,10);
             this.name = menu.getId().substring(10).replace("_", " ");
             this.intro = menu.getIntro();
             this.price = menu.getPrice();
