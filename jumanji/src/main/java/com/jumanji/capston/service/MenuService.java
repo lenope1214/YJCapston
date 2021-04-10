@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.security.sasl.AuthenticationException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -113,12 +114,18 @@ public class MenuService {
 
     public ResponseEntity<?> getMenuListByShopId(String shopId) {
         System.out.println("menuList >> shopId : " + shopId);
+        shopService.isPresent(shopId);
         List<Menu> menuList;
         menuList = menuRepository.findByIdContains(shopId);
         System.out.println("menuList info");
         System.out.println(menuList.size());
 
-        return new ResponseEntity<>(menuList, HttpStatus.OK);
+        List<Menu.Response> response = new ArrayList<Menu.Response>();
+        for(Menu menu : menuList){
+            response.add(new Menu.Response(menu));
+        }
+        if(menuList.isEmpty())return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     // 있는 메뉴인지 확인

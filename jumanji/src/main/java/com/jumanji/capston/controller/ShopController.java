@@ -37,16 +37,16 @@ public class ShopController  {
         return shopService.getShopByShopId(shopId);
     }
 
-    @Transactional(readOnly = true)
-    @GetMapping("/shopIntro/{shopId}") // get /shopIntro/{shopId}
-    public ResponseEntity<?> getShopIntro(@PathVariable String shopId) {
-        return shopService.getShopIntro(shopId);
-    }
+//    @Transactional(readOnly = true)
+//    @GetMapping("/shopIntro/{shopId}") // get /shopIntro/{shopId}
+//    public ResponseEntity<?> getShopIntro(@PathVariable String shopId) {
+//        return shopService.getShopIntro(shopId);
+//    }
 
     @Transactional(readOnly = true)
     @GetMapping("/myShop") // get /myShop
     public ResponseEntity<?> getMyShop(@RequestHeader String authorization) { // 수정해야함.
-        return userService.getMyShop(authorization);
+        return shopService.getMyShop(authorization);
 
     }
 
@@ -70,7 +70,7 @@ public class ShopController  {
         return shopService.postShop(request, authorization);
     }
 
-    @Transactional
+    @Transactional // delete
     @DeleteMapping("/shop/{shopId}")
     public ResponseEntity<?> deleteShop(@RequestHeader String authorization, @PathVariable String shopId) {
         return shopService.delete(authorization, shopId);

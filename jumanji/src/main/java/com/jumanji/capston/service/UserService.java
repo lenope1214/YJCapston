@@ -3,7 +3,6 @@ package com.jumanji.capston.service;
 import com.jumanji.capston.config.jwt.JwtResponse;
 import com.jumanji.capston.config.jwt.JwtTokenUtil;
 import com.jumanji.capston.controller.exception.ApiErrorResponse;
-import com.jumanji.capston.controller.exception.BasicException;
 import com.jumanji.capston.controller.exception.UserException.UserNotFoundException;
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.data.User;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -84,7 +82,7 @@ public class UserService {
                     .provider_id(null)
 //                .level(0)
                     .build();
-            return new ResponseEntity<>(userRepository.save(userEntity), HttpStatus.CREATED);
+            return new ResponseEntity<>(new User.Response(userRepository.save(userEntity)), HttpStatus.CREATED);
         } else {
             System.out.println("이미 있는 아이디. 회원가입 불가.");
             return new ResponseEntity<>(new ApiErrorResponse("0003"), HttpStatus.BAD_REQUEST);
@@ -163,13 +161,7 @@ public class UserService {
         }
     }
 
-    public ResponseEntity<?> getMyShop(String authorization) {
-        System.out.println("ShopController in getMyShop");
-        String loginId = getMyId(authorization);
-        User userEntity = userRepository.findById(loginId).get();
-        List<Shop> result = shopService.getShopListByOwnerId(userEntity.getId());
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
+
 
     private boolean isEmpty(String id) {
         if (userRepository.findById(id).isEmpty()) return true;

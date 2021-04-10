@@ -1,7 +1,6 @@
 package com.jumanji.capston.service;
 
 import com.jumanji.capston.controller.exception.ApiErrorResponse;
-import com.jumanji.capston.controller.exception.Auth.UnAuthorizedException;
 import com.jumanji.capston.controller.exception.ShopException.ShopHasExistException;
 import com.jumanji.capston.controller.exception.ShopException.ShopNotFoundException;
 import com.jumanji.capston.data.Shop;
@@ -140,12 +139,12 @@ public class ShopService {
         return new ResponseEntity<>(response, HttpStatus.CREATED); // 생성이므로 201번을 리턴.
     }
 
-    public ResponseEntity<?> putShop(String authorization, Shop.Request shop) {
-        isShopPresent(shop.getShopId()); // 있는 매장번호 인가?
+    public ResponseEntity<?> putShop(String authorization, Shop.Request request) {
+        isPresent(request.getShopId()); // 있는 매장번호 인가?
         String loginId = userService.getMyId(authorization);
-        Shop shopEntity = shopRepository.findById(shop.getShopId()).get();
-        if(isUserShop(loginId, shopEntity)){ // 로그인한 아이디가 해당 매장을 가지고 있는가?
-            shopEntity.update(shop);
+        Shop shopEntity = shopRepository.findById(request.getShopId()).get();
+        if(isOwnShop(loginId, shopEntity.getId())){ // 로그인한 아이디가 해당 매장을 가지고 있는가?
+            shopEntity.update(request);
             return new ResponseEntity<>(shopEntity, HttpStatus.OK);
         }
         return new ResponseEntity<>("not defined error ", HttpStatus.BAD_REQUEST);
@@ -157,8 +156,8 @@ public class ShopService {
         System.out.println("patch.getShopId() : " + request.getShopId());
         String userId = userService.getMyId(authorization);
         Shop shop = shopRepository.findById(request.getShopId()).get();
-        isShopPresent(request.getShopId());
-        isUserShop(userId, shop);
+        isPresent(request.getShopId());
+        isOwnShop(userId, shop.getId());
 
 
         System.out.println(
@@ -173,7 +172,7 @@ public class ShopService {
     public ResponseEntity<?> patchShopIsOpen(String authorization, String shopId) {
         String userId = userService.getMyId(authorization);
         List<Shop> shopList = getShopListByOwnerId(userId);
-        isShopPresent(shopId);
+        isPresent(shopId);
         for (Shop shop : shopList) {
             if (shop.getId().equals(shopId)) {                // 해당 유저의 해당 매장번호가 있음!
                 System.out.println(shop.getName() + "의 오픈상태 반전성공");
@@ -186,7 +185,7 @@ public class ShopService {
     public ResponseEntity<?> patchSHopIsRsPos(String authorization, String shopId) {
         String userId = userService.getMyId(authorization);
         List<Shop> shopList = getShopListByOwnerId(userId);
-        isShopPresent(shopId);
+        isPresent(shopId);
         for (Shop shop : shopList) {
             if (shop.getId().equals(shopId)) {
                 // 해당 유저의 해당 매장번호가 있음!
@@ -201,7 +200,7 @@ public class ShopService {
         Shop shop;
         System.out.println("ShopController in getShopById");
         System.out.println("shop id : " + shopId);
-        isShopPresent(shopId);
+        isPresent(shopId);
         try {
             shop = shopRepository.findById(shopId).get();
         } catch (ShopNotFoundException e) {
@@ -213,17 +212,10 @@ public class ShopService {
     }
 
     // 89있는 매장번호 인지 확인. 없으면 error를 반환하게 된다. ㅂㅂ
-    public boolean isShopPresent(String shopId)  {
+    public boolean isPresent(String shopId)  {
         if(shopRepository.findById(shopId).isPresent())return true;
         throw new ShopNotFoundException();
     }
-
-    // 로그인 유저의 매장인지 확인 아니면 에러 반환
-    private boolean isUserShop(String userId, Shop shop){
-        if(shop.getOwner().getId().equals(userId))return true;
-        throw new UnAuthorizedException();
-    }
-
 
     public boolean isOwnShop(String loginId, String shopId) {
         System.out.println("삭제 유저아디 : " + loginId);
@@ -237,5 +229,13 @@ public class ShopService {
             }
         }
         return false;
+    }
+
+    public ResponseEntity<?> getMyShop(String authorization) {
+        System.out.println("ShopController in getMyShop");
+        String loginId = userService.getMyId(authorization);
+        User userEntity = userRepository.findById(loginId).get();
+        List<Shop> result = getShopListByOwnerId(userEntity.getId());
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

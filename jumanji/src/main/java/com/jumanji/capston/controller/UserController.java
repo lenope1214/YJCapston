@@ -3,7 +3,6 @@ package com.jumanji.capston.controller;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -43,7 +42,7 @@ public class UserController  {
 //    }
 
     @Transactional
-    @PatchMapping("/user") // putUser
+    @PatchMapping("/user") // patch user
     public ResponseEntity<?> patchUser(@RequestBody User.Request request, @RequestHeader String authorization) {
         return userService.patchUser(authorization, request);
     }

@@ -1,5 +1,6 @@
 package com.jumanji.capston.controller.exception;
 
+import com.jumanji.capston.controller.exception.MenuException.MenuAlreadUsedException;
 import com.jumanji.capston.controller.exception.OrderException.OrderNotFoundException;
 import com.jumanji.capston.controller.exception.ShopException.ShopNotFoundException;
 import com.jumanji.capston.controller.exception.UserException.PasswordMissMatchException;
@@ -22,21 +23,28 @@ public class ApiExceptionHandler {
     @ExceptionHandler(PasswordMissMatchException.class)
     public ResponseEntity<ApiErrorResponse> pwHandleException(PasswordMissMatchException ex) {
         ApiErrorResponse response =
-                new ApiErrorResponse("error-0002", "faild login : " + ex.getPassword());
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(ShopNotFoundException.class)
     public ResponseEntity<ApiErrorResponse> shopExistException(ShopNotFoundException ex){
         ApiErrorResponse response =
-                new ApiErrorResponse("error-1001", "not exist shop id");
+                new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(OrderNotFoundException.class)
     public ResponseEntity<?> orderNotFoundException(OrderNotFoundException ex){
         ApiErrorResponse response=
-                new ApiErrorResponse("error-3001", "not found order");
+                new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(MenuAlreadUsedException.class)
+    public ResponseEntity<?> menuAlreadUsedException(MenuAlreadUsedException ex){
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }
