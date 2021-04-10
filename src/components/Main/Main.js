@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
-import topimg from "./img/topimg.jpg";
+import topimg from "./img/메인화면이미지3.jpg";
 import juminicon from "./img/주민아이콘.png";
 import downimg from "./img/다운로드.png";
 import peopleimg from "./img/주민사람.png";
 import backimg2 from "./img/backimg.jpg";
 import shopimg from "./img/매장아이콘.png";
 import backimg3 from "./img/종이질감갈색화면.png";
+import scroll1 from "./img/손글씨 스크롤(흰색).png";
+import qrimg from "./img/노랑QR이미지.png";
+import chatimg from "./img/챗봇이미지2.png";
 import * as S from "./style";
 import { Link } from "react-router-dom";
 import { debounce } from 'lodash';
+import reserveimg from "./img/갈색예약주문.png";
 
 const Main = ({
     isLogin,
@@ -83,14 +87,25 @@ const Main = ({
         return scrollDirection;
     })
 
-        const [but1, setbut1] = useState("");
+    const [but1, setbut1] = useState("");
     const [but2, setbut2] = useState("");
     const [but3, setbut3] = useState("");
     const [but4, setbut4] = useState("");
+    const [img1, setimg1] = useState("");
+    const [img2, setimg2] = useState("");
     const direction = useScrollDirection("");
-    console.log(direction);
 
     useEffect(() => {
+        if(window.scrollY === 0) {
+            setimg2("-none");
+            setimg1("");
+        } else if(window.scrollY === height*3) {
+            setimg2("");
+            setimg1("-none");
+        } else {
+            setimg2("");
+            setimg1("");
+        }
         if(0 <= window.scrollY && window.scrollY < height) {
             setbut1("-selected");    
             setbut2("");
@@ -123,6 +138,8 @@ const Main = ({
                 setbut3("");
                 setbut4("");  
             } else if(direction === "up") {
+                setimg2("-none");
+            setimg1("");
                 window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 
             }
@@ -144,15 +161,23 @@ const Main = ({
                 setbut2("");
                 setbut3("");
                 setbut4("-selected");
+                setimg2("");
+            setimg1("-none");
             } else if(direction === "up") {
                 window.scrollTo({ top: height*2, left: 0, behavior: "smooth" });
             }
         }
     })
+    
 
     return (
         <>
             <S.MainWrap>
+            {/* <div className={"scroll-img2"+img2}>
+                    <img src={scroll3} >
+
+                    </img>
+                </div> */}
                 <div className="App">
                     <div className="black-nav">
                         
@@ -160,7 +185,7 @@ const Main = ({
                             주문
                             <span
                                 style={{
-                                    fontSize: "23px",
+                                    fontSize: "25px",
                                     paddingTop: "10px",
                                 }}
                             >
@@ -199,7 +224,7 @@ const Main = ({
                                     LOG OUT
                                 </button>
                                 <Link to="/mypage">
-                                    <button class="right2-nav">MY PAGE</button>
+                                    <button className="right2-nav" onClick={() => { window.scrollTo(0, 0) }}>MY PAGE</button>
                                 </Link>
                             </div>
                             <div className="scroll-nav">
@@ -240,7 +265,7 @@ const Main = ({
                                         LOG IN
                                 </button>
                                     <Link to="/register">
-                                        <button class="right2-nav"> JOIN</button>
+                                        <button className="right2-nav" onClick={() => { window.scrollTo(0, 0) }}> JOIN</button>
                                     </Link>
                                 </div>
                                 <div className="scroll-nav">
@@ -280,19 +305,51 @@ const Main = ({
 
                             />
                         </div>
-                        <div className="toptext">
-                            <span>테이블</span>
-                            <span style={{ fontSize: "30px" }}>에서</span>
-                            <br></br>
-                            <span>주문</span>
-                            <span style={{ fontSize: "30px" }}>하고</span>
-                            <br></br>
-                            <span>집</span>
-                            <span style={{ fontSize: "30px" }}>에서</span>
-                            <br></br>
-                            <span>예약</span>
-                            <span style={{ fontSize: "30px" }}>하자</span>
+                        <div className="topimg-up">누구나 이용하기 쉬운 서비스</div>
+                        <div className="topimg-text">
+                            주문과 예약은 <span className="jumintext">주민</span>에서
                         </div>
+                            <div className="toptop">
+                            <div className="toptop-item">
+                                <div className="title-of-item">QR코드 주문</div>
+                                <img src={qrimg}
+                                className="items-img2"
+                                />
+                            </div>
+                            <div className="toptop-item">
+                            <div className="title-of-item">예약 주문</div>
+                            <img src={reserveimg}
+                                className="items-img2"
+                                />
+                            </div>
+                            <div className="toptop-item">
+                            <div className="title-of-item">챗봇 문의</div>
+                            <img src={chatimg}
+                                className="items-img2"
+                                />
+                            </div>
+                            </div>
+
+                        {/* <div className="toptext">
+                            
+                            <div className="top-item-title">주요 서비스</div>
+                            <hr className="hr"/>
+                            <div className="top-item">
+                                <img src={qrimg}
+                                className="items-img"
+                                />
+                            </div>
+                            <div className="top-item">
+                            <img src={reserveimg}
+                                className="items-img"
+                                />
+                            </div>
+                            <div className="top-item">
+                            <img src={chatimg}
+                                className="items-img"
+                                />
+                            </div>
+                        </div> */}
                     </div>
                     
                     <div className="but-item1">
@@ -303,6 +360,7 @@ const Main = ({
                             <img src={backimg3} width="100%" height="100%"
                                 className="backimg-img" />
                         </div>
+                        
                         <div className="but-item1-text">
                             <p>주문의민족</p>
                             <p>모든 기능</p>
@@ -410,10 +468,10 @@ const Main = ({
                     </div>
                 </div>
                 <footer>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
+                <div className={"scroll-img"+img1}>
+                    <img src={scroll1} width='300px'>
+                    </img>
+                </div>
                 </footer>
             </S.MainWrap>
 

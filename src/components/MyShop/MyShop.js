@@ -35,10 +35,7 @@ const MyShop = ({
                             {/* <th align="center" className="addressDetail">매장상세주소</th> */}
                             <th align="center" className="item-6">예약</th>
                             <th align="center" className="item-7"></th>
-
-
                         </thead>
-
                         <tbody>
 
                             {!shop.length && (

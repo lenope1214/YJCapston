@@ -3,6 +3,7 @@ import React from "react";
 import * as S from "./style";
 import { Link } from "react-router-dom";
 import DaumPostcode from "react-daum-postcode";
+import topimg from "../Main/img/QR코드사진2.png";
 
 const Register = ({
     id,
@@ -45,7 +46,7 @@ const Register = ({
         position: "fixed",
         top: "50%",
         width: "400px",
-        height: "500px",
+        height: "550px",
         padding: "7px",
         left: "50%",
         transform: "translate(-50%, -50%)",
@@ -69,153 +70,165 @@ const Register = ({
                             민족
                         </div>
                     </Link>
-                </header>
-                <body>
-                    <p>회원가입하기</p>
-                    <span>아이디</span>
-                    <input
-                        type="text"
-                        id="userId"
-                        placeholder="아이디"
-                        onChange={handleId}
-                        value={id}
-                    />
-                    <button onClick={IdCheck}>중복확인</button>
-                    <br></br>
-                    <br></br>
-                    <span>비밀번호</span>
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="비밀번호"
-                        onChange={handlePw}
-                        value={pw}
-                    />
-                    <span>이름</span>
-                    <input
-                        type="text"
-                        id="username"
-                        placeholder="이름"
-                        onChange={handleName}
-                        value={username}
-                    />
 
-                    <span class="named">전화번호</span>
-                    <select
-                        id="txtMobile1"
-                        onChange={handlePhone1}
-                        value={phone1}
-                    >
-                        <option value="">::선택::</option>
-                        <option value="010">010</option>
-                        <option value="011">011</option>
-                        <option value="016">016</option>
-                        <option value="017">017</option>
-                        <option value="019">019</option>
-                    </select>
-                    <span>-</span>
-                    <input
-                        class="phone"
-                        type="text"
-                        id="txtMobile2"
-                        size="4"
-                        onkeypress="onlyNumber();"
-                        placeholder="ex)1234"
-                        onChange={handlePhone2}
-                        value={phone2}
-                    />
-                    <span>-</span>
-                    <input
-                        class="phone"
-                        type="text"
-                        id="txtMobile3"
-                        size="4"
-                        placeholder="ex)1234"
-                        onChange={handlePhone3}
-                        value={phone3}
-                    />
-                    <span class="named">이메일</span>
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder="이메일을 입력하세요"
-                        onChange={handleEmail}
-                        value={email}
-                    />
-                    <span class="check">사업자체크　</span>
-                    <input
-                        class="checkbox"
-                        type="checkbox"
-                        id="owner"
-                        onChange={handleOwner}
-                        value={owner}
-                    />
-                    <input
-                        type="date"
-                        id="birthday"
-                        name="birthday"
-                        value="2000-01-01"
-                        onChange={handleBirthday}
-                        value={birthday}
-                    />
-                    <input
-                        type="address"
-                        id="address"
-                        placeholder={roadAddr}
-                        onChange={handleAddress}
-                        value={roadAddr}
-                        disabled
-                    />
-                    <button onClick={openModal}>검색</button>
-                    <input
-                        type="address1"
-                        id="address1"
-                        placeholder="상세 주소를 입력하세요"
-                        onChange={handleAddress1}
-                        value={address1}
-                    />
+                </header>
+                <div>
+                    <img src={topimg} className="topimg" />
+                </div>
+                <div className="topimg-text">
+                    <p>회원가입 페이지</p>
+                </div>
+                <body>
+                    <div className="total-body">
+                        <div className="label">아이디</div>
+                        <input
+                            type="text"
+                            id="userId"
+                            placeholder="아이디를 입력해주세요."
+                            onChange={handleId}
+                            value={id}
+                            className="input-box"
+                        >
+                        </input>
+                        <button onClick={IdCheck} className="button1">V</button>
+                        <div className="label">비밀번호</div>
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="비밀번호를 입력해주세요."
+                            onChange={handlePw}
+                            value={pw}
+                            className="input-box"
+                        />
+                        <div className="label">이름</div>
+                        <input
+                            type="text"
+                            id="username"
+                            placeholder="이름을 입력해주세요."
+                            onChange={handleName}
+                            value={username}
+                            className="input-box"
+                        />
+
+                        <div className="label">전화번호</div>
+                        <div>
+                            <select
+                                id="txtMobile1"
+                                onChange={handlePhone1}
+                                value={phone1}
+                                className="phone-box1"
+
+                            >
+                                <option value="">::선택::</option>
+                                <option value="010">010</option>
+                                <option value="011">011</option>
+                                <option value="016">016</option>
+                                <option value="017">017</option>
+                                <option value="019">019</option>
+                            </select>
+                            <span>-</span>
+                            <input
+                                className="phone-box"
+                                type="text"
+                                id="txtMobile2"
+                                size="4"
+                                onkeypress="onlyNumber();"
+                                placeholder="ex)1234"
+                                onChange={handlePhone2}
+                                value={phone2}
+                            />
+                            <span>-</span>
+                            <input
+                                className="phone-box"
+                                type="text"
+                                id="txtMobile3"
+                                size="4"
+                                placeholder="ex)1234"
+                                onChange={handlePhone3}
+                                value={phone3}
+                            />
+                        </div>
+                        <div className="label">이메일</div>
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="이메일을 입력해주세요."
+                            onChange={handleEmail}
+                            value={email}
+                            className="input-box"
+                        />
+                        <div className="checkbox-box">
+                            <div className="label">사업자체크<span></span>
+                                <input
+                                    type="checkbox"
+                                    id="owner"
+                                    onChange={handleOwner}
+                                    value={owner}
+                                    className="check-box"
+                                />
+                            </div>
+                        </div>
+                        <div className="label">생년월일</div>
+                        <input
+                            type="date"
+                            id="birthday"
+                            name="birthday"
+                            value="2000-01-01"
+                            onChange={handleBirthday}
+                            value={birthday}
+                            className="input-box"
+                        />
+                        <div className="address-box">
+                            <div className="label">주소</div>
+                            <div>
+                                <input
+                                    type="address"
+                                    id="address"
+                                    placeholder={roadAddr}
+                                    onChange={handleAddress}
+                                    value={roadAddr}
+                                    className="input-box"
+                                    disabled
+                                />
+                                <button onClick={openModal} className="button2">검색</button>
+                            </div>
+                            <input
+                                type="address1"
+                                id="address1"
+                                placeholder="상세 주소를 입력하세요"
+                                onChange={handleAddress1}
+                                value={address1}
+                                className="input-box"
+
+                            />
+                        </div>
+                        <div className="button-box">
+                            <button onClick={register} className="button3">회원가입</button>
+                            <Link to="/" onClick={() => {window.scrollTo(0,0)}}>
+                                <button className="button4" >취소</button>
+                            </Link>
+                        </div>
+                    </div>
+
                 </body>
+
                 <footer>
-                    <button onClick={register}>회원가입</button>
+
                 </footer>
             </S.RegisterWrap>
             {modal && (
+                <S.postCodeStyle>
+                <div>
+                    <div className="close">닫기</div>
+                    <div>
                 <DaumPostcode
                     onComplete={handleComplete}
                     style={postCodeStyle}
                     height={700}
                 />
-                // <S.searchWrap>
-                //     <header>
-                //         <h1>주소를 검색해주세요</h1>
-                //     </header>
-                //     <body>
-                //         <input
-                //             type="text"
-                //             placeholder="주소를 입력하세요"
-                //             onChange={handleKeyword}
-                //             value={Keyword}
-                //         />
-                //     </body>
-                //     <button onClick={openModal}>검색</button>
-                //     {showLocation.map((loca) => {
-                //         return (
-                //             <div>
-                //                 <button
-                //                     onClick={() =>
-                //                         handleRoadAddr(loca.roadAddr)
-                //                     }
-                //                 >
-                //                     {loca.roadAddr}
-                //                 </button>
-                //                 <br />
-                //             </div>
-                //         );
-                //     })}
-                //     {/* <input type="text" value={showLocation} /> */}
-                //     <button>확인</button>
-                //     <button onClick={closeModal}>닫기</button>
-                // </S.searchWrap>
+                </div>
+                </div>
+                </S.postCodeStyle>
             )}
         </>
     );

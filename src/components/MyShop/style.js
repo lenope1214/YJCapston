@@ -2,13 +2,19 @@
 import styled from "styled-components";
 
 export const MyShopWrap = styled.div`
-margin-top: 70px;
-width: 60%;
-margin-left: 20%;
-
+background: #F2F2F2;
 a { color: black;}
 
+.menu-container {
+    padding-top: 160px;
+    padding-left: 50%;
+    transform: translateX(-27%);
+    width: 60%;
+    padding-bottom: 70px;
+}
+
 .btn-link, btn-link:visited {
+    margin-top: 120px;
     color: whitesmoke;
     font-size: 1.2em;
     margin: 16px 0px;
@@ -35,10 +41,12 @@ a { color: black;}
 }
 
 .menu-list {
-    margin-top: 100px;
+    margin-top: 70px;
     width: 100%; 
     border-collapse: collapse;
-    margin-bottom: 70px;   
+    padding-bottom: 160px;   
+    background: white;
+    border-radius: 3% 3% 0 0;
 }
 
 .menu-link {

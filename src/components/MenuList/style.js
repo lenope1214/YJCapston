@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const MenuWrap = styled.div`
 margin-top: 70px;
-width: 60%;
-margin-left: 20%;
+
+background: #F2F2F2;
 
 a { color: black;}
 
@@ -18,19 +18,27 @@ a { color: black;}
     backdrop-filter: blur( 8.5px );
     border-radius: 10px;
     width: 85%;
-    max-width: 800px;
+    max-width: 300px;
     height: 50px;
     line-height: 50px;
     text-align: center;
     text-decoration: none;
     margin: 0 auto;
 }
+.menu-container {
+    padding-top: 150px;
+    width: 60%;
+    padding-left: 20%;
+    padding-bottom: 40px;
+}
 
 .menu-list {
     margin-top: 100px;
     width: 100%; 
     border-collapse: collapse;
-    margin-bottom: 70px;   
+    padding-bottom: 100px;   
+    background: white;
+    border-radius: 3% 3% 0 0;
 }
 
 .menu-link {
@@ -39,7 +47,8 @@ a { color: black;}
 }
 
 th, td {
-    border-bottom: 1px solid #444444;
+    border-bottom: 1px solid gray;
+    border-width: 80%;
 }
 
 .menu-title {
