@@ -44,8 +44,8 @@ const Register = ({
         display: "block",
         position: "fixed",
         top: "50%",
-        width: "400px",
-        height: "500px",
+        width: "30%",
+        height: "73%",
         padding: "7px",
         left: "50%",
         transform: "translate(-50%, -50%)",
@@ -178,7 +178,13 @@ const Register = ({
                 <footer>
                     <button onClick={register}>회원가입</button>
                 </footer>
+                {modal && (
+                    <button class="Modalclosebutton" onClick={closeModal}>
+                        닫기
+                    </button>
+                )}
             </S.RegisterWrap>
+
             {modal && (
                 <DaumPostcode
                     onComplete={handleComplete}

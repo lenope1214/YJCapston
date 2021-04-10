@@ -645,6 +645,29 @@ export const shopcontentWrap = styled.div`
         outline: none;
         cursor: pointer;
     }
+    .closehandleModal {
+        position: absolute;
+        top: 31%;
+        left: 77.1%;
+        z-index: 30;
+        background-color: black;
+        color: white;
+        transform: translate(-50%, 0%);
+        cursor: pointer;
+        border-radius: 10px;
+        border: none;
+        box-shadow: 2px 2px 5px 2px gray;
+    }
+
+    .showmapbtn {
+        margin-left: 10px;
+        cursor: pointer;
+        background-color: black;
+        color: white;
+        border-radius: 10px;
+        border: none;
+        box-shadow: 2px 2px 5px 2px gray;
+    }
 `;
 
 export const LoginWrap = styled.div`

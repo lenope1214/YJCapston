@@ -155,6 +155,7 @@ const Shoplist = ({
                                                                 }
                                                             />
                                                         </div>
+
                                                         <div class="listcontent">
                                                             <div class="linesetting">
                                                                 <div class="listname">
@@ -168,7 +169,9 @@ const Shoplist = ({
                                                             </div>
                                                             <br></br>
                                                             <div class="listAddress">
-                                                                {shop.address}{" "}
+                                                                {shop.address}
+                                                            </div>
+                                                            <div>
                                                                 {
                                                                     shop.addressDetail
                                                                 }

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as S from "./style";
 import { Link } from "react-router-dom";
 import yangtimjang from "../Shoplist/img/yangtimjang.png";
+import { RenderAfterNavermapsLoaded, NaverMap, Marker } from "react-naver-maps";
 
 const Shopcontent = ({
     isLogin,
@@ -19,12 +20,21 @@ const Shopcontent = ({
     handleMenu,
     jmMenu,
     handleDeleteMenu,
+    lat,
+    lag,
+    mapModal,
+    openhandleModal,
+    closehandleModal,
 }) => {
     console.log(isLogin);
+    var x = (lat *= 1);
+    var y = (lag *= 1);
+
     let HOUSE_BASE_URL = "http://122.202.45.37:8088/";
     let SCHOOL_BASE_URL = "http://192.168.1.17:8088/";
     let AWS_BASE_URL = "http://3.34.55.186:8088/";
     let SCHOOL_BASE_URL2 = "http://192.168.0.24:8088/";
+
     return (
         <>
             <S.shopcontentWrap>
@@ -144,6 +154,12 @@ const Shopcontent = ({
                                             <div class="shopother8">
                                                 주소 : {shopIntro.address}{" "}
                                                 {shopIntro.addressDetail}
+                                                <button
+                                                    onClick={openhandleModal}
+                                                    class="showmapbtn"
+                                                >
+                                                    자세히보기
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -166,7 +182,7 @@ const Shopcontent = ({
                                                             class="menu-item-button"
                                                             onClick={() =>
                                                                 handleMenu(
-                                                                    menukind.id,
+                                                                    menukind.name,
                                                                     menukind.price
                                                                 )
                                                             }
@@ -182,9 +198,7 @@ const Shopcontent = ({
                                                     </td>
 
                                                     <td class="menu-item">
-                                                        {menukind.id.substring(
-                                                            10
-                                                        )}
+                                                        {menukind.name}
                                                     </td>
 
                                                     <td class="menu-item">
@@ -209,7 +223,7 @@ const Shopcontent = ({
                                         <div>
                                             <div class="jmList_all">
                                                 <div class="jmList_1">
-                                                    {jmlist.id.substring(10)}
+                                                    {jmlist.name}
                                                 </div>
                                                 <div class="jmList_3">
                                                     {jmlist.count}개
@@ -222,7 +236,7 @@ const Shopcontent = ({
                                                     class="jmList_4"
                                                     onClick={() =>
                                                         handleDeleteMenu(
-                                                            jmlist.id
+                                                            jmlist.name
                                                         )
                                                     }
                                                 >
@@ -246,12 +260,31 @@ const Shopcontent = ({
                             <button class="gojm">주문하기</button>
                         </div>
                     </body>
+                    {mapModal && (
+                        <button
+                            onClick={closehandleModal}
+                            class="closehandleModal"
+                        >
+                            닫기
+                        </button>
+                    )}
+                    {mapModal && (
+                        <RenderAfterNavermapsLoaded
+                            ncpClientId={"44kkvl80g1"} // 자신의 네이버 계정에서 발급받은 Client ID
+                            error={<p>Maps Load Error</p>}
+                            loading={<p>Maps Loading...</p>}
+                        >
+                            <NaverMapAPI />
+                        </RenderAfterNavermapsLoaded>
+                    )}
+
                     <footer>
                         <h4>
                             copyright 2021 yeongJin university capston WDA team
                             4.
                         </h4>
                     </footer>
+                    <div></div>
                 </div>
             </S.shopcontentWrap>
 
@@ -309,6 +342,44 @@ const Shopcontent = ({
             )}
         </>
     );
+    // 네이버지도 api
+
+    function NaverMapAPI() {
+        const navermaps = window.naver.maps;
+        return (
+            <NaverMap
+                mapDivId={"maps-getting-started-uncontrolled"} // default: react-naver-map
+                style={{
+                    borderRadius: "7px",
+                    border: "1px solid #555",
+                    position: "absolute",
+                    top: "30%",
+                    left: "50%",
+                    width: "29%", // 네이버지도 가로 길이
+                    height: "410px", // 네이버지도 세로 길이
+                }}
+                defaultCenter={{
+                    lat: x,
+                    lng: y,
+                }} // 지도 초기 위치
+                defaultZoom={18} // 지도 초기 확대 배율
+            >
+                <Marker
+                    key={1}
+                    position={new navermaps.LatLng(x, y)}
+                    animation={2}
+                    onClick={() => {
+                        alert(
+                            shopIntro.name +
+                                "식당에서 전해요~ " +
+                                "\n" +
+                                shopIntro.intro
+                        );
+                    }}
+                />
+            </NaverMap>
+        );
+    }
 };
 
 export default Shopcontent;

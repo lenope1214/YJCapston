@@ -31,6 +31,16 @@ export const RegisterWrap = styled.div`
         font-weight: normal;
         font-style: normal;
     }
+    .Modalclosebutton {
+        position: fixed;
+        top: 18%;
+        left: 67%;
+        transform: translate(-50%, -50%);
+        z-index: 300;
+        border: 0;
+        cursor: pointer;
+        background-color: white;
+    }
     > header {
         padding-left: 5%;
         width: 100%;
@@ -89,6 +99,7 @@ export const RegisterWrap = styled.div`
         > .named {
             padding-right: 75%;
         }
+
         > .checkbox {
             display: inline-block;
             width: 50px; /* 체크박스의 너비를 지정 */

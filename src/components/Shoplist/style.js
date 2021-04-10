@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 export const LoginWrap = styled.div`
-@font-face {
-   font-family: "Wemakeprice-Bold";
-    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Wemakeprice-Bold.woff")
-        format("woff");
-    font-weight: normal;
-    font-style: normal;
-}
+    @font-face {
+        font-family: "Wemakeprice-Bold";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Wemakeprice-Bold.woff")
+            format("woff");
+        font-weight: normal;
+        font-style: normal;
+    }
     position: fixed;
     top: 50%;
     left: 50%;
@@ -400,6 +400,7 @@ export const ShoplistWrap = styled.div`
         margin: 0 auto;
     }
     .yangtimjang {
+        margin: 0 auto;
         width: 200px;
         height: 200px;
         object-fit: cover;
@@ -465,29 +466,38 @@ export const ShoplistWrap = styled.div`
     .moneykind button {
     }
     .list_shop {
+        width: 65%;
         margin: 0 auto;
         padding-top: 10px;
     }
     .list_shop button {
-        min-width: 60%;
         border: none;
         display: inline-block;
         margin: 0 auto;
         background-color: white;
     }
-    .testname {
-        position: relative;
-        display: flex;
+    .image {
+        width: 100%;
+        max-height: 200px;
+        min-height: 200px;
+        text-align: center;
+        padding: 2% 0% 5% 0%;
         float: left;
+    }
+    .testname {
+        width: 250px;
+        padding: 10px;
+        position: relative;
+
         color: black;
         cursor: pointer;
+        max-height: 300px;
+        min-height: 300px;
     }
 
     .listname {
-        display: block;
-        float: left;
-        padding: 10px;
-        font-size: 30px;
+        padding: 10px 0px 0px 0px;
+        font-size: 18px;
         font-weight: bold;
     }
     .linesetting {
@@ -505,17 +515,18 @@ export const ShoplistWrap = styled.div`
 
     .listcategory {
         display: block;
-        float: left;
-        padding-top: 30px;
-        padding-bottom: 10px;
+        float: right;
+        padding-right: 13%;
+
         color: #dddddd;
     }
     .listAddress {
-        padding-top: 15%;
         display: block;
-        float: left;
-        padding-left: 40px;
-        font-size: 20px;
+        padding-top: 2%;
+        font-size: 13px;
         color: #555555;
+    }
+    footer {
+        padding-top: 80px;
     }
 `;
