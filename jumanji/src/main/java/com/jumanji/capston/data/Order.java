@@ -39,7 +39,7 @@ public class Order implements Serializable {
     @Getter
     @NoArgsConstructor @AllArgsConstructor
     public class Request {
-        private String bucketId;
+        private String cartId;
         private int quantity;
         private String menuId;
         private String tabId; // 테이블번호 : 사업자번호 + 테이블번호 ( 2 )

@@ -12,8 +12,8 @@ import java.io.Serializable;
 @Getter
 @Entity
 @NoArgsConstructor
-@Table(name = "buckets")
-public class Bucket implements Serializable {
+@Table(name = "carts")
+public class Cart implements Serializable {
     @Id
 //    @Column(insertable = false, updatable = false)
     private String id; // 바구니번호 yyyyMMddhhmmss
@@ -31,7 +31,7 @@ public class Bucket implements Serializable {
     private User user;
 
     @Builder
-    public Bucket(String id, int quantity, String orderRequest, Shop shop, User user) {
+    public Cart(String id, int quantity, String orderRequest, Shop shop, User user) {
         this.id = id;
         this.quantity = quantity;
         this.orderRequest = orderRequest;
@@ -50,18 +50,18 @@ public class Bucket implements Serializable {
 
     @Getter
     public static class Response{
-        private String bucketId;
+        private String cartId;
         private int quantity;
         private String orderRequest;
         private String shopId;
         private String userId;
 
-        public Response(Bucket bucket) {
-            this.bucketId = bucket.getId();
-            this.quantity = bucket.quantity;
-            this.orderRequest = bucket.getOrderRequest();
-            this.shopId = bucket.getShop().getId();
-            this.userId = bucket.getUser().getId();
+        public Response(Cart cart) {
+            this.cartId = cart.getId();
+            this.quantity = cart.quantity;
+            this.orderRequest = cart.getOrderRequest();
+            this.shopId = cart.getShop().getId();
+            this.userId = cart.getUser().getId();
         }
     }
 }

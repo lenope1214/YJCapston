@@ -1,9 +1,7 @@
 package com.jumanji.capston.service.interfaces;
 
-import com.jumanji.capston.data.Bucket;
 import com.jumanji.capston.data.Tab;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 
 public interface TableService {
     public ResponseEntity<?> get(String tableId);

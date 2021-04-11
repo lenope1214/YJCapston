@@ -41,7 +41,7 @@ public class PaymentServiceImpl implements PaymentService, BasicService {
     }
 
     @Override
-    public ResponseEntity<?> getList(String bucketId) {
+    public ResponseEntity<?> getList(String cartId) {
         return null;
     }
 

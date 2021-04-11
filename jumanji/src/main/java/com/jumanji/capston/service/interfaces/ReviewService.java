@@ -1,9 +1,7 @@
 package com.jumanji.capston.service.interfaces;
 
-import com.jumanji.capston.data.Bucket;
 import com.jumanji.capston.data.Review;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 
 public interface ReviewService {
     public ResponseEntity<?> get(String reviewId);
