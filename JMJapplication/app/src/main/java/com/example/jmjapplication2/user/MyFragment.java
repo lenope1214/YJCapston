@@ -15,6 +15,7 @@ public class MyFragment extends Fragment {
     ImageButton loginButton;
     ConstraintLayout login_btn;
     ConstraintLayout profile_btn;
+    ConstraintLayout notice_constraint;
     TextView profile_text;
 
     @Override
@@ -36,6 +37,16 @@ public class MyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ProfileUpdateActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        notice_constraint = rootView.findViewById(R.id.notice_constraint);
+        notice_constraint.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), NoticeActivity.class);
                 startActivity(intent);
             }
         });

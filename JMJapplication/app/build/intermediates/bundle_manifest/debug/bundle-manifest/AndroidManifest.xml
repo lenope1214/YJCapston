@@ -59,6 +59,12 @@
         android:testOnly="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true" >
+        <activity android:name="com.example.jmjapplication2.user.NoticeActivity" />
+        <activity android:name="com.example.jmjapplication2.owner.MenuRegisterActivity" />
+        <activity android:name="com.example.jmjapplication2.owner.MenuDetailActivity" />
+        <activity android:name="com.example.jmjapplication2.owner.ListShopActivity" />
+        <activity android:name="com.example.jmjapplication2.owner.OwnerLoginActivity" />
+
         <uses-library android:name="com.google.android.maps" />
         <uses-library
             android:name="org.apache.http.legacy"
@@ -71,39 +77,32 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name="com.example.jmjapplication2.MainActivity" >
+        <activity android:name="com.example.jmjapplication2.user.MainActivity" />
+        <activity android:name="com.example.jmjapplication2.user.MenuActivity" />
+        <activity android:name="com.example.jmjapplication2.user.BellActivity" />
+        <activity android:name="com.example.jmjapplication2.user.QrReaderActivity" />
+        <activity android:name="com.example.jmjapplication2.user.ProfileUpdateActivity" />
+        <activity android:name="com.example.jmjapplication2.IntroScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.jmjapplication2.MenuActivity" >
-        </activity>
-        <activity android:name="com.example.jmjapplication2.BellActivity" >
-        </activity>
-        <activity android:name="com.example.jmjapplication2.QrReaderActivity" >
-        </activity>
-        <activity android:name="com.example.jmjapplication2.ProfileUpdateActivity" >
-        </activity>
         <activity
-            android:name="com.example.jmjapplication2.CaptureAct"
+            android:name="com.example.jmjapplication2.user.CaptureAct"
             android:screenOrientation="fullSensor"
             android:stateNotNeeded="true"
-            android:windowSoftInputMode="stateAlwaysHidden" >
-        </activity>
-        <activity android:name="com.example.jmjapplication2.LoginActivity" >
-        </activity>
-        <activity android:name="com.example.jmjapplication2.MainActivity_O" >
-        </activity>
-        <activity android:name="com.example.jmjapplication2.RegisterNoActivity" >
-        </activity>
-        <activity android:name="com.example.jmjapplication2.RegisterShopActivity" >
-        </activity>
-        <activity android:name="com.example.jmjapplication2.SignupActivity" >
-        </activity>
-        <activity android:name="com.example.jmjapplication2.LogoutActivity" >
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name="com.example.jmjapplication2.user.LoginActivity" />
+        <activity android:name="com.example.jmjapplication2.owner.MainActivity_O" />
+        <activity android:name="com.example.jmjapplication2.owner.RegisterNoActivity" />
+        <activity android:name="com.example.jmjapplication2.owner.RegisterShopActivity" />
+        <activity android:name="com.example.jmjapplication2.user.JoinActivity" />
+        <activity android:name="com.example.jmjapplication2.user.ShopDetailActivity" />
+        <activity android:name="com.example.jmjapplication2.user.LogoutActivity" />
+        <activity android:name="com.example.jmjapplication2.owner.OwnerJoinActivity" />
+        <activity android:name="com.example.jmjapplication2.owner.WebViewActivity" />
         <activity
             android:name="com.nhn.android.naverlogin.ui.OAuthLoginActivity"
             android:theme="@style/Theme.AppCompat.Light.Dialog" />
