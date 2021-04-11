@@ -1,12 +1,14 @@
 package com.jumanji.capston.service;
 
-import com.jumanji.capston.controller.exception.ApiErrorResponse;
-import com.jumanji.capston.controller.exception.ShopException.ShopHasExistException;
-import com.jumanji.capston.controller.exception.ShopException.ShopNotFoundException;
+import com.jumanji.capston.data.DateOperator;
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.ShopRepository;
 import com.jumanji.capston.repository.UserRepository;
+import com.jumanji.capston.service.exception.ApiErrorResponse;
+import com.jumanji.capston.service.exception.ShopException.ShopHasExistException;
+import com.jumanji.capston.service.exception.ShopException.ShopNotFoundException;
+import com.jumanji.capston.service.interfaces.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,7 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class ShopServiceImpl {
+public class ShopServiceImpl implements ShopService, BasicService {
     @Autowired
     ShopRepository shopRepository;
     @Autowired
@@ -113,14 +115,14 @@ public class ShopServiceImpl {
 //            return new ResponseEntity<>("사업자 번호가 중복입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
 
         String loginId = userService.getMyId(authorization);
-        User userEntity = userService.getMyInfo(loginId);
+        User userEntity = userService.getUserInfo(loginId);
         String uri = "shop/" + request.getId() + "/thumbnail/";
         String imgPath=null;
         System.out.println("openTime : " + request.getOpenTime());
         System.out.println("closeTime : " + request.getCloseTime());
         if(request.getImg() != null) imgPath = storageService.store(request.getImg(), request.getImg().getName(), uri.split("/"));
-        Date openTime = Shop.stringToDate(request.getOpenTime());
-        Date closeTime = Shop.stringToDate(request.getCloseTime());
+        Date openTime = DateOperator.stringToMilisecond(request.getOpenTime());
+        Date closeTime = DateOperator.stringToMilisecond(request.getCloseTime());
         Shop shopEntity;
         shopEntity = Shop.insertShop()
                 .id(request.getId())
@@ -211,16 +213,12 @@ public class ShopServiceImpl {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    // 89있는 매장번호 인지 확인. 없으면 error를 반환하게 된다. ㅂㅂ
-    public boolean isPresent(String shopId)  {
-        if(shopRepository.findById(shopId).isPresent())return true;
-        throw new ShopNotFoundException();
-    }
+
 
     public boolean isOwnShop(String loginId, String shopId) {
         System.out.println("삭제 유저아디 : " + loginId);
         System.out.println("삭제 매장번호 : " + shopId);
-        User loginUser = userService.getMyInfo(loginId);
+        User loginUser = userService.getUserInfo(loginId);
         System.out.println("로긘 유저 이름 : " + loginUser.getName());
         for(Shop shop : shopRepository.findByOwnerId(loginId)){
             if(shop.getId().equals(shopId)){
@@ -237,5 +235,41 @@ public class ShopServiceImpl {
         User userEntity = userRepository.findById(loginId).get();
         List<Shop> result = getShopListByOwnerId(userEntity.getId());
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> get(String shopId) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<?> getList() {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<?> post(Shop.Request request) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<?> patch(Shop.Request request) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<?> delete(String shopId) {
+        return null;
+    }
+
+    // 89있는 매장번호 인지 확인. 없으면 error를 반환하게 된다. ㅂㅂ
+    public boolean isPresent(String shopId)  {
+        if(shopRepository.findById(shopId).isPresent())return true;
+        throw new ShopNotFoundException();
+    }
+
+    @Override
+    public boolean isEmpty(String id) {
+        return false;
     }
 }

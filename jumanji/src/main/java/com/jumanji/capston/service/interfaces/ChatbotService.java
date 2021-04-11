@@ -5,7 +5,6 @@ import com.jumanji.capston.data.Chatbot;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-@Service
 public interface ChatbotService {
     public ResponseEntity<?> get(String chatbotId);
     public ResponseEntity<?> post(Chatbot.Request request);

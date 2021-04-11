@@ -5,7 +5,6 @@ import com.jumanji.capston.data.Order;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-@Service
 public interface OrderService {
     public ResponseEntity<?> get(String orderId);
     public ResponseEntity<?> getList(String bucketId);

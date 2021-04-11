@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import java.awt.*;
 
-@Service
 public interface PenaltyService {
     public ResponseEntity<?> get(String penaltyId);
     public ResponseEntity<?> getList();

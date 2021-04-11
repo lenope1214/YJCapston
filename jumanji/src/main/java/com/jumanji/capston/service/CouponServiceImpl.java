@@ -2,33 +2,48 @@ package com.jumanji.capston.service;
 
 import com.jumanji.capston.data.Coupon;
 import com.jumanji.capston.repository.CouponRepository;
+import com.jumanji.capston.service.interfaces.CouponService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class CouponServiceImpl {
+public class CouponServiceImpl implements CouponService, BasicService {
     @Autowired
     CouponRepository couponRepository;
 
-    public Coupon findById(Long id){
-        return couponRepository.findById(id)
-                .orElseThrow(()-> new IllegalArgumentException("쿠폰 id를 확인해주세요!!!"));
+    @Override
+    public ResponseEntity<?> get(String couponId) {
+        return null;
     }
 
-
-    public Coupon insert(Coupon _coupon){
-        return couponRepository.save(_coupon);
+    @Override
+    public ResponseEntity<?> getList() {
+        return null;
     }
 
-    public String delete(Coupon _coupon){
-        Coupon coupon  = couponRepository.findById(_coupon.getId()).orElseThrow(()-> new IllegalArgumentException("쿠폰 id를 확인해주세요!!!"));
-        couponRepository.delete(coupon);
-        return "ok";
+    @Override
+    public ResponseEntity<?> post(Coupon.Request request) {
+        return null;
     }
 
-    public List<Coupon> findAll() {
-        return couponRepository.findAll();
+    @Override
+    public ResponseEntity<?> patch(Coupon.Request request) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<?> delete(String couponId) {
+        return null;
+    }
+
+    @Override
+    public boolean isPresent(String id) {
+        return false;
+    }
+
+    @Override
+    public boolean isEmpty(String id) {
+        return false;
     }
 }

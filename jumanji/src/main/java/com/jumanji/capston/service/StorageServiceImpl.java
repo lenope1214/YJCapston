@@ -23,7 +23,7 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 @Service
-public class StorageServiceImpl {
+public class StorageServiceImpl{
     private final Path rootLocation;
 
 

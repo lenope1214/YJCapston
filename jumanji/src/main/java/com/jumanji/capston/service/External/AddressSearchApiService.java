@@ -2,7 +2,6 @@ package com.jumanji.capston.service.External;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.jumanji.capston.service.ExternalApiServiceImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -10,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class AddressSearchApiService implements ExternalApiServiceImpl {
+public class AddressSearchApiService implements ExternalApiService {
 
 
     private Gson gson;

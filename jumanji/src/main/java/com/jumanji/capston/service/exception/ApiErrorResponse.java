@@ -1,4 +1,4 @@
-package com.jumanji.capston.controller.exception;
+package com.jumanji.capston.service.exception;
 
 import lombok.Getter;
 import lombok.Setter;

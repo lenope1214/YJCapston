@@ -1,10 +1,10 @@
-package com.jumanji.capston.controller.exception;
+package com.jumanji.capston.service.exception;
 
-import com.jumanji.capston.controller.exception.MenuException.MenuAlreadUsedException;
-import com.jumanji.capston.controller.exception.OrderException.OrderNotFoundException;
-import com.jumanji.capston.controller.exception.ShopException.ShopNotFoundException;
-import com.jumanji.capston.controller.exception.UserException.PasswordMissMatchException;
-import com.jumanji.capston.controller.exception.UserException.UserNotFoundException;
+import com.jumanji.capston.service.exception.MenuException.MenuHasExistException;
+import com.jumanji.capston.service.exception.OrderException.OrderNotFoundException;
+import com.jumanji.capston.service.exception.ShopException.ShopNotFoundException;
+import com.jumanji.capston.service.exception.UserException.PasswordMissMatchException;
+import com.jumanji.capston.service.exception.UserException.UserNotFoundException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,8 +42,8 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(MenuAlreadUsedException.class)
-    public ResponseEntity<?> menuAlreadUsedException(MenuAlreadUsedException ex){
+    @ExceptionHandler(MenuHasExistException.class)
+    public ResponseEntity<?> menuAlreadUsedException(MenuHasExistException ex){
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);

@@ -1,23 +1,23 @@
 package com.jumanji.capston.service;
 
-import com.jumanji.capston.controller.exception.ApiErrorResponse;
-import com.jumanji.capston.controller.exception.MenuException.MenuAlreadUsedException;
-import com.jumanji.capston.controller.exception.MenuException.MenuNotFoundException;
 import com.jumanji.capston.data.Menu;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.MenuRepository;
+import com.jumanji.capston.service.exception.Auth.ForbiddenException;
+import com.jumanji.capston.service.exception.MenuException.MenuHasExistException;
+import com.jumanji.capston.service.exception.MenuException.MenuNotFoundException;
+import com.jumanji.capston.service.interfaces.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.security.sasl.AuthenticationException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class MenuServiceImpl {
+public class MenuServiceImpl implements MenuService, BasicService {
     @Autowired
     MenuRepository menuRepository;
     @Autowired
@@ -32,45 +32,41 @@ public class MenuServiceImpl {
 //        return menuRepository.getMenuSeqNextVal();
 //    }
 
-    public ResponseEntity<?> findById(String menuId) {
+    public Menu getMenu(String menuId) {
         System.out.println("메뉴 Id : " + menuId);
-
+        isPresent(menuId);
         Menu menu = menuRepository.findById(menuId).get();
-        if (menu == null)
-            return new ResponseEntity<>("없는 메뉴번호 입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
-        Menu.Response response = new Menu.Response(menu);
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return menu;
     }
-
-//    public boolean findShopIdByMenuId(String menuId){
-//        return menuRepository.findShopIdByMenuId(menuId);
-//    }
 
     public int count(String id){
         return menuRepository.countMenusByIdContains(id);
     }
 
-
-    public Menu save(Menu _menu) {
-        return menuRepository.save(_menu);
+    @Override
+    public ResponseEntity<?> get(String menuId) {
+        return null;
     }
 
-    public ResponseEntity<?> delete(String authorization, String menuId) throws AuthenticationException {
-        String loginId = userService.getMyId(authorization);
-        User loginUser = userService.getMyInfo(loginId);
-        if(shopService.isOwnShop(loginId, menuId.substring(0, 10))) {
-            menuRepository.delete( menuRepository.findById(menuId).get());
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @Override
+    public ResponseEntity<?> getList(String shopId) {
+        System.out.println("menuList >> shopId : " + shopId);
+        shopService.isPresent(shopId);
+        List<Menu> menuList;
+        menuList = menuRepository.findByIdContains(shopId);
+        System.out.println("menuList info");
+        System.out.println(menuList.size());
+
+        List<Menu.Response> response = new ArrayList<Menu.Response>();
+        for(Menu menu : menuList){
+            response.add(new Menu.Response(menu));
         }
-        return new ResponseEntity<>(new ApiErrorResponse("error", "권한없음"), HttpStatus.FORBIDDEN);
+        if(menuList.isEmpty())return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    public List<Menu> findAll() {
-        return menuRepository.findAll();
-    }
-
-    public ResponseEntity<?> postMenu(Menu.info request) {
+    @Override
+    public ResponseEntity<?> post(Menu.Request request) {
         String menuId = request.getShopId() + request.getName();
         isEmpty(menuId);
         Menu menu;
@@ -94,9 +90,8 @@ public class MenuServiceImpl {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-
-
-    public ResponseEntity<?> patchMenu(Menu.Request request) {
+    @Override
+    public ResponseEntity<?> patch(Menu.Request request) {
         System.out.println("메뉴 수정>>> ");
         isPresent(request.getMenuId());
         // 권한확인 해야함. 로그인유저 의 매장인지.
@@ -112,26 +107,20 @@ public class MenuServiceImpl {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> getMenuListByShopId(String shopId) {
-        System.out.println("menuList >> shopId : " + shopId);
-        shopService.isPresent(shopId);
-        List<Menu> menuList;
-        menuList = menuRepository.findByIdContains(shopId);
-        System.out.println("menuList info");
-        System.out.println(menuList.size());
-
-        List<Menu.Response> response = new ArrayList<Menu.Response>();
-        for(Menu menu : menuList){
-            response.add(new Menu.Response(menu));
+    public ResponseEntity<?> delete(String authorization, String menuId) {
+        String loginId = userService.getMyId(authorization);
+        User loginUser = userService.getUserInfo(loginId);
+        if(shopService.isOwnShop(loginId, menuId.substring(0, 10))) {
+            menuRepository.delete( menuRepository.findById(menuId).get());
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        if(menuList.isEmpty())return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        throw new ForbiddenException();
     }
 
     // 있는 메뉴인지 확인
     public boolean isEmpty(String id){
-        if(!menuRepository.findById(id).isPresent())return true;
-        throw new MenuAlreadUsedException();
+        if(menuRepository.findById(id).isEmpty())return true;
+        throw new MenuHasExistException();
     }
 
     public boolean isPresent(String menuId){

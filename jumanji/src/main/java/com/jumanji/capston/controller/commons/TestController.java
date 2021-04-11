@@ -1,6 +1,6 @@
 package com.jumanji.capston.controller.commons;
 
-import com.jumanji.capston.controller.exception.ApiErrorResponse;
+import com.jumanji.capston.service.exception.ApiErrorResponse;
 import com.jumanji.capston.data.request.FileAndData;
 import com.jumanji.capston.service.MenuServiceImpl;
 import com.jumanji.capston.service.StorageServiceImpl;

@@ -7,8 +7,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -38,13 +36,13 @@ public class Shop {
     private char isOpen = 'N';
     @Column(name = "img_path")
     private String imgPath;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
     private User owner;
 
 
     @Getter @AllArgsConstructor
-    public static class Request {
+    public class Request {
         private String id;
         private String name;
         private String intro;
@@ -79,13 +77,12 @@ public class Shop {
             this.address = shop.getAddress();
             this.addressDetail = shop.getAddressDetail();
             this.category = shop.getCategory();
-            this.openTime = dateToString(shop.getOpenTime());
-            this.closeTime = dateToString(shop.getCloseTime());
+            this.openTime = DateOperator.toHHMM(shop.getOpenTime());
+            this.closeTime = DateOperator.toHHMM(shop.getCloseTime());
             this.isOpen = shop.getIsOpen();
             this.isRsPos = shop.getIsRsPos();
             this.imgPath = shop.getImgPath();
         }
-
     }
 
 
@@ -106,27 +103,10 @@ public class Shop {
 
     public void update(Shop.Request patch) {
         if (patch.getIntro() != null) this.intro = patch.getIntro();
-        if (patch.getOpenTime() != null) this.openTime = stringToDate(patch.getOpenTime());
-        if (patch.getCloseTime() != null) this.closeTime = stringToDate(patch.getCloseTime());
+        if (patch.getOpenTime() != null) this.openTime = DateOperator.stringToMilisecond(patch.getOpenTime());
+        if (patch.getCloseTime() != null) this.closeTime = DateOperator.stringToMilisecond(patch.getCloseTime());
         if (patch.getAddress() != null) this.address = patch.getAddress();
         if (patch.getAddressDetail() != null) this.addressDetail = patch.getAddressDetail();
         if (patch.getCategory() != null) this.category = patch.getCategory();
-    }
-
-
-    public static Date stringToDate(String date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        Date parseDate = null;
-        try {
-            parseDate = dateFormat.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return parseDate;
-    }
-
-    public static String dateToString(Date date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        return dateFormat.format(date);
     }
 }

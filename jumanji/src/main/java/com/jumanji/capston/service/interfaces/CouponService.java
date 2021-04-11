@@ -1,11 +1,8 @@
 package com.jumanji.capston.service.interfaces;
 
-import com.jumanji.capston.data.Bucket;
 import com.jumanji.capston.data.Coupon;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 
-@Service
 public interface CouponService {
     public ResponseEntity<?> get(String couponId);
     public ResponseEntity<?> getList();

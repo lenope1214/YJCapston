@@ -26,7 +26,7 @@ public class UserController  {
     @Transactional(readOnly = true)
     @GetMapping("/userList") // getUserList
     public ResponseEntity<?> getUserList(@RequestHeader String authorization) {
-        return userService.findAll(authorization);
+        return userService.getList(authorization);
     }
 
     @Transactional(readOnly = true)
@@ -44,7 +44,7 @@ public class UserController  {
     @Transactional
     @PatchMapping("/user") // patch user
     public ResponseEntity<?> patchUser(@RequestBody User.Request request, @RequestHeader String authorization) {
-        return userService.patchUser(authorization, request);
+        return userService.patch(authorization, request);
     }
 
 

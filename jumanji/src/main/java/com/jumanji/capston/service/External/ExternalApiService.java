@@ -1,4 +1,4 @@
-package com.jumanji.capston.service;
+package com.jumanji.capston.service.External;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-public interface ExternalApiServiceImpl {
+public interface ExternalApiService {
 
     default String get(String apiUrl, Map<String, String> requestHeaders, String Method){
         HttpURLConnection con = connect(apiUrl);

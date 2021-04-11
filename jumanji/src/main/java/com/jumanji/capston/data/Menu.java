@@ -74,6 +74,7 @@ public class Menu {
         private int duration;
         private char isSale;
         private char isPopular;
+        private MultipartFile img;
 
 //        public String getMenuId(Menu.Request request){
 //            return request.getShopId() + request.getName();
@@ -131,7 +132,7 @@ public class Menu {
 //    @Column(insertable = false, updatable = false)
 //    private Long menu_id ; // 메뉴번호
 //
-//    @ManyToOne
+//    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name="shop_id",nullable = false)
 //    private Shop shop;//매장번호
 //

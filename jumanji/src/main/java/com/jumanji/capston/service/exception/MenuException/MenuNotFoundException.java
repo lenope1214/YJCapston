@@ -1,6 +1,6 @@
-package com.jumanji.capston.controller.exception.MenuException;
+package com.jumanji.capston.service.exception.MenuException;
 
-import com.jumanji.capston.controller.exception.BasicException;
+import com.jumanji.capston.service.exception.BasicException;
 
 public class MenuNotFoundException extends BasicException {
     public MenuNotFoundException() {

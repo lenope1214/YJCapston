@@ -5,7 +5,6 @@ import com.jumanji.capston.data.Reservation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-@Service
 public interface ReservationService {
     public ResponseEntity<?> get(String reservationId);
     public ResponseEntity<?> getList();

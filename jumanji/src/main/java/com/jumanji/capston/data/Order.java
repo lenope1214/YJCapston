@@ -1,7 +1,9 @@
 package com.jumanji.capston.data;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,6 +12,7 @@ import java.io.Serializable;
 @Getter
 @Entity
 @Table(name = "orders")
+@NoArgsConstructor
 public class Order implements Serializable {
     @Id
     private String id; // 주문번호 insert 할때 값 sequence 설정해주기. 기본값으로 하는거 어렵넹
@@ -17,11 +20,11 @@ public class Order implements Serializable {
     @Column(length = 2)
     private int quantity; // 메뉴 수량
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id")
     private Menu menu;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tab_id", insertable = false, updatable = false)
     private Tab tab;
 
@@ -34,8 +37,8 @@ public class Order implements Serializable {
     }
 
     @Getter
-    public
-    class Request {
+    @NoArgsConstructor @AllArgsConstructor
+    public class Request {
         private String bucketId;
         private int quantity;
         private String menuId;

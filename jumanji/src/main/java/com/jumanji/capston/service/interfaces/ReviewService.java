@@ -5,7 +5,6 @@ import com.jumanji.capston.data.Review;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-@Service
 public interface ReviewService {
     public ResponseEntity<?> get(String reviewId);
     public ResponseEntity<?> getList();

@@ -1,4 +1,4 @@
-package com.jumanji.capston.service;
+package com.jumanji.capston.service.External;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class NaverPlaceSearchService implements ExternalApiServiceImpl {
+public class NaverPlaceSearchService implements ExternalApiService {
 
     private Gson gson;
 

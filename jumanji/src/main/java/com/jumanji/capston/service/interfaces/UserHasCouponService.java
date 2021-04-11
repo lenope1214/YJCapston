@@ -5,7 +5,6 @@ import com.jumanji.capston.data.UserHasCoupon;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-@Service
 public interface UserHasCouponService {
     public ResponseEntity<?> get(String userCouponId);
     public ResponseEntity<?> getList();

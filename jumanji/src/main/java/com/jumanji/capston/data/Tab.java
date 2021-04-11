@@ -41,7 +41,7 @@ public class Tab {
 //    @Column(length = 2, name="tab_id")
 //    private int id ; // 좌석번호
 //
-//    @ManyToOne
+//    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name="shop_id")
 //    private Shop shop_id; // 매장번호
 //

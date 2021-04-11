@@ -5,7 +5,6 @@ import com.jumanji.capston.data.Payment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-@Service
 public interface PaymentService {
     public ResponseEntity<?> get(String paymentId);
     public ResponseEntity<?> getList(String bucketId);

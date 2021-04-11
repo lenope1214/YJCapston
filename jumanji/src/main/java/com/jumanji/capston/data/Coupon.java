@@ -19,7 +19,7 @@ public class Coupon {
     private final Date beginDate= new Date(); // 사용 마지막 기간
     @Column(name = "expiry_date")
     private Date expiryDate; // 만료기간
-//    @ManyToOne
+//    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name="account",nullable = false)
 //    private Account id; //아이디
 

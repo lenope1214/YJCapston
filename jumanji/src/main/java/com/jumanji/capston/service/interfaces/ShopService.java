@@ -5,7 +5,6 @@ import com.jumanji.capston.data.Shop;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-@Service
 public interface ShopService {
     public ResponseEntity<?> get(String shopId);
     public ResponseEntity<?> getList();

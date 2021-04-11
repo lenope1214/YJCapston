@@ -1,6 +1,6 @@
-package com.jumanji.capston.controller.exception.UserException;
+package com.jumanji.capston.service.exception.UserException;
 
-import com.jumanji.capston.controller.exception.BasicException;
+import com.jumanji.capston.service.exception.BasicException;
 
 public class UserNotFoundException extends BasicException {
     public UserNotFoundException(){

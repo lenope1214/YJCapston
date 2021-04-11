@@ -1,6 +1,6 @@
-package com.jumanji.capston.controller.exception.OrderException;
+package com.jumanji.capston.service.exception.OrderException;
 
-import com.jumanji.capston.controller.exception.BasicException;
+import com.jumanji.capston.service.exception.BasicException;
 
 public class OrderNotFoundException extends BasicException {
     public OrderNotFoundException(){

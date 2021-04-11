@@ -1,8 +1,9 @@
 package com.jumanji.capston.service;
 
-import com.jumanji.capston.controller.exception.OrderException.OrderNotFoundException;
 import com.jumanji.capston.data.Order;
 import com.jumanji.capston.repository.*;
+import com.jumanji.capston.service.exception.OrderException.OrderNotFoundException;
+import com.jumanji.capston.service.interfaces.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class OrderServiceImpl {
+public class OrderServiceImpl implements OrderService, BasicService {
     @Autowired
     OrderRepository orderRepository;
 
@@ -55,11 +56,41 @@ public class OrderServiceImpl {
         return new ResponseEntity<>(orderRepository.findById(orderId), HttpStatus.OK);
     }
 
+
+    @Override
+    public ResponseEntity<?> get(String orderId) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<?> getList(String bucketId) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<?> post(Order.Request request) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<?> patch(Order.Request request) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<?> delete(String orderId) {
+        return null;
+    }
+
     public boolean isPresent(String orderId){
         if(orderRepository.findById(orderId).isPresent())return true;
         throw new OrderNotFoundException();
     }
 
+    @Override
+    public boolean isEmpty(String id) {
+        return false;
+    }
 //    public ResponseEntity<?> postOrder(Order.Request request) {
 //        Order order;
 //        Order.builder()

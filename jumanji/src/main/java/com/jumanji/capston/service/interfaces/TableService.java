@@ -5,7 +5,6 @@ import com.jumanji.capston.data.Tab;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-@Service
 public interface TableService {
     public ResponseEntity<?> get(String tableId);
     public ResponseEntity<?> getList(String shopId);
