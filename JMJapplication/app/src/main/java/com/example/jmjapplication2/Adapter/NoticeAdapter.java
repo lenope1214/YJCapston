@@ -8,7 +8,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jmjapplication2.R;
@@ -83,9 +82,9 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ItemViewHo
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.iv_noticemenu = (ImageView) itemView.findViewById(R.id.iv_noticemenu);
-            this.iv_noticedown = (ImageView) itemView.findViewById(R.id.iv_noticedown);
-            this.tv_notice_name = (TextView) itemView.findViewById(R.id.tv_notice_name);
+            this.iv_noticemenu = (ImageView) itemView.findViewById(R.id.iv_centermenu);
+            this.iv_noticedown = (ImageView) itemView.findViewById(R.id.iv_centerdown);
+            this.tv_notice_name = (TextView) itemView.findViewById(R.id.tv_center_name);
             this.tv_notice_intro = (TextView) itemView.findViewById(R.id.tv_notice_intro);
         }
     }

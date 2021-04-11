@@ -16,6 +16,7 @@ public class MyFragment extends Fragment {
     ConstraintLayout login_btn;
     ConstraintLayout profile_btn;
     ConstraintLayout notice_constraint;
+    ConstraintLayout service_constraint;
     TextView profile_text;
 
     @Override
@@ -47,6 +48,16 @@ public class MyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), NoticeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        service_constraint = rootView.findViewById(R.id.service_constraint);
+        service_constraint.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CustomerService.class);
                 startActivity(intent);
             }
         });

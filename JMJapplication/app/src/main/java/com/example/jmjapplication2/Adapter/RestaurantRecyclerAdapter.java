@@ -79,7 +79,7 @@ public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRe
         public ItemViewHolder(View itemView) {
             super(itemView);
             layout_restaurant = (LinearLayout) itemView.findViewById(R.id.layout_restaurant);
-            riv_restaurant_img = (ImageView) itemView.findViewById(R.id.iv_noticemenu);
+            riv_restaurant_img = (ImageView) itemView.findViewById(R.id.iv_centermenu);
             tv_restaurant_name = (TextView) itemView.findViewById(R.id.tv_restaurant_name);
             tv_restaurant_menu = (TextView) itemView.findViewById(R.id.tv_restaurant_menu);
             tv_status = (TextView) itemView.findViewById(R.id.tv_status);

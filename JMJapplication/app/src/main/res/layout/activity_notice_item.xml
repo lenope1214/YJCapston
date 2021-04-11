@@ -15,7 +15,7 @@
         android:cropToPadding="false"
         android:padding="0dp"
         android:scaleType="fitXY"
-        android:id="@+id/iv_noticemenu"
+        android:id="@+id/iv_centermenu"
         android:background="@drawable/hamburger_icon"/>
 
     <LinearLayout
@@ -25,7 +25,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_notice_name"
+            android:id="@+id/tv_center_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -48,7 +48,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/iv_noticedown"
+        android:id="@+id/iv_centerdown"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_margin="15dp"
