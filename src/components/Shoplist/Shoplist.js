@@ -51,15 +51,16 @@ const Shoplist = ({
                             <input
                                 type="text"
                                 placeholder="매장을 검색하세요."
+                                class="search-box"
                             ></input>
-                            <button>검색</button>
+                            <button class="search-button">검색</button>
                         </div>
                         {isLogin ? (
                             <div class="right-nav">
                                 <button class="right1-nav" onClick={logout}>
                                     LOGOUT
                                 </button>
-                                <Link to="/mypage">
+                                <Link to="/mypage" className="but-back">
                                     <button class="right2-nav">MYPAGE</button>
                                 </Link>
                             </div>
@@ -69,7 +70,7 @@ const Shoplist = ({
                                     LOGIN
                                 </button>
 
-                                <Link to="/register">
+                                <Link to="/register" className="but-back">
                                     <button class="right2-nav"> JOIN</button>
                                 </Link>
                             </div>
@@ -118,26 +119,29 @@ const Shoplist = ({
                             <div class="mainimg">
                                 <img class="mainimg-img" src={mainpicture} />
                             </div>
-                            <div class="leftCategory">
-                                <ul class="moneykind">
-                                    <input type="text" placeholder="최소금액" />
-                                    <span>~</span>
-                                    <input type="text" placeholder="최대금액" />
-                                    <button>검색</button>
-                                </ul>
-                                <ul class="selectcategory">
-                                    <button>예약 많은 순</button>
-                                    <br />
-                                    <button>주문 많은 순</button>
-                                    <br />
-                                    <button>
-                                        최소주문금액 <br /> ↓
-                                    </button>
-                                    <br />
-                                    <button>별점순</button>
-                                </ul>
+                            <div class="guidetext">
+                               매장 보기 
+                               <hr class="hrstyle" />
                             </div>
                             <div clasName="menulist">
+                            <div class="leftCategory">
+                                <select class="moneykind">
+                                    
+                                <option value="예약 많은 순">
+                                    예약 많은 순
+                                </option>
+                                <option value="최소주문금액">
+                                
+                                        최소주문금액
+                                    
+                                </option>
+                                <option value="별점순">
+                                별점순
+                                </option>
+                                    
+                                </select>
+                                <button>검색</button>
+                            </div>
                                 <div class="list_shop">
                                     {restaurant.map((shop) => {
                                         return (
@@ -155,24 +159,27 @@ const Shoplist = ({
                                                                 }
                                                             />
                                                         </div>
+
                                                         <div class="listcontent">
                                                             <div class="linesetting">
                                                                 <div class="listname">
                                                                     {shop.name}
                                                                 </div>
-                                                                <div class="listcategory">
+                                                                {/* <div class="listcategory">
                                                                     {
                                                                         shop.category
                                                                     }
-                                                                </div>
+                                                                </div> */}
                                                             </div>
-                                                            <br></br>
                                                             <div class="listAddress">
-                                                                {shop.address}{" "}
+                                                            평점 ★ 4.3 (21)
+                                                            </div>
+
+                                                            {/* <div>
                                                                 {
                                                                     shop.addressDetail
                                                                 }
-                                                            </div>
+                                                            </div> */}
                                                         </div>
                                                     </div>
                                                 </button>
@@ -198,33 +205,52 @@ const Shoplist = ({
             {modal && (
                 <S.LoginWrap>
                     <header>
-                        <h1>주문의 민족에 오신걸 환영합니다.</h1>
+                        <h1 className="login-title">
+                            주문
+                            <span
+                                style={{
+                                    fontSize: "17px",
+                                    paddingTop: "10px",
+                                }}
+                            >
+                                의
+                            </span>
+                            민족
+                        </h1>
                     </header>
                     <main>
-                        <p>로그인 정보를 입력하세요!!!</p>
+                        <p className="login-text">로그인 정보를 입력</p>
                         <input
                             type="text"
-                            placeholder="Your ID"
+                            placeholder="ID"
                             onChange={handleId}
                             value={id}
+                            className="login-input"
                         />
                         <input
                             type="password"
                             placeholder="Password"
                             onChange={handlePw}
                             value={pw}
+                            className="login-input"
                             onKeyPress={(e) => e.key === "Enter" && login}
                         />
                     </main>
                     <footer>
-                        <div>
+                        <div className="remeber">
                             <label>
                                 <input type="checkbox" />
                                 <span>기억하기</span>
                             </label>
                         </div>
-                        <button onClick={login}>로그인</button>
-                        <button onClick={closeModal}>닫기</button>
+                        <div className="login-but-box">
+                            <button onClick={login} className="login-but">
+                                로그인
+                            </button>
+                            <button onClick={closeModal} className="login-but">
+                                닫기
+                            </button>
+                        </div>
                     </footer>
                 </S.LoginWrap>
             )}

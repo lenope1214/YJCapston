@@ -45,6 +45,16 @@ background: #F2F2F2;
         font-weight: normal;
         font-style: normal;
     }
+    .Modalclosebutton {
+        position: fixed;
+        top: 18%;
+        left: 67%;
+        transform: translate(-50%, -50%);
+        z-index: 300;
+        border: 0;
+        cursor: pointer;
+        background-color: white;
+    }
     > header {
         padding-left: 5%;
         width: 100%;
