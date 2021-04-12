@@ -94,12 +94,12 @@ public class User implements Serializable {
             this.name = user.getName();
             this.address = user.getAddress();
             this.addressDetail = user.getAddressDetail();
-            this.birthday = DateOperator.toYYYYMMDD(user.getBirthday());
+            this.birthday = DateOperator.dateToYYYYMMDD(user.getBirthday());
             this.phone = user.phone;
             this.role = user.getRole();
             this.level = user.getLevel();
             this.point = user.getPoint();
-            this.signDate = DateOperator.toYYYYMMDD(user.getSignDate());
+            this.signDate = DateOperator.dateToYYYYMMDD(user.getSignDate());
         }
     }
 }

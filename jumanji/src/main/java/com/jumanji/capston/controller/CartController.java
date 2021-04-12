@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+
 @RestController
 @RequestMapping("/api/v1")
 public class CartController {
@@ -19,13 +21,13 @@ public class CartController {
 
     @Transactional(readOnly = true)
     @GetMapping("/cart/{cartId}")
-    public ResponseEntity<?> getCart(@PathVariable String cartId){
+    public ResponseEntity<?> getCart(@PathVariable Timestamp cartId){
         return cartService.get(cartId);
     }
 
     @Transactional(readOnly = true)
     @GetMapping("/cart/myCartList")
-    public ResponseEntity<?> getCartList(@RequestHeader String authorization, @PathVariable String userId){
+    public ResponseEntity<?> getCartList(@RequestHeader String authorization){
         String loginId = userService.getMyId(authorization);
         return cartService.getList(loginId);
     }

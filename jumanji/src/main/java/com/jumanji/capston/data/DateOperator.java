@@ -16,16 +16,23 @@ public class DateOperator {
         return parseDate;
     }
 
-    public static String toHHMM(Date date) {
+    public static String dateToHHMM(Date date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
         return dateFormat.format(date);
     }
 
-    public static String toYYYYMMDD(Date date) {
+    public static String dateToYYYYMMDD(Date date) {
         if (date != null) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
             return dateFormat.format(date);
         }
         return null;
     }
+
+//    public static Timestamp stringToTimestamp(Time time){
+////        Timestamp timestamp = Timestamp.valueOf(time);
+//        Timestamp timestamp = Timestamp.valueOf(time);
+//        System.out.println(Timestamp.(time));
+//        return timestamp;
+//    }
 }

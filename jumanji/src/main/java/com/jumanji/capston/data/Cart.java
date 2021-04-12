@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 
 @Getter
@@ -16,10 +17,9 @@ import java.io.Serializable;
 public class Cart implements Serializable {
     @Id
 //    @Column(insertable = false, updatable = false)
-    private String id; // 바구니번호 yyyyMMddhhmmss
-
+    private Timestamp id; // 바구니번호 yyyyMMddhhmmss
     @Column(length = 2)
-    private int quantity; // 메뉴 수량
+    private int people;
     @Column(name = "order_request")
     private String orderRequest; // 요청사항
     @ManyToOne(fetch = FetchType.LAZY)
@@ -31,9 +31,9 @@ public class Cart implements Serializable {
     private User user;
 
     @Builder
-    public Cart(String id, int quantity, String orderRequest, Shop shop, User user) {
+    public Cart(Timestamp id, int people, String orderRequest, Shop shop, User user) {
         this.id = id;
-        this.quantity = quantity;
+        this.people = people;
         this.orderRequest = orderRequest;
         this.shop = shop;
         this.user = user;
@@ -42,7 +42,7 @@ public class Cart implements Serializable {
     @Getter @AllArgsConstructor
     @NoArgsConstructor
     public static class Request {
-        private int quantity;
+        private int people;
         private String orderRequest;
         private String shopId;
         private String userId;
@@ -50,15 +50,15 @@ public class Cart implements Serializable {
 
     @Getter
     public static class Response{
-        private String cartId;
-        private int quantity;
+        private Timestamp cartId;
+        private int people;
         private String orderRequest;
         private String shopId;
         private String userId;
 
         public Response(Cart cart) {
             this.cartId = cart.getId();
-            this.quantity = cart.quantity;
+            this.people = cart.getPeople();
             this.orderRequest = cart.getOrderRequest();
             this.shopId = cart.getShop().getId();
             this.userId = cart.getUser().getId();

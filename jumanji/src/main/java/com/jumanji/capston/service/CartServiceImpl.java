@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 
 
 @Service
-public class CartServiceImpl implements CartService, BasicService {
+public class CartServiceImpl implements CartService {
     @Autowired
     CartRepository cartRepository;
     @Autowired
@@ -26,8 +26,9 @@ public class CartServiceImpl implements CartService, BasicService {
     ShopServiceImpl shopService;
 
     @Override
-    public ResponseEntity<?> get(String cartId) {
+    public ResponseEntity<?> get(Timestamp cartId) {
         isPresent(cartId);
+//        Timestamp cartIdTime = DateOperator.stringToTimestamp(cartId);
         Cart cart = cartRepository.findById(cartId).get();
         Cart.Response response =
                 new Cart.Response(cart);
@@ -55,12 +56,10 @@ public class CartServiceImpl implements CartService, BasicService {
         System.out.println("가져온 매장번호 : " + shop.getId());
         System.out.println("가져온 유저번호 : " + user.getId());
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-        Timestamp requestTime = new Timestamp(System.currentTimeMillis());
-        String cartId = dateFormat.format(requestTime);
+        Timestamp cartId = new Timestamp(System.currentTimeMillis());
         cart = Cart.builder()
                 .id(cartId)
                 .orderRequest(request.getOrderRequest())
-                .quantity(request.getQuantity())
                 .shop(shop)
                 .user(user)
                 .build();
@@ -75,7 +74,7 @@ public class CartServiceImpl implements CartService, BasicService {
     }
 
     @Override
-    public ResponseEntity<?> delete(String cartId) {
+    public ResponseEntity<?> delete(Timestamp cartId) {
         System.out.println("");
         isPresent(cartId);
         Cart cart = cartRepository.findById(cartId).get();
@@ -83,15 +82,18 @@ public class CartServiceImpl implements CartService, BasicService {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    public boolean isPresent(String id) {
+    public boolean isPresent(Timestamp id) {
         if (cartRepository.findById(id).isPresent()) return true;
-        throw new CartNotFoundException(id);
+        throw new CartNotFoundException();
     }
 
-    @Override
-    public boolean isEmpty(String id) {
+
+
+    public boolean isEmpty(Timestamp id) {
         if (cartRepository.findById(id).isEmpty()) return true;
         throw new CartHasExistException();
     }
+
+
 
 }

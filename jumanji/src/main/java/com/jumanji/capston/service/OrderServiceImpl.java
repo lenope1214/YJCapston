@@ -15,7 +15,6 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService, BasicService {
     @Autowired
     OrderRepository orderRepository;
-
     @Autowired
     ShopRepository shopRepository;
     @Autowired
@@ -24,22 +23,10 @@ public class OrderServiceImpl implements OrderService, BasicService {
     TableRepository tableRepository;
     @Autowired
     MenuRepository menuRepository;
-
-
-    public Order insert(Order.Request request) {
-        Order order = null;
-        return null;
-//        order = Order.insertOrder()
-//                .id(orderRepository.getOrderSeqNextVal())
-//                .quantity(request.getQuantity())
-//                .orderRequest(request.getOrderRequest())
-//                .shop(shopRepository.findById(request.getShopId()).get())
-//                .user(userRepository.findById(request.getUserId()).get())
-//                .menu(menuRepository.findById(request.getMenuId()).get())
-//                .tab(tableRepository.findById(request.getTabId()).get())
-//                .build();
-//        return orderRepository.save(order);
-    }
+    @Autowired
+    CartServiceImpl cartService;
+    @Autowired
+    MenuServiceImpl menuService;
 
     public String delete(Order order) {
         Order orderEntity = orderRepository.findById(order.getId()).orElseThrow(() -> new IllegalArgumentException("id를 확인해주세요!!!"));
@@ -69,7 +56,32 @@ public class OrderServiceImpl implements OrderService, BasicService {
 
     @Override
     public ResponseEntity<?> post(Order.Request request) {
-        return null;
+        System.out.println("post order request info \n" +
+                "cartId : " + request.getCartId() + "\n" +
+                "menuId : " + request.getMenuId() + "\n" +
+                "quantity : " + request.getQuantity() + "\n" +
+                "tabId : " + request.getTabId()
+        );
+        Order order = null;
+        long cartId = request.getCartId().getTime();
+        cartService.isPresent(request.getCartId());
+        menuService.isPresent(request.getMenuId());
+
+
+        System.out.println("비교 cartId : " + cartId);
+        int orderCount = orderRepository.countByIdContains("" + cartId);
+        System.out.println("카트의 주문 수 : " + orderCount);
+        String orderId = "" + cartId + String.format("%02d", orderCount);
+        System.out.println("가져올 테이블 id : " + request.getTabId());
+        order = Order.builder()
+                .id(orderId)
+                .quantity(request.getQuantity())
+                .menu(menuRepository.findById(request.getMenuId()).get())
+                .tab(tableRepository.findById(request.getTabId()).get())
+                .build();
+        orderRepository.save(order);
+        Order.Response response = new Order.Response(order);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @Override
@@ -77,13 +89,14 @@ public class OrderServiceImpl implements OrderService, BasicService {
         return null;
     }
 
+
     @Override
     public ResponseEntity<?> delete(String orderId) {
         return null;
     }
 
-    public boolean isPresent(String orderId){
-        if(orderRepository.findById(orderId).isPresent())return true;
+    public boolean isPresent(String orderId) {
+        if (orderRepository.findById(orderId).isPresent()) return true;
         throw new OrderNotFoundException();
     }
 

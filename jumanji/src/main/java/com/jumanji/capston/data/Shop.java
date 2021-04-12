@@ -77,8 +77,8 @@ public class Shop {
             this.address = shop.getAddress();
             this.addressDetail = shop.getAddressDetail();
             this.category = shop.getCategory();
-            this.openTime = DateOperator.toHHMM(shop.getOpenTime());
-            this.closeTime = DateOperator.toHHMM(shop.getCloseTime());
+            this.openTime = DateOperator.dateToHHMM(shop.getOpenTime());
+            this.closeTime = DateOperator.dateToHHMM(shop.getCloseTime());
             this.isOpen = shop.getIsOpen();
             this.isRsPos = shop.getIsRsPos();
             this.imgPath = shop.getImgPath();

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 
 @Getter
@@ -15,7 +16,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class Order implements Serializable {
     @Id
-    private String id; // 주문번호 insert 할때 값 sequence 설정해주기. 기본값으로 하는거 어렵넹
+    private String id; // cartId - timestamp(13) + orderList (2) => (15)
 
     @Column(length = 2)
     private int quantity; // 메뉴 수량
@@ -38,21 +39,21 @@ public class Order implements Serializable {
 
     @Getter
     @NoArgsConstructor @AllArgsConstructor
-    public class Request {
-        private String cartId;
+    public static class Request {
+        private Timestamp cartId;
         private int quantity;
         private String menuId;
         private String tabId; // 테이블번호 : 사업자번호 + 테이블번호 ( 2 )
     }
 
     @Getter
-    public class Response{
+    public static class Response{
         private String orderId;
         private int quantity;
         private String menuId;
         private String tabId;
 
-        Response(Order order){
+        public Response(Order order){
             this.orderId = order.getId();
             this.quantity = order.getQuantity();
             this.menuId = order.getMenu().getId();
