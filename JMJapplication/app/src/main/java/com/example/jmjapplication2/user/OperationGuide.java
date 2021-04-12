@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.example.jmjapplication2.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+//이용약관
 public class OperationGuide extends AppCompatActivity {
 
     BottomNavigationView bottomNavigation;
