@@ -21,14 +21,15 @@ const MenuRead = ({
     return (
         <>
             <S.MenuReadWrap>
-                <h2 className="menu-title">메뉴 상세</h2>
+                
                 <div className="menu-register-container">
+                <h2 className="menu-title">메뉴 상세</h2>
                     <table className="register-form">
                         <tbody>
                             <tr>
                                 <th colSpan='2' align='center' className="img-box">
                                     <img src={`http://3.34.55.186:8088/${img}`}
-                                        width='80%'
+                                        width='60%'
                                         // height='60%'
                                         className="img-box-box"
                                     />
@@ -84,8 +85,8 @@ const MenuRead = ({
                         </tbody>
                     </table>
                     <div className="button-div">
-                        <button onClick={ReadMenu} className="button">수정</button>
-                        <button className="button" onClick={goBack}>취소</button>
+                        <button onClick={ReadMenu} className="button3">수정</button>
+                        <button className="button4" onClick={goBack}>취소</button>
                     </div>
                 </div>
             </S.MenuReadWrap>
