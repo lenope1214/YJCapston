@@ -1,0 +1,42 @@
+com/jumanji/capston/Controller/WebController.java
+ com.jumanji.capston.Controller.WebController
+com/jumanji/capston/data/Member.java
+ com.jumanji.capston.data.Member
+com/jumanji/capston/data/Chatbot.java
+ com.jumanji.capston.data.Chatbot
+com/jumanji/capston/repository/ShopRepository.java
+ com.jumanji.capston.repository.ShopRepository
+com/jumanji/capston/data/TabId.java
+ com.jumanji.capston.data.Tab
+ com.jumanji.capston.data.TabId
+com/jumanji/capston/data/Panelty.java
+ com.jumanji.capston.data.Panelty
+com/jumanji/capston/Service/IndexService.java
+ com.jumanji.capston.Service.IndexService
+com/jumanji/capston/data/Review.java
+ com.jumanji.capston.data.Review
+com/jumanji/capston/data/Shop.java
+ com.jumanji.capston.data.Shop
+com/jumanji/capston/CapstonApplication.java
+ com.jumanji.capston.CapstonApplication
+com/jumanji/capston/data/Message.java
+ com.jumanji.capston.data.Message
+com/jumanji/capston/data/Order.java
+ com.jumanji.capston.data.Order
+com/jumanji/capston/data/MemberHasCoupon.java
+ com.jumanji.capston.data.MemberHasCoupon
+com/jumanji/capston/data/MenuId.java
+ com.jumanji.capston.data.Menu
+ com.jumanji.capston.data.MenuId
+com/jumanji/capston/Controller/IndexController.java
+ com.jumanji.capston.Controller.IndexController
+com/jumanji/capston/Controller/PostController.java
+ com.jumanji.capston.Controller.PostController
+com/jumanji/capston/repository/MemberRepository.java
+ com.jumanji.capston.repository.MemberRepository
+com/jumanji/capston/data/Coupon.java
+ com.jumanji.capston.data.Coupon
+com/jumanji/capston/data/Payment.java
+ com.jumanji.capston.data.Payment
+com/jumanji/capston/data/Reservation.java
+ com.jumanji.capston.data.Reservation

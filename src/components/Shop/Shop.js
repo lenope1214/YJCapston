@@ -1,8 +1,8 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import * as S from "./style";
 import DaumPostcode from "react-daum-postcode";
-import { Link } from "react-router-dom";
+import topimg from "../Main/img/QR코드사진2.png";
 
 const Shop = ({
     id,
@@ -36,7 +36,7 @@ const Shop = ({
 }) => {
     const postCodeStyle = {
         display: "block",
-        position: "fixed",
+        position: "absolute",
         top: "50%",
         width: "400px",
         height: "500px",

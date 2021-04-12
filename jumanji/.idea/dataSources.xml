@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="jumanji" uuid="16731dae-373a-4860-856c-c8ffd6a16f84">
+      <driver-ref>oracle.19</driver-ref>
+      <synchronize>true</synchronize>
+      <auto-commit>false</auto-commit>
+      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
+      <jdbc-url>jdbc:oracle:thin:@caps-database-oracle.cd5hnl5ycfyg.ap-northeast-2.rds.amazonaws.com:1521:orcl</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="jumanji@springboot-aws-caps.cd5hnl5ycfyg.ap-northeast-2.rds.amazonaws.com" uuid="f3da7743-e93c-40f1-a09f-ba031a385658">
+      <driver-ref>mariadb</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mariadb://springboot-aws-caps.cd5hnl5ycfyg.ap-northeast-2.rds.amazonaws.com:3306/jumanji</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+  </component>
+</project>
