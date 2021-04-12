@@ -28,7 +28,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".user.CustomerService"></activity>
+        <activity android:name=".user.OperationGuide"></activity>
+        <activity android:name=".user.CustomerService" />
         <activity android:name=".user.NoticeActivity" />
         <activity android:name=".owner.MenuRegisterActivity" />
         <activity android:name=".owner.MenuDetailActivity" />

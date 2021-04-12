@@ -1320,6 +1320,7 @@ dimen abc_text_size_subtitle_material_toolbar
 dimen abc_text_size_title_material
 dimen abc_text_size_title_material_toolbar
 dimen action_bar_size
+dimen app_bar_height
 dimen appcompat_dialog_background_inset
 dimen browser_actions_context_menu_max_width
 dimen browser_actions_context_menu_min_padding
@@ -1385,6 +1386,7 @@ dimen design_tab_text_size_2line
 dimen design_textinput_caption_translate_y
 dimen disabled_alpha_material_dark
 dimen disabled_alpha_material_light
+dimen fab_margin
 dimen fastscroll_default_thickness
 dimen fastscroll_margin
 dimen fastscroll_minimum_range
@@ -1398,6 +1400,7 @@ dimen hint_pressed_alpha_material_light
 dimen item_touch_helper_max_drag_scroll_per_frame
 dimen item_touch_helper_swipe_escape_max_velocity
 dimen item_touch_helper_swipe_escape_velocity
+dimen item_width
 dimen material_clock_display_padding
 dimen material_clock_face_margin_top
 dimen material_clock_hand_center_dot_radius
@@ -1630,6 +1633,7 @@ dimen subtitle_outline_width
 dimen subtitle_shadow_offset
 dimen subtitle_shadow_radius
 dimen test_mtrl_calendar_day_cornerSize
+dimen text_margin
 dimen tooltip_corner_radius
 dimen tooltip_horizontal_padding
 dimen tooltip_margin
@@ -1727,6 +1731,7 @@ drawable abc_vector_test
 drawable adv1
 drawable adv2
 drawable adv3
+drawable appguide
 drawable arrowback
 drawable avd_hide_password
 drawable avd_show_password
@@ -1820,6 +1825,7 @@ drawable kakao
 drawable kimbap
 drawable like
 drawable loading
+drawable locationguide
 drawable login_btn_img
 drawable main_icon
 drawable main_icon2
@@ -2142,6 +2148,8 @@ id graph_wrap
 id group_divider
 id grouping
 id groups
+id guide_bottom_navigation
+id guide_container
 id guideline
 id header_title
 id hideable
@@ -2182,9 +2190,17 @@ id invisible
 id inward
 id italic
 id item_touch_helper_previous_elevation
+id iv_centerdown
+id iv_centerdown1
+id iv_centerdown2
+id iv_centerdown3
+id iv_centerdown4
+id iv_centermenu
+id iv_centermenu1
+id iv_centermenu2
+id iv_centermenu3
+id iv_centermenu4
 id iv_menu_img
-id iv_noticedown
-id iv_noticemenu
 id japansesfood
 id japantv
 id join_toolbar
@@ -2300,6 +2316,7 @@ id noScroll
 id none
 id normal
 id notice_constraint
+id notice_linearItem
 id notification_background
 id notification_main_column
 id notification_main_column_container
@@ -2535,6 +2552,9 @@ id textView23
 id textView24
 id textView25
 id textView26
+id textView27
+id textView28
+id textView29
 id textView3
 id textView4
 id textView5
@@ -2578,6 +2598,13 @@ id transition_scene_layoutid_cache
 id transition_transform
 id triangle
 id tv_bell
+id tv_center_name
+id tv_center_name1
+id tv_center_name2
+id tv_center_name3
+id tv_center_name4
+id tv_guide1
+id tv_guide2
 id tv_id
 id tv_info_content
 id tv_info_name
@@ -2589,7 +2616,6 @@ id tv_menu_price
 id tv_menu_register
 id tv_name
 id tv_notice_intro
-id tv_notice_name
 id tv_password
 id tv_phone
 id tv_qr
@@ -2705,6 +2731,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_after_login
 layout activity_bell
+layout activity_customer_service
 layout activity_list_shop
 layout activity_login
 layout activity_login2
@@ -2716,6 +2743,7 @@ layout activity_menu_detail
 layout activity_menu_register
 layout activity_notice
 layout activity_notice_item
+layout activity_operation_guide
 layout activity_owner_join_o
 layout activity_owner_login_o
 layout activity_profileupdate
@@ -2854,6 +2882,7 @@ layout zxing_capture
 layout zzim_fragment
 menu menu_bottom
 menu menu_bottom_o
+menu menu_guide_bottom
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
@@ -2995,6 +3024,8 @@ string project_id
 string retry
 string search_menu_title
 string status_bar_notification_info_overflow
+string title_item_detail
+string title_item_list
 string use_application
 string zxing_app_name
 string zxing_button_ok
@@ -3009,6 +3040,9 @@ style Animation_AppCompat_Tooltip
 style Animation_Design_BottomSheetDialog
 style Animation_MaterialComponents_BottomSheetDialog
 style AppTheme
+style AppTheme_AppBarOverlay
+style AppTheme_NoActionBar
+style AppTheme_PopupOverlay
 style Base_AlertDialog_AppCompat
 style Base_AlertDialog_AppCompat_Light
 style Base_Animation_AppCompat_Dialog

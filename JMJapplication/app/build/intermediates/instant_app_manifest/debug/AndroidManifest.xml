@@ -60,6 +60,8 @@
         android:testOnly="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true" >
+        <activity android:name="com.example.jmjapplication2.user.OperationGuide" />
+        <activity android:name="com.example.jmjapplication2.user.CustomerService" />
         <activity android:name="com.example.jmjapplication2.user.NoticeActivity" />
         <activity android:name="com.example.jmjapplication2.owner.MenuRegisterActivity" />
         <activity android:name="com.example.jmjapplication2.owner.MenuDetailActivity" />
