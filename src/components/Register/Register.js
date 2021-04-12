@@ -24,13 +24,20 @@ const Register = ({
     handleEmail,
     birthday,
     handleBirthday,
+    address,
     address1,
     handleAddress,
     handleAddress1,
+    search,
     modal,
     openModal,
+    closeModal,
+    handleKeyword,
+    Keyword,
     IdCheck,
+    showLocation,
     roadAddr,
+    handleRoadAddr,
     handleComplete,
 }) => {
     const postCodeStyle = {
@@ -74,6 +81,8 @@ const Register = ({
                         value={id}
                     />
                     <button onClick={IdCheck}>중복확인</button>
+                    <br></br>
+                    <br></br>
                     <span>비밀번호</span>
                     <input
                         type="password"
@@ -149,7 +158,6 @@ const Register = ({
                         onChange={handleBirthday}
                         value={birthday}
                     />
-                    <span>주소</span>
                     <input
                         type="address"
                         id="address"

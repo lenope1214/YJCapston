@@ -1,18 +1,37 @@
-import React, { useState } from "react";
-import MenuRegisterForm from "../../components/MenuRegisterForm/MenuRegisterForm";
-import OwnerNavbar from "../../components/OwnerMenubar/OwnerNavbar";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
+import MenuRegisterForm from "../components/MenuRegisterForm/MenuRegisterForm";
+import OwnerNavbar from "../components/OwnerMenubar/OwnerNavbar";
 import { useHistory } from "react-router";
-import Header from "../../components/Header/Header";
-import { apiDefault } from "../../lib/client";
+import Header from "../components/Header/Header";
+import { apiDefault } from "../lib/client";
 
-const MenuRegisterFormContainer = () => {
+const MenuRegisterFormContainer = (props) => {
     const history = useHistory();
     const [menuname, setMenuname] = useState("");
     const [price, setPrice] = useState("");
     const [img, setImg] = useState(null);
     const [menudesc, setMenudesc] = useState("");
     const [duration, setMenuduration] = useState("");
+    const [shopId, setShopId] = useState("");
+
+    useEffect(()=> {
+        setShopId(props.match.params.shopId);
+    })
+
+    function isName(menuname) {
+        let menunameRegExp = /^[가-힣]{2,20}$/;
+        return menunameRegExp.test(menuname);
+    }
+
+    function isPrice(price) {
+        let priceRegExp = /^[0-9]{2,6}$/;
+        return priceRegExp.test(price);
+    }
+
+    function isDuration(duration) {
+        let durationRegExp = /^[0-9]{1,3}$/;
+        return durationRegExp.test(duration);
+    }
 
     const handleMenuname = (e) => {
         const value = e.target.value;
@@ -26,7 +45,6 @@ const MenuRegisterFormContainer = () => {
 
     const handleImg = (e) => {
         const files = e.target.files[0];
-        // console.log("files="+files);
         setImg(files);
     };
 
@@ -41,23 +59,34 @@ const MenuRegisterFormContainer = () => {
     };
 
     const menu_v1 = async () => {
-        alert("추가확인 버튼");
+        if(!isName(menuname)) {
+            return alert(
+                "메뉴명은 한글 2~20자리로 입력해야 합니다."
+            );
+        }
+        if(!isPrice(price)) {
+            return alert(
+                "가격은 숫자 2~6자리로 입력해야 합니다."
+            );
+        }
+
+        if(!isDuration(duration)) {
+            return alert(
+                "예상 소요시간은 숫자 1~3자리로 입력해야 합니다."
+            );
+        }
+
+
         const formData = new FormData();
         formData.append("img", img);
-        formData.append("shopId", '0223446783');
+        formData.append("shopId", shopId);
         formData.append("name", menuname);
         formData.append("price", price);
         formData.append("intro", menudesc);
         formData.append("duration", duration);
-        // console.log(formData);
         
         const res = await apiDefault().post("/menu",
-        // {   
             formData,
-            // name: menuname,
-            // price: price,
-            // intro: menudesc,
-        // },
         {
             headers: {
                 Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
@@ -65,28 +94,20 @@ const MenuRegisterFormContainer = () => {
             },
         }
         ).then((res) => {
-            history.push("/menulist")
+            history.goBack();
+            alert("메뉴가 추가되었습니다.");
         })
         .catch((err) => {
-            alert("Err");
+            alert("메뉴 추가 실패!");
         });
         console.log(res);
-        // postMenu(
-        //     formData,     
-        // )
-        // .then((res) => {
-        //     history.push("/menulist");
-        // })
-        // .catch((err) => {
-        //     alert("MenuRegisterContainer Err");
-        // });
-        
     };
 
     return (
         <>
         <Header />
-        <OwnerNavbar />
+        <hr />
+        {/* <OwnerNavbar /> */}
         <MenuRegisterForm 
             menuname={menuname}
             handleMenuname={handleMenuname}
@@ -97,7 +118,7 @@ const MenuRegisterFormContainer = () => {
             menudesc={menudesc}
             handleMenudesc={handleMenudesc}
             menu_v1={menu_v1}
-            shopid='022344278'
+            shopId={shopId}
             duration={duration}
             handleDuration={handleDuration}
         />

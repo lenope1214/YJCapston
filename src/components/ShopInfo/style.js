@@ -18,6 +18,12 @@ export const InfoWrap = styled.div`
     > textarea {
         margin-left: 40%;
         width:200px;
+        resize: both;  
+    }
+    .info-0 {
+        margin-top:50px;
+        margin-left: 15%;
+        font-size:10px;
     }
     .info-1 {
         margin-top:50px;
@@ -73,6 +79,11 @@ export const InfoWrap = styled.div`
         margin-top:2px;
         font-size:20px;
     }
+    .info-12 {
+        margin-top:2px;
+        margin-left: 40%;
+        font-size:10px;
+    }
     >input{
         margin-left:40%;
         width:200px;
@@ -83,5 +94,14 @@ export const InfoWrap = styled.div`
     .button-div{
         margin-top: 20px;
         margin-left:40%;
+    }
+    .open-button{
+        margin-left:40%;
+    }
+    .rs-button{
+        margin-left:40%;
+    }
+    >img{
+        margin-left:15%;
     }
 `;

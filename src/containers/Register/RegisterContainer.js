@@ -175,24 +175,8 @@ const RegisterContainer = () => {
                 alert("사용 가능한 아이디 입니다.");
             })
             .catch((err) => {
-                console.log(err);
-                alert("이미 존재하는 아이디 입니다.");
-            });
-    };
-
-    const search = () => {
-        getLocation(keyword)
-            .then((res) => {
-                const a = JSON.parse(res.data);
-                const regilo = a.results.juso.map((j) => {
-                    return {
-                        roadAddr: j.roadAddr,
-                    };
-                });
-                setShowLocation(regilo);
-            })
-            .catch((err) => {
                 alert(err);
+                alert("이미 존재하는 아이디 입니다.");
             });
     };
 
@@ -239,7 +223,6 @@ const RegisterContainer = () => {
             handleBirthday={handleBirthday}
             handleAddress={handleAddress}
             handleAddress1={handleAddress1}
-            search={search}
             openModal={openmodal}
             closeModal={closemodal}
             modal={modal}

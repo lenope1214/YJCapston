@@ -36,10 +36,12 @@ const MyShopContainer = (props) => {
                     close_time:shop.closeTime,
                     address:shop.address,
                     addressDetail:shop.addressDetail,
-                    isRsPos:shop.isRsPos
+                    isRsPos:shop.isRsPos,
+                    isOpen:shop.isOpen
                 };
             });
             setShop(shop);
+            
             
         })
         .catch((err) => {
@@ -53,6 +55,7 @@ const MyShopContainer = (props) => {
                 alert("삭제되었습니다.");
                 history.push(`/myshop/${shopId}`);
                 window.location.reload();
+                
             })
             .catch((err) => {
                 alert("매장삭제에러");

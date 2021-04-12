@@ -1,9 +1,9 @@
 import { apiDefault } from "../client";
 
-export const postLogin = (id, pw) => {
+export const postLogin = (id, password) => {
     return apiDefault().post("/login", {
         id,
-        password: pw,
+        password,
     });
 };
 

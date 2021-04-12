@@ -13,11 +13,9 @@ a { color: black;}
     margin: 16px 0px;
     display: block;
     font-weight: bold;
-    background: black;
+    background: #323232;
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 8.5px );
-    -webkit-backdrop-filter: blur( 8.5px );
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
     border-radius: 10px;
     width: 85%;
     max-width: 800px;
@@ -45,7 +43,7 @@ th, td {
 }
 
 .menu-title {
-    margin-bottom : 70px;
+    margin-bottom : 100px;
 }
 
 .item-1 {
@@ -99,5 +97,11 @@ th, td {
     color: white;
     border-radius: 7px;
     border: 0px;
+    cursor: pointer;
+}
+.empty-list {
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
 }
 `;

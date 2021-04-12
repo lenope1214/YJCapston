@@ -20,13 +20,19 @@ a { color: black;}
     -webkit-backdrop-filter: blur( 8.5px );
     border: 1px solid rgba( 255, 255, 255, 0.18 );
     border-radius: 10px;
-    width: 85%;
+    width: 50%;
     max-width: 800px;
     height: 50px;
     line-height: 50px;
     text-align: center;
     text-decoration: none;
     margin: 0 auto;
+}
+
+
+.img-box {
+    border-radius: 15%;
+    text-align: center;
 }
 
 .menu-list {
@@ -52,9 +58,11 @@ th, td {
 .item-1{
     width: 20%;
     padding:20px;
+    text-align: center;
 }
 .item-2{
     width: 20%;
+    text-align: center;
    
 }
 .item-3{
@@ -63,46 +71,58 @@ th, td {
 }
 .item-4{
     width: 15%;
+    text-align: center;
    
 }
 .item-5{
     width: 15%;
+    text-align: center;
     
 }
 .item-6{
     width: 5%;
-  
+    text-align: center;
 }
 .item-7{
+    width: 5%;
+    text-align: center;
+}
+.item-8{
     width: 10%;
- 
+    text-align: center;
 }
 
 .body-item-1{
     width: 20%;
     padding:20px;
+    text-align: center;
 }
 .body-item-2{
     width: 15%;
-   
+    text-align: center;
 }
 .body-item-3{
     width: 15%;
+    text-align: center;
     
 }
 .body-item-4{
     width: 15%;
-   
+    text-align: center;
 }
 .body-item-5{
     width: 15%;
-    
+    text-align: center;
 }
 .body-item-6{
     width: 10%;
-  
+    text-align: center;
 }
 .body-item-7{
+    width: 10%;
+    text-align: center;
+}
+.body-item-8{
     padding: 15px;
     font-size: 19px;
     text-aling: center;
@@ -115,5 +135,6 @@ th, td {
     border-radius: 7px;
     border: 0px;
 }
+
 
 `;

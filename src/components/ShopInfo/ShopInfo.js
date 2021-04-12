@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import * as S from "./style";
+import DaumPostcode from "react-daum-postcode";
 
 const ShopInfo = ({
     shopId,
@@ -31,10 +32,31 @@ const ShopInfo = ({
     shopIsRsPos,
     handleShopIsRsPos,
     Shop_v1,
+    Shop_v2,
+    Shop_v3,
+    isOpen,
+    roadAddr,
+    handleAddress,
+    modal,
+    openModal,
+    handleComplete,     
+    handleRoadAddr,
+    img,
+    shop
 }
 ) => {
+    
+    const postCodeStyle = {
+        display: "block",
+        position: "fixed",
+        top: "50%",
+        width: "400px",
+        height: "500px",
+        padding: "7px",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+    };
 
-        // console.log(shopname.id);
     return(
         <>
         <S.InfoWrap>
@@ -55,30 +77,21 @@ const ShopInfo = ({
                 id="name"
                 placeholder={name}
                 onChange={handleShopName}
-                // value={name}
                 value={shopName}
-                // disabled
             />
+
             <div className="info-3">
                 <h1>매장소개</h1>
             </div>
             <textarea
             className="input-box-area"
-            fow="10"
+            row="10"
             placeholder={intro}
             id="intro"
-            value={shopIntro}
             onChange={handleShopIntro}
+            value={shopIntro}
             />
 
-            {/* <input
-                type="text"
-                id="intro"
-                placeholder={intro}
-                onChange={handleShopIntro}
-                // value={intro}
-                value={shopIntro}
-            /> */}
             <div className="info-4">
                 <h1>오픈시간</h1>
             </div>
@@ -87,9 +100,9 @@ const ShopInfo = ({
                 id="open_time"
                 placeholder={openTime}
                 onChange={handleShopOpenTime}
-                // value={openTime}
                 value={shopOpenTime}
             />
+            
             <div className="info-5">
                 <h1>마감시간</h1>
             </div>
@@ -110,6 +123,7 @@ const ShopInfo = ({
                 onChange={handleShopCategory}
                 // value={shopCategory}
                 value={category}
+                disabled
                 >
                 <option value="" disable={true}>선택</option>
                 <option value="한식">한식</option>
@@ -126,14 +140,25 @@ const ShopInfo = ({
             <div className="info-7">
             <h1>매장주소</h1>
             </div>
-            <input
+            {/* <input
                 type="text"
                 id="address"
                 placeholder={address}
                 onChange={handleShopAddress}
                 // value={address}
                 value={shopAddress}
-            />
+            /> */}
+            <input 
+                type="text"
+                id="address"
+                placeholder={roadAddr}
+                onChange={handleRoadAddr}
+                value={roadAddr}
+                disabled
+                />
+
+                <button onClick={openModal}>검색</button>
+
             <div className="info-8">
                 <h1>매장상세주소</h1>
             </div>
@@ -148,12 +173,14 @@ const ShopInfo = ({
             <div className="info-9">
             <h1>예약가능여부</h1>
             </div>
-            <span className="info-10"
+        <div>
+            {/* <span className="info-10"
                 // style={{
                 //     fontSize:"20px",
                 //     paddingTop:"20px",
                 // }}
             >
+                
             가능
             <input 
                 type="radio"
@@ -180,103 +207,22 @@ const ShopInfo = ({
                 value={isRsPos = "N"}
                 // onChange={handleIs_rs_pos}
             />
-            </span>
-        {/* <div className="info-1">
-            <h1>사업자아이디</h1>
-        </div>
-            <input
-                type="text"
-                id="id"
-             // placeholder={id}
-                onChange={handleId}
-                placeholder={shopname.id}
-        />
-        <div className="info-2">
-            <h1>매장이름</h1>
-        </div>
-            <input
-                type="text"
-                id="name"
-                onChange={handleName}
-                value={shopname.name}
-
-            />
-        <div className="info-3">
-            <h1>매장소개</h1>
-        </div>
-            <input
-                type="text"
-                id="intro"
-                onChange={handleIntro}
-                placeholder={shopname.intro}
-            />
-        <div className="info-4">
-            <h1>오픈시간</h1>
-        </div>
-            <input 
-                type="text"
-                id="open_time"
-                onChange={handleOpen_time}
-                placeholder={shopname.open_time}
-            />
-        <div className="info-5">
-            <h1>마감시간</h1>
-        </div>
-            <input
-                type="text"
-                id="close_time"
-                onChange={handleClose_time}
-                placeholder={shopname.close_time}
-            />
-        <div className="info-6">
-            <h1>카테고리</h1>
-        </div>
-            <select
-                id="category"
-                onChange={handleCategory}
-                value={shopname.category}
-                >
-                <option value="" disable={true}>선택</option>
-                <option value="한식">한식</option>
-                <option value="일식">일식</option>
-                <option value="중식">중식</option>
-                <option value="고기">고기</option>
-                <option value="분식">분식</option>
-                <option value="술집">술집</option>
-                <option value="패스트푸드">패스트푸드</option>
-                <option value="찜.탕">찜.탕</option>
-                <option value="카페.디저트">카페.디저트</option>    
-
-            </select>
+            </span> */}
             
-        <div className="info-7">
-            <h1>매장주소</h1>
+            
+            <button onClick={Shop_v2} className="rs-button">예약여부변경하기</button>
+            {/* <span className="open">{isRsPos}</span> */}
         </div>
-            <input
-                type="text"
-                id="address"
-                onChange={handleAddress}
-                placeholder={shopname.address}
-            />
-        <div className="info-8">
-            <h1>매장상세주소</h1>
-        </div>
-            <input
-                type="text"
-                id="addressDetail"
-                onChange={handleAddressDetail}
-                placeholder={shopname.addressDetail}
-            />
-        <div className="info-9">
-            <h1>예약가능여부</h1>
-        </div>
-            <input
-                type="text"
-                id="isRsPos"
-                onChange={handleIsRsPos}
-                placeholder={shopname.isRsPos}
-            />
-        */}
+            
+            <div className="info-12">
+              <h1>오픈여부</h1>
+            </div>
+        <div>
+            <button onClick={Shop_v3} className="open-button">오픈여부변경하기</button>
+            {/* <span className="open">{isOpen}</span>                 */}
+        </div>    
+
+        
 
         <div className="button-div">
             <button onClick={Shop_v1} className="button">수정</button>
@@ -286,7 +232,17 @@ const ShopInfo = ({
         </div> 
 
         
+        
         </S.InfoWrap>
+
+        {modal && (
+                <DaumPostcode
+                    onComplete={handleComplete}
+                    style={postCodeStyle}
+                    height={700}
+                />
+            )}
+
         </>
     );
 }

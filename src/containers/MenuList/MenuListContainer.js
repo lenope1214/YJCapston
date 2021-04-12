@@ -59,7 +59,6 @@ const MenuListContainer = (props) => {
     return (
         <>
             <Header />
-
             <OwnerNavbar 
                 shopId={shopId}
             />

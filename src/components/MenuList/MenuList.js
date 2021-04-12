@@ -6,6 +6,7 @@ const MenuList = ({ menues, removeMenu, shopId }) => {
     return (
         <>
             <S.MenuWrap>
+                
                 <div className="menu-container">
                     <h2 className="menu-title">메뉴 목록</h2>
                     <Link to={`/create/${shopId}`} className="btn-link">메뉴 추가하기</Link>
@@ -19,7 +20,7 @@ const MenuList = ({ menues, removeMenu, shopId }) => {
                         <tbody>
                             {!menues.length && (
                                 <tr>
-                                    <td colSpan="3">목록이 비었습니다.</td>
+                                    <td colSpan="4" className="empty-list">목록이 비었습니다.</td>
                                 </tr>
                             )}
 
@@ -27,18 +28,23 @@ const MenuList = ({ menues, removeMenu, shopId }) => {
                                 return (
                                     <tr>
                                         <td className="body-item-1">
-                                            <img src={`http://3.34.55.186:8088/${menu.img}`}
-                                                width='150'
-                                                height='150'
-                                                className="img-box">
-                                            </img>
+                                            <Link to={`/menu/${shopId}${menu.name}`} className="menu-link">
+                                                <img src={`http://3.34.55.186:8088/${menu.img}`}
+                                                    width='150'
+                                                    height='150'
+                                                    className="img-box">
+                                                </img>
+                                            </Link>
+
                                         </td>
                                         <td className="body-item-2">
                                             <Link to={`/menu/${shopId}${menu.name}`} className="menu-link">
                                                 {menu.name}
                                             </Link>
                                         </td>
-                                        <td className="body-item-3">{menu.price}</td>
+                                        <td className="body-item-3"><Link to={`/menu/${shopId}${menu.name}`} className="menu-link">
+                                            {menu.price}
+                                        </Link></td>
                                         <td className="body-item-4" onClick={() => removeMenu(`${menu.id}`)}><button className="delete-button">X</button></td>
                                     </tr>
                                 );
