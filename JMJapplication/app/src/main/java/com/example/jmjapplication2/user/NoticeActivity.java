@@ -38,6 +38,7 @@ public class NoticeActivity extends AppCompatActivity {
         noticeAdapter = new NoticeAdapter(arrayList);
         recyclerView.setAdapter(noticeAdapter);
 
+        //더미데이터
         Notice notice = new Notice(R.drawable.hamburger_icon,R.drawable.down, "공지사항1", "1번 공지사항 입니다.");
         arrayList.add(notice);
         Notice notice1 = new Notice(R.drawable.hamburger_icon,R.drawable.down, "공지사항2", "2번 공지사항 입니다.");
