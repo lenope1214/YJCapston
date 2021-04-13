@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router";
 import Header from "../../components/Header/Header";
 import OwnerNavbar from "../../components/OwnerMenubar/OwnerNavbar";
-import ShopInfo from "../../components/ShopInfo/Shopinfo";
+import ShopInfo from "../../components/ShopInfo/ShopInfo";
 import { getShopInfo, putShopreserve, putShopopen, putShopInfo} from '../../lib/ShopInfo';
 
 

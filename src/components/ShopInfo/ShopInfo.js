@@ -60,17 +60,20 @@ const ShopInfo = ({
     return(
         <>
         <S.InfoWrap>
-            <div className="info-1">
-                <h1>사업자아이디</h1>
+        <div className="total-body">
+                <div className="title">매장 정보</div>
+            <div className="label">
+                사업자아이디
             </div>
             <input
                 type="text"
                 value={id}
+                className="input-box"
                 disabled
             />
 
-            <div className="info-2">
-                <h1>매장이름</h1>
+            <div className="label">
+                매장이름
             </div>
             <input
                 type="text"
@@ -78,10 +81,12 @@ const ShopInfo = ({
                 placeholder={name}
                 onChange={handleShopName}
                 value={shopName}
+                className="input-box"
+                disabled
             />
 
-            <div className="info-3">
-                <h1>매장소개</h1>
+            <div className="label">
+                매장소개
             </div>
             <textarea
             className="input-box-area"
@@ -92,8 +97,8 @@ const ShopInfo = ({
             value={shopIntro}
             />
 
-            <div className="info-4">
-                <h1>오픈시간</h1>
+            <div className="label">
+                오픈시간
             </div>
             <input 
                 type="text"
@@ -101,10 +106,11 @@ const ShopInfo = ({
                 placeholder={openTime}
                 onChange={handleShopOpenTime}
                 value={shopOpenTime}
+                className="input-box"
             />
             
-            <div className="info-5">
-                <h1>마감시간</h1>
+            <div className="label">
+                마감시간
             </div>
             <input
                 type="text"
@@ -113,9 +119,10 @@ const ShopInfo = ({
                 onChange={handleShopCloseTime}
                 // value={closeTime}
                 value={shopClostTime}
+                className="input-box"
             />
-            <div className="info-6">
-            <h1>카테고리</h1>
+            <div className="label">
+            카테고리
             </div>
             <select
                 id="category"
@@ -123,6 +130,7 @@ const ShopInfo = ({
                 onChange={handleShopCategory}
                 // value={shopCategory}
                 value={category}
+                className="select"
                 disabled
                 >
                 <option value="" disable={true}>선택</option>
@@ -137,8 +145,8 @@ const ShopInfo = ({
                 <option value="카페.디저트">카페.디저트</option>    
 
             </select>
-            <div className="info-7">
-            <h1>매장주소</h1>
+            <div className="label">
+            매장주소
             </div>
             {/* <input
                 type="text"
@@ -154,13 +162,14 @@ const ShopInfo = ({
                 placeholder={roadAddr}
                 onChange={handleRoadAddr}
                 value={roadAddr}
+                className="input-box"
                 disabled
                 />
 
-                <button onClick={openModal}>검색</button>
+                <button onClick={openModal} className="button1">검색</button>
 
-            <div className="info-8">
-                <h1>매장상세주소</h1>
+            <div className="label">
+                매장상세주소
             </div>
             <input
                 type="text"
@@ -169,9 +178,12 @@ const ShopInfo = ({
                 onChange={handleShopAddressDetail}
                 // value={addressDetail}
                 value={shopAddressDetail}
+                className="input-box"
             />
-            <div className="info-9">
-            <h1>예약가능여부</h1>
+            {/* --------여기서부터 --------------- */}
+            
+            <div className="label">
+            예약가능여부
             </div>
         <div>
             {/* <span className="info-10"
@@ -214,8 +226,8 @@ const ShopInfo = ({
             {/* <span className="open">{isRsPos}</span> */}
         </div>
             
-            <div className="info-12">
-              <h1>오픈여부</h1>
+            <div className="label">
+            오픈여부
             </div>
         <div>
             <button onClick={Shop_v3} className="open-button">오픈여부변경하기</button>
@@ -224,15 +236,15 @@ const ShopInfo = ({
 
         
 
-        <div className="button-div">
-            <button onClick={Shop_v1} className="button">수정</button>
+        <div className="button-box">
+            <button onClick={Shop_v1} className="button3">수정</button>
             <Link to="/myshop">
-            <button className="button" >취소</button>
+            <button className="button4" >취소</button>
             </Link>
         </div> 
 
         
-        
+        </div>
         </S.InfoWrap>
 
         {modal && (

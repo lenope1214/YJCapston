@@ -16,13 +16,11 @@ const MyShop = ({
             <S.MyShopWrap>
                 <div className="menu-container">
                     <h2 className="menu-title">매장 목록</h2>
-                    <div className="biv-1">
                     <Link to="/shop">
                         <button className="btn-link">
                             매장등록하기
                     </button>
                     </Link>
-                    </div>
 
                     <table className="menu-list">
                         <thead>
@@ -36,12 +34,9 @@ const MyShop = ({
                             <th align="center" className="item-5">매장주소</th>
                             {/* <th align="center" className="addressDetail">매장상세주소</th> */}
                             <th align="center" className="item-6">예약</th>
-                            <th align="center" className="item-7">오픈</th>
+	               <th align="center" className="item-7">오픈</th>
                             <th align="center" className="item-8"></th>
-
-
                         </thead>
-
                         <tbody>
 
                             {!shop.length && (
@@ -73,7 +68,7 @@ const MyShop = ({
                                         <td className="body-item-5">{shop.address}</td>
                                         {/* <td>{shop.addressDetail}</td> */}
                                         <td className="body-item-6">{shop.isRsPos}</td>
-                                        <td className="body-item-7">{shop.isOpen}</td>
+			  <td className="body-item-7">{shop.isOpen}</td>
                                         <td className="body-item-8" onClick={() => removeShop(`${shop.id}`)}><button className="delete-button">X</button></td>
 
                                     </tr>
