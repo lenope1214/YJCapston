@@ -1,6 +1,6 @@
 package com.jumanji.capston.controller.commons;
 
-import com.jumanji.capston.service.StorageService;
+import com.jumanji.capston.service.StorageServiceImpl;
 import com.jumanji.capston.storage.StorageFileNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -19,9 +19,9 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/files")
 public class FileController {
-    private final StorageService storageService;
+    private final StorageServiceImpl storageService;
     @Autowired
-    public FileController(StorageService storageService){
+    public FileController(StorageServiceImpl storageService){
         this.storageService = storageService;
     }
 

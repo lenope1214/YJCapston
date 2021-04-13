@@ -15,7 +15,10 @@ public class Chatbot {
     private String question;
     @Column(length=250)
     private String answer;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private Shop shop;
+
+    public class Request {
+    }
 }

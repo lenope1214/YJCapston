@@ -3,9 +3,9 @@ package com.jumanji.capston.controller;
 
 
 import com.jumanji.capston.data.Shop;
-import com.jumanji.capston.service.ShopService;
-import com.jumanji.capston.service.StorageService;
-import com.jumanji.capston.service.UserService;
+import com.jumanji.capston.service.ShopServiceImpl;
+import com.jumanji.capston.service.StorageServiceImpl;
+import com.jumanji.capston.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,14 +21,14 @@ public class ShopController  {
 
 
     @Autowired
-    ShopService shopService;
+    ShopServiceImpl shopService;
 
     @Autowired
-    UserService userService;
+    UserServiceImpl userService;
 
 
     @Autowired
-    StorageService storageService;
+    StorageServiceImpl storageService;
 
 
     @Transactional(readOnly = true) // get /shop/{shopId}
@@ -66,7 +66,7 @@ public class ShopController  {
 
     @Transactional
     @PostMapping("/shop") // post /shop 매장등록     Form-data로 받음 => Param. requestbody를 안적으면 자동 param 매핑 해주는듯
-    public ResponseEntity<?> insertShop(Shop.info request, @RequestHeader String authorization) throws ParseException {
+    public ResponseEntity<?> postShop(Shop.Request request, @RequestHeader String authorization) throws ParseException {
         return shopService.postShop(request, authorization);
     }
 

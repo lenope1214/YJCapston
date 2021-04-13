@@ -7,13 +7,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 
 @Getter
 @Setter
 @Entity
 @Table(name="tables")
-public class Tab {
+public class Tab implements Serializable {
 
 //    @EmbeddedId
 //    private TabId id;
@@ -26,6 +27,10 @@ public class Tab {
 
     @Column
     private char using; // 사용중인지 확인.
+
+    public class Request{
+
+    }
 }
 //
 //@Getter
@@ -37,7 +42,7 @@ public class Tab {
 //    @Column(length = 2, name="tab_id")
 //    private int id ; // 좌석번호
 //
-//    @ManyToOne
+//    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name="shop_id")
 //    private Shop shop_id; // 매장번호
 //

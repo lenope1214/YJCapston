@@ -21,4 +21,8 @@ public class Reservation implements Serializable {
     private char delay; // 딜레이
     @Column(name = "arrive_time")
     private Timestamp arriveTime; // 가게 도착시간
+
+    public class Request{
+
+    }
 }

@@ -13,11 +13,15 @@ public class Penalty {
 //    @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
     @Column(name = "reg_time")
     private Timestamp regTime;
     private String name;
     private String reason;
+
+    public class Request{
+
+    }
 }

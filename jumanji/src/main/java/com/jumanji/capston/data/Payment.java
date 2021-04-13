@@ -14,7 +14,7 @@ public class Payment implements Serializable {
     @Id
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order ; // 주문번호
     @Column(name="use_point")
@@ -26,4 +26,8 @@ public class Payment implements Serializable {
     private int complePay; // 결제 당시 금액
     @Column(name = "is_refund")
     private char isRefund; // 환불 여부
+
+    public class Request{
+
+    }
 }

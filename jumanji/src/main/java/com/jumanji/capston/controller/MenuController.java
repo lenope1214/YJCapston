@@ -1,12 +1,11 @@
 package com.jumanji.capston.controller;
 
 import com.jumanji.capston.data.Menu;
-import com.jumanji.capston.service.MenuService;
-import com.jumanji.capston.service.ShopService;
-import com.jumanji.capston.service.StorageService;
+import com.jumanji.capston.service.MenuServiceImpl;
+import com.jumanji.capston.service.ShopServiceImpl;
+import com.jumanji.capston.service.StorageServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +18,12 @@ import javax.security.sasl.AuthenticationException;
 public class MenuController  {
 
     @Autowired
-    MenuService menuService;
+    MenuServiceImpl menuService;
     @Autowired
-    ShopService shopService;
+    ShopServiceImpl shopService;
 
     @Autowired
-    StorageService storageService;
+    StorageServiceImpl storageService;
 
     @Autowired
     HttpHeaders httpHeaders;
@@ -39,27 +38,27 @@ public class MenuController  {
     @GetMapping("/menu/{menuId}")
     public ResponseEntity<?> selectMenuById(@PathVariable String menuId) {
 //        String menuId = request.getShopId() + request.getName();
-        return menuService.findById(menuId);
+        return menuService.get(menuId);
     }
 
 
     @Transactional(readOnly = true)
     @GetMapping("/menuList/{shopId}")
     public ResponseEntity<?> selectMenuList(@PathVariable String shopId) {
-        return menuService.getMenuListByShopId(shopId);
+        return menuService.getList(shopId);
     }
 
 
     @Transactional
     @PostMapping("/menu") // post
-    public ResponseEntity<?> insertMenu(Menu.info request) {
-        return menuService.postMenu(request);
+    public ResponseEntity<?> postMenu(Menu.Request request) {
+        return menuService.post(request);
     }
 
     @Transactional
     @PatchMapping("/menu") // patch
     public ResponseEntity<?> patchMenu(@RequestBody Menu.Request request) {
-        return menuService.patchMenu(request);
+        return menuService.patch(request);
     }
 
     @Transactional
@@ -68,11 +67,4 @@ public class MenuController  {
         System.out.println("메뉴 삭제 요청");
         return menuService.delete(authorization, menuId);
     }
-
-    @Transactional(readOnly = true)
-    @GetMapping("/menuListAll")
-    public ResponseEntity<?> menuListAll() {
-        return new ResponseEntity<>(menuService.findAll(), HttpStatus.OK);
-    }
-
 }

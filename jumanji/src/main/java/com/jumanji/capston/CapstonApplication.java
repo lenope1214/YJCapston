@@ -1,7 +1,7 @@
 package com.jumanji.capston;
 
 import com.jumanji.capston.config.StorageConfig;
-import com.jumanji.capston.service.StorageService;
+import com.jumanji.capston.service.StorageServiceImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,7 +17,7 @@ public class CapstonApplication {
     }
 
     @Bean
-    CommandLineRunner init(StorageService storageService) {
+    CommandLineRunner init(StorageServiceImpl storageService) {
         return (args) -> {
 //            storageService.deleteAll();
             storageService.init();

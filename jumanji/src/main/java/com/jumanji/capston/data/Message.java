@@ -18,6 +18,10 @@ public class Message {
     @Column(length = 250)
     private String content;//내용
 
+    public class Request{
+
+    }
+
 }
 
 

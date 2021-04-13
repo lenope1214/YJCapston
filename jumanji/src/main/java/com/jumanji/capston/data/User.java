@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 
 
@@ -16,7 +17,7 @@ import java.util.Date;
 @ToString
 @NoArgsConstructor
 @Table(name="users")
-public class User {
+public class User implements Serializable {
     @Id
     private String id; //아이디
     private String password; // 비밀번호
@@ -40,7 +41,7 @@ public class User {
     @Column(name = "provider_id")
     private String providerId; // 해당 소셜에서의 아이디(primary key)
 
-//    @Builder(builderMethodName = "updateUser")
+//    @Builder(builderMethodName = "updateInfo")
 //    public User(String email, String address, String addressDetail){
 //        this.email = email;
 //        this.address = address;
@@ -64,7 +65,7 @@ public class User {
         this.level = 1;
     }
 
-    @Getter
+    @Getter @Setter
     public static class Request {
         private String id; //아이디
         private String password; // 비밀번호
@@ -72,7 +73,7 @@ public class User {
         private String email; // 이메일
         private String address; // 주소
         private String addressDetail; // 상세주소
-        private Date birthday; // 생년월일
+        private String birthday; // 생년월일
         private String phone; // 전화번호
         private String role; // 권한   ROLE_USER, ROLE_OWNER, ROLE_ADMIN
     }
@@ -82,10 +83,10 @@ public class User {
         private String name;
         private String address;
         private String addressDetail;
-        private Date birthday; // 생년월일
+        private String birthday; // 생년월일
         private String phone; // 전화번호
-        private String role; // 권한   u, o, a
-        private Date signDate; // 가입날짜
+        private String role; // 권한   user, owner, admin
+        private String signDate; // 가입날짜
         private int level; // 등급
         private int point; // 포인트
 
@@ -93,12 +94,12 @@ public class User {
             this.name = user.getName();
             this.address = user.getAddress();
             this.addressDetail = user.getAddressDetail();
-            this.birthday = user.getBirthday();
+            this.birthday = DateOperator.dateToYYYYMMDD(user.getBirthday());
             this.phone = user.phone;
             this.role = user.getRole();
             this.level = user.getLevel();
             this.point = user.getPoint();
-//            this.signDate = user.getSignDate();
+            this.signDate = DateOperator.dateToYYYYMMDD(user.getSignDate());
         }
     }
 }

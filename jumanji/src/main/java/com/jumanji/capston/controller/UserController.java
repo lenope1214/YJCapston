@@ -1,7 +1,7 @@
 package com.jumanji.capston.controller;
 
 import com.jumanji.capston.data.User;
-import com.jumanji.capston.service.UserService;
+import com.jumanji.capston.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1")
 public class UserController  {
     @Autowired
-    UserService userService;
+    UserServiceImpl userService;
 
 
     @Transactional(readOnly = true)
@@ -26,7 +26,7 @@ public class UserController  {
     @Transactional(readOnly = true)
     @GetMapping("/userList") // getUserList
     public ResponseEntity<?> getUserList(@RequestHeader String authorization) {
-        return userService.findAll(authorization);
+        return userService.getList(authorization);
     }
 
     @Transactional(readOnly = true)
@@ -44,7 +44,7 @@ public class UserController  {
     @Transactional
     @PatchMapping("/user") // patch user
     public ResponseEntity<?> patchUser(@RequestBody User.Request request, @RequestHeader String authorization) {
-        return userService.patchUser(authorization, request);
+        return userService.patch(authorization, request);
     }
 
 

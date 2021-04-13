@@ -41,9 +41,8 @@ public class Menu {
     private Date modDate = new Date();
 
     @Builder(builderMethodName = "init")
-    public Menu(String id, String name, String intro, int price, int duration, String imgPath) {
-        this.id = id + name;
-//        this.name = name;
+    public Menu(String id, String intro, int price, int duration, String imgPath) {
+        this.id = id;
         this.intro = intro;
         this.price = price;
         this.duration = duration;
@@ -74,6 +73,7 @@ public class Menu {
         private int duration;
         private char isSale;
         private char isPopular;
+        private MultipartFile img;
 
 //        public String getMenuId(Menu.Request request){
 //            return request.getShopId() + request.getName();
@@ -92,7 +92,8 @@ public class Menu {
         private String imgPath;
 
         public Response(Menu menu){
-            this.id = menu.getId().substring(0,10);
+//            this.id = menu.getId().substring(0,10);
+            System.out.println("결과 name : " + menu.getId().substring(10).replace("_", " "));
             this.name = menu.getId().substring(10).replace("_", " ");
             this.intro = menu.getIntro();
             this.price = menu.getPrice();
@@ -131,7 +132,7 @@ public class Menu {
 //    @Column(insertable = false, updatable = false)
 //    private Long menu_id ; // 메뉴번호
 //
-//    @ManyToOne
+//    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name="shop_id",nullable = false)
 //    private Shop shop;//매장번호
 //
