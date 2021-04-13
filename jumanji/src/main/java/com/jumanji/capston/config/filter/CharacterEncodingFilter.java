@@ -1,4 +1,4 @@
-package com.jumanji.capston.config.Filter;
+package com.jumanji.capston.config.filter;
 
 
 import javax.servlet.*;
