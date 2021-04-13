@@ -14,9 +14,9 @@ files:
 hooks:
   BeforeInstall:
     - location: killport.bat
-      timeout: 5
-    - location: deletejar.bat
       timeout: 15
+    - location: deletejar.bat
+      timeout: 5
   AfterInstall:
     # location은 프로젝트의 root경로를 기준
     - location: deploy.bat
