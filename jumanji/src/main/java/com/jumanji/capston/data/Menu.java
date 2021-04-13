@@ -104,6 +104,7 @@ public class Menu {
         public Response(Menu menu){
 //            this.id = menu.getId().substring(0,10);
             System.out.println("결과 name : " + menu.getId().substring(10).replace("_", " "));
+            this.id = menu.getId();
             this.name = menu.getId().substring(10).replace("_", " ");
             this.intro = menu.getIntro();
             this.price = menu.getPrice();
