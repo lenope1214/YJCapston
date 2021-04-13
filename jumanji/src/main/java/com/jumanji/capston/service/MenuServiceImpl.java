@@ -46,7 +46,10 @@ public class MenuServiceImpl implements MenuService, BasicService {
 
     @Override
     public ResponseEntity<?> get(String menuId) {
-        return null;
+        isPresent(menuId);
+        Menu menu = menuRepository.findById(menuId).get();
+        Menu.Response response = new Menu.Response(menu);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Override
