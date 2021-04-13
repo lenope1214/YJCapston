@@ -28,6 +28,8 @@ public class MenuServiceImpl implements MenuService, BasicService {
     UserServiceImpl userService;
     @Autowired
     ShopServiceImpl shopService;
+    @Autowired
+    MenuServiceImpl menuService;
 //    public BigDecimal getMenuSeqNextVal() {
 //        return menuRepository.getMenuSeqNextVal();
 //    }
@@ -119,6 +121,17 @@ public class MenuServiceImpl implements MenuService, BasicService {
         throw new ForbiddenException();
     }
 
+    public ResponseEntity<?> patchStatus(String authorization, String menuId, String target) {
+        String loginId = userService.getMyId(authorization);
+        shopService.isOwnShop(loginId, menuId.substring(0,10));
+        shopService.isPresent(menuId.substring(0,10));
+        menuService.isPresent(menuId);
+        Menu menu = menuService.getMenuInfo(menuId);
+        menu.reverseStatus(target);
+        menuRepository.save(menu);
+        return new ResponseEntity<>(menu.getIsPopular(), HttpStatus.OK);
+    }
+
     // 있는 메뉴인지 확인
     public boolean isEmpty(String id){
         if(menuRepository.findById(id).isEmpty())return true;
@@ -129,4 +142,5 @@ public class MenuServiceImpl implements MenuService, BasicService {
         if(menuRepository.findById(menuId).isPresent())return true;
         throw new MenuNotFoundException();
     }
+
 }

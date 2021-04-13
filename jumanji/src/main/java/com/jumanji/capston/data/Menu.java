@@ -51,6 +51,16 @@ public class Menu {
         this.imgPath = imgPath;
     }
 
+    public void reverseStatus(String target) {
+        switch (target){
+            case "popular":
+                this.isPopular = this.isPopular == 'Y' ? 'N' : 'Y';
+                break;
+            case "sale":
+                this.isSale = this.isSale == 'Y' ? 'N' : 'Y';
+        }
+    }
+
     @Getter @Setter
     public static class info{
         private String shopId;

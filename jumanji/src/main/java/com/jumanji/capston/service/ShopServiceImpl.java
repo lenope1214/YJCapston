@@ -195,7 +195,7 @@ public class ShopServiceImpl implements ShopService, BasicService {
                 return new ResponseEntity<>(reverseIsRsPos(shop), HttpStatus.OK);
             }
         }
-        return new ResponseEntity<>("매장번호가 일치하는 매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
+        return null;
     }
 
     public ResponseEntity<?> getShopByShopId(String shopId) {
