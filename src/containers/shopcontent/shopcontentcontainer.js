@@ -17,6 +17,7 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
     const [pw, setPw] = useState("");
     const [modal, setModal] = useState(false);
     const [mapModal, setmapModal] = useState(false);
+
     const [menu, setMenu] = useState([
         {
             name: "",
@@ -38,11 +39,11 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
         imgPath: "",
     });
 
-    const [priceSum, setPriceSum] = useState(0);
     const [jmMenu, setJmMenu] = useState([]);
-    const [latlagaddress, setlatlagaddress] = useState();
+
     const [lat, setlat] = useState();
     const [lag, setlag] = useState();
+    const [pricesum, setpricesum] = useState([]);
 
     const openhandleModal = () => {
         setmapModal(true);
@@ -71,7 +72,6 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
     };
 
     const param = useParams();
-    console.log(param);
 
     useEffect(() => {
         if (param.shopId === undefined) {
@@ -84,7 +84,6 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
     const getinfo = () => {
         getshopinfo(param.shopId)
             .then((res) => {
-                console.log(res.data);
                 setShopIntro(res.data);
             })
 
@@ -92,36 +91,51 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
                 alert(err);
             });
     };
-
+    let sum = 0;
     const handleMenu = (name, price) => {
-        let a = 0;
-        if (a === 0) {
+        let a = 1;
+
+        if (a === 1) {
             setJmMenu([...jmMenu, { name, price, count: 1 }]);
-            a = 1;
+            a = 2;
         }
+
         for (let i = 0; i < jmMenu.length; i++) {
             if (jmMenu[i].name === name) {
                 const copy = [...jmMenu];
                 copy[i].count++;
+
+                sum = jmMenu[i].count * jmMenu[i].price;
+
+                setpricesum([{ sum }]);
+
+                // for (let j = 0 ; j < jmMenu.length; j++){
+                //     jmMenu[i];
+                // }
+                // for (let j = 0; j < jmMenu.length; j++) {
+                //     setpricesum(sum[i]);
+                // }
+
                 setJmMenu(copy);
                 break;
             }
         }
+        console.log(pricesum);
     };
+
     // ... < 앞에 있는것을 지우지않고 추가하는 것
 
     const handleDeleteMenu = (name) => {
         const filteredMenu = jmMenu.filter(({ name: filtername }) => {
-            console.log(name, filtername);
             return name !== filtername;
         });
+
         setJmMenu(filteredMenu);
     };
 
     const getmenu = () => {
         getshopmenu(param.shopId)
             .then((res) => {
-                console.log(res.data);
                 const getmenulist = res.data.map((getmenulist) => {
                     return {
                         name: getmenulist.name,
@@ -131,7 +145,6 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
                     };
                 });
                 setMenu(getmenulist);
-                console.log(menu);
             })
             .catch((err) => {
                 console.log(err);
@@ -169,7 +182,6 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
 
     // 위도경도 반환
     const latlng = () => {
-        console.log(shopIntro);
         Geocode.fromAddress(shopIntro.address + shopIntro.addressDetail).then(
             (response) => {
                 const { lat, lng } = response.results[0].geometry.location;

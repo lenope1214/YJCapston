@@ -25,8 +25,8 @@ const Shopcontent = ({
     mapModal,
     openhandleModal,
     closehandleModal,
+    priceSum,
 }) => {
-    console.log(isLogin);
     var x = (lat *= 1);
     var y = (lag *= 1);
 
@@ -250,10 +250,13 @@ const Shopcontent = ({
                             </div>
                             <div class="jmallprice">
                                 <span>합계</span>
-                                {jmMenu.map((jmlist) => {
-                                    const priceall = (jmlist.price *= 1);
 
-                                    return <div class="jmprice"></div>;
+                                {jmMenu.map((jmlist) => {
+                                    return (
+                                        <div class="jmprice8">
+                                            {jmlist.price}
+                                        </div>
+                                    );
                                 })}
                             </div>
 
