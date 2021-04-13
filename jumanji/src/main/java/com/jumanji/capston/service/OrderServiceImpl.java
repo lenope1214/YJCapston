@@ -13,7 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class OrderServiceImpl implements OrderService, BasicService {
@@ -40,9 +42,18 @@ public class OrderServiceImpl implements OrderService, BasicService {
         return orderRepository.findAll();
     }
 
-    public ResponseEntity<?> getOrderByOrderId(String orderId) {
-
-        return new ResponseEntity<>(orderRepository.findById(orderId), HttpStatus.OK);
+    public ResponseEntity<?> getOrderByCartId(String cartId) {
+        Set<Order> orderList = orderRepository.findByIdContains(cartId);
+        List<Order.Response> response = new ArrayList<>();
+        System.out.println("주문메뉴 개수 : " + orderList.size());
+        for(Order order : orderRepository.findByIdContains(cartId)){
+            System.out.println("orderList info \n" +
+                    "order.getId() : "+ order.getId() + "\n" +
+                    "order.getMenuId : " + order.getMenu().getId().substring(10) +"\n" +
+                    "order.get");
+            response.add(new Order.Response(order));
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 
@@ -108,7 +119,8 @@ public class OrderServiceImpl implements OrderService, BasicService {
                 .tab(table)
                 .build();
         order.patch(requestOrder);
-        return new ResponseEntity<>(order, HttpStatus.OK);
+        Order.Response response = new Order.Response(order);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 

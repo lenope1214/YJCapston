@@ -72,6 +72,9 @@ dependencies {
 //    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.14.1'
 
 //    compile fileTree(dir: 'lib', include: ['*.jar'])
+
+    //aws s3
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-aws', version: '2.2.1.RELEASE', ext: 'pom'
 }
 
 //test {

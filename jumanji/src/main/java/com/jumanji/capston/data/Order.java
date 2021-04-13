@@ -54,14 +54,16 @@ public class Order implements Serializable {
     public static class Response{
         private String orderId;
         private int quantity;
-        private String menuId;
-        private String tabId;
+        private String shopId;
+        private String menu;
+        private String tab;
 
         public Response(Order order){
             if(order.getId() != null)this.orderId = order.getId();
             this.quantity = order.getQuantity();
-            this.menuId = order.getMenu().getId();
-            this.tabId = order.getTab().getId();
+            this.shopId = order.getMenu().getId().substring(0, 10);
+            this.menu = order.getMenu().getId().substring(10);
+            this.tab = order.getTab().getId().substring(10);
         }
     }
 

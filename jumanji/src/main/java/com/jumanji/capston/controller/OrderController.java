@@ -15,9 +15,9 @@ public class OrderController {
 
 
     @Transactional(readOnly = true)
-    @GetMapping("/order/{orderId}")
-    public ResponseEntity<?> selectOrderByOrderId(@PathVariable String orderId) {
-        return orderService.getOrderByOrderId(orderId);
+    @GetMapping("/order/{cartId}")
+    public ResponseEntity<?> selectOrderByOrderId(@PathVariable String cartId) {
+        return orderService.getOrderByCartId(cartId);
     }
 
     @Transactional
@@ -29,7 +29,7 @@ public class OrderController {
     }
 
     @Transactional
-    @PatchMapping("/order/table")
+    @PatchMapping("/order")
     public ResponseEntity<?> patchOrder(@RequestBody Order.Request request) {
         return orderService.patch(request);
     }
