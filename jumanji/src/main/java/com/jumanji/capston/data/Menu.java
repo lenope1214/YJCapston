@@ -41,9 +41,8 @@ public class Menu {
     private Date modDate = new Date();
 
     @Builder(builderMethodName = "init")
-    public Menu(String id, String name, String intro, int price, int duration, String imgPath) {
-        this.id = id + name;
-//        this.name = name;
+    public Menu(String id, String intro, int price, int duration, String imgPath) {
+        this.id = id;
         this.intro = intro;
         this.price = price;
         this.duration = duration;
@@ -94,6 +93,7 @@ public class Menu {
 
         public Response(Menu menu){
 //            this.id = menu.getId().substring(0,10);
+            System.out.println("결과 name : " + menu.getId().substring(10).replace("_", " "));
             this.name = menu.getId().substring(10).replace("_", " ");
             this.intro = menu.getIntro();
             this.price = menu.getPrice();

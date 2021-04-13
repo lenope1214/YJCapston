@@ -26,7 +26,7 @@ public class Order implements Serializable {
     private Menu menu;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tab_id", insertable = false, updatable = false)
+    @JoinColumn(name = "tab_id")
     private Tab tab;
 
     @Builder
@@ -40,6 +40,7 @@ public class Order implements Serializable {
     @Getter
     @NoArgsConstructor @AllArgsConstructor
     public static class Request {
+        private String orderId;
         private Timestamp cartId;
         private int quantity;
         private String menuId;
@@ -54,11 +55,17 @@ public class Order implements Serializable {
         private String tabId;
 
         public Response(Order order){
-            this.orderId = order.getId();
+            if(order.getId() != null)this.orderId = order.getId();
             this.quantity = order.getQuantity();
             this.menuId = order.getMenu().getId();
             this.tabId = order.getTab().getId();
         }
+    }
+
+    public void patch(Order order){
+        if(order.getQuantity() != 0)this.quantity = order.getQuantity();
+        if(order.getTab() != null)this.tab = order.getTab();
+        if(order.getMenu() != null)this.menu = order.getMenu();
     }
 }
 

@@ -32,8 +32,7 @@ public class MenuServiceImpl implements MenuService, BasicService {
 //        return menuRepository.getMenuSeqNextVal();
 //    }
 
-    public Menu getMenu(String menuId) {
-        System.out.println("메뉴 Id : " + menuId);
+    public Menu getMenuInfo(String menuId) {
         isPresent(menuId);
         Menu menu = menuRepository.findById(menuId).get();
         return menu;
@@ -76,16 +75,19 @@ public class MenuServiceImpl implements MenuService, BasicService {
         if (request.getImg() != null)
             imgPath = storageService.store(request.getImg(), request.getName().replace(" ", "_"), path.split("/"));
         System.out.println("메뉴 이미지 path : " + imgPath);
+        System.out.println("메뉴명 : " + request.getName());
+        System.out.println("넣는 메뉴명 : " + request.getName().replace(" ", "_"));
+        System.out.println("넣는 메뉴 id : " + menuId);
         menu = Menu.init()
                 .id(menuId)
-                .name(request.getName().replace(" ", "_"))
                 .intro(request.getIntro())
                 .price(request.getPrice())
                 .duration(request.getDuration())
                 .imgPath(imgPath)
                 .build();
-        Menu result = menuRepository.save(menu);
-        Menu.Response response = new Menu.Response(result);
+        System.out.println("save 전 menu Id  : " + menu.getId());
+        menuRepository.save(menu);
+        Menu.Response response = new Menu.Response(menu);
 
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }

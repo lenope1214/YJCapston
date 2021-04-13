@@ -7,13 +7,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 
 @Getter
 @Setter
 @Entity
 @Table(name="tables")
-public class Tab {
+public class Tab implements Serializable {
 
 //    @EmbeddedId
 //    private TabId id;
