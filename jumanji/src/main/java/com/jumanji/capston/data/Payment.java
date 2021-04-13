@@ -1,5 +1,6 @@
 package com.jumanji.capston.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ public class Payment implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
+    @JsonIgnore
     private Order order ; // 주문번호
     @Column(name="use_point")
     private int usePoint; // 사용된 포인트

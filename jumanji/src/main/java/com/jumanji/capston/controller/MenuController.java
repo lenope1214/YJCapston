@@ -67,4 +67,19 @@ public class MenuController  {
         System.out.println("메뉴 삭제 요청");
         return menuService.delete(authorization, menuId);
     }
+
+    @Transactional
+    @PatchMapping("/menu/{menuId}/popular")
+    public ResponseEntity<?> updateShopIsOpen(@RequestHeader String authorization, @PathVariable String menuId) {
+        return menuService.patchStatus(authorization, menuId, "popular");
+
+    }
+
+
+    //
+    @Transactional
+    @PatchMapping("/menu/{menuId}/sale")
+    public ResponseEntity<?> updateShopIsRsPos(@RequestHeader String authorization, @PathVariable String menuId) {
+        return menuService.patchStatus(authorization, menuId, "sale");
+    }
 }

@@ -1,5 +1,6 @@
 package com.jumanji.capston.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,10 +25,12 @@ public class Cart implements Serializable {
     private String orderRequest; // 요청사항
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shop_id", updatable = false)
+    @JsonIgnore
     private Shop shop;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", updatable = false)
+    @JsonIgnore
     private User user;
 
     @Builder

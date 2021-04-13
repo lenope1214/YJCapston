@@ -1,4 +1,5 @@
 package com.jumanji.capston.data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ public class Review {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
+    @JsonIgnore
     private Shop shop;//매장번호 !!복합키설정 필요함!!
     private String content;//리뷰내용
     @Column(name = "reg_time")
@@ -25,6 +27,7 @@ public class Review {
     private String imgUrl;//이미지경로
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id",nullable = false)
+    @JsonIgnore
     private User user;
 
     public class Request{

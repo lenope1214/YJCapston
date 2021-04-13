@@ -1,5 +1,6 @@
 package com.jumanji.capston.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class Chatbot {
     private String answer;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
+    @JsonIgnore
     private Shop shop;
 
     public class Request {
