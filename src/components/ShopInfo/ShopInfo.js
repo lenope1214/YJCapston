@@ -49,7 +49,7 @@ const ShopInfo = ({
     const postCodeStyle = {
         display: "block",
         position: "fixed",
-        top: "50%",
+        top: "60%",
         width: "400px",
         height: "500px",
         padding: "7px",

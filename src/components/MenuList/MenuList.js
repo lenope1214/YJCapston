@@ -6,7 +6,6 @@ const MenuList = ({ menues, removeMenu, shopId }) => {
     return (
         <>
             <S.MenuWrap>
-                
                 <div className="menu-container">
                     <h2 className="menu-title">메뉴 목록</h2>
                     <Link to={`/create/${shopId}`} className="btn-link">메뉴 추가하기</Link>

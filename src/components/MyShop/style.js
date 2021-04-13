@@ -149,5 +149,9 @@ th, td {
     border-radius: 7px;
     border: 0px;
 }
-
+.empty-list {
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+}
 `;

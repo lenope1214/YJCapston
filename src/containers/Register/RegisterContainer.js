@@ -181,6 +181,7 @@ const RegisterContainer = () => {
     };
 
     const handleComplete = (data) => {
+        console.log(data);
         let fullAddress = data.address;
         let extraAddress = "";
 
@@ -196,7 +197,7 @@ const RegisterContainer = () => {
             }
             fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
         }
-
+        console.log(extraAddress);
         handleRoadAddr(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
     };
 

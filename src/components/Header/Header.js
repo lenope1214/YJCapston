@@ -9,7 +9,7 @@ const Header = () => {
         <>
             <S.headerWrap>
                 <header>
-                    <Link to="/" class="shoppage">
+                    <Link to="/" class="shoppage" onClick={() => {window.scrollTo(0,0)}}>
                         <div className="left-nav">
                             주문
                             <span

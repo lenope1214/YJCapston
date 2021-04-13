@@ -11,6 +11,7 @@ export const headerWrap = styled.div`
     > header {
         padding-left: 5%;
         width: 100%;
+        top:0;
         color: white;
         display: flex;
         padding-top: 30px;
@@ -18,8 +19,9 @@ export const headerWrap = styled.div`
         font-weight: 700;
         font-size: 33px;
         font-family: "Wemakeprice-Bold";
-        position: relative;
+        position: fixed;
         background-color: white;
+        z-index: 10;
     }
     a {
         text-decoration: none;

@@ -6,15 +6,20 @@ import {
     getshopmenu,
     postLogin,
 } from "../../lib/shopcontent/index";
+import Geocode from "react-geocode";
+Geocode.setApiKey("AIzaSyBvpJoGP7dKHRovDgP4CSByczdZC7vrz18");
+Geocode.setLanguage("kr");
+Geocode.setRegion("kr");
 
 const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
     const history = useHistory();
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
     const [modal, setModal] = useState(false);
+    const [mapModal, setmapModal] = useState(false);
     const [menu, setMenu] = useState([
         {
-            id: "",
+            name: "",
             img: "",
             intro: "",
             price: "",
@@ -35,6 +40,17 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
 
     const [priceSum, setPriceSum] = useState(0);
     const [jmMenu, setJmMenu] = useState([]);
+    const [latlagaddress, setlatlagaddress] = useState();
+    const [lat, setlat] = useState();
+    const [lag, setlag] = useState();
+
+    const openhandleModal = () => {
+        setmapModal(true);
+    };
+
+    const closehandleModal = () => {
+        setmapModal(false);
+    };
 
     const openmodal = () => {
         setModal(true);
@@ -77,14 +93,14 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
             });
     };
 
-    const handleMenu = (id, price) => {
+    const handleMenu = (name, price) => {
         let a = 0;
         if (a === 0) {
-            setJmMenu([...jmMenu, { id, price, count: 1 }]);
+            setJmMenu([...jmMenu, { name, price, count: 1 }]);
             a = 1;
         }
         for (let i = 0; i < jmMenu.length; i++) {
-            if (jmMenu[i].id === id) {
+            if (jmMenu[i].name === name) {
                 const copy = [...jmMenu];
                 copy[i].count++;
                 setJmMenu(copy);
@@ -94,10 +110,10 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
     };
     // ... < 앞에 있는것을 지우지않고 추가하는 것
 
-    const handleDeleteMenu = (id) => {
-        const filteredMenu = jmMenu.filter(({ id: filterId }) => {
-            console.log(id, filterId);
-            return id !== filterId;
+    const handleDeleteMenu = (name) => {
+        const filteredMenu = jmMenu.filter(({ name: filtername }) => {
+            console.log(name, filtername);
+            return name !== filtername;
         });
         setJmMenu(filteredMenu);
     };
@@ -108,7 +124,7 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
                 console.log(res.data);
                 const getmenulist = res.data.map((getmenulist) => {
                     return {
-                        id: getmenulist.id,
+                        name: getmenulist.name,
                         img: getmenulist.imgPath,
                         intro: getmenulist.intro,
                         price: getmenulist.price,
@@ -147,6 +163,24 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
                 }
             });
     };
+    useEffect(() => {
+        setTimeout(latlng(), 1000);
+    });
+
+    // 위도경도 반환
+    const latlng = () => {
+        console.log(shopIntro);
+        Geocode.fromAddress(shopIntro.address + shopIntro.addressDetail).then(
+            (response) => {
+                const { lat, lng } = response.results[0].geometry.location;
+                setlat(lat);
+                setlag(lng);
+            },
+            (error) => {
+                console.error(error);
+            }
+        );
+    };
 
     return (
         <Shopcontent
@@ -165,6 +199,11 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
             handleMenu={handleMenu}
             jmMenu={jmMenu}
             handleDeleteMenu={handleDeleteMenu}
+            lat={lat}
+            lag={lag}
+            mapModal={mapModal}
+            openhandleModal={openhandleModal}
+            closehandleModal={closehandleModal}
         />
     );
 };
