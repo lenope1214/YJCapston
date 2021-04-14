@@ -2,6 +2,7 @@ package com.jumanji.capston.service;
 
 import com.jumanji.capston.data.Payment;
 import com.jumanji.capston.repository.PaymentRepository;
+import com.jumanji.capston.service.interfaces.BasicService;
 import com.jumanji.capston.service.interfaces.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

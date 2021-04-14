@@ -7,18 +7,20 @@ import com.jumanji.capston.repository.OrderMenuRepository;
 import com.jumanji.capston.repository.UserRepository;
 import com.jumanji.capston.service.exception.OrderMenuException.OrderMenuNotFoundException;
 import com.jumanji.capston.service.exception.ShopException.ShopMissMatchException;
-import com.jumanji.capston.service.interfaces.OrderService;
+import com.jumanji.capston.service.interfaces.BasicService;
+import com.jumanji.capston.service.interfaces.OrderMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Service
-public class OrderMenuServiceImpl implements OrderService, BasicService {
+public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
     @Autowired
     OrderMenuRepository orderRepository;
     @Autowired
@@ -28,7 +30,7 @@ public class OrderMenuServiceImpl implements OrderService, BasicService {
     @Autowired
     TableServiceImpl tableService;
     @Autowired
-    OrderServiceImpl cartService;
+    OrderServiceImpl orderService;
     @Autowired
     MenuServiceImpl menuService;
 
@@ -39,11 +41,12 @@ public class OrderMenuServiceImpl implements OrderService, BasicService {
     }
 
 
-    public ResponseEntity<?> getOrderByCartId(String cartId) {
-        Set<OrderMenu> orderList = orderRepository.findByIdContains(cartId);
+    public ResponseEntity<?> getOrderMenuByCartId(Timestamp orderMenuId) {
+        System.out.println("orderMenuId : " +orderMenuId.toString());
+        Set<OrderMenu> orderList = orderRepository.findByIdContains(orderMenuId.toString());
         List<OrderMenu.Response> response = new ArrayList<>();
         System.out.println("주문메뉴 개수 : " + orderList.size());
-        for(OrderMenu order : orderRepository.findByIdContains(cartId)){
+        for(OrderMenu order : orderRepository.findByIdContains(orderMenuId.toString())){
             System.out.println("orderList info \n" +
                     "order.getId() : "+ order.getId() + "\n" +
                     "order.getMenuId : " + order.getMenu().getId().substring(10) +"\n" +
@@ -67,30 +70,30 @@ public class OrderMenuServiceImpl implements OrderService, BasicService {
     @Override
     public ResponseEntity<?> post(OrderMenu.Request request) {
         System.out.println("post order request info \n" +
-                "cartId : " + request.getCartId() + "\n" +
+                "orderId : " + request.getOrderId() + "\n" +
                 "menuId : " + request.getMenuId() + "\n" +
                 "quantity : " + request.getQuantity() + "\n" +
                 "tabId : " + request.getTabId()
         );
-        OrderMenu order = null;
-        long cartId = request.getCartId().getTime();
-        cartService.isPresent(request.getCartId());
+        OrderMenu orderMenu = null;
+        long cartId = request.getOrderId().getTime();
+        orderService.isPresent(request.getOrderId());
         menuService.isPresent(request.getMenuId());
 
 
         int orderCount = orderRepository.countByIdContains("" + cartId);
-        String orderId = "" + cartId + String.format("%02d", orderCount);
+        String orderMenuId = "" + cartId + String.format("%02d", orderCount);
         Menu menu = menuService.getMenuInfo(request.getMenuId());
         Tab table = tableService.getTableInfo(request.getTabId());
-        order = OrderMenu.builder()
-                .id(orderId)
+        orderMenu = OrderMenu.builder()
+                .id(orderMenuId)
                 .quantity(request.getQuantity())
                 .menu(menu)
                 .tab(table)
                 .build();
-        System.out.println(order.getTab().getId());
-        orderRepository.save(order);
-        OrderMenu.Response response = new OrderMenu.Response(order);
+        System.out.println(orderMenu.getTab().getId());
+        orderRepository.save(orderMenu);
+        OrderMenu.Response response = new OrderMenu.Response(orderMenu);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
@@ -101,8 +104,8 @@ public class OrderMenuServiceImpl implements OrderService, BasicService {
         Tab table = null;
 
         //유효성 검사
-        isPresent(request.getOrderId());
-        order = orderRepository.findById(request.getOrderId()).get();
+        isPresent(request.getOrderMenuId());
+        order = orderRepository.findById(request.getOrderMenuId()).get();
 
         equalsShop(request.getMenuId().substring(0,10) , order.getMenu().getId().substring(0, 10));
         shopService.isPresent(request.getMenuId().substring(0,10));

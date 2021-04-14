@@ -1,12 +1,18 @@
 package com.jumanji.capston.service.interfaces;
 
-import com.jumanji.capston.data.OrderMenu;
+import com.jumanji.capston.data.Order;
 import org.springframework.http.ResponseEntity;
 
+import java.sql.Timestamp;
+
+/** Order service Interface **/
+
+
 public interface OrderService {
-    public ResponseEntity<?> get(String orderId);
-    public ResponseEntity<?> getList(String cartId);
-    public ResponseEntity<?> post(OrderMenu.Request request);
-    public ResponseEntity<?> patch(OrderMenu.Request request);
-    public ResponseEntity<?> delete(String orderId);
+
+    ResponseEntity<?> get(Timestamp cartId);
+    ResponseEntity<?> getList(String userId);
+    ResponseEntity<?> post(String authorization, Order.Request request);
+    ResponseEntity<?> patch(String authorization, Order.Request request);
+    ResponseEntity<?> delete(Timestamp cartId);
 }

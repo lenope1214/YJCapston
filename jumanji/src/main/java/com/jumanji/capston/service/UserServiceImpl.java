@@ -8,6 +8,7 @@ import com.jumanji.capston.service.exception.Auth.ForbiddenException;
 import com.jumanji.capston.service.exception.UserException.PasswordMissMatchException;
 import com.jumanji.capston.service.exception.UserException.UserHasExistException;
 import com.jumanji.capston.service.exception.UserException.UserNotFoundException;
+import com.jumanji.capston.service.interfaces.BasicService;
 import com.jumanji.capston.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;

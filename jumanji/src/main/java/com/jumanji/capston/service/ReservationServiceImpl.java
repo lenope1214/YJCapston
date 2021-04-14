@@ -4,6 +4,7 @@ import com.jumanji.capston.data.OrderMenu;
 import com.jumanji.capston.data.Reservation;
 import com.jumanji.capston.repository.OrderMenuRepository;
 import com.jumanji.capston.repository.ReservationRepository;
+import com.jumanji.capston.service.interfaces.BasicService;
 import com.jumanji.capston.service.interfaces.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

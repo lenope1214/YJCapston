@@ -2,6 +2,7 @@ package com.jumanji.capston.service;
 
 import com.jumanji.capston.data.Chatbot;
 import com.jumanji.capston.repository.ChatbotRepository;
+import com.jumanji.capston.service.interfaces.BasicService;
 import com.jumanji.capston.service.interfaces.ChatbotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

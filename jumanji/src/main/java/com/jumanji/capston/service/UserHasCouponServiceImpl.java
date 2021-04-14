@@ -3,6 +3,7 @@ package com.jumanji.capston.service;
 import com.jumanji.capston.data.UserHasCoupon;
 import com.jumanji.capston.data.UserHasCouponId;
 import com.jumanji.capston.repository.UserHasCouponRepository;
+import com.jumanji.capston.service.interfaces.BasicService;
 import com.jumanji.capston.service.interfaces.UserHasCouponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

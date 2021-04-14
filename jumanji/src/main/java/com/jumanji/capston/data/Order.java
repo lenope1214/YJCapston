@@ -45,7 +45,7 @@ public class Order implements Serializable {
     @Getter @AllArgsConstructor
     @NoArgsConstructor
     public static class Request {
-        private Timestamp cartId;
+        private Timestamp orderId;
         private int people;
         private String orderRequest;
         private String shopId;
@@ -54,18 +54,23 @@ public class Order implements Serializable {
 
     @Getter
     public static class Response{
-        private Timestamp cartId;
+        private Timestamp orderId;
         private int people;
         private String orderRequest;
         private String shopId;
         private String userId;
 
         public Response(Order cart) {
-            this.cartId = cart.getId();
+            this.orderId = cart.getId();
             this.people = cart.getPeople();
             this.orderRequest = cart.getOrderRequest();
             this.shopId = cart.getShop().getId();
             this.userId = cart.getUser().getId();
         }
+    }
+
+    public void update(Request request){
+        if(request.orderRequest != null)this.orderRequest = request.getOrderRequest();
+        if(request.people != 0) this.people = request.getPeople();
     }
 }

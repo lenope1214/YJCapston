@@ -7,31 +7,34 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+
 @RestController
 @RequestMapping("/api/v1")
 public class OrderMenusController {
     @Autowired
-    OrderMenuServiceImpl orderService;
+    OrderMenuServiceImpl orderMenuService;
 
 
     @Transactional(readOnly = true)
-    @GetMapping("/order/{cartId}")
-    public ResponseEntity<?> selectOrderByOrderId(@PathVariable String cartId) {
-        return orderService.getOrderByCartId(cartId);
+    @GetMapping("/orderMenu/{orderMenuId}")
+    public ResponseEntity<?> selectOrderByOrderId(@PathVariable Timestamp orderMenuId) {
+        System.out.println("orderMenuId : " + orderMenuId);
+        return orderMenuService.getOrderMenuByCartId(orderMenuId);
     }
 
     @Transactional
-    @PostMapping("/order")
+    @PostMapping("/orderMenu")
     public ResponseEntity<?> postOrder(@RequestBody OrderMenu.Request request) {
-//        return orderService.postOrder(request);
+//        return orderMenuService.postOrder(request);
 
-        return orderService.post(request);
+        return orderMenuService.post(request);
     }
 
     @Transactional
-    @PatchMapping("/order")
+    @PatchMapping("/orderMenu")
     public ResponseEntity<?> patchOrder(@RequestBody OrderMenu.Request request) {
-        return orderService.patch(request);
+        return orderMenuService.patch(request);
     }
 
 }

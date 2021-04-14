@@ -1,6 +1,7 @@
 package com.jumanji.capston.controller;
 
 import com.jumanji.capston.data.Order;
+import com.jumanji.capston.service.OrderMenuServiceImpl;
 import com.jumanji.capston.service.OrderServiceImpl;
 import com.jumanji.capston.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,34 +15,39 @@ import java.sql.Timestamp;
 @RequestMapping("/api/v1")
 public class OrderController {
     @Autowired
-    OrderServiceImpl cartService;
+    OrderServiceImpl orderService;
     @Autowired
     UserServiceImpl userService;
 
+//    @Transactional(readOnly = true)
+//    @GetMapping("/cartId")
+//    public ResponseEntity<?> getCartId(){
+//        return orderService.getCartId();
+//    }
+
     @Transactional(readOnly = true)
-    @GetMapping("/cartId")
-    public ResponseEntity<?> getCartId(){
-        return cartService.getCartId();
+    @GetMapping("/order/{orderId}")
+    public ResponseEntity<?> getOrder(@PathVariable Timestamp orderId){
+        return orderService.get(orderId);
     }
 
     @Transactional(readOnly = true)
-    @GetMapping("/cart/{cartId}")
-    public ResponseEntity<?> getCart(@PathVariable Timestamp cartId){
-
-        return cartService.get(cartId);
-    }
-
-    @Transactional(readOnly = true)
-    @GetMapping("/cart/myCartList")
-    public ResponseEntity<?> getCartList(@RequestHeader String authorization){
+    @GetMapping("/order/myOrderList")
+    public ResponseEntity<?> getOrderList(@RequestHeader String authorization){
         String loginId = userService.getMyId(authorization);
-        return cartService.getList(loginId);
+        return orderService.getList(loginId);
     }
 
     @Transactional
-    @PostMapping("/cart")
-    public ResponseEntity<?> postCart(@RequestBody Order.Request request){
+    @PostMapping("/order")
+    public ResponseEntity<?> postOrder(@RequestHeader String authorization, @RequestBody Order.Request request){
 //        System.out.println("request info \n" + request.getQuantity() +"\n" + request.getOrderRequest() +"\n" + request.getShopId() +"\n" + request.getUserId());
-        return cartService.post(request);
+        return orderService.post(authorization, request);
+    }
+
+    @Transactional
+    @PatchMapping("/order")
+    public ResponseEntity<?> patchOrder(@RequestHeader String authorization, @RequestBody Order.Request request){
+        return orderService.patch(authorization, request);
     }
 }

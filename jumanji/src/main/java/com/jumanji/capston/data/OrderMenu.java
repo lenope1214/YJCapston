@@ -43,8 +43,8 @@ public class OrderMenu implements Serializable {
     @Getter
     @NoArgsConstructor @AllArgsConstructor
     public static class Request {
-        private String orderId;
-        private Timestamp cartId;
+        private String orderMenuId;
+        private Timestamp orderId;
         private int quantity;
         private String menuId;
         private String tabId; // 테이블번호 : 사업자번호 + 테이블번호 ( 2 )
@@ -52,18 +52,18 @@ public class OrderMenu implements Serializable {
 
     @Getter
     public static class Response{
-        private String orderId;
+        private String orderMenuId;
         private int quantity;
         private String shopId;
-        private String menu;
-        private String tab;
+        private String menuName;
+        private String tableNo;
 
         public Response(OrderMenu order){
-            if(order.getId() != null)this.orderId = order.getId();
+            if(order.getId() != null)this.orderMenuId = order.getId();
             this.quantity = order.getQuantity();
             this.shopId = order.getMenu().getId().substring(0, 10);
-            this.menu = order.getMenu().getId().substring(10);
-            this.tab = order.getTab().getId().substring(10);
+            this.menuName = order.getMenu().getId().substring(10);
+            this.tableNo = order.getTab().getId().substring(10);
         }
     }
 

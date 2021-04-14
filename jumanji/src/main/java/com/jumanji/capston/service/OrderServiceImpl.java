@@ -6,7 +6,7 @@ import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.OrderRepository;
 import com.jumanji.capston.service.exception.OrderException.OrderHasExistException;
 import com.jumanji.capston.service.exception.OrderException.OrderNotFoundException;
-import com.jumanji.capston.service.interfaces.CartService;
+import com.jumanji.capston.service.interfaces.OrderService;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,35 +14,40 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 
 @Service
-public class OrderServiceImpl implements CartService {
+public class OrderServiceImpl implements OrderService {
     @Autowired
-    OrderRepository cartRepository;
+    OrderRepository orderRepository;
     @Autowired
     UserServiceImpl userService;
     @Autowired
     ShopServiceImpl shopService;
 
-    public ResponseEntity<?> getCartId() {
-        @Getter
-        @Setter
-        class Response {
-            private Timestamp cartId;
-        }
-        Response response = new Response();
-        response.setCartId(new Timestamp(System.currentTimeMillis()));
-        return new ResponseEntity<>(response, HttpStatus.OK);
+//    public ResponseEntity<?> getCartId() {
+//        @Getter
+//        @Setter
+//        class Response {
+//            private Timestamp cartId;
+//        }
+//        Response response = new Response();
+//        response.setCartId(new Timestamp(System.currentTimeMillis()));
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+//    }
+
+    public Order getOrderInfo(Timestamp orderId){
+        return orderRepository.findById(orderId).get();
     }
 
     @Override
-    public ResponseEntity<?> get(Timestamp cartId) {
-        isPresent(cartId);
+    public ResponseEntity<?> get(Timestamp orderId) {
+        isPresent(orderId);
 //        Timestamp cartIdTime = DateOperator.stringToTimestamp(cartId);
-        Order cart = cartRepository.findById(cartId).get();
+        Order cart = orderRepository.findById(orderId).get();
         Order.Response response =
                 new Order.Response(cart);
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -50,57 +55,70 @@ public class OrderServiceImpl implements CartService {
 
     @Override
     public ResponseEntity<?> getList(String userId) {
-        for (Order cart : cartRepository.findALLByUser_Id(userId)) {
+        for (Order cart : orderRepository.findALLByUser_Id(userId)) {
             System.out.println("출력");
         }
-        return new ResponseEntity<>(cartRepository.findALLByUser_Id(userId), HttpStatus.OK);
+        return new ResponseEntity<>(orderRepository.findALLByUser_Id(userId), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<?> post(Order.Request request) {
-        Order cart;
+    public ResponseEntity<?> post(String authorization, Order.Request request) {
+        Order order;
+        Shop shop;
+        User user;
+        String loginId = userService.getMyId(authorization);
+        userService.isPresent(loginId);
+        shopService.isPresent(request.getShopId());
+
         //isEmpty 는 필요 x 주문은 매번 새로운 애기 때문.
-        System.out.println("매장번호의 매장이 있나요? " + shopService.isPresent(request.getShopId()));
-        System.out.println("유저번호의 유저가 있나요? " + userService.isPresent(request.getUserId()));
-        Shop shop = shopService.isPresent(request.getShopId()) ?
-                shopService.shopRepository.findById(request.getShopId()).get() : null;
-        User user = userService.isPresent(request.getUserId()) ?
-                userService.getUserInfo(request.getUserId()) : null;
-        System.out.println("가져온 매장번호 : " + shop.getId());
-        System.out.println("가져온 유저번호 : " + user.getId());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-        cart = Order.builder()
-                .id(request.getCartId())
-                .orderRequest(request.getOrderRequest())
+        shop = shopService.getShopInfo(request.getShopId());
+        user = userService.getUserInfo(loginId);
+
+        order = Order.builder()
+                .id(new Timestamp(System.currentTimeMillis()))
+//                .orderRequest(request.getOrderRequest()) // 얘와 밑의 얘네 둘은 결제 완료 후에 들어갈 예정
+//                .people(request.getPeople())
                 .shop(shop)
                 .user(user)
                 .build();
-        cartRepository.save(cart);
-        Order.Response response = new Order.Response(cart);
+        orderRepository.save(order);
+        Order.Response response = new Order.Response(order);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<?> patch(Order.Request request) {
-        return null; // 주문수정은 .. 없어도 되지 않을까?
+    public ResponseEntity<?> patch(String authorization, Order.Request request) {
+        Order order;
+        System.out.println("request info \nrequest.getOrderId()" + request.getOrderId()+"\n" +
+                "request.getPeople" + request.getPeople() + "\n" +
+                "request.getOrderRequest" + request.getOrderRequest());
+        String loginId = userService.getMyId(authorization);
+        userService.isPresent(loginId);
+
+        //isEmpty 는 필요 x 주문은 매번 새로운 애기 때문.
+        order = getOrderInfo(request.getOrderId());
+        order.update(request);
+        orderRepository.save(order);
+        Order.Response response = new Order.Response(order);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<?> delete(Timestamp cartId) {
         System.out.println("");
         isPresent(cartId);
-        Order cart = cartRepository.findById(cartId).get();
-        cartRepository.delete(cart);
+        Order cart = orderRepository.findById(cartId).get();
+        orderRepository.delete(cart);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     public boolean isPresent(Timestamp id) {
-        if (cartRepository.findById(id).isPresent()) return true;
+        if (orderRepository.findById(id).isPresent()) return true;
         throw new OrderNotFoundException();
     }
 
     public boolean isEmpty(Timestamp id) {
-        if (cartRepository.findById(id).isEmpty()) return true;
+        if (orderRepository.findById(id).isEmpty()) return true;
         throw new OrderHasExistException();
     }
 
