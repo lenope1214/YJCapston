@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Component
-@ResponseStatus(value= HttpStatus.UNAUTHORIZED, reason="login required")
+@ResponseStatus(value = HttpStatus.UNAUTHORIZED, reason = "login required")
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
@@ -31,8 +31,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
 
     private static final List<String> EXCLUDE_URL =
-            List.of("/api/v1/login"
-                    , "/authenticate"  // 얜 필수..!
+            List.of(
+                    "/api/v1/login"
+                    , "/authenticate"
                     , "/api/v1/join"
                     , "/api/v1/shopList"
                     , "/api/v1/validate"
@@ -42,10 +43,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                     , "/api/v1/shopList"
                     , "/api/v1/menu"
                     , "/api/v1/menuList"
-                    , "/api/v1/test/uploadTest01"
-                    , "/api/v1/test/uploadTest02"
-                    , "/api/v1/test/loadImg/*"
-                );
+            );
 
 
     @Override
@@ -53,11 +51,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 //        System.out.println("In JwtRequestFilter");
+
         final String requestTokenHeader = request.getHeader("Authorization");
 //        System.out.println("TOKEN : " + requestTokenHeader );
         String username = null;
         String jwtToken = null;
-        boolean jwtFlag = false;
+        System.out.println("Authorization : " + requestTokenHeader);
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) { // 헤더에 Authorization 이 있고 Bearer로 시작하면,
             jwtToken = requestTokenHeader.substring(7);
 //            System.out.println("Parsing jwtToken : " + jwtToken);
@@ -67,42 +66,44 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             } catch (IllegalArgumentException e) {
                 System.out.println("Unable to get JWT Token");
                 response.sendError(400, "Unable to get JWT Token");
-                jwtFlag = true;
             } catch (ExpiredJwtException e) {
                 System.out.println("JWT Token has expired");
                 response.sendError(401, "JWT Token has expired"); // 401 =>
-                jwtFlag = true;
 
-            } catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 System.out.println("Username is Null!");
                 response.sendError(400, "Username is Null!");
-                jwtFlag = true;
             }
         } else {
 //            logger.warn("JWT Token does not begin with Bearer String");
         }
 //        System.out.println("토큰 체킹 ! ");
 
-        if(username != null) {
-            if(SecurityContextHolder.getContext().getAuthentication() == null){
+        if (username != null) {
+            if (SecurityContextHolder.getContext().getAuthentication() == null) {
 //                System.out.println("doFilterInternal -> username != null ... ");
                 PrincipalDetails userDetails = this.jwtUserDetailService.loadUserByUsername(username);
 
-                if(jwtTokenUtil.validateToken(jwtToken, userDetails)) {
+                if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
                     UsernamePasswordAuthenticationToken authenticationToken =
-                            new UsernamePasswordAuthenticationToken(userDetails, null ,userDetails.getAuthorities());
+                            new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
                     authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                 }
-            }else{ System.out.println("SecurityContextHolder.getContext().getAuthentication() is null"); }
-        }else{ System.out.println("token's username is null"); }
+            } else {
+                System.out.println("SecurityContextHolder.getContext().getAuthentication() is null");
+            }
+        } else {
+            if (!shouldNotFilter(request)) {
+                response.sendError(400, "please login");
+                return;
+            }
+            System.out.println("token's username is null");
+        }
 //        System.out.println("JWT 체킹 완료!!!");
 
-        if(!jwtFlag){
-            System.out.println("토큰 핉터 넘어감.");
-            filterChain.doFilter(request,response);
-        }
+        filterChain.doFilter(request, response);
     }
 
     @Override

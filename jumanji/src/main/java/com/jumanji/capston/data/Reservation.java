@@ -16,7 +16,7 @@ public class Reservation implements Serializable {
 
     @OneToOne
     @JoinColumn(name="order_id")
-    private Order order; //아이디
+    private OrderMenu order; //아이디
     private int people; // 사람 수
     private char delay; // 딜레이
     @Column(name = "arrive_time")

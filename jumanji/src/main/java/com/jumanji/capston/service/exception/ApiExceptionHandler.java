@@ -1,9 +1,10 @@
 package com.jumanji.capston.service.exception;
 
 import com.jumanji.capston.service.exception.MenuException.MenuHasExistException;
-import com.jumanji.capston.service.exception.OrderException.OrderNotFoundException;
+import com.jumanji.capston.service.exception.OrderMenuException.OrderMenuNotFoundException;
 import com.jumanji.capston.service.exception.ShopException.ShopMissMatchException;
 import com.jumanji.capston.service.exception.ShopException.ShopNotFoundException;
+import com.jumanji.capston.service.exception.UserException.DoLoginExistException;
 import com.jumanji.capston.service.exception.UserException.PasswordMissMatchException;
 import com.jumanji.capston.service.exception.UserException.UserNotFoundException;
 import org.hibernate.exception.ConstraintViolationException;
@@ -36,8 +37,8 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(OrderNotFoundException.class)
-    public ResponseEntity<?> orderNotFoundException(OrderNotFoundException ex){
+    @ExceptionHandler(OrderMenuNotFoundException.class)
+    public ResponseEntity<?> orderNotFoundException(OrderMenuNotFoundException ex){
         ApiErrorResponse response=
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
@@ -62,5 +63,13 @@ public class ApiExceptionHandler {
         ApiErrorResponse response =
                 new ApiErrorResponse("ORA-00001", ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(DoLoginExistException.class)
+    public ResponseEntity<?> AuthenticationException(DoLoginExistException ex){
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+//        new ApiErrorResponse("error-0000 : 권한없음", "로그인해주세요");
+        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
 }

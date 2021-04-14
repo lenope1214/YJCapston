@@ -13,77 +13,59 @@ import java.sql.Timestamp;
 
 @Getter
 @Entity
-@Table(name = "orders")
 @NoArgsConstructor
+@Table(name = "ORDERS")
 public class Order implements Serializable {
     @Id
-    private String id; // cartId - timestamp(13) + orderList (2) => (15)
-
+//    @Column(insertable = false, updatable = false)
+    private Timestamp id; // 바구니번호 yyyyMMddhhmmss
     @Column(length = 2)
-    private int quantity; // 메뉴 수량
+    private int people;
+    @Column(name = "order_request")
+    private String orderRequest; // 요청사항
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "shop_id", updatable = false)
+    @JsonIgnore
+    private Shop shop;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "menu_id")
+    @JoinColumn(name = "user_id", updatable = false)
     @JsonIgnore
-    private Menu menu;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tab_id")
-    @JsonIgnore
-    private Tab tab;
+    private User user;
 
     @Builder
-    public Order(String id, int quantity, Menu menu, Tab tab) {
+    public Order(Timestamp id, int people, String orderRequest, Shop shop, User user) {
         this.id = id;
-        this.quantity = quantity;
-        this.menu = menu;
-        this.tab = tab;
+        this.people = people;
+        this.orderRequest = orderRequest;
+        this.shop = shop;
+        this.user = user;
     }
 
-    @Getter
-    @NoArgsConstructor @AllArgsConstructor
+    @Getter @AllArgsConstructor
+    @NoArgsConstructor
     public static class Request {
-        private String orderId;
         private Timestamp cartId;
-        private int quantity;
-        private String menuId;
-        private String tabId; // 테이블번호 : 사업자번호 + 테이블번호 ( 2 )
+        private int people;
+        private String orderRequest;
+        private String shopId;
+        private String userId;
     }
 
     @Getter
     public static class Response{
-        private String orderId;
-        private int quantity;
+        private Timestamp cartId;
+        private int people;
+        private String orderRequest;
         private String shopId;
-        private String menu;
-        private String tab;
+        private String userId;
 
-        public Response(Order order){
-            if(order.getId() != null)this.orderId = order.getId();
-            this.quantity = order.getQuantity();
-            this.shopId = order.getMenu().getId().substring(0, 10);
-            this.menu = order.getMenu().getId().substring(10);
-            this.tab = order.getTab().getId().substring(10);
+        public Response(Order cart) {
+            this.cartId = cart.getId();
+            this.people = cart.getPeople();
+            this.orderRequest = cart.getOrderRequest();
+            this.shopId = cart.getShop().getId();
+            this.userId = cart.getUser().getId();
         }
     }
-
-    public void patch(Order order){
-        if(order.getQuantity() != 0)this.quantity = order.getQuantity();
-        if(order.getTab() != null)this.tab = order.getTab();
-        if(order.getMenu() != null)this.menu = order.getMenu();
-    }
 }
-
-//@Getter
-//@Setter
-//@Embeddable
-//@EqualsAndHashCode
-//public class shop_menu_tab implements Serializable {
-//
-//    @Column(name="menu_id", length = 3)
-//    private int menu_id ; // 메뉴번호
-//
-//    @Embedded
-//    private TabId tab_id;
-//    public shop_menu_tab(){}
-//}

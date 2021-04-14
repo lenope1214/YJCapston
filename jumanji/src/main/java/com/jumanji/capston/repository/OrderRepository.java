@@ -2,15 +2,11 @@ package com.jumanji.capston.repository;
 
 import com.jumanji.capston.data.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
-import java.util.Set;
+import java.sql.Timestamp;
+import java.util.List;
 
-public interface OrderRepository extends JpaRepository<Order, String> {
-    @Query(value = "SELECT ORDER_SEQ.nextval FROM dual", nativeQuery = true)
-    Long getOrderSeqNextVal();
+public interface OrderRepository extends JpaRepository<Order, Timestamp> {
 
-    int countByIdContains(String cartId);
-
-    Set<Order> findByIdContains(String cartId);
+    List<Order> findALLByUser_Id(String user_Id);
 }

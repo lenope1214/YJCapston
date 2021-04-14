@@ -1,155 +1,107 @@
 package com.jumanji.capston.service;
 
-import com.jumanji.capston.data.Menu;
 import com.jumanji.capston.data.Order;
-import com.jumanji.capston.data.Tab;
+import com.jumanji.capston.data.Shop;
+import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.OrderRepository;
-import com.jumanji.capston.repository.UserRepository;
+import com.jumanji.capston.service.exception.OrderException.OrderHasExistException;
 import com.jumanji.capston.service.exception.OrderException.OrderNotFoundException;
-import com.jumanji.capston.service.exception.ShopException.ShopMissMatchException;
-import com.jumanji.capston.service.interfaces.OrderService;
+import com.jumanji.capston.service.interfaces.CartService;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+
 
 @Service
-public class OrderServiceImpl implements OrderService, BasicService {
+public class OrderServiceImpl implements CartService {
     @Autowired
-    OrderRepository orderRepository;
+    OrderRepository cartRepository;
+    @Autowired
+    UserServiceImpl userService;
     @Autowired
     ShopServiceImpl shopService;
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
-    TableServiceImpl tableService;
-    @Autowired
-    CartServiceImpl cartService;
-    @Autowired
-    MenuServiceImpl menuService;
 
-    public String delete(Order order) {
-        Order orderEntity = orderRepository.findById(order.getId()).orElseThrow(() -> new IllegalArgumentException("id를 확인해주세요!!!"));
-        orderRepository.delete(orderEntity);
-        return "ok";
-    }
-
-    public List<Order> findAll() {
-        return orderRepository.findAll();
-    }
-
-    public ResponseEntity<?> getOrderByCartId(String cartId) {
-        Set<Order> orderList = orderRepository.findByIdContains(cartId);
-        List<Order.Response> response = new ArrayList<>();
-        System.out.println("주문메뉴 개수 : " + orderList.size());
-        for(Order order : orderRepository.findByIdContains(cartId)){
-            System.out.println("orderList info \n" +
-                    "order.getId() : "+ order.getId() + "\n" +
-                    "order.getMenuId : " + order.getMenu().getId().substring(10) +"\n" +
-                    "order.get");
-            response.add(new Order.Response(order));
+    public ResponseEntity<?> getCartId() {
+        @Getter
+        @Setter
+        class Response {
+            private Timestamp cartId;
         }
+        Response response = new Response();
+        response.setCartId(new Timestamp(System.currentTimeMillis()));
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-
     @Override
-    public ResponseEntity<?> get(String orderId) {
-        return null;
+    public ResponseEntity<?> get(Timestamp cartId) {
+        isPresent(cartId);
+//        Timestamp cartIdTime = DateOperator.stringToTimestamp(cartId);
+        Order cart = cartRepository.findById(cartId).get();
+        Order.Response response =
+                new Order.Response(cart);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<?> getList(String cartId) {
-        return null;
+    public ResponseEntity<?> getList(String userId) {
+        for (Order cart : cartRepository.findALLByUser_Id(userId)) {
+            System.out.println("출력");
+        }
+        return new ResponseEntity<>(cartRepository.findALLByUser_Id(userId), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<?> post(Order.Request request) {
-        System.out.println("post order request info \n" +
-                "cartId : " + request.getCartId() + "\n" +
-                "menuId : " + request.getMenuId() + "\n" +
-                "quantity : " + request.getQuantity() + "\n" +
-                "tabId : " + request.getTabId()
-        );
-        Order order = null;
-        long cartId = request.getCartId().getTime();
-        cartService.isPresent(request.getCartId());
-        menuService.isPresent(request.getMenuId());
-
-
-        int orderCount = orderRepository.countByIdContains("" + cartId);
-        String orderId = "" + cartId + String.format("%02d", orderCount);
-        Menu menu = menuService.getMenuInfo(request.getMenuId());
-        Tab table = tableService.getTableInfo(request.getTabId());
-        order = Order.builder()
-                .id(orderId)
-                .quantity(request.getQuantity())
-                .menu(menu)
-                .tab(table)
+        Order cart;
+        //isEmpty 는 필요 x 주문은 매번 새로운 애기 때문.
+        System.out.println("매장번호의 매장이 있나요? " + shopService.isPresent(request.getShopId()));
+        System.out.println("유저번호의 유저가 있나요? " + userService.isPresent(request.getUserId()));
+        Shop shop = shopService.isPresent(request.getShopId()) ?
+                shopService.shopRepository.findById(request.getShopId()).get() : null;
+        User user = userService.isPresent(request.getUserId()) ?
+                userService.getUserInfo(request.getUserId()) : null;
+        System.out.println("가져온 매장번호 : " + shop.getId());
+        System.out.println("가져온 유저번호 : " + user.getId());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        cart = Order.builder()
+                .id(request.getCartId())
+                .orderRequest(request.getOrderRequest())
+                .shop(shop)
+                .user(user)
                 .build();
-        System.out.println(order.getTab().getId());
-        orderRepository.save(order);
-        Order.Response response = new Order.Response(order);
+        cartRepository.save(cart);
+        Order.Response response = new Order.Response(cart);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @Override
     public ResponseEntity<?> patch(Order.Request request) {
-        Order order;
-        Menu menu = null;
-        Tab table = null;
-
-        //유효성 검사
-        isPresent(request.getOrderId());
-        order = orderRepository.findById(request.getOrderId()).get();
-
-        equalsShop(request.getMenuId().substring(0,10) , order.getMenu().getId().substring(0, 10));
-        shopService.isPresent(request.getMenuId().substring(0,10));
-
-
-        if(request.getMenuId() != null)menu = menuService.getMenuInfo(request.getMenuId());
-        if(request.getTabId() != null)table = tableService.getTableInfo(request.getTabId());
-        Order requestOrder = Order.builder()
-                .quantity(request.getQuantity())
-                .menu(menu)
-                .tab(table)
-                .build();
-        order.patch(requestOrder);
-        Order.Response response = new Order.Response(order);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return null; // 주문수정은 .. 없어도 되지 않을까?
     }
-
 
     @Override
-    public ResponseEntity<?> delete(String orderId) {
-        return null;
+    public ResponseEntity<?> delete(Timestamp cartId) {
+        System.out.println("");
+        isPresent(cartId);
+        Order cart = cartRepository.findById(cartId).get();
+        cartRepository.delete(cart);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    public boolean isPresent(String orderId) {
-        if (orderRepository.findById(orderId).isPresent()) return true;
+    public boolean isPresent(Timestamp id) {
+        if (cartRepository.findById(id).isPresent()) return true;
         throw new OrderNotFoundException();
     }
 
-    @Override
-    public boolean isEmpty(String id) {
-        return false;
+    public boolean isEmpty(Timestamp id) {
+        if (cartRepository.findById(id).isEmpty()) return true;
+        throw new OrderHasExistException();
     }
 
-    public void equalsShop(String beforeId, String afterId){
-        if(beforeId.equals(afterId))return ;
-        throw new ShopMissMatchException();
-    }
-//    public ResponseEntity<?> postOrder(Order.Request request) {
-//        Order order;
-//        Order.builder()
-//                .id(orderRepository.getOrderSeqNextVal())
-//                .orderRequest(request.getOrderRequest())
-//                .quantity(request.getQuantity())
-//                .tab()
-//
-//    }
 }

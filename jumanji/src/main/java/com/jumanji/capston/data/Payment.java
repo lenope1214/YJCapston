@@ -18,7 +18,7 @@ public class Payment implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     @JsonIgnore
-    private Order order ; // 주문번호
+    private OrderMenu order ; // 주문번호
     @Column(name="use_point")
     private int usePoint; // 사용된 포인트
     @Column(name="pay_time")

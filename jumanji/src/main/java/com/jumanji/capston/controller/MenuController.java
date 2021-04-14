@@ -72,7 +72,6 @@ public class MenuController  {
     @PatchMapping("/menu/{menuId}/popular")
     public ResponseEntity<?> updateShopIsOpen(@RequestHeader String authorization, @PathVariable String menuId) {
         return menuService.patchStatus(authorization, menuId, "popular");
-
     }
 
 
