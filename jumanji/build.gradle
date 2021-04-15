@@ -12,9 +12,6 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
-    all {
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-    }
 }
 
 repositories {
@@ -72,6 +69,10 @@ dependencies {
 //    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.14.1'
 
 //    compile fileTree(dir: 'lib', include: ['*.jar'])
+
+    //aws s3
+//    implementation 'org.springframework.cloud:spring-cloud-starter-aws'
+
 }
 
 //test {

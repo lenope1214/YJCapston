@@ -1,4 +1,4 @@
-package com.jumanji.capston.service;
+package com.jumanji.capston.service.interfaces;
 
 public interface BasicService {
     public boolean isPresent(String id);

@@ -8,6 +8,7 @@ import com.jumanji.capston.repository.UserRepository;
 import com.jumanji.capston.service.exception.ApiErrorResponse;
 import com.jumanji.capston.service.exception.ShopException.ShopHasExistException;
 import com.jumanji.capston.service.exception.ShopException.ShopNotFoundException;
+import com.jumanji.capston.service.interfaces.BasicService;
 import com.jumanji.capston.service.interfaces.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -34,6 +35,10 @@ public class ShopServiceImpl implements ShopService, BasicService {
 
     @Autowired
     HttpHeaders httpHeaders;
+
+    public Shop getShopInfo(String shopId){
+        return shopRepository.findById(shopId).get();
+    }
 
     public ResponseEntity<?> delete(String authorization, String shopId){
         String loginId = userService.getMyId(authorization); // jwt가 있다는 것은 유저 인증이 완료. isPresent 필요 없음.

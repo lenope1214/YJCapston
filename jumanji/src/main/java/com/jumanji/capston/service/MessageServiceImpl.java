@@ -2,6 +2,7 @@ package com.jumanji.capston.service;
 
 import com.jumanji.capston.data.Message;
 import com.jumanji.capston.repository.MessageRepository;
+import com.jumanji.capston.service.interfaces.BasicService;
 import com.jumanji.capston.service.interfaces.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

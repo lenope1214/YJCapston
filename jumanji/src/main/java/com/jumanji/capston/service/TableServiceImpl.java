@@ -4,6 +4,7 @@ import com.jumanji.capston.data.Tab;
 import com.jumanji.capston.repository.TableRepository;
 import com.jumanji.capston.service.exception.TableException.TableHasExistException;
 import com.jumanji.capston.service.exception.TableException.TableNotFoundException;
+import com.jumanji.capston.service.interfaces.BasicService;
 import com.jumanji.capston.service.interfaces.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
