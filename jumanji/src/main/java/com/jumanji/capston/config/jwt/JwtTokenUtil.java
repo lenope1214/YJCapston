@@ -4,9 +4,8 @@ package com.jumanji.capston.config.jwt;
 import com.jumanji.capston.config.auth.PrincipalDetails;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.UserRepository;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +13,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+
 
 @Component
 public class JwtTokenUtil implements JwtProperties {
@@ -25,7 +25,7 @@ public class JwtTokenUtil implements JwtProperties {
     @Autowired
     UserRepository userRepository;
 
-    public String getUsername(String token){
+    public String getUsername(String token) {
         return getUsernameFromToken(token.replace("Bearer ", ""));
     }
 
@@ -39,7 +39,7 @@ public class JwtTokenUtil implements JwtProperties {
     }
 
     private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).getBody();
+            return Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).getBody();
     }
 
     private Boolean isTokenExpired(String token) {
@@ -61,10 +61,11 @@ public class JwtTokenUtil implements JwtProperties {
 
     private String doGenerateToken(String id, Map<String, Object> claims) {
         Map<String, Object> header = new HashMap<>();
-        header.put("alg", "HS512"); header.put("typ", "JWT");
+        header.put("alg", "HS512");
+        header.put("typ", "JWT");
 //        Claims claims
         User user;
-        if(userRepository.findById(id).isPresent()) {
+        if (userRepository.findById(id).isPresent()) {
             user = userRepository.findById(id).get();
             claims.put("name", user.getName());
             claims.put("role", user.getRole());
