@@ -51,12 +51,16 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 //        System.out.println("In JwtRequestFilter");
-
+        if (shouldNotFilter(request)) {
+            System.out.println("권한없음 다시 돌아가.");
+            response.sendError(400, "please login");
+            return;
+        }
         final String requestTokenHeader = request.getHeader("Authorization");
 //        System.out.println("TOKEN : " + requestTokenHeader );
         String username = null;
         String jwtToken = null;
-        System.out.println("Authorization : " + requestTokenHeader);
+//        System.out.println("Authorization : " + requestTokenHeader);
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) { // 헤더에 Authorization 이 있고 Bearer로 시작하면,
             jwtToken = requestTokenHeader.substring(7);
 //            System.out.println("Parsing jwtToken : " + jwtToken);
@@ -78,7 +82,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 //            logger.warn("JWT Token does not begin with Bearer String");
         }
 //        System.out.println("토큰 체킹 ! ");
-
+        System.out.println("토큰 username : " + username);
         if (username != null) {
             if (SecurityContextHolder.getContext().getAuthentication() == null) {
 //                System.out.println("doFilterInternal -> username != null ... ");
@@ -95,10 +99,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 System.out.println("SecurityContextHolder.getContext().getAuthentication() is null");
             }
         } else {
-            if (!shouldNotFilter(request)) {
-                response.sendError(400, "please login");
-                return;
-            }
             System.out.println("token's username is null");
         }
 //        System.out.println("JWT 체킹 완료!!!");
@@ -108,6 +108,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        System.out.println(request.getServletPath());
+        System.out.println(EXCLUDE_URL.stream().anyMatch(exclude -> exclude.contains(request.getServletPath())));
         return EXCLUDE_URL.stream().anyMatch(exclude -> exclude.equalsIgnoreCase(request.getServletPath()));
     }
 
