@@ -32,17 +32,17 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     private static final List<String> EXCLUDE_URL =
             List.of(
-                    "/api/v1/login"
-                    , "/authenticate"
-                    , "/api/v1/join"
-                    , "/api/v1/shopList"
-                    , "/api/v1/validate"
-                    , "/api/v1/validateDscNo"
-                    , "/api/v1/searchAddr"
-                    , "/api/v1/shop"
-                    , "/api/v1/shopList"
-                    , "/api/v1/menu"
-                    , "/api/v1/menuList"
+                    "login"
+                    , "authenticate"
+                    , "join"
+                    , "shopList"
+                    , "validate"
+                    , "validateDscNo"
+                    , "searchAddr"
+                    , "shop"
+                    , "shopList"
+                    , "menu"
+                    , "menuList"
             );
 
 
@@ -51,7 +51,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 //        System.out.println("In JwtRequestFilter");
-        if (shouldNotFilter(request)) {
+        if (!shouldNotFilter(request)) {
             System.out.println("권한없음 다시 돌아가.");
             response.sendError(400, "please login");
             return;
@@ -108,9 +108,14 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        System.out.println(request.getServletPath());
-        System.out.println(EXCLUDE_URL.stream().anyMatch(exclude -> exclude.contains(request.getServletPath())));
-        return EXCLUDE_URL.stream().anyMatch(exclude -> exclude.equalsIgnoreCase(request.getServletPath()));
+//        System.out.println(request.getServletPath());
+//        for(String path :request.getServletPath().split("/") ){
+//            System.out.println("-------> " + path);
+//        }
+//        System.out.println("비교할 context split res : " + request.getServletPath().split("/")[3]);
+//        System.out.print("exclude 결과 : ");
+//        System.out.println(EXCLUDE_URL.stream().anyMatch(exclude -> exclude.equalsIgnoreCase(request.getServletPath().split("/")[3])));
+        return EXCLUDE_URL.stream().anyMatch(exclude -> exclude.equalsIgnoreCase(request.getServletPath().split("/")[3]));
     }
 
 }
