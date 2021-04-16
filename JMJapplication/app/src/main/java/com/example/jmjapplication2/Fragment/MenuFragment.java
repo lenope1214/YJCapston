@@ -5,16 +5,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.jmjapplication2.Adapter.MenuRecyclerAdapter;
-import com.example.jmjapplication2.Adapter.RestaurantRecyclerAdapter;
 import com.example.jmjapplication2.R;
-import com.example.jmjapplication2.ShopDetailActivity;
+import com.example.jmjapplication2.user.ShopDetailActivity;
 import com.example.jmjapplication2.dto.Menu;
-import com.example.jmjapplication2.dto.Shop;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -73,8 +70,8 @@ public class MenuFragment extends Fragment {
                         List<Menu> menuList = response.body();
                         for(Menu list : menuList) {
                             mItems.add(new Menu(list.getId(), list.getName(), list.getIntro(),
-                                    list.getIs_sale(), list.getIs_popular(),list.getPrice(),
-                                    list.getDuration(), list.getImg_url()));
+                                    list.getIsSale(), list.getIsPopular(),list.getPrice(),
+                                    list.getDuration(), list.getImgUrl()));
                             rv_menu_list.setHasFixedSize(true);
                             adapter.setItems(mItems);
                             rv_menu_list.setLayoutManager(new LinearLayoutManager(getActivity()));
