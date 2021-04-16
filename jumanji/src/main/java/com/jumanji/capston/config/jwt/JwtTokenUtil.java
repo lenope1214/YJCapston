@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-
+@Slf4j
 @Component
 public class JwtTokenUtil implements JwtProperties {
 
@@ -86,5 +86,40 @@ public class JwtTokenUtil implements JwtProperties {
     public Boolean validateToken(String token, PrincipalDetails userDetails) {
         final String username = getUsernameFromToken(token);
         return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
+    }
+
+    /**
+     * Jwt Token을 복호화 하여 이름을 얻는다.
+     */
+    public String getUserNameFromJwt(String jwt) {
+        return getClaims(jwt).getBody().getId();
+    }
+
+    /**
+     * Jwt Token의 유효성을 체크한다.
+     */
+    public boolean validateToken(String jwt) {
+        return this.getClaims(jwt) != null;
+    }
+
+    private Jws<Claims> getClaims(String jwt) {
+        try {
+            return Jwts.parser().setSigningKey(SECRET).parseClaimsJws(jwt);
+        } catch (SignatureException ex) {
+            log.error("Invalid JWT signature");
+            throw ex;
+        } catch (MalformedJwtException ex) {
+            log.error("Invalid JWT token");
+            throw ex;
+        } catch (ExpiredJwtException ex) {
+            log.error("Expired JWT token");
+            throw ex;
+        } catch (UnsupportedJwtException ex) {
+            log.error("Unsupported JWT token");
+            throw ex;
+        } catch (IllegalArgumentException ex) {
+            log.error("JWT claims string is empty.");
+            throw ex;
+        }
     }
 }
