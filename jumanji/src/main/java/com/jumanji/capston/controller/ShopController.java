@@ -8,6 +8,7 @@ import com.jumanji.capston.service.StorageServiceImpl;
 import com.jumanji.capston.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,9 +53,11 @@ public class ShopController  {
 
     @Transactional(readOnly = true)
     @GetMapping("/shopList") // get /shopList
-    public ResponseEntity<?> selectShopList() {
+    public ResponseEntity<?> selectShopList(
+           @Nullable @RequestParam String category,
+           @Nullable @RequestParam String sortTarget) {
         System.out.println("샵리스트 >> ");
-        return shopService.getShopList();
+        return shopService.getShopList(category, sortTarget);
     }
 
     @Transactional(readOnly = true)

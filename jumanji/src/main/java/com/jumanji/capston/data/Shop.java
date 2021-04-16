@@ -37,6 +37,7 @@ public class Shop {
     private char isOpen = 'N';
     @Column(name = "img_path")
     private String imgPath;
+    private String phone;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
     @JsonIgnore
@@ -54,6 +55,7 @@ public class Shop {
         private String addressDetail;
         private String category;
         private String shopId;
+        private String phone;
         private MultipartFile img;
     }
 
@@ -71,6 +73,7 @@ public class Shop {
         private char isOpen;
         private char isRsPos;
         private String imgPath;
+        private String phone;
 
         public Response(Shop shop) {
             this.id = shop.getId();
@@ -84,12 +87,13 @@ public class Shop {
             this.isOpen = shop.getIsOpen();
             this.isRsPos = shop.getIsRsPos();
             this.imgPath = shop.getImgPath();
+            this.phone = shop.getPhone();
         }
     }
 
 
     @Builder(builderMethodName = "insertShop")
-    public Shop(String id, String name, String intro, Date openTime, Date closeTime, String address, String addressDetail, String category, String imgPath, User owner) {
+    public Shop(String id, String name, String intro, Date openTime, Date closeTime, String address, String addressDetail, String category, String imgPath, User owner, String phone) {
         this.id = id;
         this.name = name;
         this.intro = intro;
@@ -101,9 +105,11 @@ public class Shop {
         this.isRsPos = 'N';
         this.imgPath = imgPath;
         this.owner = owner;
+        this.phone = phone;
     }
 
     public void update(Shop.Request patch) {
+        if(patch.getPhone() != null) this.phone = patch.getPhone();
         if (patch.getIntro() != null) this.intro = patch.getIntro();
         if (patch.getOpenTime() != null) this.openTime = DateOperator.stringToMilisecond(patch.getOpenTime());
         if (patch.getCloseTime() != null) this.closeTime = DateOperator.stringToMilisecond(patch.getCloseTime());

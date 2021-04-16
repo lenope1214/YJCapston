@@ -3,6 +3,10 @@ package com.jumanji.capston.config.jwt;
 import com.jumanji.capston.config.auth.PrincipalDetails;
 import com.jumanji.capston.config.auth.PrincipalDetailsService;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.UnsupportedJwtException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+@Slf4j
 @Component
 @ResponseStatus(value = HttpStatus.UNAUTHORIZED, reason = "login required")
 public class JwtRequestFilter extends OncePerRequestFilter {
@@ -51,11 +56,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 //        System.out.println("In JwtRequestFilter");
-        if (!shouldNotFilter(request)) {
-            System.out.println("권한없음 다시 돌아가.");
-            response.sendError(400, "please login");
-            return;
-        }
+
         final String requestTokenHeader = request.getHeader("Authorization");
 //        System.out.println("TOKEN : " + requestTokenHeader );
         String username = null;
@@ -68,15 +69,23 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 username = jwtTokenUtil.getUsernameFromToken(jwtToken);
                 System.out.println("username : " + username);
             } catch (IllegalArgumentException e) {
-                System.out.println("Unable to get JWT Token");
+                log.error("Unable to get JWT Token");
                 response.sendError(400, "Unable to get JWT Token");
             } catch (ExpiredJwtException e) {
-                System.out.println("JWT Token has expired");
+                log.error("JWT Token has expired");
                 response.sendError(401, "JWT Token has expired"); // 401 =>
-
             } catch (NullPointerException e) {
-                System.out.println("Username is Null!");
+                log.error("Username is Null!");
                 response.sendError(400, "Username is Null!");
+            }catch (SignatureException ex) {
+                log.error("Invalid JWT signature");
+                response.sendError(400, "Invalid request.");
+            } catch (MalformedJwtException ex) {
+                log.error("Invalid JWT token");
+                response.sendError(400, "Invalid request.");
+            } catch (UnsupportedJwtException ex) {
+                log.error("Unsupported JWT token");
+                response.sendError(400, "Invalid request.");
             }
         } else {
 //            logger.warn("JWT Token does not begin with Bearer String");
@@ -99,6 +108,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 System.out.println("SecurityContextHolder.getContext().getAuthentication() is null");
             }
         } else {
+            if (!shouldNotFilter(request)) {
+                System.out.println("권한없음 다시 돌아가.");
+                response.sendError(400, "please login");
+                return;
+            }
             System.out.println("token's username is null");
         }
 //        System.out.println("JWT 체킹 완료!!!");
@@ -108,14 +122,23 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-//        System.out.println(request.getServletPath());
+        String path = request.getServletPath();
+        System.out.println(path);
 //        for(String path :request.getServletPath().split("/") ){
 //            System.out.println("-------> " + path);
 //        }
 //        System.out.println("비교할 context split res : " + request.getServletPath().split("/")[3]);
 //        System.out.print("exclude 결과 : ");
 //        System.out.println(EXCLUDE_URL.stream().anyMatch(exclude -> exclude.equalsIgnoreCase(request.getServletPath().split("/")[3])));
+        if(
+                startWith(path, "/ws") ||
+                        startWith(path, "/chat")
+        )return true;
         return EXCLUDE_URL.stream().anyMatch(exclude -> exclude.equalsIgnoreCase(request.getServletPath().split("/")[3]));
+    }
+
+    private boolean startWith(String str,String prefix){
+        return str.startsWith(prefix);
     }
 
 }
