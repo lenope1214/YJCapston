@@ -6,6 +6,7 @@ import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.ShopRepository;
 import com.jumanji.capston.repository.UserRepository;
 import com.jumanji.capston.service.exception.ApiErrorResponse;
+import com.jumanji.capston.service.exception.ShopException.NoShopListException;
 import com.jumanji.capston.service.exception.ShopException.ShopHasExistException;
 import com.jumanji.capston.service.exception.ShopException.ShopNotFoundException;
 import com.jumanji.capston.service.interfaces.BasicService;
@@ -36,50 +37,62 @@ public class ShopServiceImpl implements ShopService, BasicService {
     @Autowired
     HttpHeaders httpHeaders;
 
-    public Shop getShopInfo(String shopId){
+    public Shop getShopInfo(String shopId) {
         return shopRepository.findById(shopId).get();
     }
 
-    public ResponseEntity<?> delete(String authorization, String shopId){
+    public ResponseEntity<?> delete(String authorization, String shopId) {
         String loginId = userService.getMyId(authorization); // jwt가 있다는 것은 유저 인증이 완료. isPresent 필요 없음.
         Shop shopEntity = shopRepository.findById(shopId).get();
-        if(loginId.equals(shopEntity.getOwner().getId())) {
+        if (loginId.equals(shopEntity.getOwner().getId())) {
             shopRepository.delete(shopEntity);
             return new ResponseEntity<>("delete success", HttpStatus.NO_CONTENT);
-        }
-        else
+        } else
             return new ResponseEntity<>(new ApiErrorResponse("error-0000"), HttpStatus.FORBIDDEN);
     }
 
     public ResponseEntity<?> getShopList() {
-        if(shopRepository.findAll().size() != 0) {
-            // shop.response로 parsing 해서 보내기.
-            ArrayList<Shop.Response> responseList = new ArrayList<>();
-            for(Shop shop :  shopRepository.findAll()){
-                Shop.Response response = new Shop.Response(shop);
-                responseList.add(response);
-            }
-            return new ResponseEntity<>(responseList, HttpStatus.OK);
+        isListPresent();
+        // shop.response로 parsing 해서 보내기.
+        ArrayList<Shop.Response> responseList = new ArrayList<>();
+        for (Shop shop : shopRepository.findAll()) {
+            Shop.Response response = new Shop.Response(shop);
+            responseList.add(response);
         }
-        else
-            return new ResponseEntity<>("1001", HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(responseList, HttpStatus.OK);
+    }
+
+    public ResponseEntity<?> getShopList(String category, String sortTarget) {
+        System.out.println("getShopList where category order by sortTarget ");
+        isListPresent();
+        List<Shop> resultList = null;
+        sortTarget = sortTarget == null ? "score" : sortTarget;
+        switch (sortTarget){
+            case "score":
+                System.out.println("sort by score");
+                resultList = shopRepository.ShopOrderByScore(category);
+                break;
+            default:
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(resultList, HttpStatus.OK);
     }
 
 
-
-    public ResponseEntity<?> getShopIntro(String shopId){
+    public ResponseEntity<?> getShopIntro(String shopId) {
 //        System.out.println("요청 매장 id : " + shopId );
-        if(shopRepository.findById(shopId).isPresent())
+        if (shopRepository.findById(shopId).isPresent())
             return new ResponseEntity<>(shopRepository.findById(shopId).get().getIntro(), HttpStatus.OK);
-        else{
+        else {
             System.out.println("매장 id 오류");
             return new ResponseEntity<>(new ApiErrorResponse("1001"), HttpStatus.BAD_REQUEST);
         }
     }
 
-    public List<Shop> getShopListByOwnerId(String id){
+    public List<Shop> getShopListByOwnerId(String id) {
         List<Shop> shopList = shopRepository.findAllByOwner_Id(id);
-        if(shopList.size() == 0)throw new ShopNotFoundException();
+        if (shopList.size() == 0) throw new ShopNotFoundException();
         return shopList;
     }
 
@@ -93,15 +106,15 @@ public class ShopServiceImpl implements ShopService, BasicService {
         return new ResponseEntity<>("매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
     }
 
-    public char reverseIsOpen(Shop shop){
-        if(shop.getIsOpen() == 'Y')shop.setIsOpen('N');
+    public char reverseIsOpen(Shop shop) {
+        if (shop.getIsOpen() == 'Y') shop.setIsOpen('N');
         else shop.setIsOpen('Y');
         shopRepository.save(shop);
         return shop.getIsOpen();
     }
 
-    public char reverseIsRsPos(Shop shop){
-        if(shop.getIsRsPos() == 'Y')shop.setIsRsPos('N');
+    public char reverseIsRsPos(Shop shop) {
+        if (shop.getIsRsPos() == 'Y') shop.setIsRsPos('N');
         else shop.setIsRsPos('Y');
         shopRepository.save(shop);
         return shop.getIsRsPos();
@@ -110,7 +123,7 @@ public class ShopServiceImpl implements ShopService, BasicService {
     public ResponseEntity<?> postShop(Shop.Request request, String authorization) {
         System.out.println("매장등록's shopId : " + request.getId());
         try {
-            if(shopRepository.findById(request.getId()).isPresent()) throw new ShopHasExistException();
+            if (shopRepository.findById(request.getId()).isPresent()) throw new ShopHasExistException();
         } catch (ShopNotFoundException ignored) { // null 이면 없는 사업자번호 이므로 된다 !!
         } catch (ShopHasExistException e) { // 사업자번호 중복 에러 체킹!!
             return new ResponseEntity<>(new ApiErrorResponse(e.getCode(), e.getMessage()), HttpStatus.LOCKED);
@@ -122,10 +135,11 @@ public class ShopServiceImpl implements ShopService, BasicService {
         String loginId = userService.getMyId(authorization);
         User userEntity = userService.getUserInfo(loginId);
         String uri = "shop/" + request.getId() + "/thumbnail/";
-        String imgPath=null;
+        String imgPath = null;
         System.out.println("openTime : " + request.getOpenTime());
         System.out.println("closeTime : " + request.getCloseTime());
-        if(request.getImg() != null) imgPath = storageService.store(request.getImg(), request.getImg().getName(), uri.split("/"));
+        if (request.getImg() != null)
+            imgPath = storageService.store(request.getImg(), request.getImg().getName(), uri.split("/"));
         Date openTime = DateOperator.stringToMilisecond(request.getOpenTime());
         Date closeTime = DateOperator.stringToMilisecond(request.getCloseTime());
         Shop shopEntity;
@@ -150,13 +164,12 @@ public class ShopServiceImpl implements ShopService, BasicService {
         isPresent(request.getShopId()); // 있는 매장번호 인가?
         String loginId = userService.getMyId(authorization);
         Shop shopEntity = shopRepository.findById(request.getShopId()).get();
-        if(isOwnShop(loginId, shopEntity.getId())){ // 로그인한 아이디가 해당 매장을 가지고 있는가?
+        if (isOwnShop(loginId, shopEntity.getId())) { // 로그인한 아이디가 해당 매장을 가지고 있는가?
             shopEntity.update(request);
             return new ResponseEntity<>(shopEntity, HttpStatus.OK);
         }
         return new ResponseEntity<>("not defined error ", HttpStatus.BAD_REQUEST);
     }
-
 
 
     public ResponseEntity<?> patchShop(String authorization, Shop.Request request) {
@@ -168,8 +181,8 @@ public class ShopServiceImpl implements ShopService, BasicService {
 
 
         System.out.println(
-                "매장 수정 patch.toString()" +"\n" +
-                        "patch.getOpenTime : " + request.getOpenTime() +"\n" +
+                "매장 수정 patch.toString()" + "\n" +
+                        "patch.getOpenTime : " + request.getOpenTime() + "\n" +
                         "patch.getCloseTime : " + request.getCloseTime()
         );
         shop.update(request);
@@ -219,14 +232,13 @@ public class ShopServiceImpl implements ShopService, BasicService {
     }
 
 
-
     public boolean isOwnShop(String loginId, String shopId) {
         System.out.println("삭제 유저아디 : " + loginId);
         System.out.println("삭제 매장번호 : " + shopId);
         User loginUser = userService.getUserInfo(loginId);
         System.out.println("로긘 유저 이름 : " + loginUser.getName());
-        for(Shop shop : shopRepository.findByOwnerId(loginId)){
-            if(shop.getId().equals(shopId)){
+        for (Shop shop : shopRepository.findByOwnerId(loginId)) {
+            if (shop.getId().equals(shopId)) {
                 System.out.println("삭제할 메뉴의 매장번호 : " + shop.getId());
                 return true;
             }
@@ -268,8 +280,8 @@ public class ShopServiceImpl implements ShopService, BasicService {
     }
 
     // 89있는 매장번호 인지 확인. 없으면 error를 반환하게 된다. ㅂㅂ
-    public boolean isPresent(String shopId)  {
-        if(shopRepository.findById(shopId).isPresent())return true;
+    public boolean isPresent(String shopId) {
+        if (shopRepository.findById(shopId).isPresent()) return true;
         throw new ShopNotFoundException();
     }
 
@@ -277,4 +289,9 @@ public class ShopServiceImpl implements ShopService, BasicService {
     public boolean isEmpty(String id) {
         return false;
     }
+
+    public void isListPresent() {
+        if (shopRepository.findAll().size() == 0) throw new NoShopListException();
+    }
+
 }

@@ -5,6 +5,7 @@ import com.jumanji.capston.config.jwt.JwtTokenUtil;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.UserRepository;
 import com.jumanji.capston.service.exception.Auth.ForbiddenException;
+import com.jumanji.capston.service.exception.Auth.UnauthorizedException;
 import com.jumanji.capston.service.exception.UserException.PasswordMissMatchException;
 import com.jumanji.capston.service.exception.UserException.UserHasExistException;
 import com.jumanji.capston.service.exception.UserException.UserNotFoundException;
@@ -174,6 +175,16 @@ public class UserServiceImpl implements UserService, BasicService {
         if (userRole.equals("ROLE_OWNER")) return !role.equals("ADMIN");
         if (userRole.equals("ROLE_USER")) return role.equals("USER");
         return false; // 이게 될리 없음. 여기까지 왔다는건 잘못된 값이 넘어온것...
+    }
+
+    public ResponseEntity<?> Withdrawal(String authorization) {
+        String loginId = getMyId(authorization);
+        User user = getUserInfo(loginId);
+        if(user.getIsWdrw() == ' ') {
+            user.setIsWdrw('Y');
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        throw new UnauthorizedException();
     }
 }
 
