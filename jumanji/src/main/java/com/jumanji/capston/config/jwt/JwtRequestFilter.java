@@ -56,7 +56,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 //        System.out.println("In JwtRequestFilter");
-
+        if (!shouldNotFilter(request)) {
+            System.out.println("권한없음 다시 돌아가.");
+            response.sendError(400, "please login");
+            return;
+        }
         final String requestTokenHeader = request.getHeader("Authorization");
 //        System.out.println("TOKEN : " + requestTokenHeader );
         String username = null;
@@ -108,11 +112,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 System.out.println("SecurityContextHolder.getContext().getAuthentication() is null");
             }
         } else {
-            if (!shouldNotFilter(request)) {
-                System.out.println("권한없음 다시 돌아가.");
-                response.sendError(400, "please login");
-                return;
-            }
             System.out.println("token's username is null");
         }
 //        System.out.println("JWT 체킹 완료!!!");
@@ -122,23 +121,14 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        String path = request.getServletPath();
-        System.out.println(path);
+//        System.out.println(request.getServletPath());
 //        for(String path :request.getServletPath().split("/") ){
 //            System.out.println("-------> " + path);
 //        }
 //        System.out.println("비교할 context split res : " + request.getServletPath().split("/")[3]);
 //        System.out.print("exclude 결과 : ");
 //        System.out.println(EXCLUDE_URL.stream().anyMatch(exclude -> exclude.equalsIgnoreCase(request.getServletPath().split("/")[3])));
-        if(
-                startWith(path, "/ws") ||
-                        startWith(path, "/chat")
-        )return true;
         return EXCLUDE_URL.stream().anyMatch(exclude -> exclude.equalsIgnoreCase(request.getServletPath().split("/")[3]));
-    }
-
-    private boolean startWith(String str,String prefix){
-        return str.startsWith(prefix);
     }
 
 }

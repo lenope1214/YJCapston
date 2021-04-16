@@ -41,13 +41,6 @@ public class MenuController  {
         return menuService.get(menuId);
     }
 
-    @Transactional(readOnly = true)
-    @GetMapping("/menuList")
-    public ResponseEntity<?> AllMenu(@RequestHeader String authorization){
-        return menuService.findAll(authorization);
-
-    }
-
 
     @Transactional(readOnly = true)
     @GetMapping("/menuList/{shopId}")
