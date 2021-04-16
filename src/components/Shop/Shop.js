@@ -33,6 +33,7 @@ const Shop = ({
     shop_v1,
     roadAddr,
     handleComplete,
+    goBack,
 }) => {
     const postCodeStyle = {
         display: "block",
@@ -158,7 +159,7 @@ const Shop = ({
                         />
                         </div>
                         <div className="button-box">
-                            <button onClick={shop_v1} className="button3">수정</button>
+                            <button onClick={shop_v1} className="button3">등록</button>
                             <Link to="/myshop" onClick={() => { window.scrollTo(0, 0) }}>
                                 <button className="button4" >취소</button>
                             </Link>

@@ -14,6 +14,7 @@ import ShopInfoContainer from "./containers/ShopInfo/ShopInfoContainer";
 import MyShopContainer from "./containers/MyShop/MyShopContainer";
 import ShoplistContainer from "./containers/Shoplist/ShoplistContainer";
 import ShopcontentContainer from "./containers/shopcontent/shopcontentcontainer";
+import Payment from "./components/Event/Payment";
 
 const App = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -40,6 +41,7 @@ const App = () => {
     <>
       <Router>
         <Switch>
+          <Route path="/payment" component={Payment} />
           <Route path="/login" component={LoginContainer} />
           <Route path="/register" component={RegisterContainer} />
           <Route path="/mypage" component={MypageContainer} />

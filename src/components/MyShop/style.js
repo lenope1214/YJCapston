@@ -9,7 +9,7 @@ a { color: black;}
     padding-top: 160px;
     padding-left: 50%;
     transform: translateX(-27%);
-    width: 60%;
+    width: 70%;
     padding-bottom: 70px;
 }
 
@@ -91,6 +91,10 @@ th, td {
     text-align: center;
 }
 .item-7{
+    width: 5%;
+    text-align: center;
+}
+.item-8{
     width: 10%;
     text-align: center;
 }
@@ -127,6 +131,17 @@ th, td {
     text-aling: center;
   
 }
+//.body-item-7{
+//    width: 10%;
+//    text-align: center;
+//}
+.body-item-8{
+    padding: 15px;
+    font-size: 19px;
+    text-aling: center;
+  
+}
+
 .delete-button{
     padding: 8px;
     background-color: gray;
@@ -134,5 +149,9 @@ th, td {
     border-radius: 7px;
     border: 0px;
 }
-
+.empty-list {
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+}
 `;

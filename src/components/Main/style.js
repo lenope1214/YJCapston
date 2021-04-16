@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const LoginWrap = styled.div`
+min-width: 600px;
 @font-face {
     font-family: "Wemakeprice-Bold";
     src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Wemakeprice-Bold.woff")
@@ -86,9 +87,7 @@ min-width: 1350px;
       
       @keyframes fade-out {
         from {
-          opacity: 1;
-
-      
+          opacity: 1;    
         }
         to {
           opacity: 0;
@@ -307,6 +306,7 @@ min-width: 1350px;
         line-height: 3px;
         background-color: #bead8e;
         z-index: 2;
+        min-width: 1100px;
     }
 
     .but-item1-text {
@@ -327,6 +327,11 @@ min-width: 1350px;
         z-index: 2;
     }
 
+    .payment {
+        z-index: 10;
+        width: 400px;
+    }
+
     .but-item1-icon {
         position: relative;
         float: right;
@@ -338,6 +343,7 @@ min-width: 1350px;
 
     .but-item1-but {
         cursor: pointer;
+        z-index: 3;
     }
 
     .backimg2 {
@@ -372,6 +378,7 @@ min-width: 1350px;
         line-height: 3px;
         z-index: 3;
         object-fit: fill;
+        min-width: 1100px;
     }
 
     .but-item2-text {
@@ -421,6 +428,7 @@ min-width: 1350px;
         line-height: 3px;
         background-color: #bead8e;
         z-index: 2;
+        min-width: 1100px;
     }
 
     .but-item3-text {
@@ -495,6 +503,7 @@ min-width: 1350px;
         margin-left: 5%;
         z-index: 3;
         cursor: pointer;
+        transform: translateX(-7px);
     }
 
     .App-logo {

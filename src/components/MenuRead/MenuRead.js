@@ -16,7 +16,11 @@ const MenuRead = ({
     goBack,
     duration,
     handleDuration,
-    menuDuration
+    menuDuration,
+    isPopular,
+    isSale,
+    menu_v2,
+    menu_v3
 }) => {
     return (
         <>
@@ -80,6 +84,30 @@ const MenuRead = ({
                                         value={menuIntro}
                                         className="input-box-area"
                                     />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th className="form-label">인기상품</th>
+                                <td>
+                                <input
+                                        type="text"
+                                        value={isPopular}
+                                        className="input-box"
+                                        readOnly
+                                    />
+                                    <button onClick={menu_v2} className="ps-button">인기여부변경</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th className="form-label">판매중</th>
+                                <td>
+                                <input
+                                        type="text"
+                                        value={isSale}
+                                        className="input-box"
+                                        readOnly
+                                    />
+                                    <button onClick={menu_v3} className="ps-button">판매여부변경</button>
                                 </td>
                             </tr>
                         </tbody>

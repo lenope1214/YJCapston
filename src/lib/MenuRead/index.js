@@ -11,6 +11,21 @@ export const getMenuRead = (
         });
 };
 
+export const putMenuPopular = (menuId) => {
+    return apiDefault().patch(`/menu/${menuId}/popular` ,{},{
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        }, 
+    });
+};
+export const putMenuSale = (menuId) => {
+    return apiDefault().patch(`/menu/${menuId}/sale` ,{},{
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        }, 
+    });
+};
+
 export const putMenuRead = (
     menuPrice,
     menuIntro,

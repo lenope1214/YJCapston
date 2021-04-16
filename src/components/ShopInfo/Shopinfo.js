@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import * as S from "./style";
+import DaumPostcode from "react-daum-postcode";
 
 const ShopInfo = ({
     shopId,
@@ -31,14 +32,35 @@ const ShopInfo = ({
     shopIsRsPos,
     handleShopIsRsPos,
     Shop_v1,
+    Shop_v2,
+    Shop_v3,
+    isOpen,
+    roadAddr,
+    handleAddress,
+    modal,
+    openModal,
+    handleComplete,     
+    handleRoadAddr,
+    img,
+    shop
 }
 ) => {
+    
+    const postCodeStyle = {
+        display: "block",
+        position: "fixed",
+        top: "60%",
+        width: "400px",
+        height: "500px",
+        padding: "7px",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+    };
 
-        // console.log(shopname.id);
     return(
         <>
         <S.InfoWrap>
-            <div className="total-body">
+        <div className="total-body">
                 <div className="title">매장 정보</div>
             <div className="label">
                 사업자아이디
@@ -49,6 +71,7 @@ const ShopInfo = ({
                 className="input-box"
                 disabled
             />
+
             <div className="label">
                 매장이름
             </div>
@@ -57,23 +80,23 @@ const ShopInfo = ({
                 id="name"
                 placeholder={name}
                 onChange={handleShopName}
-                // value={name}
                 value={shopName}
                 className="input-box"
-                // disabled
+                disabled
             />
+
             <div className="label">
                 매장소개
             </div>
             <textarea
             className="input-box-area"
-            fow="10"
+            row="10"
             placeholder={intro}
             id="intro"
-            value={shopIntro}
             onChange={handleShopIntro}
-            className="input-box-area"
+            value={shopIntro}
             />
+
             <div className="label">
                 오픈시간
             </div>
@@ -82,19 +105,21 @@ const ShopInfo = ({
                 id="open_time"
                 placeholder={openTime}
                 onChange={handleShopOpenTime}
-                className="input-box"
                 value={shopOpenTime}
+                className="input-box"
             />
+            
             <div className="label">
-            마감시간
+                마감시간
             </div>
             <input
                 type="text"
                 id="close_time"
                 placeholder={closeTime}
                 onChange={handleShopCloseTime}
-                className="input-box"
+                // value={closeTime}
                 value={shopClostTime}
+                className="input-box"
             />
             <div className="label">
             카테고리
@@ -106,6 +131,7 @@ const ShopInfo = ({
                 // value={shopCategory}
                 value={category}
                 className="select"
+                disabled
                 >
                 <option value="" disable={true}>선택</option>
                 <option value="한식">한식</option>
@@ -122,17 +148,28 @@ const ShopInfo = ({
             <div className="label">
             매장주소
             </div>
-            <input
+            {/* <input
                 type="text"
                 id="address"
                 placeholder={address}
                 onChange={handleShopAddress}
                 // value={address}
                 value={shopAddress}
+            /> */}
+            <input 
+                type="text"
+                id="address"
+                placeholder={roadAddr}
+                onChange={handleRoadAddr}
+                value={roadAddr}
                 className="input-box"
-            />
+                disabled
+                />
+
+                <button onClick={openModal} className="button1">검색</button>
+
             <div className="label">
-             매장상세주소
+                매장상세주소
             </div>
             <input
                 type="text"
@@ -143,15 +180,19 @@ const ShopInfo = ({
                 value={shopAddressDetail}
                 className="input-box"
             />
+            {/* --------여기서부터 --------------- */}
+            
             <div className="label">
             예약가능여부
             </div>
-            <span
+        <div>
+            {/* <span className="info-10"
                 // style={{
                 //     fontSize:"20px",
                 //     paddingTop:"20px",
                 // }}
             >
+                
             가능
             <input 
                 type="radio"
@@ -160,7 +201,6 @@ const ShopInfo = ({
                 // placeholder={isRsPos ="Y"}
             
                 value={isRsPos = "Y"}
-                className="input-check"
                 // onChange={handleIs_rs_pos}
             />
             </span>
@@ -177,10 +217,24 @@ const ShopInfo = ({
                 name="is_rs_pos"
                 // placeholder={isRsPos ="N"}
                 value={isRsPos = "N"}
-                className="input-check"
                 // onChange={handleIs_rs_pos}
             />
-            </span>
+            </span> */}
+            
+            
+            <button onClick={Shop_v2} className="rs-button">예약여부변경하기</button>
+            {/* <span className="open">{isRsPos}</span> */}
+        </div>
+            
+            <div className="label">
+            오픈여부
+            </div>
+        <div>
+            <button onClick={Shop_v3} className="open-button">오픈여부변경하기</button>
+            {/* <span className="open">{isOpen}</span>                 */}
+        </div>    
+
+        
 
         <div className="button-box">
             <button onClick={Shop_v1} className="button3">수정</button>
@@ -189,8 +243,18 @@ const ShopInfo = ({
             </Link>
         </div> 
 
+        
         </div>
         </S.InfoWrap>
+
+        {modal && (
+                <DaumPostcode
+                    onComplete={handleComplete}
+                    style={postCodeStyle}
+                    height={700}
+                />
+            )}
+
         </>
     );
 }

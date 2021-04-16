@@ -1,6 +1,6 @@
 import React from "react";
 import OwnerNavbar from "../components/OwnerMenubar/OwnerNavbar";
-import Event from "../components/Event/Event"
+import Payment from "../components/Event/Payment"
 import Header from "../components/Header/Header";
 
 
@@ -12,7 +12,7 @@ const EventContainer = () => {
 
         <OwnerNavbar />
         
-        <Event />
+        <Payment />
         </>
     );
 }

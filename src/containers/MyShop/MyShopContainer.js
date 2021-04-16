@@ -9,8 +9,9 @@ import { removeShops } from "../../lib/MyShop/index"
 
 const MyShopContainer = (props) => {
     const history = useState();
-    const [shop, setShop] = useState([
+    const [shops, setShops] = useState([
         {
+            
             id:"",
             img: "",
         }
@@ -18,12 +19,15 @@ const MyShopContainer = (props) => {
     const [shopId, setShopId] =useState("");
 
     useEffect(() => {
+        showShopList(props.match.params.shopId);
+        setShopId(props.match.params.shopId);
     }, []);
-    useEffect(() => {
-        getmyShop()
+    
+    const showShopList = () => {
+        getmyShop(props.match.params.shopId)
         .then((res) => {
 
-            setShop(res.data);
+            setShops(res.data);
             
             const shop = res.data.map((shop) => {
                 return {
@@ -36,16 +40,16 @@ const MyShopContainer = (props) => {
                     close_time:shop.closeTime,
                     address:shop.address,
                     addressDetail:shop.addressDetail,
-                    isRsPos:shop.isRsPos
+                    isRsPos:shop.isRsPos,
+                    isOpen:shop.isOpen
                 };
             });
-            setShop(shop);
-            
+            setShops(shop);
         })
         .catch((err) => {
-            alert("errrrr");
+            alert("등록된 매장이 없습니다.");
         });
-    }, []);
+    }
 
     const removeShop = (id) => {
         removeShops(id)
@@ -53,6 +57,7 @@ const MyShopContainer = (props) => {
                 alert("삭제되었습니다.");
                 history.push(`/myshop/${shopId}`);
                 window.location.reload();
+                
             })
             .catch((err) => {
                 alert("매장삭제에러");
@@ -65,7 +70,7 @@ const MyShopContainer = (props) => {
 
 
         <MyShop 
-        shop={shop}
+        shops={shops}
         removeShop={removeShop}
         shopId={shopId}
         />
