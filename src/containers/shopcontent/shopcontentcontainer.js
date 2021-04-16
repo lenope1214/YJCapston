@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
+
 import Shopcontent from "../../components/shopcontent/shopcontent";
 import { useHistory, useParams } from "react-router-dom";
 import {
     getshopinfo,
     getshopmenu,
     postLogin,
+    cartNumber,
+    jmthing,
 } from "../../lib/shopcontent/index";
 import Geocode from "react-geocode";
+
 Geocode.setApiKey("AIzaSyBvpJoGP7dKHRovDgP4CSByczdZC7vrz18");
 Geocode.setLanguage("kr");
 Geocode.setRegion("kr");
@@ -38,12 +42,16 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
         openTime: "",
         imgPath: "",
     });
+    // const [,] = useState({
+
+    // })
 
     const [jmMenu, setJmMenu] = useState([]);
 
     const [lat, setlat] = useState();
     const [lag, setlag] = useState();
     const [pricesum, setpricesum] = useState([]);
+    const [shopId, setShopId] = useState();
 
     const openhandleModal = () => {
         setmapModal(true);
@@ -77,8 +85,10 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
         if (param.shopId === undefined) {
             return;
         }
+
         getinfo(param.shopId);
         getmenu(param.shopId);
+        setShopId(param.shopId);
     }, [param.shopId]);
 
     const getinfo = () => {
@@ -88,9 +98,10 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
             })
 
             .catch((err) => {
-                alert(err);
+                console.log(err);
             });
     };
+
     let sum = 0;
     const handleMenu = (name, price) => {
         let a = 1;
@@ -107,8 +118,6 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
 
                 sum = jmMenu[i].count * jmMenu[i].price;
 
-                setpricesum([{ sum }]);
-
                 // for (let j = 0 ; j < jmMenu.length; j++){
                 //     jmMenu[i];
                 // }
@@ -117,9 +126,11 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
                 // }
 
                 setJmMenu(copy);
+
                 break;
             }
         }
+
         console.log(pricesum);
     };
 
@@ -158,6 +169,7 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
                 handleLogin();
                 setModal(false);
                 sessionStorage.setItem("access_token", accessToken);
+
                 history.push("/shoplist");
             })
             .catch((err) => {
@@ -176,6 +188,40 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
                 }
             });
     };
+
+    const order = () => {
+        if (jmMenu.length === 0) {
+            alert("주문목록이 비어있습니다.");
+            return;
+        }
+
+        cartNumber(shopId)
+            .then((res) => {
+                if (localStorage) {
+                    localStorage.removeItem("orderlist");
+                    localStorage.setItem("orderlist", JSON.stringify(jmMenu));
+                }
+                if (localStorage.shopId) {
+                    localStorage.removeItem("shopId");
+                    localStorage.setItem("shopId", param.shopId);
+                } else {
+                    localStorage.setItem("shopId", param.shopId);
+                }
+                localStorage.setItem("orderId", res.data.orderId);
+                history.push("/shoporder");
+            })
+            .catch((err) => {
+                console.log(err);
+                const status = err?.response?.status;
+                if (status == 500) {
+                    alert("로그인이 필요합니다.");
+                    openmodal();
+                }
+                //  else if (status == 400) {
+                // }
+            });
+    };
+
     useEffect(() => {
         setTimeout(latlng(), 1000);
     });
@@ -193,6 +239,17 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
             }
         );
     };
+
+    // const jmmenuReducer = (action, state = jmMenu) => {
+    //     console.log(state);
+    //     switch (action.type) {
+    //         case JMMENU: {
+    //             return state;
+    //         }
+    //         default:
+    //             return state;
+    //     }
+    // };
 
     return (
         <Shopcontent
@@ -216,8 +273,16 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
             mapModal={mapModal}
             openhandleModal={openhandleModal}
             closehandleModal={closehandleModal}
+            order={order}
+            shopId={shopId}
+            // jmmenuReducer={jmmenuReducer}
         />
     );
 };
 
 export default Shopcontentcontainer;
+
+// export const jmthing = React.createContext((jmMenu) => {
+//     console.log(jmMenu);
+//     return jmMenu;
+// });

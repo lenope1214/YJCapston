@@ -121,6 +121,7 @@ const ShopContainer = () => {
             )
             .then((res) => {
                 history.push("/myShop");
+                // history.goBack();
             })
             .catch((err) => {
                 alert("Err");
@@ -207,6 +208,11 @@ const ShopContainer = () => {
 
         handleRoadAddr(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
     };
+
+    const goBack = () => {
+        history.goBack();
+    }
+
     return (
         <>
             <Header />
@@ -241,6 +247,7 @@ const ShopContainer = () => {
                 closeModal={closemodal}
                 handleComplete={handleComplete}
                 roadAddr={roadAddr}
+                goBack={goBack}
             />
         </>
     );

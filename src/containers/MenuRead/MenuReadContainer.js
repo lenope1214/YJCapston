@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import OwnerNavbar from "../../components/OwnerMenubar/OwnerNavbar";
 import Header from "../../components/Header/Header";
 import MenuRead from '../../components/MenuRead/MenuRead';
-import { getMenuRead, putMenuRead } from '../../lib/MenuRead';
+import { getMenuRead, putMenuPopular, putMenuSale, putMenuRead } from '../../lib/MenuRead';
 
 export const MenuReadContainer = (props) => {
     const history = useHistory();
@@ -63,6 +63,30 @@ export const MenuReadContainer = (props) => {
                 alert("showMenuRead Err");
             });
     };
+    const menu_v2 = () => {
+        putMenuPopular(menuId,)
+        .then((res)=> {
+            history.push(`/menu/${menuId}`);
+            alert("인기 여부 변경");
+            window.location.reload();
+        })
+        .catch((err)=> {
+            alert("인기여부 변경 에러");
+        });
+
+    };
+    const menu_v3 = () => {
+        putMenuSale(menuId,)
+        .then((res)=> {
+            history.push(`/menu/${menuId}`);
+            alert("인기 여부 변경");
+            window.location.reload();
+        })
+        .catch((err)=> {
+            alert("인기여부 변경 에러");
+        });
+
+    };
 
     const goBack = () => {
         history.goBack();
@@ -90,6 +114,10 @@ export const MenuReadContainer = (props) => {
                 menuDuration={menuDuration}
                 duration={menuRead.duration}
                 handleDuration={handleDuration}
+                isPopular={menuRead.isPopular}
+                isSale={menuRead.isSale}
+                menu_v2={menu_v2}
+                menu_v3={menu_v3}
             />
         </div>
     );

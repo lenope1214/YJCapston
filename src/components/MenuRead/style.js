@@ -1,22 +1,22 @@
 import styled from "styled-components";
 
 export const MenuReadWrap = styled.div`
-margin-top: 70px;
-width: 60%;
-margin-left: 20%;
+background: #F2F2F2;
 text-align: left;
 
 .form-label {
     padding: 40px 0 40px 40px;
     text-align: center;
 }
-
+.menu-title { 
+    margin-bottom: 40px;
+}
 .menu-register-container {
     display: table; 
     margin-left: auto; 
     margin-right: auto;
-    margin-top: 70px;
-    margin-bottom: 80px;
+    padding-top: 160px;
+    padding-bottom: 80px;
     text-align: center;
 }
 
@@ -32,7 +32,7 @@ text-align: left;
     margin-left: auto; 
     margin-right: auto;
     margin-top: 60px;
-    margin-bottom: 50px;
+    padding-bottom: 70px;
 }
 
 .img-box {
@@ -55,5 +55,30 @@ text-align: left;
     height: 80px;
     padding-left: 10px;
     font-size: 16px;
+}
+.button3 {
+    height: 50px;
+    width: 200px;
+    margin-left: 5px;
+    margin-right: 5px;
+    background: #1785f2;
+    color: white;
+    border: 1px solid gray;
+    font-size: 16px;
+}
+.button4 {
+    height: 50px;
+    width: 200px;
+    margin-left: 5px;
+    margin-right: 5px;
+    background: white;
+    color: black;
+    border: 1px solid black;
+    font-size: 16px;
+}
+.ps-button {
+    position: absolute;
+    height: 46px;
+    transform: translateX(-92px);
 }
 `;

@@ -16,19 +16,24 @@ const MenuRead = ({
     goBack,
     duration,
     handleDuration,
-    menuDuration
+    menuDuration,
+    isPopular,
+    isSale,
+    menu_v2,
+    menu_v3
 }) => {
     return (
         <>
             <S.MenuReadWrap>
-                <h2 className="menu-title">메뉴 상세</h2>
+                
                 <div className="menu-register-container">
+                <h2 className="menu-title">메뉴 상세</h2>
                     <table className="register-form">
                         <tbody>
                             <tr>
                                 <th colSpan='2' align='center' className="img-box">
                                     <img src={`http://3.34.55.186:8088/${img}`}
-                                        width='80%'
+                                        width='60%'
                                         // height='60%'
                                         className="img-box-box"
                                     />
@@ -81,11 +86,35 @@ const MenuRead = ({
                                     />
                                 </td>
                             </tr>
+                            <tr>
+                                <th className="form-label">인기상품</th>
+                                <td>
+                                <input
+                                        type="text"
+                                        value={isPopular}
+                                        className="input-box"
+                                        readOnly
+                                    />
+                                    <button onClick={menu_v2} className="ps-button">인기여부변경</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th className="form-label">판매중</th>
+                                <td>
+                                <input
+                                        type="text"
+                                        value={isSale}
+                                        className="input-box"
+                                        readOnly
+                                    />
+                                    <button onClick={menu_v3} className="ps-button">판매여부변경</button>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <div className="button-div">
-                        <button onClick={ReadMenu} className="button">수정</button>
-                        <button className="button" onClick={goBack}>취소</button>
+                        <button onClick={ReadMenu} className="button3">수정</button>
+                        <button className="button4" onClick={goBack}>취소</button>
                     </div>
                 </div>
             </S.MenuReadWrap>

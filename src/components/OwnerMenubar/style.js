@@ -15,8 +15,9 @@ a:hover {
 }
 
 nav {
-    position: relative;
+    position: fixed;
     display: flex;
+    z-index: 4;
     top: 0;
     left: 0;
     right: 0;
@@ -25,6 +26,7 @@ nav {
     background-color: #282828;
     height: 20px;
     color: white;
+    padding-top: 110px;
 }
 
 ul {

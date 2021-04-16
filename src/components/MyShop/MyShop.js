@@ -7,7 +7,7 @@ const MyShop = ({
     isLogin,
     logout,
     openModal,
-    shop,
+    shops,
     removeShop,
     Id
 }) => {
@@ -34,19 +34,17 @@ const MyShop = ({
                             <th align="center" className="item-5">매장주소</th>
                             {/* <th align="center" className="addressDetail">매장상세주소</th> */}
                             <th align="center" className="item-6">예약</th>
-                            <th align="center" className="item-7"></th>
-
-
+	               <th align="center" className="item-7">오픈</th>
+                            <th align="center" className="item-8"></th>
                         </thead>
-
                         <tbody>
 
-                            {!shop.length && (
+                            {!shops.length && (
                                 <tr>
-                                    <td colSpan="3">목록이 비었습니다.</td>
+                                    <td colSpan="8" className="empty-list">목록이 비었습니다.</td>
                                 </tr>
                             )}
-                            {!!shop.length && shop.map((shop) => {
+                            {!!shops.length && shops.map((shop) => {
                                 // console.log(shop.closeTime);
                                 return (
                                     <tr>
@@ -66,11 +64,12 @@ const MyShop = ({
                                         {/* <td>{shop.intro}</td> */}
                                         <td className="body-item-4">{shop.category}</td>
                                         {/* <td>{shop.openTime}</td>
-            <td>{shop.closeTime}</td> */}
+                                        <td>{shop.closeTime}</td> */}
                                         <td className="body-item-5">{shop.address}</td>
                                         {/* <td>{shop.addressDetail}</td> */}
                                         <td className="body-item-6">{shop.isRsPos}</td>
-                                        <td className="body-item-7" onClick={() => removeShop(`${shop.id}`)}><button className="delete-button">X</button></td>
+			                            <td className="body-item-7">{shop.isOpen}</td>
+                                        <td className="body-item-8" onClick={() => removeShop(`${shop.id}`)}><button className="delete-button">X</button></td>
 
                                     </tr>
 

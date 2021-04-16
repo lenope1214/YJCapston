@@ -77,12 +77,11 @@ const MyPageContainer = () => {
     useEffect(() => {
         getMyPage();
     }, []);
-    console.log("res", user);
 
     const getMyPage = () => {
         getMyInfo()
             .then((res) => {
-                console.log(res.data.name);
+                console.log(res.data);
                 setUser(res.data);
                 setAddressDetail(res.data.addressDetail);
                 setRoadAddr(res.data.address);

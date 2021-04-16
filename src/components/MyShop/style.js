@@ -2,13 +2,19 @@
 import styled from "styled-components";
 
 export const MyShopWrap = styled.div`
-margin-top: 70px;
-width: 60%;
-margin-left: 20%;
-
+background: #F2F2F2;
 a { color: black;}
 
+.menu-container {
+    padding-top: 160px;
+    padding-left: 50%;
+    transform: translateX(-27%);
+    width: 70%;
+    padding-bottom: 70px;
+}
+
 .btn-link, btn-link:visited {
+    margin-top: 120px;
     color: whitesmoke;
     font-size: 1.2em;
     margin: 16px 0px;
@@ -35,10 +41,12 @@ a { color: black;}
 }
 
 .menu-list {
-    margin-top: 100px;
+    margin-top: 70px;
     width: 100%; 
     border-collapse: collapse;
-    margin-bottom: 70px;   
+    padding-bottom: 160px;   
+    background: white;
+    border-radius: 3% 3% 0 0;
 }
 
 .menu-link {
@@ -83,6 +91,10 @@ th, td {
     text-align: center;
 }
 .item-7{
+    width: 5%;
+    text-align: center;
+}
+.item-8{
     width: 10%;
     text-align: center;
 }
@@ -119,6 +131,17 @@ th, td {
     text-aling: center;
   
 }
+//.body-item-7{
+//    width: 10%;
+//    text-align: center;
+//}
+.body-item-8{
+    padding: 15px;
+    font-size: 19px;
+    text-aling: center;
+  
+}
+
 .delete-button{
     padding: 8px;
     background-color: gray;
@@ -126,5 +149,9 @@ th, td {
     border-radius: 7px;
     border: 0px;
 }
-
+.empty-list {
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+}
 `;

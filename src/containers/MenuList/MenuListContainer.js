@@ -45,13 +45,16 @@ const MenuListContainer = (props) => {
     };
 
     const removeMenu = (id) => {
+        console.log("메뉴 아이디"+id);
         removeMenues(id)
             .then((res) => {
                 alert("삭제되었습니다.");
+                
                 history.push(`/menulist/${shopId}`);
                 window.location.reload();
             })
             .catch((err) => {
+                
                 alert("메뉴 삭제 에러");
             });
     };
