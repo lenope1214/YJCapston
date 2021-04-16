@@ -2,7 +2,6 @@ package com.jumanji.capston.service.exception;
 
 import com.jumanji.capston.service.exception.MenuException.MenuHasExistException;
 import com.jumanji.capston.service.exception.OrderMenuException.OrderMenuNotFoundException;
-import com.jumanji.capston.service.exception.ShopException.NoShopListException;
 import com.jumanji.capston.service.exception.ShopException.ShopMissMatchException;
 import com.jumanji.capston.service.exception.ShopException.ShopNotFoundException;
 import com.jumanji.capston.service.exception.UserException.DoLoginExistException;
@@ -72,12 +71,5 @@ public class ApiExceptionHandler {
                 new ApiErrorResponse(ex);
 //        new ApiErrorResponse("error-0000 : 권한없음", "로그인해주세요");
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
-    }
-
-    @ExceptionHandler(NoShopListException.class)
-    public ResponseEntity<?> NoShopListException(NoShopListException ex){
-        ApiErrorResponse response =
-                new ApiErrorResponse(ex);
-        return  new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
     }
 }

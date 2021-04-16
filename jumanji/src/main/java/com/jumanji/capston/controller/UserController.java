@@ -47,10 +47,5 @@ public class UserController  {
         return userService.patch(authorization, request);
     }
 
-    @Transactional
-    @DeleteMapping("/user")
-    public ResponseEntity<?> Withdrawal(@RequestHeader String authorization){
-        return userService.Withdrawal(authorization);
-    }
 
 }

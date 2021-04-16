@@ -147,11 +147,4 @@ public class MenuServiceImpl implements MenuService, BasicService {
         throw new MenuNotFoundException();
     }
 
-    public ResponseEntity<?> findAll(String authorization) {
-        User user;
-        String loginId = userService.getMyId(authorization);
-        user = userService.getUserInfo(loginId);
-        if(!user.getRole().equals("ROLE_ADMIN"))return new ResponseEntity<>("권한없음", HttpStatus.UNAUTHORIZED);
-        return new ResponseEntity<>(menuRepository.findAll(), HttpStatus.OK);
-    }
 }

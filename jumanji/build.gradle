@@ -33,8 +33,6 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation group: 'org.springframework.security', name: 'spring-security-jwt', version: '1.1.1.RELEASE'
-    implementation 'org.springframework.boot:spring-boot-starter-websocket'
-    implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
@@ -75,18 +73,6 @@ dependencies {
     //aws s3
 //    implementation 'org.springframework.cloud:spring-cloud-starter-aws'
 
-    // web socket
-    implementation 'org.springframework.boot:spring-boot-starter-websocket'
-
-    // stomp 방식으로 통신하기 위한 js
-    implementation 'org.webjars:stomp-websocket:2.3.3-1'
-    // websocket을 지원하지 않는 낮은 버전의 브라우저에서도 websocket을 사용할 수 있도록 해주는 라이브러리
-    implementation 'org.webjars:sockjs-client:1.1.2'
-
-    // redis
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-    //embedded-redis
-    compile group: 'it.ozimov', name: 'embedded-redis', version: '0.7.2'
 }
 
 //test {
