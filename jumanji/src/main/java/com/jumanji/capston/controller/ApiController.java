@@ -1,5 +1,6 @@
 package com.jumanji.capston.controller;
 
+import com.jumanji.capston.config.jwt.JwtTokenUtil;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.service.ShopServiceImpl;
 import com.jumanji.capston.service.UserServiceImpl;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1")
 public class ApiController {
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+
     @Autowired
     UserServiceImpl userService;
     @Autowired
