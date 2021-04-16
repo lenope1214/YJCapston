@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1c7495b5-2e1d-45d6-b68d-f2d45aba44a2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/Adapter/BasketRecyclerAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/dto/Basket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/user/BasketActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/user/MenuChoosedActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/res/drawable/ic_baseline_add_24.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/res/drawable/ic_baseline_clear_24.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/res/drawable/ic_baseline_remove_24.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/res/drawable/ic_baseline_shopping_basket_24.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/res/drawable/tumbsup.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/res/layout/activity_basket.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/res/layout/activity_menu_choosed.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/res/layout/basket_menu_list.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/6.1.1/fileContent/fileContent.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/6.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/.gradle/6.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/6.1.1/javaCompile/classAnalysis.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/6.1.1/javaCompile/jarAnalysis.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/6.1.1/javaCompile/taskHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/6.7/executionHistory/executionHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/6.7/executionHistory/executionHistory.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/6.7/fileChanges/last-build.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/6.7/fileHashes/fileHashes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/6.7/fileHashes/fileHashes.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/6.7/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/checksums/md5-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/checksums/sha1-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.gradle/configuration-cache/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.idea/modules/JMJapplication.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/.idea/modules/JMJapplication.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.idea/modules/app/JMJapplication.app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/.idea/modules/app/JMJapplication.app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/Adapter/MenuListRecyclerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/Adapter/MenuListRecyclerAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/Adapter/MenuRecyclerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/Adapter/MenuRecyclerAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/Fragment/ApiService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/Fragment/ApiService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/Fragment/MenuFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/Fragment/MenuFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/Fragment/Net.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/Fragment/Net.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/IntroScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/IntroScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/dto/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/dto/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/owner/DataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/owner/DataService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/owner/ListShopActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/owner/ListShopActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/owner/MenuDetailActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/owner/MenuDetailActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/owner/MenuRegisterActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/owner/MenuRegisterActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/owner/OwnerLoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/owner/OwnerLoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/owner/RegisterShopActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/owner/RegisterShopActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/owner/ShopDetailFragment_O.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/owner/ShopDetailFragment_O.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/user/DataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/user/DataService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/user/JoinActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/user/JoinActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/user/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/user/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/user/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/user/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/user/MyFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/user/MyFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/user/ProfileUpdateActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/user/ProfileUpdateActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/user/ShopDetailActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/java/com/example/jmjapplication2/user/ShopDetailActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/res/layout/activity_menu2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/res/layout/activity_menu2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/res/layout/activity_shop_detail3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/res/layout/activity_shop_detail3.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/res/layout/fragment_menu_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/res/layout/fragment_menu_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/app/src/main/res/layout/fragment_shop_menu_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/app/src/main/res/layout/fragment_shop_menu_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JMJapplication/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/../JMJapplication/gradlew" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_29" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1rEVvgF9WVgsXWjwIsi2HvAJflV" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+  </component>
+  <component name="RunManager">
+    <configuration name="My_Application32.app" type="AndroidRunConfigurationType" factoryName="Android App">
+      <module name="My_Application32.app" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <Java />
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1c7495b5-2e1d-45d6-b68d-f2d45aba44a2" name="Default Changelist" comment="" />
+      <created>1618541468369</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1618541468369</updated>
+      <workItem from="1618541470685" duration="291000" />
+    </task>
+    <servers />
+  </component>
+</project>
