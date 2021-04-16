@@ -55,6 +55,8 @@ public class ShopController  {
     public ResponseEntity<?> selectShopList() {
         System.out.println("샵리스트 >> ");
         return shopService.getShopList();
+//        return shopService.getShopList(category, sortTarget);
+
     }
 
     @Transactional(readOnly = true)
