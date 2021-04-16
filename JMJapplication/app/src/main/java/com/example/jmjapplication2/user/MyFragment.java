@@ -1,7 +1,10 @@
 package com.example.jmjapplication2.user;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +19,15 @@ public class MyFragment extends Fragment {
     ConstraintLayout login_btn;
     ConstraintLayout profile_btn;
     TextView profile_text;
+    private String user_id;
+    Context context;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.my_fragment, container, false);
+
+        Bundle bundle = getArguments();
+        user_id = bundle.getString("user_id","nothing");
 
         profile_text = rootView.findViewById(R.id.profile_text);
         login_btn = rootView.findViewById(R.id.login_btn);
@@ -46,16 +54,13 @@ public class MyFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
-        String id = ((JMJApplication)this.getActivity().getApplication()).getId();
-
-        if(id != null) {
-            login_btn.setVisibility(View.GONE);
-            profile_btn.setVisibility(View.VISIBLE);
-            profile_text.setText(id + "님 안녕하세요");
-        } else {
+        if(user_id.equals("nothing")) {
             login_btn.setVisibility(View.VISIBLE);
             profile_btn.setVisibility(View.GONE);
+        } else {
+            login_btn.setVisibility(View.GONE);
+            profile_btn.setVisibility(View.VISIBLE);
+            profile_text.setText(user_id + "님 안녕하세요");
         }
     }
 }

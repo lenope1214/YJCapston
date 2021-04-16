@@ -41,6 +41,7 @@ public class ShopDetailFragment_O extends Fragment {
     private String jwt, shopNumber, owner_id;
     private String isOpen, isRsPos;
     private Map<String, String> map = new HashMap();
+    Context context;
     public ShopDetailFragment_O() {
 
     }
@@ -65,8 +66,11 @@ public class ShopDetailFragment_O extends Fragment {
         Bundle bundle = getArguments();
         shopNumber = bundle.getString("shopNumber","dwad");
         
-        jwt = ((JMJApplication) this.getActivity().getApplication()).getJwt();
-        owner_id = ((JMJApplication) this.getActivity().getApplication()).getId();
+        //jwt = ((JMJApplication) this.getActivity().getApplication()).getJwt();
+
+        SharedPreferences pref = getActivity().getSharedPreferences("auth_o", Context.MODE_PRIVATE);
+        owner_id = pref.getString("owner_id", null);
+        jwt = pref.getString("token", null);
 
         owner_name_tv.setText(owner_id + "님");
 
@@ -86,9 +90,11 @@ public class ShopDetailFragment_O extends Fragment {
 
                         // 값버리기
                         Context context = getActivity();
-                        SharedPreferences pref = context.getSharedPreferences("auth", Context.MODE_PRIVATE);
+                        SharedPreferences pref = context.getSharedPreferences("auth_o", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = pref.edit();
                         editor.remove("token");
+                        editor.remove("owner_id");
+                        editor.remove("role");
                         editor.apply();
 
                         // 앱 변수버리기

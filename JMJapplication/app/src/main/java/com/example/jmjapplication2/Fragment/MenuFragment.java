@@ -70,8 +70,8 @@ public class MenuFragment extends Fragment {
                         List<Menu> menuList = response.body();
                         for(Menu list : menuList) {
                             mItems.add(new Menu(list.getId(), list.getName(), list.getIntro(),
-                                    list.getIs_sale(), list.getIs_popular(),list.getPrice(),
-                                    list.getDuration(), list.getImg_url()));
+                                    list.getIsSale(), list.getIsPopular(),list.getPrice(),
+                                    list.getDuration(), list.getImgUrl()));
                             rv_menu_list.setHasFixedSize(true);
                             adapter.setItems(mItems);
                             rv_menu_list.setLayoutManager(new LinearLayoutManager(getActivity()));

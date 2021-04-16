@@ -119,6 +119,8 @@ public class LoginActivity extends AppCompatActivity {
                                     SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
                                     SharedPreferences.Editor editor = pref.edit();
                                     editor.putString("token", jwt);
+                                    editor.putString("user_id", et_login_id.getText().toString());
+                                    editor.putString("role", "ROLE_USER");
                                     editor.apply();
 
                                     ((JMJApplication)getApplication()).setId(et_login_id.getText().toString());
@@ -130,8 +132,6 @@ public class LoginActivity extends AppCompatActivity {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                             startActivity(intent);
                                             finish();
                                         }

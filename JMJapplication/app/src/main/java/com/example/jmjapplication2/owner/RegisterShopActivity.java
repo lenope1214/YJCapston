@@ -176,7 +176,8 @@ public class RegisterShopActivity extends AppCompatActivity {
                 if(resultCode == RESULT_OK) {
                     String data = intent.getExtras().getString("data");
                     if(data != null) {
-                        shop_et_addr.setText(data);
+                        String data2 = data.substring(7);
+                        shop_et_addr.setText(data2);
                     }
                 }
                 break;

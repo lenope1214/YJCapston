@@ -1,5 +1,7 @@
 package com.example.jmjapplication2.user;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -9,10 +11,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.ViewPager;
 import com.example.jmjapplication2.Adapter.DetailPagerAdapter;
 import com.example.jmjapplication2.R;
 import com.example.jmjapplication2.dto.Shop;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,9 +35,9 @@ public class ShopDetailActivity extends AppCompatActivity {
     static public String shopDetailAddress;
 
     TextView shop_detail_shopname, shop_detail_review, shop_detail_reply, shop_detail_avgtext;
-    ImageView shop_detail_avgstar;
-    TextView shop_detail_phonecall;
-    TextView shop_detail_zzim;
+    ImageView shop_detail_avgstar, shop_detail_phonecall_img, shop_detail_zzim_img;
+    ConstraintLayout shop_detail_phonecall, shop_detail_zzim;
+    FloatingActionButton order_basket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +55,12 @@ public class ShopDetailActivity extends AppCompatActivity {
         shop_detail_reply = (TextView) findViewById(R.id.shop_detail_reply);
         //shop_detail_avgtext = (TextView) findViewById(R.id.shop_detail_avgtext);
         //shop_detail_avgstar = (ImageView) findViewById(R.id.shop_detail_avgstar);
-        shop_detail_phonecall = (TextView) findViewById(R.id.shop_detail_phonecall);
-        shop_detail_zzim = (TextView) findViewById(R.id.shop_detail_zzim);
+        shop_detail_phonecall = (ConstraintLayout) findViewById(R.id.shop_detail_phonecall);
+        shop_detail_zzim = (ConstraintLayout) findViewById(R.id.shop_detail_zzim);
+        shop_detail_phonecall_img = (ImageView) findViewById(R.id.shop_detail_phonecall_img);
+        shop_detail_zzim_img = (ImageView) findViewById(R.id.shop_detail_zzim_img);
+        order_basket = (FloatingActionButton) findViewById(R.id.order_basket);
+
         
         shop_detail_phonecall.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +72,21 @@ public class ShopDetailActivity extends AppCompatActivity {
         shop_detail_zzim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ShopDetailActivity.this, "찜", Toast.LENGTH_SHORT).show();
+                shop_detail_zzim_img.setImageResource(R.drawable.zzimred);
+            }
+        });
+
+        order_basket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences pref = getSharedPreferences("basket", MODE_PRIVATE);
+                int list_size = pref.getInt("list_size", 0);
+                if(list_size == 0) {
+                    Toast.makeText(ShopDetailActivity.this, "메뉴를 선택해주세요", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(ShopDetailActivity.this, BasketActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 

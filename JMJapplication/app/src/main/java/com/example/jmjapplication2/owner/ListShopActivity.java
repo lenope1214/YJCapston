@@ -2,6 +2,7 @@ package com.example.jmjapplication2.owner;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -38,11 +39,12 @@ public class ListShopActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_shop);
 
-
         Intent intent = getIntent();
         int owner_number_size = intent.getIntExtra("owner_number_size", 1);
         owner_id = intent.getStringExtra("owner_id");
-        jwt = ((JMJApplication)this.getApplication()).getJwt();
+
+        SharedPreferences pref = getSharedPreferences("auth_o", MODE_PRIVATE);
+        jwt = pref.getString("token", null);
 
         String[] shopId = new String[owner_number_size];
         for (int i=0; i < owner_number_size; i++) {

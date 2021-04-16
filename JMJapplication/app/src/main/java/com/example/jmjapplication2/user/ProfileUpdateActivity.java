@@ -53,6 +53,8 @@ public class ProfileUpdateActivity extends AppCompatActivity {
                         SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
                         SharedPreferences.Editor editor = pref.edit();
                         editor.remove("token");
+                        editor.remove("user_id");
+                        editor.remove("role");
                         editor.apply();
 
                         // 앱 변수버리기

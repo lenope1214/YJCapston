@@ -1,6 +1,8 @@
 package com.example.jmjapplication2.user;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -33,11 +35,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getHashKey();
 
+        SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
+        String user_id = pref.getString("user_id", null);
+        
         homeFragment = new HomeFragment();
         posFragment = new PosFragment();
         mapFragment = new MapFragment();
         myFragment = new MyFragment();
         zzimFragment = new ZzimFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("user_id", user_id);
+        myFragment.setArguments(bundle);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
 

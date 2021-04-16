@@ -80,9 +80,11 @@ public class OwnerLoginActivity extends AppCompatActivity {
                                 Log.d("jsonobject :: userid >> ", et_owner_id.getText().toString());
 
                                 if(role.equals("ROLE_OWNER")) {
-                                    SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
+                                    SharedPreferences pref = getSharedPreferences("auth_o", MODE_PRIVATE);
                                     SharedPreferences.Editor editor = pref.edit();
                                     editor.putString("token", jwt);
+                                    editor.putString("owner_id", et_owner_id.getText().toString());
+                                    editor.putString("role", "ROLE_OWNER");
                                     editor.apply();
 
                                     ((JMJApplication)getApplication()).setId(et_owner_id.getText().toString());
