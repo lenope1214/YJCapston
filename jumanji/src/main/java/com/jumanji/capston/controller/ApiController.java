@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 public class ApiController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
-
     @Autowired
     UserServiceImpl userService;
     @Autowired

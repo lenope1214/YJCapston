@@ -53,25 +53,22 @@ public class ShopServiceImpl implements ShopService, BasicService {
 
     public ResponseEntity<?> getShopListOrderTarget(String category, String sortTarget) {
         if(getShopListSize() != 0) {
-            List<Shop> shopList;
+            List<Shop.Response> responseList = new ArrayList<>();
             sortTarget = sortTarget == null ? "" : sortTarget;
             category = category == null ? "" : category;
             switch (sortTarget){
                 case "score" :
-
-                    shopList = shopRepository.ShopOrderByScore(category);
-                    break;
+                        return new ResponseEntity<>(shopRepository.ShopOrderByScore(category), HttpStatus.OK);
                 default:
-                    shopList = shopRepository.findAll();
+                    List<Shop> shopList = shopRepository.findAll();
+                    for(Shop shop :  shopList){
+                        Shop.Response response = new Shop.Response(shop);
+                        responseList.add(response);
+                    }
                     break;
             }
             // shop.response로 parsing 해서 보내기.
-            ArrayList<Shop.Response> responseList = new ArrayList<>();
 
-            for(Shop shop :  shopList){
-                Shop.Response response = new Shop.Response(shop);
-                responseList.add(response);
-            }
             return new ResponseEntity<>(responseList, HttpStatus.OK);
         }
         else

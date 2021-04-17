@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 @Table(name="reviews")
 public class Review {
     @Id
-    private Long id; //리뷰번호
+    private String id; //리뷰번호
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
