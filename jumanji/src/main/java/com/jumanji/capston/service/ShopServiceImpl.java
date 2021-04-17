@@ -51,9 +51,37 @@ public class ShopServiceImpl implements ShopService, BasicService {
             return new ResponseEntity<>(new ApiErrorResponse("error-0000"), HttpStatus.FORBIDDEN);
     }
 
-    public ResponseEntity<?> getShopList() {
-        if(shopRepository.findAll().size() != 0) {
+    public ResponseEntity<?> getShopListOrderTarget(String category, String sortTarget) {
+        if(getShopListSize() != 0) {
+            List<Shop> shopList;
+            sortTarget = sortTarget == null ? "" : sortTarget;
+            category = category == null ? "" : category;
+            switch (sortTarget){
+                case "score" :
+
+                    shopList = shopRepository.ShopOrderByScore(category);
+                    break;
+                default:
+                    shopList = shopRepository.findAll();
+                    break;
+            }
             // shop.response로 parsing 해서 보내기.
+            ArrayList<Shop.Response> responseList = new ArrayList<>();
+
+            for(Shop shop :  shopList){
+                Shop.Response response = new Shop.Response(shop);
+                responseList.add(response);
+            }
+            return new ResponseEntity<>(responseList, HttpStatus.OK);
+        }
+        else
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+
+    public ResponseEntity<?> getShopList() {
+        if(getShopListSize() != 0) {
+            // shop.response로 parsing 해서 보내기
             ArrayList<Shop.Response> responseList = new ArrayList<>();
             for(Shop shop :  shopRepository.findAll()){
                 Shop.Response response = new Shop.Response(shop);
@@ -276,5 +304,9 @@ public class ShopServiceImpl implements ShopService, BasicService {
     @Override
     public boolean isEmpty(String id) {
         return false;
+    }
+
+    public int getShopListSize(){
+        return shopRepository.findAll().size();
     }
 }

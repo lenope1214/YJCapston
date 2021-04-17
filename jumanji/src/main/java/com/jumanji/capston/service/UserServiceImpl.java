@@ -117,9 +117,13 @@ public class UserServiceImpl implements UserService, BasicService {
     }
 
     @Transactional
-    public ResponseEntity<?> delete(String id) {
-        isPresent(id);
-        userRepository.deleteById(id);
+    public ResponseEntity<?> delete(String authorization) {
+        String loginId = getMyId(authorization);
+        isPresent(loginId);
+
+        User user = getUserInfo(loginId);
+        user.setIsWdrw('Y');
+        userRepository.save(user);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 삭제가 잘 되면 ok 반환.
     }
 
@@ -129,6 +133,7 @@ public class UserServiceImpl implements UserService, BasicService {
         User userEntity = userRepository.findById(request.getId()).get();
 //         아이디 오류 후에 아이디, 비번 오류 통합.. 현재는 있는지 확인하기 위해 이렇게 둠.
         checkPW(request, userEntity.getPassword());
+        isWdrw(request.getId());
         final String access_token = jwtTokenUtil.generateToken(userEntity.getId());
         JwtResponse jwtResponse = new JwtResponse(access_token, userEntity.getRole());
         return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
@@ -164,6 +169,11 @@ public class UserServiceImpl implements UserService, BasicService {
     public boolean isPresent(String id) {
         if (userRepository.findById(id).isPresent()) return true;
         throw new UserNotFoundException(id);
+    }
+
+    public void isWdrw(String id){
+        if(userRepository.findById(id).get().getIsWdrw() == 'Y')
+            throw new UserNotFoundException();
     }
 
     /**
