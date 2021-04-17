@@ -51,10 +51,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 //        System.out.println("In JwtRequestFilter");
-        if (!shouldNotFilter(request)) {
-            System.out.println("권한없음 다시 돌아가.");
-            response.sendError(400, "please login");
-            return;
+        if (shouldNotFilter(request)) {
+            filterChain.doFilter(request, response);
         }
         final String requestTokenHeader = request.getHeader("Authorization");
 //        System.out.println("TOKEN : " + requestTokenHeader );

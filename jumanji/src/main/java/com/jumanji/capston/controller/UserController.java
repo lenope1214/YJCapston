@@ -47,5 +47,9 @@ public class UserController  {
         return userService.patch(authorization, request);
     }
 
-
+    @Transactional
+    @DeleteMapping("/user") // delete user
+    public ResponseEntity<?> deleteUser(@RequestHeader String authorization){
+        return userService.delete(authorization);
+    }
 }

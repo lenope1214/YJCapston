@@ -81,6 +81,6 @@ dependencies {
 
 bootJar{
     archiveBaseName = '-'
-    archiveFileName = '-.jar'
+    archiveFileName = 'capston-0.0.1-SNAPSHOT.jar'
     archiveVersion ='0.0.0'
 }
