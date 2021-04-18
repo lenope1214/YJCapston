@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "./style";
 import { Link } from "react-router-dom";
 import yangtimjang from "../Shoplist/img/yangtimjang.png";
@@ -25,8 +25,8 @@ const Shopcontent = ({
     mapModal,
     openhandleModal,
     closehandleModal,
+    order,
 }) => {
-    console.log(isLogin);
     var x = (lat *= 1);
     var y = (lag *= 1);
 
@@ -35,6 +35,16 @@ const Shopcontent = ({
     let AWS_BASE_URL = "http://3.34.55.186:8088/";
     let SCHOOL_BASE_URL2 = "http://192.168.0.24:8088/";
 
+    const [allPrice, setAllPrice] = useState();
+    useEffect(() => {
+        let a = jmMenu.reduce((prev, curr) => {
+            console.log(prev, curr);
+            return prev + curr.price * curr.count;
+        }, 0);
+
+        setAllPrice(a);
+    }, [jmMenu]);
+    localStorage.setItem("allPrice", allPrice);
     return (
         <>
             <S.shopcontentWrap>
@@ -84,21 +94,7 @@ const Shopcontent = ({
                         )}
                     </div>
                     <body>
-                        <div class="topCategory">
-                            <li>한식</li>
-                            <li>중식</li>
-                            <li>일식</li>
-                            <li>양식</li>
-                            <li>술집</li>
-                            <li>분식</li>
-                            <li>고기</li>
-                            <li>찜탕</li>
-                            <li>카페 디저트</li>
-                            <li>패스트푸드</li>
-                            <li class="cityreview">실시간 리뷰</li>
-                            <li class="reviewevent">리뷰이벤트</li>
-                        </div>
-                        <div class="allbody">
+                    <div class="allbody">
                             <div class="shopcon">
                                 <div class="shopcon_2">
                                     <div class="shop_img">
@@ -250,14 +246,12 @@ const Shopcontent = ({
                             </div>
                             <div class="jmallprice">
                                 <span>합계</span>
-                                {jmMenu.map((jmlist) => {
-                                    const priceall = (jmlist.price *= 1);
-
-                                    return <div class="jmprice"></div>;
-                                })}
+                                <div class="jmprice8">{allPrice}원</div>
                             </div>
 
-                            <button class="gojm">주문하기</button>
+                            <button class="gojm" onClick={order}>
+                                주문하기
+                            </button>
                         </div>
                     </body>
                     {mapModal && (

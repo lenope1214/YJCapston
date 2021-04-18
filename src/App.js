@@ -15,6 +15,7 @@ import MyShopContainer from "./containers/MyShop/MyShopContainer";
 import ShoplistContainer from "./containers/Shoplist/ShoplistContainer";
 import ShopcontentContainer from "./containers/shopcontent/shopcontentcontainer";
 import Payment from "./components/Event/Payment";
+import ShopOrderContainer from "./containers/ShopOrder/ShopOrderContainer";
 
 const App = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -53,15 +54,15 @@ const App = () => {
           <Route component={EventContainer} path="/event" />
           <Route component={MenuReadContainer} path='/menu/:menuId' />
           <Route
-                    path="/shopcontent/:shopId"
-                    component={() => (
-                        <ShopcontentContainer
-                            isLogin={isLogin}
-                            handleLogin={handleLogin}
-                            handleLogout={handleLogout}
-                        />
-                    )}
-                ></Route>
+            path="/shopcontent/:shopId"
+            component={() => (
+              <ShopcontentContainer
+                isLogin={isLogin}
+                handleLogin={handleLogin}
+                handleLogout={handleLogout}
+              />
+            )}
+          ></Route>
           <Route
             path="/shoplist"
             component={() => (
@@ -72,6 +73,16 @@ const App = () => {
               />
             )}
           />
+          <Route
+            path="/shoporder"
+            component={() => (
+              <ShopOrderContainer
+                isLogin={isLogin}
+                handleLogin={handleLogin}
+                handleLogout={handleLogout}
+              />
+            )}
+          ></Route>
           <Route
             path="/"
             component={() => (
