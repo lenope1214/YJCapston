@@ -1,7 +1,6 @@
 package com.jumanji.capston.data;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +12,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
-@Table(name="tables")
+@Table(name="tables") @NoArgsConstructor
 public class Tab implements Serializable {
 
 //    @EmbeddedId
@@ -24,13 +23,42 @@ public class Tab implements Serializable {
 
     @Column(name = "seat_qty", length = 2)
     private int seatQty; // 좌석수
+    @Column(name = "qr_code")
+    private String qrCode;
 
     @Column
-    private char using; // 사용중인지 확인.
+    private char using = 'N'; // 사용중인지 확인.
 
-    public class Request{
-
+    @Builder
+    public Tab(String tabId, String qrCode, int seatQty){
+        this.id = tabId;
+        this.qrCode = qrCode;
+        this.seatQty = seatQty;
     }
+
+    @Getter @AllArgsConstructor @NoArgsConstructor
+    public static class Request{
+        private String shopId;
+        private int tabId; // 테이블 번호
+        private String qrCode; // qr code url
+        private int seatQty; // 의자 수? 좌석 수?
+    }
+
+    @Getter
+    public static class Response{
+        private String tabId;
+        private int seatQty;
+        private char using;
+        private String qrCode;
+
+        public Response(Tab tab){
+            this.tabId = tab.getId();
+            this.seatQty = tab.getSeatQty();
+            this.using = tab.getUsing();
+            this.qrCode = tab.getQrCode();
+        }
+    }
+
 }
 //
 //@Getter

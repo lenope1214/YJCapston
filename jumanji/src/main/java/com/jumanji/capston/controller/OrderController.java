@@ -32,7 +32,7 @@ public class OrderController {
     }
 
     @Transactional(readOnly = true)
-    @GetMapping("/order/myOrderList")
+    @GetMapping("/order/myOrder")
     public ResponseEntity<?> getOrderList(@RequestHeader String authorization){
         String loginId = userService.getMyId(authorization);
         return orderService.getList(loginId);

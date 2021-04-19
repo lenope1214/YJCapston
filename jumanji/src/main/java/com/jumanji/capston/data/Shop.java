@@ -71,6 +71,7 @@ public class Shop {
         private char isOpen;
         private char isRsPos;
         private String imgPath;
+        private String score;
 
         public Response(Shop shop) {
             this.id = shop.getId();
@@ -86,6 +87,7 @@ public class Shop {
             this.imgPath = shop.getImgPath();
         }
     }
+
 
 
     @Builder(builderMethodName = "insertShop")
@@ -110,5 +112,20 @@ public class Shop {
         if (patch.getAddress() != null) this.address = patch.getAddress();
         if (patch.getAddressDetail() != null) this.addressDetail = patch.getAddressDetail();
         if (patch.getCategory() != null) this.category = patch.getCategory();
+    }
+
+    public interface Dao{
+        String getId();
+        String getName();
+        String getIntro();
+        String getAddress();
+        String getAddressDetail();
+        String getCategory();
+        String getOpenTime();
+        String getCloseTime();
+        Character getIsOpen();
+        Character getIsRsPos();
+        String getImgPath();
+        String getSortTarget();
     }
 }

@@ -152,12 +152,13 @@ public class UserServiceImpl implements UserService, BasicService {
             throw new PasswordMissMatchException();
     }
 
-    public void updateInfo(User oldData, User.Request newData) {
+    public void updateInfo(User user, User.Request newData) {
         System.out.println("Update User in");
-        if (newData.getAddress() != null) oldData.setAddress(newData.getAddress());
-        if (newData.getAddressDetail() != null) oldData.setAddressDetail(newData.getAddressDetail());
-        if (newData.getPassword() != null) oldData.setPassword(bCryptPasswordEncoder.encode(newData.getPassword()));
-        userRepository.save(oldData);
+        if(newData.getEmail() != null) user.setEmail(newData.getEmail());
+        if (newData.getAddress() != null) user.setAddress(newData.getAddress());
+        if (newData.getAddressDetail() != null) user.setAddressDetail(newData.getAddressDetail());
+        if (newData.getPassword() != null) user.setPassword(bCryptPasswordEncoder.encode(newData.getPassword()));
+        userRepository.save(user);
     }
 
     public boolean isEmpty(String id) {

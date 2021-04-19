@@ -60,16 +60,16 @@ public class ShopController  {
             ) {
         System.out.println("샵리스트 >> ");
 //        return shopService.getShopList();
-        return shopService.getShopListOrderTarget(category, sortTarget);
+        return shopService.getShopList(category, sortTarget);
 
     }
 
-    @Transactional(readOnly = true)
-    @GetMapping("/shopList/{category}") // get /shopList/{category}
-    public ResponseEntity<?> getShopListByCategory(@PathVariable String category) {
-        return shopService.getShopListByCat(category);
-//        return new ResponseEntity<>(shopCatList, httpHeaders, HttpStatus.OK); // 이렇게 하면 오류. 객체를 utf로 변환 시켜서 그런지 무슨 한글 변환하면서 오류나나봄!
-    }
+//    @Transactional(readOnly = true)
+//    @GetMapping("/shopList/{category}") // get /shopList/{category}
+//    public ResponseEntity<?> getShopListByCategory(@PathVariable String category) {
+//        return shopService.getShopListByCat(category);
+////        return new ResponseEntity<>(shopCatList, httpHeaders, HttpStatus.OK); // 이렇게 하면 오류. 객체를 utf로 변환 시켜서 그런지 무슨 한글 변환하면서 오류나나봄!
+//    }
 
     @Transactional
     @PostMapping("/shop") // post /shop 매장등록     Form-data로 받음 => Param. requestbody를 안적으면 자동 param 매핑 해주는듯
