@@ -23,5 +23,6 @@ public class TableController {
     @PostMapping("/table")
     public ResponseEntity<?> postTable(@RequestHeader String authorization, @RequestBody Tab.Request request){
         return new ResponseEntity<>(tableService.post(authorization, request), HttpStatus.CREATED);
+        
     }
 }
