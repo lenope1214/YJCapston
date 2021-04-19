@@ -22,7 +22,7 @@ public class TableServiceImpl implements TableService, BasicService {
     @Autowired
     ShopServiceImpl shopService;
 
-    public Tab getTableInfo(String tabId){
+    public Tab getTableInfo(String tabId) {
         isPresent(tabId);
         Tab table = tableRepository.findById(tabId).get();
         return table;
@@ -31,7 +31,10 @@ public class TableServiceImpl implements TableService, BasicService {
 
     @Override
     public Tab.Response get(String tableId) {
-        return null;
+        isPresent(tableId);
+        Tab tab = tableRepository.findById(tableId).get();
+        Tab.Response response = new Tab.Response(tab);
+        return response;
     }
 
     @Override
@@ -40,15 +43,15 @@ public class TableServiceImpl implements TableService, BasicService {
     }
 
     @Override
-    public Tab.Response post(String authorization,Tab.Request request) {
+    public Tab.Response post(String authorization, Tab.Request request) {
         String loginId = userService.getMyId(authorization);
-        String tabId = request.getShopId() + String.format("%2d", request.getTabId());
-        
+        String tabId = request.getShopId() + String.format("%2d", request.getNo());
+
         // 유효성 체크 --
         userService.isPresent(loginId); // 로그인 아이디가 존재하는지
         shopService.isOwnShop(loginId, request.getShopId()); // 내 매장이 맞는지
         isEmpty(tabId); // 전에 만들어둔 테이블과 겹치는지
-        
+
         Tab tab = Tab.builder()
                 .tabId(tabId)
                 .seatQty(request.getSeatQty())
@@ -70,13 +73,13 @@ public class TableServiceImpl implements TableService, BasicService {
 
     @Override
     public boolean isPresent(String id) {
-        if(tableRepository.findById(id).isPresent())return true;
+        if (tableRepository.findById(id).isPresent()) return true;
         throw new TableNotFoundException();
     }
 
     @Override
     public boolean isEmpty(String id) {
-        if(tableRepository.findById(id).isEmpty())return true;
+        if (tableRepository.findById(id).isEmpty()) return true;
         throw new TableHasExistException();
     }
 }

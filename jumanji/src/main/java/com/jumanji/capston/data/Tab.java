@@ -38,8 +38,9 @@ public class Tab implements Serializable {
 
     @Getter @AllArgsConstructor @NoArgsConstructor
     public static class Request{
+        private String tabId;
         private String shopId;
-        private int tabId; // 테이블 번호
+        private int no; // 테이블 번호
         private String qrCode; // qr code url
         private int seatQty; // 의자 수? 좌석 수?
     }
