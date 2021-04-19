@@ -76,13 +76,13 @@ public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
                 "tabId : " + request.getTabId()
         );
         OrderMenu orderMenu = null;
-        long cartId = request.getOrderId().getTime();
+        long orderId = request.getOrderId().getTime();
         orderService.isPresent(request.getOrderId());
         menuService.isPresent(request.getMenuId());
 
 
-        int orderCount = orderRepository.countByIdContains("" + cartId);
-        String orderMenuId = "" + cartId + String.format("%02d", orderCount);
+        int orderCount = orderRepository.countByIdContains("" + orderId);
+        String orderMenuId = orderId + "o" +String.format("%02d", orderCount);
         Menu menu = menuService.getMenuInfo(request.getMenuId());
         Tab table = tableService.getTableInfo(request.getTabId());
         orderMenu = OrderMenu.builder()

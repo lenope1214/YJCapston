@@ -126,6 +126,6 @@ public class Shop {
         Character getIsOpen();
         Character getIsRsPos();
         String getImgPath();
-        String getScore();
+        String getSortTarget();
     }
 }

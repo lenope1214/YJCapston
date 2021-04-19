@@ -60,7 +60,7 @@ public class ShopController  {
             ) {
         System.out.println("샵리스트 >> ");
 //        return shopService.getShopList();
-        return shopService.getShopListOrderTarget(category, sortTarget);
+        return shopService.getShopList(category, sortTarget);
 
     }
 

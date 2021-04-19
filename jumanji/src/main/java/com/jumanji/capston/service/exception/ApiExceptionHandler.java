@@ -10,11 +10,28 @@ import com.jumanji.capston.service.exception.UserException.UserNotFoundException
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class ApiExceptionHandler {
+
+    @ExceptionHandler(MissingRequestHeaderException.class)
+    public ResponseEntity<ApiErrorResponse> missingHeader(MissingRequestHeaderException ex) {
+        ApiErrorResponse response = null;
+        if (ex.getMessage().contains("authorization")) {
+            response =
+                    new ApiErrorResponse("code-header", "does not exist require header authorization parameter");
+        }else{
+            response =
+                    new ApiErrorResponse("code-header", "does not exist require header authorization parameter");
+
+        }
+
+
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ApiErrorResponse> idHandleException(UserNotFoundException ex) {
@@ -31,42 +48,42 @@ public class ApiExceptionHandler {
     }
 
     @ExceptionHandler(ShopNotFoundException.class)
-    public ResponseEntity<ApiErrorResponse> shopExistException(ShopNotFoundException ex){
+    public ResponseEntity<ApiErrorResponse> shopExistException(ShopNotFoundException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(OrderMenuNotFoundException.class)
-    public ResponseEntity<?> orderNotFoundException(OrderMenuNotFoundException ex){
-        ApiErrorResponse response=
+    public ResponseEntity<?> orderNotFoundException(OrderMenuNotFoundException ex) {
+        ApiErrorResponse response =
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(MenuHasExistException.class)
-    public ResponseEntity<?> menuAlreadUsedException(MenuHasExistException ex){
+    public ResponseEntity<?> menuAlreadUsedException(MenuHasExistException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(ShopMissMatchException.class)
-    public ResponseEntity<?> menuAlreadUsedException(ShopMissMatchException ex){
+    public ResponseEntity<?> menuAlreadUsedException(ShopMissMatchException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<?> dataDuplicateKeyException(ConstraintViolationException ex){
+    public ResponseEntity<?> dataDuplicateKeyException(ConstraintViolationException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse("ORA-00001", ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(DoLoginExistException.class)
-    public ResponseEntity<?> AuthenticationException(DoLoginExistException ex){
+    public ResponseEntity<?> AuthenticationException(DoLoginExistException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
 //        new ApiErrorResponse("error-0000 : 권한없음", "로그인해주세요");
