@@ -45,7 +45,7 @@ public class TableServiceImpl implements TableService, BasicService {
     @Override
     public Tab.Response post(String authorization, Tab.Request request) {
         String loginId = userService.getMyId(authorization);
-        String tabId = request.getShopId() + String.format("%2d", request.getNo());
+        String tabId = request.getShopId() + String.format("%02d", request.getNo());
 
         // 유효성 체크 --
         userService.isPresent(loginId); // 로그인 아이디가 존재하는지
