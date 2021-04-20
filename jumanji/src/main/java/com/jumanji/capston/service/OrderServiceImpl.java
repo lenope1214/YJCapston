@@ -71,8 +71,8 @@ public class OrderServiceImpl implements OrderService {
         shopService.isPresent(request.getShopId());
 
         //isEmpty 는 필요 x 주문은 매번 새로운 애기 때문.
-        shop = shopService.getShopInfo(request.getShopId());
-        user = userService.getUserInfo(loginId);
+        shop = shopService.get(request.getShopId());
+        user = userService.get(loginId);
 
         order = Order.builder()
                 .id(new Timestamp(System.currentTimeMillis()))

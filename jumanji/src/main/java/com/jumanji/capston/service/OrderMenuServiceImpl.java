@@ -41,19 +41,10 @@ public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
     }
 
 
-    public ResponseEntity<?> getOrderMenuByCartId(Timestamp orderMenuId) {
+    public Set<OrderMenu> getOrderMenuByCartId(Timestamp orderMenuId) {
         System.out.println("orderMenuId : " +orderMenuId.toString());
         Set<OrderMenu> orderList = orderRepository.findByIdContains(orderMenuId.toString());
-        List<OrderMenu.Response> response = new ArrayList<>();
-        System.out.println("주문메뉴 개수 : " + orderList.size());
-        for(OrderMenu order : orderRepository.findByIdContains(orderMenuId.toString())){
-            System.out.println("orderList info \n" +
-                    "order.getId() : "+ order.getId() + "\n" +
-                    "order.getMenuId : " + order.getMenu().getId().substring(10) +"\n" +
-                    "order.get");
-            response.add(new OrderMenu.Response(order));
-        }
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return orderList;
     }
 
 

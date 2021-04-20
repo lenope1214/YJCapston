@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PaymentServiceImpl implements PaymentService, BasicService {
     @Autowired
@@ -15,23 +17,24 @@ public class PaymentServiceImpl implements PaymentService, BasicService {
     @Autowired
     OrderServiceImpl orderService;
 
+
     @Override
-    public ResponseEntity<?> get(String paymentId) {
+    public Payment get(String authorization, String paymentId) {
         return null;
     }
 
     @Override
-    public ResponseEntity<?> getList(String cartId) {
+    public List<Payment> getList(String orderId) {
         return null;
     }
 
     @Override
-    public ResponseEntity<?> post(Payment.Request request) {
+    public Payment post(String authorization, Payment.Request request) {
         return null;
-     }
+    }
 
     @Override
-    public ResponseEntity<?> patch(Payment.Request request) {
+    public Payment patch(String authorization, Payment.Request request) {
         return null;
     }
 

@@ -1,6 +1,7 @@
 package com.jumanji.capston.service.exception;
 
 import com.jumanji.capston.data.Tab;
+import com.jumanji.capston.service.exception.Auth.ForbiddenException;
 import com.jumanji.capston.service.exception.MenuException.MenuHasExistException;
 import com.jumanji.capston.service.exception.OrderMenuException.OrderMenuNotFoundException;
 import com.jumanji.capston.service.exception.ShopException.ShopMissMatchException;
@@ -105,5 +106,12 @@ public class ApiExceptionHandler {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<?> ForbiddenException(ForbiddenException ex){
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
     }
 }
