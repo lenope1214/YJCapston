@@ -6,6 +6,7 @@ import com.jumanji.capston.service.exception.OrderMenuException.OrderMenuNotFoun
 import com.jumanji.capston.service.exception.ShopException.ShopMissMatchException;
 import com.jumanji.capston.service.exception.ShopException.ShopNotFoundException;
 import com.jumanji.capston.service.exception.TableException.TableHasExistException;
+import com.jumanji.capston.service.exception.TableException.TableNotFoundException;
 import com.jumanji.capston.service.exception.UserException.DoLoginExistException;
 import com.jumanji.capston.service.exception.UserException.PasswordMissMatchException;
 import com.jumanji.capston.service.exception.UserException.UserNotFoundException;
@@ -94,6 +95,13 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(TableHasExistException.class)
     public ResponseEntity<?> TableHasExistException(TableHasExistException ex){
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(TableNotFoundException.class)
+    public ResponseEntity<?> TableNotFoundException(TableNotFoundException ex){
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
