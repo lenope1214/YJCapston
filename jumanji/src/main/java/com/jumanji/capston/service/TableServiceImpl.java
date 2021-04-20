@@ -29,26 +29,21 @@ public class TableServiceImpl implements TableService, BasicService {
 
 
     @Override
-    public Tab.Response get(String tableId) {
+    public Tab get(String tableId) {
         isPresent(tableId);
         Tab tab = tableRepository.findById(tableId).get();
-        Tab.Response response = new Tab.Response(tab);
-        return response;
+        return tab;
     }
 
     @Override
-    public List<Tab.Response> getList(String shopId) {
+    public List<Tab> getList(String shopId) {
         // 유효성 체크
         shopService.isPresent(shopId);
-        List<Tab.Response> response = new ArrayList<>();
-        for(Tab tab : tableRepository.findByIdContains(shopId)){
-            response.add(new Tab.Response(tab));
-        }
-        return response;
+        return tableRepository.findByIdContains(shopId);
     }
 
     @Override
-    public Tab.Response post(String authorization, Tab.Request request) {
+    public Tab post(String authorization, Tab.Request request) {
         String loginId = userService.getMyId(authorization);
         String tabId = request.getShopId() + String.format("%02d", request.getNo());
         System.out.println("request.getNo() : " + request.getNo());
@@ -63,12 +58,11 @@ public class TableServiceImpl implements TableService, BasicService {
                 .seatQty(request.getSeatQty())
                 .qrCode(request.getQrCode())
                 .build();
-        Tab.Response response = new Tab.Response(tableRepository.save(tab));
-        return response;
+        return tab;
     }
 
     @Override
-    public Tab.Response patch(String authorization, Tab.Request request) {
+    public Tab patch(String authorization, Tab.Request request) {
         String tabId = toTabId(request.getShopId(), request.getNo());
         String loginId = userService.getMyId(authorization);
 
@@ -77,7 +71,7 @@ public class TableServiceImpl implements TableService, BasicService {
 
         Tab tab = tableRepository.findById(tabId).get();
         tab.update(request);
-        return null;
+        return tab;
     }
 
     @Override
