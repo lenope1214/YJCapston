@@ -96,7 +96,7 @@ public class User implements Serializable {
             this.address = user.getAddress();
             this.addressDetail = user.getAddressDetail();
             this.birthday = DateOperator.dateToYYYYMMDD(user.getBirthday());
-            this.email = user.getEmail();f]
+            this.email = user.getEmail();
             this.phone = user.phone;
             this.role = user.getRole();
             this.level = user.getLevel();

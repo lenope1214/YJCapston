@@ -1,9 +1,11 @@
 package com.jumanji.capston.service.exception;
 
+import com.jumanji.capston.data.Tab;
 import com.jumanji.capston.service.exception.MenuException.MenuHasExistException;
 import com.jumanji.capston.service.exception.OrderMenuException.OrderMenuNotFoundException;
 import com.jumanji.capston.service.exception.ShopException.ShopMissMatchException;
 import com.jumanji.capston.service.exception.ShopException.ShopNotFoundException;
+import com.jumanji.capston.service.exception.TableException.TableHasExistException;
 import com.jumanji.capston.service.exception.UserException.DoLoginExistException;
 import com.jumanji.capston.service.exception.UserException.PasswordMissMatchException;
 import com.jumanji.capston.service.exception.UserException.UserNotFoundException;
@@ -88,5 +90,12 @@ public class ApiExceptionHandler {
                 new ApiErrorResponse(ex);
 //        new ApiErrorResponse("error-0000 : 권한없음", "로그인해주세요");
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(TableHasExistException.class)
+    public ResponseEntity<?> TableHasExistException(TableHasExistException ex){
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }

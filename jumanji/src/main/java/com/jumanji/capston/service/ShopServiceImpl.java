@@ -252,7 +252,7 @@ public class ShopServiceImpl implements ShopService, BasicService {
         System.out.println("로긘 유저 이름 : " + loginUser.getName());
         for(Shop shop : shopRepository.findByOwnerId(loginId)){
             if(shop.getId().equals(shopId)){
-                System.out.println("삭제할 메뉴의 매장번호 : " + shop.getId());
+                System.out.println("보유한 매칭된 매장번호 : " + shop.getId());
                 return true;
             }
         }
