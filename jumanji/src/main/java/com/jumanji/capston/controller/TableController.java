@@ -19,8 +19,24 @@ public class TableController {
         return new ResponseEntity<>(tableService.get(tabId),HttpStatus.OK);
     }
 
+    @GetMapping("/tableList/{shopId}")
+    public ResponseEntity<?> getTableListByShop(@PathVariable String shpoId){
+        return new ResponseEntity<>(tableService.getList(shpoId), HttpStatus.OK);
+    }
+
     @PostMapping("/table")
     public ResponseEntity<?> postTable(@RequestHeader String authorization, @RequestBody Tab.Request request){
         return new ResponseEntity<>(tableService.post(authorization, request), HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/table")
+    public ResponseEntity<?> patchTable(@RequestHeader String authorization, @RequestBody Tab.Request request){
+        return new ResponseEntity<>(tableService.patch(authorization, request), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/table/{tabId}")
+    public ResponseEntity<?> deleteTable(@RequestHeader String authorization, @RequestParam String tabId){
+        tableService.delete(authorization, tabId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

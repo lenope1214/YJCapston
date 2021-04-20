@@ -36,12 +36,19 @@ public class Tab implements Serializable {
         this.seatQty = seatQty;
     }
 
+    public void update(Request request) {
+        if(request.getNo()!= request.getChangeNo())this.id = request.getShopId() + String.format("%02d", request.getChangeNo());
+        if(request.getSeatQty()!=0)this.seatQty = request.getSeatQty();
+        if(request.getQrCode()!=null)this.qrCode = request.getQrCode();
+    }
+
     @Getter @AllArgsConstructor @NoArgsConstructor
     public static class Request{
         private String tabId;
         private String shopId;
         private int no; // 테이블 번호
-        private String qrCode; // qr code url
+        private int changeNo; // 바꿀 테이블 번호
+        private String qrCode; //code url
         private int seatQty; // 의자 수? 좌석 수?
     }
 
