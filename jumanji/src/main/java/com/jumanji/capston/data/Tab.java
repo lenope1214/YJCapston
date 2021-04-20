@@ -54,6 +54,7 @@ public class Tab implements Serializable {
 
     @Getter
     public static class Response{
+        private String tabId;
         private String shopId;
         private String no;
         private int seatQty;
@@ -61,7 +62,7 @@ public class Tab implements Serializable {
         private String qrCode;
 
         public Response(Tab tab){
-            System.out.println(tab.getId());
+            this.tabId = tab.getId();
             this.shopId = tab.getId().substring(0, 10);
             this.no = tab.getId().substring(10);
             this.seatQty = tab.getSeatQty();
