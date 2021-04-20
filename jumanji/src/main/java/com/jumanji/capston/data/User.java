@@ -81,6 +81,7 @@ public class User implements Serializable {
     @Getter
     public static class Response{
         private String name;
+        private String email;
         private String address;
         private String addressDetail;
         private String birthday; // 생년월일
@@ -95,6 +96,7 @@ public class User implements Serializable {
             this.address = user.getAddress();
             this.addressDetail = user.getAddressDetail();
             this.birthday = DateOperator.dateToYYYYMMDD(user.getBirthday());
+            this.email = user.getEmail();f]
             this.phone = user.phone;
             this.role = user.getRole();
             this.level = user.getLevel();
