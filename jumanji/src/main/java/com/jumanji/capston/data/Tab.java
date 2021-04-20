@@ -47,13 +47,16 @@ public class Tab implements Serializable {
 
     @Getter
     public static class Response{
-        private String tabId;
+        private String shopId;
+        private String tabNo;
         private int seatQty;
         private char using;
         private String qrCode;
 
         public Response(Tab tab){
-            this.tabId = tab.getId();
+            System.out.println(tab.getId());
+            this.shopId = tab.getId().substring(0, 10);
+            this.tabNo = tab.getId().substring(10);
             this.seatQty = tab.getSeatQty();
             this.using = tab.getUsing();
             this.qrCode = tab.getQrCode();
