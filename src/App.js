@@ -1,7 +1,7 @@
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import React from "react";
 import MenuRegisterFormContainer from "./containers/MenuRegisterFormContainer";
-
+import EventContainer from "./containers/EventContainer";
 import LoginContainer from "./containers/Login/LoginContainer";
 import MainContainer from "./containers/Main/MainContainer";
 import MypageContainer from "./containers/MyPage/MyPageContainer";
@@ -14,7 +14,9 @@ import ShopInfoContainer from "./containers/ShopInfo/ShopInfoContainer";
 import MyShopContainer from "./containers/MyShop/MyShopContainer";
 import ShoplistContainer from "./containers/Shoplist/ShoplistContainer";
 import ShopcontentContainer from "./containers/shopcontent/shopcontentcontainer";
+import Payment from "./components/Event/Payment";
 import ShopOrderContainer from "./containers/ShopOrder/ShopOrderContainer";
+import PaymentContainer from "./containers/PaymentDone/PaymentDoneContainer";
 
 const App = () => {
     const [isLogin, setIsLogin] = useState(false);
@@ -41,6 +43,7 @@ const App = () => {
         <>
             <Router>
                 <Switch>
+                    <Route path="/payment" component={Payment} />
                     <Route path="/login" component={LoginContainer} />
                     <Route path="/register" component={RegisterContainer} />
                     <Route path="/mypage" component={MypageContainer} />
@@ -58,7 +61,7 @@ const App = () => {
                         path="/ShopInfo/:shopId"
                         component={ShopInfoContainer}
                     />
-
+                    <Route component={EventContainer} path="/event" />
                     <Route component={MenuReadContainer} path="/menu/:menuId" />
                     <Route
                         path="/shopcontent/:shopId"
@@ -84,6 +87,16 @@ const App = () => {
                         path="/shoporder"
                         component={() => (
                             <ShopOrderContainer
+                                isLogin={isLogin}
+                                handleLogin={handleLogin}
+                                handleLogout={handleLogout}
+                            />
+                        )}
+                    ></Route>
+                    <Route
+                        path="/paymentDone"
+                        component={() => (
+                            <PaymentContainer
                                 isLogin={isLogin}
                                 handleLogin={handleLogin}
                                 handleLogout={handleLogout}

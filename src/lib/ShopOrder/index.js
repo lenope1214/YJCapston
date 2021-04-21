@@ -18,3 +18,21 @@ export const getMyInfo = () => {
         },
     });
 };
+
+export const patchorder = (request, people) => {
+    return apiDefault().patch(
+        "/order",
+        {
+            orderId: localStorage.getItem("orderId"),
+            orderRequest: request,
+            people: people,
+        },
+        {
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem(
+                    "access_token"
+                )}`,
+            },
+        }
+    );
+};

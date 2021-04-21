@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./style";
 import { Link } from "react-router-dom";
-import yangtimjang from "../Shoplist/img/yangtimjang.png";
+
 import { RenderAfterNavermapsLoaded, NaverMap, Marker } from "react-naver-maps";
 
 const Shopcontent = ({
@@ -94,20 +94,6 @@ const Shopcontent = ({
                         )}
                     </div>
                     <body>
-                        <div class="topCategory">
-                            <li>한식</li>
-                            <li>중식</li>
-                            <li>일식</li>
-                            <li>양식</li>
-                            <li>술집</li>
-                            <li>분식</li>
-                            <li>고기</li>
-                            <li>찜탕</li>
-                            <li>카페 디저트</li>
-                            <li>패스트푸드</li>
-                            <li class="cityreview">실시간 리뷰</li>
-                            <li class="reviewevent">리뷰이벤트</li>
-                        </div>
                         <div class="allbody">
                             <div class="shopcon">
                                 <div class="shopcon_2">

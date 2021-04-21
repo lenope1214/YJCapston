@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const shopOrder = styled.div`
+export const PaymentDoneWrap = styled.div`
     @font-face {
         font-family: "Wemakeprice-Bold";
         src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Wemakeprice-Bold.woff")
@@ -22,6 +22,7 @@ export const shopOrder = styled.div`
         font-weight: normal;
         font-style: normal;
     }
+
     .App {
         text-align: center;
         background-color: white;
@@ -127,76 +128,6 @@ export const shopOrder = styled.div`
     }
     .right-nav {
         padding-right: 2%;
-    }
-    
-    .topimg {
-        margin-top: 85px;
-        height: 300px;
-        width: 100%;
-        margin-bottom: 50px;
-        position: relative;
-    }
-
-    .topimg-text {
-        font-family: "Wemakeprice-Bold";
-        width: 100%;
-        position: absolute;
-        text-align: center;
-        font-size: 60px;
-        color: white;
-        transform: translateY(-230px);
-    }
-    .total-body {
-        width: 100%;
-        text-align: left;
-        margin-left: 50%;
-        transform: translateX(-200px);
-    }
-
-    .partition {
-        margin-bottom: 30px;
-    }
-
-    .box-title {
-        font-weight: bold;
-        font-size: 18px;
-        margin-bottom: 10px;
-    }
-
-    .button-box {
-        margin-top: 50px;
-        margin-bottom: 60px;
-    }
-    .button1 {
-        height: 50px;
-        width: 200px;
-        margin-left: 5px;
-        margin-right: 5px;
-        background: #1785f2;
-        color: white;
-        border: 1px solid gray;
-        font-size: 16px;
-    }
-    .button2 {
-        height: 50px;
-        width: 200px;
-        margin-left: 5px;
-        margin-right: 5px;
-        background: white;
-        color: black;
-        border: 1px solid black;
-        font-size: 16px;
-    }
-    .input-box {
-        width: 400px;
-        height: 36px;
-        border-radius: 5px;
-        border: 1px solid gray;
-        font-size: 17px;
-        margin-bottom: 10px;
-    }
-    .subtitle {
-        font-size: 18px;
     }
 `;
 

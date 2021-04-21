@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const LoginWrap = styled.div`
-min-width: 600px;
 @font-face {
     font-family: "Wemakeprice-Bold";
     src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Wemakeprice-Bold.woff")

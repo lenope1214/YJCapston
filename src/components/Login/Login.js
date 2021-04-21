@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import * as S from "./style";
 
-const Login = ({ id, pw, handleId, handlePw, login, isLogin, test, a }) => {
+const Login = ({ id, pw, handleId, handlePw, login, isLogin }) => {
     const [modal, setModal] = useState(true);
     const type = localStorage.getItem("type");
 
@@ -24,7 +24,6 @@ const Login = ({ id, pw, handleId, handlePw, login, isLogin, test, a }) => {
                             <h1>주문의 민족에 오신걸 환영합니다.</h1>
                         </header>
                         <main>
-                            <button onClick={test}>asdfsdaf</button>
                             <p>로그인 정보를 입력하세요!!!</p>
                             <input
                                 type="text"
@@ -32,12 +31,6 @@ const Login = ({ id, pw, handleId, handlePw, login, isLogin, test, a }) => {
                                 onChange={handleId}
                                 value={id}
                             />
-                            <div>
-                                {a.map((abc) => {
-                                    return <div>abc.b_dtt</div>;
-                                })}
-                            </div>
-                            {/* <img src="https://chart.apis.google.com/chart?cht=qr&chs=350x350&chl=http://3.34.55.186:3000/shopcontent/5101695500/tablenum" /> */}
                             <input
                                 type="password"
                                 placeholder="Password"
