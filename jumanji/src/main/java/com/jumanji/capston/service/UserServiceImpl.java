@@ -169,7 +169,6 @@ public class UserServiceImpl implements UserService, BasicService {
         if (userRole.equals("ROLE_USER")) return role.equals("USER"); // 유저는 유저만 가능.
         return false;
     }
-
 }
 
 
