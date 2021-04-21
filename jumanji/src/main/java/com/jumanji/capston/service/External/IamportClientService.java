@@ -2,6 +2,8 @@ package com.jumanji.capston.service.External;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.jumanji.capston.config.IamportConfig;
+import com.jumanji.capston.config.StorageConfig;
 import com.jumanji.capston.data.externalData.iamport.request.AuthData;
 import com.jumanji.capston.data.externalData.iamport.request.CancelData;
 import com.jumanji.capston.data.externalData.iamport.response.AccessToken;
@@ -16,6 +18,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 
 import java.io.IOException;
@@ -23,8 +27,10 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
+import java.nio.file.Paths;
 
 
+@Service
 public class IamportClientService implements ExternalApiService{
     private static final String API_URL = "https://api.iamport.kr";
     // private static final String API_URL = "http://localhost:8888";
@@ -32,6 +38,12 @@ public class IamportClientService implements ExternalApiService{
     private String api_secret = null;
     private CloseableHttpClient client = null;
     private Gson gson = new Gson();
+    @Autowired
+    public IamportClientService(IamportConfig config) {
+//        System.out.println("StorageServicec constructor...");
+        this.api_key = config.getKey();
+        this.api_secret = config.getSecret();
+    }
 
     public IamportClientService(String api_key, String api_secret) {
         this.api_key = api_key;
@@ -41,7 +53,8 @@ public class IamportClientService implements ExternalApiService{
 
     private IamportResponse<AccessToken> getAuth() throws Exception{
         AuthData authData = new AuthData(api_key, api_secret);
-
+        System.out.println("Iamport api_key : " + api_key);
+        System.out.println("Iamport api_secret : " + api_secret);
         String authJsonData = gson.toJson(authData);
 
         try {
@@ -54,7 +67,8 @@ public class IamportClientService implements ExternalApiService{
 
             postRequest.setEntity(data);
 
-            HttpResponse response = client.execute(postRequest);
+            HttpResponse response =
+                    client.execute(postRequest);
 
             if (response.getStatusLine().getStatusCode() != 200) {
                 throw new RuntimeException("Failed : HTTP error code : "
