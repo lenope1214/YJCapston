@@ -58,6 +58,7 @@ public class TableServiceImpl implements TableService, BasicService {
                 .seatQty(request.getSeatQty())
                 .qrCode(request.getQrCode())
                 .build();
+        tableRepository.save(tab);
         return tab;
     }
 
