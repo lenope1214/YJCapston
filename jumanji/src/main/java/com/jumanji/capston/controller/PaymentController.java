@@ -19,7 +19,15 @@ public class PaymentController {
     private PaymentServiceImpl paymentService;
 
     @Transactional
-    @PostMapping("payment")
+    @GetMapping("/payment/{payId}")
+    public ResponseEntity<?> getPayment(@RequestHeader String authorization, @PathVariable String payId){
+        Payment payment = paymentService.get(authorization, payId);
+        Payment.Response response = new Payment.Response(payment);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @Transactional
+    @PostMapping("/payment")
     public ResponseEntity<?> postPayment(@RequestHeader String authorization, @RequestBody Payment.Request request) {
         // response 형태로 바꿔줘야함.
         return new ResponseEntity(paymentService.post(authorization, request), HttpStatus.CREATED);
