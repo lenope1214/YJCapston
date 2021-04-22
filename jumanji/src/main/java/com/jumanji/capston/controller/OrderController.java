@@ -39,8 +39,7 @@ public class OrderController {
     @Transactional(readOnly = true)
     @GetMapping("/order")
     public ResponseEntity<?> getOrderList(@RequestHeader String authorization){
-        String loginId = userService.getMyId(authorization);
-        List<Order> orderList = orderService.getList(loginId);
+        List<Order> orderList = orderService.getList(authorization);
         List<Order.Response> response = new ArrayList<>();
         for(Order order : orderList ){
             response.add(new Order.Response(order));
