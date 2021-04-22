@@ -1,6 +1,8 @@
 package com.jumanji.capston.controller;
 
+import com.jumanji.capston.data.Order;
 import com.jumanji.capston.data.User;
+import com.jumanji.capston.service.OrderServiceImpl;
 import com.jumanji.capston.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,8 @@ import java.util.List;
 public class UserController  {
     @Autowired
     UserServiceImpl userService;
+    @Autowired
+    OrderServiceImpl orderService;
 
 
     @Transactional(readOnly = true)
@@ -24,7 +28,9 @@ public class UserController  {
     public ResponseEntity<?> selectMyInfo(@RequestHeader String authorization) {
         String loginId = userService.getMyId(authorization);
         User user = userService.get(loginId);
-        User.Response response = new User.Response(user);
+        System.out.println("user.info : " + user.toString() );
+        List<Order> orderList = orderService.getList(authorization);
+        User.MyInfo response = new User.MyInfo(user, orderList);
         return new ResponseEntity<>(response, HttpStatus.OK);
 //        return new ResponseEntity<>("is not match login id <-> request id.", HttpStatus.FORBIDDEN);
     }

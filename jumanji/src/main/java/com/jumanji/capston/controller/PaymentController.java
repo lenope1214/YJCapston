@@ -21,6 +21,7 @@ public class PaymentController {
     @Transactional
     @PostMapping("payment")
     public ResponseEntity<?> postPayment(@RequestHeader String authorization, @RequestBody Payment.Request request) {
+        // response 형태로 바꿔줘야함.
         return new ResponseEntity(paymentService.post(authorization, request), HttpStatus.CREATED);
     }
 

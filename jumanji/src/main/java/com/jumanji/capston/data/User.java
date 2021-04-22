@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 
 @Getter
@@ -78,8 +79,9 @@ public class User implements Serializable {
         private String role; // 권한   ROLE_USER, ROLE_OWNER, ROLE_ADMIN
     }
 
-    @Getter
+    @Getter @NoArgsConstructor
     public static class Response{
+        private String id;
         private String name;
         private String email;
         private String address;
@@ -92,6 +94,7 @@ public class User implements Serializable {
         private int point; // 포인트
 
         public Response(User user) {
+            this.id = user.getId();
             this.name = user.getName();
             this.address = user.getAddress();
             this.addressDetail = user.getAddressDetail();
@@ -102,6 +105,27 @@ public class User implements Serializable {
             this.level = user.getLevel();
             this.point = user.getPoint();
             this.signDate = DateOperator.dateToYYYYMMDD(user.getSignDate());
+        }
+    }
+
+    @Getter
+    public static class MyInfo{
+        private Response user = new Response();
+        private List<Order> orderList;
+
+        public MyInfo(User user, List<Order> orderList){
+            this.user.id = user.getId();
+            this.user.name = user.getName();
+            this.user.address = user.getAddress();
+            this.user.addressDetail = user.getAddressDetail();
+            this.user.birthday = DateOperator.dateToYYYYMMDD(user.getBirthday());
+            this.user.email = user.getEmail();
+            this.user.phone = user.phone;
+            this.user.role = user.getRole();
+            this.user.level = user.getLevel();
+            this.user.point = user.getPoint();
+            this.user.signDate = DateOperator.dateToYYYYMMDD(user.getSignDate());
+            this.orderList = orderList;
         }
     }
 }

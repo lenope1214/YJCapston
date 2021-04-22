@@ -21,7 +21,7 @@ public class OrderMenusController{
 
 
     @Transactional(readOnly = true)
-    @GetMapping("/orderMenu/{orderMenuId}")
+    @GetMapping("/order-menu/{orderMenuId}")
     public ResponseEntity<?> selectOrderByOrderId(@PathVariable Timestamp orderMenuId) {
         System.out.println("orderMenuId : " + orderMenuId);
         List<OrderMenu.Response> response = new ArrayList<>();
@@ -38,17 +38,19 @@ public class OrderMenusController{
     }
 
     @Transactional
-    @PostMapping("/orderMenu")
-    public ResponseEntity<?> postOrder(@RequestBody OrderMenu.Request request) {
-//        return orderMenuService.postOrder(request);
-
-        return orderMenuService.post(request);
+    @PostMapping("/order-menu")
+    public ResponseEntity<?> postOrder(@RequestHeader String authorization, @RequestBody OrderMenu.Request request) {
+        OrderMenu orderMenu = orderMenuService.post(authorization, request);
+        OrderMenu.Response response = new OrderMenu.Response(orderMenu);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @Transactional
-    @PatchMapping("/orderMenu")
-    public ResponseEntity<?> patchOrder(@RequestBody OrderMenu.Request request) {
-        return orderMenuService.patch(request);
+    @PatchMapping("/order-menu")
+    public ResponseEntity<?> patchOrder(@RequestHeader String authorization, @RequestBody OrderMenu.Request request) {
+        OrderMenu orderMenu= orderMenuService.patch(authorization, request);
+        OrderMenu.Response response = new OrderMenu.Response(orderMenu);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }

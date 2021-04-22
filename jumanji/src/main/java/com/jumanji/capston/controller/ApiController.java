@@ -46,7 +46,7 @@ public class ApiController {
 
     @GetMapping("/validate/{id}") // validate
     public ResponseEntity<?> validateOne(@PathVariable String id) {
-        if(userService.validationId(id))
+        if(userService.isEmpty(id))
             return new ResponseEntity<>(HttpStatus.OK);
         else
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

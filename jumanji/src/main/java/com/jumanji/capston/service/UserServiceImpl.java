@@ -119,10 +119,6 @@ public class UserServiceImpl implements UserService, BasicService {
         return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
     }
 
-    public boolean validationId(String id) {
-        return userRepository.findById(id).isEmpty();
-    }
-
     public void checkPW(User.Request _user, String encodedPassword) {
         String rawPassword = _user.getPassword();
         System.out.println("rawPw : " + rawPassword);

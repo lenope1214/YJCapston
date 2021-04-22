@@ -4,15 +4,16 @@ import com.jumanji.capston.data.Order;
 import org.springframework.http.ResponseEntity;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 /** Order service Interface **/
 
 
 public interface OrderService {
 
-    ResponseEntity<?> get(Timestamp cartId);
-    ResponseEntity<?> getList(String userId);
-    ResponseEntity<?> post(String authorization, Order.Request request);
-    ResponseEntity<?> patch(String authorization, Order.Request request);
-    ResponseEntity<?> delete(Timestamp cartId);
+    Order get(String authorization, Timestamp cartId);
+    List<Order> getList(String authorization, String userId);
+    Order post(String authorization, Order.Request request);
+    Order patch(String authorization, Order.Request request);
+    void delete(String authorization, Timestamp cartId);
 }
