@@ -165,26 +165,4 @@ public class UserServiceImpl implements UserService, BasicService {
         if (userRole.equals("ROLE_USER")) return role.equals("USER"); // 유저는 유저만 가능.
         return false;
     }
-
-    public ResponseEntity<?> Withdrawal(String authorization) {
-        String loginId = getMyId(authorization);
-        User user = getUserInfo(loginId);
-        if(user.getIsWdrw() == ' ') {
-            user.setIsWdrw('Y');
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        throw new UnauthorizedException();
-    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
