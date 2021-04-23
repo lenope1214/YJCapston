@@ -1,7 +1,9 @@
 package com.jumanji.capston.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,23 +15,46 @@ import java.sql.Timestamp;
 @Table(name="payments")
 public class Payment implements Serializable {
     @Id
-    private Long id;
-
+    @JoinColumn
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id")
-    @JsonIgnore
-    private OrderMenu order ; // 주문번호
-    @Column(name="use_point")
-    private int usePoint; // 사용된 포인트
+    private Order id;
+
     @Column(name="pay_time")
     private Timestamp payTime; // 결제 일자 yyyyMMdd
-    private String pg; // 결제방식
-    @Column(name="comple_pay")
-    private int complePay; // 결제 당시 금액
-    @Column(name = "is_refund")
-    private char isRefund; // 환불 여부
+    private char refunded; // 환불여부
+    @Column(length = 7)
+    private int amount; // 결제 금액
+    @Column(name = "pay_method")
+    private String payMethod; // 결제방식
+    @Column(length = 9)
+    private String pg;
 
-    public class Request{
 
+    @Getter @AllArgsConstructor
+    public static class Request{
+        private Timestamp orderId;
+        private int amount;
+        private String pg;
+        private String payMethod;
+        private String shopId;
+    }
+
+    @Getter
+    public static class Response{
+        private Order payId;
+        private Timestamp payTime;
+        private char refunded;
+        private int amount;
+        private String payMethod;
+        private String pg;
+
+        public Response(Payment payment){
+            this.payId = payment.getId();
+            this.payTime = payment.getPayTime();
+            this.refunded = payment.getRefunded();
+            this.amount = payment.getAmount();
+            this.payMethod = payment.getPayMethod();
+            this.pg = payment.getPg();
+        }
     }
 }

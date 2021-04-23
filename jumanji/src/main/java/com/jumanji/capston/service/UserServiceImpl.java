@@ -19,7 +19,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -47,45 +46,26 @@ public class UserServiceImpl implements UserService, BasicService {
     }
 
     @Transactional
-    public User getUserInfo(String id) {
+    public User get(String id) {
+        isPresent(id);
         return userRepository.findById(id).get();
     }
 
-    @Transactional
-    public ResponseEntity<?> findById(String id) {
-        if (userRepository.findById(id).isPresent())
-            return new ResponseEntity<>(new User.Response(userRepository.findById(id).get()), HttpStatus.OK);
-        throw new UserNotFoundException(); // ApiExceptionHandler가 잡아채서 반환해줌.
-//        return new ResponseEntity<>(new BasicException.CodeMessage(new UserNotFoundException()), HttpStatus.NOT_FOUND);
-    }
-
-    @Override
-    public ResponseEntity<?> get(String userId) {
-        isPresent(userId);
-        User user = userRepository.findById(userId).get();
-        return new ResponseEntity<>(user, HttpStatus.OK);
-    }
-
     @Override
     @Transactional
-    public ResponseEntity<?> getList(String authorization) {
+    public List<User> getList(String authorization) {
         String loginId = getMyId(authorization);
         isPresent(loginId);
         User user = userRepository.findById(loginId).get();
         System.out.println("로그인 아이디의 권한 : " + user.getRole());
-        if (isAuth(user.getRole(), "ADMIN")) {
-            throw new ForbiddenException();
-        }
-        List<User.Response> userList = new ArrayList<>();
-        for (User _user : userRepository.findAll()) {
-            userList.add(new User.Response(_user));
-        }
+        isAuth(user.getRole(), "ADMIN");
 
-        return new ResponseEntity<>(userList, HttpStatus.OK);
+
+        return userRepository.findAll();
     }
 
     @Transactional
-    public ResponseEntity<?> post(User.Request user) {
+    public User post(User.Request user) {
         isEmpty(user.getId());
         String rawPassword = user.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
@@ -103,25 +83,28 @@ public class UserServiceImpl implements UserService, BasicService {
                 .provider_id(null)
 //                .level(0)
                 .build();
-        return new ResponseEntity<>(new User.Response(userRepository.save(userEntity)), HttpStatus.CREATED);
+        return userRepository.save(userEntity);
     }
 
     @Override
     @Transactional
-    public ResponseEntity<?> patch(String authorization, User.Request request) {
+    public User patch(String authorization, User.Request request) {
         String loginId = getMyId(authorization);
         isPresent(loginId);
 
         User loginUser = userRepository.findById(loginId).get();
         updateInfo(loginUser, request);
-        return new ResponseEntity<>(new User.Response(loginUser), HttpStatus.OK);
+        return loginUser;
     }
 
     @Transactional
-    public ResponseEntity<?> delete(String id) {
-        isPresent(id);
-        userRepository.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 삭제가 잘 되면 ok 반환.
+    public void delete(String authorization) {
+        String loginId = getMyId(authorization);
+        isPresent(loginId);
+
+        User user = get(loginId);
+        user.setIsWdrw('Y');
+        userRepository.save(user);
     }
 
     @Transactional
@@ -130,14 +113,10 @@ public class UserServiceImpl implements UserService, BasicService {
         User userEntity = userRepository.findById(request.getId()).get();
 //         아이디 오류 후에 아이디, 비번 오류 통합.. 현재는 있는지 확인하기 위해 이렇게 둠.
         checkPW(request, userEntity.getPassword());
+        isWdrw(request.getId());
         final String access_token = jwtTokenUtil.generateToken(userEntity.getId());
         JwtResponse jwtResponse = new JwtResponse(access_token, userEntity.getRole());
         return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
-    }
-
-    public ResponseEntity<?> validationId(String id) {
-        if (userRepository.findById(id).isEmpty()) return new ResponseEntity<>(HttpStatus.OK);
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     public void checkPW(User.Request _user, String encodedPassword) {
@@ -148,12 +127,13 @@ public class UserServiceImpl implements UserService, BasicService {
             throw new PasswordMissMatchException();
     }
 
-    public void updateInfo(User oldData, User.Request newData) {
+    public void updateInfo(User user, User.Request newData) {
         System.out.println("Update User in");
-        if (newData.getAddress() != null) oldData.setAddress(newData.getAddress());
-        if (newData.getAddressDetail() != null) oldData.setAddressDetail(newData.getAddressDetail());
-        if (newData.getPassword() != null) oldData.setPassword(bCryptPasswordEncoder.encode(newData.getPassword()));
-        userRepository.save(oldData);
+        if (newData.getEmail() != null) user.setEmail(newData.getEmail());
+        if (newData.getAddress() != null) user.setAddress(newData.getAddress());
+        if (newData.getAddressDetail() != null) user.setAddressDetail(newData.getAddressDetail());
+        if (newData.getPassword() != null) user.setPassword(bCryptPasswordEncoder.encode(newData.getPassword()));
+        userRepository.save(user);
     }
 
     public boolean isEmpty(String id) {
@@ -167,14 +147,23 @@ public class UserServiceImpl implements UserService, BasicService {
         throw new UserNotFoundException(id);
     }
 
+    public void isWdrw(String id) {
+        if (userRepository.findById(id).get().getIsWdrw() == 'Y')
+            throw new UserNotFoundException();
+    }
+
     /**
      * role args ex) "ADMIN"  "OWNER"  "USER"
      **/
-    public boolean isAuth(String userRole, String role) {
-        if (userRole.equals("ROLE_ADMIN")) return true;
-        if (userRole.equals("ROLE_OWNER")) return !role.equals("ADMIN");
-        if (userRole.equals("ROLE_USER")) return role.equals("USER");
-        return false; // 이게 될리 없음. 여기까지 왔다는건 잘못된 값이 넘어온것...
+    public void isAuth(String userRole, String role) {
+        if(!authCheck(userRole, role))throw new ForbiddenException();
+    }
+
+    private boolean authCheck(String userRole, String role){
+        if (userRole.equals("ROLE_ADMIN")) return true; // 어드민은 무조건 가능.
+        if (userRole.equals("ROLE_OWNER")) return !role.equals("ADMIN"); // OWNER는 어드민 권한만 아니면 다 가능.
+        if (userRole.equals("ROLE_USER")) return role.equals("USER"); // 유저는 유저만 가능.
+        return false;
     }
 
     public ResponseEntity<?> Withdrawal(String authorization) {

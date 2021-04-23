@@ -1,12 +1,13 @@
 package com.jumanji.capston.service.interfaces;
 
 import com.jumanji.capston.data.Tab;
-import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 
 public interface TableService {
-    public ResponseEntity<?> get(String tableId);
-    public ResponseEntity<?> getList(String shopId);
-    public ResponseEntity<?> post(Tab.Request request);
-    public ResponseEntity<?> patch(Tab.Request request);
-    public ResponseEntity<?> delete(String tableId);
+    public Tab get(String tableId);
+    public List<Tab> getList(String shopId);
+    public Tab post(String authorization, Tab.Request request);
+    public Tab patch(String authorization, Tab.Request request);
+    public void delete(String authorization, String tableId);
 }

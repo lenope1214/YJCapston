@@ -46,15 +46,14 @@ public class MenuServiceImpl implements MenuService, BasicService {
     }
 
     @Override
-    public ResponseEntity<?> get(String menuId) {
+    public Menu get(String menuId) {
         isPresent(menuId);
         Menu menu = menuRepository.findById(menuId).get();
-        Menu.Response response = new Menu.Response(menu);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return menu;
     }
 
     @Override
-    public ResponseEntity<?> getList(String shopId) {
+    public List<Menu> getList(String shopId) {
         System.out.println("menuList >> shopId : " + shopId);
         shopService.isPresent(shopId);
         List<Menu> menuList;
@@ -62,16 +61,11 @@ public class MenuServiceImpl implements MenuService, BasicService {
         System.out.println("menuList info");
         System.out.println(menuList.size());
 
-        List<Menu.Response> response = new ArrayList<Menu.Response>();
-        for(Menu menu : menuList){
-            response.add(new Menu.Response(menu));
-        }
-        if(menuList.isEmpty())return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return menuList;
     }
 
     @Override
-    public ResponseEntity<?> post(Menu.Request request) {
+    public Menu post(String authorization, Menu.Request request) {
         String menuId = request.getShopId() + request.getName();
         isEmpty(menuId);
         Menu menu;
@@ -92,14 +86,11 @@ public class MenuServiceImpl implements MenuService, BasicService {
                 .imgPath(imgPath)
                 .build();
         System.out.println("save 전 menu Id  : " + menu.getId());
-        menuRepository.save(menu);
-        Menu.Response response = new Menu.Response(menu);
-
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        return menuRepository.save(menu);
     }
 
     @Override
-    public ResponseEntity<?> patch(Menu.Request request) {
+    public Menu patch(String authorization, Menu.Request request) {
         System.out.println("메뉴 수정>>> ");
         isPresent(request.getMenuId());
         // 권한확인 해야함. 로그인유저 의 매장인지.
@@ -109,31 +100,30 @@ public class MenuServiceImpl implements MenuService, BasicService {
 
         menu.update(request);
 
-        menuRepository.save(menu);
-        Menu.Response response = new Menu.Response(menu);
-        System.out.println("menuId : " + menu.getId());
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return menuRepository.save(menu);
     }
 
-    public ResponseEntity<?> delete(String authorization, String menuId) {
+    public void delete(String authorization, String menuId) {
         String loginId = userService.getMyId(authorization);
-        User loginUser = userService.getUserInfo(loginId);
-        if(shopService.isOwnShop(loginId, menuId.substring(0, 10))) {
-            menuRepository.delete( menuRepository.findById(menuId).get());
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        throw new ForbiddenException();
+        User loginUser = userService.get(loginId);
+        String shopId = menuId.substring(0, 10);
+
+        // 유효성 검사
+        userService.isPresent(loginId); // 존재하는 유저인지
+        shopService.isPresent(shopId); // 존재하는 식당인지
+        shopService.isOwnShop(loginId, shopId); // 내 식당인지 체크
+
+        menuRepository.delete( menuRepository.findById(menuId).get());
     }
 
-    public ResponseEntity<?> patchStatus(String authorization, String menuId, String target) {
+    public Menu patchStatus(String authorization, String menuId, String target) {
         String loginId = userService.getMyId(authorization);
         shopService.isOwnShop(loginId, menuId.substring(0,10));
         shopService.isPresent(menuId.substring(0,10));
         menuService.isPresent(menuId);
         Menu menu = menuService.getMenuInfo(menuId);
         menu.reverseStatus(target);
-        menuRepository.save(menu);
-        return new ResponseEntity<>(menu.getIsPopular(), HttpStatus.OK);
+        return menuRepository.save(menu);
     }
 
     // 있는 메뉴인지 확인

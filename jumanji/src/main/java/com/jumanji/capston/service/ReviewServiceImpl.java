@@ -15,7 +15,7 @@ public class ReviewServiceImpl implements ReviewService, BasicService {
     @Autowired
     ReviewRepository reviewRepository;
 
-    public Review findById(Long id){
+    public Review findById(String id){
         return reviewRepository.findById(id)
                 .orElseThrow(()-> new IllegalArgumentException("id를 확인해주세요!!!"));
     }

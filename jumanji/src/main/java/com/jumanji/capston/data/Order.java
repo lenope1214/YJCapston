@@ -17,17 +17,18 @@ import java.sql.Timestamp;
 @Table(name = "ORDERS")
 public class Order implements Serializable {
     @Id
-//    @Column(insertable = false, updatable = false)
     private Timestamp id; // 바구니번호 yyyyMMddhhmmss
-    @Column(length = 2)
-    private int people;
     @Column(name = "order_request")
     private String orderRequest; // 요청사항
+    @Column(length = 2)
+    private int people;
+    @Column(name="use_point")
+    private int usePoint; // 사용된 포인트
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shop_id", updatable = false)
     @JsonIgnore
     private Shop shop;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", updatable = false)
     @JsonIgnore

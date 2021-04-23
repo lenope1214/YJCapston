@@ -14,45 +14,27 @@ import java.util.List;
 public class PaymentServiceImpl implements PaymentService, BasicService {
     @Autowired
     PaymentRepository paymentRepository;
+    @Autowired
+    OrderServiceImpl orderService;
 
-    public Payment findById(Long id){
-        return paymentRepository.findById(id)
-                .orElseThrow(()-> new IllegalArgumentException("id를 확인해주세요!!!"));
-    }
-
-
-    public Payment insert(Payment _payment){
-        return paymentRepository.save(_payment);
-
-    }
-
-    public String delete(Payment _payment){
-        Payment payment  = paymentRepository.findById(_payment.getId()).orElseThrow(()-> new IllegalArgumentException("id를 확인해주세요!!!"));
-        paymentRepository.delete(payment);
-        return "ok";
-    }
-
-    public List<Payment> findAll() {
-        return paymentRepository.findAll();
-    }
 
     @Override
-    public ResponseEntity<?> get(String paymentId) {
+    public Payment get(String authorization, String paymentId) {
         return null;
     }
 
     @Override
-    public ResponseEntity<?> getList(String cartId) {
+    public List<Payment> getList(String orderId) {
         return null;
     }
 
     @Override
-    public ResponseEntity<?> post(Payment.Request request) {
+    public Payment post(String authorization, Payment.Request request) {
         return null;
     }
 
     @Override
-    public ResponseEntity<?> patch(Payment.Request request) {
+    public Payment patch(String authorization, Payment.Request request) {
         return null;
     }
 
