@@ -42,19 +42,15 @@ public class Order implements Serializable {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shop_id", updatable = false)
-    @JsonIgnore
+    @JoinColumn(name = "shop_id", updatable = false) @JsonIgnore // 이거 없으면 fetchType lazy라서 json 변환중에 오류남.
     private Shop shop;
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", updatable = false)
-    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY) @JsonIgnore // 이거 없으면 fetchType lazy라서 json 변환중에 오류남.
     private User user;
 
     @Builder
-    public Order(Timestamp id, int people, String orderRequest, Shop shop, User user) {
+    public Order(Timestamp id, Shop shop, User user) {
         this.id = id;
-        this.people = people;
-        this.orderRequest = orderRequest;
         this.shop = shop;
         this.user = user;
     }
@@ -63,8 +59,15 @@ public class Order implements Serializable {
     @NoArgsConstructor
     public static class Request {
         private Timestamp orderId;
-        private int people;
+        private String status;
         private String orderRequest;
+        private int people;
+        private int usePoint; // 사용된 포인트
+        private int amount; // 가격 총합
+        private Timestamp arriveTime; // 가게 도착시간
+        private Timestamp payTime; // 결제 일자 yyyyMMdd
+        private String pg;
+        private String payMethod; // 결제방식
         private String shopId;
         private String userId;
     }
@@ -74,15 +77,29 @@ public class Order implements Serializable {
         private Timestamp orderId;
         private int people;
         private String orderRequest;
-        private String shopId;
-        private String userId;
+        private String shopName;
+        private String userName;
+        private int usePoint; // 사용된 포인트
+        private int amount; // 가격 총합
+        private int totalAmount; // 할인 적용 가격
+        private Timestamp arriveTime; // 가게 도착시간
+        private Timestamp payTime; // 결제 일자 yyyyMMdd
+        private String pg;
+        private String payMethod; // 결제방식
 
-        public Response(Order cart) {
-            this.orderId = cart.getId();
-            this.people = cart.getPeople();
-            this.orderRequest = cart.getOrderRequest();
-            this.shopId = cart.getShop().getId();
-            this.userId = cart.getUser().getId();
+        public Response(Order order) {
+            this.orderId = order.getId();
+            this.shopName = order.getShop().getName();
+            this.people = order.getPeople();
+            this.orderRequest = order.getOrderRequest();
+            this.usePoint = order.getUsePoint();
+            this.userName = order.getUser().getName();
+            this.amount = order.getAmount();
+            this.arriveTime = order.getArriveTime();
+            this.pg = order.getPg();
+            this.payMethod = order.getPayMethod();
+            this.payTime = order.getPayTime();
+            this.totalAmount = order.getAmount() - order.getUsePoint();
         }
     }
 

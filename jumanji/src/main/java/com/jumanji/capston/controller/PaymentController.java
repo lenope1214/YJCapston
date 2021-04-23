@@ -1,5 +1,6 @@
 //package com.jumanji.capston.controller;
 //
+//import com.jumanji.capston.data.Order;
 //import com.jumanji.capston.data.Payment;
 //import com.jumanji.capston.service.OrderServiceImpl;
 //import com.jumanji.capston.service.PaymentServiceImpl;
@@ -11,6 +12,8 @@
 //import org.springframework.transaction.annotation.Transactional;
 //import org.springframework.web.bind.annotation.*;
 //
+//import java.sql.Timestamp;
+//
 //@RestController
 ////@CrossOrigin(origins = "http://localhost:3000")
 //@RequestMapping("/api/v1")
@@ -21,9 +24,9 @@
 //
 //    @Transactional
 //    @GetMapping("/payment/{orderId}")
-//    public ResponseEntity<?> getPayment(@RequestHeader String authorization, @PathVariable String payId){
-//        Payment payment = orderService.get(authorization, payId);
-//        Payment.Response response = new Payment.Response(payment);
+//    public ResponseEntity<?> getPayment(@RequestHeader String authorization, @PathVariable Timestamp orderId){
+//        Order order = orderService.get(authorization, orderId);
+//        Order.Response response = new Order.Response(order);
 //        return new ResponseEntity<>(response, HttpStatus.OK);
 //    }
 //
