@@ -22,8 +22,24 @@ public class Order implements Serializable {
     private String orderRequest; // 요청사항
     @Column(length = 2)
     private int people;
-    @Column(name="use_point")
+    @Column(name="use_point", length = 5)
     private int usePoint; // 사용된 포인트
+    @Column(length = 8)
+    private int amount; // 가격 총합
+    @Column(name = "arrive_time")
+    private Timestamp arriveTime; // 가게 도착시간
+    @Column(name="pay_time")
+    private Timestamp payTime; // 결제 일자 yyyyMMdd
+    @Column(length = 9)
+    private String pg;
+    @Column(name = "pay_method")
+    private String payMethod; // 결제방식
+
+
+//    @Column
+//    private char delay; // 딜레이 얘는 뭔지 모르겠다. 나중에 다시 생각
+
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shop_id", updatable = false)

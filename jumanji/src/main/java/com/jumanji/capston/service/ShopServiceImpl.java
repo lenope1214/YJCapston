@@ -6,7 +6,7 @@ import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.ShopRepository;
 import com.jumanji.capston.repository.UserRepository;
 import com.jumanji.capston.service.exception.ApiErrorResponse;
-import com.jumanji.capston.service.exception.Auth.ForbiddenException;
+import com.jumanji.capston.service.exception.ShopException.NoShopListException;
 import com.jumanji.capston.service.exception.ShopException.ShopHasExistException;
 import com.jumanji.capston.service.exception.ShopException.ShopNotFoundException;
 import com.jumanji.capston.service.interfaces.BasicService;
@@ -37,11 +37,73 @@ public class ShopServiceImpl implements ShopService, BasicService {
     @Autowired
     HttpHeaders httpHeaders;
 
+    public Shop getShopInfo(String shopId) {
+        return shopRepository.findById(shopId).get();
+    }
+
+    public ResponseEntity<?> delete(String authorization, String shopId) {
+        String loginId = userService.getMyId(authorization); // jwt가 있다는 것은 유저 인증이 완료. isPresent 필요 없음.
+        Shop shopEntity = shopRepository.findById(shopId).get();
+        if (loginId.equals(shopEntity.getOwner().getId())) {
+            shopRepository.delete(shopEntity);
+            return new ResponseEntity<>("delete success", HttpStatus.NO_CONTENT);
+        } else
+            return new ResponseEntity<>(new ApiErrorResponse("error-0000"), HttpStatus.FORBIDDEN);
+    }
+
+    public ResponseEntity<?> getShopList() {
+        isListPresent();
+        // shop.response로 parsing 해서 보내기.
+        ArrayList<Shop.Response> responseList = new ArrayList<>();
+        for (Shop shop : shopRepository.findAll()) {
+            Shop.Response response = new Shop.Response(shop);
+            responseList.add(response);
+        }
+        return new ResponseEntity<>(responseList, HttpStatus.OK);
+    }
+
+    public ResponseEntity<?> getShopList(String category, String sortTarget) {
+        System.out.println("getShopList where category order by sortTarget ");
+        isListPresent();
+        List<Shop> resultList = null;
+        sortTarget = sortTarget == null ? "score" : sortTarget;
+        switch (sortTarget){
+            case "score":
+                System.out.println("sort by score");
+                resultList = shopRepository.ShopOrderByScore(category);
+                break;
+            default:
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(resultList, HttpStatus.OK);
+    }
+
+
+    public ResponseEntity<?> getShopIntro(String shopId) {
+//        System.out.println("요청 매장 id : " + shopId );
+        if (shopRepository.findById(shopId).isPresent())
+            return new ResponseEntity<>(shopRepository.findById(shopId).get().getIntro(), HttpStatus.OK);
+        else {
+            System.out.println("매장 id 오류");
+            return new ResponseEntity<>(new ApiErrorResponse("1001"), HttpStatus.BAD_REQUEST);
+        }
+    }
 
     public List<Shop> getShopListByOwnerId(String id) {
         List<Shop> shopList = shopRepository.findAllByOwner_Id(id);
         if (shopList.size() == 0) throw new ShopNotFoundException();
         return shopList;
+    }
+
+    public ResponseEntity<?> getShopListByCat(String category) {
+        System.out.println("캣 : " + category);
+        List<Shop> shopCatList = shopRepository.findByCategory(category);
+        if (shopCatList.size() != 0) {
+            System.out.println("샵캣리스트 :" + shopCatList.get(0));
+            return new ResponseEntity<>(shopCatList, HttpStatus.OK);
+        }
+        return new ResponseEntity<>("매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
     }
 
     public char reverseIsOpen(Shop shop) {
@@ -58,21 +120,100 @@ public class ShopServiceImpl implements ShopService, BasicService {
         return shop.getIsRsPos();
     }
 
+    public ResponseEntity<?> postShop(Shop.Request request, String authorization) {
+        System.out.println("매장등록's shopId : " + request.getId());
+        try {
+            if (shopRepository.findById(request.getId()).isPresent()) throw new ShopHasExistException();
+        } catch (ShopNotFoundException ignored) { // null 이면 없는 사업자번호 이므로 된다 !!
+        } catch (ShopHasExistException e) { // 사업자번호 중복 에러 체킹!!
+            return new ResponseEntity<>(new ApiErrorResponse(e.getCode(), e.getMessage()), HttpStatus.LOCKED);
+        }
 
-    public char patchShopIsOpen(String authorization, String shopId) {
+//        if ( == null)
+//            return new ResponseEntity<>("사업자 번호가 중복입니다.", httpHeaders, HttpStatus.BAD_REQUEST);
+
         String loginId = userService.getMyId(authorization);
-        isPresent(shopId);
-        isOwnShop(loginId, shopId);
-        Shop shop = shopRepository.findById(shopId).get();
-        return reverseIsOpen(shop);
+        User userEntity = userService.getUserInfo(loginId);
+        String uri = "shop/" + request.getId() + "/thumbnail/";
+        String imgPath = null;
+        System.out.println("openTime : " + request.getOpenTime());
+        System.out.println("closeTime : " + request.getCloseTime());
+        if (request.getImg() != null)
+            imgPath = storageService.store(request.getImg(), request.getImg().getName(), uri.split("/"));
+        Date openTime = DateOperator.stringToMilisecond(request.getOpenTime());
+        Date closeTime = DateOperator.stringToMilisecond(request.getCloseTime());
+        Shop shopEntity;
+        shopEntity = Shop.insertShop()
+                .id(request.getId())
+                .name(request.getName().replace(" ", "_"))
+                .intro(request.getIntro())
+                .openTime(openTime)
+                .closeTime(closeTime)
+                .address(request.getAddress())
+                .addressDetail(request.getAddressDetail())
+                .category(request.getCategory())
+                .imgPath(imgPath)
+                .owner(userEntity)
+                .build();
+        Shop result = shopRepository.save(shopEntity);
+        Shop.Response response = new Shop.Response(result);
+        return new ResponseEntity<>(response, HttpStatus.CREATED); // 생성이므로 201번을 리턴.
     }
 
-    public char patchSHopIsRsPos(String authorization, String shopId) {
+    public ResponseEntity<?> putShop(String authorization, Shop.Request request) {
+        isPresent(request.getShopId()); // 있는 매장번호 인가?
         String loginId = userService.getMyId(authorization);
+        Shop shopEntity = shopRepository.findById(request.getShopId()).get();
+        if (isOwnShop(loginId, shopEntity.getId())) { // 로그인한 아이디가 해당 매장을 가지고 있는가?
+            shopEntity.update(request);
+            return new ResponseEntity<>(shopEntity, HttpStatus.OK);
+        }
+        return new ResponseEntity<>("not defined error ", HttpStatus.BAD_REQUEST);
+    }
+
+
+    public ResponseEntity<?> patchShop(String authorization, Shop.Request request) {
+        System.out.println("patch.getShopId() : " + request.getShopId());
+        String userId = userService.getMyId(authorization);
+        Shop shop = shopRepository.findById(request.getShopId()).get();
+        isPresent(request.getShopId());
+        isOwnShop(userId, shop.getId());
+
+
+        System.out.println(
+                "매장 수정 patch.toString()" + "\n" +
+                        "patch.getOpenTime : " + request.getOpenTime() + "\n" +
+                        "patch.getCloseTime : " + request.getCloseTime()
+        );
+        shop.update(request);
+        return new ResponseEntity<>(shop, HttpStatus.OK);
+    }
+
+    public ResponseEntity<?> patchShopIsOpen(String authorization, String shopId) {
+        String userId = userService.getMyId(authorization);
+        List<Shop> shopList = getShopListByOwnerId(userId);
         isPresent(shopId);
-        isOwnShop(loginId, shopId);
-        Shop shop = shopRepository.findById(shopId).get();
-        return reverseIsRsPos(shop);
+        for (Shop shop : shopList) {
+            if (shop.getId().equals(shopId)) {                // 해당 유저의 해당 매장번호가 있음!
+                System.out.println(shop.getName() + "의 오픈상태 반전성공");
+                return new ResponseEntity<>(reverseIsOpen(shop), HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>("매장번호가 일치하는 매장이 없습니다.", httpHeaders, HttpStatus.BAD_REQUEST);
+    }
+
+    public ResponseEntity<?> patchSHopIsRsPos(String authorization, String shopId) {
+        String userId = userService.getMyId(authorization);
+        List<Shop> shopList = getShopListByOwnerId(userId);
+        isPresent(shopId);
+        for (Shop shop : shopList) {
+            if (shop.getId().equals(shopId)) {
+                // 해당 유저의 해당 매장번호가 있음!
+                System.out.println(shop.getName() + "의 예약상태 반전성공");
+                return new ResponseEntity<>(reverseIsRsPos(shop), HttpStatus.OK);
+            }
+        }
+        return null;
     }
 
     public ResponseEntity<?> getShopByShopId(String shopId) {
@@ -91,135 +232,66 @@ public class ShopServiceImpl implements ShopService, BasicService {
     }
 
 
-    public List<Shop> getMyShop(String authorization) {
+    public boolean isOwnShop(String loginId, String shopId) {
+        System.out.println("삭제 유저아디 : " + loginId);
+        System.out.println("삭제 매장번호 : " + shopId);
+        User loginUser = userService.getUserInfo(loginId);
+        System.out.println("로긘 유저 이름 : " + loginUser.getName());
+        for (Shop shop : shopRepository.findByOwnerId(loginId)) {
+            if (shop.getId().equals(shopId)) {
+                System.out.println("삭제할 메뉴의 매장번호 : " + shop.getId());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public ResponseEntity<?> getMyShop(String authorization) {
         System.out.println("ShopController in getMyShop");
         String loginId = userService.getMyId(authorization);
         User userEntity = userRepository.findById(loginId).get();
         List<Shop> result = getShopListByOwnerId(userEntity.getId());
-        return result;
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @Override
-    public Shop get(String shopId) {
-        isPresent(shopId);
-        return shopRepository.findById(shopId).get();
+    public ResponseEntity<?> get(String shopId) {
+        return null;
     }
 
     @Override
-    public ResponseEntity<?> getList(String category, String sortTarget) {
-        if (getShopListSize() != 0) {
-            List<Shop.Response> responseList = new ArrayList<>();
-            sortTarget = sortTarget == null ? "" : sortTarget;
-            category = category == null ? "" : category;
-            switch (sortTarget) {
-                case "score":
-                    return new ResponseEntity<>(shopRepository.ShopOrderByScore(category), HttpStatus.OK);
-                default:
-                    List<Shop> shopList = shopRepository.findAll();
-                    for (Shop shop : shopList) {
-                        Shop.Response response = new Shop.Response(shop);
-                        responseList.add(response);
-                    }
-                    break;
-            }
-            // shop.response로 parsing 해서 보내기.
-
-            return new ResponseEntity<>(responseList, HttpStatus.OK);
-        } else
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<?> getList() {
+        return null;
     }
 
     @Override
-    public Shop post(String authorization, Shop.Request request) {
-        System.out.println("매장등록's shopId : " + request.getId());
-
-        String loginId = userService.getMyId(authorization);
-        User user = userService.get(loginId);
-        String uri = "shop/" + request.getId() + "/thumbnail/";
-        String imgPath = null;
-        System.out.println("openTime : " + request.getOpenTime());
-        System.out.println("closeTime : " + request.getCloseTime());
-
-        // 유효성 검사
-        isPresent(request.getShopId()); // 해당 사업자 번호로 사업자 등록이 됐는지 확인
-        userService.isPresent(loginId); // 해당 요청하는 사람이 존재하는지
-        userService.isAuth(user.getRole(), "OWNER");
-
-
-        if (request.getImg() != null)
-            imgPath = storageService.store(request.getImg(), request.getImg().getName(), uri.split("/"));
-        Date openTime = DateOperator.stringToMilisecond(request.getOpenTime());
-        Date closeTime = DateOperator.stringToMilisecond(request.getCloseTime());
-        Shop shopEntity;
-        shopEntity = Shop.insertShop()
-                .id(request.getId())
-                .name(request.getName().replace(" ", "_"))
-                .intro(request.getIntro())
-                .openTime(openTime)
-                .closeTime(closeTime)
-                .address(request.getAddress())
-                .addressDetail(request.getAddressDetail())
-                .category(request.getCategory())
-                .imgPath(imgPath)
-                .owner(user)
-                .build();
-        Shop shop = shopRepository.save(shopEntity);
-        return shop;
+    public ResponseEntity<?> post(Shop.Request request) {
+        return null;
     }
 
     @Override
-    public Shop patch(String authorization, Shop.Request request) {
-        System.out.println("patch.getShopId() : " + request.getShopId());
-        String userId = userService.getMyId(authorization);
-        Shop shop = shopRepository.findById(request.getShopId()).get();
-        isPresent(request.getShopId());
-        isOwnShop(userId, shop.getId());
-
-
-        System.out.println(
-                "매장 수정 patch.toString()" + "\n" +
-                        "patch.getOpenTime : " + request.getOpenTime() + "\n" +
-                        "patch.getCloseTime : " + request.getCloseTime()
-        );
-        shop.update(request);
-        return shop;
+    public ResponseEntity<?> patch(Shop.Request request) {
+        return null;
     }
 
     @Override
-    public void delete(String authorization, String shopId) {
-        String loginId = userService.getMyId(authorization); // jwt가 있다는 것은 유저 인증이 완료. isPresent 필요 없음.
-        Shop shopEntity = shopRepository.findById(shopId).get();
-        isOwnShop(loginId, shopId);
-        shopRepository.delete(shopEntity);
+    public ResponseEntity<?> delete(String shopId) {
+        return null;
     }
 
-    // 있는 매장번호 인지 확인. 없으면 error를 반환하게 된다.
+    // 89있는 매장번호 인지 확인. 없으면 error를 반환하게 된다. ㅂㅂ
     public boolean isPresent(String shopId) {
         if (shopRepository.findById(shopId).isPresent()) return true;
         throw new ShopNotFoundException();
     }
 
     @Override
-    public boolean isEmpty(String shopId) {
-        if (shopRepository.findById(shopId).isEmpty()) return true;
-        throw new ShopHasExistException();
+    public boolean isEmpty(String id) {
+        return false;
     }
 
-    public boolean isOwnShop(String loginId, String shopId) {
-        System.out.println("보유매장 비교 유저아디 : " + loginId);
-        System.out.println("보유매장 비교 매장번호 : " + shopId);
-        User loginUser = userService.get(loginId);
-        System.out.println("로긘 유저 이름 : " + loginUser.getName());
-        for (Shop shop : shopRepository.findByOwnerId(loginId)) {
-            if (shop.getId().equals(shopId)) {
-                System.out.println("보유매장 매칭된 매장번호 : " + shop.getId());
-                return true;
-            }
-        }
-        throw new ForbiddenException();
+    public void isListPresent() {
+        if (shopRepository.findAll().size() == 0) throw new NoShopListException();
     }
 
-    public int getShopListSize() {
-        return shopRepository.findAll().size();
-    }
 }
