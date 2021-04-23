@@ -1,5 +1,6 @@
 package com.jumanji.capston;
 
+import com.jumanji.capston.config.IamportConfig;
 import com.jumanji.capston.config.StorageConfig;
 import com.jumanji.capston.service.StorageServiceImpl;
 import org.springframework.boot.CommandLineRunner;
@@ -9,7 +10,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-@EnableConfigurationProperties(StorageConfig.class)
+@EnableConfigurationProperties({StorageConfig.class, IamportConfig.class})
 public class CapstonApplication {
 
     public static void main(String[] args) {

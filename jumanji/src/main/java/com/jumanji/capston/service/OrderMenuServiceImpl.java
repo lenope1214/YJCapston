@@ -34,41 +34,26 @@ public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
     @Autowired
     MenuServiceImpl menuService;
 
-    public String delete(OrderMenu order) {
-        OrderMenu orderEntity = orderRepository.findById(order.getId()).orElseThrow(() -> new IllegalArgumentException("id를 확인해주세요!!!"));
-        orderRepository.delete(orderEntity);
-        return "ok";
-    }
 
-
-    public ResponseEntity<?> getOrderMenuByCartId(Timestamp orderMenuId) {
+    public Set<OrderMenu> getOrderMenuByCartId(Timestamp orderMenuId) {
         System.out.println("orderMenuId : " +orderMenuId.toString());
         Set<OrderMenu> orderList = orderRepository.findByIdContains(orderMenuId.toString());
-        List<OrderMenu.Response> response = new ArrayList<>();
-        System.out.println("주문메뉴 개수 : " + orderList.size());
-        for(OrderMenu order : orderRepository.findByIdContains(orderMenuId.toString())){
-            System.out.println("orderList info \n" +
-                    "order.getId() : "+ order.getId() + "\n" +
-                    "order.getMenuId : " + order.getMenu().getId().substring(10) +"\n" +
-                    "order.get");
-            response.add(new OrderMenu.Response(order));
-        }
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return orderList;
     }
 
 
     @Override
-    public ResponseEntity<?> get(String orderId) {
+    public OrderMenu get(String authorization, String orderId) {
         return null;
     }
 
     @Override
-    public ResponseEntity<?> getList(String cartId) {
+    public List<OrderMenu> getList(String authorization, String cartId) {
         return null;
     }
 
     @Override
-    public ResponseEntity<?> post(OrderMenu.Request request) {
+    public OrderMenu post(String authorization, OrderMenu.Request request) {
         System.out.println("post order request info \n" +
                 "orderId : " + request.getOrderId() + "\n" +
                 "menuId : " + request.getMenuId() + "\n" +
@@ -93,12 +78,11 @@ public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
                 .build();
         System.out.println(orderMenu.getTab().getId());
         orderRepository.save(orderMenu);
-        OrderMenu.Response response = new OrderMenu.Response(orderMenu);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        return orderMenu;
     }
 
     @Override
-    public ResponseEntity<?> patch(OrderMenu.Request request) {
+    public OrderMenu patch(String authorization, OrderMenu.Request request) {
         OrderMenu order;
         Menu menu = null;
         Tab table = null;
@@ -119,14 +103,12 @@ public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
                 .tab(table)
                 .build();
         order.patch(requestOrder);
-        OrderMenu.Response response = new OrderMenu.Response(order);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return order;
     }
 
 
     @Override
-    public ResponseEntity<?> delete(String orderId) {
-        return null;
+    public void delete(String authorization, String orderId) {
     }
 
     public boolean isPresent(String orderId) {

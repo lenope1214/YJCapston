@@ -24,14 +24,11 @@ public class Order implements Serializable {
     private int people;
     @Column(name="use_point")
     private int usePoint; // 사용된 포인트
-    @Column(name="amount_price")
-    private int amountPrice; // 결제 금액
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shop_id", updatable = false)
     @JsonIgnore
     private Shop shop;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", updatable = false)
     @JsonIgnore

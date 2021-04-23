@@ -6,6 +6,7 @@ import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.OrderRepository;
 import com.jumanji.capston.service.exception.OrderException.OrderHasExistException;
 import com.jumanji.capston.service.exception.OrderException.OrderNotFoundException;
+import com.jumanji.capston.service.interfaces.BasicService;
 import com.jumanji.capston.service.interfaces.OrderService;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,10 +18,12 @@ import org.springframework.stereotype.Service;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
-public class OrderServiceImpl implements OrderService {
+public class OrderServiceImpl implements OrderService, BasicService {
     @Autowired
     OrderRepository orderRepository;
     @Autowired
@@ -44,25 +47,37 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public ResponseEntity<?> get(Timestamp orderId) {
+    public Order get(String authorization, Timestamp orderId) {
         isPresent(orderId);
 //        Timestamp cartIdTime = DateOperator.stringToTimestamp(cartId);
-        Order cart = orderRepository.findById(orderId).get();
-        Order.Response response =
-                new Order.Response(cart);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        Order order = orderRepository.findById(orderId).get();
+        return order;
     }
 
-    @Override
-    public ResponseEntity<?> getList(String userId) {
-        for (Order cart : orderRepository.findALLByUser_Id(userId)) {
-            System.out.println("출력");
+    public List<Order> getList(String authorization) {
+        String loginId = userService.getMyId(authorization);
+        List<Order> orderList = new ArrayList<>();
+        for (Order order : orderRepository.findALLByUser_Id(loginId)) {
+            orderList.add(order);
         }
-        return new ResponseEntity<>(orderRepository.findALLByUser_Id(userId), HttpStatus.OK);
+        return orderList;
     }
 
     @Override
-    public ResponseEntity<?> post(String authorization, Order.Request request) {
+    public List<Order> getList(String authorization, String userId) {
+        String loginId = userService.getMyId(authorization);
+        User user = userService.get(loginId);
+        userService.isAuth(user.getRole(), "ADMIN");
+
+        List<Order> orderList = new ArrayList<>();
+        for (Order order : orderRepository.findALLByUser_Id(userId)) {
+            orderList.add(order);
+        }
+        return orderList;
+    }
+
+    @Override
+    public Order post(String authorization, Order.Request request) {
         Order order;
         Shop shop;
         User user;
@@ -71,8 +86,8 @@ public class OrderServiceImpl implements OrderService {
         shopService.isPresent(request.getShopId());
 
         //isEmpty 는 필요 x 주문은 매번 새로운 애기 때문.
-        shop = shopService.getShopInfo(request.getShopId());
-        user = userService.getUserInfo(loginId);
+        shop = shopService.get(request.getShopId());
+        user = userService.get(loginId);
 
         order = Order.builder()
                 .id(new Timestamp(System.currentTimeMillis()))
@@ -82,34 +97,32 @@ public class OrderServiceImpl implements OrderService {
                 .user(user)
                 .build();
         orderRepository.save(order);
-        Order.Response response = new Order.Response(order);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        return order;
     }
 
     @Override
-    public ResponseEntity<?> patch(String authorization, Order.Request request) {
+    public Order patch(String authorization, Order.Request request) {
         Order order;
-        System.out.println("request info \nrequest.getOrderId()" + request.getOrderId()+"\n" +
+        System.out.println("request info \nrequest.getOrderId()" + request.getOrderId() + "\n" +
                 "request.getPeople" + request.getPeople() + "\n" +
                 "request.getOrderRequest" + request.getOrderRequest());
         String loginId = userService.getMyId(authorization);
-        userService.isPresent(loginId);
 
-        //isEmpty 는 필요 x 주문은 매번 새로운 애기 때문.
+        // 유효성 검사.
+        userService.isPresent(loginId);
+        isPresent(request.getOrderId()); // 있는지~
+
         order = getOrderInfo(request.getOrderId());
         order.update(request);
         orderRepository.save(order);
-        Order.Response response = new Order.Response(order);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return order;
     }
 
     @Override
-    public ResponseEntity<?> delete(Timestamp cartId) {
-        System.out.println("");
-        isPresent(cartId);
-        Order cart = orderRepository.findById(cartId).get();
-        orderRepository.delete(cart);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public void delete(String authorization, Timestamp orderId) {
+        isPresent(orderId);
+        Order order = orderRepository.findById(orderId).get();
+        orderRepository.delete(order);
     }
 
     public boolean isPresent(Timestamp id) {
@@ -122,4 +135,13 @@ public class OrderServiceImpl implements OrderService {
         throw new OrderHasExistException();
     }
 
+    @Override
+    public boolean isPresent(String id) {
+        return false;
+    }
+
+    @Override
+    public boolean isEmpty(String id) {
+        return false;
+    }
 }

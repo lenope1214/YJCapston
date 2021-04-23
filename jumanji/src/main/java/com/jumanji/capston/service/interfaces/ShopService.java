@@ -3,10 +3,16 @@ package com.jumanji.capston.service.interfaces;
 import com.jumanji.capston.data.Shop;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public interface ShopService {
-    public ResponseEntity<?> get(String shopId);
-    public ResponseEntity<?> getList();
-    public ResponseEntity<?> post(Shop.Request request);
-    public ResponseEntity<?> patch(Shop.Request request);
-    public ResponseEntity<?> delete(String shopId);
+    public Shop get(String shopId);
+
+    public ResponseEntity<?> getList(String category, String sortTarget);
+
+    public Shop post(String authorization, Shop.Request request);
+
+    public Shop patch(String authorization, Shop.Request request);
+
+    public void delete(String authorization, String shopId);
 }
