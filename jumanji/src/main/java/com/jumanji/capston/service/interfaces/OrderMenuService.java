@@ -12,7 +12,7 @@ public interface OrderMenuService {
 
     public List<OrderMenu> getList(String authorization, String orderId);
 
-    public OrderMenu post(String authorization, OrderMenu.Request request);
+    public List<OrderMenu> post(String authorization, OrderMenu.RequestList requestList);
 
     public OrderMenu patch(String authorization, OrderMenu.Request request);
 

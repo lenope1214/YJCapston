@@ -39,10 +39,13 @@ public class OrderMenusController{
 
     @Transactional
     @PostMapping("/order-menu")
-    public ResponseEntity<?> postOrder(@RequestHeader String authorization, @RequestBody OrderMenu.Request request) {
-        OrderMenu orderMenu = orderMenuService.post(authorization, request);
-        OrderMenu.Response response = new OrderMenu.Response(orderMenu);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    public ResponseEntity<?> postOrder(@RequestHeader String authorization, @RequestBody OrderMenu.RequestList requestList) {
+        List<OrderMenu> orderMenuList = orderMenuService.post(authorization, requestList);
+        List<OrderMenu.Response> responseList= new ArrayList<>();
+        for(OrderMenu orderMenu : orderMenuList){
+            responseList.add(new OrderMenu.Response(orderMenu));
+        }
+        return new ResponseEntity<>(responseList, HttpStatus.CREATED);
     }
 
     @Transactional
