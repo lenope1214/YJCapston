@@ -13,7 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.example.jmjapp.R;
-import com.example.jmjapp.dto.MemberDTO;
+import lombok.SneakyThrows;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,7 +24,6 @@ import java.util.Map;
 
 public class JoinActivity extends AppCompatActivity {
     DataService dataService = new DataService();
-    MemberDTO memberDTO;
     EditText et_id;
     EditText et_pw;
     EditText et_name;
@@ -59,6 +58,7 @@ public class JoinActivity extends AppCompatActivity {
                     Toast.makeText(JoinActivity.this, "아이디는 2~8자로 입력해주세요!", Toast.LENGTH_SHORT).show();
                 } else {
                     dataService.read.validateOne(et_id.getText().toString()).enqueue(new Callback<ResponseBody>() {
+                        @SneakyThrows
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
@@ -77,7 +77,8 @@ public class JoinActivity extends AppCompatActivity {
                                 et_id.requestFocus();
 
                             } else {
-                                Log.d("result ", "연결실패");
+                                Log.d("D",response.errorBody().string());
+                                Log.d("result ", "연결실패312");
                             }
                         }
 

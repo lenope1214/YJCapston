@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 public class DataService {
-    private String BASE_URL = "http://3.34.55.186:8088/api/v1/"; // 학교2
-    //static final public String BASE_URL = "http://192.168.1.37:8088/api/v1/"; // 학교
+    //private String BASE_URL = "http://3.34.55.186:8088/api/v1/"; // 학교2
+    static final public String BASE_URL = "http://192.168.1.37:8088/api/v1/"; // 학교
     //private String BASE_URL = "http://122.202.45.37:8088/api/v1/"; // 집
 
     Gson gson = new GsonBuilder().setLenient().create();
@@ -44,7 +44,7 @@ interface CreateAPI {
 
     @Multipart
     @POST("menu") // 메뉴 등록
-    Call<ResponseBody> insertMenu(@PartMap Map<String, RequestBody> map, @Part MultipartBody.Part file);
+    Call<ResponseBody> insertMenu(@Header("Authorization") String jwt, @PartMap Map<String, RequestBody> map, @Part MultipartBody.Part file);
     //
 
     @POST("join") // 회원가입
@@ -74,6 +74,9 @@ interface UpdateAPI {
 
     @PATCH("shop/{shopid}/reserve") // 매장 예약 수정
     Call<ResponseBody> updateIsRsPos(@Header("Authorization") String jwt, @Path("shopid") String shopid);
+
+    @PATCH("shop") // 매장 수정
+    Call<ResponseBody> updateShop(@Header("Authorization") String jwt, @Body Map<String, String> map);
 }
 
 interface DeleteAPI {

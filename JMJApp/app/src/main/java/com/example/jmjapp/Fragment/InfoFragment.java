@@ -68,7 +68,7 @@ public class InfoFragment extends Fragment {
 //                .baseUrl(ApiService.BASEURL)
 //                .build();
 //        ApiService apiService = retrofit.create(ApiService.class);
-//        Call<List<Shop>> shopCall = apiService.shopList(category);
+//        Call<List<Shop>> shopCall = apiService.shopList2(category);
 //        shopCall.enqueue(new Callback<List<Shop>>() {
 //            @Override
 //            public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response) {

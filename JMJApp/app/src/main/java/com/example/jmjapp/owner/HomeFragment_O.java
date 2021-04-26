@@ -18,6 +18,8 @@ public class HomeFragment_O extends Fragment {
     ToggleButton toggle_Button;
     TextView text_myshop_name;
 
+    static public String shopNumber;
+
     public HomeFragment_O() {
 
     }
@@ -33,7 +35,7 @@ public class HomeFragment_O extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.home_fragment_o, container, false);
         Bundle bundle = getArguments();
-        String shopNumber = bundle.getString("shopNumber");
+        shopNumber = bundle.getString("shopNumber");
         String shopName = bundle.getString("shopName");
         Log.d("owner_number@@@@@@@@@@@@", shopNumber);
         Log.d("name@@@@@@@@@@@@", shopName);

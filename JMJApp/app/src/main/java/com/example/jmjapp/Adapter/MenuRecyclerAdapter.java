@@ -49,7 +49,7 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
         holder.tv_menu_price.setText(mItems.get(position).getPrice() + "원");
         String tv_menu_intro = mItems.get(position).getIntro();
         Log.d("awd","Awd");
-        Glide.with(context).load("http://3.34.55.186:8088/" + mItems.get(position).getImgPath()).override(500,500).into(holder.iv_menu_img);
+        Glide.with(context).load("http://3.34.55.186:8088/" + mItems.get(position).getImgPath()).override(500,500).into(holder.tv_menu_img);
 
         if (mItems.get(position).getIsSale() == 'Y') {
             holder.layout_menu.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +59,7 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
                     intent.putExtra("menuName", holder.tv_menu_name.getText().toString());
                     intent.putExtra("menuPrice", mItems.get(position).getPrice());
                     intent.putExtra("menuIntro", tv_menu_intro);
+                    intent.putExtra("menuImage", mItems.get(position).getImgPath());
                     context.startActivity(intent);
                 }
             });
@@ -95,13 +96,13 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
     // item layout 에 존재하는 위젯들을 바인딩합니다.
     class ItemViewHolder extends RecyclerView.ViewHolder{
         private ConstraintLayout layout_menu, menu_is_popular;
-        private ImageView iv_menu_img;
+        private ImageView tv_menu_img;
         private TextView tv_menu_name, menu_is_sale;
         private TextView tv_menu_price;
         public ItemViewHolder(View itemView) {
             super(itemView);
             layout_menu = (ConstraintLayout)itemView.findViewById(R.id.layout_menu);
-            iv_menu_img = (ImageView) itemView.findViewById(R.id.iv_menu_img);
+            tv_menu_img = (ImageView) itemView.findViewById(R.id.tv_menu_img);
             tv_menu_name = (TextView)itemView.findViewById(R.id.tv_menu_name);
             tv_menu_price = (TextView)itemView.findViewById(R.id.tv_menu_price);
             menu_is_popular = (ConstraintLayout) itemView.findViewById(R.id.menu_is_popular);

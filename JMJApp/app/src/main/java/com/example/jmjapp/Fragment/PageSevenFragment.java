@@ -60,7 +60,7 @@ public class PageSevenFragment extends Fragment {
                 .baseUrl(ApiService.BASEURL)
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<List<Shop>> shopCall = apiService.shopList(category);
+        Call<List<Shop>> shopCall = apiService.shopList2(category);
         shopCall.enqueue(new Callback<List<Shop>>() {
             @Override
             public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response) {
@@ -69,7 +69,10 @@ public class PageSevenFragment extends Fragment {
                         List<Shop> shopList = response.body();
                         for(Shop list : shopList) {
                             Log.e("result : ", list.getCategory());
-                            mItems.add(new Shop(list.getId(), list.getName(), list.getIntro(), list.getCloseTime(), list.getOpenTime(), list.getAddress(), list.getAddressDetail(), list.getIsRsPos(), list.getCategory(), list.getIsOpen()));
+                            mItems.add(new Shop(list.getId(), list.getName(), list.getIntro(),
+                                    list.getCloseTime(), list.getOpenTime(),
+                                    list.getAddress(), list.getAddressDetail(), list.getIsRsPos(),
+                                    list.getCategory(), list.getIsOpen(), list.getImgPath()));
                             rv_restaurant_list.setHasFixedSize(true);
                             adapter.setItems(mItems);
                             rv_restaurant_list.setLayoutManager(new LinearLayoutManager(getActivity()));
