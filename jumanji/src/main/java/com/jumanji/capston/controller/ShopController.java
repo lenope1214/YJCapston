@@ -91,8 +91,10 @@ public class ShopController {
     @Transactional
     @PatchMapping("/shop") // patch /shop
     public ResponseEntity<?> patchShop(@RequestHeader String authorization, @RequestBody Shop.Request request) {
+        System.out.println("매장수정 시작");
         Shop shop = shopService.patch(authorization, request);
         Shop.Response response = new Shop.Response(shop);
+        System.out.println("매장수정 종료");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
