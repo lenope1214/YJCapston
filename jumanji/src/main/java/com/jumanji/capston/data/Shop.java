@@ -45,7 +45,7 @@ public class Shop {
 
     @Getter @AllArgsConstructor
     public static class Request {
-        private String id;
+        private String id; // shopId로 대체하기
         private String name;
         private String intro;
         private String openTime;
