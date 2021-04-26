@@ -129,4 +129,19 @@ public class Shop {
         if (patch.getAddressDetail() != null) this.addressDetail = patch.getAddressDetail();
         if (patch.getCategory() != null) this.category = patch.getCategory();
     }
+
+    public interface Dao{
+        String getId();
+        String getName();
+        String getIntro();
+        String getAddress();
+        String getAddressDetail();
+        String getCategory();
+        String getOpenTime();
+        String getCloseTime();
+        Character getIsOpen();
+        Character getIsRsPos();
+        String getImgPath();
+        String getScore();
+    }
 }

@@ -111,6 +111,8 @@ public class ShopServiceImpl implements ShopService, BasicService {
             List<Shop.Response> responseList = new ArrayList<>();
             sortTarget = sortTarget == null ? "" : sortTarget;
             category = category == null ? "" : category;
+            System.out.println("카테고리 : " + category);
+            System.out.println("정렬기준 : " + sortTarget);
             switch (sortTarget) {
                 case "score":
                     return new ResponseEntity<>(shopRepository.ShopOrderByScore(category), HttpStatus.OK);
