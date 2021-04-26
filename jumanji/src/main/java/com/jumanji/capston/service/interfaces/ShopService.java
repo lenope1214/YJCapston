@@ -10,9 +10,9 @@ public interface ShopService {
 
     public ResponseEntity<?> getList(String category, String sortTarget);
 
-    public Shop post(String authorization, Shop.Request request);
+    public Shop post(String authorization, Shop.PostRequest request);
 
-    public Shop patch(String authorization, Shop.Request request);
+    public Shop patch(String authorization, Shop.PatchRequest request);
 
     public void delete(String authorization, String shopId);
 }

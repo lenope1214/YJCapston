@@ -130,7 +130,7 @@ public class ShopServiceImpl implements ShopService, BasicService {
     }
 
     @Override
-    public Shop post(String authorization, Shop.Request request) {
+    public Shop post(String authorization, Shop.PostRequest request) {
         System.out.println("매장등록's shopId : " + request.getId());
 
         String loginId = userService.getMyId(authorization);
@@ -168,7 +168,7 @@ public class ShopServiceImpl implements ShopService, BasicService {
     }
 
     @Override
-    public Shop patch(String authorization, Shop.Request request) {
+    public Shop patch(String authorization, Shop.PatchRequest request) {
         System.out.println("patch.getShopId() : " + request.getShopId());
         String userId = userService.getMyId(authorization);
         Shop shop = shopRepository.findById(request.getShopId()).get();

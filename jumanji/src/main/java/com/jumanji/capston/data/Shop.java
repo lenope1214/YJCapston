@@ -3,6 +3,7 @@ package com.jumanji.capston.data;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -43,8 +44,23 @@ public class Shop {
     @JsonIgnore
     private User owner;
 
+    @Getter @NoArgsConstructor
+    public static class PatchRequest{
+        private String id; // shopId로 대체하기
+        private String name;
+        private String intro;
+        private String openTime;
+        private String closeTime;
+        private String address;
+        private String addressDetail;
+        private String category;
+        private String shopId;
+        private String phone;
+        private MultipartFile img;
+    }
+
     @Getter @AllArgsConstructor
-    public static class Request implements Serializable{
+    public static class PostRequest{
         private String id; // shopId로 대체하기
         private String name;
         private String intro;
@@ -106,7 +122,7 @@ public class Shop {
         this.phone = phone;
     }
 
-    public void update(Shop.Request patch) {
+    public void update(Shop.PatchRequest patch) {
         if(patch.getPhone() != null) this.phone = patch.getPhone();
         if (patch.getIntro() != null) this.intro = patch.getIntro();
         if (patch.getOpenTime() != null) this.openTime = DateOperator.stringToMilisecond(patch.getOpenTime());
