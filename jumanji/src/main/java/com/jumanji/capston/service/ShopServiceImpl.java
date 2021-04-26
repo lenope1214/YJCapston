@@ -117,7 +117,9 @@ public class ShopServiceImpl implements ShopService, BasicService {
                 case "score":
                     return new ResponseEntity<>(shopRepository.ShopOrderByScore(category), HttpStatus.OK);
                 default:
-                    List<Shop> shopList = shopRepository.findByCategory(category);
+                    List<Shop> shopList;
+                    if(category.equals(""))shopList = shopRepository.findAll();
+                    else shopList = shopRepository.findByCategory(category);
                     for (Shop shop : shopList) {
                         Shop.Response response = new Shop.Response(shop);
                         responseList.add(response);
