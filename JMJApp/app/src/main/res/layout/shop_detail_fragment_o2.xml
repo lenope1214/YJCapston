@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edge"
+            android:id="@+id/relativeLayout"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/bell_button"
+                android:width="1dp"
+                android:height="1dp"
+                android:layout_marginLeft="1dp"
+                android:padding="1dp"
+                app:strokeWidth="1dp"
+                android:background="@drawable/bell"/>
+        <TextView
+                android:id="@+id/text_shop_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginTop="8dp"
+                android:textColor="#000"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:text="매장 관리"/>
+    </RelativeLayout>
+
+
+    <TextView
+            android:id="@+id/owner_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ooo"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="32dp"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+            android:layout_marginTop="32dp"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="안녕하세요"
+            android:textSize="17sp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintTop_toTopOf="@+id/owner_name_tv"
+            app:layout_constraintBottom_toBottomOf="@+id/owner_name_tv"
+            app:layout_constraintStart_toEndOf="@+id/owner_name_tv"
+            android:id="@+id/textView24"/>
+
+    <TextView
+            android:id="@+id/owner_logout_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="로그아웃 >>"
+            android:textSize="17sp"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView24"
+            app:layout_constraintBottom_toBottomOf="@+id/textView24"
+            android:layout_marginEnd="28dp"
+            app:layout_constraintVertical_bias="0.0"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="영업"
+            android:textSize="17sp"
+            android:textColor="#000000"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/owner_name_tv"
+            android:layout_marginTop="36dp"
+            android:layout_marginStart="52dp"
+            android:id="@+id/textView25"/>
+    <Button
+            android:id="@+id/toggle_button_on"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/toggle_button_checked"
+            android:text="ON"
+            tools:ignore="MissingConstraints"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toEndOf="@+id/textView25"
+            app:layout_constraintTop_toTopOf="@+id/textView25"
+            app:layout_constraintBottom_toBottomOf="@+id/textView25"/>
+
+    <Button
+            android:id="@+id/toggle_button_off"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/toggle_button_checked"
+            android:text="OFF"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintStart_toEndOf="@+id/toggle_button_on"
+            app:layout_constraintTop_toTopOf="@+id/toggle_button_on"
+            app:layout_constraintBottom_toBottomOf="@+id/toggle_button_on"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="예약"
+            android:textSize="17sp"
+            android:textColor="#000000"
+            tools:ignore="MissingConstraints"
+            android:id="@+id/textView26"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+            app:layout_constraintStart_toEndOf="@+id/toggle_button_off"
+            android:layout_marginTop="96dp"
+            android:layout_marginStart="56dp"/>
+    <Button
+            android:id="@+id/toggle_button_res_on"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/toggle_button_checked"
+            android:text="ON"
+            tools:ignore="MissingConstraints"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toEndOf="@+id/textView26"
+            app:layout_constraintTop_toTopOf="@+id/textView26"
+            app:layout_constraintBottom_toBottomOf="@+id/textView26"/>
+    <Button
+            android:id="@+id/toggle_button_res_off"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/toggle_button_checked"
+            android:text="OFF"
+            tools:ignore="MissingConstraints"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintStart_toEndOf="@+id/toggle_button_res_on"
+            app:layout_constraintTop_toTopOf="@+id/toggle_button_res_on"
+            app:layout_constraintBottom_toBottomOf="@+id/toggle_button_res_on"
+            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="160dp"
+            android:layout_height="70dp"
+            android:id="@+id/move_time_option"
+            android:background="@drawable/shop_detail_background"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="156dp"
+            android:layout_marginStart="32dp">
+
+        <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/time"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/imageView11"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="시간관리"
+                android:fontFamily="@font/we_semibold"
+                android:textSize="20sp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toEndOf="@+id/imageView11"
+                app:layout_constraintTop_toTopOf="@+id/imageView11"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView11"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="160dp"
+            android:layout_height="70dp"
+            android:id="@+id/shop_detail_menu_button"
+            android:background="@drawable/shop_detail_background"
+            tools:ignore="MissingConstraints"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintTop_toTopOf="@+id/move_time_option"
+            app:layout_constraintBottom_toBottomOf="@+id/move_time_option"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+                android:layout_width="55dp"
+                android:layout_height="45dp"
+                android:background="@drawable/menulist"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/imageView12"/>
+
+        <TextView
+                android:text="메뉴관리"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/we_semibold"
+                android:textSize="20sp"
+                android:layout_marginStart="5dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView12"
+                app:layout_constraintTop_toTopOf="@+id/imageView12"
+                app:layout_constraintStart_toEndOf="@+id/imageView12"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="160dp"
+            android:layout_height="70dp"
+            android:id="@+id/move_holiday_option"
+            android:background="@drawable/shop_detail_background"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintTop_toBottomOf="@+id/move_time_option"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="40dp">
+
+        <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/holiday"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/imageView13"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="휴일관리"
+                android:fontFamily="@font/we_semibold"
+                android:textSize="20sp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toEndOf="@+id/imageView13"
+                app:layout_constraintTop_toTopOf="@+id/imageView13"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView13"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="160dp"
+            android:layout_height="70dp"
+            android:id="@+id/move_review_option"
+            android:background="@drawable/shop_detail_background"
+            tools:ignore="MissingConstraints"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintTop_toTopOf="@+id/move_holiday_option"
+            app:layout_constraintBottom_toBottomOf="@+id/move_holiday_option"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/o_review"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/imageView14"/>
+
+        <TextView
+                android:text="리뷰관리"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/we_semibold"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView14"
+                app:layout_constraintTop_toTopOf="@+id/imageView14"
+                app:layout_constraintStart_toEndOf="@+id/imageView14"
+                android:layout_marginStart="15dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="160dp"
+            android:layout_height="70dp"
+            android:id="@+id/move_res_option"
+            android:background="@drawable/shop_detail_background"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintTop_toBottomOf="@+id/move_holiday_option"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="40dp">
+
+        <ImageView
+                android:layout_width="45dp"
+                android:layout_height="40dp"
+                android:background="@drawable/res1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/imageView15"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="예약관리"
+                android:fontFamily="@font/we_semibold"
+                android:textSize="20sp"
+                android:layout_marginStart="11dp"
+                app:layout_constraintStart_toEndOf="@+id/imageView15"
+                app:layout_constraintTop_toTopOf="@+id/imageView15"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView15"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="160dp"
+            android:layout_height="70dp"
+            android:id="@+id/move_chat_option"
+            android:background="@drawable/shop_detail_background"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintBottom_toBottomOf="@+id/move_res_option"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintTop_toTopOf="@+id/move_res_option"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:background="@drawable/o_chat"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="19dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/imageView16"/>
+
+        <TextView
+                android:text="채팅관리"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/we_semibold"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView16"
+                app:layout_constraintTop_toTopOf="@+id/imageView16"
+                app:layout_constraintStart_toEndOf="@+id/imageView16"
+                android:layout_marginStart="15dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="160dp"
+            android:layout_height="70dp"
+            android:id="@+id/move_employee_option"
+            android:background="@drawable/shop_detail_background"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintTop_toBottomOf="@+id/move_res_option"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="40dp">
+
+        <ImageView
+                android:layout_width="45dp"
+                android:layout_height="40dp"
+                android:background="@drawable/employee"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/imageView17"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="직원관리"
+                android:fontFamily="@font/we_semibold"
+                android:textSize="20sp"
+                android:layout_marginStart="11dp"
+                app:layout_constraintStart_toEndOf="@+id/imageView17"
+                app:layout_constraintTop_toTopOf="@+id/imageView17"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView17"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="160dp"
+            android:layout_height="70dp"
+            android:id="@+id/move_sales_option"
+            android:background="@drawable/shop_detail_background"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintBottom_toBottomOf="@+id/move_employee_option"
+            app:layout_constraintTop_toTopOf="@+id/move_employee_option"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:background="@drawable/sales"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="19dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/imageView18"/>
+
+        <TextView
+                android:text="매출관리"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/we_semibold"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView18"
+                app:layout_constraintTop_toTopOf="@+id/imageView18"
+                app:layout_constraintStart_toEndOf="@+id/imageView18"
+                android:layout_marginStart="15dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
