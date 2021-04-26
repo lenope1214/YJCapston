@@ -46,7 +46,7 @@ public class Shop {
 
     @Getter @NoArgsConstructor
     public static class PatchRequest{
-        private String id; // shopId로 대체하기
+        private String shopId;
         private String name;
         private String intro;
         private String openTime;
@@ -54,14 +54,13 @@ public class Shop {
         private String address;
         private String addressDetail;
         private String category;
-        private String shopId;
         private String phone;
         private MultipartFile img;
     }
 
     @Getter @AllArgsConstructor
     public static class PostRequest{
-        private String id; // shopId로 대체하기
+        private String shopId;
         private String name;
         private String intro;
         private String openTime;
@@ -69,14 +68,13 @@ public class Shop {
         private String address;
         private String addressDetail;
         private String category;
-        private String shopId;
         private String phone;
         private MultipartFile img;
     }
 
     @Getter @Setter
     public static class Response implements Serializable {
-        private String id;
+        private String shopId;
         private String name;
         private String intro;
         private String address;
@@ -90,7 +88,7 @@ public class Shop {
         private String phone;
 
         public Response(Shop shop) {
-            this.id = shop.getId();
+            this.shopId = shop.getId();
             this.name = shop.getName().replace("_", " ");
             this.intro = shop.getIntro();
             this.address = shop.getAddress();
