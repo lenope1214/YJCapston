@@ -44,7 +44,7 @@ public class Shop {
     private User owner;
 
     @Getter @AllArgsConstructor
-    public static class Request {
+    public static class Request implements Serializable{
         private String id; // shopId로 대체하기
         private String name;
         private String intro;
