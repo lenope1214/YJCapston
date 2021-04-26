@@ -60,8 +60,7 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
         holder.shop_menu_price.setText(mItems.get(position).getPrice() + "원");
         holder.shop_menu_intro.setText(mItems.get(position).getIntro());
         holder.shop_menu_duration.setText(String.valueOf(mItems.get(position).getDuration())+ "분");
-        //System.out.println(mItems.get(position).getImgPath());
-       // Glide.with(context).load(mItems.get(position).getImgPath()).into(holder.shop_menu_img);
+        Glide.with(context).load("http://3.34.55.186:8088/" + mItems.get(position).getImgPath()).into(holder.shop_menu_img);
 
         if(mItems.get(position).getIsSale() == 'Y') {
             holder.checkbox_soldout.setChecked(true);

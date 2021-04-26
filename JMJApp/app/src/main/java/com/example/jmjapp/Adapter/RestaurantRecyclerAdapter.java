@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
+import com.bumptech.glide.Glide;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Shop;
 import com.example.jmjapp.user.ShopDetailActivity;
@@ -44,6 +45,7 @@ public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRe
     public void onBindViewHolder(final ItemViewHolder holder, final int position) {
         holder.tv_restaurant_name.setText(mItems.get(position).getName());
         holder.tv_restaurant_menu.setText(mItems.get(position).getAddress());
+        Glide.with(context).load("http://3.34.55.186:8088/" + mItems.get(position).getImgPath()).override(500,500).into(holder.riv_restaurant_img);
 
         if(mItems.get(position).getIsOpen() == 'Y') {
             holder.tv_status.setText("영업 중");

@@ -25,6 +25,7 @@ import retrofit2.Response;
 public class ShopDetailActivity extends AppCompatActivity {
     DataService dataService = new DataService();
 
+    static public String shopName;
     static public String shopNumber;
     static public String shopIntro;
     static public String shopOpen;
@@ -33,6 +34,7 @@ public class ShopDetailActivity extends AppCompatActivity {
     static public char shopIsRsPos;
     static public String shopAddress;
     static public String shopDetailAddress;
+    static public String shopImgPath;
 
     TextView shop_detail_shopname, shop_detail_review, shop_detail_reply, shop_detail_avgtext;
     ImageView shop_detail_avgstar, shop_detail_phonecall_img, shop_detail_zzim_img;
@@ -113,6 +115,7 @@ public class ShopDetailActivity extends AppCompatActivity {
                     Shop shop = response.body();
                     shop_detail_shopname.setText(shop.getName());
 
+                    shopName = shop.getName();
                     shopIntro = shop.getIntro();
                     shopOpen = shop.getOpenTime();
                     shopClose = shop.getCloseTime();
@@ -120,6 +123,7 @@ public class ShopDetailActivity extends AppCompatActivity {
                     shopIsRsPos = shop.getIsRsPos();
                     shopAddress = shop.getAddress();
                     shopDetailAddress = shop.getAddressDetail();
+                    shopImgPath = shop.getImgPath();
                     Log.d("rawa@@@@@@@@w",shopIntro + "@" + shopOpen + "@"  + shopClose + "@" + shopIsOpen + "@"
                             + shopIsRsPos + "@" + shopAddress + "@" + shopDetailAddress);
 

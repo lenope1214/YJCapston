@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+import com.bumptech.glide.Glide;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Shop;
 import com.example.jmjapp.owner.MainActivity_O;
@@ -34,6 +35,7 @@ public class RestaurantListRecyclerAdapter extends RecyclerView.Adapter<Restaura
     // View 의 내용을 해당 포지션의 데이터로 바꿉니다.
     public void onBindViewHolder(final ItemViewHolder holder, final int position) {
         holder.tv_restaurant_name.setText(shops.get(position).getName());
+        Glide.with(context).load("http://3.34.55.186:8088/" + shops.get(position).getImgPath()).into(holder.riv_restaurant_img);
 
         holder.layout_restaurant.setOnClickListener(new View.OnClickListener() {
             @Override

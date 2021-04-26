@@ -1,19 +1,21 @@
 package com.example.jmjapp.owner;
 
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.*;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.jmjapp.JMJApplication;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Shop;
+import lombok.SneakyThrows;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -27,8 +29,10 @@ public class RegisterShopActivity extends AppCompatActivity {
     private static final int SEARCH_ADDRESS_ACTIVITY = 10000;
 
     EditText shop_et_id, shop_et_name, shop_et_intro, shop_et_addr, shop_et_addr_detail;
-    Spinner shop_open, shop_close, shop_isres, shop_category;
+    Spinner shop_isres, shop_category;
+    TextView shop_open, shop_close;
     Button shop_register, search_addr;
+    int t1Hour, t1Minute, t2Hour, t2Minute;
 
     private String jwt;
     private AlertDialog dialog;
@@ -37,7 +41,9 @@ public class RegisterShopActivity extends AppCompatActivity {
         DataService dataService = new DataService();
         
         String member_id = ((JMJApplication)this.getApplication()).getId();
-        String jwt = ((JMJApplication)this.getApplication()).getJwt();
+        SharedPreferences pref = getSharedPreferences("auth_o", MODE_PRIVATE);
+        String jwt = pref.getString("token", null);
+        System.out.println(jwt);
 
         //Log.d("res jwtjwtjwt", jwt);
 
@@ -56,22 +62,60 @@ public class RegisterShopActivity extends AppCompatActivity {
         shop_register = findViewById(R.id.shop_register);
         search_addr = findViewById(R.id.search_addr);
 
-        //spinner
-        ArrayAdapter openAdapter = ArrayAdapter.createFromResource(this, R.array.open_time, android.R.layout.simple_spinner_item);
-        openAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        shop_open.setAdapter(openAdapter);
-
-        ArrayAdapter closeAdapter = ArrayAdapter.createFromResource(this, R.array.close_time, android.R.layout.simple_spinner_item);
-        closeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        shop_close.setAdapter(closeAdapter);
-
         ArrayAdapter categoryAdapter = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_spinner_item);
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         shop_category.setAdapter(categoryAdapter);
 
-//        ArrayAdapter isresAdapter = ArrayAdapter.createFromResource(this, R.array.reservation, android.R.layout.simple_spinner_item);
-//        isresAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        shop_isres.setAdapter(isresAdapter);
+        shop_open.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(
+                        RegisterShopActivity.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @SneakyThrows
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                t1Hour = hourOfDay;
+                                t1Minute = minute;
+
+                                String time = t1Hour + ":" + t1Minute;
+                                Log.d("daw", String.valueOf(t1Minute));
+
+
+                                time(time, t1Minute, t1Hour, shop_open);
+                            }
+                        }, 12, 0, true
+                );
+                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                timePickerDialog.updateTime(t1Hour, t1Minute);
+                timePickerDialog.show();
+            }
+        });
+
+        shop_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(
+                        RegisterShopActivity.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @SneakyThrows
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                t2Hour = hourOfDay;
+                                t2Minute = minute;
+
+                                String time = t2Hour + ":" + t2Minute;
+                                time(time, t2Minute, t2Hour, shop_close);
+                            }
+                        }, 12, 0, true
+                );
+                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                timePickerDialog.updateTime(t2Hour, t2Minute);
+                timePickerDialog.show();
+            }
+        });
 
         search_addr.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,8 +133,8 @@ public class RegisterShopActivity extends AppCompatActivity {
                 RequestBody introBody = RequestBody.create(MediaType.parse("text/plain"), shop_et_intro.getText().toString());
                 RequestBody addressBody = RequestBody.create(MediaType.parse("text/plain"), shop_et_addr.getText().toString());
                 RequestBody address_detailBody = RequestBody.create(MediaType.parse("text/plain"), shop_et_addr_detail.getText().toString());
-                RequestBody open_timeBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(shop_open.getSelectedItem()));
-                RequestBody close_timeBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(shop_close.getSelectedItem()));
+                RequestBody open_timeBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(shop_open.getText().toString()));
+                RequestBody close_timeBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(shop_close.getText().toString()));
                 RequestBody categoryBody = RequestBody.create(MediaType.parse("text/plain"), shop_category.getSelectedItem().toString());
 
                 Map<String, RequestBody> map = new HashMap();
@@ -103,23 +147,10 @@ public class RegisterShopActivity extends AppCompatActivity {
                 map.put("closeTime", close_timeBody);
                 map.put("category", categoryBody);
 
-
-//                map.put("id", shop_et_id.getText().toString());
-//                map.put("name", shop_et_name.getText().toString());
-//                map.put("intro", shop_et_intro.getText().toString());
-//                map.put("address", shop_et_addr.getText().toString());
-//                map.put("address_detail", shop_et_addr_detail.getText().toString());
-//                map.put("open_time", shop_open.getSelectedItem());
-//                map.put("close_time", shop_close.getSelectedItem());
-//                map.put("category", shop_category.getSelectedItem().toString());
-                //map.put("isRePos", shop_isres.getSelectedItem().toString());
-                //map.put("member_id", member_id);
-
-//                SharedPreferences pref =  getSharedPreferences("auth", MODE_PRIVATE);
-//                String jwt = pref.getString("token", "");
-//                Log.d("awdkmawd", jwt);
+                //Log.d("qweq@@@", String.valueOf(idBody.)+nameBody+introBody+addressBody+address_detailBody+open_timeBody+close_timeBody+categoryBody);
 
                 dataService.create.insertShop("Bearer " + jwt, map).enqueue(new Callback<Shop>() {
+                    @SneakyThrows
                     @Override
                     public void onResponse(Call<Shop> call, Response<Shop> response) {
                         if(response.code() == 201) {
@@ -141,23 +172,9 @@ public class RegisterShopActivity extends AppCompatActivity {
 
                             Log.d("result : ", "매장등록 실패");
                         } else {
-                            Log.d("result : " , "연결실패");
+
+                            Log.d("result : " , "연결실패"+"@@@@@"+response.errorBody().string());
                         }
-//                        if(response.isSuccessful()) {
-//                            Log.d("result : " , "연결성공");
-//                            AlertDialog.Builder builder = new AlertDialog.Builder(RegisterShopActivity.this);
-//                            dialog = builder.setMessage("매장이 등록되었습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    Intent intent = new Intent(RegisterShopActivity.this, MainActivity_O.class);
-//                                    startActivity(intent);
-//                                }
-//                            }).create();
-//                            builder.setCancelable(false);
-//                            dialog.show();
-//                        } else {
-//                            Log.d("result : " , "연결실패");
-//                        }
                     }
 
                     @Override
@@ -167,6 +184,18 @@ public class RegisterShopActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    private void time(String time, int t2Minute, int t2Hour, TextView shop_update_closetime) {
+        if (String.valueOf(t2Minute).toString().length() == 1 && String.valueOf(t2Hour).toString().length() == 1) {
+            shop_update_closetime.setText("0"+ t2Hour + ":" + "0"+ t2Minute);
+        } else if(String.valueOf(t2Hour).toString().length() == 1) {
+            shop_update_closetime.setText("0"+ t2Hour + ":" + t2Minute);
+        } else if(String.valueOf(t2Minute).toString().length() == 1) {
+            shop_update_closetime.setText(t2Hour + ":" + "0"+ t2Minute);
+        } else {
+            shop_update_closetime.setText(time);
+        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {

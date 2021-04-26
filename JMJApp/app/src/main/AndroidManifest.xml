@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.example.jmjapp">
+
     <permission
             android:name="com.example.jmjapp.permission.MAPS_RECEIVE"
             android:protectionLevel="signature"/>
@@ -28,7 +29,10 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
-
+        <activity android:name=".user.OrderActivity">
+        </activity>
+        <activity android:name=".owner.ShopUpdateActivity">
+        </activity>
         <activity android:name=".user.BasketActivity">
         </activity>
         <activity android:name=".user.MenuChoosedActivity">
@@ -88,9 +92,8 @@
         <activity android:name=".user.JoinActivity">
         </activity>
         <activity android:name=".user.ShopDetailActivity">
-        </activity>
-<!--        <activity android:name=".user.LogoutActivity">-->
-<!--        </activity>-->
+        </activity> <!-- <activity android:name=".user.LogoutActivity"> -->
+        <!-- </activity> -->
         <activity android:name=".owner.OwnerJoinActivity">
         </activity>
         <activity android:name=".owner.WebViewActivity">

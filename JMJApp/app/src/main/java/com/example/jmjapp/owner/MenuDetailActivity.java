@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuDetailActivity extends AppCompatActivity {
-    FloatingActionButton menu_register;
+    TextView menu_register;
     public static String shopNumber;
     DataService dataService = new DataService();
     private MenuListRecyclerAdapter adapter;

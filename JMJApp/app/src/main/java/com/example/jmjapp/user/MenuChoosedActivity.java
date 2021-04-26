@@ -12,11 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import com.bumptech.glide.Glide;
 import com.example.jmjapp.*;
 import com.google.android.material.snackbar.Snackbar;
 
 public class MenuChoosedActivity extends AppCompatActivity {
-    private String menuName;
+    private String menuName, menuImage;
     private int menuCount;
     public static int menuPrice;
     private String menuIntro;
@@ -40,6 +41,7 @@ public class MenuChoosedActivity extends AppCompatActivity {
         menuName = intent.getStringExtra("menuName");
         menuPrice = intent.getIntExtra("menuPrice", 0);
         menuIntro = intent.getStringExtra("menuIntro");
+        menuImage = intent.getStringExtra("menuImage");
         Log.d("shopNumber", ShopDetailActivity.shopNumber);
 
         char is_rs_pos = ShopDetailActivity.shopIsRsPos;
@@ -53,6 +55,7 @@ public class MenuChoosedActivity extends AppCompatActivity {
         menu_choosed_name.setText(menuName);
         menu_choosed_price.setText(menuPrice + "원");
         menu_choosed_intro.setText(menuIntro);
+        Glide .with(this).load("http://3.34.55.186:8088/" + menuImage).into(menu_choosed_img);
 
         if (is_rs_pos == 'Y') {
             menu_choosed_btn.setOnClickListener(new View.OnClickListener() {

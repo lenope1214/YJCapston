@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 public interface ApiService {
-    static final String BASEURL = "http://3.34.55.186:8088/api/v1/"; // 학교2
-    //static final String BASEURL = "http://192.168.1.37:8088/api/v1/"; // 학교
+    //static final String BASEURL = "http://3.34.55.186:8088/api/v1/"; // 학교2
+    static final String BASEURL = "http://192.168.1.37:8088/api/v1/"; // 학교
     //static final String BASEURL = "http://122.202.45.37:8088/api/v1/"; // 집
 
 
@@ -19,7 +19,7 @@ public interface ApiService {
     Call<List<Shop>> shopList(@Path("category") String category);
 
     @GET("shopList")
-    Call<List<Shop>> shopList();
+    Call<List<Shop>> shopList2(@Query("category") String category);
 
     @GET("shop/{id}")
     Call<Shop> shop(@Path("id") String id);

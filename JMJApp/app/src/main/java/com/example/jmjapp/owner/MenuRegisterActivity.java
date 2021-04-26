@@ -3,16 +3,19 @@ package com.example.jmjapp.owner;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import com.example.jmjapp.R;
 import lombok.SneakyThrows;
 import okhttp3.MediaType;
@@ -37,7 +40,7 @@ public class MenuRegisterActivity extends AppCompatActivity {
     private AlertDialog dialog;
     private String shopNumber;
 
-    private String path;
+    private String path, jwt;
     private Uri selectedImageUri;
 
     boolean isPhotoCaptured;
@@ -48,6 +51,15 @@ public class MenuRegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_register);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.menu_register_toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.arrowback);
+
+        SharedPreferences pref = getSharedPreferences("auth_o", MODE_PRIVATE);
+        jwt = pref.getString("token", null);
 
         Intent intent = getIntent();
         shopNumber = intent.getStringExtra("shopNumber");
@@ -94,11 +106,12 @@ public class MenuRegisterActivity extends AppCompatActivity {
     }
 
     private void registerMenu(String path) {
+        Log.d("rr","rr");
         File file = new File(path);
         menu_register_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RequestBody idBody = RequestBody.create(MediaType.parse("text.plain"), shopNumber);
+                RequestBody idBody = RequestBody.create(MediaType.parse("text/plain"), shopNumber);
                 RequestBody nameBody = RequestBody.create(MediaType.parse("text/plain"), menu_name_et.getText().toString());
                 RequestBody introBody = RequestBody.create(MediaType.parse("text/plain"), menu_intro_et.getText().toString());
                 RequestBody priceBody = RequestBody.create(MediaType.parse("text/plain"), menu_price_et.getText().toString());
@@ -114,7 +127,9 @@ public class MenuRegisterActivity extends AppCompatActivity {
                 map.put("price", priceBody);
                 map.put("duration", timeBody);
 
-                dataService.create.insertMenu(map, body).enqueue(new Callback<ResponseBody>() {
+                Log.d("awd",String.valueOf(idBody)+nameBody+introBody+priceBody+timeBody);
+
+                dataService.create.insertMenu("Bearer " + jwt, map, body).enqueue(new Callback<ResponseBody>() {
                     @SneakyThrows
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -140,7 +155,7 @@ public class MenuRegisterActivity extends AppCompatActivity {
 
                     @SneakyThrows
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(Call<ResponseBody> call, Throwable t) { ;
                         Log.d("result : " , "연결실패2");
                     }
                 });
@@ -148,5 +163,12 @@ public class MenuRegisterActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }
