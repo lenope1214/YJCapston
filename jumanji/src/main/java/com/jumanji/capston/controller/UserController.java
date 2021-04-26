@@ -25,7 +25,7 @@ public class UserController  {
 
     @Transactional(readOnly = true)
     @GetMapping("/user")  // myInfo
-    public ResponseEntity<?> selectMyInfo(@RequestHeader String authorization) {
+    public ResponseEntity<?> getMyInfo(@RequestHeader String authorization) {
         String loginId = userService.getMyId(authorization);
         User user = userService.get(loginId);
         System.out.println("user.info : " + user.toString() );
@@ -49,11 +49,11 @@ public class UserController  {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @Transactional(readOnly = true)
-    @GetMapping("/user/{id}")
-    public ResponseEntity<?> selectUserInfo(@PathVariable String id) {
-        return new ResponseEntity<>(userService.get(id), HttpStatus.OK);
-    }
+//    @Transactional(readOnly = true)
+//    @GetMapping("/user/{id}")
+//    public ResponseEntity<?> selectUserInfo(@PathVariable String id) {
+//        return new ResponseEntity<>(userService.get(id), HttpStatus.OK);
+//    }
 
 //    @Transactional
 //    @DeleteMapping("/userDelAll")
@@ -63,7 +63,7 @@ public class UserController  {
 
     @Transactional
     @PatchMapping("/user") // patch user
-    public ResponseEntity<?> patchUser(@RequestBody User.Request request, @RequestHeader String authorization) {
+    public ResponseEntity<?> patchUser(@RequestHeader String authorization, @RequestBody User.Request request) {
         User.Response response = new User.Response(userService.patch(authorization, request));
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
