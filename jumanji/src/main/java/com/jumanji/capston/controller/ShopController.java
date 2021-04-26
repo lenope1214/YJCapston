@@ -74,7 +74,7 @@ public class ShopController {
 
     @Transactional
     @PostMapping("/shop") // post /shop 매장등록     Form-data로 받음 => Param. requestbody를 안적으면 자동 param 매핑 해주는듯
-    public ResponseEntity<?> postShop(Shop.Request request, @RequestHeader String authorization) throws ParseException {
+    public ResponseEntity<?> postShop(Shop.PostRequest request, @RequestHeader String authorization) throws ParseException {
         Shop result = shopService.post(authorization, request);
         Shop.Response response = new Shop.Response(result);
         return new ResponseEntity<>(response, HttpStatus.CREATED); // 생성이므로 201번을 리턴.
@@ -90,7 +90,7 @@ public class ShopController {
 
     @Transactional
     @PatchMapping("/shop") // patch /shop
-    public ResponseEntity<?> patchShop(@RequestHeader String authorization, @RequestBody Shop.Request request) {
+    public ResponseEntity<?> patchShop(@RequestHeader String authorization, @RequestBody Shop.PatchRequest request) {
         System.out.println("매장수정 시작");
         Shop shop = shopService.patch(authorization, request);
         Shop.Response response = new Shop.Response(shop);

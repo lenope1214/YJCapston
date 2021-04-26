@@ -93,6 +93,7 @@ public class Menu {
     @Getter
     public static class Response{
         private String id;
+        private String shopId;
         private String name;
         private String intro;
         private int price;
@@ -105,6 +106,7 @@ public class Menu {
 //            this.id = menu.getId().substring(0,10);
             System.out.println("결과 name : " + menu.getId().substring(10).replace("_", " "));
             this.id = menu.getId();
+            this.shopId = menu.getId().substring(10);
             this.name = menu.getId().substring(10).replace("_", " ");
             this.intro = menu.getIntro();
             this.price = menu.getPrice();

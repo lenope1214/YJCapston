@@ -31,7 +31,7 @@ public class ApiExceptionHandler {
     public ResponseEntity<ApiErrorResponse> idHandleException(UserHasExistException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(PasswordMissMatchException.class)
@@ -52,7 +52,7 @@ public class ApiExceptionHandler {
     public ResponseEntity<ApiErrorResponse> shopException(ShopHasExistException ex){
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(OrderMenuNotFoundException.class)

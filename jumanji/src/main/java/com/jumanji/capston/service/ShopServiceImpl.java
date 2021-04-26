@@ -111,11 +111,15 @@ public class ShopServiceImpl implements ShopService, BasicService {
             List<Shop.Response> responseList = new ArrayList<>();
             sortTarget = sortTarget == null ? "" : sortTarget;
             category = category == null ? "" : category;
+            System.out.println("카테고리 : " + category);
+            System.out.println("정렬기준 : " + sortTarget);
             switch (sortTarget) {
                 case "score":
                     return new ResponseEntity<>(shopRepository.ShopOrderByScore(category), HttpStatus.OK);
                 default:
-                    List<Shop> shopList = shopRepository.findAll();
+                    List<Shop> shopList;
+                    if(category.equals(""))shopList = shopRepository.findAll();
+                    else shopList = shopRepository.findByCategory(category);
                     for (Shop shop : shopList) {
                         Shop.Response response = new Shop.Response(shop);
                         responseList.add(response);
@@ -130,18 +134,18 @@ public class ShopServiceImpl implements ShopService, BasicService {
     }
 
     @Override
-    public Shop post(String authorization, Shop.Request request) {
-        System.out.println("매장등록's shopId : " + request.getId());
+    public Shop post(String authorization, Shop.PostRequest request) {
+        System.out.println("매장등록's shopId : " + request.getShopId());
 
         String loginId = userService.getMyId(authorization);
         User user = userService.get(loginId);
-        String uri = "shop/" + request.getId() + "/thumbnail/";
+        String uri = "shop/" + request.getShopId() + "/thumbnail/";
         String imgPath = null;
         System.out.println("openTime : " + request.getOpenTime());
         System.out.println("closeTime : " + request.getCloseTime());
 
         // 유효성 검사
-        isEmpty(request.getId()); // 해당 사업자 번호로 사업자 등록이 됐는지 확인 비어있어야 등록
+        isEmpty(request.getShopId()); // 해당 사업자 번호로 사업자 등록이 됐는지 확인 비어있어야 등록
         userService.isPresent(loginId); // 해당 요청하는 사람이 존재하는지
         userService.isAuth(user.getRole(), "OWNER");
 
@@ -152,7 +156,7 @@ public class ShopServiceImpl implements ShopService, BasicService {
         Date closeTime = DateOperator.stringToMilisecond(request.getCloseTime());
         Shop shopEntity;
         shopEntity = Shop.insertShop()
-                .id(request.getId())
+                .id(request.getShopId())
                 .name(request.getName().replace(" ", "_"))
                 .intro(request.getIntro())
                 .openTime(openTime)
@@ -168,7 +172,7 @@ public class ShopServiceImpl implements ShopService, BasicService {
     }
 
     @Override
-    public Shop patch(String authorization, Shop.Request request) {
+    public Shop patch(String authorization, Shop.PatchRequest request) {
         System.out.println("patch.getShopId() : " + request.getShopId());
         String userId = userService.getMyId(authorization);
         Shop shop = shopRepository.findById(request.getShopId()).get();

@@ -3,6 +3,7 @@ package com.jumanji.capston.data;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -43,9 +44,9 @@ public class Shop {
     @JsonIgnore
     private User owner;
 
-    @Getter @AllArgsConstructor
-    public static class Request {
-        private String id; // shopId로 대체하기
+    @Getter @NoArgsConstructor
+    public static class PatchRequest{
+        private String shopId;
         private String name;
         private String intro;
         private String openTime;
@@ -53,14 +54,27 @@ public class Shop {
         private String address;
         private String addressDetail;
         private String category;
+        private String phone;
+        private MultipartFile img;
+    }
+
+    @Getter @AllArgsConstructor
+    public static class PostRequest{
         private String shopId;
+        private String name;
+        private String intro;
+        private String openTime;
+        private String closeTime;
+        private String address;
+        private String addressDetail;
+        private String category;
         private String phone;
         private MultipartFile img;
     }
 
     @Getter @Setter
     public static class Response implements Serializable {
-        private String id;
+        private String shopId;
         private String name;
         private String intro;
         private String address;
@@ -74,7 +88,7 @@ public class Shop {
         private String phone;
 
         public Response(Shop shop) {
-            this.id = shop.getId();
+            this.shopId = shop.getId();
             this.name = shop.getName().replace("_", " ");
             this.intro = shop.getIntro();
             this.address = shop.getAddress();
@@ -106,7 +120,7 @@ public class Shop {
         this.phone = phone;
     }
 
-    public void update(Shop.Request patch) {
+    public void update(Shop.PatchRequest patch) {
         if(patch.getPhone() != null) this.phone = patch.getPhone();
         if (patch.getIntro() != null) this.intro = patch.getIntro();
         if (patch.getOpenTime() != null) this.openTime = DateOperator.stringToMilisecond(patch.getOpenTime());
@@ -114,5 +128,20 @@ public class Shop {
         if (patch.getAddress() != null) this.address = patch.getAddress();
         if (patch.getAddressDetail() != null) this.addressDetail = patch.getAddressDetail();
         if (patch.getCategory() != null) this.category = patch.getCategory();
+    }
+
+    public interface Dao{
+        String getId();
+        String getName();
+        String getIntro();
+        String getAddress();
+        String getAddressDetail();
+        String getCategory();
+        String getOpenTime();
+        String getCloseTime();
+        Character getIsOpen();
+        Character getIsRsPos();
+        String getImgPath();
+        String getScore();
     }
 }
