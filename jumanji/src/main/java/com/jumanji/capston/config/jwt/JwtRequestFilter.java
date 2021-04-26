@@ -126,7 +126,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 //        System.out.println("비교할 context split res : " + request.getServletPath().split("/")[3]);
 //        System.out.print("exclude 결과 : ");
 //        System.out.println(EXCLUDE_URL.stream().anyMatch(exclude -> exclude.equalsIgnoreCase(request.getServletPath().split("/")[3])));
-        return EXCLUDE_URL.stream().anyMatch(exclude -> exclude.equalsIgnoreCase(request.getServletPath().split("/")[3]));
+        if(request.getServletPath().split("/").length > 2) {
+            return EXCLUDE_URL.stream().anyMatch(exclude -> exclude.equalsIgnoreCase(request.getServletPath().split("/")[3]));
+        }
+        return false;
     }
 
 }

@@ -96,7 +96,7 @@ public class OrderServiceImpl implements OrderService, BasicService {
                 .shop(shop)
                 .user(user)
                 .build();
-        orderRepository.save(order);
+                orderRepository.save(order);
         return order;
     }
 
