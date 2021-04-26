@@ -45,6 +45,15 @@
         </activity>
         <activity android:name=".owner.OwnerLoginActivity">
         </activity>
+        <activity android:name="com.example.jmjapp.user.MembershipWithdrawal"></activity>
+        <activity android:name="com.example.jmjapp.user.RecordZzim" />
+        <activity android:name="com.example.jmjapp.user.RecordReview" />
+        <activity android:name="com.example.jmjapp.user.RecordVisit" />
+        <activity android:name="com.example.jmjapp.user.RecordPoint" />
+        <activity android:name="com.example.jmjapp.user.OperationGuideActivity" />
+        <activity android:name="com.example.jmjapp.user.CustomerServiceActivity" />
+        <activity android:name="com.example.jmjapp.user.NoticeActivity" />
+
 
         <uses-library android:name="com.google.android.maps"/>
         <uses-library

@@ -60,6 +60,10 @@
         android:testOnly="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true" >
+        <activity android:name="com.example.jmjapp.user.OrderActivity" >
+        </activity>
+        <activity android:name="com.example.jmjapp.owner.ShopUpdateActivity" >
+        </activity>
         <activity android:name="com.example.jmjapp.user.BasketActivity" >
         </activity>
         <activity android:name="com.example.jmjapp.user.MenuChoosedActivity" >
@@ -72,6 +76,14 @@
         </activity>
         <activity android:name="com.example.jmjapp.owner.OwnerLoginActivity" >
         </activity>
+        <activity android:name="com.example.jmjapp.user.MembershipWithdrawal" />
+        <activity android:name="com.example.jmjapp.user.RecordZzim" />
+        <activity android:name="com.example.jmjapp.user.RecordReview" />
+        <activity android:name="com.example.jmjapp.user.RecordVisit" />
+        <activity android:name="com.example.jmjapp.user.RecordPoint" />
+        <activity android:name="com.example.jmjapp.user.OperationGuideActivity" />
+        <activity android:name="com.example.jmjapp.user.CustomerServiceActivity" />
+        <activity android:name="com.example.jmjapp.user.NoticeActivity" />
 
         <uses-library android:name="com.google.android.maps" />
         <uses-library
@@ -119,13 +131,15 @@
         <activity android:name="com.example.jmjapp.user.JoinActivity" >
         </activity>
         <activity android:name="com.example.jmjapp.user.ShopDetailActivity" >
-        </activity>
-        <!-- <activity android:name=".user.LogoutActivity"> -->
+        </activity> <!-- <activity android:name=".user.LogoutActivity"> -->
         <!-- </activity> -->
         <activity android:name="com.example.jmjapp.owner.OwnerJoinActivity" >
         </activity>
         <activity android:name="com.example.jmjapp.owner.WebViewActivity" >
         </activity>
+        <activity
+            android:name="com.lakue.lakuepopupactivity.PopupActivity"
+            android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name="com.nhn.android.naverlogin.ui.OAuthLoginActivity"
             android:theme="@style/Theme.AppCompat.Light.Dialog" />

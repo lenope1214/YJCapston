@@ -50,9 +50,12 @@ interface ReadAPI {
 }
 
 interface UpdateAPI {
-
+    @PATCH("user")
+    Call<ResponseBody> updateOne(@Header("Authorization")String jwt, @Body Map<String, String> map);
 }
 
 interface DeleteAPI {
-
+    @DELETE("user")
+    Call<ResponseBody> deleteOne(@Header("Authorization") String jwt);
 }
+
