@@ -3,6 +3,7 @@ package com.jumanji.capston.service.exception;
 import com.jumanji.capston.service.exception.MenuException.MenuHasExistException;
 import com.jumanji.capston.service.exception.OrderMenuException.OrderMenuNotFoundException;
 import com.jumanji.capston.service.exception.ShopException.NoShopListException;
+import com.jumanji.capston.service.exception.ShopException.ShopHasExistException;
 import com.jumanji.capston.service.exception.ShopException.ShopMissMatchException;
 import com.jumanji.capston.service.exception.ShopException.ShopNotFoundException;
 import com.jumanji.capston.service.exception.UserException.DoLoginExistException;
@@ -41,6 +42,13 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(ShopNotFoundException.class)
     public ResponseEntity<ApiErrorResponse> shopException(ShopNotFoundException ex){
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ShopHasExistException.class)
+    public ResponseEntity<ApiErrorResponse> shopException(ShopHasExistException ex){
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
