@@ -10,6 +10,7 @@ import com.jumanji.capston.service.exception.UserException.DoLoginExistException
 import com.jumanji.capston.service.exception.UserException.PasswordMissMatchException;
 import com.jumanji.capston.service.exception.UserException.UserHasExistException;
 import com.jumanji.capston.service.exception.UserException.UserNotFoundException;
+import io.jsonwebtoken.MalformedJwtException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -75,13 +76,6 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<?> dataDuplicateKeyException(ConstraintViolationException ex){
-        ApiErrorResponse response =
-                new ApiErrorResponse("ORA-00001", ex.getMessage());
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-    }
-
     @ExceptionHandler(DoLoginExistException.class)
     public ResponseEntity<?> AuthenticationException(DoLoginExistException ex){
         ApiErrorResponse response =
@@ -95,5 +89,19 @@ public class ApiExceptionHandler {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
         return  new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<?> dataDuplicateKeyException(ConstraintViolationException ex){
+        ApiErrorResponse response =
+                new ApiErrorResponse("ORA-0001", ex.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(MalformedJwtException.class)
+    public ResponseEntity<?> jwtException(MalformedJwtException ex){
+        ApiErrorResponse response =
+                new ApiErrorResponse("token-0001", "토큰이 제대로 넘어오지 않습니다.");
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }
