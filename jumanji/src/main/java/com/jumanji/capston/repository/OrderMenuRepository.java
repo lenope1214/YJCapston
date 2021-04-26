@@ -10,7 +10,7 @@ public interface OrderMenuRepository extends JpaRepository<OrderMenu, String> {
     @Query(value = "SELECT ORDER_SEQ.nextval FROM dual", nativeQuery = true)
     Long getOrderSeqNextVal();
 
-    int countByIdContains(String cartId);
+    int countByIdContains(String orderId);
 
-    Set<OrderMenu> findByIdContains(String cartId);
+    Set<OrderMenu> findByIdContains(String orderId);
 }

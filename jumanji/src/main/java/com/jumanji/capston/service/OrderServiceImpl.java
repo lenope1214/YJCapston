@@ -96,7 +96,7 @@ public class OrderServiceImpl implements OrderService, BasicService {
                 .shop(shop)
                 .user(user)
                 .build();
-        orderRepository.save(order);
+                orderRepository.save(order);
         return order;
     }
 
@@ -118,12 +118,12 @@ public class OrderServiceImpl implements OrderService, BasicService {
         return order;
     }
 
-    @Override
-    public void delete(String authorization, Timestamp orderId) {
-        isPresent(orderId);
-        Order order = orderRepository.findById(orderId).get();
-        orderRepository.delete(order);
-    }
+//    @Override
+//    public void delete(String authorization, Timestamp orderId) {
+//        isPresent(orderId);
+//        Order order = orderRepository.findById(orderId).get();
+//        orderRepository.delete(order);
+//    }
 
     public boolean isPresent(Timestamp id) {
         if (orderRepository.findById(id).isPresent()) return true;

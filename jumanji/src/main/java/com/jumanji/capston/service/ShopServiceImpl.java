@@ -141,7 +141,7 @@ public class ShopServiceImpl implements ShopService, BasicService {
         System.out.println("closeTime : " + request.getCloseTime());
 
         // 유효성 검사
-        isPresent(request.getShopId()); // 해당 사업자 번호로 사업자 등록이 됐는지 확인
+        isEmpty(request.getId()); // 해당 사업자 번호로 사업자 등록이 됐는지 확인 비어있어야 등록
         userService.isPresent(loginId); // 해당 요청하는 사람이 존재하는지
         userService.isAuth(user.getRole(), "OWNER");
 

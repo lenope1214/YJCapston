@@ -44,9 +44,9 @@ public class Shop {
     private User owner;
 
 
-    @Getter @AllArgsConstructor
-    public class Request {
-        private String id;
+    @Getter @AllArgsConstructor @NoArgsConstructor
+    public static class Request {
+        private String id;// shopId 로 변경
         private String name;
         private String intro;
         private String openTime;

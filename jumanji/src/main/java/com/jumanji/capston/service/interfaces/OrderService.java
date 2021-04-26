@@ -15,5 +15,5 @@ public interface OrderService {
     List<Order> getList(String authorization, String userId);
     Order post(String authorization, Order.Request request);
     Order patch(String authorization, Order.Request request);
-    void delete(String authorization, Timestamp cartId);
+//    void delete(String authorization, Timestamp cartId);
 }

@@ -1,6 +1,7 @@
 package com.jumanji.capston.service;
 
 import com.jumanji.capston.data.Menu;
+import com.jumanji.capston.data.Order;
 import com.jumanji.capston.data.OrderMenu;
 import com.jumanji.capston.data.Tab;
 import com.jumanji.capston.repository.OrderMenuRepository;
@@ -22,7 +23,7 @@ import java.util.Set;
 @Service
 public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
     @Autowired
-    OrderMenuRepository orderRepository;
+    OrderMenuRepository orderMenuRepository;
     @Autowired
     ShopServiceImpl shopService;
     @Autowired
@@ -37,7 +38,7 @@ public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
 
     public Set<OrderMenu> getOrderMenuByCartId(Timestamp orderMenuId) {
         System.out.println("orderMenuId : " +orderMenuId.toString());
-        Set<OrderMenu> orderList = orderRepository.findByIdContains(orderMenuId.toString());
+        Set<OrderMenu> orderList = orderMenuRepository.findByIdContains(orderMenuId.toString());
         return orderList;
     }
 
@@ -53,57 +54,61 @@ public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
     }
 
     @Override
-    public OrderMenu post(String authorization, OrderMenu.Request request) {
-        System.out.println("post order request info \n" +
-                "orderId : " + request.getOrderId() + "\n" +
-                "menuId : " + request.getMenuId() + "\n" +
-                "quantity : " + request.getQuantity() + "\n" +
-                "tabId : " + request.getTabId()
-        );
-        OrderMenu orderMenu = null;
-        long orderId = request.getOrderId().getTime();
-        orderService.isPresent(request.getOrderId());
-        menuService.isPresent(request.getMenuId());
+    public List<OrderMenu> post(String authorization, OrderMenu.RequestList requestList) {
+        List<OrderMenu> response = new ArrayList<>();
+        for(OrderMenu.Request request : requestList.getList()){
+            OrderMenu orderMenu;
+            long orderId = request.getOrderId().getTime();
+            String menuId = request.getShopId() + request.getMenuName();
+            String tabId = request.getShopId() + request.getTabNo();
 
+            orderService.isPresent(request.getOrderId());
+            menuService.isPresent(menuId);
+            tableService.isPresent(tabId);
 
-        int orderCount = orderRepository.countByIdContains("" + orderId);
-        String orderMenuId = orderId + "o" +String.format("%02d", orderCount);
-        Menu menu = menuService.getMenuInfo(request.getMenuId());
-        Tab table = tableService.getTableInfo(request.getTabId());
-        orderMenu = OrderMenu.builder()
-                .id(orderMenuId)
-                .quantity(request.getQuantity())
-                .menu(menu)
-                .tab(table)
-                .build();
-        System.out.println(orderMenu.getTab().getId());
-        orderRepository.save(orderMenu);
-        return orderMenu;
+            int orderCount = orderMenuRepository.countByIdContains("" + orderId);
+            String orderMenuId = orderId + "o" +String.format("%02d", orderCount);
+            Menu menu = menuService.getMenuInfo(menuId);
+            Tab table = tableService.getTableInfo(tabId);
+            orderMenu = OrderMenu.builder()
+                    .id(orderMenuId)
+                    .quantity(request.getQuantity())
+                    .menu(menu)
+                    .tab(table)
+                    .build();
+            System.out.println(orderMenu.getTab().getId());
+            response.add(orderMenuRepository.save(orderMenu));
+        }
+        return response;
     }
 
     @Override
     public OrderMenu patch(String authorization, OrderMenu.Request request) {
-        OrderMenu order;
+        Order order;
+        OrderMenu orderMenu;
+        long orderId = request.getOrderId().getTime();
+        String menuId = request.getShopId() + request.getMenuName();
+        String tabId = request.getShopId() + request.getTabNo();
         Menu menu = null;
         Tab table = null;
 
         //유효성 검사
         isPresent(request.getOrderMenuId());
-        order = orderRepository.findById(request.getOrderMenuId()).get();
+        orderMenu = orderMenuRepository.findById(request.getOrderMenuId()).get();
 
-        equalsShop(request.getMenuId().substring(0,10) , order.getMenu().getId().substring(0, 10));
-        shopService.isPresent(request.getMenuId().substring(0,10));
+        equalsShop(menuId.substring(0,10) , orderMenu.getMenu().getId().substring(0, 10));
+        shopService.isPresent(menuId.substring(0,10));
 
 
-        if(request.getMenuId() != null)menu = menuService.getMenuInfo(request.getMenuId());
-        if(request.getTabId() != null)table = tableService.getTableInfo(request.getTabId());
+        if(menuId != null)menu = menuService.getMenuInfo(menuId);
+        if(tabId != null)table = tableService.getTableInfo(tabId);
         OrderMenu requestOrder = OrderMenu.builder()
                 .quantity(request.getQuantity())
                 .menu(menu)
                 .tab(table)
                 .build();
-        order.patch(requestOrder);
-        return order;
+        orderMenu.patch(requestOrder);
+        return orderMenu;
     }
 
 
@@ -112,7 +117,7 @@ public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
     }
 
     public boolean isPresent(String orderId) {
-        if (orderRepository.findById(orderId).isPresent()) return true;
+        if (orderMenuRepository.findById(orderId).isPresent()) return true;
         throw new OrderMenuNotFoundException();
     }
 

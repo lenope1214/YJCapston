@@ -64,10 +64,10 @@ public class OrderController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @Transactional
-    @DeleteMapping("/order/{orderId}")
-    public ResponseEntity<?> deleteOrder(@RequestHeader String authorization, @PathVariable Timestamp orderId){
-        orderService.delete(authorization, orderId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+//    @Transactional
+//    @DeleteMapping("/order/{orderId}")
+//    public ResponseEntity<?> deleteOrder(@RequestHeader String authorization, @PathVariable Timestamp orderId){
+//        orderService.delete(authorization, orderId);
+//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//    }
 }

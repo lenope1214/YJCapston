@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 
 @Getter
@@ -45,16 +46,22 @@ public class OrderMenu implements Serializable {
     public static class Request {
         private String orderMenuId;
         private Timestamp orderId;
+        private String shopId;
+        private String menuName;
         private int quantity;
-        private String menuId;
-        private String tabId; // 테이블번호 : 사업자번호 + 테이블번호 ( 2 )
+        private String tabNo; // 테이블번호 : 사업자번호 + 테이블번호 ( 2 )
+    }
+    @Getter
+    @NoArgsConstructor @AllArgsConstructor
+    public static class RequestList{
+        List<Request> list;
     }
 
     @Getter
     public static class Response{
         private String orderMenuId;
-        private int quantity;
         private String shopId;
+        private int quantity;
         private String menuName;
         private String tableNo;
 
