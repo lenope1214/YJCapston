@@ -43,10 +43,9 @@ public class Shop {
     @JsonIgnore
     private User owner;
 
-
-    @Getter @AllArgsConstructor @NoArgsConstructor
+    @Getter @AllArgsConstructor
     public static class Request {
-        private String id;// shopId 로 변경
+        private String id;
         private String name;
         private String intro;
         private String openTime;
@@ -59,8 +58,7 @@ public class Shop {
         private MultipartFile img;
     }
 
-    @Getter
-    @Setter
+    @Getter @Setter
     public static class Response implements Serializable {
         private String id;
         private String name;
