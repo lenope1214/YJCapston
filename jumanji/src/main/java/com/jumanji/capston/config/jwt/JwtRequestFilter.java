@@ -50,7 +50,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                     , "menuList"
             );
 
-
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
