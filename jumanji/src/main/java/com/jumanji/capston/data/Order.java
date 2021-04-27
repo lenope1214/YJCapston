@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.checkerframework.checker.units.qual.C;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,6 +20,7 @@ import java.util.List;
 public class Order implements Serializable {
     @Id
     private Timestamp id; // 바구니번호 yyyyMMddhhmmss
+    private String status = "rd"; // rd : 준비중, pd : 결제완료, rf : 환불
     @Column(name = "order_request")
     private String orderRequest; // 요청사항
     @Column(length = 2)
@@ -107,5 +109,13 @@ public class Order implements Serializable {
     public void update(Request request){
         if(request.orderRequest != null)this.orderRequest = request.getOrderRequest();
         if(request.people != 0) this.people = request.getPeople();
+    }
+
+    public void pay(Payment.Request request){
+        this.status = "pd";
+        this.payMethod = request.getPayMethod();
+        this.payTime = new Timestamp(System.currentTimeMillis());
+        this.pg = request.getPg();
+        this.amount = request.getAmount();
     }
 }
