@@ -101,7 +101,7 @@ public class Order implements Serializable {
             this.arriveTime = order.getArriveTime();
             this.pg = order.getPg();
             this.payMethod = order.getPayMethod();
-            this.payTime = DateOperator.dateToYYYYMMDD(order.getPayTime()) + DateOperator.dateToHHMM(order.getPayTime());
+            if(payTime != null)this.payTime = DateOperator.dateToYYYYMMDD(order.getPayTime()) + DateOperator.dateToHHMM(order.getPayTime());
             this.totalAmount = order.getAmount() - order.getUsePoint();
         }
     }
