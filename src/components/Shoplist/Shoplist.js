@@ -120,28 +120,22 @@ const Shoplist = ({
                                 <img class="mainimg-img" src={mainpicture} />
                             </div>
                             <div class="guidetext">
-                               매장 보기 
-                               <hr class="hrstyle" />
+                                매장 보기
+                                <hr class="hrstyle" />
                             </div>
                             <div clasName="menulist">
-                            <div class="leftCategory">
-                                <select class="moneykind">
-                                    
-                                <option value="예약 많은 순">
-                                    예약 많은 순
-                                </option>
-                                <option value="최소주문금액">
-                                
-                                        최소주문금액
-                                    
-                                </option>
-                                <option value="별점순">
-                                별점순
-                                </option>
-                                    
-                                </select>
-                                <button>검색</button>
-                            </div>
+                                <div class="leftCategory">
+                                    <select class="moneykind">
+                                        <option value="예약 많은 순">
+                                            예약 많은 순
+                                        </option>
+                                        <option value="최소주문금액">
+                                            최소주문금액
+                                        </option>
+                                        <option value="별점순">별점순</option>
+                                    </select>
+                                    <button>검색</button>
+                                </div>
                                 <div class="list_shop">
                                     {restaurant.map((shop) => {
                                         return (
@@ -172,7 +166,7 @@ const Shoplist = ({
                                                                 </div> */}
                                                             </div>
                                                             <div class="listAddress">
-                                                            평점 ★ 4.3 (21)
+                                                                평점 ★ 4.3 (21)
                                                             </div>
 
                                                             {/* <div>

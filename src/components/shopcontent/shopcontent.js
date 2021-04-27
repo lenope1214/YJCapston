@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./style";
 import { Link } from "react-router-dom";
-import yangtimjang from "../Shoplist/img/yangtimjang.png";
+
 import { RenderAfterNavermapsLoaded, NaverMap, Marker } from "react-naver-maps";
 
 const Shopcontent = ({
@@ -94,7 +94,7 @@ const Shopcontent = ({
                         )}
                     </div>
                     <body>
-                    <div class="allbody">
+                        <div class="allbody">
                             <div class="shopcon">
                                 <div class="shopcon_2">
                                     <div class="shop_img">

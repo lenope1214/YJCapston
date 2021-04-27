@@ -16,6 +16,7 @@ import ShoplistContainer from "./containers/Shoplist/ShoplistContainer";
 import ShopcontentContainer from "./containers/shopcontent/shopcontentcontainer";
 import Payment from "./components/Event/Payment";
 import ShopOrderContainer from "./containers/ShopOrder/ShopOrderContainer";
+import PaymentContainer from "./containers/PaymentDone/PaymentDoneContainer";
 
 const App = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -83,6 +84,16 @@ const App = () => {
               />
             )}
           ></Route>
+          <Route
+                        path="/paymentDone"
+                        component={() => (
+                            <PaymentContainer
+                                isLogin={isLogin}
+                                handleLogin={handleLogin}
+                                handleLogout={handleLogout}
+                            />
+                        )}
+                    ></Route>
           <Route
             path="/"
             component={() => (

@@ -180,6 +180,28 @@ const RegisterContainer = () => {
             });
     };
 
+    const phoneauth = () => {
+        var IMP = window.IMP; // 생략해도 괜찮습니다.
+        IMP.init("imp59387591"); // "imp00000000" 대신 발급받은 "가맹점 식별코드"를 사용합니다.
+        alert("아직 안돼요!");
+        IMP.certification(
+            {
+                // param
+                merchant_uid: "ORD20180131-0000011",
+            },
+            function (rsp) {
+                // callback
+                if (rsp.success) {
+                    console.log("done");
+                    // 인증 성공 시 로직,
+                } else {
+                    // 인증 실패 시 로직,
+                    console.log("err");
+                }
+            }
+        );
+    };
+
     const handleComplete = (data) => {
         console.log(data);
         let fullAddress = data.address;
@@ -233,6 +255,7 @@ const RegisterContainer = () => {
             showLocation={showLocation}
             roadAddr={roadAddr}
             handleComplete={handleComplete}
+            phoneauth={phoneauth}
         />
     );
 };

@@ -20,7 +20,11 @@ const ShopOrder = ({
     jmorderlist,
     jmallprice,
     onClickPayment,
-    goBack
+    goBack,
+    request,
+    handleRequest,
+    handlePeople,
+    people,
 }) => {
     return (
         <>
@@ -83,48 +87,94 @@ const ShopOrder = ({
                                 <div className="box-title">예약 정보</div>
                                 <div className="subtitle">인원 수</div>
                                 <div>
-                                    <select className="input-box">
-                                        <option value="1명">1명</option>
-                                        <option value="2명">2명</option>
-                                        <option value="3명">3명</option>
-                                        <option value="4명">4명</option>
-                                        <option value="5명">5명</option>
-                                        <option value="6명">6명</option>
-                                        <option value="7명">7명</option>
-                                        <option value="8명">8명</option>
+                                    <select
+                                        className="input-box"
+                                        onChange={handlePeople}
+                                        value={people}
+                                    >
+                                        <option value="1">1명</option>
+                                        <option value="2">2명</option>
+                                        <option value="3">3명</option>
+                                        <option value="4">4명</option>
+                                        <option value="5">5명</option>
+                                        <option value="6">6명</option>
+                                        <option value="7">7명</option>
+                                        <option value="8">8명</option>
                                     </select>
                                 </div>
                                 <div className="subtitle">예약 시간</div>
-                                <div><input className="input-box" type="date"></input></div>
-                                <div><input className="input-box" type="time"></input></div>
+                                <div>
+                                    <input
+                                        className="input-box"
+                                        type="date"
+                                    ></input>
+                                </div>
+                                <div>
+                                    <input
+                                        className="input-box"
+                                        type="time"
+                                    ></input>
+                                </div>
+                                <div className="subtitle">요청 사항</div>
+                                <input
+                                    type="text"
+                                    className="input-box"
+                                    value={request}
+                                    onChange={handleRequest}
+                                    placeholder="요청사항을 입력해주세요"
+                                />
                             </div>
+
                             <div className="partition">
                                 <div className="box-title">예약자 정보 </div>
-                                <div className="subtitle">이름</div> 
-                                <div><input value={jmuserinfo.name} className="input-box"></input></div>
+                                <div className="subtitle">이름</div>
+                                <div>
+                                    <input
+                                        value={jmuserinfo.name}
+                                        className="input-box"
+                                    ></input>
+                                </div>
                                 <div className="subtitle">이메일</div>
-                                <div><input value={jmuserinfo.email} className="input-box"></input></div>
+                                <div>
+                                    <input
+                                        value={jmuserinfo.email}
+                                        className="input-box"
+                                    ></input>
+                                </div>
                                 <div className="subtitle">휴대폰 번호</div>
-                                <div><input value={jmuserinfo.phone} className="input-box" /></div>
+                                <div>
+                                    <input
+                                        value={jmuserinfo.phone}
+                                        className="input-box"
+                                    />
+                                </div>
                             </div>
                             <div className="partition">
                                 <div className="box-title">식당정보</div>
                                 <div className="subtitle">식당이름</div>
-                                <div><input value={jmshopinfo.name} className="input-box" /></div>
+                                <div>
+                                    <input
+                                        value={jmshopinfo.name}
+                                        className="input-box"
+                                    />
+                                </div>
                                 <div className="subtitle">식당주소</div>
-                                    <div className="input-box">
+                                <div className="input-box">
                                     {jmshopinfo.address}{" "}
                                     {jmshopinfo.addressDetail}
                                 </div>
-                                <div className="subtitle">식당번호</div>
-                                <div><input value={jmshopinfo.id} className="input-box" /></div>
                             </div>
                             <div className="partition">
+                                <div className="box-title">주문정보</div>
                                 <div className="subtitle">주문 번호</div>
-                                <div><input value={jmorderid}  className="input-box"/></div>
-                                <div className="subtitle">
-                                    주문 목록</div>
-                                    <div className="input-box">
+                                <div>
+                                    <input
+                                        value={jmorderid}
+                                        className="input-box"
+                                    />
+                                </div>
+                                <div className="subtitle">주문 목록</div>
+                                <div className="input-box">
                                     {jmorderlist.map((jmorder_list) => {
                                         return (
                                             <span>
@@ -138,14 +188,28 @@ const ShopOrder = ({
                             <div>
                                 <div className="box-title">결제 정보</div>
                                 <div className="subtitle">할인 쿠폰</div>
-                                <div><input value="없음"  className="input-box"/></div>
+                                <div>
+                                    <input value="없음" className="input-box" />
+                                </div>
                                 <div className="subtitle">총결제 금액</div>
-                                <div><input value={jmallprice}  className="input-box"/></div>
+                                <div>
+                                    <input
+                                        value={jmallprice}
+                                        className="input-box"
+                                    />
+                                </div>
                             </div>
                         </div>
                         <div class="button-box">
-                            <button onClick={onClickPayment} className="button1">결제하기</button>
-                            <button className="button2" onClick={goBack}>취소</button>
+                            <button
+                                onClick={onClickPayment}
+                                className="button1"
+                            >
+                                결제하기
+                            </button>
+                            <button className="button2" onClick={goBack}>
+                                취소
+                            </button>
                         </div>
                     </body>
                 </div>

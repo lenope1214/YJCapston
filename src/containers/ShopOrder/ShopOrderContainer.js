@@ -1,7 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 import ShopOrder from "../../components/ShopOrder/ShopOrder";
-import { postLogin, getMyInfo, getshopinfo } from "../../lib/ShopOrder/index";
+import {
+    postLogin,
+    getMyInfo,
+    getshopinfo,
+    patchorder,
+} from "../../lib/ShopOrder/index";
 // import { jmthing } from "../shopcontent/shopcontentcontainer";
 
 const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
@@ -18,6 +23,8 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
     const [jmorderid, setJmorderid] = useState();
     const [jmorderlist, setJmorderlist] = useState([{}]);
     const [jmallprice, setjmallpirce] = useState();
+    const [request, setRequest] = useState();
+    const [people, setPeople] = useState();
 
     const openmodal = () => {
         setModal(true);
@@ -25,6 +32,16 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
 
     const closemodal = () => {
         setModal(false);
+    };
+
+    const handleRequest = (e) => {
+        const value = e.target.value;
+        setRequest(value);
+    };
+
+    const handlePeople = (e) => {
+        const value = e.target.value;
+        setPeople(value);
     };
 
     const handleId = (e) => {
@@ -45,25 +62,30 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
         setjmallpirce(localStorage.getItem("allPrice"));
     }, []);
 
-    console.log(jmorderid);
-    console.log(jmorderlist);
-    console.log(jmallprice);
-
-    const getMyinfor = () => {
-        getMyInfo()
+    const patchcontent = () => {
+        patchorder(request, people)
             .then((res) => {
-                console.log(res.data);
-                setJmuserinfo(res.data);
+                console.log(res);
             })
             .catch((err) => {
                 alert("err");
             });
     };
 
+    const getMyinfor = () => {
+        getMyInfo()
+            .then((res) => {
+                setJmuserinfo(res.data.user);
+            })
+            .catch((err) => {
+                alert("err");
+            });
+    };
+    console.log(jmuserinfo);
+
     const getshopinfor = () => {
         getshopinfo(localStorage.getItem("shopId"))
             .then((res) => {
-                console.log(res.data);
                 setJmshopinfo(res.data);
             })
 
@@ -100,19 +122,19 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
     };
     const goBack = () => {
         history.goBack();
-    }
+    };
 
     //결제 api
 
     const onClickPayment = () => {
         const { IMP } = window;
-        IMP.init("imp01130487");
+        IMP.init("imp59387591");
 
         /* 2. 결제 데이터 정의하기 */
         const data = {
             pg: "inicis", // PG사
             pay_method: "card", // 결제수단
-            merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
+            merchant_uid: localStorage.getItem("orderId"), // 주문번호
             amount: jmallprice, // 결제금액
             name: jmshopinfo.name, // 매장이름
             buyer_name: jmuserinfo.name, // 구매자 이름
@@ -129,7 +151,10 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
         const { success, merchant_uid, error_msg } = response;
 
         if (success) {
+            patchcontent();
+
             alert("결제 성공");
+            history.push("/PaymentDone");
         } else {
             alert(`결제 실패: ${error_msg}`);
         }
@@ -155,6 +180,10 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 jmallprice={jmallprice}
                 onClickPayment={onClickPayment}
                 goBack={goBack}
+                handleRequest={handleRequest}
+                request={request}
+                handlePeople={handlePeople}
+                people={people}
             />
         </>
     );

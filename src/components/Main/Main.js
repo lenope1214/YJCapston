@@ -11,7 +11,7 @@ import qrimg from "./img/노랑QR이미지.png";
 import chatimg from "./img/챗봇이미지2.png";
 import * as S from "./style";
 import { Link } from "react-router-dom";
-import { debounce, throttle } from 'lodash';
+import { debounce, throttle } from "lodash";
 import reserveimg from "./img/갈색예약주문.png";
 
 const Main = ({
@@ -30,20 +30,22 @@ const Main = ({
         const { innerWidth: width, innerHeight: height } = window;
         return {
             width,
-            height
+            height,
         };
     }
 
     function useWindowDimensions() {
-        const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+        const [windowDimensions, setWindowDimensions] = useState(
+            getWindowDimensions()
+        );
 
         useEffect(() => {
             function handleResize() {
                 setWindowDimensions(getWindowDimensions());
             }
 
-            window.addEventListener('resize', handleResize);
-            return () => window.removeEventListener('resize', handleResize);
+            window.addEventListener("resize", handleResize);
+            return () => window.removeEventListener("resize", handleResize);
         }, []);
 
         return windowDimensions;
@@ -63,29 +65,30 @@ const Main = ({
         window.scrollTo({ top: height * 3, left: 0, behavior: "smooth" });
     };
 
-    const useScrollDirection = (() => {
-        const [scrollDirection, setScrollDirection] = useState("")
-        const [prevOffset, setPrevOffset] = useState(0)
-        const toggleScrollDirection = () => { // 여기
-            let scrollY = window.scrollY
+    const useScrollDirection = () => {
+        const [scrollDirection, setScrollDirection] = useState("");
+        const [prevOffset, setPrevOffset] = useState(0);
+        const toggleScrollDirection = debounce(() => {
+            // 여기
+            let scrollY = window.scrollY;
             if (scrollY === 0) {
-                setScrollDirection("")
+                setScrollDirection("");
             }
             if (scrollY > prevOffset) {
-                setScrollDirection("down")
+                setScrollDirection("down");
             } else if (scrollY < prevOffset) {
-                setScrollDirection("up")
+                setScrollDirection("up");
             }
-            setPrevOffset(scrollY) // 시도 해봄
-        };
+            setPrevOffset(scrollY); // 시도 해봄
+        },200);
         useEffect(() => {
-            window.addEventListener("scroll", toggleScrollDirection)
+            window.addEventListener("scroll", toggleScrollDirection);
             return () => {
-                window.removeEventListener("scroll", toggleScrollDirection)
-            }
+                window.removeEventListener("scroll", toggleScrollDirection);
+            };
         });
         return scrollDirection;
-    })
+    };
 
     const [but1, setbut1] = useState("");
     const [but2, setbut2] = useState("");
@@ -95,78 +98,105 @@ const Main = ({
     const [img2, setimg2] = useState("");
     const direction = useScrollDirection("");
 
-    useEffect(throttle(() => {
-        if (window.scrollY === 0) {
-            setimg2("-none");
-            setimg1("");
-        } else if (window.scrollY === height * 3) {
-            setimg2("");
-            setimg1("-none");
-        } else {
-            setimg2("");
-            setimg1("");
-        }
-        if (0 <= window.scrollY && window.scrollY < height) {
-            setbut1("-selected");
-            setbut2("");
-            setbut3("");
-            setbut4("");
-        } else if (height <= window.scrollY && window.scrollY < height * 2) {
-            setbut1("");
-            setbut2("-selected");
-            setbut3("");
-            setbut4("");
-        }
-        else if (height * 2 <= window.scrollY && window.scrollY < height * 3) {
-            setbut1("");
-            setbut2("");
-            setbut3("-selected");
-            setbut4("");
-        }
-        else if (window.scrollY === height * 3) {
-            setbut1("");
-            setbut2("");
-            setbut3("");
-            setbut4("-selected");
-        }
-        if (window.scrollY < height) {
-            if (direction === "down") {
-                window.scrollTo({ top: height, left: 0, behavior: "smooth" });
+    useEffect(
+        throttle(() => {
+            if (window.scrollY === 0) {
+                setimg2("-none");
+                setimg1("");
+            } else if (window.scrollY === height * 3) {
+                setimg2("");
+                setimg1("-none");
+            } else {
+                setimg2("");
+                setimg1("");
+            }
+            if (0 <= window.scrollY && window.scrollY < height) {
+                setbut1("-selected");
+                setbut2("");
+                setbut3("");
+                setbut4("");
+            } else if (
+                height <= window.scrollY &&
+                window.scrollY < height * 2
+            ) {
                 setbut1("");
                 setbut2("-selected");
                 setbut3("");
                 setbut4("");
-            } else if (direction === "up") {
-                setimg2("-none");
-                setimg1("");
-                window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-
-            }
-        } else if (window.scrollY > height && window.scrollY < height * 2) {
-            if (direction === "down") {
-                window.scrollTo({ top: height * 2, left: 0, behavior: "smooth" });
+            } else if (
+                height * 2 <= window.scrollY &&
+                window.scrollY < height * 3
+            ) {
                 setbut1("");
                 setbut2("");
                 setbut3("-selected");
                 setbut4("");
-            } else if (direction === "up") {
-                window.scrollTo({ top: height, left: 0, behavior: "smooth" });
-
-            }
-        } else if (window.scrollY > height * 2 && window.scrollY < height * 3) {
-            if (direction === "down") {
-                window.scrollTo({ top: height * 3, left: 0, behavior: "smooth" });
+            } else if (window.scrollY === height * 3) {
                 setbut1("");
                 setbut2("");
                 setbut3("");
                 setbut4("-selected");
-                setimg2("");
-                setimg1("-none");
-            } else if (direction === "up") {
-                window.scrollTo({ top: height * 2, left: 0, behavior: "smooth" });
             }
-        }
-    }, 500))
+            if (window.scrollY < height) {
+                if (direction === "down") {
+                    window.scrollTo({
+                        top: height,
+                        left: 0,
+                        behavior: "smooth",
+                    });
+                    setbut1("");
+                    setbut2("-selected");
+                    setbut3("");
+                    setbut4("");
+                } else if (direction === "up") {
+                    setimg2("-none");
+                    setimg1("");
+                    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+                }
+            } else if (window.scrollY > height && window.scrollY < height * 2) {
+                if (direction === "down") {
+                    window.scrollTo({
+                        top: height * 2,
+                        left: 0,
+                        behavior: "smooth",
+                    });
+                    setbut1("");
+                    setbut2("");
+                    setbut3("-selected");
+                    setbut4("");
+                } else if (direction === "up") {
+                    window.scrollTo({
+                        top: height,
+                        left: 0,
+                        behavior: "smooth",
+                    });
+                }
+            } else if (
+                window.scrollY > height * 2 &&
+                window.scrollY < height * 3
+            ) {
+                if (direction === "down") {
+                    window.scrollTo({
+                        top: height * 3,
+                        left: 0,
+                        behavior: "smooth",
+                    });
+                    setbut1("");
+                    setbut2("");
+                    setbut3("");
+                    setbut4("-selected");
+                    setimg2("");
+                    setimg1("-none");
+                } else if (direction === "up") {
+                    window.scrollTo({
+                        top: height * 2,
+                        left: 0,
+                        behavior: "smooth",
+                    });
+                }
+            }
+        }, 500)
+    );
 
     return (
         <>
@@ -177,9 +207,7 @@ const Main = ({
                     </img>
                 </div> */}
                 <div className="App">
-
                     <div className="black-nav">
-
                         <div className="left-nav">
                             주문
                             <span
@@ -219,11 +247,21 @@ const Main = ({
                         {isLogin ? (
                             <>
                                 <div className="right-nav">
-                                    <button className="right2-nav" onClick={logout}>
+                                    <button
+                                        className="right2-nav"
+                                        onClick={logout}
+                                    >
                                         LOG OUT
-                                </button>
+                                    </button>
                                     <Link to="/mypage">
-                                        <button className="right2-nav" onClick={() => { window.scrollTo(0, 0) }}>MY PAGE</button>
+                                        <button
+                                            className="right2-nav"
+                                            onClick={() => {
+                                                window.scrollTo(0, 0);
+                                            }}
+                                        >
+                                            MY PAGE
+                                        </button>
                                     </Link>
                                 </div>
                                 <div className="scroll-nav">
@@ -232,25 +270,25 @@ const Main = ({
                                         onClick={scrollTo1}
                                     >
                                         메인
-                            </button>
+                                    </button>
                                     <button
                                         className={"right1-nav" + but2}
                                         onClick={scrollTo2}
                                     >
                                         어플
-                            </button>
+                                    </button>
                                     <button
                                         className={"right1-nav" + but3}
                                         onClick={scrollTo3}
                                     >
                                         사업자
-                            </button>
+                                    </button>
                                     <button
                                         className={"right1-nav" + but4}
                                         onClick={scrollTo4}
                                     >
                                         매장
-                            </button>
+                                    </button>
                                 </div>
                             </>
                         ) : (
@@ -261,9 +299,17 @@ const Main = ({
                                         onClick={openModal}
                                     >
                                         LOG IN
-                                </button>
+                                    </button>
                                     <Link to="/register">
-                                        <button className="right2-nav" onClick={() => { window.scrollTo(0, 0) }}> JOIN</button>
+                                        <button
+                                            className="right2-nav"
+                                            onClick={() => {
+                                                window.scrollTo(0, 0);
+                                            }}
+                                        >
+                                            {" "}
+                                            JOIN
+                                        </button>
                                     </Link>
                                 </div>
                                 <div className="scroll-nav">
@@ -291,38 +337,38 @@ const Main = ({
                                     >
                                         매장
                                     </button>
-                                    <Link to="/payment" className="payment"><button>결제창으로</button></Link>
                                 </div>
                             </>
                         )}
                     </div>
                     <div className="adimg">
                         <div className="topimg">
-                            <img src={topimg} width="100%" height="100%" className="topimg-img"
+                            <img
+                                src={topimg}
+                                width="100%"
+                                height="100%"
+                                className="topimg-img"
                             />
                         </div>
-                        <div className="topimg-up">누구나 이용하기 쉬운 서비스</div>
+                        <div className="topimg-up">
+                            누구나 이용하기 쉬운 서비스
+                        </div>
                         <div className="topimg-text">
-                            주문과 예약은 <span className="jumintext">주민</span>에서
+                            주문과 예약은{" "}
+                            <span className="jumintext">주민</span>에서
                         </div>
                         <div className="toptop">
                             <div className="toptop-item">
                                 <div className="title-of-item">QR코드 주문</div>
-                                <img src={qrimg}
-                                    className="items-img2"
-                                />
+                                <img src={qrimg} className="items-img2" />
                             </div>
                             <div className="toptop-item">
                                 <div className="title-of-item">예약 주문</div>
-                                <img src={reserveimg}
-                                    className="items-img2"
-                                />
+                                <img src={reserveimg} className="items-img2" />
                             </div>
                             <div className="toptop-item">
                                 <div className="title-of-item">챗봇 문의</div>
-                                <img src={chatimg}
-                                    className="items-img2"
-                                />
+                                <img src={chatimg} className="items-img2" />
                             </div>
                         </div>
 
@@ -353,8 +399,12 @@ const Main = ({
                             <img src={backimg2} width="100%" height="700px" />
                         </div> */}
                         <div className="backimg3">
-                            <img src={backimg3} width="100%" height="100%"
-                                className="backimg-img" />
+                            <img
+                                src={backimg3}
+                                width="100%"
+                                height="100%"
+                                className="backimg-img"
+                            />
                         </div>
                         <div className="but-item1-text">
                             <p>주문의민족</p>
@@ -390,7 +440,12 @@ const Main = ({
                     </div>
                     <div className="but-item2">
                         <div className="backimg2">
-                            <img src={backimg2} width="100%" height="100%" className="backimg-img" />
+                            <img
+                                src={backimg2}
+                                width="100%"
+                                height="100%"
+                                className="backimg-img"
+                            />
                         </div>
                         <div className="but-item2-text">
                             <p>웹으로도</p>
@@ -410,7 +465,6 @@ const Main = ({
                                             width: "210px",
                                             borderRadius: "60px",
                                             border: 0,
-
                                         }}
                                     >
                                         사업자<br></br>
@@ -426,7 +480,12 @@ const Main = ({
                     </div>
                     <div className="but-item3">
                         <div className="backimg2">
-                            <img src={backimg3} width="100%" height="100%" className="backimg-img" />
+                            <img
+                                src={backimg3}
+                                width="100%"
+                                height="100%"
+                                className="backimg-img"
+                            />
                         </div>
                         <div className="but-item3-text">
                             <p>집에서</p>
@@ -447,7 +506,6 @@ const Main = ({
                                             width: "230px",
                                             borderRadius: "60px",
                                             border: 0,
-
                                         }}
                                     >
                                         매장 둘러보고<br></br>
@@ -464,8 +522,7 @@ const Main = ({
                 </div>
                 <footer>
                     <div className={"scroll-img" + img1}>
-                        <img src={scroll1} width='300px'>
-                        </img>
+                        <img src={scroll1} width="300px"></img>
                     </div>
                 </footer>
             </S.MainWrap>
@@ -474,7 +531,8 @@ const Main = ({
                 <S.LoginWrap>
                     <header>
                         <h1 className="login-title">
-                            주문<span
+                            주문
+                            <span
                                 style={{
                                     fontSize: "17px",
                                     paddingTop: "10px",
@@ -511,8 +569,12 @@ const Main = ({
                             </label>
                         </div>
                         <div className="login-but-box">
-                            <button onClick={login} className="login-but">로그인</button>
-                            <button onClick={closeModal} className="login-but">닫기</button>
+                            <button onClick={login} className="login-but">
+                                로그인
+                            </button>
+                            <button onClick={closeModal} className="login-but">
+                                닫기
+                            </button>
                         </div>
                     </footer>
                 </S.LoginWrap>

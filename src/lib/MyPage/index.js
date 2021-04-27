@@ -8,6 +8,14 @@ export const getMyInfo = () => {
     });
 };
 
+export const Mypageorder = () => {
+    return apiDefault().get("/order", {
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        },
+    });
+};
+
 export const putMypage = (pw, roadAddr, addressDetail) => {
     return apiDefault().patch(
         "/user",
@@ -24,4 +32,8 @@ export const putMypage = (pw, roadAddr, addressDetail) => {
             },
         }
     );
+};
+
+export const requirelist = () => {
+    // return apiDefault().patch
 };
