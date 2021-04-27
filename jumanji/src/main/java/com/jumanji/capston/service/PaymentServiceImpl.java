@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -19,7 +20,7 @@ public class PaymentServiceImpl implements PaymentService, BasicService {
 
 
     @Override
-    public Payment get(String authorization, String paymentId) {
+    public Payment get(String authorization, Timestamp orderId) {
         return null;
     }
 
@@ -31,11 +32,13 @@ public class PaymentServiceImpl implements PaymentService, BasicService {
     @Override
     public Payment post(String authorization, Payment.Request request) {
         String loginId = userService.getMyId(authorization);
-        Order order = orderService.getOrderInfo(request.getOrderId());
-
+        userService.isPresent(loginId); // 그 사용자가 맞는지 확인
+        Order order = orderService.get(authorization, request.getOrderId()); // 해당 사용자의 주문이 맞는지
         order.pay(request);
-        Payment.Response response = new Payment.Response(order);
-        return null;
+        Payment payment = new Payment(order);
+        System.out.println("결제시간 : " + payment.getPayTime());
+
+        return payment;
     }
 
     @Override

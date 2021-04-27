@@ -14,6 +14,7 @@ import io.jsonwebtoken.MalformedJwtException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -102,6 +103,13 @@ public class ApiExceptionHandler {
     public ResponseEntity<?> jwtException(MalformedJwtException ex){
         ApiErrorResponse response =
                 new ApiErrorResponse("token-0001", "토큰이 제대로 넘어오지 않습니다.");
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(MissingRequestHeaderException.class)
+    public ResponseEntity<?> missingHeader(MissingRequestHeaderException ex){
+        ApiErrorResponse response =
+                new ApiErrorResponse("badRequest-0001", "헤더가 제대로 넘어오지 않습니다.");
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }

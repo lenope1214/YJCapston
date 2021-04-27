@@ -3,12 +3,14 @@ package com.jumanji.capston.data;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 
 @Getter
@@ -18,11 +20,11 @@ public class Payment implements Serializable {
 //    @Id
 //    @JoinColumn
 //    @ManyToOne
-    private Order id;
+    private Timestamp orderId;
 
 //    @Column(name="pay_time")
-    private Timestamp payTime; // 결제 일자 yyyyMMdd
-    private char refunded; // 환불여부
+    private String payTime; // 결제 일자 yyyyMMdd
+    private String status; // 주문 상태 rd : 준비중, pd : 결제완료, rf : 환불됨
 //    @Column(length = 7)
     private int amount; // 결제 금액
 //    @Column(name = "pay_method")
@@ -31,13 +33,22 @@ public class Payment implements Serializable {
     private String pg;
 
 
-    @Getter @AllArgsConstructor
+    public Payment(Order order){
+        this.orderId = order.getId();
+        this.payTime = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss").format(order.getPayTime());
+        this.status = order.getStatus();
+        this.amount = order.getAmount();
+        this.payMethod = order.getPayMethod();
+        this.pg = order.getPg();
+    }
+
+
+    @Getter @AllArgsConstructor @NoArgsConstructor
     public static class Request{
         private Timestamp orderId;
         private int amount;
         private String pg;
         private String payMethod;
-        private String shopId;
     }
 
     @Getter
@@ -51,7 +62,7 @@ public class Payment implements Serializable {
 
         public Response(Order order){
             this.orderId = order.getId();
-            this.payTime = new DateFormat("yyyy-MM-dd'T'hh:mm:ss").format(order.getPayTime());
+            this.payTime = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss").format(order.getPayTime());
             this.status = order.getStatus();
             this.amount = order.getAmount();
             this.payMethod = order.getPayMethod();
