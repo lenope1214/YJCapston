@@ -53,8 +53,6 @@ public class OrderServiceImpl implements OrderService {
         String loginId = userService.getMyId(authorization);
 
         Order order = isPresent(orderId);
-
-
         return order;
     }
 
@@ -143,5 +141,16 @@ public class OrderServiceImpl implements OrderService {
     public boolean isOwnOrder(Timestamp orderId, String userId){
         Order order = orderRepository.findById(orderId).get();
         return order.getUser().getId().equals(userId);
+    }
+
+    public List<Order> getListByShopId(String shopId) {
+        List<Order> orderList;
+        orderList = orderRepository.findAllByShop_Id(shopId);
+        System.out.println("해당 매장의 주문목록");
+        for(Order order: orderList){
+            System.out.println("getOrderRequest : " + order.getOrderRequest() + "\n");
+            System.out.println("getUser().getName()" + order.getUser().getName());
+        }
+        return null;
     }
 }

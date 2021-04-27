@@ -11,4 +11,11 @@ public class Pos {
     Shop shop;
     List<OrderMenu> orderMenuList;
     List<Tab> tabList;
+
+    public static class Response{
+        Shop shop;
+
+    }
+
+
 }

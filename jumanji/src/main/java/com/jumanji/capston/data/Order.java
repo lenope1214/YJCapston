@@ -86,7 +86,7 @@ public class Order implements Serializable {
         private int amount; // 가격 총합
         private int totalAmount; // 할인 적용 가격
         private Timestamp arriveTime; // 가게 도착시간
-        private Timestamp payTime; // 결제 일자 yyyyMMdd
+        private String payTime; // 결제 일자 yyyyMMdd
         private String pg;
         private String payMethod; // 결제방식
 
@@ -101,7 +101,7 @@ public class Order implements Serializable {
             this.arriveTime = order.getArriveTime();
             this.pg = order.getPg();
             this.payMethod = order.getPayMethod();
-            this.payTime = order.getPayTime();
+            this.payTime = DateOperator.dateToYYYYMMDD(order.getPayTime()) + DateOperator.dateToHHMM(order.getPayTime());
             this.totalAmount = order.getAmount() - order.getUsePoint();
         }
     }
