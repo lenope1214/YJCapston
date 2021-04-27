@@ -99,6 +99,7 @@ const PaymentDone = ({
                             <Link to="/shoplist">
                                 <button>다른 식당 예약하기</button>
                             </Link>
+                            <p>주문을 잘못하셨나요? </p>
                             <button onClick={require}>환불하기</button>
                         </footer>
                     </body>

@@ -75,12 +75,13 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
     const getMyinfor = () => {
         getMyInfo()
             .then((res) => {
-                setJmuserinfo(res.data);
+                setJmuserinfo(res.data.user);
             })
             .catch((err) => {
                 alert("err");
             });
     };
+    console.log(jmuserinfo);
 
     const getshopinfor = () => {
         getshopinfo(localStorage.getItem("shopId"))
@@ -133,7 +134,7 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
         const data = {
             pg: "inicis", // PG사
             pay_method: "card", // 결제수단
-            merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
+            merchant_uid: localStorage.getItem("orderId"), // 주문번호
             amount: jmallprice, // 결제금액
             name: jmshopinfo.name, // 매장이름
             buyer_name: jmuserinfo.name, // 구매자 이름
