@@ -33,13 +33,6 @@ public class PosController {
     @GetMapping("/shop/{shopId}/pos")
     public ResponseEntity<?> getShopPos(@PathVariable String shopId){
         Pos response = null;
-        Shop shop;
-        List<OrderMenu> orderMenuList;
-        List<Tab> tabList;
-
-        shop = shopService.get(shopId);
-        tabList = tableService.getList(shopId);
-        List<Order> orderList = orderService.getListByShopId(shopId);
 
         response = new Pos();
         return new ResponseEntity<>(response, HttpStatus.OK);

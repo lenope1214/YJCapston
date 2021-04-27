@@ -1,21 +1,13 @@
 package com.jumanji.capston.data;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
-@Getter @AllArgsConstructor @NoArgsConstructor
+@Getter @AllArgsConstructor @NoArgsConstructor @Builder
 public class Pos {
-    Shop shop;
-    List<OrderMenu> orderMenuList;
-    List<Tab> tabList;
-
-    public static class Response{
-        Shop shop;
-
-    }
-
-
+    private String tabNo;
+    private String orderRequest;
+    private List<OrderMenu> orderMenuList;
+    private int people;
 }

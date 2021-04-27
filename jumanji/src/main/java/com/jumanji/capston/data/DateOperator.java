@@ -1,5 +1,6 @@
 package com.jumanji.capston.data;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,6 +28,10 @@ public class DateOperator {
             return dateFormat.format(date);
         }
         return null;
+    }
+
+    public static Timestamp strToTimestamp(String string) {
+        return java.sql.Timestamp.valueOf(string);
     }
 
 //    public static Timestamp stringToTimestamp(Time time){
