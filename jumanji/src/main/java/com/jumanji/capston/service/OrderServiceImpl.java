@@ -45,6 +45,7 @@ public class OrderServiceImpl implements OrderService {
 //    }
 
     public Order getOrderInfo(Timestamp orderId){
+        isPresent(orderId);
         return orderRepository.findById(orderId).get();
     }
 

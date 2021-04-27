@@ -3,11 +3,12 @@ package com.jumanji.capston.data;
 import lombok.*;
 
 import java.util.List;
+import java.util.Set;
 
-@Getter @AllArgsConstructor @NoArgsConstructor @Builder
+@Getter @AllArgsConstructor @NoArgsConstructor @Setter
 public class Pos {
     private String tabNo;
     private String orderRequest;
-    private List<OrderMenu> orderMenuList;
     private int people;
+    private Set<OrderMenu> orderMenuSet;
 }

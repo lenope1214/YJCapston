@@ -26,9 +26,6 @@ public class Tab implements Serializable {
     @Column(name = "qr_code")
     private String qrCode;
 
-    @Column
-    private char using = 'N'; // 사용중인지 확인.
-
     @Builder
     public Tab(String tabId, String qrCode, int seatQty){
         this.id = tabId;
@@ -66,7 +63,6 @@ public class Tab implements Serializable {
             this.shopId = tab.getId().substring(0, 10);
             this.no = tab.getId().substring(10);
             this.seatQty = tab.getSeatQty();
-            this.using = tab.getUsing();
             this.qrCode = tab.getQrCode();
         }
     }

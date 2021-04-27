@@ -1,10 +1,7 @@
 package com.jumanji.capston.controller;
 
 import com.jumanji.capston.data.*;
-import com.jumanji.capston.service.OrderMenuServiceImpl;
-import com.jumanji.capston.service.OrderServiceImpl;
-import com.jumanji.capston.service.ShopServiceImpl;
-import com.jumanji.capston.service.TableServiceImpl;
+import com.jumanji.capston.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,14 +24,14 @@ public class PosController {
     TableServiceImpl tableService;
     @Autowired
     OrderServiceImpl orderService;
+    @Autowired
+    PosService posService;
 
 
     @Transactional(readOnly = true)
     @GetMapping("/shop/{shopId}/pos")
     public ResponseEntity<?> getShopPos(@PathVariable String shopId){
-        Pos response = null;
-
-        response = new Pos();
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        List<Pos> posList = posService.getShopPos(shopId);
+        return new ResponseEntity<>(posList, HttpStatus.OK);
     }
 }

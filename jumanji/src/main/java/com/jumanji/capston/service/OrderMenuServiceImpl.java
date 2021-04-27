@@ -38,7 +38,7 @@ public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
 
     public Set<OrderMenu> getOrderMenuByOrderId(Timestamp orderMenuId) {
         System.out.println("orderMenuId : " +orderMenuId.toString());
-        Set<OrderMenu> orderList = orderMenuRepository.findByIdContains(orderMenuId.toString());
+        Set<OrderMenu> orderList = orderMenuRepository.findByTab_IdStartsWith(orderMenuId.toString());
         return orderList;
     }
 

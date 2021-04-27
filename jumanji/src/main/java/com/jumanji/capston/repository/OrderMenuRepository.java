@@ -14,7 +14,7 @@ public interface OrderMenuRepository extends JpaRepository<OrderMenu, String> {
 
     int countByIdContains(String orderId);
 
-    Set<OrderMenu> findByIdContains(String orderId);
+    Set<OrderMenu> findByTab_IdStartsWith(String tabId);
 
     @Query(value = "select om.*\n" +
             "from ORDER_MENUS om\n" +
@@ -27,7 +27,7 @@ public interface OrderMenuRepository extends JpaRepository<OrderMenu, String> {
             "where om.TAB_ID  like :shopId || '%' and\n" +
             "     using = 'Y'\n" +
             "group by tab_id", nativeQuery = true)
-    public List<Tab> getTabListByShopId(String shopId);
+    public List<String> getTabListByShopId(String shopId);
 
     @Query(value = "select om.*\n" +
             "from ORDER_MENUS om\n" +
