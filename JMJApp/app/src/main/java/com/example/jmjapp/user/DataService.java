@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class DataService {
     private String BASE_URL = "http://3.34.55.186:8088/api/v1/"; // 학교2
-    //static final public String BASE_URL = "http://192.168.1.37:8088/api/v1/"; // 로컬
+//    static final public String BASE_URL = "http://192.168.1.37:8088/api/v1/"; // 로컬
     //private String BASE_URL = "http://122.202.45.37:8088/api/v1/"; // 집
 
     Gson gson = new GsonBuilder().setLenient().create();
@@ -50,9 +50,12 @@ interface ReadAPI {
 }
 
 interface UpdateAPI {
-
+    @PATCH("user")
+    Call<ResponseBody> updateOne(@Header("Authorization")String jwt, @Body Map<String, String> map);
 }
 
 interface DeleteAPI {
-
+    @DELETE("user")
+    Call<ResponseBody> deleteOne(@Header("Authorization") String jwt);
 }
+

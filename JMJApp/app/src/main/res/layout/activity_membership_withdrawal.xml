@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".user.MembershipWithdrawal">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/bell_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#FFFFFF"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_bell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:text="회원탈퇴"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/textView30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:text="유의사항"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bell_toolbar" />
+
+    <TextView
+        android:id="@+id/textView31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:hint="회원탈퇴 전에 꼭 확인하세요."
+        app:layout_constraintBottom_toBottomOf="@+id/textView30"
+        app:layout_constraintStart_toEndOf="@+id/textView30"
+        app:layout_constraintTop_toTopOf="@+id/textView30" />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text=" ▶ 주문의 민족 회원탈퇴 시 주문의 민족 서비스에서 탈퇴됩니다.\n\n
+▶ 주문의 민족 회원탈퇴 후 재가입할 경우 탈퇴 전의 회원정보와\n
+    거래정보 및 포인트, 쿠폰정보 등은 복구되지 않습니다.\n\n
+▶ 주문의 민족 회원탈퇴 시 보유하고 있던 비현금성 포인트와 쿠폰은\n
+    모두 소멸되며, 복구는 불가능합니다.\n\n
+▶ 주문의 민족 회원이 탈퇴하려는 경우 결제 편의를 목적으로 회원이\n
+    지정(선택)한 부가 서비스가 해지되며 회원 자격도 자동 상실됩니다.\n\n
+▶ 회원탈퇴한 계정의 주문의 민족 서비스 이용기록은 모두 삭제되며,\n
+    삭제된 데이터는 복구가 불가능합니다.\n\n
+▶ 거래정보가 있는 경우 판매거래 정보 관리를 위해 기본 정보는,\n
+    탈퇴 후 5년간 보관합니다(결제 내역, 작성한 리뷰)\n\n
+▶ [삭제되는 이용 기록]\n
+    아이디, 주소, 전화번호, 주문 이력, 찜, 지역, 포인트, 쿠폰, 카드 정보\n"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+    <CheckBox
+        android:id="@+id/cb_coupon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="100dp"
+        android:text="CheckBox"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView32" />
+
+    <TextView
+        android:id="@+id/textView33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:hint="보유하신 쿠폰이 있는 경우, 탈퇴 시 함께 소멸됩니다."
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/cb_coupon"
+        app:layout_constraintStart_toEndOf="@+id/cb_coupon"
+        app:layout_constraintTop_toTopOf="@+id/cb_coupon" />
+
+    <Button
+        android:id="@+id/button_withdrawal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="계정 삭제하기"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
