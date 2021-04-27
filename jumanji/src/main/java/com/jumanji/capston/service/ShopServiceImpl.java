@@ -2,6 +2,7 @@ package com.jumanji.capston.service;
 
 import com.jumanji.capston.data.DateOperator;
 import com.jumanji.capston.data.Shop;
+import com.jumanji.capston.data.Tab;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.ShopRepository;
 import com.jumanji.capston.repository.UserRepository;
@@ -20,9 +21,10 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class ShopServiceImpl implements ShopService, BasicService {
+public class ShopServiceImpl implements ShopService {
     @Autowired
     ShopRepository shopRepository;
     @Autowired
@@ -61,17 +63,15 @@ public class ShopServiceImpl implements ShopService, BasicService {
 
     public char patchShopIsOpen(String authorization, String shopId) {
         String loginId = userService.getMyId(authorization);
-        isPresent(shopId);
         isOwnShop(loginId, shopId);
-        Shop shop = shopRepository.findById(shopId).get();
+        Shop shop = isPresent(shopId);
         return reverseIsOpen(shop);
     }
 
     public char patchSHopIsRsPos(String authorization, String shopId) {
         String loginId = userService.getMyId(authorization);
-        isPresent(shopId);
         isOwnShop(loginId, shopId);
-        Shop shop = shopRepository.findById(shopId).get();
+        Shop shop = isPresent(shopId);
         return reverseIsRsPos(shop);
     }
 
@@ -79,12 +79,8 @@ public class ShopServiceImpl implements ShopService, BasicService {
         Shop shop;
         System.out.println("ShopController in getShopById");
         System.out.println("shop id : " + shopId);
-        isPresent(shopId);
-        try {
-            shop = shopRepository.findById(shopId).get();
-        } catch (ShopNotFoundException e) {
-            return new ResponseEntity<>(new ApiErrorResponse(e.getCode(), e.getMessage()), HttpStatus.BAD_REQUEST);
-        }
+
+        shop = isPresent(shopId);
         Shop.Response response = new Shop.Response(shop);
 //        if(shop.getImgPath()!=null)response.setImg(storageService.loadImg(shop.getImgPath()));
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -198,12 +194,12 @@ public class ShopServiceImpl implements ShopService, BasicService {
     }
 
     // 있는 매장번호 인지 확인. 없으면 error를 반환하게 된다.
-    public boolean isPresent(String shopId) {
-        if (shopRepository.findById(shopId).isPresent()) return true;
+    public Shop isPresent(String shopId) {
+        Optional<Shop> shop = shopRepository.findById(shopId);
+        if (shop.isPresent()) return shop.get();
         throw new ShopNotFoundException();
     }
 
-    @Override
     public boolean isEmpty(String shopId) {
         if (shopRepository.findById(shopId).isEmpty()) return true;
         throw new ShopHasExistException();
