@@ -6,489 +6,489 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="19"
-8-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml
+8-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="30" />
-9-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml
+9-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml
 10
 11    <permission
-11-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:5:5-7:50
+11-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:5:5-7:50
 12        android:name="com.example.jmjapp.permission.MAPS_RECEIVE"
-12-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:6:13-70
+12-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:6:13-70
 13        android:protectionLevel="signature" />
-13-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:7:13-48
+13-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:7:13-48
 14
 15    <uses-permission android:name="org.techtown.location.permission.MAPS_RECEIVE" />
-15-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:9:5-84
-15-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:9:22-82
+15-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:9:5-84
+15-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:9:22-82
 16    <uses-permission android:name="android.permission.INTERNET" />
-16-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:10:5-66
-16-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:10:22-64
+16-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:10:5-66
+16-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:10:22-64
 17    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-17-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:11:5-97
-17-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:11:22-95
+17-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:11:5-97
+17-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:11:22-95
 18    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-18-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:12:5-78
-18-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:12:22-76
+18-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:12:5-78
+18-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:12:22-76
 19    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-19-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:13:5-80
-19-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:13:22-78
+19-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:13:5-80
+19-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:13:22-78
 20    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-20-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:14:5-80
-20-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:14:22-78
+20-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:14:5-80
+20-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:14:22-78
 21    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-21-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:15:5-79
-21-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:15:22-77
+21-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:15:5-79
+21-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:15:22-77
 22    <uses-permission android:name="android.permission.CAMERA" />
-22-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:16:5-64
-22-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:16:22-62
+22-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:16:5-64
+22-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:16:22-62
 23
 24    <uses-feature android:name="android.hardware.camera" />
-24-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:18:5-59
-24-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:18:19-57
+24-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:18:5-59
+24-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:18:19-57
 25    <uses-feature android:name="android.hardware.camera.autofocus" />
-25-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:19:5-69
-25-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:19:19-67
+25-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:19:5-69
+25-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:19:19-67
 26
 27    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-27-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:13:5-79
-27-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:13:22-76
+27-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:13:5-79
+27-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:13:22-76
 28
 29    <uses-feature
-29-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\1d73c0cf0109a8b2e77a4b2ebec098e8\jetified-play-services-maps-17.0.0\AndroidManifest.xml:26:5-28:35
+29-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\1d73c0cf0109a8b2e77a4b2ebec098e8\jetified-play-services-maps-17.0.0\AndroidManifest.xml:26:5-28:35
 30        android:glEsVersion="0x00020000"
-30-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\1d73c0cf0109a8b2e77a4b2ebec098e8\jetified-play-services-maps-17.0.0\AndroidManifest.xml:27:9-41
+30-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\1d73c0cf0109a8b2e77a4b2ebec098e8\jetified-play-services-maps-17.0.0\AndroidManifest.xml:27:9-41
 31        android:required="true" />
-31-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\1d73c0cf0109a8b2e77a4b2ebec098e8\jetified-play-services-maps-17.0.0\AndroidManifest.xml:28:9-32
+31-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\1d73c0cf0109a8b2e77a4b2ebec098e8\jetified-play-services-maps-17.0.0\AndroidManifest.xml:28:9-32
 32    <uses-feature
-32-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ae483cb02e1d7348c4774922aebe5f0c\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:27:5-29:36
+32-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8f684d329a89993ab95f6a9d46c108ff\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:27:5-29:36
 33        android:name="android.hardware.camera.front"
-33-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ae483cb02e1d7348c4774922aebe5f0c\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:28:9-53
+33-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8f684d329a89993ab95f6a9d46c108ff\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:28:9-53
 34        android:required="false" />
-34-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ae483cb02e1d7348c4774922aebe5f0c\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:29:9-33
+34-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8f684d329a89993ab95f6a9d46c108ff\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:29:9-33
 35    <uses-feature
-35-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ae483cb02e1d7348c4774922aebe5f0c\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:35:5-37:36
+35-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8f684d329a89993ab95f6a9d46c108ff\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:35:5-37:36
 36        android:name="android.hardware.camera.flash"
-36-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ae483cb02e1d7348c4774922aebe5f0c\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:36:9-53
+36-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8f684d329a89993ab95f6a9d46c108ff\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:36:9-53
 37        android:required="false" />
-37-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ae483cb02e1d7348c4774922aebe5f0c\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:37:9-33
+37-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8f684d329a89993ab95f6a9d46c108ff\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:37:9-33
 38    <uses-feature
-38-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ae483cb02e1d7348c4774922aebe5f0c\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:38:5-40:36
+38-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8f684d329a89993ab95f6a9d46c108ff\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:38:5-40:36
 39        android:name="android.hardware.screen.landscape"
-39-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ae483cb02e1d7348c4774922aebe5f0c\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:39:9-57
+39-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8f684d329a89993ab95f6a9d46c108ff\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:39:9-57
 40        android:required="false" />
-40-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ae483cb02e1d7348c4774922aebe5f0c\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:40:9-33
+40-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8f684d329a89993ab95f6a9d46c108ff\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:40:9-33
 41    <uses-feature
-41-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ae483cb02e1d7348c4774922aebe5f0c\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:41:5-43:36
+41-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8f684d329a89993ab95f6a9d46c108ff\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:41:5-43:36
 42        android:name="android.hardware.wifi"
-42-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ae483cb02e1d7348c4774922aebe5f0c\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:42:9-45
+42-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8f684d329a89993ab95f6a9d46c108ff\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:42:9-45
 43        android:required="false" />
-43-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ae483cb02e1d7348c4774922aebe5f0c\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:43:9-33
+43-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8f684d329a89993ab95f6a9d46c108ff\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:43:9-33
 44
 45    <uses-permission android:name="android.permission.WAKE_LOCK" />
-45-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:25:5-68
-45-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:25:22-65
+45-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:25:5-68
+45-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:25:22-65
 46    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" /> <!-- Required by older versions of Google Play services to create IID tokens -->
-46-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:26:5-110
-46-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:26:22-107
+46-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:26:5-110
+46-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:26:22-107
 47    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-47-->[com.google.firebase:firebase-iid:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\495d35ff07507810de098f89f8746504\jetified-firebase-iid-19.0.0\AndroidManifest.xml:26:5-82
-47-->[com.google.firebase:firebase-iid:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\495d35ff07507810de098f89f8746504\jetified-firebase-iid-19.0.0\AndroidManifest.xml:26:22-79
+47-->[com.google.firebase:firebase-iid:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\495d35ff07507810de098f89f8746504\jetified-firebase-iid-19.0.0\AndroidManifest.xml:26:5-82
+47-->[com.google.firebase:firebase-iid:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\495d35ff07507810de098f89f8746504\jetified-firebase-iid-19.0.0\AndroidManifest.xml:26:22-79
 48
 49    <application
-49-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:21:5-110:19
+49-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:21:5-110:19
 50        android:name="com.example.jmjapp.JMJApplication"
-50-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:22:13-43
+50-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:22:13-43
 51        android:allowBackup="true"
-51-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:23:13-39
+51-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:23:13-39
 52        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-52-->[androidx.core:core:1.3.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3c63f9ebd4aabd06b688629ed4199369\core-1.3.1\AndroidManifest.xml:24:18-86
+52-->[androidx.core:core:1.3.1] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\3c63f9ebd4aabd06b688629ed4199369\core-1.3.1\AndroidManifest.xml:24:18-86
 53        android:debuggable="true"
 54        android:hardwareAccelerated="true"
-54-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:24:13-47
+54-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:24:13-47
 55        android:icon="@mipmap/ic_launcher"
-55-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:25:13-47
+55-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:25:13-47
 56        android:label="@string/app_name"
-56-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:26:13-45
+56-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:26:13-45
 57        android:requestLegacyExternalStorage="true"
-57-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:27:13-56
+57-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:27:13-56
 58        android:roundIcon="@mipmap/ic_launcher_round"
-58-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:28:13-58
+58-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:28:13-58
 59        android:supportsRtl="true"
-59-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:29:13-39
+59-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:29:13-39
 60        android:testOnly="true"
 61        android:theme="@style/AppTheme"
-61-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:30:13-44
+61-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:30:13-44
 62        android:usesCleartextTraffic="true" >
-62-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:31:13-48
+62-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:31:13-48
 63        <activity android:name="com.example.jmjapp.user.OrderActivity" >
-63-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:32:9-33:20
-63-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:32:19-53
+63-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:32:9-33:20
+63-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:32:19-53
 64        </activity>
 65        <activity android:name="com.example.jmjapp.owner.ShopUpdateActivity" >
-65-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:34:9-35:20
-65-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:34:19-59
+65-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:34:9-35:20
+65-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:34:19-59
 66        </activity>
 67        <activity android:name="com.example.jmjapp.user.BasketActivity" >
-67-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:36:9-37:20
-67-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:36:19-54
+67-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:36:9-37:20
+67-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:36:19-54
 68        </activity>
 69        <activity android:name="com.example.jmjapp.user.MenuChoosedActivity" >
-69-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:38:9-39:20
-69-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:38:19-59
+69-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:38:9-39:20
+69-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:38:19-59
 70        </activity>
 71        <activity android:name="com.example.jmjapp.owner.MenuRegisterActivity" >
-71-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:40:9-41:20
-71-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:40:19-61
+71-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:40:9-41:20
+71-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:40:19-61
 72        </activity>
 73        <activity android:name="com.example.jmjapp.owner.MenuDetailActivity" >
-73-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:42:9-43:20
-73-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:42:19-59
+73-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:42:9-43:20
+73-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:42:19-59
 74        </activity>
 75        <activity android:name="com.example.jmjapp.owner.ListShopActivity" >
-75-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:44:9-45:20
-75-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:44:19-57
+75-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:44:9-45:20
+75-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:44:19-57
 76        </activity>
 77        <activity android:name="com.example.jmjapp.owner.OwnerLoginActivity" >
-77-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:46:9-47:20
-77-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:46:19-59
+77-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:46:9-47:20
+77-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:46:19-59
 78        </activity>
 79        <activity android:name="com.example.jmjapp.user.MembershipWithdrawal" />
-79-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:48:9-90
-79-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:48:19-78
+79-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:48:9-90
+79-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:48:19-78
 80        <activity android:name="com.example.jmjapp.user.RecordZzim" />
-80-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:49:9-71
-80-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:49:19-68
+80-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:49:9-71
+80-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:49:19-68
 81        <activity android:name="com.example.jmjapp.user.RecordReview" />
-81-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:50:9-73
-81-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:50:19-70
+81-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:50:9-73
+81-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:50:19-70
 82        <activity android:name="com.example.jmjapp.user.RecordVisit" />
-82-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:51:9-72
-82-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:51:19-69
+82-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:51:9-72
+82-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:51:19-69
 83        <activity android:name="com.example.jmjapp.user.RecordPoint" />
-83-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:52:9-72
-83-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:52:19-69
+83-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:52:9-72
+83-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:52:19-69
 84        <activity android:name="com.example.jmjapp.user.OperationGuideActivity" />
-84-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:53:9-83
-84-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:53:19-80
+84-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:53:9-83
+84-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:53:19-80
 85        <activity android:name="com.example.jmjapp.user.CustomerServiceActivity" />
-85-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:54:9-84
-85-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:54:19-81
+85-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:54:9-84
+85-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:54:19-81
 86        <activity android:name="com.example.jmjapp.user.NoticeActivity" />
-86-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:55:9-75
-86-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:55:19-72
+86-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:55:9-75
+86-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:55:19-72
 87
 88        <uses-library android:name="com.google.android.maps" />
-88-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:58:9-63
-88-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:58:23-61
+88-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:58:9-63
+88-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:58:23-61
 89        <uses-library
-89-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:59:9-61:43
+89-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:59:9-61:43
 90            android:name="org.apache.http.legacy"
-90-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:60:17-54
+90-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:60:17-54
 91            android:required="false" />
-91-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:61:17-41
+91-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:61:17-41
 92
 93        <meta-data
-93-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:63:9-65:74
+93-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:63:9-65:74
 94            android:name="com.google.android.geo.API_KEY"
-94-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:64:17-62
+94-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:64:17-62
 95            android:value="AIzaSyDzrU6ZybJOo_RtvrYo7o_Koown_2Ow_1g" />
-95-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:65:17-72
+95-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:65:17-72
 96        <meta-data
-96-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:66:9-68:72
+96-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:66:9-68:72
 97            android:name="com.google.android.gms.version"
-97-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:67:17-62
+97-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:67:17-62
 98            android:value="@integer/google_play_services_version" />
-98-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:68:17-70
+98-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:68:17-70
 99
 100        <activity android:name="com.example.jmjapp.user.MainActivity" >
-100-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:70:9-71:20
-100-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:70:19-52
+100-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:70:9-71:20
+100-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:70:19-52
 101        </activity>
 102        <activity android:name="com.example.jmjapp.user.MenuActivity" >
-102-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:72:9-73:20
-102-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:72:19-52
+102-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:72:9-73:20
+102-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:72:19-52
 103        </activity>
 104        <activity android:name="com.example.jmjapp.user.BellActivity" >
-104-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:74:9-75:20
-104-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:74:19-52
+104-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:74:9-75:20
+104-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:74:19-52
 105        </activity>
 106        <activity android:name="com.example.jmjapp.user.QrReaderActivity" >
-106-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:76:9-77:20
-106-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:76:19-56
+106-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:76:9-77:20
+106-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:76:19-56
 107        </activity>
 108        <activity android:name="com.example.jmjapp.user.ProfileUpdateActivity" >
-108-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:78:9-79:20
-108-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:78:19-61
+108-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:78:9-79:20
+108-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:78:19-61
 109        </activity>
 110        <activity android:name="com.example.jmjapp.IntroScreen" >
-110-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:80:9-86:20
-110-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:80:19-46
+110-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:80:9-86:20
+110-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:80:19-46
 111            <intent-filter>
-111-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:81:13-85:29
+111-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:81:13-85:29
 112                <action android:name="android.intent.action.MAIN" />
-112-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:82:17-68
-112-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:82:25-66
+112-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:82:17-68
+112-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:82:25-66
 113
 114                <category android:name="android.intent.category.LAUNCHER" />
-114-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:84:17-76
-114-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:84:27-74
+114-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:84:17-76
+114-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:84:27-74
 115            </intent-filter>
 116        </activity>
 117        <activity
-117-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:87:9-92:20
+117-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:87:9-92:20
 118            android:name="com.example.jmjapp.user.CaptureAct"
-118-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:88:17-48
+118-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:88:17-48
 119            android:screenOrientation="fullSensor"
-119-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:89:17-55
+119-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:89:17-55
 120            android:stateNotNeeded="true"
-120-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:90:17-46
+120-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:90:17-46
 121            android:windowSoftInputMode="stateAlwaysHidden" >
-121-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:91:17-64
+121-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:91:17-64
 122        </activity>
 123        <activity android:name="com.example.jmjapp.user.LoginActivity" >
-123-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:93:9-94:20
-123-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:93:19-53
+123-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:93:9-94:20
+123-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:93:19-53
 124        </activity>
 125        <activity android:name="com.example.jmjapp.owner.MainActivity_O" >
-125-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:95:9-96:20
-125-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:95:19-55
+125-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:95:9-96:20
+125-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:95:19-55
 126        </activity>
 127        <activity android:name="com.example.jmjapp.owner.RegisterNoActivity" >
-127-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:97:9-98:20
-127-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:97:19-59
+127-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:97:9-98:20
+127-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:97:19-59
 128        </activity>
 129        <activity android:name="com.example.jmjapp.owner.RegisterShopActivity" >
-129-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:99:9-100:20
-129-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:99:19-61
+129-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:99:9-100:20
+129-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:99:19-61
 130        </activity>
 131        <activity android:name="com.example.jmjapp.user.JoinActivity" >
-131-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:101:9-102:20
-131-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:101:19-52
+131-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:101:9-102:20
+131-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:101:19-52
 132        </activity>
 133        <activity android:name="com.example.jmjapp.user.ShopDetailActivity" >
-133-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:103:9-104:20
-133-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:103:19-58
+133-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:103:9-104:20
+133-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:103:19-58
 134        </activity> <!-- <activity android:name=".user.LogoutActivity"> -->
 135        <!-- </activity> -->
 136        <activity android:name="com.example.jmjapp.owner.OwnerJoinActivity" >
-136-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:106:9-107:20
-136-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:106:19-58
+136-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:106:9-107:20
+136-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:106:19-58
 137        </activity>
 138        <activity android:name="com.example.jmjapp.owner.WebViewActivity" >
-138-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:108:9-109:20
-138-->C:\Users\ASUS\Desktop\YJC\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:108:19-56
+138-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:108:9-109:20
+138-->C:\Users\leeym\Documents\GitHub\YJCapston\JMJApp\app\src\main\AndroidManifest.xml:108:19-56
 139        </activity>
 140        <activity
-140-->[com.github.lakue119:LakuePopupActivity:1.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3bbabd5b796c316b5c5047ad91c82a4b\jetified-LakuePopupActivity-1.0.1\AndroidManifest.xml:12:9-14:59
+140-->[com.github.lakue119:LakuePopupActivity:1.0.1] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\3bbabd5b796c316b5c5047ad91c82a4b\jetified-LakuePopupActivity-1.0.1\AndroidManifest.xml:12:9-14:59
 141            android:name="com.lakue.lakuepopupactivity.PopupActivity"
-141-->[com.github.lakue119:LakuePopupActivity:1.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3bbabd5b796c316b5c5047ad91c82a4b\jetified-LakuePopupActivity-1.0.1\AndroidManifest.xml:13:13-70
+141-->[com.github.lakue119:LakuePopupActivity:1.0.1] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\3bbabd5b796c316b5c5047ad91c82a4b\jetified-LakuePopupActivity-1.0.1\AndroidManifest.xml:13:13-70
 142            android:theme="@android:style/Theme.Dialog" />
-142-->[com.github.lakue119:LakuePopupActivity:1.0.1] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\3bbabd5b796c316b5c5047ad91c82a4b\jetified-LakuePopupActivity-1.0.1\AndroidManifest.xml:14:13-56
+142-->[com.github.lakue119:LakuePopupActivity:1.0.1] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\3bbabd5b796c316b5c5047ad91c82a4b\jetified-LakuePopupActivity-1.0.1\AndroidManifest.xml:14:13-56
 143        <activity
-143-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:17:9-19:67
+143-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:17:9-19:67
 144            android:name="com.nhn.android.naverlogin.ui.OAuthLoginActivity"
-144-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:18:13-76
+144-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:18:13-76
 145            android:theme="@style/Theme.AppCompat.Light.Dialog" />
-145-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:19:13-64
+145-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:19:13-64
 146        <activity
-146-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:20:9-23:47
+146-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:20:9-23:47
 147            android:name="com.nhn.android.naverlogin.ui.OAuthLoginInAppBrowserActivity"
-147-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:21:13-88
+147-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:21:13-88
 148            android:configChanges="orientation|screenSize"
-148-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:22:13-59
+148-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:22:13-59
 149            android:label="OAuth2.0 In-app" />
-149-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:23:13-44
+149-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:23:13-44
 150        <activity
-150-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:24:9-40:20
+150-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:24:9-40:20
 151            android:name="com.nhn.android.naverlogin.ui.OAuthCustomTabActivity"
-151-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:25:13-80
+151-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:25:13-80
 152            android:configChanges="orientation|screenSize"
-152-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:26:13-59
+152-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:26:13-59
 153            android:launchMode="singleTask"
-153-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:27:13-44
+153-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:27:13-44
 154            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-154-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:28:13-72
+154-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:28:13-72
 155            <intent-filter>
-155-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:29:13-39:29
+155-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:29:13-39:29
 156                <action android:name="android.intent.action.VIEW" />
-156-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:30:17-69
-156-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:30:25-66
+156-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:30:17-69
+156-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:30:25-66
 157
 158                <category android:name="android.intent.category.DEFAULT" />
-158-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:32:17-76
-158-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:32:27-73
+158-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:32:17-76
+158-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:32:27-73
 159                <category android:name="android.intent.category.BROWSABLE" />
-159-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:33:17-78
-159-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:33:27-75
+159-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:33:17-78
+159-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:33:27-75
 160                <!-- Intent URL 에서 로그인 액티비티를 실행하기 위해 설정 -->
 161                <data
-161-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:35:17-38:59
+161-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:35:17-38:59
 162                    android:host="authorize"
-162-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:36:21-45
+162-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:36:21-45
 163                    android:path="/"
-163-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:37:21-37
+163-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:37:21-37
 164                    android:scheme="naver3rdpartylogin" />
-164-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\7f775881ed2578e45c155427dd38f2d7\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:38:21-56
+164-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\9774d6c6e6c7fae481861c4c263b863c\jetified-naveridlogin-android-sdk-4.2.6\AndroidManifest.xml:38:21-56
 165            </intent-filter>
 166        </activity>
 167        <activity
-167-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ae483cb02e1d7348c4774922aebe5f0c\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:46:9-52:63
+167-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8f684d329a89993ab95f6a9d46c108ff\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:46:9-52:63
 168            android:name="com.journeyapps.barcodescanner.CaptureActivity"
-168-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ae483cb02e1d7348c4774922aebe5f0c\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:47:13-74
+168-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8f684d329a89993ab95f6a9d46c108ff\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:47:13-74
 169            android:clearTaskOnLaunch="true"
-169-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ae483cb02e1d7348c4774922aebe5f0c\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:48:13-45
+169-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8f684d329a89993ab95f6a9d46c108ff\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:48:13-45
 170            android:screenOrientation="sensorLandscape"
-170-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ae483cb02e1d7348c4774922aebe5f0c\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:49:13-56
+170-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8f684d329a89993ab95f6a9d46c108ff\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:49:13-56
 171            android:stateNotNeeded="true"
-171-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ae483cb02e1d7348c4774922aebe5f0c\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:50:13-42
+171-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8f684d329a89993ab95f6a9d46c108ff\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:50:13-42
 172            android:theme="@style/zxing_CaptureTheme"
-172-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ae483cb02e1d7348c4774922aebe5f0c\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:51:13-54
+172-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8f684d329a89993ab95f6a9d46c108ff\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:51:13-54
 173            android:windowSoftInputMode="stateAlwaysHidden" />
-173-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ae483cb02e1d7348c4774922aebe5f0c\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:52:13-60
+173-->[com.journeyapps:zxing-android-embedded:3.4.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\8f684d329a89993ab95f6a9d46c108ff\jetified-zxing-android-embedded-3.4.0\AndroidManifest.xml:52:13-60
 174
 175        <receiver
-175-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:29:9-33:20
+175-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:29:9-33:20
 176            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
-176-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:30:13-85
+176-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:30:13-85
 177            android:enabled="true"
-177-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:31:13-35
+177-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:31:13-35
 178            android:exported="false" >
-178-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:32:13-37
+178-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:32:13-37
 179        </receiver>
 180        <receiver
-180-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:34:9-42:20
+180-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:34:9-42:20
 181            android:name="com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver"
-181-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:35:13-100
+181-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:35:13-100
 182            android:enabled="true"
-182-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:36:13-35
+182-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:36:13-35
 183            android:exported="true"
-183-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:37:13-36
+183-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:37:13-36
 184            android:permission="android.permission.INSTALL_PACKAGES" >
-184-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:38:13-69
+184-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:38:13-69
 185            <intent-filter>
-185-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:39:13-41:29
+185-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:39:13-41:29
 186                <action android:name="com.android.vending.INSTALL_REFERRER" />
-186-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:40:17-79
-186-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:40:25-76
+186-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:40:17-79
+186-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:40:25-76
 187            </intent-filter>
 188        </receiver>
 189
 190        <service
-190-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:44:9-47:40
+190-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:44:9-47:40
 191            android:name="com.google.android.gms.measurement.AppMeasurementService"
-191-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:45:13-84
+191-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:45:13-84
 192            android:enabled="true"
-192-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:46:13-35
+192-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:46:13-35
 193            android:exported="false" />
-193-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:47:13-37
+193-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:47:13-37
 194        <service
-194-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:48:9-52:72
+194-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:48:9-52:72
 195            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
-195-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:49:13-87
+195-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:49:13-87
 196            android:enabled="true"
-196-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:50:13-35
+196-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:50:13-35
 197            android:exported="false"
-197-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:51:13-37
+197-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:51:13-37
 198            android:permission="android.permission.BIND_JOB_SERVICE" />
-198-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:52:13-69
+198-->[com.google.android.gms:play-services-measurement:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\6593eccfbf7e012f9c0ae7cd99729df1\jetified-play-services-measurement-17.2.0\AndroidManifest.xml:52:13-69
 199        <service
-199-->[com.google.android.gms:play-services-measurement-api:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\f0aba3ad9dd604c67eb8896abfc272d9\jetified-play-services-measurement-api-17.2.0\AndroidManifest.xml:27:9-33:19
+199-->[com.google.android.gms:play-services-measurement-api:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\f0aba3ad9dd604c67eb8896abfc272d9\jetified-play-services-measurement-api-17.2.0\AndroidManifest.xml:27:9-33:19
 200            android:name="com.google.firebase.components.ComponentDiscoveryService"
-200-->[com.google.android.gms:play-services-measurement-api:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\f0aba3ad9dd604c67eb8896abfc272d9\jetified-play-services-measurement-api-17.2.0\AndroidManifest.xml:28:13-84
+200-->[com.google.android.gms:play-services-measurement-api:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\f0aba3ad9dd604c67eb8896abfc272d9\jetified-play-services-measurement-api-17.2.0\AndroidManifest.xml:28:13-84
 201            android:exported="false" >
-201-->[com.google.android.gms:play-services-measurement-api:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\f0aba3ad9dd604c67eb8896abfc272d9\jetified-play-services-measurement-api-17.2.0\AndroidManifest.xml:29:13-37
+201-->[com.google.android.gms:play-services-measurement-api:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\f0aba3ad9dd604c67eb8896abfc272d9\jetified-play-services-measurement-api-17.2.0\AndroidManifest.xml:29:13-37
 202            <meta-data
-202-->[com.google.android.gms:play-services-measurement-api:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\f0aba3ad9dd604c67eb8896abfc272d9\jetified-play-services-measurement-api-17.2.0\AndroidManifest.xml:30:13-32:85
+202-->[com.google.android.gms:play-services-measurement-api:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\f0aba3ad9dd604c67eb8896abfc272d9\jetified-play-services-measurement-api-17.2.0\AndroidManifest.xml:30:13-32:85
 203                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
-203-->[com.google.android.gms:play-services-measurement-api:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\f0aba3ad9dd604c67eb8896abfc272d9\jetified-play-services-measurement-api-17.2.0\AndroidManifest.xml:31:17-139
+203-->[com.google.android.gms:play-services-measurement-api:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\f0aba3ad9dd604c67eb8896abfc272d9\jetified-play-services-measurement-api-17.2.0\AndroidManifest.xml:31:17-139
 204                android:value="com.google.firebase.components.ComponentRegistrar" />
-204-->[com.google.android.gms:play-services-measurement-api:17.2.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\f0aba3ad9dd604c67eb8896abfc272d9\jetified-play-services-measurement-api-17.2.0\AndroidManifest.xml:32:17-82
+204-->[com.google.android.gms:play-services-measurement-api:17.2.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\f0aba3ad9dd604c67eb8896abfc272d9\jetified-play-services-measurement-api-17.2.0\AndroidManifest.xml:32:17-82
 205            <meta-data
-205-->[com.google.firebase:firebase-iid:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\495d35ff07507810de098f89f8746504\jetified-firebase-iid-19.0.0\AndroidManifest.xml:32:13-34:85
+205-->[com.google.firebase:firebase-iid:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\495d35ff07507810de098f89f8746504\jetified-firebase-iid-19.0.0\AndroidManifest.xml:32:13-34:85
 206                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
-206-->[com.google.firebase:firebase-iid:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\495d35ff07507810de098f89f8746504\jetified-firebase-iid-19.0.0\AndroidManifest.xml:33:17-96
+206-->[com.google.firebase:firebase-iid:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\495d35ff07507810de098f89f8746504\jetified-firebase-iid-19.0.0\AndroidManifest.xml:33:17-96
 207                android:value="com.google.firebase.components.ComponentRegistrar" />
-207-->[com.google.firebase:firebase-iid:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\495d35ff07507810de098f89f8746504\jetified-firebase-iid-19.0.0\AndroidManifest.xml:34:17-82
+207-->[com.google.firebase:firebase-iid:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\495d35ff07507810de098f89f8746504\jetified-firebase-iid-19.0.0\AndroidManifest.xml:34:17-82
 208            <meta-data
-208-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\bb8ceca9f2545f5a3187418f01056519\jetified-firebase-auth-19.0.0\AndroidManifest.xml:36:13-38:85
+208-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\bb8ceca9f2545f5a3187418f01056519\jetified-firebase-auth-19.0.0\AndroidManifest.xml:36:13-38:85
 209                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
-209-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\bb8ceca9f2545f5a3187418f01056519\jetified-firebase-auth-19.0.0\AndroidManifest.xml:37:17-109
+209-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\bb8ceca9f2545f5a3187418f01056519\jetified-firebase-auth-19.0.0\AndroidManifest.xml:37:17-109
 210                android:value="com.google.firebase.components.ComponentRegistrar" />
-210-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\bb8ceca9f2545f5a3187418f01056519\jetified-firebase-auth-19.0.0\AndroidManifest.xml:38:17-82
+210-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\bb8ceca9f2545f5a3187418f01056519\jetified-firebase-auth-19.0.0\AndroidManifest.xml:38:17-82
 211        </service>
 212
 213        <receiver
-213-->[com.google.firebase:firebase-iid:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\495d35ff07507810de098f89f8746504\jetified-firebase-iid-19.0.0\AndroidManifest.xml:37:9-44:20
+213-->[com.google.firebase:firebase-iid:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\495d35ff07507810de098f89f8746504\jetified-firebase-iid-19.0.0\AndroidManifest.xml:37:9-44:20
 214            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
-214-->[com.google.firebase:firebase-iid:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\495d35ff07507810de098f89f8746504\jetified-firebase-iid-19.0.0\AndroidManifest.xml:38:13-78
+214-->[com.google.firebase:firebase-iid:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\495d35ff07507810de098f89f8746504\jetified-firebase-iid-19.0.0\AndroidManifest.xml:38:13-78
 215            android:exported="true"
-215-->[com.google.firebase:firebase-iid:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\495d35ff07507810de098f89f8746504\jetified-firebase-iid-19.0.0\AndroidManifest.xml:39:13-36
+215-->[com.google.firebase:firebase-iid:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\495d35ff07507810de098f89f8746504\jetified-firebase-iid-19.0.0\AndroidManifest.xml:39:13-36
 216            android:permission="com.google.android.c2dm.permission.SEND" >
-216-->[com.google.firebase:firebase-iid:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\495d35ff07507810de098f89f8746504\jetified-firebase-iid-19.0.0\AndroidManifest.xml:40:13-73
+216-->[com.google.firebase:firebase-iid:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\495d35ff07507810de098f89f8746504\jetified-firebase-iid-19.0.0\AndroidManifest.xml:40:13-73
 217            <intent-filter>
-217-->[com.google.firebase:firebase-iid:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\495d35ff07507810de098f89f8746504\jetified-firebase-iid-19.0.0\AndroidManifest.xml:41:13-43:29
+217-->[com.google.firebase:firebase-iid:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\495d35ff07507810de098f89f8746504\jetified-firebase-iid-19.0.0\AndroidManifest.xml:41:13-43:29
 218                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-218-->[com.google.firebase:firebase-iid:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\495d35ff07507810de098f89f8746504\jetified-firebase-iid-19.0.0\AndroidManifest.xml:42:17-81
-218-->[com.google.firebase:firebase-iid:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\495d35ff07507810de098f89f8746504\jetified-firebase-iid-19.0.0\AndroidManifest.xml:42:25-78
+218-->[com.google.firebase:firebase-iid:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\495d35ff07507810de098f89f8746504\jetified-firebase-iid-19.0.0\AndroidManifest.xml:42:17-81
+218-->[com.google.firebase:firebase-iid:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\495d35ff07507810de098f89f8746504\jetified-firebase-iid-19.0.0\AndroidManifest.xml:42:25-78
 219            </intent-filter>
 220        </receiver>
 221
 222        <activity
-222-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\bb8ceca9f2545f5a3187418f01056519\jetified-firebase-auth-19.0.0\AndroidManifest.xml:24:9-31:50
+222-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\bb8ceca9f2545f5a3187418f01056519\jetified-firebase-auth-19.0.0\AndroidManifest.xml:24:9-31:50
 223            android:name="com.google.firebase.auth.internal.FederatedSignInActivity"
-223-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\bb8ceca9f2545f5a3187418f01056519\jetified-firebase-auth-19.0.0\AndroidManifest.xml:25:13-85
+223-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\bb8ceca9f2545f5a3187418f01056519\jetified-firebase-auth-19.0.0\AndroidManifest.xml:25:13-85
 224            android:excludeFromRecents="true"
-224-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\bb8ceca9f2545f5a3187418f01056519\jetified-firebase-auth-19.0.0\AndroidManifest.xml:26:13-46
+224-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\bb8ceca9f2545f5a3187418f01056519\jetified-firebase-auth-19.0.0\AndroidManifest.xml:26:13-46
 225            android:exported="true"
-225-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\bb8ceca9f2545f5a3187418f01056519\jetified-firebase-auth-19.0.0\AndroidManifest.xml:27:13-36
+225-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\bb8ceca9f2545f5a3187418f01056519\jetified-firebase-auth-19.0.0\AndroidManifest.xml:27:13-36
 226            android:launchMode="singleTask"
-226-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\bb8ceca9f2545f5a3187418f01056519\jetified-firebase-auth-19.0.0\AndroidManifest.xml:28:13-44
+226-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\bb8ceca9f2545f5a3187418f01056519\jetified-firebase-auth-19.0.0\AndroidManifest.xml:28:13-44
 227            android:permission="com.google.firebase.auth.api.gms.permission.LAUNCH_FEDERATED_SIGN_IN"
-227-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\bb8ceca9f2545f5a3187418f01056519\jetified-firebase-auth-19.0.0\AndroidManifest.xml:29:13-102
+227-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\bb8ceca9f2545f5a3187418f01056519\jetified-firebase-auth-19.0.0\AndroidManifest.xml:29:13-102
 228            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-228-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\bb8ceca9f2545f5a3187418f01056519\jetified-firebase-auth-19.0.0\AndroidManifest.xml:30:13-72
+228-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\bb8ceca9f2545f5a3187418f01056519\jetified-firebase-auth-19.0.0\AndroidManifest.xml:30:13-72
 229        <activity
-229-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ff0dfa02a20c6c5887c05bdfa613ec64\jetified-play-services-auth-17.0.0\AndroidManifest.xml:23:9-27:75
+229-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\ff0dfa02a20c6c5887c05bdfa613ec64\jetified-play-services-auth-17.0.0\AndroidManifest.xml:23:9-27:75
 230            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
-230-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ff0dfa02a20c6c5887c05bdfa613ec64\jetified-play-services-auth-17.0.0\AndroidManifest.xml:24:13-93
+230-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\ff0dfa02a20c6c5887c05bdfa613ec64\jetified-play-services-auth-17.0.0\AndroidManifest.xml:24:13-93
 231            android:excludeFromRecents="true"
-231-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ff0dfa02a20c6c5887c05bdfa613ec64\jetified-play-services-auth-17.0.0\AndroidManifest.xml:25:13-46
+231-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\ff0dfa02a20c6c5887c05bdfa613ec64\jetified-play-services-auth-17.0.0\AndroidManifest.xml:25:13-46
 232            android:exported="false"
-232-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ff0dfa02a20c6c5887c05bdfa613ec64\jetified-play-services-auth-17.0.0\AndroidManifest.xml:26:13-37
+232-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\ff0dfa02a20c6c5887c05bdfa613ec64\jetified-play-services-auth-17.0.0\AndroidManifest.xml:26:13-37
 233            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-233-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ff0dfa02a20c6c5887c05bdfa613ec64\jetified-play-services-auth-17.0.0\AndroidManifest.xml:27:13-72
+233-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\ff0dfa02a20c6c5887c05bdfa613ec64\jetified-play-services-auth-17.0.0\AndroidManifest.xml:27:13-72
 234        <!--
 235            Service handling Google Sign-In user revocation. For apps that do not integrate with
 236            Google Sign-In, this service will never be started.
 237        -->
 238        <service
-238-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ff0dfa02a20c6c5887c05bdfa613ec64\jetified-play-services-auth-17.0.0\AndroidManifest.xml:33:9-36:110
+238-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\ff0dfa02a20c6c5887c05bdfa613ec64\jetified-play-services-auth-17.0.0\AndroidManifest.xml:33:9-36:110
 239            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
-239-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ff0dfa02a20c6c5887c05bdfa613ec64\jetified-play-services-auth-17.0.0\AndroidManifest.xml:34:13-89
+239-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\ff0dfa02a20c6c5887c05bdfa613ec64\jetified-play-services-auth-17.0.0\AndroidManifest.xml:34:13-89
 240            android:exported="true"
-240-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ff0dfa02a20c6c5887c05bdfa613ec64\jetified-play-services-auth-17.0.0\AndroidManifest.xml:35:13-36
+240-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\ff0dfa02a20c6c5887c05bdfa613ec64\jetified-play-services-auth-17.0.0\AndroidManifest.xml:35:13-36
 241            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION" />
-241-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\ff0dfa02a20c6c5887c05bdfa613ec64\jetified-play-services-auth-17.0.0\AndroidManifest.xml:36:13-107
+241-->[com.google.android.gms:play-services-auth:17.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\ff0dfa02a20c6c5887c05bdfa613ec64\jetified-play-services-auth-17.0.0\AndroidManifest.xml:36:13-107
 242
 243        <activity
-243-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\0fd8b02d0d41f79009dd5fe87957b32a\jetified-play-services-base-17.1.0\AndroidManifest.xml:23:9-26:75
+243-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\0fd8b02d0d41f79009dd5fe87957b32a\jetified-play-services-base-17.1.0\AndroidManifest.xml:23:9-26:75
 244            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-244-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\0fd8b02d0d41f79009dd5fe87957b32a\jetified-play-services-base-17.1.0\AndroidManifest.xml:24:13-79
+244-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\0fd8b02d0d41f79009dd5fe87957b32a\jetified-play-services-base-17.1.0\AndroidManifest.xml:24:13-79
 245            android:exported="false"
-245-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\0fd8b02d0d41f79009dd5fe87957b32a\jetified-play-services-base-17.1.0\AndroidManifest.xml:25:13-37
+245-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\0fd8b02d0d41f79009dd5fe87957b32a\jetified-play-services-base-17.1.0\AndroidManifest.xml:25:13-37
 246            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-246-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\0fd8b02d0d41f79009dd5fe87957b32a\jetified-play-services-base-17.1.0\AndroidManifest.xml:26:13-72
+246-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\0fd8b02d0d41f79009dd5fe87957b32a\jetified-play-services-base-17.1.0\AndroidManifest.xml:26:13-72
 247
 248        <provider
-248-->[com.google.firebase:firebase-common:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71d31ee4ed5c0c4b24006ed8ca6cf980\jetified-firebase-common-19.0.0\AndroidManifest.xml:12:9-16:39
+248-->[com.google.firebase:firebase-common:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\71d31ee4ed5c0c4b24006ed8ca6cf980\jetified-firebase-common-19.0.0\AndroidManifest.xml:12:9-16:39
 249            android:name="com.google.firebase.provider.FirebaseInitProvider"
-249-->[com.google.firebase:firebase-common:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71d31ee4ed5c0c4b24006ed8ca6cf980\jetified-firebase-common-19.0.0\AndroidManifest.xml:13:13-77
+249-->[com.google.firebase:firebase-common:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\71d31ee4ed5c0c4b24006ed8ca6cf980\jetified-firebase-common-19.0.0\AndroidManifest.xml:13:13-77
 250            android:authorities="com.example.jmjapp.firebaseinitprovider"
-250-->[com.google.firebase:firebase-common:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71d31ee4ed5c0c4b24006ed8ca6cf980\jetified-firebase-common-19.0.0\AndroidManifest.xml:14:13-72
+250-->[com.google.firebase:firebase-common:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\71d31ee4ed5c0c4b24006ed8ca6cf980\jetified-firebase-common-19.0.0\AndroidManifest.xml:14:13-72
 251            android:exported="false"
-251-->[com.google.firebase:firebase-common:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71d31ee4ed5c0c4b24006ed8ca6cf980\jetified-firebase-common-19.0.0\AndroidManifest.xml:15:13-37
+251-->[com.google.firebase:firebase-common:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\71d31ee4ed5c0c4b24006ed8ca6cf980\jetified-firebase-common-19.0.0\AndroidManifest.xml:15:13-37
 252            android:initOrder="100" />
-252-->[com.google.firebase:firebase-common:19.0.0] C:\Users\ASUS\.gradle\caches\transforms-2\files-2.1\71d31ee4ed5c0c4b24006ed8ca6cf980\jetified-firebase-common-19.0.0\AndroidManifest.xml:16:13-36
+252-->[com.google.firebase:firebase-common:19.0.0] C:\Users\leeym\.gradle\caches\transforms-2\files-2.1\71d31ee4ed5c0c4b24006ed8ca6cf980\jetified-firebase-common-19.0.0\AndroidManifest.xml:16:13-36
 253    </application>
 254
 255</manifest>
