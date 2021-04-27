@@ -1,25 +1,24 @@
-//package com.jumanji.capston.service;
-//
-//import com.jumanji.capston.data.OrderMenu;
-//import com.jumanji.capston.data.Reservation;
-//import com.jumanji.capston.repository.OrderMenuRepository;
-//import com.jumanji.capston.repository.ReservationRepository;
-//import com.jumanji.capston.service.interfaces.BasicService;
-//import com.jumanji.capston.service.interfaces.ReservationService;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.stereotype.Service;
-//
-//import java.util.List;
-//
-//@Service
-//public class ReservationServiceImpl implements ReservationService, BasicService {
-//    @Autowired
-//    ReservationRepository reservationRepository;
-//    @Autowired
-//    OrderMenuRepository orderRepository;
-//
+package com.jumanji.capston.service;
+
+import com.jumanji.capston.data.OrderMenu;
+import com.jumanji.capston.data.Reservation;
+import com.jumanji.capston.repository.OrderMenuRepository;
+import com.jumanji.capston.service.interfaces.BasicService;
+import com.jumanji.capston.service.interfaces.ReservationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class ReservationServiceImpl
+//        implements ReservationService, BasicService
+{
+    @Autowired
+    OrderMenuRepository orderRepository;
+
 //    public Reservation findById(String id){
 //        OrderMenu order = orderRepository.findById(id)
 //                .orElseThrow(()-> new IllegalArgumentException("id를 확인해주세요!!!"));
@@ -75,4 +74,4 @@
 //    public boolean isEmpty(String id) {
 //        return false;
 //    }
-//}
+}
