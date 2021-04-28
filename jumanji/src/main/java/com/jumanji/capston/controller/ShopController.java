@@ -5,6 +5,7 @@ import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.service.ShopServiceImpl;
 import com.jumanji.capston.service.StorageServiceImpl;
 import com.jumanji.capston.service.UserServiceImpl;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -49,7 +51,11 @@ public class ShopController {
     @Transactional(readOnly = true)
     @GetMapping("/myShop") // get /myShop
     public ResponseEntity<?> getMyShop(@RequestHeader String authorization) { // 수정해야함.
-        List<Shop> response = shopService.getMyShop(authorization);
+        List<Shop> shopList = shopService.getMyShop(authorization);
+        List<Shop.Response> response = new ArrayList<>();
+        for(Shop shop: shopList){
+            response.add(new Shop.Response(shop));
+        }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -62,15 +68,7 @@ public class ShopController {
         System.out.println("샵리스트 >> ");
 //        return shopService.getShopList();
         return shopService.getList(category, sortTarget); // 얘는 이렇게 하는게 좋을듯..
-
     }
-
-//    @Transactional(readOnly = true)
-//    @GetMapping("/shopList/{category}") // get /shopList/{category}
-//    public ResponseEntity<?> getShopListByCategory(@PathVariable String category) {
-//        return shopService.getShopListByCat(category);
-////        return new ResponseEntity<>(shopCatList, httpHeaders, HttpStatus.OK); // 이렇게 하면 오류. 객체를 utf로 변환 시켜서 그런지 무슨 한글 변환하면서 오류나나봄!
-//    }
 
     @Transactional
     @PostMapping("/shop") // post /shop 매장등록     Form-data로 받음 => Param. requestbody를 안적으면 자동 param 매핑 해주는듯

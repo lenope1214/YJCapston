@@ -25,7 +25,7 @@ public class OrderMenusController{
     public ResponseEntity<?> selectOrderByOrderId(@PathVariable Timestamp orderMenuId) {
         System.out.println("orderMenuId : " + orderMenuId);
         List<OrderMenu.Response> response = new ArrayList<>();
-        Set<OrderMenu> orderMenuSet = orderMenuService.getOrderMenuByCartId(orderMenuId);
+        Set<OrderMenu> orderMenuSet = orderMenuService.getOrderMenuByOrderId(orderMenuId);
         System.out.println("주문메뉴 개수 : " + orderMenuSet.size());
         for(OrderMenu order : orderMenuSet){
             System.out.println("orderList info \n" +

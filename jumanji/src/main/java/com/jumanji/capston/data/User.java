@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -111,7 +112,7 @@ public class User implements Serializable {
     @Getter
     public static class MyInfo{
         private Response user = new Response();
-        private List<Order> orderList;
+        private List<Order.Response> orderList;
 
         public MyInfo(User user, List<Order> orderList){
             this.user.id = user.getId();
@@ -125,7 +126,11 @@ public class User implements Serializable {
             this.user.level = user.getLevel();
             this.user.point = user.getPoint();
             this.user.signDate = DateOperator.dateToYYYYMMDD(user.getSignDate());
-            this.orderList = orderList;
+            List<Order.Response> orderResponseList = new ArrayList<>();
+            for(Order order : orderList){
+                orderResponseList.add(new Order.Response(order));
+            }
+            this.orderList = orderResponseList;
         }
     }
 }

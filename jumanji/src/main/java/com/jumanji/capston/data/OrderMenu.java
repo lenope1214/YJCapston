@@ -23,6 +23,8 @@ public class OrderMenu implements Serializable {
     @Column(length = 2)
     private int quantity; // 메뉴 수량
 
+    private char using = 'N';
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id")
     @JsonIgnore
@@ -39,6 +41,7 @@ public class OrderMenu implements Serializable {
         this.quantity = quantity;
         this.menu = menu;
         this.tab = tab;
+        this.using = 'Y';
     }
 
     @Getter

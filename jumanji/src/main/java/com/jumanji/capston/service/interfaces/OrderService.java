@@ -1,6 +1,7 @@
 package com.jumanji.capston.service.interfaces;
 
 import com.jumanji.capston.data.Order;
+import com.jumanji.capston.data.Payment;
 import org.springframework.http.ResponseEntity;
 
 import java.sql.Timestamp;

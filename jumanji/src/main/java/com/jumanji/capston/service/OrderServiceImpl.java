@@ -1,6 +1,7 @@
 package com.jumanji.capston.service;
 
 import com.jumanji.capston.data.Order;
+import com.jumanji.capston.data.Payment;
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.OrderRepository;
@@ -20,10 +21,11 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
-public class OrderServiceImpl implements OrderService, BasicService {
+public class OrderServiceImpl implements OrderService {
     @Autowired
     OrderRepository orderRepository;
     @Autowired
@@ -43,14 +45,15 @@ public class OrderServiceImpl implements OrderService, BasicService {
 //    }
 
     public Order getOrderInfo(Timestamp orderId){
+        isPresent(orderId);
         return orderRepository.findById(orderId).get();
     }
 
     @Override
     public Order get(String authorization, Timestamp orderId) {
-        isPresent(orderId);
-//        Timestamp cartIdTime = DateOperator.stringToTimestamp(cartId);
-        Order order = orderRepository.findById(orderId).get();
+        String loginId = userService.getMyId(authorization);
+
+        Order order = isPresent(orderId);
         return order;
     }
 
@@ -125,23 +128,30 @@ public class OrderServiceImpl implements OrderService, BasicService {
 //        orderRepository.delete(order);
 //    }
 
-    public boolean isPresent(Timestamp id) {
-        if (orderRepository.findById(id).isPresent()) return true;
+    public Order isPresent(Timestamp orderId) {
+        Optional<Order> order =orderRepository.findById(orderId);
+        if (order.isPresent()) return order.get();
         throw new OrderNotFoundException();
     }
 
-    public boolean isEmpty(Timestamp id) {
-        if (orderRepository.findById(id).isEmpty()) return true;
+    public boolean isEmpty(Timestamp orderId) {
+        if (orderRepository.findById(orderId).isEmpty()) return true;
         throw new OrderHasExistException();
     }
 
-    @Override
-    public boolean isPresent(String id) {
-        return false;
+    public boolean isOwnOrder(Timestamp orderId, String userId){
+        Order order = orderRepository.findById(orderId).get();
+        return order.getUser().getId().equals(userId);
     }
 
-    @Override
-    public boolean isEmpty(String id) {
-        return false;
+    public List<Order> getListByShopId(String shopId) {
+        List<Order> orderList;
+        orderList = orderRepository.findAllByShop_Id(shopId);
+        System.out.println("해당 매장의 주문목록");
+        for(Order order: orderList){
+            System.out.println("getOrderRequest : " + order.getOrderRequest() + "\n");
+            System.out.println("getUser().getName()" + order.getUser().getName());
+        }
+        return null;
     }
 }

@@ -36,9 +36,9 @@ public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
     MenuServiceImpl menuService;
 
 
-    public Set<OrderMenu> getOrderMenuByCartId(Timestamp orderMenuId) {
+    public Set<OrderMenu> getOrderMenuByOrderId(Timestamp orderMenuId) {
         System.out.println("orderMenuId : " +orderMenuId.toString());
-        Set<OrderMenu> orderList = orderMenuRepository.findByIdContains(orderMenuId.toString());
+        Set<OrderMenu> orderList = orderMenuRepository.findByTab_IdStartsWith(orderMenuId.toString());
         return orderList;
     }
 
@@ -49,7 +49,13 @@ public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
     }
 
     @Override
-    public List<OrderMenu> getList(String authorization, String cartId) {
+    public List<OrderMenu> getList(String authorization, String orderId) {
+        return null;
+    }
+
+    public List<OrderMenu> getList(String shopId) {
+        List<OrderMenu> orderMenuList;
+
         return null;
     }
 
