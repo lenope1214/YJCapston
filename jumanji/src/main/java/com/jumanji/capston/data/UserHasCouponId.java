@@ -1,5 +1,6 @@
 package com.jumanji.capston.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -14,12 +15,14 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class UserHasCouponId implements Serializable {
-    @JoinColumn
     @ManyToOne
-    private User user_id;//유저번호
-    
-    @JoinColumn
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;//유저번호
+
     @ManyToOne
-    private Coupon coupon_id; // 쿠폰번호
+    @JoinColumn(name = "coupon_id")
+    @JsonIgnore
+    private Coupon coupon; // 쿠폰번호
 }
 

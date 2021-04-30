@@ -4,13 +4,9 @@ package com.jumanji.capston.config.auth;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 // 얘는 언제 발동을 하는가?
 // SecurityConfig에서 loginProcessiongUrl("/login"); 으로 설정했기 때문에
@@ -30,12 +26,12 @@ public class PrincipalDetailsService implements UserDetailsService {
     // 함수 종료시 @AuthenticationPrincipal 어노테이션이 만들어진다.
     @Override
     public PrincipalDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-        System.out.println("PrincipalDetails - loadUserByUsername");
-        System.out.println("Id : " + id);
+//        System.out.println("PrincipalDetails - loadUserByUsername");
+//        System.out.println("Id : " + id);
         User userEntity = userRepository.findById(id)
                 .orElseThrow(() -> new UsernameNotFoundException(id));
         if(userEntity==null) {
-            System.out.println("load 후.. 유저 null.. 이라는데!");
+//            System.out.println("load 후.. 유저 null.. 이라는데!");
             return null;
         }
 

@@ -3,6 +3,10 @@ package com.jumanji.capston.repository;
 import com.jumanji.capston.data.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface OrderRepository extends JpaRepository<Order, Long> {
+import java.sql.Timestamp;
+import java.util.List;
 
+public interface OrderRepository extends JpaRepository<Order, Timestamp> {
+
+    List<Order> findALLByUser_Id(String user_Id);
 }

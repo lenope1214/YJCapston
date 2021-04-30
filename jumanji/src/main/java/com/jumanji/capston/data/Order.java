@@ -1,50 +1,111 @@
 package com.jumanji.capston.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import oracle.sql.TIMESTAMP;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.List;
 
 
 @Getter
 @Entity
-@Table(name="orders")
+@NoArgsConstructor
+@Table(name = "ORDERS")
 public class Order implements Serializable {
     @Id
-//    @GeneratedValue(strategy= GenerationType.IDENTITY)
-//    @Column(insertable = false, updatable = false)
-    private Long id ; // 주문번호 insert 할때 값 yyMMddhhmmss+sequence 설정해주기. 기본값으로 하는거 어렵넹
-
+    private Timestamp id; // 바구니번호 yyyyMMddhhmmss
+    @Column(name = "order_request")
+    private String orderRequest; // 요청사항
     @Column(length = 2)
-    private int quantity; // 메뉴 수량
-    private TIMESTAMP order_time; // 주문일시
-    @Column(name="order_request")
-    private String request; // 요청사항
+    private int people;
+    @Column(name="use_point", length = 5)
+    private int usePoint; // 사용된 포인트
+    @Column(length = 8)
+    private int amount; // 가격 총합
+    @Column(name = "arrive_time")
+    private Timestamp arriveTime; // 가게 도착시간
+    @Column(name="pay_time")
+    private Timestamp payTime; // 결제 일자 yyyyMMdd
+    @Column(length = 9)
+    private String pg;
+    @Column(name = "pay_method")
+    private String payMethod; // 결제방식
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    private User user_id;
 
-    @JoinColumn
-    @ManyToOne
-    private Menu menu_id;
+//    @Column
+//    private char delay; // 딜레이 얘는 뭔지 모르겠다. 나중에 다시 생각
 
-    @JoinColumn // 비 식별 관계 식별관계로 하려면 @EmbeddedId로 변경
-    @ManyToOne
-    private Tab table_id;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "shop_id", updatable = false) @JsonIgnore // 이거 없으면 fetchType lazy라서 json 변환중에 오류남.
+    private Shop shop;
+    @JoinColumn(name = "user_id", updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY) @JsonIgnore // 이거 없으면 fetchType lazy라서 json 변환중에 오류남.
+    private User user;
+
+    @Builder
+    public Order(Timestamp id, Shop shop, User user) {
+        this.id = id;
+        this.shop = shop;
+        this.user = user;
+    }
+
+    @Getter @AllArgsConstructor
+    @NoArgsConstructor
+    public static class Request {
+        private Timestamp orderId;
+        private String status;
+        private String orderRequest;
+        private int people;
+        private int usePoint; // 사용된 포인트
+        private int amount; // 가격 총합
+        private Timestamp arriveTime; // 가게 도착시간
+        private Timestamp payTime; // 결제 일자 yyyyMMdd
+        private String pg;
+        private String payMethod; // 결제방식
+        private String shopId;
+        private String userId;
+    }
+
+    @Getter
+    public static class Response{
+        private Timestamp orderId;
+        private int people;
+        private String orderRequest;
+        private String shopName;
+        private String userName;
+        private int usePoint; // 사용된 포인트
+        private int amount; // 가격 총합
+        private int totalAmount; // 할인 적용 가격
+        private Timestamp arriveTime; // 가게 도착시간
+        private Timestamp payTime; // 결제 일자 yyyyMMdd
+        private String pg;
+        private String payMethod; // 결제방식
+
+        public Response(Order order) {
+            this.orderId = order.getId();
+            this.shopName = order.getShop().getName();
+            this.people = order.getPeople();
+            this.orderRequest = order.getOrderRequest();
+            this.usePoint = order.getUsePoint();
+            this.userName = order.getUser().getName();
+            this.amount = order.getAmount();
+            this.arriveTime = order.getArriveTime();
+            this.pg = order.getPg();
+            this.payMethod = order.getPayMethod();
+            this.payTime = order.getPayTime();
+            this.totalAmount = order.getAmount() - order.getUsePoint();
+        }
+    }
+
+    public void update(Request request){
+        if(request.orderRequest != null)this.orderRequest = request.getOrderRequest();
+        if(request.people != 0) this.people = request.getPeople();
+    }
 }
-
-//@Getter
-//@Setter
-//@Embeddable
-//@EqualsAndHashCode
-//public class shop_menu_tab implements Serializable {
-//
-//    @Column(name="menu_id", length = 3)
-//    private int menu_id ; // 메뉴번호
-//
-//    @Embedded
-//    private TabId tab_id;
-//    public shop_menu_tab(){}
-//}

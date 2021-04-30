@@ -8,7 +8,6 @@ import com.jumanji.capston.config.oauth.provider.OAuth2UserInfo;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
@@ -33,7 +32,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
         System.out.println("PrincipalOauth2UserService -> loadUser -> ");
         // code를 통해 구성한 정보
-        System.out.println("userRequest clientRegistration : " + userRequest.getClientRegistration());
+//        System.out.println("userRequest clientRegistration : " + userRequest.getClientRegistration());
         // token을 통해 응답받은 회원정보
         System.out.println("oAuth2User : " + oAuth2User);
 
@@ -41,7 +40,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
     }
 
     private OAuth2User processOAuth2User(OAuth2UserRequest userRequest, OAuth2User oAuth2User) {
-        System.out.print("PrincipalOauth2UserService -> ");
+//        System.out.print("PrincipalOauth2UserService -> ");
         // Attribute를 파싱해서 공통 객체로 묶는다. 관리가 편함.
         OAuth2UserInfo oAuth2UserInfo = null;
         if (userRequest.getClientRegistration().getRegistrationId().equals("google")) {
@@ -72,7 +71,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         } else {
 
             // user의 패스워드가 null이기 때문에 OAuth 유저는 일반적인 로그인을 할 수 없음.
-            user = User.builder()
+            user = User.createUser()
                     .id(oAuth2UserInfo.getProvider() + "_" + oAuth2UserInfo.getProviderId())
                     .name(oAuth2UserInfo.getName())
                     .email(oAuth2UserInfo.getEmail())

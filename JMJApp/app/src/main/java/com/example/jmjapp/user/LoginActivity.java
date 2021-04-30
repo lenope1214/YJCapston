@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     DataService dataService = new DataService();
 
-    LinearLayout btn_signup;
+    Button btn_signup;
     LinearLayout naver_login;
 
     Button btn_logout;
@@ -53,7 +53,6 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth mAuth = null;
     GoogleSignInClient mGoogleSignInClient;
 
-    ArrayList<Shop> mItems = new ArrayList<>();
 
     private AlertDialog dialog;
     private static final int RC_SIGN_IN = 9001;
@@ -223,7 +222,7 @@ public class LoginActivity extends AppCompatActivity {
 //            }
 //        });
 //
-        btn_signup = (LinearLayout) findViewById(com.example.jmjapp.R.id.btn_signup);
+        btn_signup = (Button) findViewById(com.example.jmjapp.R.id.btn_signup);
         btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

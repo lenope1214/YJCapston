@@ -1,7 +1,7 @@
 package com.jumanji.capston.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -14,11 +14,16 @@ public class Penalty {
 //    @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user_id;
-
-    private Timestamp reg_time;
+    @JsonIgnore
+    private User user;
+    @Column(name = "reg_time")
+    private Timestamp regTime;
     private String name;
     private String reason;
+
+    public class Request{
+
+    }
 }
