@@ -2,6 +2,7 @@ package com.example.jmjapp.owner;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +25,7 @@ public class MainActivity_O extends AppCompatActivity {
         Intent intent = getIntent();
         String shopNumber = intent.getStringExtra("shopNumber");
         String shopName = intent.getStringExtra("shopName");
-        //Log.d("result :", id);
+//        Log.d("re", shopNumber);
 
         homeFragment_o = new HomeFragment_O();
         posFragment_o = new PosFragment_O();

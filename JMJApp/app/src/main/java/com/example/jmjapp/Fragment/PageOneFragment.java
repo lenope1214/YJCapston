@@ -67,7 +67,7 @@ public class PageOneFragment extends Fragment {
                     if(response.code() == 200) {
                         List<Shop> shopList = response.body();
                         for(Shop list : shopList) {
-                            mItems.add(new Shop(list.getId(), list.getName(),
+                            mItems.add(new Shop(list.getShopId(), list.getName(),
                                     list.getIntro(), list.getCloseTime(), list.getOpenTime(),
                                     list.getAddress(), list.getAddressDetail(), list.getIsRsPos(),
                                     list.getCategory(), list.getIsOpen(), list.getImgPath()));

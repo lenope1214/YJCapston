@@ -76,7 +76,7 @@ public class ListShopActivity extends AppCompatActivity {
                     if(response.code() == 200) {
                         List<Shop> shopList = response.body();
                         for(Shop list : shopList) {
-                            mItems.add(new Shop(list.getId(), list.getName(),
+                            mItems.add(new Shop(list.getShopId(), list.getName(),
                                     list.getIntro(), list.getCloseTime(),
                                     list.getOpenTime(), list.getAddress(),
                                     list.getAddressDetail(), list.getIsRsPos(),
@@ -85,6 +85,7 @@ public class ListShopActivity extends AppCompatActivity {
                             adapter = new RestaurantListRecyclerAdapter(getApplicationContext(), mItems);
                             rv_restaurant_list.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                             rv_restaurant_list.setAdapter(adapter);
+                            Log.d("s@@@@",list.getName());
                         }
                     } else {
                         Toast.makeText(getApplicationContext(), "조회 실패", Toast.LENGTH_LONG).show();

@@ -32,14 +32,14 @@
     </androidx.appcompat.widget.Toolbar>
 
     <ImageView
-            android:id="@+id/menu_choosed_img"
-            android:layout_width="match_parent"
-            android:layout_margin="10dp"
-            android:layout_height="250dp"
-            tools:ignore="MissingConstraints"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/menu_choosed_toolbar"
-            app:layout_constraintEnd_toEndOf="parent"/>
+        android:id="@+id/menu_choosed_img"
+        android:layout_width="match_parent"
+        android:layout_height="244dp"
+        android:layout_margin="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menu_choosed_toolbar"
+        tools:ignore="MissingConstraints" />
 
     <TextView
             android:id="@+id/menu_choosed_name"
@@ -51,7 +51,7 @@
             tools:ignore="MissingConstraints"
             app:layout_constraintTop_toBottomOf="@+id/menu_choosed_img"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="36dp"
             android:layout_marginStart="24dp"/>
 
     <TextView
