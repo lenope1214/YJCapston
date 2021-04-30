@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.example.jmjapp.R;
+
 import lombok.SneakyThrows;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -24,7 +25,7 @@ import java.util.Map;
 
 public class OwnerJoinActivity extends AppCompatActivity {
     DataService dataService = new DataService();
-    EditText et_join_owner_id, et_join_owner_pw, et_join_owner_name ,et_join_owner_phone;
+    EditText et_join_owner_id, et_join_owner_pw, et_join_owner_repw, et_join_owner_name ,et_join_owner_phone;
     Button owner_join_button, owner_join_validate_button;
     boolean isChecked;
     private AlertDialog dialog;
@@ -42,6 +43,7 @@ public class OwnerJoinActivity extends AppCompatActivity {
 
         et_join_owner_id = (EditText) findViewById(R.id.et_join_owner_id);
         et_join_owner_pw = (EditText) findViewById(R.id.et_join_owner_pw);
+        et_join_owner_repw = (EditText) findViewById(R.id.et_join_owner_pw2);
         et_join_owner_name = (EditText) findViewById(R.id.et_join_owner_name);
         et_join_owner_phone = (EditText) findViewById(R.id.et_join_owner_phone);
         owner_join_button = findViewById(R.id.owner_join_button);
@@ -99,6 +101,11 @@ public class OwnerJoinActivity extends AppCompatActivity {
                     dialog = builder.setMessage("비밀번호는 8~20자로 입력해 주세요.").setPositiveButton("확인", null).create();
                     dialog.show();
                     et_join_owner_pw.requestFocus();
+                } else if (!(et_join_owner_pw.getText().toString().equals(et_join_owner_repw.getText().toString()))) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(OwnerJoinActivity.this);
+                    dialog = builder.setMessage("비밀번호를 정확하게 입력해 주세요.").setPositiveButton("확인", null).create();
+                    dialog.show();
+                    et_join_owner_repw.requestFocus();
                 } else if (!(et_join_owner_name.getText().toString().matches("^[a-zA-Zㄱ-ㅎ가-힣]+$"))) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(OwnerJoinActivity.this);
                     dialog = builder.setMessage("이름을 정확하게 입력해 주세요.").setPositiveButton("확인", null).create();
