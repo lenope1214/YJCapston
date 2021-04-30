@@ -98,8 +98,8 @@ public class OwnerLoginActivity extends AppCompatActivity {
                                                 Log.d("result : ", "매장있음" + response.body().size());
                                                 String[] shopId = new String[response.body().size()];
                                                 for(int i =0; i < response.body().size(); i++) {
-                                                    Log.d("result : ", "매장있음" + response.body().get(i).getId());
-                                                    shopId[i] = response.body().get(i).getId();
+                                                    Log.d("result : ", "매장있음" + response.body().get(i).getShopId());
+                                                    shopId[i] = response.body().get(i).getShopId();
                                                 }
                                                 AlertDialog.Builder builder = new AlertDialog.Builder(OwnerLoginActivity.this);
                                                 dialog = builder.setMessage("로그인되었습니다").setPositiveButton("확인", new DialogInterface.OnClickListener() {
@@ -109,7 +109,7 @@ public class OwnerLoginActivity extends AppCompatActivity {
                                                         intent.putExtra("owner_number_size", response.body().size());
                                                         intent.putExtra("owner_id", et_owner_id.getText().toString());
                                                         for (int i=0; i<response.body().size(); i++) {
-                                                            intent.putExtra("owner_number" + i, response.body().get(i).getId());
+                                                            intent.putExtra("owner_number" + i, response.body().get(i).getShopId());
                                                         }
                                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

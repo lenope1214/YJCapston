@@ -71,7 +71,7 @@ public class PageTwoFragment extends Fragment {
                         List<Shop> shopList = response.body();
                         for(Shop list : shopList) {
                             Log.e("result : ", list.getCategory());
-                            mItems.add(new Shop(list.getId(), list.getName(), list.getIntro(),
+                            mItems.add(new Shop(list.getShopId(), list.getName(), list.getIntro(),
                                     list.getCloseTime(), list.getOpenTime(),
                                     list.getAddress(), list.getAddressDetail(), list.getIsRsPos(),
                                     list.getCategory(), list.getIsOpen(), list.getImgPath()));

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class  Shop {
-    private String id;
+    private String shopId;
     private String name;
     private String intro;
     private String openTime;

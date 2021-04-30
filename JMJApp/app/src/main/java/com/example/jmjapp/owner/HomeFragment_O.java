@@ -37,8 +37,6 @@ public class HomeFragment_O extends Fragment {
         Bundle bundle = getArguments();
         shopNumber = bundle.getString("shopNumber");
         String shopName = bundle.getString("shopName");
-        Log.d("owner_number@@@@@@@@@@@@", shopNumber);
-        Log.d("name@@@@@@@@@@@@", shopName);
 
         text_myshop_name = rootView.findViewById(R.id.text_myshop_name);
         text_myshop_name.setText("현재 매장 : " + shopName);

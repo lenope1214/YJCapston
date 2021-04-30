@@ -2,6 +2,8 @@ package com.example.jmjapp.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,8 @@ public class RestaurantListRecyclerAdapter extends RecyclerView.Adapter<Restaura
     Context context;
     ArrayList<Shop> shops;
 
+    private String jwt;
+
     public RestaurantListRecyclerAdapter(Context context, ArrayList<Shop> shopss) {
         this.context = context;
         shops = shopss;
@@ -37,13 +41,16 @@ public class RestaurantListRecyclerAdapter extends RecyclerView.Adapter<Restaura
         holder.tv_restaurant_name.setText(shops.get(position).getName());
         Glide.with(context).load("http://3.34.55.186:8088/" + shops.get(position).getImgPath()).into(holder.riv_restaurant_img);
 
+        SharedPreferences pref = context.getSharedPreferences("auth_o", Context.MODE_PRIVATE);
+        jwt = pref.getString("token", null);
+
         holder.layout_restaurant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, MainActivity_O.class);
-                intent.putExtra("shopNumber", shops.get(position).getId());
+                intent.putExtra("shopNumber", shops.get(position).getShopId());
                 intent.putExtra("shopName", shops.get(position).getName());
-                //Log.d("result : ", shops.get(position).getId());
+                //Log.d("result : ", shops.get(position).getShopId());
                 context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         });

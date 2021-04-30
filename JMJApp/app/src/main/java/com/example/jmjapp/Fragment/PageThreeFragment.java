@@ -68,7 +68,7 @@ public class PageThreeFragment extends Fragment {
                         List<Shop> shopList = response.body();
                         for(Shop list : shopList) {
                             Log.e("result : ", response.body().toString());
-                            mItems.add(new Shop(list.getId(), list.getName(),
+                            mItems.add(new Shop(list.getShopId(), list.getName(),
                                     list.getIntro(), list.getCloseTime(),
                                     list.getOpenTime(), list.getAddress(), list.getAddressDetail(), list.getIsRsPos(),
                                     list.getCategory(), list.getIsOpen(), list.getImgPath()));

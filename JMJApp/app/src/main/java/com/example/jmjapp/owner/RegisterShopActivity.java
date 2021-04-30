@@ -155,7 +155,7 @@ public class RegisterShopActivity extends AppCompatActivity {
                     public void onResponse(Call<Shop> call, Response<Shop> response) {
                         if(response.code() == 201) {
                             Log.d("result : " , "매장등록 성공");
-                            Log.d("result : ", response.body().getId());
+                            //Log.d("result : ", response.body().getShopId());
                             AlertDialog.Builder builder = new AlertDialog.Builder(RegisterShopActivity.this);
                             dialog = builder.setMessage("매장이 등록되었습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                 @Override

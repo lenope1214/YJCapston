@@ -55,7 +55,7 @@ public class MenuChoosedActivity extends AppCompatActivity {
         menu_choosed_name.setText(menuName);
         menu_choosed_price.setText(menuPrice + "원");
         menu_choosed_intro.setText(menuIntro);
-        Glide .with(this).load("http://3.34.55.186:8088/" + menuImage).into(menu_choosed_img);
+        Glide .with(this).load("http://3.34.55.186:8088/" + menuImage).override(500,500).into(menu_choosed_img);
 
         if (is_rs_pos == 'Y') {
             menu_choosed_btn.setOnClickListener(new View.OnClickListener() {
