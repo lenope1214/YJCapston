@@ -10,16 +10,21 @@ import com.jumanji.capston.service.exception.OrderMenuException.OrderMenuNotFoun
 import com.jumanji.capston.service.exception.ShopException.ShopMissMatchException;
 import com.jumanji.capston.service.interfaces.BasicService;
 import com.jumanji.capston.service.interfaces.OrderMenuService;
+import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.common.util.impl.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
+@Slf4j
 @Service
 public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
     @Autowired
@@ -34,6 +39,8 @@ public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
     OrderServiceImpl orderService;
     @Autowired
     MenuServiceImpl menuService;
+    @Autowired
+    UserServiceImpl userService;
 
 
     public Set<OrderMenu> getOrderMenuByOrderId(Timestamp orderMenuId) {
@@ -44,13 +51,19 @@ public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
 
 
     @Override
-    public OrderMenu get(String authorization, String orderId) {
+    public OrderMenu get(String authorization, String orderMenuId) {
         return null;
     }
 
     @Override
-    public List<OrderMenu> getList(String authorization, String orderId) {
-        return null;
+    public List<OrderMenu> getList(String authorization, Timestamp orderId) {
+        userService.isLogin(authorization);
+        orderService.isPresent(orderId);
+
+        List<OrderMenu> orderMenuList;
+        System.out.println("orderId.toStrig : " + orderId.getTime());
+        orderMenuList = orderMenuRepository.getOrderMenuList("" + orderId.getTime());
+        return orderMenuList;
     }
 
     public List<OrderMenu> getList(String shopId) {

@@ -159,10 +159,14 @@ public class UserServiceImpl implements UserService, BasicService {
         if(!authCheck(userRole, role))throw new ForbiddenException();
     }
 
-    private boolean authCheck(String userRole, String role){
+    public boolean authCheck(String userRole, String role){
         if (userRole.equals("ROLE_ADMIN")) return true; // 어드민은 무조건 가능.
         if (userRole.equals("ROLE_OWNER")) return !role.equals("ADMIN"); // OWNER는 어드민 권한만 아니면 다 가능.
         if (userRole.equals("ROLE_USER")) return role.equals("USER"); // 유저는 유저만 가능.
         return false;
+    }
+
+    public void isLogin(String authorization){
+        isPresent(getMyId(authorization));
     }
 }

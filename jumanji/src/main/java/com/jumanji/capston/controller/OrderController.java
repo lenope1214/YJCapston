@@ -1,6 +1,7 @@
 package com.jumanji.capston.controller;
 
 import com.jumanji.capston.data.Order;
+import com.jumanji.capston.data.OrderMenu;
 import com.jumanji.capston.service.OrderMenuServiceImpl;
 import com.jumanji.capston.service.OrderServiceImpl;
 import com.jumanji.capston.service.UserServiceImpl;
@@ -21,6 +22,8 @@ public class OrderController {
     OrderServiceImpl orderService;
     @Autowired
     UserServiceImpl userService;
+    @Autowired
+    OrderMenuServiceImpl orderMenuService;
 
 //    @Transactional(readOnly = true)
 //    @GetMapping("/cartId")
@@ -30,9 +33,17 @@ public class OrderController {
 
     @Transactional(readOnly = true)
     @GetMapping("/order/{orderId}")
-    public ResponseEntity<?> getOrder(@RequestHeader String authorization, @PathVariable Timestamp orderId){
-        Order order =orderService.get(authorization,orderId);
-        Order.Response response = new Order.Response(order);
+    public ResponseEntity<?> getOrder(@RequestHeader String authorization, @PathVariable String orderId){
+        Long orderLong = Long.parseLong(orderId);
+        Timestamp orderTime = new Timestamp(orderLong);
+        List<OrderMenu> orderMenuList = orderMenuService.getList(authorization, orderTime);
+//        Order order =orderService.get(authorization,orderTime);
+//        Order.Response response = new Order.Response(order);
+        List<OrderMenu.Response> response = new ArrayList<>();
+
+        for(OrderMenu orderMenu : orderMenuList){
+            response.add(new OrderMenu.Response(orderMenu));
+        }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
