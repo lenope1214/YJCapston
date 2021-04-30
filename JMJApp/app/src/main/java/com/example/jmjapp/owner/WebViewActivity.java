@@ -1,12 +1,11 @@
 package com.example.jmjapp.owner;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import androidx.appcompat.app.AppCompatActivity;
 import com.example.jmjapp.R;
 
 public class WebViewActivity extends AppCompatActivity {

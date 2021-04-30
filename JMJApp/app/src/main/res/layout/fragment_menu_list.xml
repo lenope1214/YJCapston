@@ -1,45 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:id="@+id/layout_menu"
-              android:layout_width="match_parent"
-              android:layout_height="160dp"
-              android:layout_margin="5dp"
-              android:layout_weight="100"
-              android:background="@drawable/border_with_bright_color"
-              android:orientation="vertical">
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/layout_menu"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_margin="5dp"
+        android:layout_weight="100"
+        android:background="@drawable/border_with_bright_color"
+        android:orientation="vertical">
 
     <ImageView
-            android:id="@+id/iv_menu_img"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="60"
+            android:id="@+id/tv_menu_img"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:padding="10dp"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/img_ready" />
-
+            app:srcCompat="@drawable/img_ready"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="4dp"/>
     <TextView
             android:id="@+id/tv_menu_name"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_weight="20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:text="메뉴 이름"
             android:textColor="#000000"
-            android:textSize="18sp" />
-
+            android:textSize="18sp"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintStart_toEndOf="@+id/tv_menu_img"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="12dp"/>
     <TextView
             android:id="@+id/tv_menu_price"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_weight="20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:text="가격"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintStart_toEndOf="@+id/tv_menu_img"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_menu_name"
+            android:layout_marginStart="12dp"/>
 
-</LinearLayout>
+    <TextView
+            android:id="@+id/menu_is_sale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="품절"
+            android:visibility="gone"
+            android:textSize="18sp"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/menu_is_popular"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp">
+        <TextView
+                android:id="@+id/menu_is_popular_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="인기 메뉴"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/menu_is_popular_img"
+                app:layout_constraintTop_toTopOf="@+id/menu_is_popular_img"
+                app:layout_constraintEnd_toStartOf="@+id/menu_is_popular_img"/>
+
+        <ImageView
+                android:id="@+id/menu_is_popular_img"
+                android:background="@drawable/tumbsup"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

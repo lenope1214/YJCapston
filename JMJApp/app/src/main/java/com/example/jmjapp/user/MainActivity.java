@@ -1,18 +1,18 @@
 package com.example.jmjapp.user;
 
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-
-import com.example.jmjapp.R;
+import com.example.jmjapp.*;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.security.MessageDigest;
@@ -34,11 +34,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getHashKey();
 
+        SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
+        String user_id = pref.getString("user_id", null);
+        
         homeFragment = new HomeFragment();
         posFragment = new PosFragment();
         mapFragment = new MapFragment();
         myFragment = new MyFragment();
         zzimFragment = new ZzimFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("user_id", user_id);
+        myFragment.setArguments(bundle);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
 

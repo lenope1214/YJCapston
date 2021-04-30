@@ -18,6 +18,7 @@ public class  Shop {
     private char isRsPos;
     private String category;
     private char isOpen;
+    private String imgPath;
 
 
     public Shop(String id) {

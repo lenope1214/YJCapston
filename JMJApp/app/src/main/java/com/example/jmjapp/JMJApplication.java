@@ -30,6 +30,7 @@ public class JMJApplication extends Application {
         return jwt;
     }
 
+
     public void setJwt(String jwt) {
         this.jwt = jwt;
     }

@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.example.jmjapp.R;
-import com.example.jmjapp.dto.MemberDTO;
+import lombok.SneakyThrows;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,9 +24,9 @@ import java.util.Map;
 
 public class JoinActivity extends AppCompatActivity {
     DataService dataService = new DataService();
-    MemberDTO memberDTO;
     EditText et_id;
     EditText et_pw;
+    EditText et_repw;
     EditText et_name;
     EditText et_phone;
     Button btn_insert;
@@ -45,6 +47,7 @@ public class JoinActivity extends AppCompatActivity {
 
         et_id = (EditText) findViewById(R.id.et_id);
         et_pw = (EditText) findViewById(R.id.et_password);
+        et_repw = (EditText) findViewById(R.id.et_password2);
         et_name = (EditText) findViewById(R.id.et_name);
         et_phone = (EditText) findViewById(R.id.et_phone);
         btn_insert = findViewById(R.id.btn_next);
@@ -57,6 +60,7 @@ public class JoinActivity extends AppCompatActivity {
                     Toast.makeText(JoinActivity.this, "아이디는 2~8자로 입력해주세요!", Toast.LENGTH_SHORT).show();
                 } else {
                     dataService.read.validateOne(et_id.getText().toString()).enqueue(new Callback<ResponseBody>() {
+                        @SneakyThrows
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
@@ -75,7 +79,8 @@ public class JoinActivity extends AppCompatActivity {
                                 et_id.requestFocus();
 
                             } else {
-                                Log.d("result ", "연결실패");
+                                Log.d("D",response.errorBody().string());
+                                Log.d("result ", "연결실패312");
                             }
                         }
 
@@ -89,6 +94,7 @@ public class JoinActivity extends AppCompatActivity {
         });
 
         btn_insert.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 if (!(et_id.getText().toString().length() >= 2 && et_id.getText().toString().length() <= 10)) {
@@ -101,6 +107,11 @@ public class JoinActivity extends AppCompatActivity {
                     dialog = builder.setMessage("비밀번호는 8~20자로 입력해 주세요.").setPositiveButton("확인", null).create();
                     dialog.show();
                     et_pw.requestFocus();
+                } else if (!(et_pw.getText().toString().equals(et_repw.getText().toString()))) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
+                    dialog = builder.setMessage("비밀번호를 정확하게 입력해 주세요.").setPositiveButton("확인", null).create();
+                    dialog.show();
+                    et_repw.requestFocus();
                 } else if (!(et_name.getText().toString().matches("^[a-zA-Zㄱ-ㅎ가-힣]+$"))) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
                     dialog = builder.setMessage("이름을 정확하게 입력해 주세요.").setPositiveButton("확인", null).create();

@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.jmjapp.Adapter.MenuRecyclerAdapter;
 import com.example.jmjapp.R;
-import com.example.jmjapp.user.ShopDetailActivity;
 import com.example.jmjapp.dto.Menu;
+import com.example.jmjapp.user.ShopDetailActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -70,8 +70,9 @@ public class MenuFragment extends Fragment {
                         List<Menu> menuList = response.body();
                         for(Menu list : menuList) {
                             mItems.add(new Menu(list.getId(), list.getName(), list.getIntro(),
-                                    list.getIs_sale(), list.getIs_popular(),list.getPrice(),
-                                    list.getDuration(), list.getImg_url()));
+                                    list.getIsSale(), list.getIsPopular(),list.getPrice(),
+                                    list.getDuration(), list.getImgPath()));
+                            Log.d("list", response.body().toString());
                             rv_menu_list.setHasFixedSize(true);
                             adapter.setItems(mItems);
                             rv_menu_list.setLayoutManager(new LinearLayoutManager(getActivity()));

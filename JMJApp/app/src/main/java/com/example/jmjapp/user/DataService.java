@@ -3,7 +3,6 @@ package com.example.jmjapp.user;
 import com.example.jmjapp.dto.Shop;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -16,8 +15,8 @@ import java.util.Map;
 
 public class DataService {
     private String BASE_URL = "http://3.34.55.186:8088/api/v1/"; // 학교2
-//    static final public String BASE_URL = "http://192.168.1.17:8088/api/v1/"; // 학교
-//    private String BASE_URL = "http://122.202.45.37:8088/api/v1/"; // 집
+//    static final public String BASE_URL = "http://192.168.1.37:8088/api/v1/"; // 로컬
+    //private String BASE_URL = "http://122.202.45.37:8088/api/v1/"; // 집
 
     Gson gson = new GsonBuilder().setLenient().create();
 
@@ -59,3 +58,4 @@ interface DeleteAPI {
     @DELETE("user")
     Call<ResponseBody> deleteOne(@Header("Authorization") String jwt);
 }
+

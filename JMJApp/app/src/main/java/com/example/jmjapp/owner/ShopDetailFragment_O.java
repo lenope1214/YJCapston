@@ -1,5 +1,6 @@
 package com.example.jmjapp.owner;
 
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,15 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import com.example.jmjapp.IntroScreen;
 import com.example.jmjapp.JMJApplication;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Shop;
-
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,7 +35,7 @@ import java.util.Map;
 public class ShopDetailFragment_O extends Fragment {
     Button toggle_button_on, toggle_button_off, toggle_button_res_on, toggle_button_res_off;
     TextView owner_logout_btn, owner_name_tv;
-    ConstraintLayout shop_detail_menu_button;
+    ConstraintLayout shop_detail_menu_button, shop_detail_update_button;
     DataService dataService = new DataService();
     boolean is_check = true;
     boolean is_check2 = true;
@@ -41,6 +43,7 @@ public class ShopDetailFragment_O extends Fragment {
     private String jwt, shopNumber, owner_id;
     private String isOpen, isRsPos;
     private Map<String, String> map = new HashMap();
+    Context context;
     public ShopDetailFragment_O() {
 
     }
@@ -65,8 +68,11 @@ public class ShopDetailFragment_O extends Fragment {
         Bundle bundle = getArguments();
         shopNumber = bundle.getString("shopNumber","dwad");
         
-        jwt = ((JMJApplication) this.getActivity().getApplication()).getJwt();
-        owner_id = ((JMJApplication) this.getActivity().getApplication()).getId();
+        //jwt = ((JMJApplication) this.getActivity().getApplication()).getJwt();
+
+        SharedPreferences pref = getActivity().getSharedPreferences("auth_o", Context.MODE_PRIVATE);
+        owner_id = pref.getString("owner_id", null);
+        jwt = pref.getString("token", null);
 
         owner_name_tv.setText(owner_id + "님");
 
@@ -86,9 +92,11 @@ public class ShopDetailFragment_O extends Fragment {
 
                         // 값버리기
                         Context context = getActivity();
-                        SharedPreferences pref = context.getSharedPreferences("auth", Context.MODE_PRIVATE);
+                        SharedPreferences pref = context.getSharedPreferences("auth_o", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = pref.edit();
                         editor.remove("token");
+                        editor.remove("owner_id");
+                        editor.remove("role");
                         editor.apply();
 
                         // 앱 변수버리기
@@ -346,6 +354,16 @@ public class ShopDetailFragment_O extends Fragment {
                     }
                 });
                 builder.show();
+            }
+        });
+
+        shop_detail_update_button = rootView.findViewById(R.id.shop_detail_update_button);
+        shop_detail_update_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ShopUpdateActivity.class);
+                intent.putExtra("shopNumber",shopNumber);
+                startActivity(intent);
             }
         });
 

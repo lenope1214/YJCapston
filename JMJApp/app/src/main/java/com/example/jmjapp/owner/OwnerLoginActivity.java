@@ -3,6 +3,7 @@ package com.example.jmjapp.owner;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,7 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 import com.example.jmjapp.JMJApplication;
 import com.example.jmjapp.R;
@@ -80,9 +80,11 @@ public class OwnerLoginActivity extends AppCompatActivity {
                                 Log.d("jsonobject :: userid >> ", et_owner_id.getText().toString());
 
                                 if(role.equals("ROLE_OWNER")) {
-                                    SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
+                                    SharedPreferences pref = getSharedPreferences("auth_o", MODE_PRIVATE);
                                     SharedPreferences.Editor editor = pref.edit();
                                     editor.putString("token", jwt);
+                                    editor.putString("owner_id", et_owner_id.getText().toString());
+                                    editor.putString("role", "ROLE_OWNER");
                                     editor.apply();
 
                                     ((JMJApplication)getApplication()).setId(et_owner_id.getText().toString());

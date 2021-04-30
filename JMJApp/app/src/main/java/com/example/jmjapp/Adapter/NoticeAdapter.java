@@ -15,6 +15,7 @@ import com.example.jmjapp.user.ItemViewHolder;
 import com.example.jmjapp.user.OnViewHolderItemClickListener;
 
 import java.util.ArrayList;
+
 //RecyclerViewAdapter
 public class NoticeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 

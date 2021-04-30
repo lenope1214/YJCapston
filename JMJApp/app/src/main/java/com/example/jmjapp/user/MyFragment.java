@@ -1,37 +1,39 @@
 package com.example.jmjapp.user;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+
 import com.example.jmjapp.JMJApplication;
 import com.example.jmjapp.R;
 
 public class MyFragment extends Fragment {
     ImageButton loginButton;
+    ConstraintLayout login_btn;
+    ConstraintLayout profile_btn;
+    TextView profile_text;
 
     ConstraintLayout point_record;
     ConstraintLayout visit_record;
     ConstraintLayout review_record;
     ConstraintLayout zzim_record;
 
-    ConstraintLayout login_btn;
-    ConstraintLayout profile_btn;
     ConstraintLayout notice_constraint;
     ConstraintLayout service_constraint;
     ConstraintLayout info_constraint;
 
-    TextView profile_text;
-
-
-
+    private String user_id;
+    Context context;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,12 +41,33 @@ public class MyFragment extends Fragment {
 
         String id = ((JMJApplication)this.getActivity().getApplication()).getId();
 
+        Bundle bundle = getArguments();
+        user_id = bundle.getString("user_id","nothing");
+
         profile_text = rootView.findViewById(R.id.profile_text);
 
         point_record = rootView.findViewById(R.id.point_record);
         visit_record = rootView.findViewById(R.id.visit_record);
         review_record = rootView.findViewById(R.id.review_record);
         zzim_record = rootView.findViewById(R.id.zzim_record);
+
+        login_btn = rootView.findViewById(R.id.login_btn);
+        login_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        profile_btn = rootView.findViewById(R.id.linear_btn);
+        profile_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ProfileUpdateActivity.class);
+                startActivity(intent);
+            }
+        });
 
         point_record.setOnClickListener(new View.OnClickListener(){
 
@@ -157,24 +180,6 @@ public class MyFragment extends Fragment {
             }
         });
 
-        login_btn = rootView.findViewById(R.id.login_btn);
-        login_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        profile_btn = rootView.findViewById(R.id.linear_btn);
-        profile_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ProfileUpdateActivity.class);
-                startActivity(intent);
-            }
-        });
-
         notice_constraint = rootView.findViewById(R.id.notice_constraint);
         notice_constraint.setOnClickListener(new View.OnClickListener(){
 
@@ -211,16 +216,13 @@ public class MyFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
-        String id = ((JMJApplication)this.getActivity().getApplication()).getId();
-
-        if(id != null) {
-            login_btn.setVisibility(View.GONE);
-            profile_btn.setVisibility(View.VISIBLE);
-            profile_text.setText(id + "님 안녕하세요");
-        } else {
+        if(user_id.equals("nothing")) {
             login_btn.setVisibility(View.VISIBLE);
             profile_btn.setVisibility(View.GONE);
+        } else {
+            login_btn.setVisibility(View.GONE);
+            profile_btn.setVisibility(View.VISIBLE);
+            profile_text.setText(user_id + "님 안녕하세요");
         }
     }
 }

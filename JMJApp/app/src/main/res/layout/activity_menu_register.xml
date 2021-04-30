@@ -46,7 +46,7 @@
 
     <EditText
             android:id="@+id/menu_name_et"
-            android:layout_width="200dp"
+            android:layout_width="160dp"
             android:layout_height="33dp"
             android:background="@drawable/edittext_login4"
             tools:ignore="MissingConstraints"
@@ -71,7 +71,7 @@
             android:layout_marginStart="32dp"/>
 
     <EditText
-            android:layout_width="200dp"
+            android:layout_width="160dp"
             android:layout_height="100dp"
             android:inputType="textMultiLine"
             android:background="@drawable/edittext_login4"
@@ -83,7 +83,8 @@
             app:layout_constraintTop_toTopOf="@+id/textView13"
             app:layout_constraintBottom_toBottomOf="@+id/textView13"
             android:layout_marginStart="44dp"
-            app:layout_constraintVertical_bias="0.0" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"/>
 
     <TextView
@@ -100,7 +101,7 @@
             android:layout_marginStart="32dp"/>
     <EditText
             android:id="@+id/menu_price_et"
-            android:layout_width="200dp"
+            android:layout_width="160dp"
             android:layout_height="34dp"
             android:background="@drawable/edittext_login4"
             tools:ignore="MissingConstraints"
@@ -138,13 +139,16 @@
 
     <EditText
             android:id="@+id/menu_time_et"
-            android:layout_width="200dp"
+            android:layout_width="160dp"
             android:layout_height="30dp"
             android:background="@drawable/edittext_login4"
             tools:ignore="MissingConstraints"
-            app:layout_constraintStart_toEndOf="@+id/textView15" app:layout_constraintTop_toTopOf="@+id/textView15"
-            app:layout_constraintBottom_toBottomOf="@+id/textView15" android:layout_marginStart="44dp"
-            app:layout_constraintVertical_bias="0.0" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView15"
+            app:layout_constraintTop_toTopOf="@+id/textView15"
+            app:layout_constraintBottom_toBottomOf="@+id/textView15"
+            android:layout_marginStart="44dp"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"/>
 
     <TextView

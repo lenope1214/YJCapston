@@ -4,6 +4,7 @@ import com.example.jmjapp.dto.Menu;
 import com.example.jmjapp.dto.Shop;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -18,7 +19,7 @@ import java.util.Map;
 
 public class DataService {
     private String BASE_URL = "http://3.34.55.186:8088/api/v1/"; // 학교2
-    //static final public String BASE_URL = "http://192.168.1.17:8088/api/v1/"; // 학교
+//    static final public String BASE_URL = "http://192.168.1.37:8088/api/v1/"; // 학교
     //private String BASE_URL = "http://122.202.45.37:8088/api/v1/"; // 집
 
     Gson gson = new GsonBuilder().setLenient().create();
@@ -39,11 +40,12 @@ public class DataService {
 interface CreateAPI {
     @Multipart
     @POST("shop") // 매장 등록
-    Call<Shop> insertShop(@Header("Authorization")String jwt ,  @PartMap Map<String, RequestBody> map);
+    Call<Shop> insertShop(@Header("Authorization") String jwt, @PartMap Map<String, RequestBody> map);
 
     @Multipart
     @POST("menu") // 메뉴 등록
-    Call<Menu> insertMenu(@PartMap Map<String, RequestBody> map);
+    Call<ResponseBody> insertMenu(@Header("Authorization") String jwt, @PartMap Map<String, RequestBody> map, @Part MultipartBody.Part file);
+    //
 
     @POST("join") // 회원가입
     Call<String> join(@Body Map<String, String> map);
@@ -73,6 +75,8 @@ interface UpdateAPI {
     @PATCH("shop/{shopid}/reserve") // 매장 예약 수정
     Call<ResponseBody> updateIsRsPos(@Header("Authorization") String jwt, @Path("shopid") String shopid);
 
+    @PATCH("shop") // 매장 수정
+    Call<ResponseBody> updateShop(@Header("Authorization") String jwt, @Body Map<String, String> map);
 }
 
 interface DeleteAPI {

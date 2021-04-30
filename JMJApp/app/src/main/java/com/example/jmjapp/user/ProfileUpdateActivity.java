@@ -70,6 +70,8 @@ public class ProfileUpdateActivity extends AppCompatActivity {
                         SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
                         SharedPreferences.Editor editor = pref.edit();
                         editor.remove("token");
+                        editor.remove("user_id");
+                        editor.remove("role");
                         editor.apply();
 
                         // 앱 변수버리기
@@ -77,17 +79,15 @@ public class ProfileUpdateActivity extends AppCompatActivity {
                         ((JMJApplication)getApplication()).setJwt(null);
                     }
                 });
-
                 builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //원래 페이지로 이동
+                        Log.d("ㄱㄷㄴ","Awda");
                     }
                 });
                 builder.show();
             }
         });
-
         delete_id = findViewById(R.id.delete_id);
         delete_id.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,7 +102,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
 
 
         update_pw_btn.setOnClickListener((v)-> {
-        String newpassword = update_password.getText().toString();
+            String newpassword = update_password.getText().toString();
             if(newpassword.length() == 0){
                 AlertDialog.Builder builder = new AlertDialog.Builder(ProfileUpdateActivity.this);
                 dialog = builder.setMessage("비밀번호를 확인해주세요.").setPositiveButton("확인", null).create();
@@ -136,7 +136,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-                            Log.d("연결실패", "왜???????????");
+                        Log.d("연결실패", "왜???????????");
 
                     }
                 });

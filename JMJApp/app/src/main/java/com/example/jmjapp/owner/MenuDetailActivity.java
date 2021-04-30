@@ -1,10 +1,13 @@
 package com.example.jmjapp.owner;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.jmjapp.Adapter.MenuListRecyclerAdapter;
@@ -19,8 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuDetailActivity extends AppCompatActivity {
-    FloatingActionButton menu_register;
-    private String shopNumber;
+    TextView menu_register;
+    public static String shopNumber;
     DataService dataService = new DataService();
     private MenuListRecyclerAdapter adapter;
     private RecyclerView menu_list;
@@ -30,6 +33,12 @@ public class MenuDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_detail);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.menuList_toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.arrowback);
 
         Intent intent = getIntent();
         shopNumber = intent.getStringExtra("shopNumber");
@@ -66,8 +75,8 @@ public class MenuDetailActivity extends AppCompatActivity {
                         mItems.clear();
                         for(Menu list : menuList) {
                             mItems.add(new Menu(list.getId(), list.getName(), list.getIntro(),
-                                    list.getIs_sale(), list.getIs_popular(),list.getPrice(),
-                                    list.getDuration(), list.getImg_url()));
+                                    list.getIsSale(), list.getIsPopular(),list.getPrice(),
+                                    list.getDuration(), list.getImgPath()));
                             menu_list.setHasFixedSize(true);
                             adapter.setItems(mItems);
                             menu_list.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -84,6 +93,14 @@ public class MenuDetailActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

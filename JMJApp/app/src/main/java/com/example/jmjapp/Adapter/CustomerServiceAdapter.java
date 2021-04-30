@@ -14,6 +14,7 @@ import com.example.jmjapp.user.CustomerServiceViewHolder;
 import com.example.jmjapp.user.OnViewHolderItemClickListener1;
 
 import java.util.ArrayList;
+
 //RecyclerViewAdapter
 public class CustomerServiceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 

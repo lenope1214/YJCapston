@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" 
+        android:background="@drawable/main_icon2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/login_layout"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.Toolbar
+            android:id="@+id/login_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            tools:ignore="MissingConstraints" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+                android:id="@+id/tv_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:text="로그인"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="주문의 민족"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            tools:ignore="MissingConstraints"
+            android:fontFamily="@font/we_semibold"
+            android:id="@+id/textView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_toolbar"
+            android:layout_marginTop="44dp" app:layout_constraintHorizontal_bias="0.498"/>
+
+    <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:hint="아이디"
+            android:gravity="center"
+            android:ems="10"
+            android:fontFamily="@font/we_semibold"
+            android:textStyle="bold"
+            android:inputType="text"
+            android:background="@drawable/edittext_login2"
+            tools:ignore="MissingConstraints"
+            android:id="@+id/et_login_id"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            android:layout_marginTop="56dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.496"/>
+
+    <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:hint="비밀번호"
+            android:fontFamily="@font/we_semibold"
+            android:gravity="center"
+            android:ems="10"
+            android:textStyle="bold"
+            android:inputType="textPassword"
+            android:background="@drawable/edittext_login2"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintTop_toBottomOf="@+id/et_login_id"
+            android:layout_marginTop="20dp"
+            android:id="@+id/et_login_pw"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+            android:id="@+id/btn_login"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:fontFamily="@font/we_semibold"
+            android:textColor="#D0BCA1"
+            android:textStyle="bold"
+            tools:ignore="MissingConstraints"
+            android:background="@drawable/button_login"
+            android:text="로그인"
+            app:layout_constraintTop_toBottomOf="@+id/et_login_pw"
+            android:layout_marginTop="28dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.508"/>
+    <TextView
+            android:id="@+id/findidpw"
+            android:fontFamily="@font/we_semibold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="아이디/비밀번호 찾기"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintTop_toBottomOf="@+id/btn_login"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="28dp"/>
+
+    <LinearLayout
+            android:id="@+id/naver_login"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_with_soso"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/findidpw"
+            android:foregroundGravity="center"
+            android:layout_marginTop="120dp"
+            app:layout_constraintHorizontal_bias="0.513">
+
+        <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:adjustViewBounds="false"
+                android:cropToPadding="false"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/naver_icon"/>
+        <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/we_semibold"
+                android:layout_gravity="center_vertical"
+                android:text="네이버로 로그인"
+                android:textSize="18sp"/>
+    </LinearLayout>
+
+
+    <com.google.android.gms.common.SignInButton
+            android:id="@+id/google_login"
+            android:layout_marginTop="10dp"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_above="@+id/naver_login"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintTop_toBottomOf="@+id/naver_login"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+
+    </com.google.android.gms.common.SignInButton>
+    <LinearLayout
+            android:id="@+id/btn_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/google_login"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintVertical_bias="0.786">
+
+        <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/we_semibold"
+                android:text="혹시 주문의 만족이 처음이신가요?"
+                android:textSize="16sp"/>
+
+        <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/we_semibold"
+                android:text="회원가입"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

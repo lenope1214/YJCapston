@@ -2,17 +2,17 @@ package com.example.jmjapp.owner;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.jmjapp.Adapter.RestaurantListRecyclerAdapter;
-import com.example.jmjapp.JMJApplication;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Shop;
 import retrofit2.Call;
@@ -38,11 +38,12 @@ public class ListShopActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_shop);
 
-
         Intent intent = getIntent();
         int owner_number_size = intent.getIntExtra("owner_number_size", 1);
         owner_id = intent.getStringExtra("owner_id");
-        jwt = ((JMJApplication)this.getApplication()).getJwt();
+
+        SharedPreferences pref = getSharedPreferences("auth_o", MODE_PRIVATE);
+        jwt = pref.getString("token", null);
 
         String[] shopId = new String[owner_number_size];
         for (int i=0; i < owner_number_size; i++) {
@@ -79,7 +80,7 @@ public class ListShopActivity extends AppCompatActivity {
                                     list.getIntro(), list.getCloseTime(),
                                     list.getOpenTime(), list.getAddress(),
                                     list.getAddressDetail(), list.getIsRsPos(),
-                                    list.getCategory(), list.getIsOpen()));
+                                    list.getCategory(), list.getIsOpen(), list.getImgPath()));
                             rv_restaurant_list.setHasFixedSize(true);
                             adapter = new RestaurantListRecyclerAdapter(getApplicationContext(), mItems);
                             rv_restaurant_list.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
