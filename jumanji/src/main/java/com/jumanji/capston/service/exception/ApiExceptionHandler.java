@@ -7,7 +7,7 @@ import com.jumanji.capston.service.exception.ShopException.ShopHasExistException
 import com.jumanji.capston.service.exception.ShopException.ShopMissMatchException;
 import com.jumanji.capston.service.exception.ShopException.ShopNotFoundException;
 import com.jumanji.capston.service.exception.UserException.DoLoginExistException;
-import com.jumanji.capston.service.exception.UserException.PasswordMissMatchException;
+import com.jumanji.capston.service.exception.UserException.LoginFailedException;
 import com.jumanji.capston.service.exception.UserException.UserHasExistException;
 import com.jumanji.capston.service.exception.UserException.UserNotFoundException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -35,8 +35,8 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(PasswordMissMatchException.class)
-    public ResponseEntity<ApiErrorResponse> pwHandleException(PasswordMissMatchException ex) {
+    @ExceptionHandler(LoginFailedException.class)
+    public ResponseEntity<ApiErrorResponse> pwHandleException(LoginFailedException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);

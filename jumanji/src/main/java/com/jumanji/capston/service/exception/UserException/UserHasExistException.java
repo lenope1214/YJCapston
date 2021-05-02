@@ -4,11 +4,11 @@ import com.jumanji.capston.service.exception.BasicException;
 
 public class UserHasExistException extends BasicException {
     public UserHasExistException() {
-        super("error-0003", "the ID in use");
+        super("error-103", "The id has exist");
     }
 
     public UserHasExistException(String id) {
-        super("0003", "these id has used - id : " + id);
+        super("error-103", "The id has exist - id : " + id);
     }
 
     public UserHasExistException(String code, String message) {

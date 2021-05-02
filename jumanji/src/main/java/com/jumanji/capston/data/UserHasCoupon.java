@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Getter
 @Entity
-@Table(name="userHasCoupon")
+@Table(name= "USERHASCOUPONS")
 public class UserHasCoupon {
 
     @EmbeddedId

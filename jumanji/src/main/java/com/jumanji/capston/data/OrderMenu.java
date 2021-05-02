@@ -18,12 +18,12 @@ import java.util.List;
 @NoArgsConstructor
 public class OrderMenu implements Serializable {
     @Id
-    private String id; // cartId - timestamp(13) + orderList (2) => (15)
+    private String id; // orderId timestamp(13) + orderList (2) => (15)
 
     @Column(length = 2)
     private int quantity; // 메뉴 수량
 
-    private char using = 'N';
+    private char using = 'N'; // Y, N, R(예, 아니요, 예약)
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id")
