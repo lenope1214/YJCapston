@@ -5,8 +5,7 @@ import com.jumanji.capston.config.jwt.JwtTokenUtil;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.UserRepository;
 import com.jumanji.capston.service.exception.Auth.ForbiddenException;
-import com.jumanji.capston.service.exception.Auth.UnauthorizedException;
-import com.jumanji.capston.service.exception.UserException.PasswordMissMatchException;
+import com.jumanji.capston.service.exception.UserException.LoginFailedException;
 import com.jumanji.capston.service.exception.UserException.UserHasExistException;
 import com.jumanji.capston.service.exception.UserException.UserNotFoundException;
 import com.jumanji.capston.service.interfaces.BasicService;
@@ -124,7 +123,7 @@ public class UserServiceImpl implements UserService, BasicService {
         System.out.println("rawPw : " + rawPassword);
         System.out.println("encPw : " + encodedPassword);
         if (!bCryptPasswordEncoder.matches(rawPassword, encodedPassword))
-            throw new PasswordMissMatchException();
+            throw new LoginFailedException();
     }
 
     public void updateInfo(User user, User.Request newData) {
@@ -138,7 +137,7 @@ public class UserServiceImpl implements UserService, BasicService {
 
     public boolean isEmpty(String id) {
         if (userRepository.findById(id).isEmpty()) return true;
-        throw new UserHasExistException();
+        throw new UserHasExistException(id);
     }
 
 

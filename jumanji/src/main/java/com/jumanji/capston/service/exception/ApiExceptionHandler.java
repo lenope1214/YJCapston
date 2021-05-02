@@ -1,5 +1,7 @@
 package com.jumanji.capston.service.exception;
 
+import com.jumanji.capston.service.exception.EmployeeException.EmployeeHasExistException;
+import com.jumanji.capston.service.exception.EmployeeException.EmployeeNotFoundException;
 import com.jumanji.capston.service.exception.MenuException.MenuHasExistException;
 import com.jumanji.capston.service.exception.OrderMenuException.OrderMenuNotFoundException;
 import com.jumanji.capston.service.exception.ShopException.NoShopListException;
@@ -7,7 +9,7 @@ import com.jumanji.capston.service.exception.ShopException.ShopHasExistException
 import com.jumanji.capston.service.exception.ShopException.ShopMissMatchException;
 import com.jumanji.capston.service.exception.ShopException.ShopNotFoundException;
 import com.jumanji.capston.service.exception.UserException.DoLoginExistException;
-import com.jumanji.capston.service.exception.UserException.PasswordMissMatchException;
+import com.jumanji.capston.service.exception.UserException.LoginFailedException;
 import com.jumanji.capston.service.exception.UserException.UserHasExistException;
 import com.jumanji.capston.service.exception.UserException.UserNotFoundException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -35,8 +37,8 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(PasswordMissMatchException.class)
-    public ResponseEntity<ApiErrorResponse> pwHandleException(PasswordMissMatchException ex) {
+    @ExceptionHandler(LoginFailedException.class)
+    public ResponseEntity<ApiErrorResponse> pwHandleException(LoginFailedException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -112,4 +114,19 @@ public class ApiExceptionHandler {
                 new ApiErrorResponse("badRequest-0001", "헤더가 제대로 넘어오지 않습니다.");
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(EmployeeNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> empNotFoundException(EmployeeNotFoundException ex) {
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(EmployeeHasExistException.class)
+    public ResponseEntity<ApiErrorResponse> empHasExistException(EmployeeHasExistException ex) {
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
 }
