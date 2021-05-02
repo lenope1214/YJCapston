@@ -1,9 +1,7 @@
 package com.jumanji.capston.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.checkerframework.checker.units.qual.C;
 
 import javax.persistence.*;
@@ -13,6 +11,7 @@ import java.util.Date;
 @Getter
 @Entity
 @Table(name="employees")
+@Builder @AllArgsConstructor @NoArgsConstructor @ToString
 public class Employee {
     @Id
     private String id; //리뷰번호 식당번호(10) + 'e' + 직원번호(3)
@@ -25,10 +24,11 @@ public class Employee {
     @Column(length = 11)
     private String phone; // 전화번호
 
-    @NoArgsConstructor @AllArgsConstructor @Getter
+    @NoArgsConstructor @Getter
     public static class Request{
         private String shopId;
         private String empName;
+        private int empNo;
         private String birthday; // yyyyMMdd
         private String hiredate; // yyyyMMdd
         private char gender; // 성별
@@ -44,6 +44,20 @@ public class Employee {
         private String hiredate; // yyyyMMdd
         private char gender; // 성별
         private String phone; // 전화번호
+
+        public Response(Employee employee){
+            this.shopId = employee.getId().substring(0, 10);
+            this.empNo = employee.parseEmpNo(employee.getId());
+            this.empName = employee.getName();
+            this.birthday = DateOperator.dateToYYYYMMDD(employee.getBirthday());
+            this.hiredate = DateOperator.dateToYYYYMMDD(employee.getHiredate());
+            this.gender = employee.getGender();
+            this.phone = employee.getPhone();
+        }
+    }
+
+    public int parseEmpNo(String empId){
+        return Integer.parseInt(empId.substring(11, 14));
     }
 
 }

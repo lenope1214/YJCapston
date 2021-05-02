@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateOperator {
+    static final SimpleDateFormat YYYYMMDD = new SimpleDateFormat("yyyy/MM/dd");
     public static Date stringToMilisecond(String date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
         Date parseDate = null;
@@ -24,14 +25,22 @@ public class DateOperator {
 
     public static String dateToYYYYMMDD(Date date) {
         if (date != null) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-            return dateFormat.format(date);
+            return YYYYMMDD.format(date);
         }
         return null;
     }
 
     public static Timestamp strToTimestamp(String string) {
         return java.sql.Timestamp.valueOf(string);
+    }
+
+    public static Date strToDate(String string){
+        try {
+            return YYYYMMDD.parse(string);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 //    public static Timestamp stringToTimestamp(Time time){
