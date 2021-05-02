@@ -1,4 +1,4 @@
-package com.jumanji.capston.repository;
-
-public class UserRepositoryIntegreTest {
-}
+//package com.jumanji.capston.repository;
+//
+//public class UserRepositoryIntegreTest {
+//}
