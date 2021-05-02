@@ -60,7 +60,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .id(empId)
                 .name(request.getEmpName())
                 .birthday(DateOperator.strToDate(request.getBirthday()))
-                .hiredate(new Date())
+                .hiredate(DateOperator.strToDate(request.getHiredate()))
                 .phone(request.getPhone())
                 .gender(request.getGender())
                 .build();
