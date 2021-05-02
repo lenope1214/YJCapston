@@ -33,7 +33,6 @@ public class EmployeeController {
     @PostMapping("/shop/employee")
     public ResponseEntity<?> getShopPos(@RequestHeader String authorization, @RequestBody Employee.Request request){
         Employee employee = employeeService.post(authorization, request);
-        System.out.println("empolyee id : " + employee.getId() );
         Employee.Response response = new Employee.Response(employee);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

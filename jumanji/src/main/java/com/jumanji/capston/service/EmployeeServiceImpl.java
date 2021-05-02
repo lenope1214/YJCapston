@@ -8,6 +8,7 @@ import com.jumanji.capston.repository.EmployeeRepository;
 import com.jumanji.capston.service.exception.EmployeeException.EmployeeHasExistException;
 import com.jumanji.capston.service.exception.EmployeeException.EmployeeNotFoundException;
 import com.jumanji.capston.service.interfaces.EmployeeService;
+import javassist.tools.web.BadHttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,11 +52,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         String empId = toEmpId(request.getShopId(), request.getEmpNo());
 
         // 유효성 검사
+        if(request.getEmpNo() == 0)throw new CanNotBeZero();
         userService.isLogin(authorization);
         isEmpty(empId);
         
         // 서비스
-        System.out.println("empId : " + empId);
         Employee employee = Employee.builder()
                 .id(empId)
                 .name(request.getEmpName())
@@ -66,13 +67,21 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .build();
         System.out.println(employee.toString());
         Employee e = employeeRepository.saveAndFlush(employee);
-        System.out.println("저장 전 id : " + employee.getId());
         return e;
     }
 
     @Override
     public Employee patch(String authorization, Employee.Request request) {
-        return null;
+        String loginId = userService.getMyId(authorization);
+        String empId = toEmpId(request.getShopId(), request.getEmpNo());
+
+        // 유효성 검사
+        userService.isLogin(authorization);
+        Employee employee = isPresent(empId);
+
+        // 서비스
+        employee.update(request);
+        return employee;
     }
 
     @Override
@@ -86,8 +95,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     public Employee isPresent(String empId){
         Optional<Employee> employee = employeeRepository.findById(empId);
-        if(employee.isPresent())throw new EmployeeNotFoundException(empId.substring(11));
-        else return employee.get();
+        if(employee.isPresent())return employee.get();
+        else throw new EmployeeNotFoundException(empId.substring(11));
     }
 
     public boolean isEmpty(String empId){
