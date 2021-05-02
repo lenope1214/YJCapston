@@ -20,6 +20,8 @@ import com.bumptech.glide.Glide;
 import com.example.jmjapp.JMJApplication;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Shop;
+import com.example.jmjapp.network.Server;
+
 import lombok.SneakyThrows;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -31,7 +33,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ShopUpdateActivity extends AppCompatActivity {
-    DataService dataService = new DataService();
+
     private final int GET_GALLERY_IMAGE = 200;
     ImageView shop_update_img;
     TextView shop_update_opentime, shop_update_closetime;
@@ -42,6 +44,9 @@ public class ShopUpdateActivity extends AppCompatActivity {
     private String jwt, shopNumber;
     private String path;
     private Uri selectedImageUri;
+
+    private Call<Shop> shopCall;
+    private Call<ResponseBody> responseBodyCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +81,8 @@ public class ShopUpdateActivity extends AppCompatActivity {
             }
         });
 
-        dataService.read.shop(HomeFragment_O.shopNumber).enqueue(new Callback<Shop>() {
+        shopCall = Server.getInstance().getApi().shop(HomeFragment_O.shopNumber);
+        shopCall.enqueue(new Callback<Shop>() {
             @Override
             public void onResponse(Call<Shop> call, Response<Shop> response) {
                 if (response.code() == 200) {
@@ -186,7 +192,8 @@ public class ShopUpdateActivity extends AppCompatActivity {
                         Log.d("adw",shop_update_opentime.getText().toString()+"$"+shop_update_closetime.getText().toString());
                         Log.d("token", shopNumber+jwt);
 
-                        dataService.update.updateShop("Bearer " + jwt, map).enqueue(new Callback<ResponseBody>() {
+                        responseBodyCall = Server.getInstance().getApi().updateShop("Bearer " + jwt, map);
+                        responseBodyCall.enqueue(new Callback<ResponseBody>() {
                             @SneakyThrows
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -273,5 +280,14 @@ public class ShopUpdateActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(responseBodyCall!=null)
+            responseBodyCall.cancel();
+        if(shopCall!=null)
+            shopCall.cancel();
     }
 }

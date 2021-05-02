@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.jmjapp.JMJApplication;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Shop;
+import com.example.jmjapp.network.Server;
+
 import lombok.SneakyThrows;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -36,9 +38,12 @@ public class RegisterShopActivity extends AppCompatActivity {
 
     private String jwt;
     private AlertDialog dialog;
+
+    private Call<Shop> shopCall;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        DataService dataService = new DataService();
+
         
         String member_id = ((JMJApplication)this.getApplication()).getId();
         SharedPreferences pref = getSharedPreferences("auth_o", MODE_PRIVATE);
@@ -149,7 +154,8 @@ public class RegisterShopActivity extends AppCompatActivity {
 
                 //Log.d("qweq@@@", String.valueOf(idBody.)+nameBody+introBody+addressBody+address_detailBody+open_timeBody+close_timeBody+categoryBody);
 
-                dataService.create.insertShop("Bearer " + jwt, map).enqueue(new Callback<Shop>() {
+                shopCall = Server.getInstance().getApi().insertShop("Bearer " + jwt, map);
+                shopCall.enqueue(new Callback<Shop>() {
                     @SneakyThrows
                     @Override
                     public void onResponse(Call<Shop> call, Response<Shop> response) {
@@ -211,5 +217,12 @@ public class RegisterShopActivity extends AppCompatActivity {
                 }
                 break;
         }
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(shopCall!=null)
+            shopCall.cancel();
     }
 }

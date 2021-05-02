@@ -6,12 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.jmjapp.Adapter.RestaurantRecyclerAdapter;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Shop;
+import com.example.jmjapp.network.Server;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,6 +31,8 @@ public class PageFiveFragment extends Fragment {
     private RecyclerView rv_restaurant_list;
     ArrayList<Shop> mItems = new ArrayList<>();
 
+    private Call<List<Shop>> listShopCall;
+
     public static PageFiveFragment newInstance() {
         // Required empty public constructor
         Bundle args = new Bundle();
@@ -38,10 +44,10 @@ public class PageFiveFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if(view == null) {
+        if (view == null) {
             view = inflater.inflate(R.layout.fragment_page_one, container, false);
 
-            rv_restaurant_list = (RecyclerView)view.findViewById(R.id.rv_restaurant_list);
+            rv_restaurant_list = (RecyclerView) view.findViewById(R.id.rv_restaurant_list);
             adapter = new RestaurantRecyclerAdapter(getContext());
             showList("분식");
         }
@@ -57,18 +63,14 @@ public class PageFiveFragment extends Fragment {
     }
 
     private void showList(String category) {
-        Retrofit retrofit =new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(ApiService.BASEURL)
-                .build();
-        ApiService apiService = retrofit.create(ApiService.class);
-        Call<List<Shop>> shopCall = apiService.shopList2(category);
-        shopCall.enqueue(new Callback<List<Shop>>() {
+        listShopCall = Server.getInstance().getApi().shopList2(category);
+        listShopCall.enqueue(new Callback<List<Shop>>() {
             @Override
             public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response) {
-                if(response.isSuccessful()) {
-                    if(response.code() == 200) {
+                if (response.isSuccessful()) {
+                    if (response.code() == 200) {
                         List<Shop> shopList = response.body();
-                        for(Shop list : shopList) {
+                        for (Shop list : shopList) {
                             Log.e("result : ", list.getCategory());
                             mItems.add(new Shop(list.getShopId(), list.getName(), list.getIntro(), list.getCloseTime(),
                                     list.getOpenTime(), list.getAddress(), list.getAddressDetail(), list.getIsRsPos(),
@@ -89,6 +91,12 @@ public class PageFiveFragment extends Fragment {
 
             }
         });
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (listShopCall != null)
+            listShopCall.cancel();
     }
 }

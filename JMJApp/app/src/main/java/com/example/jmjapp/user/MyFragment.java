@@ -39,10 +39,10 @@ public class MyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.my_fragment, container, false);
 
-        String id = ((JMJApplication)this.getActivity().getApplication()).getId();
+        String id = ((JMJApplication) this.getActivity().getApplication()).getId();
 
         Bundle bundle = getArguments();
-        user_id = bundle.getString("user_id","nothing");
+        user_id = bundle.getString("user_id", "nothing");
 
         profile_text = rootView.findViewById(R.id.profile_text);
 
@@ -69,21 +69,21 @@ public class MyFragment extends Fragment {
             }
         });
 
-        point_record.setOnClickListener(new View.OnClickListener(){
+        point_record.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if(id == null) {
+                if (id == null) {
                     new AlertDialog.Builder(getActivity()) // TestActivity 부분에는 현재 Activity의 이름 입력.
                             .setMessage("로그인이 필요한 서비스입니다.")     // 제목 부분 (직접 작성)
                             .setPositiveButton("로그인", new DialogInterface.OnClickListener() {      // 버튼1 (직접 작성)
-                                public void onClick(DialogInterface dialog, int which){
+                                public void onClick(DialogInterface dialog, int which) {
                                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                                     startActivity(intent); // 실행할 코드
                                 }
                             })
                             .setNegativeButton("취소", new DialogInterface.OnClickListener() {     // 버튼2 (직접 작성)
-                                public void onClick(DialogInterface dialog, int which){
+                                public void onClick(DialogInterface dialog, int which) {
                                     // 실행할 코드
                                 }
                             })
@@ -97,21 +97,21 @@ public class MyFragment extends Fragment {
         });
 
 
-        visit_record.setOnClickListener(new View.OnClickListener(){
+        visit_record.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if(id == null) {
+                if (id == null) {
                     new AlertDialog.Builder(getActivity()) // TestActivity 부분에는 현재 Activity의 이름 입력.
                             .setMessage("로그인이 필요한 서비스입니다.")     // 제목 부분 (직접 작성)
                             .setPositiveButton("로그인", new DialogInterface.OnClickListener() {      // 버튼1 (직접 작성)
-                                public void onClick(DialogInterface dialog, int which){
+                                public void onClick(DialogInterface dialog, int which) {
                                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                                     startActivity(intent); // 실행할 코드
                                 }
                             })
                             .setNegativeButton("취소", new DialogInterface.OnClickListener() {     // 버튼2 (직접 작성)
-                                public void onClick(DialogInterface dialog, int which){
+                                public void onClick(DialogInterface dialog, int which) {
                                     // 실행할 코드
                                 }
                             })
@@ -125,21 +125,21 @@ public class MyFragment extends Fragment {
         });
 
 
-        review_record.setOnClickListener(new View.OnClickListener(){
+        review_record.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if(id == null) {
+                if (id == null) {
                     new AlertDialog.Builder(getActivity()) // TestActivity 부분에는 현재 Activity의 이름 입력.
                             .setMessage("로그인이 필요한 서비스입니다.")     // 제목 부분 (직접 작성)
                             .setPositiveButton("로그인", new DialogInterface.OnClickListener() {      // 버튼1 (직접 작성)
-                                public void onClick(DialogInterface dialog, int which){
+                                public void onClick(DialogInterface dialog, int which) {
                                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                                     startActivity(intent); // 실행할 코드
                                 }
                             })
                             .setNegativeButton("취소", new DialogInterface.OnClickListener() {     // 버튼2 (직접 작성)
-                                public void onClick(DialogInterface dialog, int which){
+                                public void onClick(DialogInterface dialog, int which) {
                                     // 실행할 코드
                                 }
                             })
@@ -153,21 +153,21 @@ public class MyFragment extends Fragment {
         });
 
 
-        zzim_record.setOnClickListener(new View.OnClickListener(){
+        zzim_record.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if(id == null) {
+                if (id == null) {
                     new AlertDialog.Builder(getActivity()) // TestActivity 부분에는 현재 Activity의 이름 입력.
                             .setMessage("로그인이 필요한 서비스입니다.")     // 제목 부분 (직접 작성)
                             .setPositiveButton("로그인", new DialogInterface.OnClickListener() {      // 버튼1 (직접 작성)
-                                public void onClick(DialogInterface dialog, int which){
+                                public void onClick(DialogInterface dialog, int which) {
                                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                                     startActivity(intent); // 실행할 코드
                                 }
                             })
                             .setNegativeButton("취소", new DialogInterface.OnClickListener() {     // 버튼2 (직접 작성)
-                                public void onClick(DialogInterface dialog, int which){
+                                public void onClick(DialogInterface dialog, int which) {
                                     // 실행할 코드
                                 }
                             })
@@ -181,7 +181,7 @@ public class MyFragment extends Fragment {
         });
 
         notice_constraint = rootView.findViewById(R.id.notice_constraint);
-        notice_constraint.setOnClickListener(new View.OnClickListener(){
+        notice_constraint.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -191,7 +191,7 @@ public class MyFragment extends Fragment {
         });
 
         service_constraint = rootView.findViewById(R.id.service_constraint);
-        service_constraint.setOnClickListener(new View.OnClickListener(){
+        service_constraint.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -201,7 +201,7 @@ public class MyFragment extends Fragment {
         });
 
         info_constraint = rootView.findViewById(R.id.info_constraint);
-        info_constraint.setOnClickListener(new View.OnClickListener(){
+        info_constraint.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -216,7 +216,7 @@ public class MyFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if(user_id.equals("nothing")) {
+        if (user_id.equals("nothing")) {
             login_btn.setVisibility(View.VISIBLE);
             profile_btn.setVisibility(View.GONE);
         } else {

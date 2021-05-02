@@ -10,11 +10,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import com.example.jmjapp.JMJApplication;
 import com.example.jmjapp.R;
+import com.example.jmjapp.network.Server;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,12 +28,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProfileUpdateActivity extends AppCompatActivity {
-    DataService dataService = new DataService();
+
     TextView logout_btn, user_profile_id, delete_id;
     EditText update_password;
     Button update_pw_btn;
     private AlertDialog dialog;
     private String jwt;
+    private Call<ResponseBody> responseBodyCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +47,11 @@ public class ProfileUpdateActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.arrowback);
 
-        String id =  ((JMJApplication)getApplication()).getId();
+        String id = ((JMJApplication) getApplication()).getId();
 
-        SharedPreferences pref = getSharedPreferences("auth",MODE_PRIVATE);
-        jwt = pref.getString("token",null);
-        Log.d("llllllllllllllllll","Bearer " + jwt);
+        SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
+        jwt = pref.getString("token", null);
+        Log.d("llllllllllllllllll", "Bearer " + jwt);
 
         user_profile_id = findViewById(R.id.user_profile_id);
         user_profile_id.setText(id);
@@ -75,14 +79,14 @@ public class ProfileUpdateActivity extends AppCompatActivity {
                         editor.apply();
 
                         // 앱 변수버리기
-                        ((JMJApplication)getApplication()).setId(null);
-                        ((JMJApplication)getApplication()).setJwt(null);
+                        ((JMJApplication) getApplication()).setId(null);
+                        ((JMJApplication) getApplication()).setJwt(null);
                     }
                 });
                 builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d("ㄱㄷㄴ","Awda");
+                        Log.d("ㄱㄷㄴ", "Awda");
                     }
                 });
                 builder.show();
@@ -101,9 +105,9 @@ public class ProfileUpdateActivity extends AppCompatActivity {
         update_pw_btn = findViewById(R.id.update_pw_btn);
 
 
-        update_pw_btn.setOnClickListener((v)-> {
+        update_pw_btn.setOnClickListener((v) -> {
             String newpassword = update_password.getText().toString();
-            if(newpassword.length() == 0){
+            if (newpassword.length() == 0) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ProfileUpdateActivity.this);
                 dialog = builder.setMessage("비밀번호를 확인해주세요.").setPositiveButton("확인", null).create();
                 dialog.show();
@@ -111,11 +115,12 @@ public class ProfileUpdateActivity extends AppCompatActivity {
                 Map<String, String> map = new HashMap();
                 map.put("password", newpassword);
 
-                dataService.update.updateOne("Bearer "+jwt,map).enqueue(new Callback<ResponseBody>() {
+                responseBodyCall = Server.getInstance().getApi().updateOne("Bearer " + jwt, map);
+                responseBodyCall.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        System.out.println(response.code()+"7777777777777777777");
-                        if (response.code()==200){
+                        System.out.println(response.code() + "7777777777777777777");
+                        if (response.code() == 200) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(ProfileUpdateActivity.this);
                             dialog = builder.setMessage("비밀번호가 변경되었습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                 @Override
@@ -146,10 +151,17 @@ public class ProfileUpdateActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (responseBodyCall != null)
+            responseBodyCall.cancel();
     }
 
 }
