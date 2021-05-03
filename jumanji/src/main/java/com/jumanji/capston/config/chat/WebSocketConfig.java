@@ -27,6 +27,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) { // stomp 사용시..
         // 연결 URL : ws://localhost:port/ws-stomp/websocket
         registry.addEndpoint("/ws-stomp")
+                .setAllowedOriginPatterns("*")
                 .setAllowedOrigins("http://localhost:3000") // react 포트가 3000이라서 3000으로 뒀었음. 모든 포트 허용 : ** 은 allowCredentials가 true라서 안된다고 함. 뭐지?
                 .withSockJS();
         // withSockJs 사용시의 장점
