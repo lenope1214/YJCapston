@@ -1,6 +1,5 @@
 package com.example.jmjapp.owner;
 
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,16 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import com.example.jmjapp.IntroScreen;
 import com.example.jmjapp.JMJApplication;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Shop;
+import com.example.jmjapp.network.Server;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,14 +34,17 @@ import java.util.Map;
 public class ShopDetailFragment_O extends Fragment {
     Button toggle_button_on, toggle_button_off, toggle_button_res_on, toggle_button_res_off;
     TextView owner_logout_btn, owner_name_tv;
-    ConstraintLayout shop_detail_menu_button, shop_detail_update_button, move_employee_option;
-    DataService dataService = new DataService();
+    ConstraintLayout shop_detail_menu_button, shop_detail_update_button;
     boolean is_check = true;
     boolean is_check2 = true;
     private android.app.AlertDialog dialog;
     private String jwt, shopNumber, owner_id;
     private String isOpen, isRsPos;
     private Map<String, String> map = new HashMap();
+
+    private Call<Shop> shopCall;
+    private Call<ResponseBody> responseBodyCall;
+
     Context context;
     public ShopDetailFragment_O() {
 
@@ -68,7 +70,7 @@ public class ShopDetailFragment_O extends Fragment {
 
         Bundle bundle = getArguments();
         shopNumber = bundle.getString("shopNumber","dwad");
-        
+
         //jwt = ((JMJApplication) this.getActivity().getApplication()).getJwt();
 
         SharedPreferences pref = getActivity().getSharedPreferences("auth_o", Context.MODE_PRIVATE);
@@ -115,7 +117,8 @@ public class ShopDetailFragment_O extends Fragment {
             }
         });
 
-        dataService.read.shop(shopNumber).enqueue(new Callback<Shop>() {
+        shopCall = Server.getInstance().getApi().shop(shopNumber);
+        shopCall.enqueue(new Callback<Shop>() {
             @Override
             public void onResponse(Call<Shop> call, Response<Shop> response) {
                 if(response.code() == 200) {
@@ -166,7 +169,8 @@ public class ShopDetailFragment_O extends Fragment {
                     builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            dataService.update.updateOpen("Bearer " + jwt, shopNumber).enqueue(new Callback<ResponseBody>() {
+                            responseBodyCall = Server.getInstance().getApi().updateOpen("Bearer " + jwt, shopNumber);
+                            responseBodyCall.enqueue(new Callback<ResponseBody>() {
                                 @Override
                                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                     if (response.isSuccessful()) {
@@ -210,7 +214,8 @@ public class ShopDetailFragment_O extends Fragment {
                     builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            dataService.update.updateOpen("Bearer " + jwt, shopNumber).enqueue(new Callback<ResponseBody>() {
+                            responseBodyCall = Server.getInstance().getApi().updateOpen("Bearer " + jwt, shopNumber);
+                            responseBodyCall.enqueue(new Callback<ResponseBody>() {
                                 @Override
                                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                     if (response.isSuccessful()) {
@@ -254,7 +259,8 @@ public class ShopDetailFragment_O extends Fragment {
                     builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            dataService.update.updateIsRsPos("Bearer " + jwt, shopNumber).enqueue(new Callback<ResponseBody>() {
+                            responseBodyCall = Server.getInstance().getApi().updateIsRsPos("Bearer " + jwt, shopNumber);
+                            responseBodyCall.enqueue(new Callback<ResponseBody>() {
                                 @Override
                                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                     if (response.isSuccessful()) {
@@ -298,7 +304,8 @@ public class ShopDetailFragment_O extends Fragment {
                     builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            dataService.update.updateIsRsPos("Bearer " + jwt, shopNumber).enqueue(new Callback<ResponseBody>() {
+                            responseBodyCall = Server.getInstance().getApi().updateIsRsPos("Bearer " + jwt, shopNumber);
+                            responseBodyCall.enqueue(new Callback<ResponseBody>() {
                                 @Override
                                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                     if (response.isSuccessful()) {
@@ -379,6 +386,15 @@ public class ShopDetailFragment_O extends Fragment {
         });
 
         return rootView;
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if(responseBodyCall!=null)
+            responseBodyCall.cancel();
+        if(shopCall!=null)
+            shopCall.cancel();
     }
 
 }

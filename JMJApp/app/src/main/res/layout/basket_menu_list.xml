@@ -13,8 +13,8 @@
 
     <ImageView
             android:id="@+id/iv_menu_img2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:padding="10dp"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/img_ready"
@@ -69,7 +69,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="14dp"
             app:layout_constraintVertical_bias="0.730"
             app:layout_constraintStart_toEndOf="@+id/tv_menu_price2"
             app:layout_constraintHorizontal_bias="1.0">

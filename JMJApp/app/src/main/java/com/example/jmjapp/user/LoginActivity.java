@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.example.jmjapp.JMJApplication;
 import com.example.jmjapp.dto.Shop;
+import com.example.jmjapp.network.Server;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.common.SignInButton;
 import com.google.firebase.auth.*;
@@ -36,7 +37,8 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
-    DataService dataService = new DataService();
+
+    private Call<ResponseBody> responseBodyCall;
 
     Button btn_signup;
     LinearLayout naver_login;
@@ -91,7 +93,8 @@ public class LoginActivity extends AppCompatActivity {
                     map.put("id", id);
                     map.put("password", password);
 
-                    dataService.read.LoginOne(map).enqueue(new Callback<ResponseBody>() {
+                    responseBodyCall = Server.getInstance().getApi().LoginOne(map);
+                    responseBodyCall.enqueue(new Callback<ResponseBody>() {
                         @SneakyThrows
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -299,5 +302,13 @@ public class LoginActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(responseBodyCall!=null)
+            responseBodyCall.cancel();
+    }
+
 
 }

@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.jmjapp.Adapter.RestaurantListRecyclerAdapter;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Shop;
+import com.example.jmjapp.network.Server;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListShopActivity extends AppCompatActivity {
-    DataService dataService = new DataService();
     private RecyclerView.Adapter adapter;
     private RecyclerView rv_restaurant_list;
     ArrayList<Shop> mItems = new ArrayList<>();
@@ -32,6 +33,8 @@ public class ListShopActivity extends AppCompatActivity {
 
     private String jwt;
     private String owner_id;
+
+    private Call<List<Shop>> listShopCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +72,8 @@ public class ListShopActivity extends AppCompatActivity {
     }
 
     private void showShopList() {
-        dataService.read.myShop2(jwt).enqueue(new Callback<List<Shop>>() {
+        listShopCall = Server.getInstance().getApi().myShop2(jwt);
+        listShopCall.enqueue(new Callback<List<Shop>>() {
             @Override
             public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response) {
                 if(response.isSuccessful()) {
@@ -121,4 +125,10 @@ public class ListShopActivity extends AppCompatActivity {
         alBuilder.show();
     }
 
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(listShopCall!=null)
+            listShopCall.cancel();
+    }
 }

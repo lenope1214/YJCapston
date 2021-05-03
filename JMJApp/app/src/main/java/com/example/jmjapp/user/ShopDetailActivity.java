@@ -16,6 +16,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.jmjapp.Adapter.DetailPagerAdapter;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Shop;
+import com.example.jmjapp.network.Server;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import retrofit2.Call;
@@ -23,7 +24,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ShopDetailActivity extends AppCompatActivity {
-    DataService dataService = new DataService();
+
 
     static public String shopName;
     static public String shopNumber;
@@ -40,6 +41,8 @@ public class ShopDetailActivity extends AppCompatActivity {
     ImageView shop_detail_avgstar, shop_detail_phonecall_img, shop_detail_zzim_img;
     ConstraintLayout shop_detail_phonecall, shop_detail_zzim;
     FloatingActionButton order_basket;
+
+    private Call<Shop> shopCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,9 +109,8 @@ public class ShopDetailActivity extends AppCompatActivity {
     }
 
     private void showDetail() {
-//        SharedPreferences pref =  getSharedPreferences("auth", MODE_PRIVATE);
-//        String jwt = pref.getString("token", "");
-        dataService.read.shop(shopNumber).enqueue(new Callback<Shop>() {
+        shopCall = Server.getInstance().getApi().shop(shopNumber);
+        shopCall.enqueue(new Callback<Shop>() {
             @Override
             public void onResponse(Call<Shop> call, Response<Shop> response) {
                 if(response.code() == 200) {
@@ -141,5 +143,12 @@ public class ShopDetailActivity extends AppCompatActivity {
             public void onFailure(Call<Shop> call, Throwable t) {
             }
         });
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(shopCall!=null)
+            shopCall.cancel();
     }
 }

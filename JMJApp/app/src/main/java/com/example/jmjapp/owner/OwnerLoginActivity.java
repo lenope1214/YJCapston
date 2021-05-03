@@ -16,6 +16,8 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.jmjapp.JMJApplication;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Shop;
+import com.example.jmjapp.network.Server;
+
 import lombok.SneakyThrows;
 import okhttp3.ResponseBody;
 import org.json.JSONObject;
@@ -28,12 +30,15 @@ import java.util.List;
 import java.util.Map;
 
 public class OwnerLoginActivity extends AppCompatActivity {
-    DataService dataService = new DataService();
+
     EditText et_owner_id, et_owner_pw;
     TextView et_owner_join;
     Button owner_login_button;
 
     private AlertDialog dialog;
+
+    private Call<ResponseBody> responseBodyCall;
+    private Call<List<Shop>> listShopCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +70,8 @@ public class OwnerLoginActivity extends AppCompatActivity {
                     map.put("id", id);
                     map.put("password", password);
 
-                    dataService.read.LoginOne(map).enqueue(new Callback<ResponseBody>() {
+                    responseBodyCall = Server.getInstance().getApi().LoginOne(map);
+                    responseBodyCall.enqueue(new Callback<ResponseBody>() {
                         @SneakyThrows
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -91,7 +97,8 @@ public class OwnerLoginActivity extends AppCompatActivity {
                                     ((JMJApplication)getApplication()).setJwt(jwt);
 
                                     Log.d("result : ", "사업자 로그인 성공");
-                                    dataService.read.myShop2("Bearer " + jwt).enqueue(new Callback<List<Shop>>() {
+                                    listShopCall = Server.getInstance().getApi().myShop2("Bearer " + jwt);
+                                    listShopCall.enqueue(new Callback<List<Shop>>() {
                                         @Override
                                         public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response) {
                                             if(response.code() == 200) {
@@ -180,5 +187,14 @@ public class OwnerLoginActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(responseBodyCall!=null)
+            responseBodyCall.cancel();
+        if(listShopCall!=null)
+            listShopCall.cancel();
     }
 }
