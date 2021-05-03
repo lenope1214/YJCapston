@@ -1,115 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.jmjapp">
+    package="com.example.jmjapp">
 
     <permission
-            android:name="com.example.jmjapp.permission.MAPS_RECEIVE"
-            android:protectionLevel="signature"/>
+        android:name="com.example.jmjapp.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
 
-    <uses-permission android:name="org.techtown.location.permission.MAPS_RECEIVE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="org.techtown.location.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
-    <uses-feature android:name="android.hardware.camera"/>
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
-            android:name=".JMJApplication"
-            android:allowBackup="true"
-            android:hardwareAccelerated="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:requestLegacyExternalStorage="true"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme"
-            android:usesCleartextTraffic="true">
-        <activity android:name=".user.OrderActivity">
-        </activity>
-        <activity android:name=".owner.ShopUpdateActivity">
-        </activity>
-        <activity android:name=".user.BasketActivity">
-        </activity>
-        <activity android:name=".user.MenuChoosedActivity">
-        </activity>
-        <activity android:name=".owner.MenuRegisterActivity">
-        </activity>
-        <activity android:name=".owner.MenuDetailActivity">
-        </activity>
-        <activity android:name=".owner.ListShopActivity">
-        </activity>
-        <activity android:name=".owner.OwnerLoginActivity">
-        </activity>
-        <activity android:name="com.example.jmjapp.user.MembershipWithdrawal"></activity>
-        <activity android:name="com.example.jmjapp.user.RecordZzim" />
-        <activity android:name="com.example.jmjapp.user.RecordReview" />
-        <activity android:name="com.example.jmjapp.user.RecordVisit" />
-        <activity android:name="com.example.jmjapp.user.RecordPoint" />
-        <activity android:name="com.example.jmjapp.user.OperationGuideActivity" />
-        <activity android:name="com.example.jmjapp.user.CustomerServiceActivity" />
-        <activity android:name="com.example.jmjapp.user.NoticeActivity" />
+        android:name=".JMJApplication"
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".owner.EmployeesManagementActivity"></activity>
+        <activity android:name=".user.OrderActivity"></activity>
+        <activity android:name=".owner.ShopUpdateActivity"></activity>
+        <activity android:name=".user.BasketActivity"></activity>
+        <activity android:name=".user.MenuChoosedActivity"></activity>
+        <activity android:name=".owner.MenuRegisterActivity"></activity>
+        <activity android:name=".owner.MenuDetailActivity"></activity>
+        <activity android:name=".owner.ListShopActivity"></activity>
+        <activity android:name=".owner.OwnerLoginActivity"></activity>
+        <activity android:name=".user.MembershipWithdrawal" />
+        <activity android:name=".user.RecordZzim" />
+        <activity android:name=".user.RecordReview" />
+        <activity android:name=".user.RecordVisit" />
+        <activity android:name=".user.RecordPoint" />
+        <activity android:name=".user.OperationGuideActivity" />
+        <activity android:name=".user.CustomerServiceActivity" />
+        <activity android:name=".user.NoticeActivity" />
 
-
-        <uses-library android:name="com.google.android.maps"/>
+        <uses-library android:name="com.google.android.maps" />
         <uses-library
-                android:name="org.apache.http.legacy"
-                android:required="false"/>
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
         <meta-data
-                android:name="com.google.android.geo.API_KEY"
-                android:value="AIzaSyDzrU6ZybJOo_RtvrYo7o_Koown_2Ow_1g"/>
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDzrU6ZybJOo_RtvrYo7o_Koown_2Ow_1g" />
         <meta-data
-                android:name="com.google.android.gms.version"
-                android:value="@integer/google_play_services_version"/>
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".user.MainActivity">
-        </activity>
-        <activity android:name=".user.MenuActivity">
-        </activity>
-        <activity android:name=".user.BellActivity">
-        </activity>
-        <activity android:name=".user.QrReaderActivity">
-        </activity>
-        <activity android:name=".user.ProfileUpdateActivity">
-        </activity>
+        <activity android:name=".user.MainActivity"></activity>
+        <activity android:name=".user.MenuActivity"></activity>
+        <activity android:name=".user.BellActivity"></activity>
+        <activity android:name=".user.QrReaderActivity"></activity>
+        <activity android:name=".user.ProfileUpdateActivity"></activity>
         <activity android:name=".IntroScreen">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-                android:name=".user.CaptureAct"
-                android:screenOrientation="fullSensor"
-                android:stateNotNeeded="true"
-                android:windowSoftInputMode="stateAlwaysHidden">
-        </activity>
-        <activity android:name=".user.LoginActivity">
-        </activity>
-        <activity android:name=".owner.MainActivity_O">
-        </activity>
-        <activity android:name=".owner.RegisterNoActivity">
-        </activity>
-        <activity android:name=".owner.RegisterShopActivity">
-        </activity>
-        <activity android:name=".user.JoinActivity">
-        </activity>
-        <activity android:name=".user.ShopDetailActivity">
-        </activity> <!-- <activity android:name=".user.LogoutActivity"> -->
+            android:name=".user.CaptureAct"
+            android:screenOrientation="fullSensor"
+            android:stateNotNeeded="true"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+        <activity android:name=".user.LoginActivity"></activity>
+        <activity android:name=".owner.MainActivity_O"></activity>
+        <activity android:name=".owner.RegisterNoActivity"></activity>
+        <activity android:name=".owner.RegisterShopActivity"></activity>
+        <activity android:name=".user.JoinActivity"></activity>
+        <activity android:name=".user.ShopDetailActivity"></activity> <!-- <activity android:name=".user.LogoutActivity"> -->
         <!-- </activity> -->
-        <activity android:name=".owner.OwnerJoinActivity">
-        </activity>
-        <activity android:name=".owner.WebViewActivity">
-        </activity>
-        <activity android:name=".payment.PaymentWebview">
-        </activity>
-
+        <activity android:name=".owner.OwnerJoinActivity"></activity>
+        <activity android:name=".owner.WebViewActivity"></activity>
+        <activity android:name=".payment.PaymentWebview"></activity>
     </application>
 
 </manifest>

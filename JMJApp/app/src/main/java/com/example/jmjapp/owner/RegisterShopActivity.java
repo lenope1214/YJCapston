@@ -8,10 +8,13 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.example.jmjapp.JMJApplication;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Shop;
@@ -49,6 +52,12 @@ public class RegisterShopActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_shop);
+
+        androidx.appcompat.widget.Toolbar toolbar = (Toolbar) findViewById(R.id.register_shop_toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.close);
 
         shop_et_id = findViewById(R.id.shop_et_id);
         shop_et_name = findViewById(R.id.shop_et_name);
@@ -211,5 +220,13 @@ public class RegisterShopActivity extends AppCompatActivity {
                 }
                 break;
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
