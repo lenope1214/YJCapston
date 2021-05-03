@@ -48,7 +48,7 @@ public class OrderController {
     }
 
     @Transactional(readOnly = true)
-    @GetMapping("/order")
+    @GetMapping("/order") // My Order List
     public ResponseEntity<?> getOrderList(@RequestHeader String authorization){
         List<Order> orderList = orderService.getList(authorization);
         List<Order.Response> response = new ArrayList<>();

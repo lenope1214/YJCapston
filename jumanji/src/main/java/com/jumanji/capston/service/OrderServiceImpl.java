@@ -1,9 +1,6 @@
 package com.jumanji.capston.service;
 
-import com.jumanji.capston.data.Order;
-import com.jumanji.capston.data.Payment;
-import com.jumanji.capston.data.Shop;
-import com.jumanji.capston.data.User;
+import com.jumanji.capston.data.*;
 import com.jumanji.capston.repository.OrderRepository;
 import com.jumanji.capston.service.exception.OrderException.OrderHasExistException;
 import com.jumanji.capston.service.exception.OrderException.OrderNotFoundException;
@@ -143,7 +140,7 @@ public class OrderServiceImpl implements OrderService {
 
         Order order = isPresent(orderId);
         if(order.getUser().getId().equals(userId))return order;
-        else return null;
+        else throw new OrderNotFoundException(""+orderId.getTime());
     }
 
     public List<Order> getListByShopId(String shopId) {

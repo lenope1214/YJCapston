@@ -5,6 +5,7 @@ import com.jumanji.capston.service.exception.Auth.ForbiddenException;
 import com.jumanji.capston.service.exception.EmployeeException.EmployeeHasExistException;
 import com.jumanji.capston.service.exception.EmployeeException.EmployeeNotFoundException;
 import com.jumanji.capston.service.exception.MenuException.MenuHasExistException;
+import com.jumanji.capston.service.exception.OrderException.OrderNotFoundException;
 import com.jumanji.capston.service.exception.OrderMenuException.OrderMenuNotFoundException;
 import com.jumanji.capston.service.exception.ShopException.NoShopListException;
 import com.jumanji.capston.service.exception.ShopException.ShopHasExistException;
@@ -140,6 +141,13 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(ForbiddenException.class)
     public ResponseEntity<ApiErrorResponse> forbidden(ForbiddenException ex) {
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(OrderNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> orderNotFound(OrderNotFoundException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
