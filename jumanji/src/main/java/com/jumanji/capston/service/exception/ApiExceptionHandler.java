@@ -1,6 +1,7 @@
 package com.jumanji.capston.service.exception;
 
 import com.jumanji.capston.service.CanNotBeZero;
+import com.jumanji.capston.service.exception.Auth.ForbiddenException;
 import com.jumanji.capston.service.exception.EmployeeException.EmployeeHasExistException;
 import com.jumanji.capston.service.exception.EmployeeException.EmployeeNotFoundException;
 import com.jumanji.capston.service.exception.MenuException.MenuHasExistException;
@@ -135,6 +136,13 @@ public class ApiExceptionHandler {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex.getCode(), ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<ApiErrorResponse> forbidden(ForbiddenException ex) {
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
     }
 
 }

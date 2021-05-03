@@ -1,4 +1,4 @@
-package com.jumanji.capston.service.External;
+package com.jumanji.capston.service.external;
 
 import java.io.BufferedReader;
 import java.io.IOException;

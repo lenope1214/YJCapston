@@ -139,9 +139,11 @@ public class OrderServiceImpl implements OrderService {
         throw new OrderHasExistException();
     }
 
-    public boolean isOwnOrder(Timestamp orderId, String userId){
-        Order order = orderRepository.findById(orderId).get();
-        return order.getUser().getId().equals(userId);
+    public Order isOwnOrder(Timestamp orderId, String userId){
+
+        Order order = isPresent(orderId);
+        if(order.getUser().getId().equals(userId))return order;
+        else return null;
     }
 
     public List<Order> getListByShopId(String shopId) {
@@ -153,5 +155,9 @@ public class OrderServiceImpl implements OrderService {
             System.out.println("getUser().getName()" + order.getUser().getName());
         }
         return null;
+    }
+
+    public void statusUpdate(Order order) {
+        orderRepository.save(order);
     }
 }

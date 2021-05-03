@@ -1,14 +1,14 @@
-package com.jumanji.capston.service.External;
+package com.jumanji.capston.service.external;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jumanji.capston.config.IamportConfig;
-import com.jumanji.capston.config.StorageConfig;
-import com.jumanji.capston.data.externalData.iamport.request.AuthData;
-import com.jumanji.capston.data.externalData.iamport.request.CancelData;
-import com.jumanji.capston.data.externalData.iamport.response.AccessToken;
-import com.jumanji.capston.data.externalData.iamport.response.IamportResponse;
-import com.jumanji.capston.data.externalData.iamport.response.Payment;
+import com.jumanji.capston.data.Order;
+import com.jumanji.capston.data.externalData.iamport.Iamport;
+import com.jumanji.capston.service.OrderServiceImpl;
+import com.jumanji.capston.service.ShopServiceImpl;
+import com.jumanji.capston.service.UserServiceImpl;
+import com.jumanji.capston.service.external.iamportAndroid.response.IamportResponse;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
@@ -26,23 +26,30 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
-import java.net.http.HttpClient;
-import java.nio.file.Paths;
+import java.sql.Time;
+import java.sql.Timestamp;
 
 
 @Service
 public class IamportClientService implements ExternalApiService{
     private static final String API_URL = "https://api.iamport.kr";
-    // private static final String API_URL = "http://localhost:8888";
     private String api_key = null;
     private String api_secret = null;
     private CloseableHttpClient client = null;
     private Gson gson = new Gson();
     @Autowired
+    UserServiceImpl userService;
+    @Autowired
+    ShopServiceImpl shopService;
+    @Autowired
+    OrderServiceImpl orderService;
+
+    @Autowired
     public IamportClientService(IamportConfig config) {
 //        System.out.println("StorageServicec constructor...");
         this.api_key = config.getKey();
         this.api_secret = config.getSecret();
+        this.client = HttpClientBuilder.create().build();
     }
 
     public IamportClientService(String api_key, String api_secret) {
@@ -51,15 +58,15 @@ public class IamportClientService implements ExternalApiService{
         this.client = HttpClientBuilder.create().build();
     }
 
-    private IamportResponse<AccessToken> getAuth() throws Exception{
-        AuthData authData = new AuthData(api_key, api_secret);
+    private IamportResponse<Iamport.AccessToken> getAuth() throws Exception{
+        Iamport.AuthData authData = new Iamport.AuthData(api_key, api_secret);
         System.out.println("Iamport api_key : " + api_key);
         System.out.println("Iamport api_secret : " + api_secret);
         String authJsonData = gson.toJson(authData);
-
+        System.out.println("authJsonDate is null?" + (authJsonData == null));
         try {
             StringEntity data = new StringEntity(authJsonData);
-
+            System.out.println("data is null?" + (authJsonData == null));
             HttpPost postRequest = new HttpPost(API_URL+"/users/getToken");
             postRequest.setHeader("Accept", "application/json");
             postRequest.setHeader("Connection","keep-alive");
@@ -78,8 +85,8 @@ public class IamportClientService implements ExternalApiService{
             ResponseHandler<String> handler = new BasicResponseHandler();
             String body = handler.handleResponse(response);
 
-            Type listType = new TypeToken<IamportResponse<AccessToken>>(){}.getType();
-            IamportResponse<AccessToken> auth = gson.fromJson(body, listType);
+            Type listType = new TypeToken<IamportResponse<Iamport.AccessToken>>(){}.getType();
+            IamportResponse<Iamport.AccessToken> auth = gson.fromJson(body, listType);
 
             return auth;
         } catch (UnsupportedEncodingException e) {
@@ -154,44 +161,46 @@ public class IamportClientService implements ExternalApiService{
         return null;
     }
 
-    public String getToken() throws Exception {
+    public String getToken(String authorization) throws Exception {
+        String loginId = userService.getMyId(authorization);
+        // 유효성 체크
+        userService.isLogin(authorization);
 
-        IamportResponse<AccessToken> auth = this.getAuth();
+        IamportResponse<Iamport.AccessToken> auth = this.getAuth();
 
         if( auth != null) {
             String token = auth.getResponse().getToken();
             return token;
         }
-
         return null;
     }
 
-    public IamportResponse<Payment> paymentByImpUid(String impUid) throws Exception {
+    public IamportResponse<Iamport.Payment> paymentByImpUid(String authorization, String impUid) throws Exception {
 
-        String token = this.getToken();
+        String token = this.getToken(authorization);
 
         if(token != null) {
             String path = "/payments/"+impUid;
             String response = this.getRequest(path, token);
 
-            Type listType = new TypeToken<IamportResponse<Payment>>(){}.getType();
-            IamportResponse<Payment> payment = gson.fromJson(response, listType);
+            Type listType = new TypeToken<IamportResponse<Iamport.Payment>>(){}.getType();
+            IamportResponse<Iamport.Payment> payment = gson.fromJson(response, listType);
 
             return payment;
         }
         return null;
     }
 
-    public IamportResponse<Payment> paymentByMerchantUid(String merchantUid) throws Exception {
+    public IamportResponse<Iamport.Payment> paymentByMerchantUid(String authorization, String merchantUid) throws Exception {
 
-        String token = this.getToken();
+        String token = this.getToken(authorization);
 
         if(token != null){
             String path = "/payments/find/"+merchantUid;
             String response = this.getRequest(path, token);
 
-            Type listType = new TypeToken<IamportResponse<Payment>>(){}.getType();
-            IamportResponse<Payment> payment = gson.fromJson(response, listType);
+            Type listType = new TypeToken<IamportResponse<Iamport.Payment>>(){}.getType();
+            IamportResponse<Iamport.Payment> payment = gson.fromJson(response, listType);
 
             return payment;
         }
@@ -199,9 +208,19 @@ public class IamportClientService implements ExternalApiService{
         return null;
     }
 
-    public IamportResponse<Payment> cancelPayment(CancelData cancelData) throws Exception {
-
-        String token = this.getToken();
+    public IamportResponse<Iamport.Payment> cancelPayment(String authorization, Iamport.CancelData cancelData) throws Exception {
+        String token = this.getToken(authorization);
+        String loginId = userService.getMyId(authorization);
+        Long orderId = Long.parseLong(cancelData.getMerchant_uid());
+        Timestamp orderIdTime = new Timestamp(orderId);
+        System.out.println("cancel info >>>>>>>>>" +
+                "loginId : " + loginId + "\n" +
+                "orderId : " + orderId + "\n" +
+                "orderIdTime : " + orderIdTime);
+        // 유효성 체크
+        userService.isLogin(authorization);
+        // shopService.isPresent() 매장 존재여부는 필요 없겠지?
+        Order order = orderService.isOwnOrder(orderIdTime, loginId);
 
         if(token != null){
             String cancelJsonData = gson.toJson(cancelData);
@@ -209,9 +228,10 @@ public class IamportClientService implements ExternalApiService{
 
             String response = this.postRequest("/payments/cancel", token, data);
 
-            Type listType = new TypeToken<IamportResponse<Payment>>(){}.getType();
-            IamportResponse<Payment> payment = gson.fromJson(response, listType);
-
+            Type listType = new TypeToken<IamportResponse<Iamport.Payment>>(){}.getType();
+            IamportResponse<Iamport.Payment> payment = gson.fromJson(response, listType);
+            order.refund();
+            orderService.statusUpdate(order);
             return payment;
         }
         return null;

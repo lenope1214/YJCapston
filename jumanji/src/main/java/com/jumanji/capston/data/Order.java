@@ -118,4 +118,8 @@ public class Order implements Serializable {
         this.pg = request.getPg();
         this.amount = request.getAmount();
     }
+
+    public void refund(){
+        this.status = "rf";
+    }
 }

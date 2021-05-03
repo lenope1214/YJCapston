@@ -1,6 +1,6 @@
 package com.jumanji.capston.controller.externalApiController;
 
-import com.jumanji.capston.service.External.TxprService;
+import com.jumanji.capston.service.external.TxprService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
