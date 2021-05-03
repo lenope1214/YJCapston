@@ -22,7 +22,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     }
 
     @Override
-    public void registerStompEndpoints(StompEndpointRegistry registry) {
+    public void registerStompEndpoints(StompEndpointRegistry registry) { // stomp 사용시..
         // 연결 URL : ws://localhost:port/ws-stomp/websocket
         registry.addEndpoint("/ws-stomp")
                 .setAllowedOrigins("**") // react 포트가 3000이라서 3000으로 뒀었음. 모든 포트 허용 : **
