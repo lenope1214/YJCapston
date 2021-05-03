@@ -16,7 +16,7 @@ import java.util.Scanner;
 
 // 오류 목록
 //The HTTP request to initiate the WebSocket connection to [ws://172.26.2.109:8088/ws-stomp/websocket] failed
-// 해결 방법 :w
+// 해결 방법 :
 @Slf4j
 class StompClientTest {
     public static void main(String[] args) { //            실제 실행중인 서버 주소를 써줘야 함??? ㅁㄹ localhost 안됨?

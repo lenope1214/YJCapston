@@ -29,7 +29,7 @@ public class Employee {
 
     public void update(Request request){
         if (request.getEmpNo() != 0)id = id.substring(0,11) + String.format("%03d", request.getEmpNo());
-        if(request.getHiredate()!=null)hiredate = DateOperator.strToDate(request.getHiredate());
+        if(request.getHiredate()!=null)hiredate = request.getHiredate();
         if(request.getPhone() != null)phone = request.getPhone();
     }
 
@@ -38,8 +38,8 @@ public class Employee {
         private String shopId;
         private String empName;
         private int empNo;
-        private String birthday; // yyyyMMdd
-        private String hiredate; // yyyyMMdd
+        private Date birthday; // yyyy/MM/dd
+        private Date hiredate; // yyyy/MM/dd
         private char gender; // 성별
         private String phone; // 전화번호
     }
@@ -49,8 +49,8 @@ public class Employee {
         private String shopId;
         private int empNo;
         private String empName;
-        private String birthday; // yyyyMMdd
-        private String hiredate; // yyyyMMdd
+        private Date birthday; // yyyyMMdd
+        private Date hiredate; // yyyyMMdd
         private char gender; // 성별
         private String phone; // 전화번호
 
@@ -58,8 +58,8 @@ public class Employee {
             this.shopId = employee.getId().substring(0, 10);
             this.empNo = employee.parseEmpNo(employee.getId());
             this.empName = employee.getName();
-            this.birthday = DateOperator.dateToYYYYMMDD(employee.getBirthday());
-            this.hiredate = DateOperator.dateToYYYYMMDD(employee.getHiredate());
+            this.birthday = employee.getBirthday();
+            this.hiredate = employee.getHiredate();
             this.gender = employee.getGender();
             this.phone = employee.getPhone();
         }
