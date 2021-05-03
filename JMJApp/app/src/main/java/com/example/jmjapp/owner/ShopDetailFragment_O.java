@@ -35,7 +35,7 @@ import java.util.Map;
 public class ShopDetailFragment_O extends Fragment {
     Button toggle_button_on, toggle_button_off, toggle_button_res_on, toggle_button_res_off;
     TextView owner_logout_btn, owner_name_tv;
-    ConstraintLayout shop_detail_menu_button, shop_detail_update_button;
+    ConstraintLayout shop_detail_menu_button, shop_detail_update_button, move_employee_option;
     DataService dataService = new DataService();
     boolean is_check = true;
     boolean is_check2 = true;
@@ -64,6 +64,7 @@ public class ShopDetailFragment_O extends Fragment {
         toggle_button_res_off = rootView.findViewById(R.id.toggle_button_res_off);
         owner_logout_btn = rootView.findViewById(R.id.owner_logout_btn);
         owner_name_tv = rootView.findViewById(R.id.owner_name_tv);
+        move_employee_option = rootView.findViewById(R.id.move_employee_option);
 
         Bundle bundle = getArguments();
         shopNumber = bundle.getString("shopNumber","dwad");
@@ -362,6 +363,16 @@ public class ShopDetailFragment_O extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ShopUpdateActivity.class);
+                intent.putExtra("shopNumber",shopNumber);
+                startActivity(intent);
+            }
+        });
+
+        move_employee_option = rootView.findViewById(R.id.move_employee_option);
+        move_employee_option.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), EmployeesManagementActivity.class);
                 intent.putExtra("shopNumber",shopNumber);
                 startActivity(intent);
             }
