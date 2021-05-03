@@ -2,7 +2,9 @@ package com.jumanji.capston.data.externalData.iamport;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
+import net.minidev.json.annotate.JsonIgnore;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -21,7 +23,7 @@ public class Iamport {
     }
 
     @Getter
-    public static class CancelData {
+    public static class CancelData implements Serializable {
 
         @SerializedName("imp_uid")
         private String imp_uid;

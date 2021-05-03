@@ -31,7 +31,7 @@ import java.sql.Timestamp;
 
 
 @Service
-public class IamportClientService implements ExternalApiService{
+public class IamportClientService implements com.jumanji.capston.service.external.ExternalApiService {
     private static final String API_URL = "https://api.iamport.kr";
     private String api_key = null;
     private String api_secret = null;
@@ -58,7 +58,7 @@ public class IamportClientService implements ExternalApiService{
         this.client = HttpClientBuilder.create().build();
     }
 
-    private IamportResponse<Iamport.AccessToken> getAuth() throws Exception{
+    private IamportResponse<Iamport.AccessToken> getAuth() throws Exception {
         Iamport.AuthData authData = new Iamport.AuthData(api_key, api_secret);
         System.out.println("Iamport api_key : " + api_key);
         System.out.println("Iamport api_secret : " + api_secret);
@@ -67,9 +67,9 @@ public class IamportClientService implements ExternalApiService{
         try {
             StringEntity data = new StringEntity(authJsonData);
             System.out.println("data is null?" + (authJsonData == null));
-            HttpPost postRequest = new HttpPost(API_URL+"/users/getToken");
+            HttpPost postRequest = new HttpPost(API_URL + "/users/getToken");
             postRequest.setHeader("Accept", "application/json");
-            postRequest.setHeader("Connection","keep-alive");
+            postRequest.setHeader("Connection", "keep-alive");
             postRequest.setHeader("Content-Type", "application/json");
 
             postRequest.setEntity(data);
@@ -85,7 +85,8 @@ public class IamportClientService implements ExternalApiService{
             ResponseHandler<String> handler = new BasicResponseHandler();
             String body = handler.handleResponse(response);
 
-            Type listType = new TypeToken<IamportResponse<Iamport.AccessToken>>(){}.getType();
+            Type listType = new TypeToken<IamportResponse<Iamport.AccessToken>>() {
+            }.getType();
             IamportResponse<Iamport.AccessToken> auth = gson.fromJson(body, listType);
 
             return auth;
@@ -96,13 +97,13 @@ public class IamportClientService implements ExternalApiService{
         return null;
     }
 
-    private String postRequest(String path, String token, StringEntity postData) throws URISyntaxException{
+    private String postRequest(String path, String token, StringEntity postData) throws URISyntaxException {
 
         try {
 
-            HttpPost postRequest = new HttpPost(API_URL+path);
+            HttpPost postRequest = new HttpPost(API_URL + path);
             postRequest.setHeader("Accept", "application/json");
-            postRequest.setHeader("Connection","keep-alive");
+            postRequest.setHeader("Connection", "keep-alive");
             postRequest.setHeader("Content-Type", "application/json");
             postRequest.addHeader("Authorization", token);
 
@@ -133,7 +134,7 @@ public class IamportClientService implements ExternalApiService{
 
         try {
 
-            HttpGet getRequest = new HttpGet(API_URL+path);
+            HttpGet getRequest = new HttpGet(API_URL + path);
             getRequest.addHeader("Accept", "application/json");
             getRequest.addHeader("Authorization", token);
 
@@ -168,7 +169,7 @@ public class IamportClientService implements ExternalApiService{
 
         IamportResponse<Iamport.AccessToken> auth = this.getAuth();
 
-        if( auth != null) {
+        if (auth != null) {
             String token = auth.getResponse().getToken();
             return token;
         }
@@ -179,11 +180,12 @@ public class IamportClientService implements ExternalApiService{
 
         String token = this.getToken(authorization);
 
-        if(token != null) {
-            String path = "/payments/"+impUid;
+        if (token != null) {
+            String path = "/payments/" + impUid;
             String response = this.getRequest(path, token);
 
-            Type listType = new TypeToken<IamportResponse<Iamport.Payment>>(){}.getType();
+            Type listType = new TypeToken<IamportResponse<Iamport.Payment>>() {
+            }.getType();
             IamportResponse<Iamport.Payment> payment = gson.fromJson(response, listType);
 
             return payment;
@@ -195,11 +197,12 @@ public class IamportClientService implements ExternalApiService{
 
         String token = this.getToken(authorization);
 
-        if(token != null){
-            String path = "/payments/find/"+merchantUid;
+        if (token != null) {
+            String path = "/payments/find/" + merchantUid;
             String response = this.getRequest(path, token);
 
-            Type listType = new TypeToken<IamportResponse<Iamport.Payment>>(){}.getType();
+            Type listType = new TypeToken<IamportResponse<Iamport.Payment>>() {
+            }.getType();
             IamportResponse<Iamport.Payment> payment = gson.fromJson(response, listType);
 
             return payment;
@@ -208,10 +211,11 @@ public class IamportClientService implements ExternalApiService{
         return null;
     }
 
-    public IamportResponse<Iamport.Payment> cancelPayment(String authorization, Iamport.CancelData cancelData) throws Exception {
+    //    public IamportResponse<Iamport.Payment> cancelPayment(String authorization, Iamport.CancelData cancelData) throws Exception {
+    public IamportResponse<Iamport.Payment> cancelPayment(String authorization, String m_id) throws Exception {
         String token = this.getToken(authorization);
         String loginId = userService.getMyId(authorization);
-        Long orderId = Long.parseLong(cancelData.getMerchant_uid());
+        Long orderId = Long.parseLong(m_id);
         Timestamp orderIdTime = new Timestamp(orderId);
         System.out.println("cancel info >>>>>>>>>" +
                 "loginId : " + loginId + "\n" +
@@ -222,13 +226,15 @@ public class IamportClientService implements ExternalApiService{
         // shopService.isPresent() 매장 존재여부는 필요 없겠지?
         Order order = orderService.isOwnOrder(orderIdTime, loginId);
 
-        if(token != null){
+        if (token != null) {
+            Iamport.CancelData cancelData = new Iamport.CancelData(m_id, false); // imp_uid 가 아니면, m_id 넣게 되어있음.
             String cancelJsonData = gson.toJson(cancelData);
             StringEntity data = new StringEntity(cancelJsonData);
 
             String response = this.postRequest("/payments/cancel", token, data);
 
-            Type listType = new TypeToken<IamportResponse<Iamport.Payment>>(){}.getType();
+            Type listType = new TypeToken<IamportResponse<Iamport.Payment>>() {
+            }.getType();
             IamportResponse<Iamport.Payment> payment = gson.fromJson(response, listType);
             order.refund();
             orderService.statusUpdate(order);
