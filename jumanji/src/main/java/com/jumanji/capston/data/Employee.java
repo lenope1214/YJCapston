@@ -16,21 +16,30 @@ public class Employee {
     @Id
     private String id; //리뷰번호 식당번호(10) + 'e' + 직원번호(3)
 
-    @Column(length = 15)
+    @Column(length = 15, updatable = false)
     private String name; // 이름
+    @Column(updatable = false)
     private Date birthday; // 생년월일
     private Date hiredate; // 고용일
+    @Column(updatable = false)
     private char gender; // 성별
     @Column(length = 11)
     private String phone; // 전화번호
+
+
+    public void update(Request request){
+        if (request.getEmpNo() != 0)id = id.substring(0,11) + String.format("%03d", request.getEmpNo());
+        if(request.getHiredate()!=null)hiredate = request.getHiredate();
+        if(request.getPhone() != null)phone = request.getPhone();
+    }
 
     @NoArgsConstructor @Getter
     public static class Request{
         private String shopId;
         private String empName;
         private int empNo;
-        private String birthday; // yyyyMMdd
-        private String hiredate; // yyyyMMdd
+        private Date birthday; // yyyy/MM/dd
+        private Date hiredate; // yyyy/MM/dd
         private char gender; // 성별
         private String phone; // 전화번호
     }

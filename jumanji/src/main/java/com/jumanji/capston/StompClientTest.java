@@ -1,6 +1,6 @@
 package com.jumanji.capston;
 
-import com.jumanji.capston.data.externalData.iamport.ChatMessage;
+import com.jumanji.capston.data.ChatMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
@@ -14,10 +14,13 @@ import org.springframework.web.socket.messaging.WebSocketStompClient;
 import java.lang.reflect.Type;
 import java.util.Scanner;
 
+// 오류 목록
+//The HTTP request to initiate the WebSocket connection to [ws://172.26.2.109:8088/ws-stomp/websocket] failed
+// 해결 방법 :
 @Slf4j
 class StompClientTest {
-    public static void main(String[] args) { //            실제 실행중인 서버 주소를 써줘야 함. localhost 안됨.
-        StompChatClient client = new StompChatClient("ws://localhost:8088/ws-stomp/websocket", "/sub/chat/1");
+    public static void main(String[] args) { //            실제 실행중인 서버 주소를 써줘야 함??? ㅁㄹ localhost 안됨?
+        StompChatClient client = new StompChatClient("ws://172.26.2.109:8088/ws-stomp/websocket", "/sub/chat/1");
         client.connect();
 
         while (true) {
@@ -29,8 +32,9 @@ class StompClientTest {
 //                String message = commands[1];
                 Integer roomSeq = 1;
                 String message = line;
+                String username = "test";
 
-                client.send("/pub/chat", new ChatMessage(roomSeq, message));
+                client.send("/pub/chat", new ChatMessage(roomSeq, username,message));
             } catch (Exception e) {
                 log.error("error", e);
             }

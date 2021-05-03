@@ -66,22 +66,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("happydaddy")
-                .password("{noop}1234")
-                .roles("USER")
-                .and()
-                .withUser("angrydaddy")
-                .password("{noop}1234")
-                .roles("USER")
-                .and()
-                .withUser("guest")
-                .password("{noop}1234")
-                .roles("GUEST");
-        auth.jdbcAuthentication().dataSource(dataSource);
-        auth
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(bCryptPasswordEncoder());
+//        auth.inMemoryAuthentication()
+//                .withUser("happydaddy")
+//                .password("{noop}1234")
+//                .roles("USER")
+//                .and()
+//                .withUser("angrydaddy")
+//                .password("{noop}1234")
+//                .roles("USER")
+//                .and()
+//                .withUser("guest")
+//                .password("{noop}1234")
+//                .roles("GUEST");
+//        auth.jdbcAuthentication().dataSource(dataSource);
+//        auth
+//                .userDetailsService(userDetailsService)
+//                .passwordEncoder(bCryptPasswordEncoder());
     }
 
     @Bean

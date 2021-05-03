@@ -1,6 +1,6 @@
 package com.jumanji.capston.controller.chatting;
 
-import com.jumanji.capston.data.externalData.iamport.ChatMessage;
+import com.jumanji.capston.data.ChatMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
@@ -23,7 +23,10 @@ public class ChatController {
     @MessageMapping("/chat") // "/pub/chat"
     public void publishChat(ChatMessage chatMessage) {
         log.info("publishChat : {}", chatMessage);
-
+//        if(chatMessage.getMessage().contains(":")){
+//            chatMessage.setUsername(chatMessage.getMessage().substring(0, chatMessage.getMessage().indexOf(":")));
+//            chatMessage.setMessage(chatMessage.getMessage().substring(chatMessage.getMessage().indexOf(":")));
+//        }
         messagingTemplate.convertAndSend("/sub/chat/" + chatMessage.getRoomSeq(), chatMessage);
     }
 

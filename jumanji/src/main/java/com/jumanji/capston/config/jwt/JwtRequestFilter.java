@@ -56,9 +56,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 //        System.out.println("In JwtRequestFilter");
-        if (shouldNotFilter(request)) {
-            filterChain.doFilter(request, response);
-        }
+//        if (shouldNotFilter(request)) {
+//            filterChain.doFilter(request, response);
+//        }
         final String requestTokenHeader = request.getHeader("Authorization");
 //        System.out.println("TOKEN : " + requestTokenHeader );
         String username = null;
@@ -117,25 +117,25 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    @Override
-    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-//        System.out.println(request.getServletPath());
+//    @Override
+//    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+//        System.out.println("요청 url : " +request.getServletPath());
 //        for(String path :request.getServletPath().split("/") ){
 //            System.out.println("-------> " + path);
 //        }
 //        System.out.println("비교할 context split res : " + request.getServletPath().split("/")[3]);
 //        System.out.print("exclude 결과 : ");
 //        System.out.println(EXCLUDE_URL.stream().anyMatch(exclude -> exclude.equalsIgnoreCase(request.getServletPath().split("/")[3])));
-        String[] args = request.getServletPath().split("/");
-
-        if(request.getServletPath().split("/")[1].equals("ws-stomp")){
-            System.out.println("chatting !");
-            return true;
-        }
-        if(args.length > 2) {
-            return EXCLUDE_URL.stream().anyMatch(exclude -> exclude.equalsIgnoreCase(request.getServletPath().split("/")[3]));
-        }
-        return false;
-    }
+//        String[] args = request.getServletPath().split("/");
+//        String path1 = request.getServletPath().split("/")[1];
+//        if(path1.equals("ws-stomp") || path1.equals("start")){
+//            System.out.println("chatting !");
+//            return true;
+//        }
+//        if(args.length == 4) {
+//            return EXCLUDE_URL.stream().anyMatch(exclude -> exclude.equalsIgnoreCase(request.getServletPath().split("/")[3]));
+//        }
+//        return false;
+//    }
 
 }

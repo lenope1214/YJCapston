@@ -1,5 +1,6 @@
 package com.jumanji.capston.service.exception;
 
+import com.jumanji.capston.service.CanNotBeZero;
 import com.jumanji.capston.service.exception.EmployeeException.EmployeeHasExistException;
 import com.jumanji.capston.service.exception.EmployeeException.EmployeeNotFoundException;
 import com.jumanji.capston.service.exception.MenuException.MenuHasExistException;
@@ -126,6 +127,13 @@ public class ApiExceptionHandler {
     public ResponseEntity<ApiErrorResponse> empHasExistException(EmployeeHasExistException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(CanNotBeZero.class)
+    public ResponseEntity<ApiErrorResponse> canNotBeZero(CanNotBeZero ex) {
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex.getCode(), ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
 
