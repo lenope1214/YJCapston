@@ -45,8 +45,9 @@ public class Payment implements Serializable {
 
     @Getter @AllArgsConstructor @NoArgsConstructor
     public static class Request{
-        private Timestamp orderId;
-        private int amount;
+        private Timestamp orderId; // 주문번호
+        private String holder; // 예금주
+        private int amount; //
         private String pg;
         private String payMethod;
     }

@@ -49,8 +49,8 @@ public class Employee {
         private String shopId;
         private int empNo;
         private String empName;
-        private Date birthday; // yyyyMMdd
-        private Date hiredate; // yyyyMMdd
+        private String birthday; // yyyyMMdd
+        private String hiredate; // yyyyMMdd
         private char gender; // 성별
         private String phone; // 전화번호
 
@@ -58,8 +58,8 @@ public class Employee {
             this.shopId = employee.getId().substring(0, 10);
             this.empNo = employee.parseEmpNo(employee.getId());
             this.empName = employee.getName();
-            this.birthday = employee.getBirthday();
-            this.hiredate = employee.getHiredate();
+            this.birthday = DateOperator.dateToYYYYMMDD(employee.getBirthday());
+            this.hiredate = DateOperator.dateToYYYYMMDD(employee.getHiredate());
             this.gender = employee.getGender();
             this.phone = employee.getPhone();
         }

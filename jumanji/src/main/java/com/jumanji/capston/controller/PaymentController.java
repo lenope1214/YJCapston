@@ -38,4 +38,9 @@ public class PaymentController {
         return new ResponseEntity(paymentService.post(authorization, request), HttpStatus.CREATED);
     }
 
+    @Transactional
+    @PostMapping("/payment/cancel")
+    public ResponseEntity<?> payCanceled(@RequestHeader String authorization, @RequestBody Payment.Request request){
+        return null;
+    }
 }
