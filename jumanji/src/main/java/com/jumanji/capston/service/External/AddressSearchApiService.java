@@ -1,4 +1,4 @@
-package com.jumanji.capston.service.External;
+package com.jumanji.capston.service.external;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

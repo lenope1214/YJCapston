@@ -1,6 +1,6 @@
 package com.jumanji.capston.controller.externalApiController;
 
-import com.jumanji.capston.service.External.AddressSearchApiService;
+import com.jumanji.capston.service.external.AddressSearchApiService;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

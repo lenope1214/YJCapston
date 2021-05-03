@@ -1,6 +1,8 @@
 package com.jumanji.capston.data;
 
 import lombok.*;
+import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
+import org.junit.Ignore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
