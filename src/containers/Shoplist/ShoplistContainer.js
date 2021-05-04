@@ -260,6 +260,7 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         img: rstrt.imgPath,
                     };
                 });
+                console.log(rstrt);
                 setRestaurant(rstrt);
             })
             .catch((err) => {
@@ -298,7 +299,7 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         name: rstrt.name,
                         intro: rstrt.intro,
                         category: rstrt.category,
-                        id: rstrt.id,
+                        id: rstrt.shopId,
                         addressDetail: rstrt.addressDetail,
                         img: rstrt.imgPath,
                     };

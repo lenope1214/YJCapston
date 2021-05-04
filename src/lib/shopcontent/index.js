@@ -1,5 +1,5 @@
 import { apiDefault } from "../client";
-
+import React from "react";
 export const postLogin = (id, password) => {
     return apiDefault().post("/login", {
         id,
@@ -17,4 +17,20 @@ export const getshopmenu = (shopId) => {
 
 export const getshopinfo = (shopId) => {
     return apiDefault().get(`/shop/${shopId}`, {});
+};
+
+export const cartNumber = (shopId) => {
+    return apiDefault().post(
+        "/order",
+        {
+            shopId: shopId,
+        },
+        {
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem(
+                    "access_token"
+                )}`,
+            },
+        }
+    );
 };

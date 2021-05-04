@@ -40,6 +40,7 @@ const Register = ({
     roadAddr,
     handleRoadAddr,
     handleComplete,
+    phoneauth,
 }) => {
     const postCodeStyle = {
         display: "block",
@@ -70,7 +71,6 @@ const Register = ({
                             민족
                         </div>
                     </Link>
-
                 </header>
                 <div>
                     <img src={topimg} className="topimg" />
@@ -88,9 +88,10 @@ const Register = ({
                             onChange={handleId}
                             value={id}
                             className="input-box"
-                        >
-                        </input>
-                        <button onClick={IdCheck} className="button1">V</button>
+                        ></input>
+                        <button onClick={IdCheck} className="button1">
+                            V
+                        </button>
                         <div className="label">비밀번호</div>
                         <input
                             type="password"
@@ -117,7 +118,6 @@ const Register = ({
                                 onChange={handlePhone1}
                                 value={phone1}
                                 className="phone-box1"
-
                             >
                                 <option value="">::선택::</option>
                                 <option value="010">010</option>
@@ -147,6 +147,7 @@ const Register = ({
                                 onChange={handlePhone3}
                                 value={phone3}
                             />
+                            <button onClick={phoneauth}>번호인증</button>
                         </div>
                         <div className="label">이메일</div>
                         <input
@@ -158,7 +159,8 @@ const Register = ({
                             className="input-box"
                         />
                         <div className="checkbox-box">
-                            <div className="label">사업자체크<span></span>
+                            <div className="label">
+                                사업자체크<span></span>
                                 <input
                                     type="checkbox"
                                     id="owner"
@@ -190,7 +192,9 @@ const Register = ({
                                     className="input-box"
                                     disabled
                                 />
-                                <button onClick={openModal} className="button2">검색</button>
+                                <button onClick={openModal} className="button2">
+                                    검색
+                                </button>
                             </div>
                             <input
                                 type="address1"
@@ -199,22 +203,25 @@ const Register = ({
                                 onChange={handleAddress1}
                                 value={address1}
                                 className="input-box"
-
                             />
                         </div>
                         <div className="button-box">
-                            <button onClick={register} className="button3">회원가입</button>
-                            <Link to="/" onClick={() => {window.scrollTo(0,0)}}>
-                                <button className="button4" >취소</button>
+                            <button onClick={register} className="button3">
+                                회원가입
+                            </button>
+                            <Link
+                                to="/"
+                                onClick={() => {
+                                    window.scrollTo(0, 0);
+                                }}
+                            >
+                                <button className="button4">취소</button>
                             </Link>
                         </div>
                     </div>
-
                 </body>
 
-                <footer>
-
-                </footer>
+                <footer></footer>
                 {modal && (
                     <button class="Modalclosebutton" onClick={closeModal}>
                         닫기
@@ -223,10 +230,10 @@ const Register = ({
             </S.RegisterWrap>
             {modal && (
                 <DaumPostcode
-                onComplete={handleComplete}
-                style={postCodeStyle}
-                height={700}
-            />
+                    onComplete={handleComplete}
+                    style={postCodeStyle}
+                    height={700}
+                />
             )}
         </>
     );

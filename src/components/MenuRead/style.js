@@ -76,4 +76,9 @@ text-align: left;
     border: 1px solid black;
     font-size: 16px;
 }
+.ps-button {
+    position: absolute;
+    height: 46px;
+    transform: translateX(-92px);
+}
 `;
