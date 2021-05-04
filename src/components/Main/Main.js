@@ -68,7 +68,7 @@ const Main = ({
     const useScrollDirection = () => {
         const [scrollDirection, setScrollDirection] = useState("");
         const [prevOffset, setPrevOffset] = useState(0);
-        const toggleScrollDirection = () => {
+        const toggleScrollDirection = debounce(() => {
             // 여기
             let scrollY = window.scrollY;
             if (scrollY === 0) {
@@ -80,7 +80,7 @@ const Main = ({
                 setScrollDirection("up");
             }
             setPrevOffset(scrollY); // 시도 해봄
-        };
+        },200);
         useEffect(() => {
             window.addEventListener("scroll", toggleScrollDirection);
             return () => {

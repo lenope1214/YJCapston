@@ -22,11 +22,6 @@ export const PaymentDoneWrap = styled.div`
         font-weight: normal;
         font-style: normal;
     }
-
-    .App {
-        text-align: center;
-        background-color: white;
-    }
     .jmmjlink {
         color: black;
         text-decoration: none;
@@ -42,8 +37,9 @@ export const PaymentDoneWrap = styled.div`
         font-size: 33px;
         font-family: "Wemakeprice-Bold";
         position: fixed;
-        z-index: 8;
+        z-index: 20;
         background-color: white;
+        min-width: 80%;
     }
     .adimg {
         position: relative;
@@ -77,57 +73,126 @@ export const PaymentDoneWrap = styled.div`
         opacity: 1;
     }
     .center-nav input {
-        width: 300px;
-        border-color: #a7a7a7;
-        border-right: 1;
-        border-radius: 2px 0 0 2px;
-        background-color: white;
+        width: 356px;
+        border-radius: 5px 0 0 5px;
         height: 40px;
         opacity: 1;
-        border-style: solid;
+        border: 1px solid #a7a7a7;
     }
 
     .center-nav button {
         border-color: #a7a7a7;
-        width: 10%;
+        width: 50px;
         border-left: 0;
-        border-radius: 0 2px 2px 0;
-        background-color: white;
-        height: 46px;
+        border-radius: 0 5px 5px 0;
+        background-color: black;
+        color: white;
+        height: 44px;
         opacity: 1;
-        border-style: solid;
+        border: none;
+        transform: translateX(-44px);
     }
 
     .right1-nav {
         width: 100px;
-        background-color: black;
         border: none;
-        color: white;
+        color: black;
         padding: 15px 0;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 15px;
+        font-size: 16px;
         margin: 4px;
         cursor: pointer;
         opacity: 1;
+        font-weight: bold;
+        background: none;
     }
     .right2-nav {
         width: 100px;
-        background-color: black;
         border: none;
-        color: white;
         padding: 15px 0;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 15px;
+        font-size: 16px;
         margin: 4px;
         cursor: pointer;
         opacity: 1;
+        background: none;
+        font-weight: bold;
     }
     .right-nav {
         padding-right: 2%;
+    }
+    .topimg {
+        position: relative;
+        height: 240px;
+        width: 100%;
+        margin-top: 100px;
+    }
+    .topimg-text {
+        font-family: "Wemakeprice-Bold";
+        width: 100%;
+        position: absolute;
+        text-align: center;
+        font-size: 63px;
+        color: white;
+        transform: translateY(-180px);
+    }
+    .subtext {
+        font-size: 26px;
+        transform: translateY(-50px);
+    }
+    
+    .total-body {
+        width: 100%;
+        
+    }
+    .body-item {
+        text-align: left;
+        padding-left: 50%;
+        transform: translateX(-350px);
+        width: 700px;
+    }
+    .body-title {
+        margin-top: 30px;
+        font-size: 20px;
+        margin-bottom: 40px;
+    }
+    .table {
+        width: 700px;
+        border: 1px solid gray;
+        text-align: center;
+        padding-top: 10px;
+        border-collapse : collapse;
+    }
+    th {
+        border-bottom: 1px solid gray;
+        border-collapse : collapse;
+        padding-top: 10px;
+    }
+    td {
+        padding-top: 20px;
+        margin-top: 1px;
+        border-bottom: 1px solid gray;
+        padding-bottom: 10px;
+    }
+    .button-div {
+        margin-top: 30px;
+    }
+    .button {
+        width: 340px;
+        height: 60px;
+        margin-left: 5px;
+        margin-right: 5px;
+        color:white;
+        background: gray;
+        border: 1px solid gray;
+    }
+    .price {
+        font-size: 18px;
+        font-weight: bold;
     }
 `;
 

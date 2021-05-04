@@ -5,6 +5,7 @@ import * as S from "./style";
 
 import DaumPostcode from "react-daum-postcode";
 import topimg from "../Main/img/QR코드사진2.png";
+import { ordermenulist, requirelist } from "../../lib/MyPage";
 
 const MyPage = ({
     Pw,
@@ -21,6 +22,8 @@ const MyPage = ({
     handleRoadAddr,
     jmlist,
     require,
+    orderinfom,
+    closeModal,
 }) => {
     const postCodeStyle = {
         display: "block",
@@ -33,18 +36,10 @@ const MyPage = ({
         transform: "translate(-50%, -50%)",
         border: "1px",
     };
+    const [orderid, setorderid] = useState();
 
     return (
         <>
-            <div class="abc">
-                {modal && (
-                    <DaumPostcode
-                        onComplete={handleComplete}
-                        style={postCodeStyle}
-                        height={700}
-                    />
-                )}
-            </div>
             <S.MypageWrap>
                 <header>
                     <Link to="/" class="movemainpage">
@@ -167,9 +162,8 @@ const MyPage = ({
                             className="input-box"
                         />
                         <p class="label">주문목록</p>
-                        <div>
-                            <table>
-                                <thead>
+                        <div className="orderlist">
+                            {/* <div className="orderlist-th">
                                     <th>주문번호</th>
                                     <th>금액</th>
                                     <th>주문명</th>
@@ -177,34 +171,71 @@ const MyPage = ({
                                     <th>인원 수</th>
                                     <th>요청사항</th>
                                     <th>상태</th>
-                                </thead>
-                                <tbody>
-                                    {jmlist.map((jmlist2) => {
-                                        return (
-                                            <tr>
-                                                <td>{jmlist2.jmid}</td>
-                                                <td>null</td>
-                                                <td>donthave</td>
-                                                <td>donothave</td>
-                                                <td>{jmlist2.jmpeople}</td>
-                                                <td>
-                                                    {jmlist2.jmorderRequest}
+                                </div> */}
+
+                            {jmlist.map((jmlist2) => {
+                                console.log(jmlist2);
+
+                                return (
+                                    <div className="orderlist-item">
+                                        <tr>
+                                            <td className="orderitem1">
+                                                {jmlist2.jmid}
+                                            </td>
+                                            <td className="orderitem2">
+                                                00:00
+                                            </td>
+                                            <td className="orderitem3">
+                                                {jmlist2.jmpeople}
+                                                <span className="won">명</span>
+                                            </td>
+                                            <td className="orderitem4">
+                                                결제완료
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <button
+                                                onClick={async () => {
+                                                    const res = await ordermenulist(
+                                                        jmlist2.jmid
+                                                    );
+                                                    console.log(res.data);
+                                                }}
+                                                value={jmlist2.jmid}
+                                            >
+                                                <td className="orderitem1-name">
+                                                    {jmlist2.jmshopName}
                                                 </td>
-                                                <td>
-                                                    <span>결제완료</span>
-                                                    <br></br>
-                                                    <button
-                                                        className="delete-button"
-                                                        onClick={require}
-                                                    >
-                                                        환불하기
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        );
-                                    })}
-                                </tbody>
-                            </table>
+                                            </button>
+                                            <td className="orderitem2-price">
+                                                {jmlist2.jmamount}
+                                                <span className="won">원</span>
+                                            </td>
+                                            <td className="orderitem3">
+                                                {jmlist2.jmorderRequest}
+                                            </td>
+
+                                            <td className="orderitem4-button">
+                                                <button
+                                                    className="delete-button"
+                                                    onClick={async () => {
+                                                        const res = await requirelist(
+                                                            jmlist2.jmid
+                                                        ).then((res) => {
+                                                            alert("환불완료");
+                                                            console.log(
+                                                                res.data
+                                                            );
+                                                        });
+                                                    }}
+                                                >
+                                                    환불
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </div>
+                                );
+                            })}
                         </div>
                         <div className="button-box">
                             <button onClick={Mypage} className="button3">
@@ -222,6 +253,22 @@ const MyPage = ({
                     </div>
                 </body>
             </S.MypageWrap>
+
+            <div class="abc">
+                {modal && (
+                    <button class="Modalclosebutton" onClick={closeModal}>
+                        닫기
+                    </button>
+                )}
+                {modal && (
+                    <DaumPostcode
+                        onComplete={handleComplete}
+                        style={postCodeStyle}
+                        height={700}
+                        Zindex={300}
+                    />
+                )}
+            </div>
         </>
     );
 };

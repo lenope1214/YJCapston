@@ -7,7 +7,7 @@ import MainContainer from "./containers/Main/MainContainer";
 import MypageContainer from "./containers/MyPage/MyPageContainer";
 import RegisterContainer from "./containers/Register/RegisterContainer";
 import ShopContainer from "./containers/Shop/ShopContainer";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { MenuReadContainer } from "./containers/MenuRead/MenuReadContainer";
 import MenuListContainer from "./containers/MenuList/MenuListContainer";
 import ShopInfoContainer from "./containers/ShopInfo/ShopInfoContainer";
@@ -17,6 +17,9 @@ import ShopcontentContainer from "./containers/shopcontent/shopcontentcontainer"
 import Payment from "./components/Event/Payment";
 import ShopOrderContainer from "./containers/ShopOrder/ShopOrderContainer";
 import PaymentContainer from "./containers/PaymentDone/PaymentDoneContainer";
+import * as StompJs from "@stomp/stompjs";
+
+const ROOM_SEQ = 1;
 
 const App = () => {
     const [isLogin, setIsLogin] = useState(false);
@@ -39,6 +42,7 @@ const App = () => {
         sessionStorage.removeItem("access_token");
         alert("로그아웃이 완료 되었습니다.");
     };
+
     return (
         <>
             <Router>
@@ -103,6 +107,7 @@ const App = () => {
                             />
                         )}
                     ></Route>
+                    <Route path="/test" component={TestChat} />
                     <Route
                         path="/"
                         component={() => (
@@ -116,6 +121,111 @@ const App = () => {
                 </Switch>
             </Router>
         </>
+    );
+};
+const TestChat = () => {
+    const client = useRef({});
+    const [chatMessages, setChatMessages] = useState([]);
+    const [message, setMessage] = useState("");
+
+    const divRref = useRef(null);
+
+    useEffect(() => {
+        connect();
+        scrollToBottom();
+        return () => disconnect();
+    }, []);
+
+    const scrollToBottom = () => {
+        divRref.current.scrollIntoView({ behavior: "smooth" });
+    };
+
+    const connect = () => {
+        client.current = new StompJs.Client({
+            brokerURL: "ws:/3.34.55.186:8088/ws-stomp/websocket", // 웹소켓 서버로 직접 접속
+            // webSocketFactory: () => new SockJS("/ws-stomp/websocket"), // proxy를 통한 접속
+            connectHeaders: {
+                socket_token: "jmj-chatting",
+            },
+            debug: function (str) {
+                console.log(str);
+            },
+            reconnectDelay: 5000,
+            heartbeatIncoming: 4000,
+            heartbeatOutgoing: 4000,
+            onConnect: () => {
+                subscribe();
+            },
+            onStompError: (frame) => {
+                console.error(frame);
+            },
+        });
+
+        client.current.activate();
+    };
+
+    const disconnect = () => {
+        client.current.deactivate();
+    };
+
+    const subscribe = () => {
+        client.current.subscribe(`/sub/chat/2`, ({ body }) => {
+            if (window.confirm("주문이 발생 했습니다?")) {
+                alert("happy");
+            } else {
+                // 환불
+            }
+            scrollToBottom();
+            setChatMessages((_chatMessages) => [
+                ..._chatMessages,
+                JSON.parse(body),
+            ]);
+        });
+    };
+
+    const publish = (message) => {
+        if (!client.current.connected) {
+            return;
+        }
+        scrollToBottom();
+
+        client.current.publish({
+            destination: `/sub/chat/2`,
+            body: JSON.stringify({ roomSeq: ROOM_SEQ, message }),
+        });
+
+        setMessage("");
+    };
+
+    return (
+        <div>
+            <div class="a">
+                {" "}
+                <div>
+                    {chatMessages && chatMessages.length > 0 && (
+                        <div>
+                            {chatMessages.map((_chatMessage, index) => (
+                                <div key={index}>{_chatMessage.message}</div>
+                            ))}
+                        </div>
+                    )}
+                    <div>HELLO</div>{" "}
+                    <div class="abc">
+                        <input
+                            type={"text"}
+                            placeholder={"message"}
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            onKeyPress={(e) =>
+                                e.which === 13 && publish(message)
+                            }
+                        />
+                        <button onClick={() => publish(message)}>전송</button>
+                    </div>
+                </div>
+                <div ref={divRref} />
+            </div>
+        </div>
     );
 };
 

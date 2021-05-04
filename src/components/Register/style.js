@@ -14,30 +14,8 @@ export const searchWrap = styled.div`
     z-index: 10;
 `;
 
-export const postCodeStyle = styled.div`
-    display: block;
-    position: absolute;
-    top: 50%;
-    width: 400px;
-    height: 500px;
-    padding: 7px;
-    .close {
-        display: "block",
-        position: "fixed",
-        top: "40%",
-        width: "400px",
-        height: "550px",
-        padding: "7px",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        width: 100%;
-        height: 50px;
-        z-index: 3;
-    }
-`;
-
 export const RegisterWrap = styled.div`
-background: #F2F2F2;
+    background: #f2f2f2;
     @font-face {
         font-family: "Wemakeprice-Bold";
         src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Wemakeprice-Bold.woff")
@@ -93,11 +71,9 @@ background: #F2F2F2;
         color: white;
     }
     .total-body {
-        
         margin-top: 380px;
         margin-left: 50%;
-        transform: translateX(-200px);    
-        
+        transform: translateX(-200px);
     }
     .label {
         margin-top: 20px;

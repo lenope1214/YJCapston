@@ -36,3 +36,23 @@ export const patchorder = (request, people) => {
         }
     );
 };
+export const paymentservice = (jmallprice, pointcheck) => {
+    console.log(Math.floor((jmallprice - pointcheck) * 0.01));
+    return apiDefault().post(
+        "/payment",
+        {
+            orderId: localStorage.getItem("orderId"),
+            pg: "inisis",
+            payMethod: "card",
+            amount: jmallprice - pointcheck,
+            // point: (jmallprice - pointcheck) * 0.01,
+        },
+        {
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem(
+                    "access_token"
+                )}`,
+            },
+        }
+    );
+};

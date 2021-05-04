@@ -1,6 +1,8 @@
 import React from "react";
 import * as S from "./style";
 import { Link } from "react-router-dom";
+import topimg from "../Main/img/QR코드사진2.png";
+
 const PaymentDone = ({
     isLogin,
     logout,
@@ -64,44 +66,61 @@ const PaymentDone = ({
                             </div>
                         )}
                     </div>
-                    <body>
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <div>
-                            <p>주문이 완료되었습니다.</p>
-                            <p>이용해주셔서 감사합니다.</p>
-                        </div>
-                        <div>
-                            <h4>주문내역 확인</h4>
-
-                            <p>총 결제금액</p>
-                            <p>{localStorage.getItem("allPrice")}</p>
-                            <p>주문 목록</p>
-                            <p>
+                    <div>
+                    <img src={topimg} className="topimg" />
+                </div>
+                <div className="topimg-text">
+                    <p>주문 완료!</p>
+                    <p className="subtext">이용해주셔서 감사합니다.</p>
+                </div>
+                    <body>      
+                        <div className="total-body">
+                            <div className="body-item">
+                            <h4 className="body-title">주문내역 확인</h4>
+                            <table className="table">
+                                <thead>
+                                    <th>
+                                    <p>총 결제금액</p>
+                                    </th>
+                                    <th>
+                                    <p>주문 메뉴</p>
+                                    </th>
+                                    <th>
+                                    <p>주문 번호</p>
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <td>
+                                    <p className="price">{localStorage.getItem("allPrice")}</p>
+                                    </td>
+                                    <td>
+                                    <p>
                                 {paymentlist.map((payment_list) => {
                                     return (
                                         <span>
                                             {payment_list.name}{" "}
-                                            {payment_list.count}개{" "}
+                                            {payment_list.count}개{"/"}
                                         </span>
                                     );
                                 })}
                             </p>
-                            <p>주문번호</p>
-                            <p>{localStorage.getItem("orderId")}</p>
-                        </div>
-                        <footer>
-                            <p>다른 식당도 예약하고 싶으세요?</p>
+                                    </td>
+                                    <td>
+                                    <p>{localStorage.getItem("orderId")}</p>
+                                    </td>
+                                </tbody>
+                                <tr>
+                                    
+                                </tr>
+                            </table>
+                            <div className="button-div">
                             <Link to="/shoplist">
-                                <button>다른 식당 예약하기</button>
+                                <button className="button">매장 목록으로</button>
                             </Link>
-                            <p>주문을 잘못하셨나요? </p>
-                            <button onClick={require}>환불하기</button>
-                        </footer>
+                            <button className="button" onClick={require}>취소하기</button>
+                            </div>
+                        </div>
+                        </div>
                     </body>
                 </div>
             </S.PaymentDoneWrap>

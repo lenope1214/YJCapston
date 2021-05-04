@@ -67,6 +67,7 @@ background: #F2F2F2;
         height: 36px;
         border-radius: 5px;
         border: 1px solid gray;
+        background: white;
     }
 
     .phone-box {
@@ -137,5 +138,70 @@ background: #F2F2F2;
         width: 25px;
         height: 25px;
         transform: translateY(5px);
+    }
+    .orderlist {
+        margin-top: 10px;
+        background-color : white;
+        height: 280px;
+        width: 400px;
+        overflow: auto;
+        border: 1px solid gray;
+        border-radius: 5px;
+    }
+    .orderlist-item {
+        margin-left: 3px;
+        margin-top: 3px;
+        margin-bottom : 1px;
+        width: 376px;
+        border: 1px solid gray;
+        border-radius: 5px;
+    }
+    .orderitem1 {
+        padding-left: 5px;
+        padding-top: 5px;
+        width: 160px;
+        height: 32px;
+        font-size: 13px;
+        color: gray;
+        
+    }
+    .orderitem1-name {
+        padding-left: 5px;
+        padding-top: 5px;
+        width: 160px;
+        height: 32px;
+        transform: translate(5px, -2px);
+        font-size: 15px;
+    }
+    .orderitem2 {
+        width: 80px;
+        font-size: 15px;
+        transform: translateY(2px);
+    }
+    .orderitem2-price {
+        width: 80px;
+        font-size: 16px;
+        transform: translateX(-3px);
+    }
+    .orderitem3 {
+        width: 60px;
+        font-size: 15px;
+        transform: translateY(2px);
+    }
+    .orderitem4 {
+        transform: translateY(4px);
+        font-size: 14px;
+    }
+    .won {
+        font-size: 12px;
+    }
+    .delete-button {
+        margin-left: 8px;
+        color: white;
+        background: #1785f2;
+        border: 0px;
+        width: 45px;
+        height: 26px;
+        border-radius: 3px;
     }
 `;
