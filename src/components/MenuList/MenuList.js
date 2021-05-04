@@ -1,12 +1,20 @@
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useState, useEffect } from 'react';
+
 import * as S from "./style";
 
 const MenuList = ({ menues, removeMenu, shopId }) => {
+    const [thisShopId, setThisShopId] = useState("");
+    useEffect(() => {
+        setThisShopId(shopId);
+    })
     return (
         <>
             <S.MenuWrap>
                 <div className="menu-container">
+                    <Link to={"/posmain/"+shopId}>
+                        <button className="pos-button">포스기로 이동</button>
+                    </Link>
                     <h2 className="menu-title">메뉴 목록</h2>
                     <Link to={`/create/${shopId}`} className="btn-link">메뉴 추가하기</Link>
                     <table className="menu-list">

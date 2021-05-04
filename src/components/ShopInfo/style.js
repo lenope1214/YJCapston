@@ -52,6 +52,13 @@ background: #F2F2F2;
     border-radius: 5px;
     border: 1px solid gray;
 }
+.input-box1 {
+    width: 200px;
+    height: 36px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    
+}
 .input-box-area {
     width: 400px;
     height: 76px;
@@ -126,10 +133,15 @@ background: #F2F2F2;
     transform: translateX(-36px);
     padding-bottom: 70px;
 }
+
 .check-box {
     margin-left: 10px;
     width: 25px;
     height: 25px;
     transform: translateY(5px);
+}
+.img-box-box {
+    border-radius: 10%;
+    margin-bottom: 20px;
 }
 `;

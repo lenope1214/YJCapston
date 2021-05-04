@@ -113,4 +113,11 @@ th, td {
     padding: 20px;
     font-size: 24px;
 }
+.pos-button{
+    margin-left:85%;
+    width:100px;
+    height:40px;
+    // background-color:#00BFFF;
+    border-radius: 10px;
+}
 `;

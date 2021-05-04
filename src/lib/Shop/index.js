@@ -13,6 +13,7 @@ import { apiDefault } from "../client";
 export const postShop =(
     id,
     shopname,
+    phone,
     intro,
     open_time,
     close_time,
@@ -24,8 +25,9 @@ export const postShop =(
     roadAddr
 ) => {
     return  apiDefault().post("/shop",{
-     id:id,
+     shopId:id,
      name:shopname,
+     phone:phone,
      intro:intro,
      openTime:open_time,
      closeTime:close_time,

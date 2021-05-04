@@ -32,25 +32,29 @@ const MyShopContainer = (props) => {
             const shop = res.data.map((shop) => {
                 return {
                     img: shop.imgPath,
-                    id: shop.id,
+                    id: shop.shopId,
                     shopname:shop.name,
                     intro:shop.intro,
                     category:shop.category,
-                    open_time:shop.openTime,
-                    close_time:shop.closeTime,
+                    openTime:shop.openTime,
+                    closeTime:shop.closeTime,
                     address:shop.address,
                     addressDetail:shop.addressDetail,
                     isRsPos:shop.isRsPos,
                     isOpen:shop.isOpen
                 };
+                
             });
             setShops(shop);
+            console.log(res.data);
+            // console.log(shopId);
+            
         })
         .catch((err) => {
             alert("등록된 매장이 없습니다.");
         });
     }
-
+    
     const removeShop = (id) => {
         removeShops(id)
             .then((res) => {

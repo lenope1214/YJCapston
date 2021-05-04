@@ -12,6 +12,7 @@ const ShopInfoContainer = (props) => {
     const [shopInfo, setShopInfo] = useState({});
     const [shopId, setShopId] = useState("");
     const [shopName, setShopName] = useState(null);
+    const [shopPhone, setShopPhone] = useState(null);
     const [shopIntro, setShopIntro] = useState(null);
     const [shopOpenTime, setShopOpenTime] = useState(null);
     const [shopCloseTime, setShopCloseTime] = useState(null);
@@ -30,6 +31,10 @@ const ShopInfoContainer = (props) => {
     const handleShopName = (e) =>{
         const value = e.target.value;
         setShopName(value);
+    }
+    const handleShopPhone = (e) => {
+        const value= e.target.value;
+        setShopPhone(value);
     }
     const handleShopIntro = (e) => {
         const value = e.target.value;
@@ -98,7 +103,7 @@ const Shop_v3 = () => {
     .then((res) => {
         //history.push("/shopInfo/"+shopId)
         history.push("/myshop")
-        alert("오픈여부변경완료+");
+        alert("오픈여부변경완료");
     });
 };
 
@@ -115,7 +120,7 @@ const Shop_v3 = () => {
             // shopCategory
         )
         .then((res) => {
-            history.push("/myShop");
+            history.goBack();
             alert("수정되었습니다.");
         })
         .catch((err) => {
@@ -137,6 +142,7 @@ const Shop_v3 = () => {
             console.log(res.data);
         })
         .catch((err) => {
+            console.log(props.match.params.shopId);
             alert("showshopInfo err");
         });
     };
@@ -161,6 +167,11 @@ const Shop_v3 = () => {
 
         handleRoadAddr(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
     };
+
+    const goBack = () => {
+        history.goBack();
+    }
+
     return(
         <>
         <Header />
@@ -174,12 +185,16 @@ const Shop_v3 = () => {
         openTime={shopInfo.openTime}
         closeTime={shopInfo.closeTime}
         category={shopInfo.category}
+        img={shopInfo.imgPath}
         address={shopInfo.address}
         addressDetail={shopInfo.addressDetail}
         isRsPos={shopInfo.isRsPos}
+        isOpen={shopInfo.isOpen}
         shopId={shopId}
         shopName={shopName}
         handleShopName={handleShopName}
+        shopPhone={shopPhone}
+        handleShopphone={handleShopPhone}
         shopIntro={shopIntro}
         handleShopIntro={handleShopIntro}
         shopOpenTime={shopOpenTime}
@@ -203,6 +218,8 @@ const Shop_v3 = () => {
         modal={modal}
         openModal={openmodal}
         closeModal={closemodal}
+        goBack={goBack}
+        
         // handleShopreserve={handleShopreserve}
              />
         </>

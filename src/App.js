@@ -14,6 +14,11 @@ import ShopInfoContainer from "./containers/ShopInfo/ShopInfoContainer";
 import MyShopContainer from "./containers/MyShop/MyShopContainer";
 import ShoplistContainer from "./containers/Shoplist/ShoplistContainer";
 import ShopcontentContainer from "./containers/shopcontent/shopcontentcontainer";
+import QRcodeContainer from "./containers/QRcode/QRcodeContainer";
+import PosContainer from "./containers/Pos/PosContainer";
+import PosMainContainer from "./containers/PosMain/PosMainContainer";
+import EmployeeContainer from "./containers/Employee/EmployeeContainer";
+import EmplistContainer from "./containers/Emplist/EmplistContainer";
 
 const App = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -47,9 +52,14 @@ const App = () => {
           <Route path="/MyShop" component={MyShopContainer} />
           <Route component={MenuListContainer} path="/menuList/:shopId" />
           <Route component={MenuRegisterFormContainer} path="/create/:shopId" />
-          <Route path="/ShopInfo/:shopId" component={ShopInfoContainer} />
+          <Route component={ShopInfoContainer} path="/ShopInfo/:shopId"  />
           <Route component={EventContainer} path="/event" />
           <Route component={MenuReadContainer} path='/menu/:menuId' />
+          <Route component={QRcodeContainer} path="/QRcode/:shopId" />
+          <Route component={PosContainer} path="/Pos/:shopId"/>
+          <Route component={PosMainContainer} path="/PosMain/:shopId"/>
+          <Route component={EmployeeContainer} path="/Employee/:shopId"/>
+          <Route component={EmplistContainer} path="/Emplist/:shopId"/>
           <Route
                     path="/shopcontent/:shopId"
                     component={() => (

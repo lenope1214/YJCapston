@@ -15,12 +15,15 @@ const MyShop = ({
         <>
             <S.MyShopWrap>
                 <div className="menu-container">
+
                     <h2 className="menu-title">매장 목록</h2>
+                    
                     <Link to="/shop">
-                        <button className="btn-link">
+                    <button className="btn-link">
                             매장등록하기
                     </button>
                     </Link>
+                    
 
                     <table className="menu-list">
                         <thead>
@@ -49,11 +52,13 @@ const MyShop = ({
                                 return (
                                     <tr>
                                         <td className="body-item-1">
+                                        <Link to={`/menuList/${shop.id}`} className="menu-link">
                                             <img src={`http://3.34.55.186:8088/${shop.img}`}
                                                 width='150'
                                                 height='150'
                                                 className="img-box">
                                             </img>
+                                            </Link>
                                         </td>
                                         <td className="body-item-2">
                                             <Link to={`/menuList/${shop.id}`} className="menu-link">
@@ -80,7 +85,7 @@ const MyShop = ({
                     </table>
                 </div>
 
-                <footer></footer>
+               
             </S.MyShopWrap>
         </>
     );
