@@ -205,6 +205,12 @@ public class ShopServiceImpl implements ShopService {
         throw new ShopHasExistException();
     }
 
+    /**
+     *
+     * @param loginId : 유저가 로그인한 아이디
+     * @param shopId : 입력된 매장 아이디
+     * @return 내 매장이면 true, 아니면 권한없음 에러가 던져진다.
+     */
     public boolean isOwnShop(String loginId, String shopId) {
         System.out.println("보유매장 비교 유저아디 : " + loginId);
         System.out.println("보유매장 비교 매장번호 : " + shopId);

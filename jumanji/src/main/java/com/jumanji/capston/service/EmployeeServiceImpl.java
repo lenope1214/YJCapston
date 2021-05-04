@@ -85,8 +85,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void delete(String authorization, String empNo) {
-
+    public void delete(String authorization, String shopId, String empNo) {
+        String loginId = userService.getMyId(authorization);
+        String empId = shopId + 'e' + empNo;
+        // 유효성 체크
+        userService.isPresent(loginId); // 로그인한 계정이 존재하는지
+        shopService.isOwnShop(loginId, shopId); // 존재한다면 그 매장이 내 매장인지
+        Employee e = isPresent(empId); // 존재하는 직원인지
+        employeeRepository.delete(e);
+        isEmpty(empId);
     }
 
     private String toEmpId(String shopId, int empNo){
