@@ -64,7 +64,7 @@ public class PenaltyServiceImpl implements PenaltyService, BasicService {
     }
 
     @Override
-    public boolean isPresent(String id) {
+    public Object isPresent(String id) {
         return false;
     }
 

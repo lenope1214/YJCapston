@@ -34,7 +34,7 @@ public class MessageServiceImpl implements MessageService, BasicService {
         return null;
     }
     @Override
-    public boolean isPresent(String id) {
+    public Object isPresent(String id) {
         return false;
     }
 

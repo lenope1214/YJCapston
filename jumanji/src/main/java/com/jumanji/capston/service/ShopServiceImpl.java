@@ -2,15 +2,12 @@ package com.jumanji.capston.service;
 
 import com.jumanji.capston.data.DateOperator;
 import com.jumanji.capston.data.Shop;
-import com.jumanji.capston.data.Tab;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.ShopRepository;
 import com.jumanji.capston.repository.UserRepository;
-import com.jumanji.capston.service.exception.ApiErrorResponse;
-import com.jumanji.capston.service.exception.Auth.ForbiddenException;
-import com.jumanji.capston.service.exception.ShopException.ShopHasExistException;
-import com.jumanji.capston.service.exception.ShopException.ShopNotFoundException;
-import com.jumanji.capston.service.interfaces.BasicService;
+import com.jumanji.capston.service.exception.auth.ForbiddenException;
+import com.jumanji.capston.service.exception.shopException.ShopHasExistException;
+import com.jumanji.capston.service.exception.shopException.ShopNotFoundException;
 import com.jumanji.capston.service.interfaces.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -134,7 +131,7 @@ public class ShopServiceImpl implements ShopService {
         System.out.println("매장등록's shopId : " + request.getShopId());
 
         String loginId = userService.getMyId(authorization);
-        User user = userService.get(loginId);
+        User user = userService.isPresent(loginId);
         String uri = "shop/" + request.getShopId() + "/thumbnail/";
         String imgPath = null;
         System.out.println("openTime : " + request.getOpenTime());

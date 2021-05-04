@@ -41,7 +41,7 @@ public class EmployeeController {
     @Transactional
     @DeleteMapping("/shop/employee")
     public ResponseEntity<?> deleteEmployee(@RequestHeader String authorization,
-                                            @Query("empNo") String empNo,
+                                            @Query("empNo") int empNo,
                                             @Query("shopId") String shopId){
         employeeService.delete(authorization, shopId, empNo);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

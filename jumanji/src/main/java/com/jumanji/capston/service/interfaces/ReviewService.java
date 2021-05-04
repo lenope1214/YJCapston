@@ -3,10 +3,12 @@ package com.jumanji.capston.service.interfaces;
 import com.jumanji.capston.data.Review;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public interface ReviewService {
-    public ResponseEntity<?> get(String reviewId);
-    public ResponseEntity<?> getList();
-    public ResponseEntity<?> post(Review.Request request);
-    public ResponseEntity<?> patch(Review.Request request);
-    public ResponseEntity<?> delete(String reviewId);
+    public Review get(String reviewId);
+    public List<Review> getList(String shopId);
+    public Review post(String authorization, Review.Request request);
+    public Review patch(String authorization, Review.Request request);
+    public void delete(String authorization, String reviewId);
 }

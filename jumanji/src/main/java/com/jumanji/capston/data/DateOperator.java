@@ -7,6 +7,7 @@ import java.util.Date;
 
 public class DateOperator {
     static final SimpleDateFormat YYYYMMDD = new SimpleDateFormat("yyyy/MM/dd");
+    static final SimpleDateFormat YYYYMMDDHHMMSS = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
     public static Date stringToMilisecond(String date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
         Date parseDate = null;

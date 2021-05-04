@@ -27,7 +27,7 @@ public class ChatController {
 //            chatMessage.setUsername(chatMessage.getMessage().substring(0, chatMessage.getMessage().indexOf(":")));
 //            chatMessage.setMessage(chatMessage.getMessage().substring(chatMessage.getMessage().indexOf(":")));
 //        }
-        messagingTemplate.convertAndSend("/sub/chat/" + chatMessage.getRoomSeq(), chatMessage);
+        messagingTemplate.convertAndSend("/sub/chat/" + chatMessage.getShopId(), chatMessage);
     }
 
     @EventListener(SessionConnectEvent.class)

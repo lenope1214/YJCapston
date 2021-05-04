@@ -1,44 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
 <body>
 <!-- 아임포트 자바스크립트는 jQuery 기반으로 개발되었습니다 -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" ></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- css and less -->
+<link rel="stylesheet" href="https://www.iamport.kr/assets/css/less/style.css?d=20210319"/>
+
+
+<!-- prism -->
+<script src="https://www.iamport.kr/assets/lib/prism/prism.js" type="text/javascript"></script>
+<link rel="stylesheet" href="https://www.iamport.kr/assets/lib/prism/prism.css">
+</link>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 
 <script>
-    function iamport(){
+    function iamport() {
         //가맹점 식별코드
         IMP.init('imp59387591');
         IMP.request_pay({
-            pg : 'kcp',
-            pay_method : 'card',
-            merchant_uid : 'merchant_' + new Date().getTime(),
-            name : '상품1' , //결제창에서 보여질 이름
-            amount : 100, //실제 결제되는 가격
-            buyer_email : 'iamport@siot.do',
-            buyer_name : '구매자이름',
-            buyer_tel : '010-1234-5678',
-            buyer_addr : '서울 강남구 도곡동',
-            buyer_postcode : '123-456',
-            <!-- 아래 부분을 추가해줍니다 -->
-            m_redirect_url : 'http://localhost:8088/orderCompleteMobile'
+            pg: 'kcp',
+            pay_method: 'card',
+            merchant_uid: 'merchant_' + new Date().getTime(),
+            name: '상품1', //결제창에서 보여질 이름
+            amount: 100, //실제 결제되는 가격
+            buyer_email: 'iamport@siot.do',
+            buyer_name: '구매자이름',
+            buyer_tel: '010-1234-5678',
+            buyer_addr: '서울 강남구 도곡동',
+            buyer_postcode: '123-456',
+            // <!-- 아래 부분을 추가해줍니다 -->
+            m_redirect_url: 'http://localhost:8088/orderCompleteMobile'
 
-        }, function(rsp) {
+        }, function (rsp) {
             console.log(rsp);
             // 결제검증
             $.ajax({
-                type : "POST",
-                url : "/verifyIamport/" + rsp.imp_uid
-            }).done(function(data) {
+                type: "POST",
+                url: "/verifyIamport/" + rsp.imp_uid
+            }).done(function (data) {
 
                 console.log(data);
 
                 // 위의 rsp.paid_amount 와 data.response.amount를 비교한후 로직 실행 (import 서버검증)
-                if(rsp.paid_amount == data.response.amount){
+                if (rsp.paid_amount == data.response.amount) {
                     alert("결제 및 결제검증완료");
                 } else {
                     alert("결제 실패");
@@ -46,7 +63,158 @@
             });
         });
     }
+
+    // $(document).ready(function (){
+    //     // $('#resDate').val("1234");
+    //     alert('1');
+    //     $('#message').val("화면 로딩");
+    //     $('#resDate').val(resDate());
+    // });
 </script>
+<link href="https://www.iamport.kr/assets/css/demo.css?d=20170112" rel="stylesheet">
+<section style="background-color: #6E6150" id="section1">
+    <div class="container" style="padding: 50px 0 50px 0;">
+        <h1>주문의 민족 || 결제</h1>
+        <div id="demo" class="col-md-8 col-md-offset-1 col-xs-11">
+            <form name="frm_payment" id="frm_payment" class="form-horizontal">
+
+                <div class="form-group">
+                    <label for="resShop" class="col-md-4 col-xs-4">매장이름</label>
+                    <input type="text" name="resShop" id="resShop"
+                           class="col-md-8 col-xs-8"/>
+                </div>
+                <div class="form-group">
+                    <label for="resAddr" class="col-md-4 col-xs-4">주소</label>
+                    <input type="text" name="resAddr" id="resAddr"
+                           class="col-md-8 col-xs-8"/>
+                </div>
+                <div class="form-group">
+                    <label for="resPrice" class="col-md-4 col-xs-4">금액</label>
+                    <input type="tel" name="resPrice" id="resPrice" class="col-md-8 col-xs-8"/>
+                </div>
+
+
+                <br><br><br>
+
+
+                <div class="form-group">
+                    <label for="resName" class="col-md-4 col-xs-4">이름</label>
+                    <input type="text" name="resName" id="resName"
+                           class="col-md-8 col-xs-8"/>
+                </div>
+                <div class="form-group">
+                    <label for="resPhone" class="col-md-4 col-xs-4">전화번호</label>
+                    <input type="tel" name="resPhone" id="resPhone"
+                           class="col-md-8 col-xs-8"/>
+                </div>
+                <div class="form-group">
+                    <label for="resDate" class="col-md-4 col-xs-4">예약날짜</label>
+                    <input type="text" name="resDate" id="resDate" value=""
+                           class="col-md-8 col-xs-8"/>
+                </div>
+                <div class="form-group">
+                    <label for="resTime" class="col-md-4 col-xs-4">예약시간</label>
+                    <input type="text" name="resTime" id="resTime"
+                           class="col-md-8 col-xs-8"/>
+                </div>
+                <div class="form-group">
+                    <label for="resPeople" class="col-md-4 col-xs-4">인원 수</label>
+                    <input type="text" name="resPeople" id="resPeople"
+                           class="col-md-8 col-xs-8"/>
+                </div>
+            </form>
+            <a class="btn btn-primary" onclick="iamport()">결제하기</a>
+        </div>
+    </div>
+</section>
 <button onclick="iamport()">결제테스트</button>
+<div id="message">호출 메세지</div>
 </body>
+<script>
+    function resDate() {
+        let date = window.android.getResDate();
+
+        $('#resDate').val(date);
+        $('#message').text("getResDate 로딩");
+
+        return date;
+    }
+
+    function resTime() {
+        let time = window.android.getTimeDate();
+        $('#resTime').val(time);
+
+        return time;
+    }
+
+    function resPrice() {
+        let price = window.android.getPrice();
+        $('#resPrice').val(price);
+
+        return price;
+    }
+
+    function resPeople() {
+        let people = window.android.getPeople();
+        $('#resPeople').val(people);
+
+        return people;
+    }
+
+    function resShop() {
+        let shop = window.android.getResShop();
+        $('#resShop').val(shop);
+
+        return shop;
+    }
+
+    function resAddr() {
+        let addr = window.android.getResAddr();
+        $('#resAddr').val(addr);
+
+        return addr;
+    }
+
+    function resName() {
+        setMessage("resName 전");
+
+        let name = window.android.getResName();
+        $('#resName').val(name);
+        setMessage("resName : " + name);
+        return name;
+    }
+
+    function resPhone() {
+        let phone = window.android.getResPhone();
+        $('#resPhone').val(phone);
+
+        return phone;
+    }
+    function setMessage(txt){
+        $('#message').text(txt);
+    }
+
+    $(document).ready(function () {
+        $('#resDate').val("1234");
+        alert('2');
+        $('#message').text("화면 로딩");
+        let date = resDate();
+        let time = resTime();
+        let price = resPrice();
+        let people = resPeople();
+        let shop = resShop();
+        let addr = resAddr();
+        let name = resName();
+        let phone = resPhone();
+        // $('#message').text("getResDate 후...");
+        $('#resDate').val(date);
+        $('#resTime').val(time);
+        $('#resPrice').val(price+'원');
+        $('#resPeople').val(people+'명');
+        $('#resShop').val(shop);
+        $('#resAddr').val(addr);
+        $('#resName').val(name);
+        $('#resPhone').val(phone);
+    });
+</script>
 </html>

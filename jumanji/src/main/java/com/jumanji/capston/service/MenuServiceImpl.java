@@ -1,20 +1,16 @@
 package com.jumanji.capston.service;
 
 import com.jumanji.capston.data.Menu;
-import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.MenuRepository;
-import com.jumanji.capston.service.exception.Auth.ForbiddenException;
-import com.jumanji.capston.service.exception.MenuException.MenuHasExistException;
-import com.jumanji.capston.service.exception.MenuException.MenuNotFoundException;
+import com.jumanji.capston.service.exception.menuException.MenuHasExistException;
+import com.jumanji.capston.service.exception.menuException.MenuNotFoundException;
 import com.jumanji.capston.service.interfaces.BasicService;
 import com.jumanji.capston.service.interfaces.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -64,6 +60,7 @@ public class MenuServiceImpl implements MenuService, BasicService {
         return menuList;
     }
 
+    @Transactional
     @Override
     public Menu post(String authorization, Menu.Request request) {
         String menuId = request.getShopId() + request.getName();
@@ -86,7 +83,7 @@ public class MenuServiceImpl implements MenuService, BasicService {
                 .imgPath(imgPath)
                 .build();
         System.out.println("save 전 menu Id  : " + menu.getId());
-        return menuRepository.save(menu);
+        return menuRepository.saveAndFlush(menu);
     }
 
     @Override
@@ -105,7 +102,6 @@ public class MenuServiceImpl implements MenuService, BasicService {
 
     public void delete(String authorization, String menuId) {
         String loginId = userService.getMyId(authorization);
-        User loginUser = userService.get(loginId);
         String shopId = menuId.substring(0, 10);
 
         // 유효성 검사
@@ -132,7 +128,7 @@ public class MenuServiceImpl implements MenuService, BasicService {
         throw new MenuHasExistException();
     }
 
-    public boolean isPresent(String menuId){
+    public Object isPresent(String menuId){
         if(menuRepository.findById(menuId).isPresent())return true;
         throw new MenuNotFoundException();
     }
