@@ -4,10 +4,10 @@ import com.jumanji.capston.config.jwt.JwtResponse;
 import com.jumanji.capston.config.jwt.JwtTokenUtil;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.UserRepository;
-import com.jumanji.capston.service.exception.Auth.ForbiddenException;
-import com.jumanji.capston.service.exception.UserException.LoginFailedException;
-import com.jumanji.capston.service.exception.UserException.UserHasExistException;
-import com.jumanji.capston.service.exception.UserException.UserNotFoundException;
+import com.jumanji.capston.service.exception.auth.ForbiddenException;
+import com.jumanji.capston.service.exception.userException.LoginFailedException;
+import com.jumanji.capston.service.exception.userException.UserHasExistException;
+import com.jumanji.capston.service.exception.userException.UserNotFoundException;
 import com.jumanji.capston.service.interfaces.BasicService;
 import com.jumanji.capston.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -46,8 +47,8 @@ public class UserServiceImpl implements UserService, BasicService {
 
     @Transactional
     public User get(String id) {
-        isPresent(id);
-        return userRepository.findById(id).get();
+
+        return isPresent(id);
     }
 
     @Override
@@ -99,9 +100,9 @@ public class UserServiceImpl implements UserService, BasicService {
     @Transactional
     public void delete(String authorization) {
         String loginId = getMyId(authorization);
-        isPresent(loginId);
 
-        User user = get(loginId);
+
+        User user = isPresent(loginId);
         user.setIsWdrw('Y');
         userRepository.save(user);
     }
@@ -141,8 +142,9 @@ public class UserServiceImpl implements UserService, BasicService {
     }
 
 
-    public boolean isPresent(String id) {
-        if (userRepository.findById(id).isPresent()) return true;
+    public User isPresent(String id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) return user.get();
         throw new UserNotFoundException(id);
     }
 

@@ -129,7 +129,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             return true;
         }
         if(path.startsWith("/api/v1")) {
-            System.out.println("잘라낸 패스 : "  + path.substring(path.indexOf("/api/v1/") + 8));
+//            System.out.println("잘라낸 패스 : "  + path.substring(path.indexOf("/api/v1/") + 8));
             return EXCLUDE_URL.stream().anyMatch(exclude -> exclude.equalsIgnoreCase(path.substring(path.indexOf("/api/v1/") + 8)));
         }
         return false;

@@ -27,7 +27,7 @@ public class UserController  {
     @GetMapping("/user")  // myInfo
     public ResponseEntity<?> getMyInfo(@RequestHeader String authorization) {
         String loginId = userService.getMyId(authorization);
-        User user = userService.get(loginId);
+        User user = userService.isPresent(loginId);
         System.out.println("user.info : " + user.toString() );
         List<Order> orderList = orderService.getList(authorization);
         User.MyInfo response = new User.MyInfo(user, orderList);
@@ -40,7 +40,7 @@ public class UserController  {
     @GetMapping("/userList") // getUserList
     public ResponseEntity<?> getUserList(@RequestHeader String authorization) {
         String loginId = userService.getMyId(authorization);
-        String userRole = userService.get(loginId).getRole();
+        String userRole = userService.isPresent(loginId).getRole();
         userService.isAuth(userRole, "ADMIN");
         List<User.Response> response = new ArrayList<>();
         for (User _user : userService.getList(authorization)) {

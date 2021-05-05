@@ -1,4 +1,4 @@
-package com.jumanji.capston.service.exception.MenuException;
+package com.jumanji.capston.service.exception.menuException;
 
 import com.jumanji.capston.service.exception.BasicException;
 

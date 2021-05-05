@@ -2,14 +2,13 @@ package com.jumanji.capston.service;
 
 import com.jumanji.capston.data.Tab;
 import com.jumanji.capston.repository.TableRepository;
-import com.jumanji.capston.service.exception.TableException.TableHasExistException;
-import com.jumanji.capston.service.exception.TableException.TableNotFoundException;
+import com.jumanji.capston.service.exception.tableException.TableHasExistException;
+import com.jumanji.capston.service.exception.tableException.TableNotFoundException;
 import com.jumanji.capston.service.interfaces.BasicService;
 import com.jumanji.capston.service.interfaces.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -84,7 +83,7 @@ public class TableServiceImpl implements TableService, BasicService {
     }
 
     @Override
-    public boolean isPresent(String id) {
+    public Object isPresent(String id) {
         if (tableRepository.findById(id).isPresent()) return true;
         throw new TableNotFoundException();
     }

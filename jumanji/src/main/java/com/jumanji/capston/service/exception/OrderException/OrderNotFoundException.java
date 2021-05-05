@@ -1,4 +1,4 @@
-package com.jumanji.capston.service.exception.OrderException;
+package com.jumanji.capston.service.exception.orderException;
 
 import com.jumanji.capston.service.exception.BasicException;
 

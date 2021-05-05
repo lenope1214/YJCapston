@@ -2,20 +2,13 @@ package com.jumanji.capston.service;
 
 import com.jumanji.capston.data.*;
 import com.jumanji.capston.repository.OrderRepository;
-import com.jumanji.capston.service.exception.OrderException.OrderHasExistException;
-import com.jumanji.capston.service.exception.OrderException.OrderNotFoundException;
-import com.jumanji.capston.service.interfaces.BasicService;
+import com.jumanji.capston.service.exception.orderException.OrderHasExistException;
+import com.jumanji.capston.service.exception.orderException.OrderNotFoundException;
 import com.jumanji.capston.service.interfaces.OrderService;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -66,7 +59,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getList(String authorization, String userId) {
         String loginId = userService.getMyId(authorization);
-        User user = userService.get(loginId);
+        User user = userService.isPresent(loginId);
         userService.isAuth(user.getRole(), "ADMIN");
 
         List<Order> orderList = new ArrayList<>();
@@ -82,12 +75,11 @@ public class OrderServiceImpl implements OrderService {
         Shop shop;
         User user;
         String loginId = userService.getMyId(authorization);
-        userService.isPresent(loginId);
-        shopService.isPresent(request.getShopId());
+
 
         //isEmpty 는 필요 x 주문은 매번 새로운 애기 때문.
-        shop = shopService.get(request.getShopId());
-        user = userService.get(loginId);
+        shop = shopService.isPresent(request.getShopId());
+        user = userService.isPresent(loginId);
 
         order = Order.builder()
                 .id(new Timestamp(System.currentTimeMillis()))

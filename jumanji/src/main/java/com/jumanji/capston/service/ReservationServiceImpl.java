@@ -66,7 +66,7 @@ public class ReservationServiceImpl
 //    }
 //
 //    @Override
-//    public boolean isPresent(String id) {
+//    public Object isPresent(String id) {
 //        return false;
 //    }
 //

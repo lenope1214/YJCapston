@@ -1,20 +1,20 @@
 package com.jumanji.capston.service.exception;
 
 import com.jumanji.capston.service.CanNotBeZero;
-import com.jumanji.capston.service.exception.Auth.ForbiddenException;
-import com.jumanji.capston.service.exception.EmployeeException.EmployeeHasExistException;
-import com.jumanji.capston.service.exception.EmployeeException.EmployeeNotFoundException;
-import com.jumanji.capston.service.exception.MenuException.MenuHasExistException;
-import com.jumanji.capston.service.exception.OrderException.OrderNotFoundException;
-import com.jumanji.capston.service.exception.OrderMenuException.OrderMenuNotFoundException;
-import com.jumanji.capston.service.exception.ShopException.NoShopListException;
-import com.jumanji.capston.service.exception.ShopException.ShopHasExistException;
-import com.jumanji.capston.service.exception.ShopException.ShopMissMatchException;
-import com.jumanji.capston.service.exception.ShopException.ShopNotFoundException;
-import com.jumanji.capston.service.exception.UserException.DoLoginExistException;
-import com.jumanji.capston.service.exception.UserException.LoginFailedException;
-import com.jumanji.capston.service.exception.UserException.UserHasExistException;
-import com.jumanji.capston.service.exception.UserException.UserNotFoundException;
+import com.jumanji.capston.service.exception.auth.ForbiddenException;
+import com.jumanji.capston.service.exception.employeeException.EmployeeHasExistException;
+import com.jumanji.capston.service.exception.employeeException.EmployeeNotFoundException;
+import com.jumanji.capston.service.exception.menuException.MenuHasExistException;
+import com.jumanji.capston.service.exception.orderException.OrderNotFoundException;
+import com.jumanji.capston.service.exception.orderMenuException.OrderMenuNotFoundException;
+import com.jumanji.capston.service.exception.shopException.NoShopListException;
+import com.jumanji.capston.service.exception.shopException.ShopHasExistException;
+import com.jumanji.capston.service.exception.shopException.ShopMissMatchException;
+import com.jumanji.capston.service.exception.shopException.ShopNotFoundException;
+import com.jumanji.capston.service.exception.userException.DoLoginExistException;
+import com.jumanji.capston.service.exception.userException.LoginFailedException;
+import com.jumanji.capston.service.exception.userException.UserHasExistException;
+import com.jumanji.capston.service.exception.userException.UserNotFoundException;
 import io.jsonwebtoken.MalformedJwtException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
@@ -153,4 +153,10 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ApiErrorResponse> nullPointException(IllegalArgumentException ex) {
+        ApiErrorResponse response =
+                new ApiErrorResponse("error-null", "널 값이 들어왔습니다.");
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
 }

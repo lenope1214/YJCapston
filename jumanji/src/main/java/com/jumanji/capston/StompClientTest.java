@@ -34,7 +34,7 @@ class StompClientTest {
                 String message = line;
                 String username = "test";
 
-                client.send("/pub/chat", new ChatMessage(roomSeq, username,message));
+                client.send("/pub/chat", new ChatMessage(roomSeq, "type자리",username,message));
             } catch (Exception e) {
                 log.error("error", e);
             }

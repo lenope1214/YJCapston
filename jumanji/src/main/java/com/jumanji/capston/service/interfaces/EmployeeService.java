@@ -10,5 +10,5 @@ public interface EmployeeService {
     public List<Employee> getList(String authorization,String shopId);
     public Employee post(String authorization, Employee.Request request);
     public Employee patch(String authorization, Employee.Request request);
-    public void delete(String authorization, String empNo);
+    public void delete(String authorization, String shopId, int empNo);
 }

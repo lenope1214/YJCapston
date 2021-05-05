@@ -11,4 +11,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
     @Query(value = "select * from employees where id like :shopId%",
             nativeQuery = true)
     List<Employee> findByShopId(String shopId);
+
+    List<Employee> findByIdStartsWith(String shopId);
 }

@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import retrofit2.http.Query;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +30,20 @@ public class EmployeeController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @PostMapping("/shop/employee")
     public ResponseEntity<?> getShopPos(@RequestHeader String authorization, @RequestBody Employee.Request request){
         Employee employee = employeeService.post(authorization, request);
         Employee.Response response = new Employee.Response(employee);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @Transactional
+    @DeleteMapping("/shop/employee")
+    public ResponseEntity<?> deleteEmployee(@RequestHeader String authorization,
+                                            @Query("empNo") int empNo,
+                                            @Query("shopId") String shopId){
+        employeeService.delete(authorization, shopId, empNo);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

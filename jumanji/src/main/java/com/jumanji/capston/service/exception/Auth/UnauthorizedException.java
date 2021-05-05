@@ -1,4 +1,4 @@
-package com.jumanji.capston.service.exception.Auth;
+package com.jumanji.capston.service.exception.auth;
 
 import com.jumanji.capston.service.exception.BasicException;
 

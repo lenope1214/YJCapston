@@ -1,19 +1,14 @@
 package com.jumanji.capston.service;
 
-import ch.qos.logback.classic.pattern.DateConverter;
-import com.jumanji.capston.data.DateOperator;
 import com.jumanji.capston.data.Employee;
-import com.jumanji.capston.data.Menu;
 import com.jumanji.capston.repository.EmployeeRepository;
-import com.jumanji.capston.service.exception.EmployeeException.EmployeeHasExistException;
-import com.jumanji.capston.service.exception.EmployeeException.EmployeeNotFoundException;
+import com.jumanji.capston.service.exception.employeeException.EmployeeHasExistException;
+import com.jumanji.capston.service.exception.employeeException.EmployeeNotFoundException;
 import com.jumanji.capston.service.interfaces.EmployeeService;
-import javassist.tools.web.BadHttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,8 +35,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         shopService.isOwnShop(loginId, shopId);
 
         // 서비스
-        List<Employee> employeeList = employeeRepository.findByShopId(shopId);
-        
+//        List<Employee> employeeList = employeeRepository.findByShopId(shopId);
+        List<Employee> employeeList = employeeRepository.findByIdStartsWith(shopId);
+//        for(int i =0; i<employeeList.size();i++){
+//            System.out.println("eL 0 : " + employeeList.get(i) +"\n" +
+//                    "eL 1 : " + employeeList1.get(i));
+//        }
         return employeeList;
     }
 
@@ -85,8 +84,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void delete(String authorization, String empNo) {
-
+    public void delete(String authorization, String shopId, int empNo) {
+        String loginId = userService.getMyId(authorization);
+        String empId = shopId + 'e' + String.format("%03d", empNo);
+        // 유효성 체크
+        userService.isPresent(loginId); // 로그인한 계정이 존재하는지
+        shopService.isOwnShop(loginId, shopId); // 존재한다면 그 매장이 내 매장인지
+        Employee e = isPresent(empId); // 존재하는 직원인지
+        employeeRepository.delete(e);
+        isEmpty(empId);
     }
 
     private String toEmpId(String shopId, int empNo){
