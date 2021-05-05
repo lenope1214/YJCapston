@@ -58,8 +58,8 @@ public class Employee {
             this.shopId = employee.getId().substring(0, 10);
             this.empNo = employee.parseEmpNo(employee.getId());
             this.empName = employee.getName();
-            this.birthday = DateOperator.dateToYYYYMMDD(employee.getBirthday());
-            this.hiredate = DateOperator.dateToYYYYMMDD(employee.getHiredate());
+            this.birthday = DateOperator.dateToYYYYMMDD(employee.getBirthday(), true);
+            this.hiredate = DateOperator.dateToYYYYMMDD(employee.getHiredate(), true);
             this.gender = employee.getGender();
             this.phone = employee.getPhone();
         }

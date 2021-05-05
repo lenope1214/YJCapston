@@ -1,6 +1,7 @@
 package com.jumanji.capston.controller.chatting;
 
-import com.jumanji.capston.data.ChatMessage;
+import com.jumanji.capston.data.StompMessage;
+import com.jumanji.capston.service.stomp.StompService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
@@ -19,15 +20,18 @@ import java.util.Set;
 public class ChatController {
     private static final Set<String> SESSION_IDS = new HashSet<>();
     private final SimpMessagingTemplate messagingTemplate;
+    private final StompService stompService;
 
     @MessageMapping("/chat") // "/pub/chat"
-    public void publishChat(ChatMessage chatMessage) {
+    public void publishChat(StompMessage chatMessage) {
         log.info("publishChat : {}", chatMessage);
 //        if(chatMessage.getMessage().contains(":")){
 //            chatMessage.setUsername(chatMessage.getMessage().substring(0, chatMessage.getMessage().indexOf(":")));
 //            chatMessage.setMessage(chatMessage.getMessage().substring(chatMessage.getMessage().indexOf(":")));
 //        }
-        messagingTemplate.convertAndSend("/sub/chat/" + chatMessage.getShopId(), chatMessage);
+
+        stompService.post(chatMessage);
+        messagingTemplate.convertAndSend("/sub/" + chatMessage.getShopId() + "/" + chatMessage.getType(), chatMessage);
     }
 
     @EventListener(SessionConnectEvent.class)

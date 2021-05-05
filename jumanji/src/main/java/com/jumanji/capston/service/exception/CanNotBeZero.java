@@ -1,4 +1,4 @@
-package com.jumanji.capston.service;
+package com.jumanji.capston.service.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

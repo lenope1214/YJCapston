@@ -37,7 +37,7 @@ public class ReviewServiceImpl implements ReviewService, BasicService {
 
     @Override
     public List<Review> getList(String shopId) {
-        return reviewRepository.findAllByShopId(shopId);
+        return reviewRepository.findAllByShopIdOrderByRegTimeDesc(shopId);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class ReviewServiceImpl implements ReviewService, BasicService {
         System.out.println("리뷰등록's shopId : " + request.getShopId());
 
         String loginId = userService.getMyId(authorization);
-        String uri = "shop/" + request.getShopId() + "/review/";
+        String uri = "shop/" + request.getShopId() + "/review/"; // TODO 얘를 storage service에서 만들어 주는 메소드를 만들어야 할듯.
         String imgPath = "";
         Timestamp orderId = new Timestamp(Long.parseLong(request.getOrderId()));
 
@@ -54,18 +54,18 @@ public class ReviewServiceImpl implements ReviewService, BasicService {
         User user = userService.isPresent(loginId); // 유저 유효성 검사.
         Shop shop = shopService.isPresent(request.getShopId()); //
         Order order = orderService.isPresent(orderId);
-        isEmpty(request.getShopId()); // 해당 사업자 번호로 사업자 등록이 됐는지 확인 비어있어야 등록
+        isEmpty(request.getOrderId()); // 같은 주문 번호로 리뷰 여러번 쓰는거 막기
 
         if (request.getImg() != null)
             imgPath = storageService.store(request.getImg(), request.getImg().getName(), uri.split("/"));
         Date regDate = new Date();
         Timestamp regTime = new Timestamp(regDate.getTime());
         Review review;
-        String reviewId = request.getShopId().substring(0,2) + DateOperator.dateToYYYYMMDD(regDate);
+        String reviewId = request.getShopId().substring(0,2) + DateOperator.dateToYYYYMMDD(regDate, false);
         System.out.println("개수 가져오기 전 reivewId : " + reviewId);
         int countDayReviews = reviewRepository.countByIdStartingWith(reviewId);
         System.out.println("해당 날짜 리뷰 개수 : " + countDayReviews);
-        StringUtils.append(reviewId, String.valueOf(countDayReviews));
+        reviewId = StringUtils.append(reviewId, String.format("%03d", countDayReviews));
         System.out.println("개수 붙인 후 reivewId : " + reviewId);
         review = Review.init()
                 .id(reviewId)
@@ -100,8 +100,8 @@ public class ReviewServiceImpl implements ReviewService, BasicService {
     }
 
     @Override
-    public boolean isEmpty(String reviewId) {
-        Optional<Review> review = reviewRepository.findById(reviewId);
+    public boolean isEmpty(String orderId) {
+        Optional<Review> review = reviewRepository.findByOrderId(orderId);
         if(review.isEmpty())return true;
         throw new ReviewHasExistException();
     }

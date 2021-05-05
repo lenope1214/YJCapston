@@ -2,6 +2,7 @@ package com.jumanji.capston.service;
 
 import com.jumanji.capston.data.Employee;
 import com.jumanji.capston.repository.EmployeeRepository;
+import com.jumanji.capston.service.exception.CanNotBeZero;
 import com.jumanji.capston.service.exception.employeeException.EmployeeHasExistException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeNotFoundException;
 import com.jumanji.capston.service.interfaces.EmployeeService;

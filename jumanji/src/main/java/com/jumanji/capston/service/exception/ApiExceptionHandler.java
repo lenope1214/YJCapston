@@ -1,6 +1,5 @@
 package com.jumanji.capston.service.exception;
 
-import com.jumanji.capston.service.CanNotBeZero;
 import com.jumanji.capston.service.exception.auth.ForbiddenException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeHasExistException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeNotFoundException;
@@ -153,10 +152,10 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ApiErrorResponse> nullPointException(IllegalArgumentException ex) {
+    @ExceptionHandler(MyNullPointerException.class)
+    public ResponseEntity<ApiErrorResponse> nullPointException(MyNullPointerException ex) {
         ApiErrorResponse response =
-                new ApiErrorResponse("error-null", "널 값이 들어왔습니다.");
+                new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }

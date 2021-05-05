@@ -80,7 +80,7 @@ public class Review {
             this.shopId = review.getShop().getId();
             this.content = review.content;
             this.parentId = review.parentId;
-            this.regDate = DateOperator.YYYYMMDDHHMMSS.format(review.regTime);
+            this.regDate = DateOperator.SYYYYMMDDHHMMSS.format(review.regTime);
             this.score = review.score;
             this.imgUrl = review.imgUrl;
         }
