@@ -1,6 +1,6 @@
 package com.jumanji.capston;
 
-import com.jumanji.capston.data.ChatMessage;
+import com.jumanji.capston.data.StompMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
@@ -34,7 +34,7 @@ class StompClientTest {
                 String message = line;
                 String username = "test";
 
-                client.send("/pub/chat", new ChatMessage(roomSeq, "type자리",username,message));
+                client.send("/pub/chat", new StompMessage(roomSeq, "type자리",username,message));
             } catch (Exception e) {
                 log.error("error", e);
             }
@@ -49,7 +49,7 @@ class StompClientTest {
 
         @Override
         public Type getPayloadType(StompHeaders headers) {
-            return ChatMessage.class;
+            return StompMessage.class;
         }
 
         @Override
@@ -60,7 +60,7 @@ class StompClientTest {
 
         @Override
         public void handleFrame(StompHeaders headers, Object payload) {
-            ChatMessage chatMessage = (ChatMessage) payload;
+            StompMessage chatMessage = (StompMessage) payload;
             log.info("receive : {}", chatMessage);
         }
 
@@ -75,7 +75,7 @@ class StompClientTest {
             stompClient.connect(url, httpHeaders, stompHeaders, this);
         }
 
-        public void send(String destination, ChatMessage chatMessage) {
+        public void send(String destination, StompMessage chatMessage) {
             session.send(destination, chatMessage);
         }
     }
