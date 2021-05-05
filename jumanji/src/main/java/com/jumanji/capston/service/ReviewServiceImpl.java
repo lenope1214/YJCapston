@@ -49,6 +49,7 @@ public class ReviewServiceImpl implements ReviewService, BasicService {
         String imgPath = "";
         Timestamp orderId = new Timestamp(Long.parseLong(request.getOrderId()));
 
+
         // 유효성 검사
         User user = userService.isPresent(loginId); // 유저 유효성 검사.
         Shop shop = shopService.isPresent(request.getShopId()); //
