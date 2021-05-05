@@ -38,11 +38,12 @@
             amount: price, //실제 결제되는 가격
             buyer_email: 'iamport@siot.do',
             buyer_name: username,
-            buyer_tel: phone,
+            buyer_tel: '010-1234-5678',
             buyer_addr: addr,
             buyer_postcode: '123-456',
             // <!-- 아래 부분을 추가해줍니다 -->
-            m_redirect_url: 'http://localhost:8088/orderCompleteMobile'
+            m_redirect_url: 'bill://web1',
+            app_scheme: 'bill://web1'
 
         }, function (rsp) {
             console.log(rsp);
@@ -63,7 +64,6 @@
             });
         });
     }
-
 
     // $(document).ready(function (){
     //     // $('#resDate').val("1234");
@@ -183,7 +183,7 @@
 
     function resPhone() {
         phone = window.android.getResPhone();
-        $('#resPhone').val(phone);
+        $('#resPhone').val(콜);
 
         return phone;
     }
@@ -205,7 +205,7 @@
         $('#resShop').val(shop);
         $('#resAddr').val(addr);
         $('#resName').val(username);
-        $('#resPhone').val(phone);
+        $('#resPhone').val(콜);
     });
 
 
