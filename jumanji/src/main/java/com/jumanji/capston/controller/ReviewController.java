@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
@@ -18,6 +20,18 @@ public class ReviewController  {
 
     @Autowired
     ReviewServiceImpl reviewService;
+
+    @Transactional
+    @GetMapping("/review/{shopId}")
+    public ResponseEntity<?> getReviewList(@PathVariable String shopId){
+        System.out.println("getReviewList- shopId : " + shopId);
+        List<Review> reviewList = reviewService.getList(shopId);
+        List<Review.Response> response = new ArrayList<>();
+        for(Review r : reviewList){
+            response.add(new Review.Response(r));
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
     @Transactional
     @PostMapping("/review") // Multipart-form 는 json이 아니기 때문에 바디 뺌.
