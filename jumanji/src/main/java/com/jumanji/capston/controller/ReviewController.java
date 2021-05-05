@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import retrofit2.http.Path;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -38,6 +39,19 @@ public class ReviewController  {
         Review review = reviewService.post(authorization, request);
         Review.Response response = new Review.Response(review);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @Transactional
+    @PatchMapping("/review")
+    public ResponseEntity<?> patchReview(@RequestHeader String authorization, @RequestBody Review.Request request){
+        return null;
+    }
+
+    @Transactional
+    @DeleteMapping("/review/{reviewId}")
+    public ResponseEntity<?> deleteReview(@RequestHeader String authorization, @PathVariable String reviewId){
+        reviewService.delete(authorization, reviewId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 

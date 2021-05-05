@@ -76,6 +76,7 @@ public class UserServiceImpl implements UserService, BasicService {
                 .phone(user.getPhone())
                 .email(user.getEmail())
                 .sign_date(new Date())
+                .birthday(user.getBirthday())
                 .address(user.getAddress())
                 .addressDetail(user.getAddressDetail())
                 .role(user.getRole())

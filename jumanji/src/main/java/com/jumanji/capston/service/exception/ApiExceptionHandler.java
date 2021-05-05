@@ -1,6 +1,5 @@
 package com.jumanji.capston.service.exception;
 
-import com.jumanji.capston.service.CanNotBeZero;
 import com.jumanji.capston.service.exception.auth.ForbiddenException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeHasExistException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeNotFoundException;
