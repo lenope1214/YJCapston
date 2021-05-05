@@ -53,7 +53,7 @@ public class User implements Serializable {
 //    }
 
     @Builder(builderMethodName = "createUser")
-    public User(String id, String password, String address, String addressDetail, String name, String role, String email, Date sign_date, String provider, String provider_id, String phone) {
+    public User(String id, String password, String address, String addressDetail, String name, Date birthday, String role, String email, Date sign_date, String provider, String provider_id, String phone) {
         this.id = id;
         this.password = password;
         this.name = name;
@@ -63,6 +63,7 @@ public class User implements Serializable {
         this.role = role;
         this.signDate = sign_date;
         this.provider = provider;
+        this.birthday = birthday;
         this.providerId = provider_id;
         this.phone = phone;
         this.point = 0;
@@ -77,7 +78,7 @@ public class User implements Serializable {
         private String email; // 이메일
         private String address; // 주소
         private String addressDetail; // 상세주소
-        private String birthday; // 생년월일
+        private Date birthday; // 생년월일
         private String phone; // 전화번호
         private String role; // 권한   ROLE_USER, ROLE_OWNER, ROLE_ADMIN
     }
@@ -101,8 +102,8 @@ public class User implements Serializable {
             this.name = user.getName();
             this.address = user.getAddress();
             this.addressDetail = user.getAddressDetail();
-            this.birthday = DateOperator.dateToYYYYMMDD(user.getBirthday());
-            this.email = user.getEmail();
+            if(user.birthday != null)this.birthday = DateOperator.dateToYYYYMMDD(user.getBirthday());
+            if(user.email != null)this.email = user.getEmail();
             this.phone = user.phone;
             this.role = user.getRole();
             this.level = user.getLevel();
