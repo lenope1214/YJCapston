@@ -47,11 +47,12 @@ public class ReviewServiceImpl implements ReviewService, BasicService {
         String loginId = userService.getMyId(authorization);
         String uri = "shop/" + request.getShopId() + "/review/";
         String imgPath = "";
+        Timestamp orderId = new Timestamp(Long.parseLong(request.getOrderId()));
 
         // 유효성 검사
         User user = userService.isPresent(loginId); // 유저 유효성 검사.
         Shop shop = shopService.isPresent(request.getShopId()); //
-        Order order = orderService.isPresent(request.getOrderId());
+        Order order = orderService.isPresent(orderId);
         isEmpty(request.getShopId()); // 해당 사업자 번호로 사업자 등록이 됐는지 확인 비어있어야 등록
 
         if (request.getImg() != null)

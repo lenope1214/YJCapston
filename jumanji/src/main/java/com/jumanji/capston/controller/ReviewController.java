@@ -22,6 +22,7 @@ public class ReviewController  {
     @Transactional
     @PostMapping("/review") // Multipart-form 는 json이 아니기 때문에 바디 뺌.
     public ResponseEntity<?> postReview(@RequestHeader String authorization, Review.Request request){
+        System.out.println("??" +request.getShopId());
         Review review = reviewService.post(authorization, request);
         Review.Response response = new Review.Response(review);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
