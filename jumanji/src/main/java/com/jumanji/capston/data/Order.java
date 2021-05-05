@@ -78,6 +78,7 @@ public class Order implements Serializable {
     @Getter
     public static class Response{
         private Timestamp orderId;
+        private String shopId;
         private int people;
         private String orderRequest;
         private String shopName;
@@ -93,6 +94,7 @@ public class Order implements Serializable {
 
         public Response(Order order) {
             this.orderId = order.getId();
+            this.shopId = order.getShop().getId();
             this.shopName = order.getShop().getName();
             this.people = order.getPeople();
             this.orderRequest = order.getOrderRequest();
