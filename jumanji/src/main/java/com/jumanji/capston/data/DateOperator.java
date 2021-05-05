@@ -1,13 +1,17 @@
 package com.jumanji.capston.data;
 
+import com.jumanji.capston.service.exception.MyNullPointerException;
+
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateOperator {
-    static final SimpleDateFormat YYYYMMDD = new SimpleDateFormat("yyyy/MM/dd");
-    static final SimpleDateFormat YYYYMMDDHHMMSS = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+    static final SimpleDateFormat YYYYMMDD = new SimpleDateFormat("yyyyMMdd");
+    static final SimpleDateFormat YYYYMMDDHHMMSS = new SimpleDateFormat("yyyyMMddhhmmss");
+    static final SimpleDateFormat SYYYYMMDD = new SimpleDateFormat("yyyy/MM/dd");
+    static final SimpleDateFormat SYYYYMMDDHHMMSS = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
     public static Date stringToMilisecond(String date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
         Date parseDate = null;
@@ -19,16 +23,27 @@ public class DateOperator {
         return parseDate;
     }
 
-    public static String dateToHHMM(Date date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        return dateFormat.format(date);
+    public static String dateToHHMM(Date date, boolean slash) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");;
+
+        if(date != null){
+            if(!slash){ // slash == false
+                dateFormat = new SimpleDateFormat("HHmm");
+            }
+            return dateFormat.format(date);
+        }
+        throw new MyNullPointerException("dateToHHMM", "Date", "date");
     }
 
-    public static String dateToYYYYMMDD(Date date) {
+    public static String dateToYYYYMMDD(Date date, boolean slash) {
+
         if (date != null) {
-            return YYYYMMDD.format(date);
+            if(!slash){
+                return YYYYMMDD.format(date);
+            }
+            return SYYYYMMDD.format(date);
         }
-        return null;
+        throw new MyNullPointerException("dateToYYYYMMDD", "Date", "date");
     }
 
     public static Timestamp strToTimestamp(String string) {
@@ -37,12 +52,14 @@ public class DateOperator {
 
     public static Date strToDate(String string){
         try {
-            return YYYYMMDD.parse(string);
+            return SYYYYMMDD.parse(string);
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return null;
     }
+
+
 
 //    public static Timestamp stringToTimestamp(Time time){
 ////        Timestamp timestamp = Timestamp.valueOf(time);
