@@ -34,12 +34,12 @@
             pg: 'kcp',
             pay_method: 'card',
             merchant_uid: 'merchant_' + new Date().getTime(),
-            name: '상품1', //결제창에서 보여질 이름
-            amount: 100, //실제 결제되는 가격
+            name: shop, //결제창에서 보여질 이름
+            amount: price, //실제 결제되는 가격
             buyer_email: 'iamport@siot.do',
-            buyer_name: '구매자이름',
-            buyer_tel: '010-1234-5678',
-            buyer_addr: '서울 강남구 도곡동',
+            buyer_name: username,
+            buyer_tel: phone,
+            buyer_addr: addr,
             buyer_postcode: '123-456',
             // <!-- 아래 부분을 추가해줍니다 -->
             m_redirect_url: 'http://localhost:8088/orderCompleteMobile'
@@ -74,7 +74,7 @@
 <link href="https://www.iamport.kr/assets/css/demo.css?d=20170112" rel="stylesheet">
 <section style="background-color: #6E6150" id="section1">
     <div class="container" style="padding: 50px 0 50px 0;">
-        <h1>주문의 민족 || 결제</h1>
+        <h1>주문정보</h1>
         <div id="demo" class="col-md-8 col-md-offset-1 col-xs-11">
             <form name="frm_payment" id="frm_payment" class="form-horizontal">
 
@@ -127,94 +127,86 @@
         </div>
     </div>
 </section>
-<button onclick="iamport()">결제테스트</button>
-<div id="message">호출 메세지</div>
 </body>
 <script>
+    let date, time, price, people, shop, addr, username, phone;
     function resDate() {
-        let date = window.android.getResDate();
+        date = window.android.getResDate();
 
         $('#resDate').val(date);
-        $('#message').text("getResDate 로딩");
 
         return date;
     }
 
     function resTime() {
-        let time = window.android.getTimeDate();
+        time = window.android.getTimeDate();
         $('#resTime').val(time);
 
         return time;
     }
 
     function resPrice() {
-        let price = window.android.getPrice();
+        price = window.android.getPrice();
         $('#resPrice').val(price);
 
         return price;
     }
 
     function resPeople() {
-        let people = window.android.getPeople();
+        people = window.android.getPeople();
         $('#resPeople').val(people);
 
         return people;
     }
 
     function resShop() {
-        let shop = window.android.getResShop();
+        shop = window.android.getResShop();
         $('#resShop').val(shop);
 
         return shop;
     }
 
     function resAddr() {
-        let addr = window.android.getResAddr();
+        addr = window.android.getResAddr();
         $('#resAddr').val(addr);
 
         return addr;
     }
 
     function resName() {
-        setMessage("resName 전");
+        username = window.android.getResName();
+        $('#resName').val(username);
 
-        let name = window.android.getResName();
-        $('#resName').val(name);
-        setMessage("resName : " + name);
-        return name;
+        return username;
     }
 
     function resPhone() {
-        let phone = window.android.getResPhone();
+        phone = window.android.getResPhone();
         $('#resPhone').val(phone);
 
         return phone;
     }
-    function setMessage(txt){
-        $('#message').text(txt);
-    }
 
     $(document).ready(function () {
-        $('#resDate').val("1234");
-        alert('2');
-        $('#message').text("화면 로딩");
         let date = resDate();
         let time = resTime();
         let price = resPrice();
         let people = resPeople();
         let shop = resShop();
         let addr = resAddr();
-        let name = resName();
+        let username = resName();
         let phone = resPhone();
-        // $('#message').text("getResDate 후...");
+
         $('#resDate').val(date);
         $('#resTime').val(time);
         $('#resPrice').val(price+'원');
         $('#resPeople').val(people+'명');
         $('#resShop').val(shop);
         $('#resAddr').val(addr);
-        $('#resName').val(name);
+        $('#resName').val(username);
         $('#resPhone').val(phone);
     });
+
+
 </script>
 </html>

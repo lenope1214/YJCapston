@@ -37,7 +37,7 @@ public class ReviewServiceImpl implements ReviewService, BasicService {
 
     @Override
     public List<Review> getList(String shopId) {
-        return reviewRepository.findAllByShopId(shopId);
+        return reviewRepository.findAllByShopIdOrderByRegTimeDesc(shopId);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class ReviewServiceImpl implements ReviewService, BasicService {
         System.out.println("리뷰등록's shopId : " + request.getShopId());
 
         String loginId = userService.getMyId(authorization);
-        String uri = "shop/" + request.getShopId() + "/review/";
+        String uri = "shop/" + request.getShopId() + "/review/"; // TODO 얘를 storage service에서 만들어 주는 메소드를 만들어야 할듯.
         String imgPath = "";
         Timestamp orderId = new Timestamp(Long.parseLong(request.getOrderId()));
 
