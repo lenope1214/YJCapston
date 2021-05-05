@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
  */
 @Getter
 @Entity
-@Table(name="reviews")
+@Table(name="reviews") @NoArgsConstructor
 public class Review {
     @Id
     @Column(length = 14)
@@ -53,11 +53,12 @@ public class Review {
     }
 
 
-    @Getter @NoArgsConstructor
+
+    @Getter @AllArgsConstructor
     public class Request{
         private String reviewId;
         private String shopId;
-        private Timestamp orderId;
+        private String orderId;
         private String content;
         private String parentId;
         private int score;
