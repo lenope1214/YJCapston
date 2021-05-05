@@ -101,13 +101,13 @@ public class User implements Serializable {
             this.name = user.getName();
             this.address = user.getAddress();
             this.addressDetail = user.getAddressDetail();
-            this.birthday = DateOperator.dateToYYYYMMDD(user.getBirthday());
+            this.birthday = DateOperator.dateToYYYYMMDD(user.getBirthday(), true);
             this.email = user.getEmail();
             this.phone = user.phone;
             this.role = user.getRole();
             this.level = user.getLevel();
             this.point = user.getPoint();
-            this.signDate = DateOperator.dateToYYYYMMDD(user.getSignDate());
+            this.signDate = DateOperator.dateToYYYYMMDD(user.getSignDate(), true);
         }
     }
 
@@ -121,13 +121,13 @@ public class User implements Serializable {
             this.user.name = user.getName();
             this.user.address = user.getAddress();
             this.user.addressDetail = user.getAddressDetail();
-            this.user.birthday = DateOperator.dateToYYYYMMDD(user.getBirthday());
+            this.user.birthday = DateOperator.dateToYYYYMMDD(user.getBirthday(), true);
             this.user.email = user.getEmail();
             this.user.phone = user.phone;
             this.user.role = user.getRole();
             this.user.level = user.getLevel();
             this.user.point = user.getPoint();
-            this.user.signDate = DateOperator.dateToYYYYMMDD(user.getSignDate());
+            this.user.signDate = DateOperator.dateToYYYYMMDD(user.getSignDate(), true);
             List<Order.Response> orderResponseList = new ArrayList<>();
             for(Order order : orderList){
                 orderResponseList.add(new Order.Response(order));
