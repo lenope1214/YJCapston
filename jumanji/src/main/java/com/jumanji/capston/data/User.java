@@ -102,7 +102,7 @@ public class User implements Serializable {
             this.name = user.getName();
             this.address = user.getAddress();
             this.addressDetail = user.getAddressDetail();
-            if(user.birthday != null)this.birthday = DateOperator.dateToYYYYMMDD(user.getBirthday());
+            if(user.birthday != null)this.birthday = DateOperator.dateToYYYYMMDD(user.getBirthday(), true);
             if(user.email != null)this.email = user.getEmail();
             this.phone = user.phone;
             this.role = user.getRole();
