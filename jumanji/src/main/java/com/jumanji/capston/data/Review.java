@@ -68,6 +68,7 @@ public class Review {
     @Getter @AllArgsConstructor
     public static class Response{
         private String reviewId;
+        private String userId;
         private String shopId;
         private String content;
         private String parentId;
@@ -76,6 +77,7 @@ public class Review {
         private String imgUrl;
 
         public Response(Review review){
+            this.userId = review.getUser().getId();
             this.reviewId = review.id;
             this.shopId = review.getShop().getId();
             this.content = review.content;
