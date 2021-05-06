@@ -46,11 +46,12 @@ public class Payment implements Serializable {
     @Getter @AllArgsConstructor @NoArgsConstructor
     public static class Request{
         private Timestamp orderId; // 주문번호
-        private String holder; // 예금주
-        private String reason;
         private int amount; //
+        private int usePoint;
         private String pg;
         private String payMethod;
+        private String holder; // 예금주
+        private String reason;
         private int refundBank; // 환불 수령계좌 은행코드
         private String refundAccount; // 환불 계좌
     }

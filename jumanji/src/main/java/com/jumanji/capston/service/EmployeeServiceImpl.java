@@ -1,5 +1,6 @@
 package com.jumanji.capston.service;
 
+import com.jumanji.capston.data.DateOperator;
 import com.jumanji.capston.data.Employee;
 import com.jumanji.capston.repository.EmployeeRepository;
 import com.jumanji.capston.service.exception.CanNotBeZero;
@@ -10,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,7 +51,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Transactional // Transactional이 있는 save는 안된다. 그래서 saveAndFlush를 통해 함수 종료 후에 실행되도록 함.
     @Override
-    public Employee post(String authorization, Employee.Request request) {
+    public Employee post(String authorization, Employee.Request request)  {
         String loginId = userService.getMyId(authorization);
         String empId = toEmpId(request.getShopId(), request.getEmpNo());
 
@@ -55,7 +59,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         if(request.getEmpNo() == 0)throw new CanNotBeZero();
         userService.isLogin(authorization);
         isEmpty(empId);
-        
+
+
         // 서비스
         Employee employee = Employee.builder()
                 .id(empId)
@@ -67,6 +72,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .build();
         System.out.println(employee.toString());
         Employee e = employeeRepository.saveAndFlush(employee);
+
         return e;
     }
 
