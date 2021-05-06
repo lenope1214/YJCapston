@@ -143,7 +143,7 @@ public class RegisterShopActivity extends AppCompatActivity {
                 RequestBody categoryBody = RequestBody.create(MediaType.parse("text/plain"), shop_category.getSelectedItem().toString());
 
                 Map<String, RequestBody> map = new HashMap();
-                map.put("id", idBody);
+                map.put("shopId", idBody);
                 map.put("name", nameBody);
                 map.put("intro", introBody);
                 map.put("address", addressBody);

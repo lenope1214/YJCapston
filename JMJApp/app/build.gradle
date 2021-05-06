@@ -17,7 +17,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.jmjapp"
-        minSdkVersion 19
+        minSdkVersion 16
         targetSdkVersion 30
         multiDexEnabled true
         versionCode 1
@@ -94,4 +94,10 @@ dependencies {
     implementation group: 'com.github.bumptech.glide', name: 'glide', version: '4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
+    // push
+    implementation 'com.google.firebase:firebase-messaging:20.0.0'
+
+    // volley
+    implementation 'com.android.volley:volley:1.1.0'
 }
+apply plugin: 'com.google.gms.google-services'
