@@ -130,13 +130,13 @@ public class IamportClientService implements com.jumanji.capston.service.externa
         return null;
     }
 
-    private String getRequest(String path, String token) throws URISyntaxException {
+    private String getRequest(String path, String token, boolean tokenRequired) throws URISyntaxException {
 
         try {
 
             HttpGet getRequest = new HttpGet(API_URL + path);
             getRequest.addHeader("Accept", "application/json");
-            getRequest.addHeader("Authorization", token);
+            if(tokenRequired)getRequest.addHeader("Authorization", token);
 
             HttpResponse response = client.execute(getRequest);
 
@@ -182,7 +182,7 @@ public class IamportClientService implements com.jumanji.capston.service.externa
 
         if (token != null) {
             String path = "/payments/" + impUid;
-            String response = this.getRequest(path, token);
+            String response = this.getRequest(path, token, true);
 
             Type listType = new TypeToken<IamportResponse<Iamport.Payment>>() {
             }.getType();
@@ -193,13 +193,28 @@ public class IamportClientService implements com.jumanji.capston.service.externa
         return null;
     }
 
+    public IamportResponse<Iamport.Payment> paymentByMerchantUid(String merchantUid) throws Exception {
+
+//        String token = this.getToken(authorization);
+
+        String path = "/payments/find/" + merchantUid;
+        String response = this.getRequest(path, null, false);
+
+        Type listType = new TypeToken<IamportResponse<Iamport.Payment>>() {
+        }.getType();
+        IamportResponse<Iamport.Payment> payment = gson.fromJson(response, listType);
+
+        return payment;
+
+    }
+
     public IamportResponse<Iamport.Payment> paymentByMerchantUid(String authorization, String merchantUid) throws Exception {
 
         String token = this.getToken(authorization);
 
         if (token != null) {
             String path = "/payments/find/" + merchantUid;
-            String response = this.getRequest(path, token);
+            String response = this.getRequest(path, token, true);
 
             Type listType = new TypeToken<IamportResponse<Iamport.Payment>>() {
             }.getType();
