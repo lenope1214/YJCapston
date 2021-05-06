@@ -556,6 +556,9 @@ min-width: 1350px;
         z-index: 10;
         border: none;
     }
+    .imgbox-none {
+        display: none;
+    }
     /* 그림자 이용
     /* .toptext { 
         text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;

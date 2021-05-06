@@ -61,6 +61,12 @@ background: #F2F2F2;
         font-size: 18px;
         font-weight: bold;
     }
+    .label-list {
+        margin-top: 40px;
+        margin-bottom: 2px;
+        font-size: 18px;
+        font-weight: bold;
+    }
 
     .input-box {
         width: 400px;
@@ -140,29 +146,31 @@ background: #F2F2F2;
         transform: translateY(5px);
     }
     .orderlist {
-        margin-top: 10px;
+        margin-top: 20px;
         background-color : white;
-        height: 280px;
-        width: 400px;
+        height: 318px;
+        width: 500px;
         overflow: auto;
         border: 1px solid gray;
         border-radius: 5px;
+        transform: translateX(-40px);
     }
     .orderlist-item {
         margin-left: 3px;
         margin-top: 3px;
         margin-bottom : 1px;
-        width: 376px;
+        height: 80px;
+        width: 474px;
         border: 1px solid gray;
         border-radius: 5px;
     }
     .orderitem1 {
         padding-left: 5px;
         padding-top: 5px;
-        width: 160px;
+        width: 170px;
         height: 32px;
         font-size: 13px;
-        color: gray;
+        color: black;
         
     }
     .orderitem1-name {
@@ -170,26 +178,30 @@ background: #F2F2F2;
         padding-top: 5px;
         width: 160px;
         height: 32px;
-        transform: translate(5px, -2px);
+        background: none;
         font-size: 15px;
+        border: 0px;
     }
     .orderitem2 {
-        width: 80px;
+        width: 100px;
         font-size: 15px;
         transform: translateY(2px);
     }
     .orderitem2-price {
         width: 80px;
         font-size: 16px;
-        transform: translateX(-3px);
+        transform: translateY(-10px);
     }
     .orderitem3 {
         width: 60px;
         font-size: 15px;
-        transform: translateY(2px);
+    }
+    .orderitem3-req {
+        width: 60px;
+        font-size: 15px;
+        transform: translateY(-10px);
     }
     .orderitem4 {
-        transform: translateY(4px);
         font-size: 14px;
     }
     .won {
@@ -203,5 +215,18 @@ background: #F2F2F2;
         width: 45px;
         height: 26px;
         border-radius: 3px;
+        transform: translateY(-15px);
+    }
+    .review-button {
+        margin-left: 12px;
+        color: white;
+        background: #1785f2;
+        border: 1px solid gray;
+        height: 30px;
+        border-radius: 3px;
+        transform: translateY(20px);
+    }
+    button:hover {
+        cursor:pointer;
     }
 `;

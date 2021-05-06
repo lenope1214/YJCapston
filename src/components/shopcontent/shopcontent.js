@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./style";
 import { Link } from "react-router-dom";
-
+import useritem from "./img/useritem.PNG";
 import { RenderAfterNavermapsLoaded, NaverMap, Marker } from "react-naver-maps";
+import { isNull } from "lodash";
+import e from "cors";
 
 const Shopcontent = ({
     isLogin,
@@ -26,6 +28,7 @@ const Shopcontent = ({
     openhandleModal,
     closehandleModal,
     order,
+    reviewList,
 }) => {
     var x = (lat *= 1);
     var y = (lag *= 1);
@@ -36,6 +39,7 @@ const Shopcontent = ({
     let SCHOOL_BASE_URL2 = "http://192.168.0.24:8088/";
 
     const [allPrice, setAllPrice] = useState();
+
     useEffect(() => {
         let a = jmMenu.reduce((prev, curr) => {
             console.log(prev, curr);
@@ -45,6 +49,10 @@ const Shopcontent = ({
         setAllPrice(a);
     }, [jmMenu]);
     localStorage.setItem("allPrice", allPrice);
+
+    let a = null;
+    let imgbox="";
+
     return (
         <>
             <S.shopcontentWrap>
@@ -109,6 +117,7 @@ const Shopcontent = ({
                                         <span>
                                             <span class="shopother1">
                                                 {shopIntro.name}
+                                                {console.log(shopIntro.name)}
                                             </span>
                                         </span>
                                         <br />
@@ -161,6 +170,7 @@ const Shopcontent = ({
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="tablebody">
                                 <table>
                                     <thead class="tablehead">
@@ -209,6 +219,76 @@ const Shopcontent = ({
                                     </tbody>
                                 </table>
                             </div>
+                            <div className="review-box">
+                                <div className="review-title">리뷰 리스트</div>
+                                            {!reviewList.length && (
+                                               
+                                                    <td className="none-review">등록된 리뷰가 없습니다.</td>
+                                            )}
+                                            {!!reviewList.length && reviewList.map((review) => {
+                                                if (review.score == "5") {
+                                                    a = "★★★★★"
+                                                } else if (review.score == "4") {
+                                                    a = "★★★★☆"
+                                                } else if (review.score == "3") {
+                                                    a = "★★★☆☆"
+                                                }
+                                                else if (review.score == "2") {
+                                                    a = "★★☆☆☆"
+                                                }
+                                                else if (review.score == "1") {
+                                                    a = "★☆☆☆☆"
+                                                }
+                                                if(review.imgUrl == null) {
+                                                    imgbox = "-none";
+                                                } else imgbox = "";
+                                                    
+                                                    
+                                                return (
+                                                    
+                                                    <div className="review-item">
+                                                    <tr>
+                                                        <td className="review-1">
+                                                            <span>
+                                                            <img src={useritem} 
+                                                            className="useritem" />
+                                                            </span>
+                                                            <span className="username">
+                                                            {review.userId}
+                                                            </span>
+                                                        </td>
+                                                        </tr>
+                                                        <tr>  
+                                                        <td className="review-2">
+                                                            <span className="red">{a}</span>
+                                                            <span>{review.score}</span>    
+                                                        </td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td className="review-3">
+                                                            {review.regdate}
+                                                        </td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td className="review-4">
+                                                        <img src={`http://3.34.55.186:8088/${review.imgUrl}`}
+                                                            width='150'
+                                                            height='150'
+                                                            className={"imgbox"+imgbox}
+                                                            >
+                                                        </img>
+                                                        </td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td className="review-5">
+                                                            {review.content}
+                                                        </td>
+                                                        </tr>
+                                                        </div>
+                                                );
+                                                })}
+                               
+                            </div>
                         </div>
                         <div class="showjm">
                             <div class="jmlist">주문 목록</div>
@@ -254,6 +334,7 @@ const Shopcontent = ({
                             </button>
                         </div>
                     </body>
+
                     {mapModal && (
                         <button
                             onClick={closehandleModal}
@@ -278,7 +359,6 @@ const Shopcontent = ({
                             4.
                         </h4>
                     </footer>
-                    <div></div>
                 </div>
             </S.shopcontentWrap>
 
@@ -365,9 +445,9 @@ const Shopcontent = ({
                     onClick={() => {
                         alert(
                             shopIntro.name +
-                                "식당에서 전해요~ " +
-                                "\n" +
-                                shopIntro.intro
+                            "식당에서 전해요~ " +
+                            "\n" +
+                            shopIntro.intro
                         );
                     }}
                 />

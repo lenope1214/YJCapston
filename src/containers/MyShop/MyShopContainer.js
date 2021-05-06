@@ -10,8 +10,7 @@ import { removeShops } from "../../lib/MyShop/index"
 const MyShopContainer = (props) => {
     const history = useState();
     const [shops, setShops] = useState([
-        {
-            
+        {      
             id:"",
             img: "",
         }
@@ -32,7 +31,7 @@ const MyShopContainer = (props) => {
             const shop = res.data.map((shop) => {
                 return {
                     img: shop.imgPath,
-                    id: shop.id,
+                    id: shop.shopId,
                     shopname:shop.name,
                     intro:shop.intro,
                     category:shop.category,

@@ -5,6 +5,8 @@ import * as S from "./style";
 
 import DaumPostcode from "react-daum-postcode";
 import topimg from "../Main/img/QR코드사진2.png";
+import { ordermenulist, requirelist} from "../../lib/MyPage";
+import {getOrderId} from "../../containers/MyPage/MyPageContainer";
 
 const MyPage = ({
     Pw,
@@ -21,6 +23,9 @@ const MyPage = ({
     handleRoadAddr,
     jmlist,
     require,
+    orderinfom,
+    closeModal,
+    getOrderId,
 }) => {
     const postCodeStyle = {
         display: "block",
@@ -33,18 +38,10 @@ const MyPage = ({
         transform: "translate(-50%, -50%)",
         border: "1px",
     };
+    const [orderid, setorderid] = useState();
 
     return (
         <>
-            <div class="abc">
-                {modal && (
-                    <DaumPostcode
-                        onComplete={handleComplete}
-                        style={postCodeStyle}
-                        height={700}
-                    />
-                )}
-            </div>
             <S.MypageWrap>
                 <header>
                     <Link to="/" class="movemainpage">
@@ -179,34 +176,75 @@ const MyPage = ({
                                 </div> */}
 
                             {jmlist.map((jmlist2) => {
+                                console.log(jmlist2);
+
                                 return (
                                     <div className="orderlist-item">
                                         <tr>
-                                            <td className="orderitem1">{jmlist2.jmid}</td>
-                                            <td className="orderitem2">00:00</td>
-                                            <td className="orderitem3">{jmlist2.jmpeople}<span className="won">명</span></td>
-                                            <td className="orderitem4">결제완료</td>
+                                            <td className="orderitem1">
+                                                {jmlist2.jmid}
+                                            </td>
+                                            <td className="orderitem2">
+                                                00:00
+                                            </td>
+                                            <td className="orderitem3">
+                                                {jmlist2.jmpeople}
+                                                <span className="won">명</span>
+                                            </td>
+                                            <td className="orderitem4">
+                                                결제완료
+                                            </td>
+                                            <td className="orderitem5">
+                                                <Link to={`/addreview/${jmlist2.jmshopId}/${jmlist2.jmid}`}>
+                                                <button className="review-button"
+                                                >리뷰쓰기</button>
+                                                </Link>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td className="orderitem1-name">후라이드치킨</td>
-                                            <td className="orderitem2-price">0000<span className="won">원</span></td>
-                                            <td className="orderitem3">
-                                                {jmlist2.jmorderRequest}
-                                            </td>
-                                        <td className="orderitem4-button">
                                             <button
-                                                className="delete-button"
-                                                onClick={require}
+                                             className="orderitem1-name"
+                                                onClick={async () => {
+                                                    const res = await ordermenulist(
+                                                        jmlist2.jmid
+                                                    );
+                                                    console.log(res.data);
+                                                }}
+                                                value={jmlist2.jmid}
                                             >
-                                                환불
-                                                    </button>
-                                        </td>
-                                        </tr>
+                                                <td className="orderitem1-name">
+                                                    {jmlist2.jmshopName}
+                                                </td>
+                                            </button>
+                                            <td className="orderitem2-price">
+                                                {jmlist2.jmamount}
+                                                <span className="won">원</span>
+                                            </td>
+                                            <td className="orderitem3-req">
+                                                {/* {jmlist2.jmorderRequest} */}
+                                            </td>
 
+                                            <td className="orderitem4-button">
+                                                <button
+                                                    className="delete-button"
+                                                    onClick={async () => {
+                                                        const res = await requirelist(
+                                                            jmlist2.jmid
+                                                        ).then((res) => {
+                                                            alert("취소 완료");
+                                                            console.log(
+                                                                res.data
+                                                            );
+                                                        });
+                                                    }}
+                                                >
+                                                    취소
+                                                </button>
+                                            </td>
+                                        </tr>
                                     </div>
                                 );
                             })}
-
                         </div>
                         <div className="button-box">
                             <button onClick={Mypage} className="button3">
@@ -224,6 +262,22 @@ const MyPage = ({
                     </div>
                 </body>
             </S.MypageWrap>
+
+            <div class="abc">
+                {modal && (
+                    <button class="Modalclosebutton" onClick={closeModal}>
+                        닫기
+                    </button>
+                )}
+                {modal && (
+                    <DaumPostcode
+                        onComplete={handleComplete}
+                        style={postCodeStyle}
+                        height={700}
+                        Zindex={300}
+                    />
+                )}
+            </div>
         </>
     );
 };

@@ -56,12 +56,14 @@ const MyShop = ({ isLogin, logout, openModal, shops, removeShop, Id }) => {
                                     return (
                                         <tr>
                                             <td className="body-item-1">
+                                                <Link to={`/menuList/${shop.id}`}>
                                                 <img
                                                     src={`http://3.34.55.186:8088/${shop.img}`}
                                                     width="150"
                                                     height="150"
                                                     className="img-box"
                                                 ></img>
+                                                </Link>
                                             </td>
                                             <td className="body-item-2">
                                                 <Link

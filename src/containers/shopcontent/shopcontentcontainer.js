@@ -8,8 +8,10 @@ import {
     postLogin,
     cartNumber,
     jmthing,
+    getReviewlist,
 } from "../../lib/shopcontent/index";
 import Geocode from "react-geocode";
+import { getMenuList } from "../../lib/MenuList";
 
 Geocode.setApiKey("AIzaSyBvpJoGP7dKHRovDgP4CSByczdZC7vrz18");
 Geocode.setLanguage("kr");
@@ -52,6 +54,7 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
     const [lag, setlag] = useState();
     const [pricesum, setpricesum] = useState([]);
     const [shopId, setShopId] = useState();
+    const [reviewList, setReviewList] = useState([{}]);
 
     const openhandleModal = () => {
         setmapModal(true);
@@ -156,11 +159,36 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
                     };
                 });
                 setMenu(getmenulist);
+                console.log("menu "+menu.name);
             })
             .catch((err) => {
                 console.log(err);
             });
     };
+    useEffect(() => {
+        getreview();
+    }, []);
+
+    const getreview = () => {
+        getReviewlist(param.shopId)
+        .then((res) => {
+            const reviewlist = res.data.map((reviewlist) => {
+                return {
+                    reviewId: reviewlist.reviewId,
+                    userId: reviewlist.userId,
+                    shopId: reviewlist.shopId,
+                    content: reviewlist.content,
+                    regdate: reviewlist.regDate,
+                    score: reviewlist.score,
+                    imgUrl: reviewlist.imgUrl,
+                };
+            });
+            setReviewList(reviewlist);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
 
     const login = () => {
         postLogin(id, pw)
@@ -275,6 +303,7 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
             closehandleModal={closehandleModal}
             order={order}
             shopId={shopId}
+            reviewList={reviewList}
             // jmmenuReducer={jmmenuReducer}
         />
     );

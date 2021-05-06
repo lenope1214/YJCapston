@@ -5,10 +5,11 @@ import {
     putMypage,
     Mypageorder,
     requirelist,
+    ordermenulist,
 } from "../../lib/MyPage";
 import { useHistory } from "react-router-dom";
 
-const MyPageContainer = () => {
+const MyPageContainer = (props) => {
     const handleComplete = (data) => {
         let fullAddress = data.address;
         let extraAddress = "";
@@ -28,7 +29,7 @@ const MyPageContainer = () => {
 
         handleRoadAddr(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
     };
-
+    
     const history = useHistory();
     const [Pw, setPw] = useState("");
     const [user, setUser] = useState({
@@ -84,6 +85,7 @@ const MyPageContainer = () => {
     // 이게 서버에서 코드 받아오는 함수
     useEffect(() => {
         getMyPage();
+
         // getMyPageorder();
     }, []);
     console.log("res", user);
@@ -112,18 +114,27 @@ const MyPageContainer = () => {
         // }
     };
 
+    const orderinfom = () => {
+        ordermenulist().then((res) => {
+            console.log(res.data);
+        });
+    };
+
     const getMyPage = () => {
         getMyInfo()
             .then((res) => {
-                console.log(res.data.user.name);
+                console.log(res.data);
                 setUser(res.data.user);
                 setAddressDetail(res.data.user.addressDetail);
                 setRoadAddr(res.data.user.address);
                 const orderjmlist = res.data.orderList.map((orderjmlist) => {
                     return {
-                        jmid: orderjmlist.id,
+                        jmid: orderjmlist.orderId,
                         jmorderRequest: orderjmlist.orderRequest,
                         jmpeople: orderjmlist.people,
+                        jmamount: orderjmlist.totalAmount,
+                        jmshopName: orderjmlist.shopName,
+                        jmshopId: orderjmlist.shopId,
                     };
                 });
                 setJmlist(orderjmlist);
@@ -149,8 +160,10 @@ const MyPageContainer = () => {
             handleRoadAddr={handleRoadAddr}
             jmlist={jmlist}
             require={require}
+            orderinfom={orderinfom}
         />
     );
 };
 
 export default MyPageContainer;
+

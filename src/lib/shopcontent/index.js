@@ -7,6 +7,14 @@ export const postLogin = (id, password) => {
     });
 };
 
+export const getReviewlist = (id) => {
+    return apiDefault().get(`/review/${id}`, {
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        },
+    });
+};
+
 export const getShoplist = () => {
     return apiDefault().get("/shopList", {});
 };
