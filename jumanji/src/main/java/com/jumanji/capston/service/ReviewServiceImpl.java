@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -101,7 +102,7 @@ public class ReviewServiceImpl implements ReviewService, BasicService {
 
     @Override
     public boolean isEmpty(String orderId) {
-        Optional<Review> review = reviewRepository.findByOrderId(orderId);
+        Optional<Review> review = reviewRepository.findByOrderId(new Timestamp(Long.parseLong(orderId)));
         if(review.isEmpty())return true;
         throw new ReviewHasExistException();
     }

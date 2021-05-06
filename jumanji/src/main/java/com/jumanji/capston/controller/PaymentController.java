@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import retrofit2.http.Query;
 
 import java.sql.Timestamp;
 
@@ -30,11 +31,18 @@ public class PaymentController {
     }
 
     @Transactional
+    @GetMapping("/payment/complite")
+    public ResponseEntity<?> complePayment(@Query("imp_uid") String impUid, @Query("merchant_uid") String merchantUid){
+        return null;
+    }
+
+    @Transactional
     @PostMapping("/payment")
     public ResponseEntity<?> postPayment(@RequestHeader String authorization, @RequestBody Payment.Request request) {
         // response 형태로 바꿔줘야함.
         return new ResponseEntity(paymentService.post(authorization, request), HttpStatus.CREATED);
     }
+
 
 
 }
