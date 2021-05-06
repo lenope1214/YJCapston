@@ -54,6 +54,7 @@ public class PaymentController {
         }
         if(response.getResponse().getStatus().equals("paid")){
             String mId = merchantUid.substring("merchant_".length());
+            System.out.println("mid : " + mId);
             int amount = orderService.getOrderInfo(new Timestamp(Long.parseLong(mId))).getAmount();
             BigDecimal amountB = BigDecimal.valueOf(amount);
             System.out.println("response.getResponse().getAmount() : " + response.getResponse().getAmount());
