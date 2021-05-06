@@ -222,7 +222,7 @@ public class IamportClientService implements com.jumanji.capston.service.externa
         String token = this.getToken(authorization);
 
         if (token != null) {
-            String path = "/payments/find/" + merchantUid + "/-paid";
+            String path = "/payments/find/" + merchantUid + "/paid";
             System.out.println("paymentByMerchantUid - path : " + path);
             String response = this.getRequest(path, token);
 
