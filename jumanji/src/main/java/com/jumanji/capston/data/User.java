@@ -114,21 +114,11 @@ public class User implements Serializable {
 
     @Getter
     public static class MyInfo{
-        private Response user = new Response();
+        private Response user = null;
         private List<Order.Response> orderList;
 
         public MyInfo(User user, List<Order> orderList){
-            this.user.id = user.getId();
-            this.user.name = user.getName();
-            this.user.address = user.getAddress();
-            this.user.addressDetail = user.getAddressDetail();
-            this.user.birthday = DateOperator.dateToYYYYMMDD(user.getBirthday(), true);
-            this.user.email = user.getEmail();
-            this.user.phone = user.phone;
-            this.user.role = user.getRole();
-            this.user.level = user.getLevel();
-            this.user.point = user.getPoint();
-            this.user.signDate = DateOperator.dateToYYYYMMDD(user.getSignDate(), true);
+            this.user = new Response(user);
             List<Order.Response> orderResponseList = new ArrayList<>();
             for(Order order : orderList){
                 orderResponseList.add(new Order.Response(order));
