@@ -7,6 +7,7 @@ import com.jumanji.capston.service.exception.menuException.MenuHasExistException
 import com.jumanji.capston.service.exception.myException.MyNonUniqueResultException;
 import com.jumanji.capston.service.exception.orderException.OrderNotFoundException;
 import com.jumanji.capston.service.exception.orderMenuException.OrderMenuNotFoundException;
+import com.jumanji.capston.service.exception.reviewException.ReviewHasExistException;
 import com.jumanji.capston.service.exception.shopException.NoShopListException;
 import com.jumanji.capston.service.exception.shopException.ShopHasExistException;
 import com.jumanji.capston.service.exception.shopException.ShopMissMatchException;
@@ -172,4 +173,12 @@ public class ApiExceptionHandler{
                 new ApiErrorResponse("error-value-non-unique", "유니크 제약조건 위반");
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(ReviewHasExistException.class)
+    public ResponseEntity<ApiErrorResponse> myNonUniqueResultException(ReviewHasExistException ex) {
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
 }
