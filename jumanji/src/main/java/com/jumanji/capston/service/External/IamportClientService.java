@@ -130,19 +130,19 @@ public class IamportClientService implements com.jumanji.capston.service.externa
         return null;
     }
 
-    private String getRequest(String path, String token, boolean tokenRequired) throws URISyntaxException {
+    private String getRequest(String path, String token) throws URISyntaxException {
 
         try {
 
             HttpGet getRequest = new HttpGet(API_URL + path);
             getRequest.addHeader("Accept", "application/json");
-            if(tokenRequired)getRequest.addHeader("Authorization", token);
-
+            getRequest.addHeader("Authorization", token);
+            System.out.println("getRequest token : " + token);
             HttpResponse response = client.execute(getRequest);
-
+            System.out.println("response.status code : " + response.getStatusLine().getStatusCode());
             if (response.getStatusLine().getStatusCode() != 200) {
                 throw new RuntimeException("Failed : HTTP error code : "
-                        + response.getStatusLine().getStatusCode());
+                        + response.getStatusLine().getStatusCode() +"\nmessage : " + response.getStatusLine().getReasonPhrase());
             }
 
             ResponseHandler<String> handler = new BasicResponseHandler();
@@ -167,6 +167,10 @@ public class IamportClientService implements com.jumanji.capston.service.externa
         // 유효성 체크
         userService.isLogin(authorization);
 
+        return getToken();
+    }
+
+    public String getToken() throws Exception {
         IamportResponse<Iamport.AccessToken> auth = this.getAuth();
 
         if (auth != null) {
@@ -182,7 +186,7 @@ public class IamportClientService implements com.jumanji.capston.service.externa
 
         if (token != null) {
             String path = "/payments/" + impUid;
-            String response = this.getRequest(path, token, true);
+            String response = this.getRequest(path, token);
 
             Type listType = new TypeToken<IamportResponse<Iamport.Payment>>() {
             }.getType();
@@ -195,16 +199,21 @@ public class IamportClientService implements com.jumanji.capston.service.externa
 
     public IamportResponse<Iamport.Payment> paymentByMerchantUid(String merchantUid) throws Exception {
 
-//        String token = this.getToken(authorization);
+        String token = this.getToken();
 
-        String path = "/payments/find/" + merchantUid;
-        String response = this.getRequest(path, null, false);
+        if (token != null) {
+            String path = "/payments/find/" + merchantUid + "/paid";
+            System.out.println("paymentByMerchantUid - path : " + path);
+            String response = this.getRequest(path, token);
 
-        Type listType = new TypeToken<IamportResponse<Iamport.Payment>>() {
-        }.getType();
-        IamportResponse<Iamport.Payment> payment = gson.fromJson(response, listType);
+            Type listType = new TypeToken<IamportResponse<Iamport.Payment>>() {
+            }.getType();
+            IamportResponse<Iamport.Payment> payment = gson.fromJson(response, listType);
 
-        return payment;
+            return payment;
+        }
+
+        return null;
 
     }
 
@@ -213,8 +222,9 @@ public class IamportClientService implements com.jumanji.capston.service.externa
         String token = this.getToken(authorization);
 
         if (token != null) {
-            String path = "/payments/find/" + merchantUid;
-            String response = this.getRequest(path, token, true);
+            String path = "/payments/find/" + merchantUid + "/-paid";
+            System.out.println("paymentByMerchantUid - path : " + path);
+            String response = this.getRequest(path, token);
 
             Type listType = new TypeToken<IamportResponse<Iamport.Payment>>() {
             }.getType();

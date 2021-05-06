@@ -5,13 +5,18 @@ import com.jumanji.capston.data.externalData.iamport.Iamport;
 import com.jumanji.capston.service.OrderServiceImpl;
 import com.jumanji.capston.service.PaymentServiceImpl;
 import com.jumanji.capston.service.external.IamportClientService;
+import com.jumanji.capston.service.external.iamportAndroid.response.IamportResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import retrofit2.http.Query;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.websocket.server.PathParam;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @RestController
@@ -35,13 +40,30 @@ public class PaymentController {
 
     @Transactional
     @GetMapping("/payment/complite")
-    public ResponseEntity<?> complePayment(@Query("imp_uid") String impUid, @Query("merchant_uid") String merchantUid){
+    public ResponseEntity<?> complePayment(@RequestParam("imp_uid") String impUid, @RequestParam("merchant_uid") String merchantUid, HttpServletRequest request) throws Exception {
+        System.out.println("request info" +
+                "request.getQueryString" + request.getQueryString()+"\n" +
+                "merchantUid.substring(merchant_.length()) : " + merchantUid.substring("merchant_".length()));
+        IamportResponse<Iamport.Payment> response = null;
+        if(merchantUid == null)throw new Exception("merchantUid is null");
         try {
-            iamportClientService.paymentByMerchantUid(merchantUid);
+//            String m_id = merchantUid;
+            response = iamportClientService.paymentByMerchantUid(merchantUid);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        if(response.getResponse().getStatus().equals("paid")){
+            String mId = merchantUid.substring("merchant_".length());
+            System.out.println("mid : " + mId);
+            int amount = orderService.getOrderInfo(new Timestamp(Long.parseLong(mId))).getAmount();
+            BigDecimal amountB = BigDecimal.valueOf(amount);
+            System.out.println("response.getResponse().getAmount() : " + response.getResponse().getAmount());
+            System.out.println("BigDecimal amount : " + amountB);
+            if(response.getResponse().getAmount() == amountB){
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @Transactional
