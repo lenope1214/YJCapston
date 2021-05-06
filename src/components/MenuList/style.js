@@ -62,6 +62,7 @@ th, td {
 
 .item-2 {
     width: 55%;
+    text-align: center;
 }
 
 .item-3 {
@@ -84,9 +85,9 @@ th, td {
 }
 
 .body-item-2 {
-    padding-left: 10%;
+    // padding-left: 10%;
     font-size: 19px;
-
+    text-align:center;
 }
 
 .body-item-3 {
@@ -98,7 +99,7 @@ th, td {
 .body-item-4 {
     padding: 15px;
     font-size: 19px;
-    text-aling: center;
+    text-align: center;
 }
 .delete-button {
     padding: 8px;

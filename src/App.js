@@ -182,14 +182,9 @@ const TestChat = () => {
         client.current.subscribe(`/sub/chat/2`, ({ body }) => {
             if (window.confirm("주문이 발생 했습니다?")) {
                 alert("happy");
-            } else {
-                // 환불
-            }
+            } 
             scrollToBottom();
-            setChatMessages((_chatMessages) => [
-                ..._chatMessages,
-                JSON.parse(body),
-            ]);
+           
         });
     };
 
@@ -204,7 +199,7 @@ const TestChat = () => {
             body: JSON.stringify({ roomSeq: ROOM_SEQ, message }),
         });
 
-        setMessage("");
+       
     };
 
     return (
