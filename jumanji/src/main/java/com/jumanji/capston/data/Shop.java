@@ -84,7 +84,7 @@ public class Shop {
         private String closeTime;
         private char isOpen;
         private char isRsPos;
-        private String imgUrl;
+        private String imgPath;
         private String phone;
 
         public Response(Shop shop) {
@@ -98,7 +98,7 @@ public class Shop {
             this.closeTime = DateOperator.dateToHHMM(shop.getCloseTime(), true);
             this.isOpen = shop.getIsOpen();
             this.isRsPos = shop.getIsRsPos();
-            this.imgUrl = shop.getImgPath();
+            this.imgPath = shop.getImgPath();
             this.phone = shop.getPhone();
         }
     }
