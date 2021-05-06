@@ -2,15 +2,20 @@ package com.jumanji.capston.service;
 
 import com.jumanji.capston.data.*;
 import com.jumanji.capston.repository.ReviewRepository;
+import com.jumanji.capston.service.exception.ApiErrorResponse;
+import com.jumanji.capston.service.exception.myException.MyNonUniqueResultException;
 import com.jumanji.capston.service.exception.reviewException.ReviewHasExistException;
 import com.jumanji.capston.service.exception.reviewException.ReviewNotFoundException;
 import com.jumanji.capston.service.interfaces.BasicService;
 import com.jumanji.capston.service.interfaces.ReviewService;
+import org.apache.kafka.common.errors.ApiException;
+import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 
+import javax.persistence.NonUniqueResultException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Date;

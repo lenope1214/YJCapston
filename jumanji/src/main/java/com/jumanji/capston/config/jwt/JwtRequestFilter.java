@@ -76,7 +76,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 response.sendError(400, "Unable to get JWT Token");
             } catch (ExpiredJwtException e) {
                 log.error("JWT Token has expired");
-                response.sendError(401, "JWT Token has expired"); // 401 =>
+                response.sendError(403, "JWT Token has expired"); // 401 => 인증안됨, 403 => 사용자 확인 불가?? 뭐 조수연 교수님이ㅣ 토큰 만료 403 준다함.
             } catch (NullPointerException e) {
                 log.error("Username is Null!");
                 response.sendError(400, "Username is Null!");

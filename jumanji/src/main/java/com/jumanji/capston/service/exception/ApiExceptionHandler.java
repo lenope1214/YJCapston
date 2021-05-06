@@ -4,6 +4,7 @@ import com.jumanji.capston.service.exception.auth.ForbiddenException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeHasExistException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeNotFoundException;
 import com.jumanji.capston.service.exception.menuException.MenuHasExistException;
+import com.jumanji.capston.service.exception.myException.MyNonUniqueResultException;
 import com.jumanji.capston.service.exception.orderException.OrderNotFoundException;
 import com.jumanji.capston.service.exception.orderMenuException.OrderMenuNotFoundException;
 import com.jumanji.capston.service.exception.shopException.NoShopListException;
@@ -24,6 +25,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import javax.persistence.NonUniqueResultException;
 
 @ControllerAdvice @RequiredArgsConstructor
 public class ApiExceptionHandler{
@@ -160,6 +163,13 @@ public class ApiExceptionHandler{
     public ResponseEntity<ApiErrorResponse> nullPointException(MyNullPointerException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NonUniqueResultException.class)
+    public ResponseEntity<ApiErrorResponse> myNonUniqueResultException(NonUniqueResultException ex) {
+        ApiErrorResponse response =
+                new ApiErrorResponse("error-value-non-unique", "유니크 제약조건 위반");
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }
