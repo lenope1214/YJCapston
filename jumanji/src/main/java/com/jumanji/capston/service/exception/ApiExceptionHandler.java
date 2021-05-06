@@ -15,15 +15,19 @@ import com.jumanji.capston.service.exception.userException.LoginFailedException;
 import com.jumanji.capston.service.exception.userException.UserHasExistException;
 import com.jumanji.capston.service.exception.userException.UserNotFoundException;
 import io.jsonwebtoken.MalformedJwtException;
+import lombok.RequiredArgsConstructor;
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.hibernate.exception.ConstraintViolationException;
+import org.hibernate.exception.spi.SQLExceptionConverter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-@ControllerAdvice
-public class ApiExceptionHandler {
+@ControllerAdvice @RequiredArgsConstructor
+public class ApiExceptionHandler{
+
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ApiErrorResponse> idHandleException(UserNotFoundException ex) {
@@ -99,7 +103,7 @@ public class ApiExceptionHandler {
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<?> dataDuplicateKeyException(ConstraintViolationException ex){
         ApiErrorResponse response =
-                new ApiErrorResponse("ORA-0001", ex.getMessage());
+                new ApiErrorResponse("ORA-0001", ex.getConstraintName(), ex.getSQL());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
