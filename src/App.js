@@ -17,6 +17,11 @@ import ShopcontentContainer from "./containers/shopcontent/shopcontentcontainer"
 import Payment from "./components/Event/Payment";
 import ShopOrderContainer from "./containers/ShopOrder/ShopOrderContainer";
 import PaymentContainer from "./containers/PaymentDone/PaymentDoneContainer";
+import QRcodeContainer from "./containers/QRcode/QRcodeContainer";
+import PosContainer from "./containers/Pos/PosContainer";
+import PosMainContainer from "./containers/PosMain/PosMainContainer";
+import EmployeeContainer from "./containers/Employee/EmployeeContainer";
+import EmplistContainer from "./containers/Emplist/EmplistContainer";
 import * as StompJs from "@stomp/stompjs";
 
 const ROOM_SEQ = 1;
@@ -53,6 +58,11 @@ const App = () => {
                     <Route path="/mypage" component={MypageContainer} />
                     <Route path="/shop" component={ShopContainer} />
                     <Route path="/MyShop" component={MyShopContainer} />
+                    <Route component={QRcodeContainer} path="/QRcode/:shopId" />
+                    <Route component={PosContainer} path="/Pos/:shopId"/>
+                    <Route component={PosMainContainer} path="/PosMain/:shopId"/>
+                    <Route component={EmployeeContainer} path="/Employee/:shopId"/>
+                    <Route component={EmplistContainer} path="/Emplist/:shopId"/>
                     <Route
                         component={MenuListContainer}
                         path="/menuList/:shopId"
@@ -169,12 +179,12 @@ const TestChat = () => {
     };
 
     const subscribe = () => {
-        client.current.subscribe(`/sub/chat/2`, ({ body }) => {
-            if (window.confirm("주문이 발생 했습니다?")) {
-                alert("happy");
-            } else {
-                // 환불
-            }
+        client.current.subscribe(`/sub/chat/3`, ({ body }) => {
+            // if (window.confirm("주문이 발생 했습니다?")) {
+            //     alert("happy");
+            // } else {
+            //     // 환불
+            // }
             scrollToBottom();
             setChatMessages((_chatMessages) => [
                 ..._chatMessages,
@@ -190,7 +200,7 @@ const TestChat = () => {
         scrollToBottom();
 
         client.current.publish({
-            destination: `/sub/chat/2`,
+            destination: `/sub/chat/3`,
             body: JSON.stringify({ roomSeq: ROOM_SEQ, message }),
         });
 

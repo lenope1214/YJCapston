@@ -5,8 +5,8 @@ import DaumPostcode from "react-daum-postcode";
 import topimg from "../Main/img/QR코드사진2.png";
 
 const Shop = ({
-    id,
-    handleId,
+    shopId,
+    handleshopId,
     shopname,
     handleShopname,
     intro,
@@ -34,6 +34,12 @@ const Shop = ({
     roadAddr,
     handleComplete,
     goBack,
+    phone1,
+    handlePhone1,
+    phone2,
+    handlePhone2,
+    phone3,
+    handlePhone3,
 }) => {
     const postCodeStyle = {
         display: "block",
@@ -61,8 +67,8 @@ const Shop = ({
                             type="text"
                             id="Id"
                             placeholder="사업자번호"
-                            onChange={handleId}
-                            value={id}
+                            onChange={handleshopId}
+                            value={shopId}
                             className="input-box"
                         />
 
@@ -75,6 +81,44 @@ const Shop = ({
                             value={shopname}
                             className="input-box"
                         />
+
+                        <div className="label">매장전화번호</div>
+                        <div>
+                            <select
+                                id="num1"
+                                onChange={handlePhone1}
+                                value={phone1}
+                                className="phone-box1"
+                            >
+                                <option value="">::선택::</option>
+                                <option value="010">010</option>
+                                <option value="02">02</option>
+                                <option value="051">051</option>
+                                <option value="053">053</option>
+                                <option value="031">031</option>
+                            </select>
+                            <span>-</span>
+                            <input
+                                className="phone-box"
+                                type="text"
+                                id="num2"
+                                size="4"
+                                onkeypress="onlyNumber();"
+                                placeholder="ex)1234"
+                                onChange={handlePhone2}
+                                value={phone2}
+                            />
+                            <span>-</span>
+                            <input
+                                className="phone-box"
+                                type="text"
+                                id="num3"
+                                size="4"
+                                placeholder="ex)1234"
+                                onChange={handlePhone3}
+                                value={phone3}
+                            />
+                        </div>
 
                         <div className="label">사진등록</div>
 

@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useHistory } from "react-router";
 import Header from "../../components/Header/Header";
 import OwnerNavbar from "../../components/OwnerMenubar/OwnerNavbar";
-import ShopInfo from "../../components/ShopInfo/Shopinfo";
+import ShopInfo from "../../components/ShopInfo/ShopInfo";
 import {
     getShopInfo,
     putShopreserve,
     putShopopen,
     putShopInfo,
 } from "../../lib/ShopInfo";
+import * as StompJs from "@stomp/stompjs";
+
+const ROOM_SEQ = 1;
 
 const ShopInfoContainer = (props) => {
     const history = useHistory();
@@ -157,6 +160,78 @@ const ShopInfoContainer = (props) => {
         }
 
         handleRoadAddr(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+    };
+
+    const client = useRef({});
+    const [chatMessages, setChatMessages] = useState([]);
+    const [message, setMessage] = useState("");
+
+    const divRref = useRef(null);
+
+    useEffect(() => {
+        connect();
+
+        return () => disconnect();
+    }, []);
+
+    const connect = () => {
+        client.current = new StompJs.Client({
+            brokerURL: "ws:/3.34.55.186:8088/ws-stomp/websocket", // 웹소켓 서버로 직접 접속
+            // webSocketFactory: () => new SockJS("/ws-stomp/websocket"), // proxy를 통한 접속
+            connectHeaders: {
+                socket_token: "jmj-chatting",
+            },
+            debug: function (str) {
+                console.log(str);
+            },
+            reconnectDelay: 5000,
+            heartbeatIncoming: 4000,
+            heartbeatOutgoing: 4000,
+            onConnect: () => {
+                subscribe();
+            },
+            onStompError: (frame) => {
+                console.error(frame);
+            },
+        });
+
+        client.current.activate();
+    };
+
+    const disconnect = () => {
+        client.current.deactivate();
+    };
+
+    const subscribe = () => {
+        client.current.subscribe(`/sub/chat/2`, ({ body }) => {
+            if (
+                window.confirm(
+                    "예약주문이 왔어요! \n" +
+                        "주문내용은 다음과 같아요!\n" +
+                        "주문내용 : " +
+                        JSON.parse(body).message.map((jmorder_list) => {
+                            return jmorder_list.name + jmorder_list.count;
+                        })
+                )
+            ) {
+                alert("주문이 완료되었습니다!");
+            } else {
+                alert("환불하시겠어요?");
+            }
+        });
+    };
+
+    const publish = (message) => {
+        if (!client.current.connected) {
+            return;
+        }
+
+        client.current.publish({
+            destination: `/sub/chat/2`,
+            body: JSON.stringify({ roomSeq: ROOM_SEQ, message }),
+        });
+
+        setMessage("");
     };
     return (
         <>

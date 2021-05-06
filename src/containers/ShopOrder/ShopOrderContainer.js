@@ -76,6 +76,7 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
         setJmorderid(localStorage.getItem("orderId"));
         setJmorderlist(JSON.parse(localStorage.getItem("orderlist")));
         setjmallpirce(localStorage.getItem("allPrice"));
+        connect();
     }, []);
 
     const patchcontent = () => {
@@ -163,16 +164,26 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 console.error(frame);
             },
         });
+        jmorderlist.map((jmorder_list) => {
+            console.log(jmorder_list.name, jmorder_list.count);
+        });
 
         console.log(client.current);
 
         const subscribe = () => {
             client.current.subscribe(`/sub/chat/1`, ({ body }) => {
-                if (window.confirm("주문이 발생 했습니다?")) {
-                    alert("happy");
-                } else {
-                    // 환불;
-                }
+                // if (
+                //     window.confirm(
+                //         "예약주문이 왔어요! \n" +
+                //             "주문내용은 다음과 같아요!\n" +
+                //             "주문자 : " +
+                //             {}
+                //     )
+                // ) {
+                //     alert("happy");
+                // } else {
+                //     // 환불;
+                // }
             });
         };
 
@@ -222,7 +233,8 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
 
         if (success) {
             patchcontent();
-            connect();
+
+            publish();
             setTimeout(() => {
                 paymentservice(jmallprice, pointcheck);
             }, 3000);

@@ -25,7 +25,6 @@ const MyShopContainer = (props) => {
         getmyShop(props.match.params.shopId)
             .then((res) => {
                 setShops(res.data);
-
                 const shop = res.data.map((shop) => {
                     return {
                         img: shop.imgPath,
@@ -33,8 +32,8 @@ const MyShopContainer = (props) => {
                         shopname: shop.name,
                         intro: shop.intro,
                         category: shop.category,
-                        open_time: shop.openTime,
-                        close_time: shop.closeTime,
+                        openTime: shop.openTime,
+                        closeTime: shop.closeTime,
                         address: shop.address,
                         addressDetail: shop.addressDetail,
                         isRsPos: shop.isRsPos,
@@ -42,9 +41,21 @@ const MyShopContainer = (props) => {
                     };
                 });
                 setShops(shop);
+                console.log(res.data);
+                // console.log(shopId);
             })
             .catch((err) => {
-                alert("등록된 매장이 없습니다.");
+                const status = err?.response?.status;
+                console.log(status);
+                if (status == 400) {
+                    alert("로그인이 필요합니다!");
+                    history.push("/");
+                } else if (status == 404) {
+                    alert("사업자 계정이 아니에요!");
+                    history.push("/");
+                } else {
+                    alert("로그인서버문제");
+                }
             });
     };
 

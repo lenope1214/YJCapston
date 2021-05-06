@@ -9,8 +9,11 @@ import { postShop } from "../../lib/Shop";
 
 const ShopContainer = () => {
     const history = useHistory();
-    const [id, setId] = useState("");
+    const [shopId, setShopId] = useState("");
     const [shopname, setShopname] = useState("");
+    const [phone1, setPhone1] = useState("");
+    const [phone2, setPhone2] = useState("");
+    const [phone3, setPhone3] = useState("");
     const [intro, setIntro] = useState("");
     const [open_time, setOpen_time] = useState("");
     const [close_time, setClose_time] = useState("");
@@ -26,6 +29,8 @@ const ShopContainer = () => {
             roadAddr: "",
         },
     ]);
+
+    const phone = phone1 + phone2 + phone3;
 
     const openmodal = () => {
         setModal(true);
@@ -46,15 +51,30 @@ const ShopContainer = () => {
     //     setInputStatus(value);
     // }
 
-    const handleId = (e) => {
+    const handleshopId = (e) => {
         const value = e.target.value;
-        setId(value);
+        setShopId(value);
     };
 
     const handleShopname = (e) => {
         const value = e.target.value;
         setShopname(value);
     };
+
+    const handlePhone1 = (e) => {
+        const value = e.target.value;
+        setPhone1(value);
+    }
+
+    const handlePhone2 = (e) => {
+        const value = e.target.value;
+        setPhone2(value);
+    }
+
+    const handlePhone3 = (e) => {
+        const value = e.target.value;
+        setPhone3(value);
+    }
 
     const handleIntro = (e) => {
         const value = e.target.value;
@@ -94,8 +114,9 @@ const ShopContainer = () => {
 
     const shop_v1 = async () => {
         const formData = new FormData();
-        formData.append("id", id);
+        formData.append("shopId", shopId);
         formData.append("name", shopname);
+        formData.append("phone", phone);
         formData.append("intro", intro);
         formData.append("openTime", open_time);
         formData.append("closeTime", close_time);
@@ -220,10 +241,13 @@ const ShopContainer = () => {
             {/* <OwnerNavbar /> */}
 
             <Shop
-                id={id}
-                handleId={handleId}
+                shopId={shopId}
+                handleshopId={handleshopId}
                 shopname={shopname}
                 handleShopname={handleShopname}
+                handlePhone1={handlePhone1}
+                handlePhone2={handlePhone2}
+                handlePhone3={handlePhone3}
                 intro={intro}
                 handleIntro={handleIntro}
                 open_time={open_time}

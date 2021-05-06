@@ -213,7 +213,7 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
             .catch((err) => {
                 console.log(err);
                 const status = err?.response?.status;
-                if (status == 500) {
+                if (status == 400) {
                     alert("로그인이 필요합니다.");
                     openmodal();
                 }
