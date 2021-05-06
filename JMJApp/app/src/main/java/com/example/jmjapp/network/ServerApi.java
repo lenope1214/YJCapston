@@ -41,6 +41,9 @@ public interface ServerApi {
     @POST("join") // 회원가입
     Call<String> join(@Body Map<String, String> map);
 
+    @POST("payment") // 주문등록
+    Call<ResponseBody> payment(@Header("Authorization")String jwt,  @Body Map<String, Object> map);
+
     /**
      * read read read read
      */

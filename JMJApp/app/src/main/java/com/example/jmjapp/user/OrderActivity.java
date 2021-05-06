@@ -30,8 +30,11 @@ import com.example.jmjapp.network.Server;
 import com.example.jmjapp.payment.PaymentWebview;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import lombok.SneakyThrows;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -51,6 +54,8 @@ public class OrderActivity extends AppCompatActivity {
 
     static public String order_request_et;
 
+    private Call<ResponseBody> responseBodyCall;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +71,49 @@ public class OrderActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Long orderId = intent.getLongExtra("orderId", 1);
         System.out.println(orderId);
+
+        SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
+        jwt = pref.getString("token", "tokenIsNull");
+
+        memberDTOCall = Server.getInstance().getApi().getUser("Bearer " + jwt);
+        memberDTOCall.enqueue(new Callback<MemberDTO>() {
+            @Override
+            public void onResponse(Call<MemberDTO> call, Response<MemberDTO> response) {
+                if (response.code() == 200) {
+                    MemberDTO.User user = new MemberDTO.User();
+                    user = response.body().getUser();
+                    Log.d("rse", response.body().toString());
+                    resName = user.getName();
+                    resPhone = user.getPhone();
+                    Log.d("result999 ", "성공" + resName + resPhone);
+                } else {
+                    Log.d("result ", "연결실패1" + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MemberDTO> call, Throwable t) {
+                Log.d("result ", "연결실패2");
+            }
+        });
+
+        shopCall = Server.getInstance().getApi().shop(ShopDetailActivity.shopNumber);
+        shopCall.enqueue(new Callback<Shop>() {
+            @Override
+            public void onResponse(Call<Shop> call, Response<Shop> response) {
+                if (response.code() == 200) {
+                    resAddr = response.body().getAddress();
+                    resShop = response.body().getName();
+                    Log.d("result123 ", "성공" + resShop + resAddr);
+                } else {
+                    Log.d("wlfkfdmfgofk", "wlfkfdmfgofk");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Shop> call, Throwable t) {
+            }
+        });
 
         order_request_et = binding.orderRequestEt.getText().toString();
 
@@ -129,7 +177,7 @@ public class OrderActivity extends AppCompatActivity {
             }
         });
 
-        SharedPreferences pref = getSharedPreferences("basket", MODE_PRIVATE);
+        pref = getSharedPreferences("basket", MODE_PRIVATE);
         int list_size = pref.getInt("list_size", 0);
         for (int i = 0; i < list_size; i++) {
             Integer[] priceList = new Integer[list_size];
@@ -187,47 +235,27 @@ public class OrderActivity extends AppCompatActivity {
                     dialog = builder.setMessage("예약날짜와 예약시간을 확인해주세요!").setPositiveButton("확인", null).create();
                     dialog.show();
                 } else {
-                    SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
-                    jwt = pref.getString("token", "tokenIsNull");
+                    Map<String, Object> map = new HashMap();
+                    map.put("orderId", orderId);
+                    map.put("amount", sum);
+                    map.put("usePoint", 0);
+                    map.put("pg", "inicis");
+                    map.put("payMethod", "card");
 
-                    memberDTOCall = Server.getInstance().getApi().getUser("Bearer " + jwt);
-                    memberDTOCall.enqueue(new Callback<MemberDTO>() {
+                    responseBodyCall = Server.getInstance().getApi().payment("Bearer " + jwt, map);
+                    responseBodyCall.enqueue(new Callback<ResponseBody>() {
                         @Override
-                        public void onResponse(Call<MemberDTO> call, Response<MemberDTO> response) {
-                            if (response.code() == 200) {
-                                MemberDTO.User user = new MemberDTO.User();
-                                user = response.body().getUser();
-                                Log.d("rse", response.body().toString());
-                                resName = user.getName();
-                                resPhone = user.getPhone();
-                                Log.d("result999 ", "성공" + resName + resPhone);
-                            } else {
-                                Log.d("result ", "연결실패1" + response.code());
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            if (response.code() == 201) {
+                                Log.d("성공","성공");
+                             } else {
+                                Log.d("실패1","실패1");
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<MemberDTO> call, Throwable t) {
-                            Log.d("result ", "연결실패2");
-                        }
-                    });
-
-                    shopCall = Server.getInstance().getApi().shop(ShopDetailActivity.shopNumber);
-                    shopCall.enqueue(new Callback<Shop>() {
-                        @Override
-                        public void onResponse(Call<Shop> call, Response<Shop> response) {
-                            if (response.code() == 200) {
-                                resAddr = response.body().getAddress();
-                                resShop = response.body().getName();
-                                Log.d("result123 ", "성공" + resShop + resAddr);
-                            } else {
-                                Log.d("wlfkfdmfgofk", "wlfkfdmfgofk");
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<Shop> call, Throwable t) {
-                            System.out.println("존나 오랫동안 있네");
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Log.d("실패2","실패2");
                         }
                     });
 
