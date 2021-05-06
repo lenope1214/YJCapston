@@ -33,8 +33,10 @@ public class EmployeeController {
     @Transactional
     @PostMapping("/shop/employee")
     public ResponseEntity<?> getShopPos(@RequestHeader String authorization, @RequestBody Employee.Request request){
+        System.out.println("직원등록 입장");
         Employee employee = employeeService.post(authorization, request);
         Employee.Response response = new Employee.Response(employee);
+        System.out.println("직원 등록 성공!");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

@@ -112,7 +112,9 @@ public class Order implements Serializable {
 
     public void update(Request request){
         if(request.orderRequest != null)this.orderRequest = request.getOrderRequest();
-        if(request.people != 0) this.people = request.getPeople();
+        if(request.people != 0) this.people = request.people;
+        if(request.arriveTime != null)this.arriveTime = request.arriveTime;
+        this.status = "rd";
     }
 
     public void pay(Payment.Request request){
@@ -121,6 +123,7 @@ public class Order implements Serializable {
         this.payTime = new Timestamp(System.currentTimeMillis());
         this.pg = request.getPg();
         this.amount = request.getAmount();
+        this.usePoint = request.getUsePoint();
     }
 
     public void refund(){
