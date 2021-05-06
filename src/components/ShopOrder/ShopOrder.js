@@ -197,7 +197,7 @@ const ShopOrder = ({
                             </div>
                             <div className="subtitle">현재 포인트</div>
                             <input
-                                value={jmuserinfo.point}
+                                value={jmuserinfo.point - pointcheck}
                                 className="input-box"
                             ></input>
                             <br />

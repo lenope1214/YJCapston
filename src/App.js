@@ -22,6 +22,7 @@ import PosContainer from "./containers/Pos/PosContainer";
 import PosMainContainer from "./containers/PosMain/PosMainContainer";
 import EmployeeContainer from "./containers/Employee/EmployeeContainer";
 import EmplistContainer from "./containers/Emplist/EmplistContainer";
+import AddReviewContainer from "./containers/AddReview/AddReviewContainer";
 import * as StompJs from "@stomp/stompjs";
 
 const ROOM_SEQ = 1;
@@ -77,6 +78,7 @@ const App = () => {
                     />
                     <Route component={EventContainer} path="/event" />
                     <Route component={MenuReadContainer} path="/menu/:menuId" />
+                    <Route component={AddReviewContainer} path='/addreview/:shopId/:orderId' />
                     <Route
                         path="/shopcontent/:shopId"
                         component={() => (
@@ -179,12 +181,17 @@ const TestChat = () => {
     };
 
     const subscribe = () => {
-        client.current.subscribe(`/sub/chat/2`, ({ body }) => {
-            if (window.confirm("주문이 발생 했습니다?")) {
-                alert("happy");
-            } 
+        client.current.subscribe(`/sub/chat/3`, ({ body }) => {
+            // if (window.confirm("주문이 발생 했습니다?")) {
+            //     alert("happy");
+            // } else {
+            //     // 환불
+            // }
             scrollToBottom();
-           
+            setChatMessages((_chatMessages) => [
+                ..._chatMessages,
+                JSON.parse(body),
+            ]);
         });
     };
 
@@ -195,11 +202,11 @@ const TestChat = () => {
         scrollToBottom();
 
         client.current.publish({
-            destination: `/sub/chat/2`,
+            destination: `/sub/chat/3`,
             body: JSON.stringify({ roomSeq: ROOM_SEQ, message }),
         });
 
-       
+        setMessage("");
     };
 
     return (

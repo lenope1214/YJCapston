@@ -48,6 +48,7 @@ const ShopInfo = ({
     goBack
 }
 ) => {
+    console.log(isOpen);
     
     const postCodeStyle = {
         display: "block",
@@ -283,7 +284,7 @@ const ShopInfo = ({
         <div>
         <input
                 type="text"
-                id="rspos"
+                id="open"
                 value={isOpen}
                 className="input-box1"
                 />

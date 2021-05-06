@@ -46,8 +46,8 @@ date,
                                 <td className="body-item-3">{emp.birthday}</td>
                                 <td className="body-item-4">{emp.hiredate}</td>
                                 <td className="body-item-5">{emp.phone}</td>
-                                {/* <td className="body-item-6">{emp.gender}</td> */}
-                                <td className="body-item-6">{nowTime}</td>
+                                <td className="body-item-6">{emp.gender}</td>
+                                {/* <td className="body-item-6">{nowTime}</td> */}
                                 <td className="body-item-7" onClick={async () => {
                                                     const res = await removeemps(
                                                         shopId,emp.empNo
