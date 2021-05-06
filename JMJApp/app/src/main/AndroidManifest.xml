@@ -29,6 +29,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+<<<<<<< HEAD
         <activity android:name=".owner.BellActivity_O"></activity>
         <activity android:name=".push.Firebase2" />
 
@@ -64,6 +65,17 @@
         <activity android:name=".owner.MenuDetailActivity" />
         <activity android:name=".owner.ListShopActivity" />
         <activity android:name=".owner.OwnerLoginActivity" />
+=======
+        <activity android:name=".owner.EmployeesManagementActivity"></activity>
+        <activity android:name=".user.OrderActivity"></activity>
+        <activity android:name=".owner.ShopUpdateActivity"></activity>
+        <activity android:name=".user.BasketActivity"></activity>
+        <activity android:name=".user.MenuChoosedActivity"></activity>
+        <activity android:name=".owner.MenuRegisterActivity"></activity>
+        <activity android:name=".owner.MenuDetailActivity"></activity>
+        <activity android:name=".owner.ListShopActivity"></activity>
+        <activity android:name=".owner.OwnerLoginActivity"></activity>
+>>>>>>> androidmerge
         <activity android:name=".user.MembershipWithdrawal" />
         <activity android:name=".user.RecordZzim" />
         <activity android:name=".user.RecordReview" />

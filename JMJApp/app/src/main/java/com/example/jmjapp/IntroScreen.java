@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.jmjapp.owner.ListShopActivity;
@@ -14,6 +16,7 @@ import com.example.jmjapp.user.MainActivity;
 
 public class IntroScreen extends AppCompatActivity {
     ImageView user_jmj_img, owner_jmj_img;
+    TextView tv_userLogIn, tv_ownerLogIn;
     private AlertDialog dialog;
     String loginId, role, loginId2, role2;
 
@@ -45,10 +48,10 @@ public class IntroScreen extends AppCompatActivity {
             finish();
         }
 
-        user_jmj_img = findViewById(R.id.user_jmj_img);
-        owner_jmj_img = findViewById(R.id.owner_jmj_img);
+        tv_ownerLogIn = findViewById(R.id.tv_ownerLogIn);
+        tv_userLogIn = findViewById(R.id.tv_userLogIn);
 
-        user_jmj_img.setOnClickListener(new View.OnClickListener() {
+        tv_userLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(IntroScreen.this, MainActivity.class);
@@ -58,7 +61,7 @@ public class IntroScreen extends AppCompatActivity {
             }
         });
 
-        owner_jmj_img.setOnClickListener(new View.OnClickListener() {
+        tv_ownerLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(IntroScreen.this, OwnerLoginActivity.class);
