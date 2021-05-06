@@ -1,19 +1,27 @@
 package com.jumanji.capston.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 
-@Getter
+@Getter @NoArgsConstructor @EqualsAndHashCode
 @Entity
 @Table(name="messages")
-public class Message {
-    @EmbeddedId
-    private MessageId id;
+@IdClass(Publish.class)
+public class Message implements Serializable {
+//    @EmbeddedId
+//    private MessageId id;
+    @Id
+    @JsonIgnore
+    @JoinColumn(updatable = false)
+    @ManyToOne
+    private Publish publish;
+
     @Column(length = 250)
     private String content;//내용
 
