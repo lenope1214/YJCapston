@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.jmjapp.Adapter.MenuRecyclerAdapter;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Menu;
+import com.example.jmjapp.network.Server;
 import com.example.jmjapp.user.ShopDetailActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,6 +28,8 @@ public class MenuFragment extends Fragment {
     private MenuRecyclerAdapter adapter;
     private RecyclerView rv_menu_list;
     private ArrayList<Menu> mItems = new ArrayList<>();
+
+    private Call<List<Menu>> listMenuCall;
 
     public static Fragment newInstance() {
         Bundle args = new Bundle();
@@ -55,13 +58,8 @@ public class MenuFragment extends Fragment {
     }
 
     private void showMenuList() {
-        Retrofit retrofit =new Retrofit.Builder().
-                addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(ApiService.BASEURL)
-                .build();
-        ApiService apiService = retrofit.create(ApiService.class);
-        Call<List<Menu>> shopCall = apiService.menuList(shopNumber);
-        shopCall.enqueue(new Callback<List<Menu>>() {
+        listMenuCall = Server.getInstance().getApi().menuList(shopNumber);
+        listMenuCall.enqueue(new Callback<List<Menu>>() {
             @Override
             public void onResponse(Call<List<Menu>> call, Response<List<Menu>> response) {
                 if(response.isSuccessful()) {
@@ -89,5 +87,12 @@ public class MenuFragment extends Fragment {
                 Log.d("성공ㅅㅍ","성공ㅅㅍ");
             }
         });
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if(listMenuCall!=null)
+            listMenuCall.cancel();
     }
 }

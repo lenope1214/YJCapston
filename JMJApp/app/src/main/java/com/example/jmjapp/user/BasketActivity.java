@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.jmjapp.*;
 import com.example.jmjapp.Adapter.BasketRecyclerAdapter;
 import com.example.jmjapp.dto.Menu;
+import com.example.jmjapp.network.Server;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONObject;
@@ -33,8 +34,9 @@ public class BasketActivity extends AppCompatActivity {
     private RecyclerView rv_basket_list;
     private BasketRecyclerAdapter adapter;
     private ArrayList<Menu> mItems = new ArrayList();
-    DataService dataService = new DataService();
+
     private String jwt, shopId;
+    private Call<ResponseBody> responseBodyCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +74,8 @@ public class BasketActivity extends AppCompatActivity {
                 map.put("shopId", shopId);
 
                 if (jwt != null) {
-                    dataService.read.order("Bearer " + jwt, map).enqueue(new Callback<ResponseBody>() {
+                    responseBodyCall = Server.getInstance().getApi().order("Bearer " + jwt, map);
+                    responseBodyCall.enqueue(new Callback<ResponseBody>() {
                         @SneakyThrows
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -114,5 +117,12 @@ public class BasketActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(responseBodyCall!=null)
+            responseBodyCall.cancel();
     }
 }

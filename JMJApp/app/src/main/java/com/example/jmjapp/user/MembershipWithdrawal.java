@@ -16,6 +16,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.jmjapp.JMJApplication;
 import com.example.jmjapp.R;
+import com.example.jmjapp.network.Server;
 
 import lombok.SneakyThrows;
 import okhttp3.ResponseBody;
@@ -26,8 +27,9 @@ import retrofit2.Response;
 public class MembershipWithdrawal extends AppCompatActivity {
     CheckBox cb_coupon;
     Button button_withdrawal;
-    DataService dataService = new DataService();
+
     private String jwt;
+    private Call<ResponseBody> responseBodyCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +71,8 @@ public class MembershipWithdrawal extends AppCompatActivity {
                     builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            dataService.delete.deleteOne("Bearer " + jwt).enqueue(new Callback<ResponseBody>() {
+                            responseBodyCall = Server.getInstance().getApi().deleteOne("Bearer " + jwt);
+                            responseBodyCall.enqueue(new Callback<ResponseBody>() {
                                 @SneakyThrows
                                 @Override
                                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -128,5 +131,12 @@ public class MembershipWithdrawal extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(responseBodyCall!=null)
+            responseBodyCall.cancel();
     }
 }

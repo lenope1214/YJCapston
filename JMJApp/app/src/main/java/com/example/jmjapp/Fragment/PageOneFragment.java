@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.jmjapp.Adapter.RestaurantRecyclerAdapter;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Shop;
+import com.example.jmjapp.network.Server;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,6 +27,8 @@ public class PageOneFragment extends Fragment {
     private RestaurantRecyclerAdapter adapter;
     private RecyclerView rv_restaurant_list;
     ArrayList<Shop> mItems = new ArrayList<>();
+
+    private Call<List<Shop>> listShopCall;
 
     public static PageOneFragment newInstance() {
         // Required empty public constructor
@@ -54,13 +58,8 @@ public class PageOneFragment extends Fragment {
     }
 
     private void showList(String category) {
-        Retrofit retrofit =new Retrofit.Builder().
-                addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(ApiService.BASEURL)
-                .build();
-        ApiService apiService = retrofit.create(ApiService.class);
-        Call<List<Shop>> shopCall = apiService.shopList2(category);
-        shopCall.enqueue(new Callback<List<Shop>>() {
+        listShopCall = Server.getInstance().getApi().shopList2(category);
+        listShopCall.enqueue(new Callback<List<Shop>>() {
             @Override
             public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response) {
                 if(response.isSuccessful()) {
@@ -88,5 +87,12 @@ public class PageOneFragment extends Fragment {
             }
         });
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (listShopCall != null)
+            listShopCall.cancel();
     }
 }

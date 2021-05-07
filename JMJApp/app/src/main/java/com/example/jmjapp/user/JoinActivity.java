@@ -9,10 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import com.example.jmjapp.R;
+import com.example.jmjapp.network.Server;
+
 import lombok.SneakyThrows;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -23,7 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JoinActivity extends AppCompatActivity {
-    DataService dataService = new DataService();
+
     EditText et_id;
     EditText et_pw;
     EditText et_repw;
@@ -33,6 +37,8 @@ public class JoinActivity extends AppCompatActivity {
     Button btn_id_validate;
     boolean isChecked;
     private AlertDialog dialog;
+    private Call<ResponseBody> responseBodyCall;
+    private Call<String> stringCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +65,8 @@ public class JoinActivity extends AppCompatActivity {
                 if (et_id.equals("") || !(et_id.getText().toString().length() >= 2 && et_id.getText().toString().length() <= 10)) {
                     Toast.makeText(JoinActivity.this, "아이디는 2~8자로 입력해주세요!", Toast.LENGTH_SHORT).show();
                 } else {
-                    dataService.read.validateOne(et_id.getText().toString()).enqueue(new Callback<ResponseBody>() {
+                    responseBodyCall = Server.getInstance().getApi().validateOne(et_id.getText().toString());
+                    responseBodyCall.enqueue(new Callback<ResponseBody>() {
                         @SneakyThrows
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -79,7 +86,7 @@ public class JoinActivity extends AppCompatActivity {
                                 et_id.requestFocus();
 
                             } else {
-                                Log.d("D",response.errorBody().string());
+                                Log.d("D", response.errorBody().string());
                                 Log.d("result ", "연결실패312");
                             }
                         }
@@ -94,7 +101,6 @@ public class JoinActivity extends AppCompatActivity {
         });
 
         btn_insert.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 if (!(et_id.getText().toString().length() >= 2 && et_id.getText().toString().length() <= 10)) {
@@ -122,7 +128,7 @@ public class JoinActivity extends AppCompatActivity {
                     dialog = builder.setMessage("전화번호를 정확하게 입력해 주세요.").setPositiveButton("확인", null).create();
                     dialog.show();
                     et_phone.requestFocus();
-                }  else if (isChecked == false) {
+                } else if (isChecked == false) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
                     dialog = builder.setMessage("아이디 중복체크를 해주세요.").setPositiveButton("확인", null).create();
                     dialog.show();
@@ -134,8 +140,8 @@ public class JoinActivity extends AppCompatActivity {
                     map.put("phone", et_phone.getText().toString());
                     map.put("role", "ROLE_USER");
 
-
-                    dataService.create.join(map).enqueue(new Callback<String>() {
+                    stringCall = Server.getInstance().getApi().join(map);
+                    stringCall.enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(JoinActivity.this);
@@ -172,6 +178,15 @@ public class JoinActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(responseBodyCall!=null)
+            responseBodyCall.cancel();
+        if(stringCall!=null)
+            stringCall.cancel();
     }
 }
 

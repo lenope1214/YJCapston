@@ -55,7 +55,7 @@ public class MenuChoosedActivity extends AppCompatActivity {
         menu_choosed_name.setText(menuName);
         menu_choosed_price.setText(menuPrice + "원");
         menu_choosed_intro.setText(menuIntro);
-        Glide .with(this).load("http://3.34.55.186:8088/" + menuImage).override(500,500).into(menu_choosed_img);
+        Glide.with(this).load("http://3.34.55.186:8088/" + menuImage).override(500,500).into(menu_choosed_img);
 
         if (is_rs_pos == 'Y') {
             menu_choosed_btn.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +91,7 @@ public class MenuChoosedActivity extends AppCompatActivity {
                             editor.putString("list_" + list_size + "_name", menuName);
                             editor.putInt("list_" + list_size + "_price", menuPrice);
                             editor.putInt("list_" + list_size + "_count", menuCount);
+                            editor.putString("list_" + list_size + "_img", menuImage);
                             editor.putInt("list_size", list_size + 1);
                             editor.apply();
                         } else {

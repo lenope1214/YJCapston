@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.example.jmjapp.R;
+import com.example.jmjapp.network.Server;
 
 import lombok.SneakyThrows;
 import okhttp3.ResponseBody;
@@ -24,11 +25,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OwnerJoinActivity extends AppCompatActivity {
-    DataService dataService = new DataService();
+
     EditText et_join_owner_id, et_join_owner_pw, et_join_owner_repw, et_join_owner_name ,et_join_owner_phone;
     Button owner_join_button, owner_join_validate_button;
     boolean isChecked;
     private AlertDialog dialog;
+
+    private Call<ResponseBody> responseBodyCall;
+    private Call<String> stringCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +59,8 @@ public class OwnerJoinActivity extends AppCompatActivity {
                 if (et_join_owner_id.equals("") || !(et_join_owner_id.getText().toString().length() >= 2 && et_join_owner_id.getText().toString().length() <= 10)) {
                     Toast.makeText(OwnerJoinActivity.this, "아이디는 2~8자로 입력해주세요!", Toast.LENGTH_SHORT).show();
                 } else {
-                    dataService.read.validateOne(et_join_owner_id.getText().toString()).enqueue(new Callback<ResponseBody>() {
+                    responseBodyCall = Server.getInstance().getApi().validateOne(et_join_owner_id.getText().toString());
+                    responseBodyCall.enqueue(new Callback<ResponseBody>() {
                         @SneakyThrows
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -128,7 +133,8 @@ public class OwnerJoinActivity extends AppCompatActivity {
                     map.put("phone", et_join_owner_phone.getText().toString());
                     map.put("role", "ROLE_OWNER");
 
-                    dataService.create.join(map).enqueue(new Callback<String>() {
+                    stringCall = Server.getInstance().getApi().join(map);
+                    stringCall.enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(OwnerJoinActivity.this);
@@ -164,5 +170,14 @@ public class OwnerJoinActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(responseBodyCall!=null)
+            responseBodyCall.cancel();
+        if(stringCall!=null)
+            stringCall.cancel();
     }
 }

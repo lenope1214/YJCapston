@@ -8,30 +8,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
-import com.example.jmjapp.Fragment.ApiService;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Menu;
+import com.example.jmjapp.network.Server;
 import com.example.jmjapp.owner.MenuDetailActivity;
+
 import lombok.SneakyThrows;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecyclerAdapter.ItemViewHolder>{
+public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecyclerAdapter.ItemViewHolder> {
     Context context;
     ArrayList<Menu> mItems;
-    private AlertDialog dialog;
+
+    private Call<ResponseBody> responseBodyCall;
 
     public MenuListRecyclerAdapter(Context context, ArrayList<Menu> menus) {
         this.context = context;
@@ -42,7 +44,7 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
         this.context = context;
     }
 
-    public void setItems(ArrayList<Menu> menus){
+    public void setItems(ArrayList<Menu> menus) {
         this.mItems = menus;
     }
 
@@ -59,16 +61,16 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
         holder.shop_menu_name.setText(mItems.get(position).getName());
         holder.shop_menu_price.setText(mItems.get(position).getPrice() + "원");
         holder.shop_menu_intro.setText(mItems.get(position).getIntro());
-        holder.shop_menu_duration.setText(String.valueOf(mItems.get(position).getDuration())+ "분");
+        holder.shop_menu_duration.setText(String.valueOf(mItems.get(position).getDuration()) + "분");
         Glide.with(context).load("http://3.34.55.186:8088/" + mItems.get(position).getImgPath()).into(holder.shop_menu_img);
 
-        if(mItems.get(position).getIsSale() == 'Y') {
+        if (mItems.get(position).getIsSale() == 'Y') {
             holder.checkbox_soldout.setChecked(true);
         } else {
             holder.checkbox_soldout.setChecked(false);
         }
 
-        if(mItems.get(position).getIsPopular() == 'Y') {
+        if (mItems.get(position).getIsPopular() == 'Y') {
             holder.checkbox_popular.setChecked(true);
         } else {
             holder.checkbox_popular.setChecked(false);
@@ -115,13 +117,8 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
                         map.put("price", price);
                         map.put("duration", duration);
 
-                        Retrofit retrofit =new Retrofit.Builder().
-                                addConverterFactory(GsonConverterFactory.create())
-                                .baseUrl(ApiService.BASEURL)
-                                .build();
-                        ApiService apiService = retrofit.create(ApiService.class);
-                        Call<ResponseBody> updateMenu = apiService.updateMenu("Bearer " + jwt, map);
-                        updateMenu.enqueue(new Callback<ResponseBody>() {
+                        responseBodyCall = Server.getInstance().getApi().updateMenu("Bearer " + jwt, map);
+                        responseBodyCall.enqueue(new Callback<ResponseBody>() {
                             @SneakyThrows
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -130,7 +127,7 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
                                         Log.d("메뉴수정", "성공");
                                         holder.shop_menu_intro.setText(intro);
                                         holder.shop_menu_price.setText(price + "원");
-                                        holder.shop_menu_duration.setText(duration +"분");
+                                        holder.shop_menu_duration.setText(duration + "분");
                                     } else {
                                         Log.d("메뉴수정", "실패");
                                     }
@@ -152,7 +149,7 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
                 builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d("실행안함","실행안함");
+                        Log.d("실행안함", "실행안함");
                     }
                 });
                 builder.show();
@@ -168,13 +165,8 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
                 builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Retrofit retrofit =new Retrofit.Builder().
-                                addConverterFactory(GsonConverterFactory.create())
-                                .baseUrl(ApiService.BASEURL)
-                                .build();
-                        ApiService apiService = retrofit.create(ApiService.class);
-                        Call<ResponseBody> deleteMenu = apiService.deleteMenu("Bearer " + jwt, menuId);
-                        deleteMenu.enqueue(new Callback<ResponseBody>() {
+                        responseBodyCall = Server.getInstance().getApi().deleteMenu("Bearer " + jwt, menuId);
+                        responseBodyCall.enqueue(new Callback<ResponseBody>() {
                             @SneakyThrows
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -202,7 +194,7 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
                 builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d("실행안함","실행안함");
+                        Log.d("실행안함", "실행안함");
                     }
                 });
                 builder.show();
@@ -227,13 +219,8 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
                     builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Retrofit retrofit =new Retrofit.Builder().
-                                    addConverterFactory(GsonConverterFactory.create())
-                                    .baseUrl(ApiService.BASEURL)
-                                    .build();
-                            ApiService apiService = retrofit.create(ApiService.class);
-                            Call<ResponseBody> updateSale = apiService.updateSale("Bearer " + jwt, menuId);
-                            updateSale.enqueue(new Callback<ResponseBody>() {
+                            responseBodyCall = Server.getInstance().getApi().updateSale("Bearer " + jwt, menuId);
+                            responseBodyCall.enqueue(new Callback<ResponseBody>() {
                                 @SneakyThrows
                                 @Override
                                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -270,13 +257,8 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
                     builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Retrofit retrofit =new Retrofit.Builder().
-                                    addConverterFactory(GsonConverterFactory.create())
-                                    .baseUrl(ApiService.BASEURL)
-                                    .build();
-                            ApiService apiService = retrofit.create(ApiService.class);
-                            Call<ResponseBody> updateSale = apiService.updateSale("Bearer " + jwt, menuId);
-                            updateSale.enqueue(new Callback<ResponseBody>() {
+                            responseBodyCall = Server.getInstance().getApi().updateSale("Bearer " + jwt, menuId);
+                            responseBodyCall.enqueue(new Callback<ResponseBody>() {
                                 @SneakyThrows
                                 @Override
                                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -313,63 +295,15 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
         holder.checkbox_popular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(holder.checkbox_popular.isChecked()) {
+                if (holder.checkbox_popular.isChecked()) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                     builder.setTitle("알림");
                     builder.setMessage("인기메뉴로 등록하시겠습니까?");
                     builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Retrofit retrofit =new Retrofit.Builder().
-                                    addConverterFactory(GsonConverterFactory.create())
-                                    .baseUrl(ApiService.BASEURL)
-                                    .build();
-                            ApiService apiService = retrofit.create(ApiService.class);
-                            Call<ResponseBody> updatePopular = apiService.updatePopular("Bearer " + jwt, menuId);
-                            updatePopular.enqueue(new Callback<ResponseBody>() {
-                                @SneakyThrows
-                                @Override
-                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                    if (response.isSuccessful()) {
-                                        if (response.code() == 200) {
-                                            Log.d("SS", "성공");
-                                        } else {
-                                            Log.d("SS", "실패");
-                                        }
-                                    } else {
-                                        response.errorBody().toString();
-                                        Log.d("연결실패", response.errorBody().string());
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                    Log.d("연결2", "실패2");
-                                }
-                            });
-                        }
-                    });
-                    builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            holder.checkbox_popular.setChecked(true);
-                        }
-                    });
-                    builder.show();
-                } else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                    builder.setTitle("알림");
-                    builder.setMessage("인기메뉴를 해제하시겠습니까?");
-                    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Retrofit retrofit =new Retrofit.Builder().
-                                    addConverterFactory(GsonConverterFactory.create())
-                                    .baseUrl(ApiService.BASEURL)
-                                    .build();
-                            ApiService apiService = retrofit.create(ApiService.class);
-                            Call<ResponseBody> updatePopular = apiService.updatePopular("Bearer " + jwt, menuId);
-                            updatePopular.enqueue(new Callback<ResponseBody>() {
+                            responseBodyCall = Server.getInstance().getApi().updatePopular("Bearer " + jwt, menuId);
+                            responseBodyCall.enqueue(new Callback<ResponseBody>() {
                                 @SneakyThrows
                                 @Override
                                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -399,6 +333,44 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
                         }
                     });
                     builder.show();
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                    builder.setTitle("알림");
+                    builder.setMessage("인기메뉴를 해제하시겠습니까?");
+                    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            responseBodyCall = Server.getInstance().getApi().updatePopular("Bearer " + jwt, menuId);
+                            responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                                @SneakyThrows
+                                @Override
+                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                    if (response.isSuccessful()) {
+                                        if (response.code() == 200) {
+                                            Log.d("SS", "성공");
+                                        } else {
+                                            Log.d("SS", "실패");
+                                        }
+                                    } else {
+                                        response.errorBody().toString();
+                                        Log.d("연결실패", response.errorBody().string());
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                    Log.d("연결2", "실패2");
+                                }
+                            });
+                        }
+                    });
+                    builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            holder.checkbox_popular.setChecked(true);
+                        }
+                    });
+                    builder.show();
                 }
             }
         });
@@ -407,12 +379,12 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
     // 데이터 셋의 크기
     @Override
     public int getItemCount() {
-        return mItems==null? 0:mItems.size();
+        return mItems == null ? 0 : mItems.size();
     }
 
     // 커스텀 뷰홀더
     // item layout 에 존재하는 위젯들을 바인딩합니다.
-    class ItemViewHolder extends RecyclerView.ViewHolder{
+    class ItemViewHolder extends RecyclerView.ViewHolder {
         private ImageView shop_menu_img_update, shop_menu_img;
         private TextView shop_menu_name;
         private TextView shop_menu_price, shop_menu_intro, shop_menu_name_update;
@@ -422,17 +394,18 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
         private Button menu_update_btn, menu_update_btn_comp, menu_delete_btn, menu_update_btn_cancel;
         private ConstraintLayout menu_detail_list, menu_detail_update;
         private EditText shop_menu_intro_update, shop_menu_price_update, shop_menu_duration_update;
+
         public ItemViewHolder(View itemView) {
             super(itemView);
             // 리스트
             menu_detail_list = (ConstraintLayout) itemView.findViewById(R.id.menu_detail_list);
             shop_menu_img = (ImageView) itemView.findViewById(R.id.shop_menu_img);
-            shop_menu_name = (TextView)itemView.findViewById(R.id.shop_menu_name);
-            shop_menu_intro = (TextView)itemView.findViewById(R.id.shop_menu_intro);
-            shop_menu_price = (TextView)itemView.findViewById(R.id.shop_menu_price);
+            shop_menu_name = (TextView) itemView.findViewById(R.id.shop_menu_name);
+            shop_menu_intro = (TextView) itemView.findViewById(R.id.shop_menu_intro);
+            shop_menu_price = (TextView) itemView.findViewById(R.id.shop_menu_price);
             shop_menu_duration = (TextView) itemView.findViewById(R.id.shop_menu_duration);
-            checkbox_soldout = (CheckBox)itemView.findViewById(R.id.checkbox_soldout);
-            checkbox_popular = (CheckBox)itemView.findViewById(R.id.checkbox_popular);
+            checkbox_soldout = (CheckBox) itemView.findViewById(R.id.checkbox_soldout);
+            checkbox_popular = (CheckBox) itemView.findViewById(R.id.checkbox_popular);
             menu_update_btn = (Button) itemView.findViewById(R.id.menu_update_btn);
             menu_delete_btn = (Button) itemView.findViewById(R.id.menu_delete_btn);
 
@@ -441,10 +414,11 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
             menu_update_btn_cancel = (Button) itemView.findViewById(R.id.menu_update_btn_cancel);
             menu_update_btn_comp = (Button) itemView.findViewById(R.id.menu_update_btn_comp);
             shop_menu_img_update = (ImageView) itemView.findViewById(R.id.shop_menu_img);
-            shop_menu_name_update = (TextView)itemView.findViewById(R.id.shop_menu_name_update);
-            shop_menu_intro_update = (EditText)itemView.findViewById(R.id.shop_menu_intro_update);
-            shop_menu_price_update = (EditText)itemView.findViewById(R.id.shop_menu_price_update);
+            shop_menu_name_update = (TextView) itemView.findViewById(R.id.shop_menu_name_update);
+            shop_menu_intro_update = (EditText) itemView.findViewById(R.id.shop_menu_intro_update);
+            shop_menu_price_update = (EditText) itemView.findViewById(R.id.shop_menu_price_update);
             shop_menu_duration_update = (EditText) itemView.findViewById(R.id.shop_menu_duration_update);
         }
     }
+
 }

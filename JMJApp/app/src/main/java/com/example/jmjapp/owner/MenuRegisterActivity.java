@@ -17,6 +17,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.example.jmjapp.R;
+import com.example.jmjapp.network.Server;
+
 import lombok.SneakyThrows;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -32,7 +34,7 @@ import java.util.Map;
 
 public class MenuRegisterActivity extends AppCompatActivity {
     Context context;
-    DataService dataService = new DataService();
+
     EditText menu_name_et, menu_intro_et, menu_price_et, menu_time_et;
     Button menu_register_btn;
     private ImageView menu_register_img;
@@ -42,6 +44,7 @@ public class MenuRegisterActivity extends AppCompatActivity {
 
     private String path, jwt;
     private Uri selectedImageUri;
+    private Call<ResponseBody> responseBodyCall;
 
     boolean isPhotoCaptured;
     boolean isPhotoFileSaved;
@@ -85,6 +88,7 @@ public class MenuRegisterActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
 
             selectedImageUri = data.getData();
@@ -129,7 +133,8 @@ public class MenuRegisterActivity extends AppCompatActivity {
 
                 Log.d("awd",String.valueOf(idBody)+nameBody+introBody+priceBody+timeBody);
 
-                dataService.create.insertMenu("Bearer " + jwt, map, body).enqueue(new Callback<ResponseBody>() {
+                responseBodyCall = Server.getInstance().getApi().insertMenu("Bearer " + jwt, map, body);
+                responseBodyCall.enqueue(new Callback<ResponseBody>() {
                     @SneakyThrows
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -171,4 +176,10 @@ public class MenuRegisterActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(responseBodyCall!=null)
+            responseBodyCall.cancel();
+    }
 }

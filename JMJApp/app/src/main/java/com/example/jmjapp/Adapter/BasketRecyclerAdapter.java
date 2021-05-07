@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Menu;
 
@@ -19,8 +21,6 @@ import java.util.ArrayList;
 public class BasketRecyclerAdapter extends RecyclerView.Adapter<BasketRecyclerAdapter.ItemViewHolder> {
     Context context;
     ArrayList<Menu> mItems;
-    private AlertDialog dialog;
-
 
     public BasketRecyclerAdapter(Context context, ArrayList<Menu> menus) {
         this.context = context;
@@ -45,10 +45,7 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter<BasketRecyclerAd
     // View 의 내용을 해당 포지션의 데이터로 바꿉니다.
     @Override
     public void onBindViewHolder(final BasketRecyclerAdapter.ItemViewHolder holder, final int position) {
-
         holder.tv_menu_name.setText(mItems.get(position).getName());
-        //holder.tv_menu_price.setText(mItems.get(position).getPrice() + "원");
-        //Glide.with(context).load(mItems.get(position).getImgPath()).into(holder.iv_menu_img);
 
         holder.menu_delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +53,7 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter<BasketRecyclerAd
                 ArrayList<String> menu_name_list = new ArrayList<String>();
                 ArrayList<Integer> menu_price_list = new ArrayList<Integer>();
                 ArrayList<Integer> menu_count_list = new ArrayList<Integer>();
+                ArrayList<String> menu_img_list = new ArrayList<String>();
 
                 SharedPreferences pref = context.getSharedPreferences("basket", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
@@ -68,44 +66,29 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter<BasketRecyclerAd
                     editor2.apply();
                 }
 
-                //int menuCount = pref.getInt("list_" + holder.tv_menu_name + "_count", 1);
-
                 for (int i = 0; i < list_size; i++) {
                     String[] list_name = new String[list_size];
                     int[] list_price = new int[list_size];
                     int[] list_count = new int[list_size];
+                    String[] list_img = new String[list_size];
+
                     list_name[i] = pref.getString("list_" + i + "_name", "nope");
                     list_price[i] = pref.getInt("list_" + i + "_price", 0);
                     list_count[i] = pref.getInt("list_" + i + "_count", 1);
-
-//                    Log.d("list_size", String.valueOf(list_size));
-//                    Log.d("list_name", list_name[i]);
-//                    Log.d("list_price", String.valueOf(list_price[i]));
-//                    Log.d("list_count", String.valueOf(list_count[i]));
-//                    Log.d("cureent menu", holder.tv_menu_name.getText().toString());
-//                    Log.d("current price", holder.tv_menu_price.getText().toString());
+                    list_img[i] = pref.getString("list_" + i + "_img", "nope");
 
                     menu_name_list.add(list_name[i]);
                     menu_price_list.add(list_price[i]);
                     menu_count_list.add(list_count[i]);
-
-//                    System.out.println(menu_name_list.toString());
-//                    System.out.println(menu_price_list.toString());
-//                    System.out.println(menu_count_list.toString());
+                    menu_img_list.add(list_img[i]);
 
                     if(list_name[i] == holder.tv_menu_name.getText().toString()) {
                         menu_name_list.remove(i);
                         menu_price_list.remove(i);
                         menu_count_list.remove(i);
-
-//                        System.out.println("두번째 결과" + menu_name_list.toString());
-//                        System.out.println("두번째 결과" + menu_price_list.toString());
-//                        System.out.println("두번째 결과" + menu_count_list.toString());
+                        menu_img_list.remove(i);
                     }
                 }
-//                System.out.println("최종 리스트" + menu_name_list);
-//                System.out.println("최종 리스트" + menu_price_list);
-//                System.out.println("최종 리스트" + menu_count_list);
 
                 editor.clear();
                 editor.apply();
@@ -115,6 +98,7 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter<BasketRecyclerAd
                         editor.putString("list_" + j + "_name", menu_name_list.get(j));
                         editor.putInt("list_" + j + "_price", menu_price_list.get(j));
                         editor.putInt("list_" + j + "_count", menu_count_list.get(j));
+                        editor.putString("list_" + j + "_img", menu_img_list.get(j));
                         editor.putInt("list_size", j + 1);
                     }
                     editor.apply();
@@ -132,13 +116,17 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter<BasketRecyclerAd
         for (int i = 0; i < list_size; i++) {
             String[] list_name = new String[list_size];
             int[] list_price = new int[list_size];
+
             list_name[i] = pref.getString("list_" + i + "_name", null);
             list_price[i] = pref.getInt("list_" + i + "_price", 0);
+
             if(list_name[i].equals(holder.tv_menu_name.getText().toString())) {
                 int menuCount1 = pref.getInt("list_" + i + "_count", 0);
                 int menuPrice1 = pref.getInt("list_" + i + "_price", 0);
+                String menuImg1 = pref.getString("list_" + i + "_img", "nope");
                 holder.menu_count.setText(String.valueOf(menuCount1));
                 holder.tv_menu_price.setText(String.valueOf(menuPrice1));
+                Glide.with(context).load("http://3.34.55.186:8088/" + menuImg1).into(holder.iv_menu_img);
             }
         }
 

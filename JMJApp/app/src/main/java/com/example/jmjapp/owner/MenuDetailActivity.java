@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.jmjapp.Adapter.MenuListRecyclerAdapter;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Menu;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.jmjapp.network.Server;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,10 +24,11 @@ import java.util.List;
 public class MenuDetailActivity extends AppCompatActivity {
     TextView menu_register;
     public static String shopNumber;
-    DataService dataService = new DataService();
     private MenuListRecyclerAdapter adapter;
     private RecyclerView menu_list;
     ArrayList<Menu> mItems = new ArrayList<>();
+
+    private Call<List<Menu>> listMenuCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +67,9 @@ public class MenuDetailActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         adapter = new MenuListRecyclerAdapter(getApplicationContext());
-        dataService.read.menuList(shopNumber).enqueue(new Callback<List<Menu>>() {
+
+        listMenuCall = Server.getInstance().getApi().menuList(shopNumber);
+        listMenuCall.enqueue(new Callback<List<Menu>>() {
             @Override
             public void onResponse(Call<List<Menu>> call, Response<List<Menu>> response) {
                 if(response.isSuccessful()) {
@@ -101,6 +104,13 @@ public class MenuDetailActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(listMenuCall!=null)
+            listMenuCall.cancel();
     }
 
 }
