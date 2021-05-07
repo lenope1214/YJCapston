@@ -3,6 +3,7 @@ package com.example.jmjapp.payment;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.jmjapp.R;
 import com.example.jmjapp.databinding.ActivityOrderBinding;
@@ -16,5 +17,7 @@ public class PaymentResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityPaymentResultBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
     }
 }

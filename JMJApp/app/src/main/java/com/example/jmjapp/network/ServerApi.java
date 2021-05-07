@@ -42,7 +42,7 @@ public interface ServerApi {
     Call<String> join(@Body Map<String, String> map);
 
     @POST("payment") // 주문등록
-    Call<ResponseBody> payment(@Header("Authorization")String jwt,  @Body Map<String, Object> map);
+    Call<ResponseBody> payment(@Header("Authorization")String jwt,  @Body Map<String, String> map);
 
     /**
      * read read read read
@@ -79,6 +79,10 @@ public interface ServerApi {
     @PATCH("user") // 비밀번호 변경
     Call<ResponseBody> updateOne(@Header("Authorization")String jwt,
                                  @Body Map<String, String> map);
+
+    @PATCH("order") // 주문서 수정
+    Call<ResponseBody> updateOrder(@Header("Authorization")String jwt,
+                                   @Body Map<String, String> map);
 
     /**
      * delete delete delete delete

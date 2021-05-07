@@ -51,8 +51,9 @@ public class OrderActivity extends AppCompatActivity {
     private Call<Shop> shopCall;
     private int sum = 0;
     private String resTime, resDate, resName, resPhone, resAddr, resShop, jwt;
+    private Long orderId;
 
-    static public String order_request_et;
+    private String order_request_et;
 
     private Call<ResponseBody> responseBodyCall;
 
@@ -69,33 +70,33 @@ public class OrderActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.arrowback);
 
         Intent intent = getIntent();
-        Long orderId = intent.getLongExtra("orderId", 1);
+        orderId = intent.getLongExtra("orderId", 1);
         System.out.println(orderId);
 
         SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
         jwt = pref.getString("token", "tokenIsNull");
 
-        memberDTOCall = Server.getInstance().getApi().getUser("Bearer " + jwt);
-        memberDTOCall.enqueue(new Callback<MemberDTO>() {
-            @Override
-            public void onResponse(Call<MemberDTO> call, Response<MemberDTO> response) {
-                if (response.code() == 200) {
-                    MemberDTO.User user = new MemberDTO.User();
-                    user = response.body().getUser();
-                    Log.d("rse", response.body().toString());
-                    resName = user.getName();
-                    resPhone = user.getPhone();
-                    Log.d("result999 ", "성공" + resName + resPhone);
-                } else {
-                    Log.d("result ", "연결실패1" + response.code());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MemberDTO> call, Throwable t) {
-                Log.d("result ", "연결실패2");
-            }
-        });
+//        memberDTOCall = Server.getInstance().getApi().getUser("Bearer " + jwt);
+//        memberDTOCall.enqueue(new Callback<MemberDTO>() {
+//            @Override
+//            public void onResponse(Call<MemberDTO> call, Response<MemberDTO> response) {
+//                if (response.code() == 200) {
+//                    MemberDTO.User user = new MemberDTO.User();
+//                    user = response.body().getUser();
+//                    Log.d("rse", response.body().toString());
+//                    resName = user.getName();
+//                    resPhone = user.getPhone();
+//                    Log.d("result999 ", "성공" + resName + resPhone);
+//                } else {
+//                    Log.d("result ", "연결실패1" + response.code());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<MemberDTO> call, Throwable t) {
+//                Log.d("result ", "연결실패2");
+//            }
+//        });
 
         shopCall = Server.getInstance().getApi().shop(ShopDetailActivity.shopNumber);
         shopCall.enqueue(new Callback<Shop>() {
@@ -183,7 +184,6 @@ public class OrderActivity extends AppCompatActivity {
             Integer[] priceList = new Integer[list_size];
             priceList[i] = pref.getInt("list_" + i + "_price", 0);
             sum = sum + priceList[i];
-            Log.d("가격", String.valueOf(priceList[i]) + "#@2@2" + sum);
         }
 
         binding.orderPayMoney.setText(String.valueOf(sum) + "원");
@@ -226,6 +226,11 @@ public class OrderActivity extends AppCompatActivity {
             }
         });
 
+        Log.d("orderId1", String.valueOf(orderId));
+        Log.d("orderRequest1", binding.orderRequestEt.getText().toString());
+        Log.d("people1", String.valueOf(count));
+        Log.d("amount2", String.valueOf(sum));
+
         binding.orderPayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -235,44 +240,81 @@ public class OrderActivity extends AppCompatActivity {
                     dialog = builder.setMessage("예약날짜와 예약시간을 확인해주세요!").setPositiveButton("확인", null).create();
                     dialog.show();
                 } else {
-                    Map<String, Object> map = new HashMap();
-                    map.put("orderId", orderId);
-                    map.put("amount", sum);
-                    map.put("usePoint", 0);
-                    map.put("pg", "inicis");
-                    map.put("payMethod", "card");
+                    Map<String, String> map = new HashMap();
+                    map.put("orderId", String.valueOf(orderId));
+                    map.put("orderRequest", binding.orderRequestEt.getText().toString());
+                    map.put("people", String.valueOf(count));
 
-                    responseBodyCall = Server.getInstance().getApi().payment("Bearer " + jwt, map);
+                    Log.d("orderId1", String.valueOf(orderId));
+                    Log.d("orderRequest1", binding.orderRequestEt.getText().toString());
+                    Log.d("people1", String.valueOf(count));
+
+                    responseBodyCall = Server.getInstance().getApi().updateOrder("Bearer " + jwt, map);
                     responseBodyCall.enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                            if (response.code() == 201) {
-                                Log.d("성공","성공");
-                             } else {
-                                Log.d("실패1","실패1");
+                            if (response.isSuccessful()) {
+                                Log.d("연결성공여부", String.valueOf(response.code()));
+                            } else {
+                                Log.d("연결실패1", "연결실패1");
                             }
                         }
 
                         @Override
                         public void onFailure(Call<ResponseBody> call, Throwable t) {
-                            Log.d("실패2","실패2");
+                            Log.d("연결실패2", "연결실패2");
                         }
                     });
 
-                    Intent intent = new Intent(OrderActivity.this, PaymentWebview.class);
-                    intent.putExtra("shopNumber", ShopDetailActivity.shopNumber);
-                    intent.putExtra("price", sum);
-                    intent.putExtra("people", count);
-                    intent.putExtra("resDate", resDate);
-                    intent.putExtra("resTime", resTime);
-                    intent.putExtra("resShop", resShop);
-                    intent.putExtra("resAddr", resAddr);
-                    intent.putExtra("resName", resName);
-                    intent.putExtra("resPhone", resPhone);
-                    startActivityForResult(intent, PAYMENT_ACTIVITY);
-                    /**
-                     *  웹뷰로 데이터 전달 필요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                     **/
+                    Map<String, String> map2 = new HashMap();
+                    map2.put("orderId", String.valueOf(orderId));
+                    map2.put("amount", String.valueOf(sum));
+                    map2.put("usePoint", "359");
+                    map2.put("pg", "inicis");
+                    map2.put("payMethod", "card");
+
+                    Log.d("orderId2", String.valueOf(orderId));
+                    Log.d("amount2", String.valueOf(sum));
+
+
+                    responseBodyCall = Server.getInstance().getApi().payment("Bearer " + jwt, map2);
+                    responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                        @SneakyThrows
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            if (response.isSuccessful()) {
+                                Log.d("성공123", "성공123");
+
+                                Intent intent = new Intent(OrderActivity.this, PaymentWebview.class);
+                                intent.putExtra("shopNumber", ShopDetailActivity.shopNumber);
+                                intent.putExtra("price", sum);
+                                intent.putExtra("people", count);
+                                intent.putExtra("resDate", resDate);
+                                intent.putExtra("resTime", resTime);
+                                intent.putExtra("resShop", resShop);
+                                intent.putExtra("resAddr", resAddr);
+                                intent.putExtra("resName", resName);
+                                intent.putExtra("resPhone", resPhone);
+                                intent.putExtra("orderId", orderId);
+                                startActivityForResult(intent, PAYMENT_ACTIVITY);
+                                /**
+                                 *  웹뷰로 데이터 전달 필요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                 **/
+                            } else {
+                                Log.d("실패13", "실패13" + response.errorBody().string() + response.code());
+                                return;
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Log.d("실패2", "실패2");
+                        }
+                    });
+
+
                 }
             }
         });
@@ -349,5 +391,9 @@ public class OrderActivity extends AppCompatActivity {
         super.onDestroy();
         if (memberDTOCall != null)
             memberDTOCall.cancel();
+        if (shopCall != null)
+            shopCall.cancel();
+        if (responseBodyCall != null)
+            responseBodyCall.cancel();
     }
 }
