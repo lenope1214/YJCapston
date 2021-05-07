@@ -11,6 +11,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity_O extends AppCompatActivity {
 
+    static public String shopNumber;
+
     HomeFragment_O homeFragment_o;
     PosFragment_O posFragment_o;
     ShopDetailFragment_O shopDetailFragment_o;
@@ -23,7 +25,7 @@ public class MainActivity_O extends AppCompatActivity {
         setContentView(R.layout.activity_main_o);
 
         Intent intent = getIntent();
-        String shopNumber = intent.getStringExtra("shopNumber");
+        shopNumber = intent.getStringExtra("shopNumber");
         String shopName = intent.getStringExtra("shopName");
 //        Log.d("re", shopNumber);
 
