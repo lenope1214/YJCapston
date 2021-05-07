@@ -49,8 +49,7 @@
                     android:background="@drawable/shop_detail_background"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                android:id="@+id/constraintLayout2">
+                    app:layout_constraintTop_toTopOf="parent" android:id="@+id/constraintLayout2">
 
 
                 <TextView

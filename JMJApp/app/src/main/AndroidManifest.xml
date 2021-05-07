@@ -29,8 +29,37 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
+        <activity android:name=".payment.PaymentResultActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="web1"
+                    android:scheme="iamporttest" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".owner.BellActivity_O" />
+        <activity android:name=".push.Firebase2" />
+        <activity android:name=".push.Firebase" />
+
+        <service
+            android:name=".push.MyFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true"
+            android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity android:name=".owner.AddEmployeesActivity" />
         <activity android:name=".owner.EmployeesManagementActivity" />
+        <activity android:name=".payment.PaymentWebview">
+        </activity>
         <activity android:name=".user.OrderActivity" />
         <activity android:name=".owner.ShopUpdateActivity" />
         <activity android:name=".user.BasketActivity" />
@@ -86,7 +115,6 @@
         <!-- </activity> -->
         <activity android:name=".owner.OwnerJoinActivity" />
         <activity android:name=".owner.WebViewActivity" />
-        <activity android:name=".payment.PaymentWebview" />
     </application>
 
 </manifest>

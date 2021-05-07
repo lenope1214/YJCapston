@@ -39,37 +39,37 @@
         android:id="@+id/textView41"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginEnd="177dp"
         android:gravity="center"
         android:text="Korea's No.1 ordering app &quot;order of people&quot;"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView21" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView21"
+        android:layout_marginLeft="176dp"
+        android:layout_marginRight="177dp" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginEnd="177dp"
         android:gravity="center"
         android:hint="Order the app right now!"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView41" />
+        app:layout_constraintTop_toBottomOf="@+id/textView41"
+        android:layout_marginLeft="176dp"
+        android:layout_marginRight="177dp" />
 
     <ImageView
         android:id="@+id/user_jmj_img"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_marginStart="24dp"
         android:foreground="@drawable/user"
         app:layout_constraintBottom_toBottomOf="@+id/tv_userLogIn"
         app:layout_constraintStart_toStartOf="@+id/tv_userLogIn"
         app:layout_constraintTop_toTopOf="@+id/tv_userLogIn"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:layout_marginLeft="24dp" />
 
     <TextView
         android:id="@+id/tv_userLogIn"
@@ -94,14 +94,14 @@
         android:id="@+id/owner_jmj_img"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/owner"
         app:layout_constraintBottom_toBottomOf="@+id/tv_ownerLogIn"
         app:layout_constraintStart_toStartOf="@+id/tv_ownerLogIn"
         app:layout_constraintTop_toTopOf="@+id/tv_ownerLogIn"
         app:layout_constraintVertical_bias="0.392"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:layout_marginLeft="24dp" />
 
     <TextView
         android:id="@+id/tv_ownerLogIn"
