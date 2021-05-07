@@ -1,10 +1,7 @@
 package com.jumanji.capston.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.checkerframework.checker.units.qual.C;
 
 import javax.persistence.*;
@@ -15,7 +12,7 @@ import java.util.List;
 
 @Getter
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor @ToString
 @Table(name = "ORDERS")
 public class Order implements Serializable {
     @Id
@@ -111,9 +108,15 @@ public class Order implements Serializable {
     }
 
     public void update(Request request){
-        if(request.orderRequest != null)this.orderRequest = request.getOrderRequest();
+        System.out.println("OrderRequest >> ? " + request.getOrderRequest());
+        if(request.orderRequest.length() > 0){
+            System.out.println("OrderRequest 변경!");
+            this.orderRequest = request.getOrderRequest();
+            System.out.println(this.orderRequest);
+        }
         if(request.people != 0) this.people = request.people;
         if(request.arriveTime != null)this.arriveTime = request.arriveTime;
+        if(request.amount != 0 ) this.amount = request.amount;
         this.status = "rd";
     }
 
@@ -122,7 +125,7 @@ public class Order implements Serializable {
         this.payMethod = request.getPayMethod();
         this.payTime = new Timestamp(System.currentTimeMillis());
         this.pg = request.getPg();
-        this.amount = request.getAmount();
+        if(request.getAmount() != 0 ) this.amount = request.getAmount();
         this.usePoint = request.getUsePoint();
     }
 

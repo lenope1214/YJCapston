@@ -40,7 +40,7 @@ public class PosService {
                     System.out.println("orderMenuSet>");
                     System.out.println("orderMenu Id.sub(0, 10) : " + orderMenuSet.iterator().next().getId().substring(0,13));
                     System.out.println("orderMenu Id.sub(0, 10) : " + new Timestamp(Long.parseLong(orderMenuSet.iterator().next().getId().substring(0,13))));
-                    Order order = orderService.getOrderInfo(new Timestamp(Long.parseLong(orderMenuSet.iterator().next().getId().substring(0,13))));
+                    Order order = orderService.isPresent(new Timestamp(Long.parseLong(orderMenuSet.iterator().next().getId().substring(0,13))));
                     System.out.println("order info ->\n" +
                             "orderRequest : " + order.getOrderRequest() +"\n" +
                             "people : " + order.getPeople());

@@ -1,5 +1,6 @@
 package com.jumanji.capston.controller;
 
+import com.jumanji.capston.data.Order;
 import com.jumanji.capston.data.Payment;
 import com.jumanji.capston.data.externalData.iamport.Iamport;
 import com.jumanji.capston.service.OrderServiceImpl;
@@ -45,6 +46,11 @@ public class PaymentController {
                 "request.getQueryString" + request.getQueryString()+"\n" +
                 "merchantUid.substring(merchant_.length()) : " + merchantUid.substring("merchant_".length()));
         IamportResponse<Iamport.Payment> response = null;
+        String mId = merchantUid;
+        if(merchantUid.contains("_")){
+            mId = mId.substring(mId.indexOf('_')+1);
+        }
+        System.out.println("mid : " + mId);
         if(merchantUid == null)throw new Exception("merchantUid is null");
         try {
 //            String m_id = merchantUid;
@@ -53,9 +59,8 @@ public class PaymentController {
             e.printStackTrace();
         }
         if(response.getResponse().getStatus().equals("paid")){
-            String mId = merchantUid.substring("merchant_".length());
-            System.out.println("mid : " + mId);
-            int amount = orderService.getOrderInfo(new Timestamp(Long.parseLong(mId))).getAmount();
+            System.out.println("요청 후mid : " + mId);
+            int amount = orderService.isPresent(new Timestamp(Long.parseLong(mId))).getAmount();
             BigDecimal amountB = BigDecimal.valueOf(amount);
             System.out.println("response.getResponse().getAmount() : " + response.getResponse().getAmount());
             System.out.println("BigDecimal amount : " + amountB);
@@ -66,11 +71,13 @@ public class PaymentController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @Transactional
+//    @Transactional
     @PostMapping("/payment")
     public ResponseEntity<?> postPayment(@RequestHeader String authorization, @RequestBody Payment.Request request) {
         // response 형태로 바꿔줘야함.
-        return new ResponseEntity(paymentService.post(authorization, request), HttpStatus.CREATED);
+        Payment payment = paymentService.post(authorization, request);
+        Payment.Response response = new Payment.Response(payment);
+        return new ResponseEntity(response, HttpStatus.OK);
     }
 
 

@@ -67,12 +67,17 @@ public class OrderController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @Transactional
     @PatchMapping("/order")
     public ResponseEntity<?> patchOrder(@RequestHeader String authorization, @RequestBody Order.Request request){
         Order order = orderService.patch(authorization, request);
         Order.Response response = new Order.Response(order);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @Transactional
+    @GetMapping("/orders")
+    public ResponseEntity<?> getOrderAll(){
+        return new ResponseEntity<>(orderService.getList(), HttpStatus.OK);
     }
 
 //    @Transactional

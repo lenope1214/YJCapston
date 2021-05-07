@@ -131,7 +131,7 @@ public class Shop {
     }
 
     public interface Dao{
-        String getId();
+        String getShopId();
         String getName();
         String getIntro();
         String getAddress();
@@ -143,5 +143,6 @@ public class Shop {
         Character getIsRsPos();
         String getImgPath();
         String getScore();
+        String getReviews();
     }
 }

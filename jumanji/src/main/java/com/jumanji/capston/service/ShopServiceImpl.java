@@ -14,6 +14,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,13 +27,10 @@ public class ShopServiceImpl implements ShopService {
     ShopRepository shopRepository;
     @Autowired
     UserRepository userRepository;
-
     @Autowired
     UserServiceImpl userService;
-
     @Autowired
     StorageServiceImpl storageService;
-
     @Autowired
     HttpHeaders httpHeaders;
 
@@ -102,26 +100,28 @@ public class ShopServiceImpl implements ShopService {
     public ResponseEntity<?> getList(String category, String sortTarget) {
         if (getShopListSize() != 0) {
             List<Shop.Response> responseList = new ArrayList<>();
+//            sortTarget = sortTarget == null ? "" : toOracleChar(sortTarget);
+//            category = category == null ? "" : toOracleChar(category);
             sortTarget = sortTarget == null ? "" : sortTarget;
             category = category == null ? "" : category;
             System.out.println("카테고리 : " + category);
             System.out.println("정렬기준 : " + sortTarget);
-            switch (sortTarget) {
-                case "score":
-                    return new ResponseEntity<>(shopRepository.ShopOrderByScore(category), HttpStatus.OK);
-                default:
-                    List<Shop> shopList;
-                    if(category.equals(""))shopList = shopRepository.findAll();
-                    else shopList = shopRepository.findByCategory(category);
-                    for (Shop shop : shopList) {
-                        Shop.Response response = new Shop.Response(shop);
-                        responseList.add(response);
-                    }
-                    break;
-            }
+            return new ResponseEntity<>(shopRepository.getShopListByCategorySortTarget(category, sortTarget), HttpStatus.OK);
+//            switch (sortTarget) {
+//                case "score":
+//                    return new ResponseEntity<>(shopRepository.ShopOrderByScore(category), HttpStatus.OK);
+//                default:
+//                    List<Shop> shopList;
+//                    if(category.equals(""))shopList = shopRepository.findAll();
+//                    else shopList = shopRepository.findByCategory(category);
+//                    for (Shop shop : shopList) {
+//                        Shop.Response response = new Shop.Response(shop);
+//                        responseList.add(response);
+//                    }
+//                    break;
+//            }
             // shop.response로 parsing 해서 보내기.
 
-            return new ResponseEntity<>(responseList, HttpStatus.OK);
         } else
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -224,5 +224,9 @@ public class ShopServiceImpl implements ShopService {
 
     public int getShopListSize() {
         return shopRepository.findAll().size();
+    }
+
+    public String toOracleChar(String str){
+        return "'" + str + "'";
     }
 }

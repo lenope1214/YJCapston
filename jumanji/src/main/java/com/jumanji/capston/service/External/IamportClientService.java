@@ -209,7 +209,7 @@ public class IamportClientService implements com.jumanji.capston.service.externa
             Type listType = new TypeToken<IamportResponse<Iamport.Payment>>() {
             }.getType();
             IamportResponse<Iamport.Payment> payment = gson.fromJson(response, listType);
-
+            System.out.println(payment.toString());
             return payment;
         }
 

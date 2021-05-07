@@ -5,8 +5,10 @@ import com.jumanji.capston.repository.OrderRepository;
 import com.jumanji.capston.service.exception.orderException.OrderHasExistException;
 import com.jumanji.capston.service.exception.orderException.OrderNotFoundException;
 import com.jumanji.capston.service.interfaces.OrderService;
+import jdk.jfr.TransitionTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -34,18 +36,6 @@ public class OrderServiceImpl implements OrderService {
 //        return new ResponseEntity<>(response, HttpStatus.OK);
 //    }
 
-    public Order getOrderInfo(Timestamp orderId){
-        isPresent(orderId);
-        return orderRepository.findById(orderId).get();
-    }
-
-    @Override
-    public Order get(String authorization, Timestamp orderId) {
-        String loginId = userService.getMyId(authorization);
-
-        Order order = isPresent(orderId);
-        return order;
-    }
 
     public List<Order> getList(String authorization) {
         String loginId = userService.getMyId(authorization);
@@ -93,6 +83,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public Order patch(String authorization, Order.Request request) {
         Order order;
         System.out.println("request info \nrequest.getOrderId()" + request.getOrderId() + "\n" +
@@ -102,11 +93,11 @@ public class OrderServiceImpl implements OrderService {
 
         // 유효성 검사.
         userService.isPresent(loginId);
-        isPresent(request.getOrderId()); // 있는지~
+        order = isPresent(request.getOrderId()); // 있는지~
 
-        order = getOrderInfo(request.getOrderId());
         order.update(request);
-        orderRepository.save(order);
+
+        order = orderRepository.saveAndFlush(order);
         return order;
     }
 
@@ -129,9 +120,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     public Order isOwnOrder(Timestamp orderId, String userId){
-
         Order order = isPresent(orderId);
-        if(order.getUser().getId().equals(userId))return order;
+        String _uId =order.getUser().getId();
+        System.out.println("order isOwnOrder\n_uId : " + _uId);
+        System.out.println("userId : " + userId);
+        if(_uId.equals(userId))return order;
         else throw new OrderNotFoundException(""+orderId.getTime());
     }
 
@@ -148,5 +141,9 @@ public class OrderServiceImpl implements OrderService {
 
     public void statusUpdate(Order order) {
         orderRepository.save(order);
+    }
+
+    public Object getList() {
+        return orderRepository.findAll();
     }
 }
