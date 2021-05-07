@@ -1,5 +1,6 @@
 package com.example.jmjapp.network;
 
+import com.example.jmjapp.dto.Employee;
 import com.example.jmjapp.dto.MemberDTO;
 import com.example.jmjapp.dto.Menu;
 import com.example.jmjapp.dto.Shop;
@@ -118,6 +119,10 @@ public interface ServerApi {
     Call<ResponseBody> insertMenu(@Header("Authorization") String jwt,
                                   @PartMap Map<String, RequestBody> map,
                                   @Part MultipartBody.Part file);
+
+    @POST("shop/employee") // 직원 등록
+    Call<ResponseBody> insertemp(@Header("Authorization") String jwt,
+                             @Body Map<String, Object> map);
 
     /**
      * read read read read
