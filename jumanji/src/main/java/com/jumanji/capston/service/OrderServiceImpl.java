@@ -2,6 +2,7 @@ package com.jumanji.capston.service;
 
 import com.jumanji.capston.data.*;
 import com.jumanji.capston.repository.OrderRepository;
+import com.jumanji.capston.repository.ReviewRepository;
 import com.jumanji.capston.service.exception.orderException.OrderHasExistException;
 import com.jumanji.capston.service.exception.orderException.OrderNotFoundException;
 import com.jumanji.capston.service.interfaces.OrderService;
@@ -20,6 +21,8 @@ import java.util.Optional;
 public class OrderServiceImpl implements OrderService {
     @Autowired
     OrderRepository orderRepository;
+    @Autowired
+    ReviewRepository reviewRepository;
     @Autowired
     UserServiceImpl userService;
     @Autowired
@@ -40,7 +43,9 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getList(String authorization) {
         String loginId = userService.getMyId(authorization);
         List<Order> orderList = new ArrayList<>();
-        for (Order order : orderRepository.findALLByUser_Id(loginId)) {
+
+        for (Order order : orderRepository.myOrderListContainsReviewed(loginId)) {
+            System.out.println(order.getReviewed());
             orderList.add(order);
         }
         return orderList;

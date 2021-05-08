@@ -2,6 +2,7 @@ package com.jumanji.capston.controller;
 
 import com.jumanji.capston.data.Order;
 import com.jumanji.capston.data.OrderMenu;
+import com.jumanji.capston.repository.ReviewRepository;
 import com.jumanji.capston.service.OrderMenuServiceImpl;
 import com.jumanji.capston.service.OrderServiceImpl;
 import com.jumanji.capston.service.UserServiceImpl;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/")
 public class OrderController {
     @Autowired
     OrderServiceImpl orderService;
@@ -24,6 +25,8 @@ public class OrderController {
     UserServiceImpl userService;
     @Autowired
     OrderMenuServiceImpl orderMenuService;
+    @Autowired
+    ReviewRepository reviewRepository;
 
 //    @Transactional(readOnly = true)
 //    @GetMapping("/cartId")
@@ -32,7 +35,7 @@ public class OrderController {
 //    }
 
     @Transactional(readOnly = true)
-    @GetMapping("/order/{orderId}")
+    @GetMapping("orders/{orderId}")
     public ResponseEntity<?> getOrder(@RequestHeader String authorization, @PathVariable String orderId){
         Long orderLong = Long.parseLong(orderId);
         Timestamp orderTime = new Timestamp(orderLong);
@@ -48,7 +51,7 @@ public class OrderController {
     }
 
     @Transactional(readOnly = true)
-    @GetMapping("/order") // My Order List
+    @GetMapping("orders") // My Order List
     public ResponseEntity<?> getOrderList(@RequestHeader String authorization){
         List<Order> orderList = orderService.getList(authorization);
         List<Order.Response> response = new ArrayList<>();
@@ -59,7 +62,7 @@ public class OrderController {
     }
 
     @Transactional
-    @PostMapping("/order")
+    @PostMapping("orders")
     public ResponseEntity<?> postOrder(@RequestHeader String authorization, @RequestBody Order.Request request){
 //        System.out.println("request info \n" + request.getQuantity() +"\n" + request.getOrderRequest() +"\n" + request.getShopId() +"\n" + request.getUserId());
         Order order = orderService.post(authorization, request);
@@ -67,7 +70,7 @@ public class OrderController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @PatchMapping("/order")
+    @PatchMapping("orders")
     public ResponseEntity<?> patchOrder(@RequestHeader String authorization, @RequestBody Order.Request request){
         Order order = orderService.patch(authorization, request);
         Order.Response response = new Order.Response(order);
@@ -75,7 +78,7 @@ public class OrderController {
     }
 
     @Transactional
-    @GetMapping("/orders")
+    @GetMapping("orders/admin")
     public ResponseEntity<?> getOrderAll(){
         return new ResponseEntity<>(orderService.getList(), HttpStatus.OK);
     }

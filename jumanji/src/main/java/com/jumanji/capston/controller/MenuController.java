@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/")
 public class MenuController  {
 
     @Autowired
@@ -38,7 +38,7 @@ public class MenuController  {
 //        return null;
 //    }
     @Transactional(readOnly = true)
-    @GetMapping("/menu/{menuId}")
+    @GetMapping("menus/{menuId}")
     public ResponseEntity<?> selectMenuById(@PathVariable String menuId) {
 //        String menuId = request.getShopId() + request.getName();
         Menu menu = menuService.get(menuId);
@@ -48,7 +48,7 @@ public class MenuController  {
 
 
     @Transactional(readOnly = true)
-    @GetMapping("/menuList/{shopId}")
+    @GetMapping("menus/list/{shopId}")
     public ResponseEntity<?> selectMenuList(@PathVariable String shopId) {
         List<Menu> menuList = menuService.getList(shopId);
         List<Menu.Response> response = new ArrayList<>();
@@ -61,7 +61,7 @@ public class MenuController  {
 
 
     @Transactional
-    @PostMapping("/menu") // post
+    @PostMapping("menus") // post
     public ResponseEntity<?> postMenu(@RequestHeader String authorization, Menu.Request request) {
         Menu menu = menuService.post(authorization, request);
         Menu.Response response = new Menu.Response(menu);
@@ -69,7 +69,7 @@ public class MenuController  {
     }
 
     @Transactional
-    @PatchMapping("/menu") // patch
+    @PatchMapping("menus") // patch
     public ResponseEntity<?> patchMenu(@RequestHeader String authorization, @RequestBody Menu.Request request) {
         Menu menu =  menuService.patch(authorization, request);
         Menu.Response response = new Menu.Response(menu);
@@ -78,7 +78,7 @@ public class MenuController  {
     }
 
     @Transactional
-    @DeleteMapping("/menu/{menuId}") // Delete
+    @DeleteMapping("menus/{menuId}") // Delete
     public ResponseEntity<?> deleteMenu(@RequestHeader String authorization, @PathVariable String menuId) throws AuthenticationException {
         System.out.println("메뉴 삭제 요청");
         menuService.delete(authorization, menuId);
@@ -86,7 +86,7 @@ public class MenuController  {
     }
 
     @Transactional
-    @PatchMapping("/menu/{menuId}/popular")
+    @PatchMapping("menus/{menuId}/popular")
     public ResponseEntity<?> updateShopIsOpen(@RequestHeader String authorization, @PathVariable String menuId) {
         Menu menu = menuService.patchStatus(authorization, menuId, "popular");
         return new ResponseEntity<>(menu.getIsPopular(), HttpStatus.OK);
@@ -95,7 +95,7 @@ public class MenuController  {
 
     //
     @Transactional
-    @PatchMapping("/menu/{menuId}/sale")
+    @PatchMapping("menus/{menuId}/sale")
     public ResponseEntity<?> updateShopIsRsPos(@RequestHeader String authorization, @PathVariable String menuId) {
         Menu menu = menuService.patchStatus(authorization, menuId, "sale");
         return new ResponseEntity<>(menu.getIsSale(), HttpStatus.OK);

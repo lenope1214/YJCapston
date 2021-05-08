@@ -35,6 +35,9 @@ public class Order implements Serializable {
     @Column(name = "pay_method")
     private String payMethod; // 결제방식
 
+//    @Transient // 영속성 등록 제외? 제외하면 결과 제대로 안나옴ㅋㅋㅋ
+    private char reviewed;
+
 
 //    @Column
 //    private char delay; // 딜레이 얘는 뭔지 모르겠다. 나중에 다시 생각
@@ -88,6 +91,7 @@ public class Order implements Serializable {
         private String status;
         private String pg;
         private String payMethod; // 결제방식
+        private char reviewed;
 
         public Response(Order order) {
             this.orderId = order.getId();
@@ -98,6 +102,7 @@ public class Order implements Serializable {
             this.usePoint = order.getUsePoint();
             this.status = order.getStatus();
             this.userName = order.getUser().getName();
+            this.reviewed = order.getReviewed();
             this.amount = order.getAmount();
             this.arriveTime = order.getArriveTime();
             this.pg = order.getPg();

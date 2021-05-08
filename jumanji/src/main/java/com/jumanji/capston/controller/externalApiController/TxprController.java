@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1") // 국세청 관련 api
+@RequestMapping("/api/v1/") // 국세청 관련 api
 public class TxprController {
     @Autowired
     TxprService txprService;
 
 
-    @GetMapping("/validateDscNo")
+    @GetMapping("validateDscNo")
     public ResponseEntity<?> getTxprDscNoRes(@RequestParam String id){
         return txprService.getTaxTypeFromNts(id);
     }

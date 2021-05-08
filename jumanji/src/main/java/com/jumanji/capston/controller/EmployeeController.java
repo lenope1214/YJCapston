@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/")
 public class EmployeeController {
     @Autowired
     EmployeeServiceImpl employeeService;
 
     @Transactional(readOnly = true)
-    @GetMapping("/shop/employee/{shopId}")
+    @GetMapping("shops/{shopId}/employees")
     public ResponseEntity<?> getShopPos(@RequestHeader String authorization, @PathVariable String shopId){
         List<Employee> employeeList = employeeService.getList(authorization, shopId);
         List<Employee.Response> response = new ArrayList<>();
@@ -31,7 +31,7 @@ public class EmployeeController {
     }
 
     @Transactional
-    @PostMapping("/shop/employee")
+    @PostMapping("shops/employees")
     public ResponseEntity<?> getShopPos(@RequestHeader String authorization, @RequestBody Employee.Request request){
         System.out.println("직원등록 입장");
         Employee employee = employeeService.post(authorization, request);
@@ -41,7 +41,7 @@ public class EmployeeController {
     }
 
     @Transactional
-    @DeleteMapping("/shop/employee")
+    @DeleteMapping("/shops/employees")
     public ResponseEntity<?> deleteEmployee(@RequestHeader String authorization,
                                             @Query("empNo") int empNo,
                                             @Query("shopId") String shopId){

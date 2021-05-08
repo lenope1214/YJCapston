@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController()
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/")
 public class NavSearchController {
 
     @Autowired
     NaverPlaceSearchService naverPlaceSearchService;
 
-    @GetMapping("/addressSearch/{keyword}")
+    @GetMapping("addressSearch/{keyword}")
     public ResponseEntity<?> callAddressApi(@PathVariable String keyword) {
 //        System.out.println("Keyword : " + keyword);
         HttpHeaders responseHeaders = new HttpHeaders();

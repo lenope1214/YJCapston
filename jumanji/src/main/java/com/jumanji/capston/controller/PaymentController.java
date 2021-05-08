@@ -22,7 +22,7 @@ import java.sql.Timestamp;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/")
 public class PaymentController {
 
     @Autowired
@@ -33,14 +33,14 @@ public class PaymentController {
     IamportClientService iamportClientService;
 
     @Transactional
-    @GetMapping("/payment/{orderId}")
+    @GetMapping("payments/{orderId}")
     public ResponseEntity<?> getPayment(@RequestHeader String authorization, @PathVariable Timestamp orderId){
         Payment payment = paymentService.get(authorization, orderId);
         return new ResponseEntity<>(payment, HttpStatus.OK);
     }
 
     @Transactional
-    @GetMapping("/payment/complite")
+    @GetMapping("payments/complite")
     public ResponseEntity<?> complePayment(@RequestParam("imp_uid") String impUid, @RequestParam("merchant_uid") String merchantUid, HttpServletRequest request) throws Exception {
         System.out.println("request info" +
                 "request.getQueryString" + request.getQueryString()+"\n" +
@@ -72,7 +72,7 @@ public class PaymentController {
     }
 
 //    @Transactional
-    @PostMapping("/payment")
+    @PostMapping("payments")
     public ResponseEntity<?> postPayment(@RequestHeader String authorization, @RequestBody Payment.Request request) {
         // response 형태로 바꿔줘야함.
         Payment payment = paymentService.post(authorization, request);

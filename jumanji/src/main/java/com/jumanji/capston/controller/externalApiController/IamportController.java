@@ -18,13 +18,13 @@ public class IamportController {
     private IamportClientService service;
 
     @Transactional
-    @PostMapping("/get-token")
+    @PostMapping("get-token")
     public ResponseEntity<?> usersGetToken(@RequestHeader String authorization) throws Exception {
         return new ResponseEntity<>(service.getToken(authorization), HttpStatus.OK);
     }
 
     @org.springframework.transaction.annotation.Transactional
-    @GetMapping("/cancel")
+    @GetMapping("cancel")
     public ResponseEntity<?> payCanceled(@RequestHeader String authorization, @Query("m_id") String m_id) throws Exception {
         return new ResponseEntity<>(service.cancelPayment(authorization, m_id), HttpStatus.OK);
     }

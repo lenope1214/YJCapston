@@ -124,7 +124,10 @@ public class ReviewServiceImpl implements ReviewService, BasicService {
 
     public Review isOwnReview(String loginId, String reviewId){
         Review r = (Review) isPresent(reviewId);
-        if(r.getUser().getId().equals(loginId))return r;
+        String reviewer = r.getUser().getId();
+        System.out.println("리뷰 작성자 : " + reviewer);
+        System.out.println("삭제 요청자 : " + loginId);
+        if(reviewer.equals(loginId))return r;
         throw new ReviewIsNotYoursException();
     }
 }
