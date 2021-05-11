@@ -127,7 +127,7 @@ const ShopContainer = () => {
         console.log(formData);
 
         const res = await apiDefault()
-            .post("/shop",
+            .post("/shops",
 
                 formData,
 

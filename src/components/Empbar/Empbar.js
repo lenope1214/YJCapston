@@ -13,7 +13,7 @@ const Empbar = ({shopId}) => {
         <S.EmpbarWrap>
         <nav>
         <div className="emp-container">
-        <div className="header"><h2>직원관리</h2></div>
+        
             
         <div className="menu-bar">
             <NavLink to={"/employee/"+thisShopId} activeClassName="active">     
@@ -22,10 +22,16 @@ const Empbar = ({shopId}) => {
             <NavLink to={"/emplist/"+thisShopId}>
             <button className="menu-2">직원 리스트</button>
             </NavLink>
+            <NavLink to={"/emptime/"+thisShopId}>
             <button className="menu-3">근무시간</button>
-            <button className="menu-4"></button>
+            </NavLink>
+            <NavLink to={"/emptimelist/"+thisShopId}>
+            <button className="menu-4">근무시간<br/> 리스트</button>
+            </NavLink>
         </div>    
          </div> 
+
+        
           
          </nav>
         

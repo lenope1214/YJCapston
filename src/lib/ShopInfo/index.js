@@ -3,7 +3,7 @@ import {apiDefault} from "../client";
 // const shopid = "1111111111";
 
 export const getShopInfo = (shopId) => {
-    return apiDefault().get(`/shop/${shopId}`,{
+    return apiDefault().get(`/shops/${shopId}`,{
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         }, 
@@ -11,7 +11,7 @@ export const getShopInfo = (shopId) => {
 };
 
 export const putShopreserve = (shopId) => {
-    return apiDefault().patch(`/shop/${shopId}/reserve` ,{},{
+    return apiDefault().patch(`/shops/${shopId}/reserve` ,{},{
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         }, 
@@ -19,7 +19,7 @@ export const putShopreserve = (shopId) => {
 };
 
 export const putShopopen = (shopId) => {
-    return apiDefault().patch(`/shop/${shopId}/open` ,{},{
+    return apiDefault().patch(`/shops/${shopId}/open` ,{},{
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         }, 
@@ -37,7 +37,7 @@ export const putShopInfo = (
     // shopCategory,
     
 ) => {
-    return apiDefault().patch("/shop"
+    return apiDefault().patch("/shops"
     ,{
         shopId:shopId,
         intro:shopIntro,

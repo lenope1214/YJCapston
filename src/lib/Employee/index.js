@@ -9,7 +9,7 @@ export const postEmp = (
     phone,
     gender,
 ) => {
-    return apiDefault().post("/shop/employee",{
+    return apiDefault().post("/shops/employees",{
     shopId:shopId,
     empNo:empNo,
     empName:empName,

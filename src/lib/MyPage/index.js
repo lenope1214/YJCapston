@@ -2,7 +2,7 @@ import { apiDefault } from "../client";
 import axios from "axios";
 
 export const getMyInfo = () => {
-    return apiDefault().get("/user", {
+    return apiDefault().get("/users", {
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         },
@@ -10,7 +10,7 @@ export const getMyInfo = () => {
 };
 
 export const Mypageorder = () => {
-    return apiDefault().get("/order", {
+    return apiDefault().get("/orders", {
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         },
@@ -19,7 +19,7 @@ export const Mypageorder = () => {
 
 export const putMypage = (pw, roadAddr, addressDetail) => {
     return apiDefault().patch(
-        "/user",
+        "/users",
         {
             password: pw,
             address: roadAddr,
@@ -36,7 +36,7 @@ export const putMypage = (pw, roadAddr, addressDetail) => {
 };
 
 export const ordermenulist = (id) => {
-    return apiDefault().get(`/order/${id}`, {
+    return apiDefault().get(`/orders/${id}`, {
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         },

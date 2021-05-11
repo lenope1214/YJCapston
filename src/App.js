@@ -23,7 +23,9 @@ import PosMainContainer from "./containers/PosMain/PosMainContainer";
 import EmployeeContainer from "./containers/Employee/EmployeeContainer";
 import EmplistContainer from "./containers/Emplist/EmplistContainer";
 import AddReviewContainer from "./containers/AddReview/AddReviewContainer";
+import EmptimeContainer from "./containers/Emptime/EmptimeContainer";
 import * as StompJs from "@stomp/stompjs";
+import EmptimelistContainer from "./containers/Emptimelist/EmptimelistContainer";
 
 const ROOM_SEQ = 1;
 
@@ -64,6 +66,8 @@ const App = () => {
                     <Route component={PosMainContainer} path="/PosMain/:shopId"/>
                     <Route component={EmployeeContainer} path="/Employee/:shopId"/>
                     <Route component={EmplistContainer} path="/Emplist/:shopId"/>
+                    <Route component={EmptimeContainer} path="/Emptime/:shopId"/>
+                    <Route component={EmptimelistContainer} path="/Emptimelist/:shopId"/>
                     <Route
                         component={MenuListContainer}
                         path="/menuList/:shopId"

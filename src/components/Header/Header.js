@@ -1,10 +1,21 @@
-import React from 'react';
-
+// import React from 'react';
+import React, { useState } from "react";
 import * as S from "./style";
 import { Link } from "react-router-dom";
 
+import moment from 'moment';
+import 'moment/locale/ko';
+import {useInterval} from 'react-use';
+
 const Header = () => {
     
+    const [realTime, setRealTime] = useState(Date.now());
+    const nowDate = moment().format('YYYY-MM-DD')
+    const nowTime = moment().format('HH:mm:ss');
+    
+    useInterval(() => {
+        setRealTime(Date.now());
+      }, 1000);
     return (
         <>
             <S.headerWrap>
@@ -15,12 +26,14 @@ const Header = () => {
                             <span
                                 style={{
                                     fontSize: "23px",
-                                    paddingTop: "10px",
+                                    paddingTop: "10px",  
                                 }}
                             >
                                 의
                             </span>
                             민족
+                            <span className="date">{nowDate}</span>
+                            <span className="time">{nowTime}</span>
                         </div>
                     </Link>
                 </header>

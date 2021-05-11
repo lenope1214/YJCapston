@@ -5,6 +5,7 @@ import Empbar from "../../components/Empbar/Empbar";
 import Employee from "../../components/Employee/Employee";
 import { useHistory } from "react-router-dom";
 import { postEmp } from "../../lib/Employee";
+import PosNavbar from "../../components/PosNavbar/PosNavbar";
 
 const EmployeeContainer = (props) => {
     
@@ -86,6 +87,9 @@ const EmployeeContainer = (props) => {
         <OwnerNavbar
         shopId={shopId}/>
         <Empbar
+        shopId={shopId}
+        />
+        <PosNavbar
         shopId={shopId}
         />
         <Employee

@@ -41,7 +41,7 @@ const AddReviewContainer = (props) => {
         formData.append("content", menudesc);
         formData.append("score", score);
         
-        const res = await apiDefault().post("/review",
+        const res = await apiDefault().post("/reviews",
             formData,
         {
             headers: {

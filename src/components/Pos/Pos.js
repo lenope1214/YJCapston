@@ -8,6 +8,7 @@ const Pos = ({
    num,
    handleNum,
    number,
+   nowTime,
 }) => {
     const [thisShopId, setThisShopId] = useState("");
     useEffect(() => {
@@ -19,6 +20,7 @@ const Pos = ({
 
             
             <S.PosWrap>
+                
                 <div className="pos-title">
                     <span>{shopId}</span>
                     <Link to={"/posmain/"+shopId}>
@@ -26,7 +28,7 @@ const Pos = ({
                     </Link>
                     <button className="title2">직원관리</button>
                     <button className="title3">예약관리</button>
-                    <span>현재시간</span>
+                    <span>{nowTime}</span>
                 </div>
                 <div className="left-container">
                     <div className="left-head">테이블 번호</div>

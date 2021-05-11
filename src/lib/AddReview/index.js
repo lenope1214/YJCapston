@@ -4,7 +4,7 @@ export const postReview = (
     formData,
 ) => {
     alert("postReview함수 실행");
-    return apiDefault().post("/menu", {
+    return apiDefault().post("/reviews", {
         formData,
         
     }, {

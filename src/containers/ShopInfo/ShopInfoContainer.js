@@ -242,6 +242,7 @@ const ShopInfoContainer = (props) => {
                 id={shopInfo.id}
                 name={shopInfo.name}
                 intro={shopInfo.intro}
+                img={shopInfo.imgPath}
                 openTime={shopInfo.openTime}
                 closeTime={shopInfo.closeTime}
                 category={shopInfo.category}

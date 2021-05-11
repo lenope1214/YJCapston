@@ -8,7 +8,7 @@ export const postLogin = (id, password) => {
 };
 
 export const getReviewlist = (id) => {
-    return apiDefault().get(`/review/${id}`, {
+    return apiDefault().get(`/reviews/${id}`, {
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         },
@@ -20,16 +20,16 @@ export const getShoplist = () => {
 };
 
 export const getshopmenu = (shopId) => {
-    return apiDefault().get(`/menuList/${shopId}`, {});
+    return apiDefault().get(`/menus/list/${shopId}`, {});
 };
 
 export const getshopinfo = (shopId) => {
-    return apiDefault().get(`/shop/${shopId}`, {});
+    return apiDefault().get(`/shops/${shopId}`, {});
 };
 
 export const cartNumber = (shopId) => {
     return apiDefault().post(
-        "/order",
+        "/orders",
         {
             shopId: shopId,
         },

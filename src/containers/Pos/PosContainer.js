@@ -3,6 +3,11 @@ import OwnerNavbar from "../../components/OwnerMenubar/OwnerNavbar";
 import Header from "../../components/Header/Header";
 import Pos from "../../components/Pos/Pos";
 import { getShopOrder} from "../../lib/Pos/";
+import moment, { now } from 'moment';
+import 'moment/locale/ko';
+import {useInterval} from 'react-use';
+import PosNavbar from "../../components/PosNavbar/PosNavbar";
+//npm i react-use   설치하기
  
 const PosContainer = (props) => {
     const [shopId, setShopId] = useState("");
@@ -12,10 +17,12 @@ const PosContainer = (props) => {
 
         }
     ]);
+    const [realTime, setRealTime] = useState(Date.now());
+    const nowTime = moment().format('YYYY년MM월DD일 HH시mm분ss초');
 
-    const date= new Date();
-    const dates = date.getMonth();
-    console.log(dates);
+    useInterval(() => {
+        setRealTime(Date.now());
+      }, 1000);
 
     const handleNum = (e) => {
         const value = e.target.value;
@@ -52,12 +59,15 @@ const PosContainer = (props) => {
     return (
         <>
             <Header/>
-            <OwnerNavbar/>
+            <OwnerNavbar shopId={shopId}/>
+            <PosNavbar shopId={shopId}/>
             <Pos
               shopId={shopId}
               Orders={Orders}
               handleNum={handleNum}
               num={num}
+              realTime={realTime}
+              nowTime={nowTime}
             />
         </>
     );

@@ -2,23 +2,37 @@ import styled from "styled-components";
 
 export const EmplistWrap = styled.div`
 .emp-container {
-    padding-top: 10px;
-    margin-left: 40%;
+    padding-top: 80px;
+    margin-left: 550px;
     transform: translateX(-27%);
-    width: 100%;
+    width: 92%;
     padding-bottom: 70px;
 }
+.emp-link {
+    text-decoration: none;
+    text-align: center;
+}
 .emp-list{
-    width:80%;
+    width:100%;
+    padding-top:20px;
 }
 .emp-title{
-    padding-bottom:20px;
+    margin-left:40%;
+}
+.emp-title-1{
+    font-size:25px;
+    font-weight: bold ;
 }
 .table-head{
-    background: #F2F2F2;
+    background: #DDDDDD;
 }
 .item-1{
     padding-top:10px;
+    padding-bottom:10px;
+}
+.item-2{
+    width:60px;
+    position:center;
     padding-bottom:10px;
 }
 .body-item-1{
@@ -70,7 +84,13 @@ export const EmplistWrap = styled.div`
     padding: 8px;
     background-color: gray;
     color: white;
-    border-radius: 7px;
+    // border-radius: 7px;
     border: 0px;
+}
+.time{
+    font-size:30px;
+    font-weight: bold;
+    margin-left:60%;
+    padding-bottom:20px;
 }
 `
