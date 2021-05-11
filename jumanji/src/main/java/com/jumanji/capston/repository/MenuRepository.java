@@ -9,7 +9,9 @@ import java.util.List;
 public interface MenuRepository extends JpaRepository<Menu, String> {
 //    @Query(value = "SELECT MENU_SEQ.nextval FROM dual", nativeQuery = true)
 //    public BigDecimal getMenuSeqNextVal();
-    List<Menu> findByIdContains(String id);
+List<Menu> findByIdContains(String id);
+
+    List<Menu> findByShopId(String id);
 
     int countMenusByIdContains(String id);
 

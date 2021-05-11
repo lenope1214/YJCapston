@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TableServiceImpl implements TableService, BasicService {
@@ -20,11 +21,6 @@ public class TableServiceImpl implements TableService, BasicService {
     @Autowired
     ShopServiceImpl shopService;
 
-    public Tab getTableInfo(String tabId) {
-        isPresent(tabId);
-        Tab table = tableRepository.findById(tabId).get();
-        return table;
-    }
 
 
     @Override
@@ -83,8 +79,9 @@ public class TableServiceImpl implements TableService, BasicService {
     }
 
     @Override
-    public Object isPresent(String id) {
-        if (tableRepository.findById(id).isPresent()) return true;
+    public Tab isPresent(String id) {
+        Optional<Tab> tab = tableRepository.findById(id);
+        if (tab.isPresent()) return tab.get();
         throw new TableNotFoundException();
     }
 

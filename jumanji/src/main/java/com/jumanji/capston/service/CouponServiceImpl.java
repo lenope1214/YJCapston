@@ -39,8 +39,8 @@ public class CouponServiceImpl implements CouponService, BasicService {
     }
 
     @Override
-    public Object isPresent(String id) {
-        return false;
+    public Coupon isPresent(String id) {
+        return null;
     }
 
     @Override

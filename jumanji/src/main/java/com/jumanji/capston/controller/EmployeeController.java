@@ -21,12 +21,20 @@ public class EmployeeController {
 
     @Transactional(readOnly = true)
     @GetMapping("shops/{shopId}/employees")
-    public ResponseEntity<?> getShopPos(@RequestHeader String authorization, @PathVariable String shopId){
+    public ResponseEntity<?> getShopEmployees(@RequestHeader String authorization, @PathVariable String shopId){
         List<Employee> employeeList = employeeService.getList(authorization, shopId);
         List<Employee.Response> response = new ArrayList<>();
         for(Employee e : employeeList){
             response.add(new Employee.Response(e));
         }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @Transactional(readOnly = true)
+    @GetMapping("shops/{shopId}/employees/{empNo}")
+    public ResponseEntity<?> getEmployeeInfo(@RequestHeader String authorization, @PathVariable String shopId, @PathVariable String empNo){
+        Employee employee = employeeService.get(authorization, shopId, empNo);
+        Employee.Response response = new Employee.Response(employee);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

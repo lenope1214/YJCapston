@@ -6,6 +6,7 @@ import com.jumanji.capston.repository.EmployeeRepository;
 import com.jumanji.capston.service.exception.CanNotBeZero;
 import com.jumanji.capston.service.exception.employeeException.EmployeeHasExistException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeNotFoundException;
+import com.jumanji.capston.service.interfaces.BasicService;
 import com.jumanji.capston.service.interfaces.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService {
+public class EmployeeServiceImpl implements EmployeeService, BasicService {
     @Autowired
     EmployeeRepository employeeRepository;
     @Autowired
@@ -27,8 +28,17 @@ public class EmployeeServiceImpl implements EmployeeService {
     ShopServiceImpl shopService;
 
     @Override
-    public Employee get(String authorization, String empNo) {
-        return null;
+    public Employee get(String authorization, String shopId, String empNo) {
+        String loginId = userService.getMyId(authorization);
+        Employee employee;
+        String empId = shopId + 'e' + empNo;
+
+        // 유효성 검사
+        userService.isLogin(authorization);
+        shopService.isOwnShop(loginId, shopId);
+        employee = isPresent(empId);
+
+        return employee;
     }
 
     @Override

@@ -70,6 +70,8 @@ public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
     @Override
     public List<OrderMenu> post(String authorization, OrderMenu.RequestList requestList) {
         List<OrderMenu> response = new ArrayList<>();
+        Menu menu;
+        Tab table;
         for(OrderMenu.Request request : requestList.getList()){
             OrderMenu orderMenu;
             long orderId = request.getOrderId().getTime();
@@ -77,13 +79,12 @@ public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
             String tabId = request.getShopId() + request.getTabNo();
 
             orderService.isPresent(request.getOrderId());
-            menuService.isPresent(menuId);
-            tableService.isPresent(tabId);
+            menu = menuService.isPresent(menuId);
+            table = tableService.isPresent(tabId);
 
             int orderCount = orderMenuRepository.countByIdContains("" + orderId);
             String orderMenuId = orderId + "o" +String.format("%02d", orderCount);
-            Menu menu = menuService.getMenuInfo(menuId);
-            Tab table = tableService.getTableInfo(tabId);
+
             orderMenu = OrderMenu.builder()
                     .id(orderMenuId)
                     .quantity(request.getQuantity())
@@ -109,13 +110,14 @@ public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
         //유효성 검사
         isPresent(request.getOrderMenuId());
         orderMenu = orderMenuRepository.findById(request.getOrderMenuId()).get();
+        menu = menuService.isPresent(menuId);
+        table = tableService.isPresent(tabId);
 
         equalsShop(menuId.substring(0,10) , orderMenu.getMenu().getId().substring(0, 10));
         shopService.isPresent(menuId.substring(0,10));
 
 
-        if(menuId != null)menu = menuService.getMenuInfo(menuId);
-        if(tabId != null)table = tableService.getTableInfo(tabId);
+
         OrderMenu requestOrder = OrderMenu.builder()
                 .quantity(request.getQuantity())
                 .menu(menu)

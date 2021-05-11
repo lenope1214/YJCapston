@@ -83,6 +83,7 @@ public class UserServiceImpl implements UserService, BasicService {
                 .provider("jumin") /** 얘는 추후에 변경해야함. **/
                 .provider_id(null)
 //                .level(0)
+                .deviceToken(user.getDeviceToken())
                 .build();
         return userRepository.save(userEntity);
     }
@@ -170,5 +171,9 @@ public class UserServiceImpl implements UserService, BasicService {
 
     public void isLogin(String authorization){
         isPresent(getMyId(authorization));
+    }
+
+    public String getDeviceToken(String userId) {
+        return isPresent(userId).getDeviceToken();
     }
 }

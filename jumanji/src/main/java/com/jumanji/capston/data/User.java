@@ -44,6 +44,8 @@ public class User implements Serializable {
     private String provider; // 소셜
     @Column(name = "provider_id")
     private String providerId; // 해당 소셜에서의 아이디(primary key)
+    @Column(name = "device_token")
+    private String deviceToken;
 
 //    @Builder(builderMethodName = "updateInfo")
 //    public User(String email, String address, String addressDetail){
@@ -53,7 +55,7 @@ public class User implements Serializable {
 //    }
 
     @Builder(builderMethodName = "createUser")
-    public User(String id, String password, String address, String addressDetail, String name, Date birthday, String role, String email, Date sign_date, String provider, String provider_id, String phone) {
+    public User(String id, String password, String address, String addressDetail, String name, Date birthday, String role, String email, Date sign_date, String provider, String provider_id, String phone, String deviceToken) {
         this.id = id;
         this.password = password;
         this.name = name;
@@ -68,6 +70,7 @@ public class User implements Serializable {
         this.phone = phone;
         this.point = 0;
         this.level = 1;
+        this.deviceToken = deviceToken;
     }
 
     @Getter @Setter
@@ -81,6 +84,7 @@ public class User implements Serializable {
         private Date birthday; // 생년월일
         private String phone; // 전화번호
         private String role; // 권한   ROLE_USER, ROLE_OWNER, ROLE_ADMIN
+        private String deviceToken;
     }
 
     @Getter @NoArgsConstructor
@@ -96,6 +100,7 @@ public class User implements Serializable {
         private String signDate; // 가입날짜
         private int level; // 등급
         private int point; // 포인트
+        private String deviceToken;
 
         public Response(User user) {
             this.id = user.getId();
@@ -109,6 +114,7 @@ public class User implements Serializable {
             this.level = user.getLevel();
             this.point = user.getPoint();
             this.signDate = DateOperator.dateToYYYYMMDD(user.getSignDate(), true);
+            this.deviceToken = user.getDeviceToken();
         }
     }
 

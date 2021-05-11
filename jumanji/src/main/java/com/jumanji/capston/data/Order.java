@@ -35,7 +35,7 @@ public class Order implements Serializable {
     @Column(name = "pay_method")
     private String payMethod; // 결제방식
 
-//    @Transient // 영속성 등록 제외? 제외하면 결과 제대로 안나옴ㅋㅋㅋ
+//    @Transient // 영속성 등록 제외?   제외하면 결과 제대로 안나옴ㅋㅋㅋ
     private char reviewed;
 
 

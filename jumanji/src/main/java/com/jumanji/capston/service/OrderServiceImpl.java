@@ -133,7 +133,13 @@ public class OrderServiceImpl implements OrderService {
         else throw new OrderNotFoundException(""+orderId.getTime());
     }
 
-    public List<Order> getListByShopId(String shopId) {
+    public List<Order> getListByShopId(String authorization, String shopId) {
+        String loginId;
+
+        // 유효성 검사
+        loginId = userService.getMyId(authorization);
+        shopService.isOwnShop(loginId, shopId);
+
         List<Order> orderList;
         orderList = orderRepository.findAllByShop_Id(shopId);
         System.out.println("해당 매장의 주문목록");
@@ -141,7 +147,7 @@ public class OrderServiceImpl implements OrderService {
             System.out.println("getOrderRequest : " + order.getOrderRequest() + "\n");
             System.out.println("getUser().getName()" + order.getUser().getName());
         }
-        return null;
+        return orderList;
     }
 
     public void statusUpdate(Order order) {

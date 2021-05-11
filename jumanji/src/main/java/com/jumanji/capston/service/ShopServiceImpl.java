@@ -229,4 +229,8 @@ public class ShopServiceImpl implements ShopService {
     public String toOracleChar(String str){
         return "'" + str + "'";
     }
+
+//    public String getDeviceToken(String shopId) {
+//
+//    }
 }

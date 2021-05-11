@@ -11,6 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @RestController
 @RequestMapping("/api/v1/")
 public class ApiController {
@@ -51,5 +55,14 @@ public class ApiController {
         else
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+
+    @GetMapping("users/{userId}/device-token")
+    public ResponseEntity<?> getDeviceToken(@PathVariable String userId){
+        String deviceToken = userService.getDeviceToken(userId);
+        return new ResponseEntity<>(deviceToken, HttpStatus.OK);
+    }
+
+//    @GetMapping("shop/{shopId}/device-token")
+//    public ResponseEntity<?> getDeviceTokenBy
 
 }

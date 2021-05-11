@@ -1,6 +1,8 @@
 package com.jumanji.capston.service;
 
+import com.jumanji.capston.data.DateOperator;
 import com.jumanji.capston.data.Menu;
+import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.repository.MenuRepository;
 import com.jumanji.capston.service.exception.menuException.MenuHasExistException;
 import com.jumanji.capston.service.exception.menuException.MenuNotFoundException;
@@ -10,8 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.thymeleaf.util.StringUtils;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MenuServiceImpl implements MenuService, BasicService {
@@ -31,43 +37,43 @@ public class MenuServiceImpl implements MenuService, BasicService {
 //        return menuRepository.getMenuSeqNextVal();
 //    }
 
-    public Menu getMenuInfo(String menuId) {
-        isPresent(menuId);
-        Menu menu = menuRepository.findById(menuId).get();
-        return menu;
-    }
-
-    public int count(String id){
+    public int count(String id) {
         return menuRepository.countMenusByIdContains(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Menu get(String menuId) {
-        isPresent(menuId);
-        Menu menu = menuRepository.findById(menuId).get();
+        Menu menu = isPresent(menuId);
         return menu;
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Menu> getList(String shopId) {
         System.out.println("menuList >> shopId : " + shopId);
         shopService.isPresent(shopId);
         List<Menu> menuList;
-        menuList = menuRepository.findByIdContains(shopId);
+        menuList = menuRepository.findByShopId(shopId);
         System.out.println("menuList info");
         System.out.println(menuList.size());
 
         return menuList;
     }
 
-    @Transactional
     @Override
+    @Transactional
     public Menu post(String authorization, Menu.Request request) {
-        String menuId = request.getShopId() + request.getName();
-        isEmpty(menuId);
         Menu menu;
+        Shop shop;
+        String menuId = request.getShopId().substring(0, 2) + 'm' + DateOperator.dateToYYYYMMDDHHMMSS(new Date());
+        System.out.println("menuId : " + menuId);
+
+
+        isEmpty(menuId);
+        shop = shopService.isPresent(request.getShopId());
         System.out.println("메뉴 추가");
-        String path = "shop/" + request.getShopId() +"/" + "menu";
+        String path = "shop/" + request.getShopId() + "/" + "menu";
         String imgPath = null;
         if (request.getImg() != null)
             imgPath = storageService.store(request.getImg(), request.getName().replace(" ", "_"), path.split("/"));
@@ -81,56 +87,53 @@ public class MenuServiceImpl implements MenuService, BasicService {
                 .price(request.getPrice())
                 .duration(request.getDuration())
                 .imgPath(imgPath)
+                .shop(shop)
                 .build();
         System.out.println("save 전 menu Id  : " + menu.getId());
         return menuRepository.saveAndFlush(menu);
     }
 
-    @Override
-    public Menu patch(String authorization, Menu.Request request) {
-        System.out.println("메뉴 수정>>> ");
-        isPresent(request.getMenuId());
-        // 권한확인 해야함. 로그인유저 의 매장인지.
-//        String menuId = request.getMenuId(request);
-        Menu menu = menuRepository.findById(request.getMenuId()).get();
-        System.out.println("menuId : " + menu.getId());
-
-        menu.update(request);
-
+    public Menu patchStatus(String authorization, String menuId, String target) {
+        String loginId = userService.getMyId(authorization);
+        shopService.isOwnShop(loginId, menuId.substring(0, 10));
+        shopService.isPresent(menuId.substring(0, 10));
+        Menu menu = menuService.isPresent(menuId);
+        menu.reverseStatus(target);
         return menuRepository.save(menu);
     }
 
-    public void delete(String authorization, String menuId) {
+    @Override
+    public Menu patch(String authorization, Menu.Request request) {
+        return null;
+    }
+
+
+    public void delete(String authorization, String menuId){
         String loginId = userService.getMyId(authorization);
         String shopId = menuId.substring(0, 10);
 
         // 유효성 검사
         userService.isPresent(loginId); // 존재하는 유저인지
-        shopService.isPresent(shopId); // 존재하는 식당인지
+//        shopService.isPresent(shopId); // 존재하는 식당인지
         shopService.isOwnShop(loginId, shopId); // 내 식당인지 체크
-
-        menuRepository.delete( menuRepository.findById(menuId).get());
+        Menu menu = isPresent(menuId);
+        menuRepository.delete(menu);
     }
 
-    public Menu patchStatus(String authorization, String menuId, String target) {
-        String loginId = userService.getMyId(authorization);
-        shopService.isOwnShop(loginId, menuId.substring(0,10));
-        shopService.isPresent(menuId.substring(0,10));
-        menuService.isPresent(menuId);
-        Menu menu = menuService.getMenuInfo(menuId);
-        menu.reverseStatus(target);
-        return menuRepository.save(menu);
-    }
-
-    // 있는 메뉴인지 확인
-    public boolean isEmpty(String id){
-        if(menuRepository.findById(id).isEmpty())return true;
-        throw new MenuHasExistException();
-    }
-
-    public Object isPresent(String menuId){
-        if(menuRepository.findById(menuId).isPresent())return true;
+    @Override
+    public Menu isPresent(String id) {
+        Optional<Menu> menu = menuRepository.findById(id);
+        if(menu.isPresent())return menu.get();
         throw new MenuNotFoundException();
     }
+
+    @Override
+    public boolean isEmpty(String id) {
+        Optional<Menu> menu = menuRepository.findById(id);
+        if(menu.isEmpty())return true;
+        throw new MenuHasExistException();
+    }
+//    @Override
+//    @Transactional
 
 }

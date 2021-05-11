@@ -35,6 +35,29 @@ public class OrderController {
 //    }
 
     @Transactional(readOnly = true)
+    @GetMapping("orders") // My Order List
+    public ResponseEntity<?> getOrderList(@RequestHeader String authorization){
+        List<Order> orderList = orderService.getList(authorization);
+        List<Order.Response> response = new ArrayList<>();
+        for(Order order : orderList ){
+            response.add(new Order.Response(order));
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @Transactional(readOnly = true)
+    @GetMapping("orders/list/{shopId}")
+    public ResponseEntity<?> getOrderByShopId(@RequestHeader String authorization, @PathVariable String shopId){
+        List<Order> orderList = orderService.getListByShopId(authorization, shopId);
+        List<Order.Response> response = new ArrayList<>();
+
+        for(Order order : orderList){
+            response.add(new Order.Response(order));
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @Transactional(readOnly = true)
     @GetMapping("orders/{orderId}")
     public ResponseEntity<?> getOrder(@RequestHeader String authorization, @PathVariable String orderId){
         Long orderLong = Long.parseLong(orderId);
@@ -50,16 +73,6 @@ public class OrderController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @Transactional(readOnly = true)
-    @GetMapping("orders") // My Order List
-    public ResponseEntity<?> getOrderList(@RequestHeader String authorization){
-        List<Order> orderList = orderService.getList(authorization);
-        List<Order.Response> response = new ArrayList<>();
-        for(Order order : orderList ){
-            response.add(new Order.Response(order));
-        }
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
 
     @Transactional
     @PostMapping("orders")
