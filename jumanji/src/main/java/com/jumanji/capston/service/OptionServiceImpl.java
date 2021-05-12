@@ -35,13 +35,18 @@ public class OptionServiceImpl implements BasicService<Option, Option.Request> {
     public Option post(@Nullable String authorization, Option.Request request) {
         // 변수선언
         String loginId = userService.getMyId(authorization);
-        Menu menu;
+        String ogId =request.getOptionGroupId();
+        String opId = ogId.substring(ogId.lastIndexOf("og"));
 
         // 값 확인
+        System.out.println("post option - opId : " + opId);
 
         // 유효성 검사
         userService.isPresent(loginId);
-        menu = menuService.isPresent( )
+        optionGroupService.isPresent(request.getOptionGroupId());
+
+//        Option option = Option.builder()
+//                .id(opid)
 
         return null;
     }
