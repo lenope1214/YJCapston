@@ -1,25 +1,21 @@
 package com.jumanji.capston.service;
 
-import com.jumanji.capston.data.DateOperator;
 import com.jumanji.capston.data.Employee;
 import com.jumanji.capston.repository.EmployeeRepository;
 import com.jumanji.capston.service.exception.CanNotBeZero;
 import com.jumanji.capston.service.exception.employeeException.EmployeeHasExistException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeNotFoundException;
 import com.jumanji.capston.service.interfaces.BasicService;
-import com.jumanji.capston.service.interfaces.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService, BasicService {
+public class EmployeeServiceImpl implements BasicService<Employee, Employee.Request> {
     @Autowired
     EmployeeRepository employeeRepository;
     @Autowired
@@ -28,11 +24,11 @@ public class EmployeeServiceImpl implements EmployeeService, BasicService {
     ShopServiceImpl shopService;
 
     @Override
-    public Employee get(String authorization, String shopId, String empNo) {
+    public Employee get(String authorization, String... str) {
+        String shopId = str[0], empNo = str[1];
         String loginId = userService.getMyId(authorization);
-        Employee employee;
         String empId = shopId + 'e' + empNo;
-
+        Employee employee;
         // 유효성 검사
         userService.isLogin(authorization);
         shopService.isOwnShop(loginId, shopId);
@@ -42,7 +38,8 @@ public class EmployeeServiceImpl implements EmployeeService, BasicService {
     }
 
     @Override
-    public List<Employee> getList(String authorization, String shopId) {
+    public List<Employee> getList(@Nullable String authorization, String... str) {
+        String shopId = str[0];
         String loginId = userService.getMyId(authorization);
 
         // 유효성 검사
@@ -59,13 +56,14 @@ public class EmployeeServiceImpl implements EmployeeService, BasicService {
         return employeeList;
     }
 
-    @Transactional // Transactional이 있는 save는 안된다. 그래서 saveAndFlush를 통해 함수 종료 후에 실행되도록 함.
     @Override
-    public Employee post(String authorization, Employee.Request request)  {
+    @Transactional // Transactional이 있는 save는 안된다. 그래서 saveAndFlush를 통해 함수 종료 후에 실행되도록 함.
+    public Employee post(@Nullable String authorization, Employee.Request request)  {
         String loginId = userService.getMyId(authorization);
         String empId = toEmpId(request.getShopId(), request.getEmpNo());
 
         // 유효성 검사
+
         if(request.getEmpNo() == 0)throw new CanNotBeZero();
         userService.isLogin(authorization);
         isEmpty(empId);
@@ -101,12 +99,13 @@ public class EmployeeServiceImpl implements EmployeeService, BasicService {
     }
 
     @Override
-    public void delete(String authorization, String shopId, int empNo) {
+    public void delete(@Nullable String authorization, String... str) {
         String loginId = userService.getMyId(authorization);
-        String empId = shopId + 'e' + String.format("%03d", empNo);
+        String shopId = str[0], empNo = str[1];
+        String empId = shopId + 'e' + empNo;
         // 유효성 체크
         userService.isPresent(loginId); // 로그인한 계정이 존재하는지
-        shopService.isOwnShop(loginId, shopId); // 존재한다면 그 매장이 내 매장인지
+        shopService.isOwnShop(loginId, empId.substring(0, 10)); // 존재한다면 그 매장이 내 매장인지
         Employee e = isPresent(empId); // 존재하는 직원인지
         employeeRepository.delete(e);
         isEmpty(empId);

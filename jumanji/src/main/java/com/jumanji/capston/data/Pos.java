@@ -11,4 +11,7 @@ public class Pos {
     private String orderRequest;
     private int people;
     private Set<OrderMenu> orderMenuSet;
+
+    public static class Request {
+    }
 }

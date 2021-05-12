@@ -3,39 +3,41 @@ package com.jumanji.capston.service;
 import com.jumanji.capston.data.Coupon;
 import com.jumanji.capston.repository.CouponRepository;
 import com.jumanji.capston.service.interfaces.BasicService;
-import com.jumanji.capston.service.interfaces.CouponService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Nullable;
+import java.util.List;
+
 @Service
-public class CouponServiceImpl implements CouponService, BasicService {
+public class CouponServiceImpl implements BasicService<Coupon, Coupon.Request> {
     @Autowired
     CouponRepository couponRepository;
 
+
     @Override
-    public ResponseEntity<?> get(String couponId) {
+    public Coupon get(@Nullable String authorization, String... str) {
         return null;
     }
 
     @Override
-    public ResponseEntity<?> getList() {
+    public List<Coupon> getList(@Nullable String authorization, String... str) {
         return null;
     }
 
     @Override
-    public ResponseEntity<?> post(Coupon.Request request) {
+    public Coupon post(@Nullable String authorization, Coupon.Request request) {
         return null;
     }
 
     @Override
-    public ResponseEntity<?> patch(Coupon.Request request) {
+    public Coupon patch(@Nullable String authorization, Coupon.Request request) {
         return null;
     }
 
     @Override
-    public ResponseEntity<?> delete(String couponId) {
-        return null;
+    public void delete(@Nullable String authorization, String... str) {
+
     }
 
     @Override

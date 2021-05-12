@@ -2,16 +2,18 @@ package com.jumanji.capston.service;
 
 import com.jumanji.capston.data.*;
 import com.jumanji.capston.repository.OrderMenuRepository;
+import com.jumanji.capston.service.interfaces.BasicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Nullable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Service
-public class PosService {
+public class PosService implements BasicService<Pos, Pos.Request> {
     @Autowired
     OrderMenuRepository orderMenuRepository;
     @Autowired
@@ -20,7 +22,16 @@ public class PosService {
     TableServiceImpl tableService;
 
 
-    public List<Pos> getShopPos(String shopId){
+
+
+    @Override
+    public Pos get(@Nullable String authorization, String... str) {
+        return null;
+    }
+
+    @Override
+    public List<Pos> getList(@Nullable String authorization, String... str) {
+        String shopId = str[0];
         String tabNo;
         String orderRequest = null;
         int people = 0;
@@ -55,5 +66,30 @@ public class PosService {
             }
         }
         return posList;
+    }
+
+    @Override
+    public Pos post(@Nullable String authorization, Pos.Request request) {
+        return null;
+    }
+
+    @Override
+    public Pos patch(@Nullable String authorization, Pos.Request request) {
+        return null;
+    }
+
+    @Override
+    public void delete(@Nullable String authorization, String... str) {
+
+    }
+
+    @Override
+    public Pos isPresent(String id) {
+        return null;
+    }
+
+    @Override
+    public boolean isEmpty(String id) {
+        return false;
     }
 }

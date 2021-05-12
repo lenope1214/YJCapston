@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Service
-public class PaymentServiceImpl implements PaymentService, BasicService {
+public class PaymentServiceImpl implements PaymentService {
     @Autowired
     OrderServiceImpl orderService;
     @Autowired
@@ -59,12 +59,12 @@ public class PaymentServiceImpl implements PaymentService, BasicService {
         return null;
     }
 
-    @Override
+
     public Object isPresent(String id) {
         return false;
     }
 
-    @Override
+
     public boolean isEmpty(String id) {
         return false;
     }

@@ -7,20 +7,18 @@ import com.jumanji.capston.repository.MenuRepository;
 import com.jumanji.capston.service.exception.menuException.MenuHasExistException;
 import com.jumanji.capston.service.exception.menuException.MenuNotFoundException;
 import com.jumanji.capston.service.interfaces.BasicService;
-import com.jumanji.capston.service.interfaces.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.thymeleaf.util.StringUtils;
 
-import java.sql.Timestamp;
+import javax.annotation.Nullable;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MenuServiceImpl implements MenuService, BasicService {
+public class MenuServiceImpl implements BasicService<Menu, Menu.Request> {
     @Autowired
     MenuRepository menuRepository;
     @Autowired
@@ -43,14 +41,16 @@ public class MenuServiceImpl implements MenuService, BasicService {
 
     @Override
     @Transactional(readOnly = true)
-    public Menu get(String menuId) {
+    public Menu get(@Nullable String authorization, String... str) {
+        String menuId = str[0];
         Menu menu = isPresent(menuId);
         return menu;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<Menu> getList(String shopId) {
+    public List<Menu> getList(@Nullable String authorization, String... str) {
+        String shopId = str[0];
         System.out.println("menuList >> shopId : " + shopId);
         shopService.isPresent(shopId);
         List<Menu> menuList;
@@ -107,10 +107,11 @@ public class MenuServiceImpl implements MenuService, BasicService {
         return null;
     }
 
-
-    public void delete(String authorization, String menuId){
+    @Override
+    public void delete(@Nullable String authorization, String... str){
+        String shopId = str[0];
+        String menuId = str[1];
         String loginId = userService.getMyId(authorization);
-        String shopId = menuId.substring(0, 10);
 
         // 유효성 검사
         userService.isPresent(loginId); // 존재하는 유저인지

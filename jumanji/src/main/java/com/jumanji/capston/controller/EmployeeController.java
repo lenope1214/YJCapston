@@ -53,7 +53,7 @@ public class EmployeeController {
     public ResponseEntity<?> deleteEmployee(@RequestHeader String authorization,
                                             @Query("empNo") int empNo,
                                             @Query("shopId") String shopId){
-        employeeService.delete(authorization, shopId, empNo);
+        employeeService.delete(authorization, shopId, String.valueOf(empNo));
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

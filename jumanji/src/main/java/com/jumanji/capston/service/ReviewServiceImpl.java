@@ -2,30 +2,23 @@ package com.jumanji.capston.service;
 
 import com.jumanji.capston.data.*;
 import com.jumanji.capston.repository.ReviewRepository;
-import com.jumanji.capston.service.exception.ApiErrorResponse;
-import com.jumanji.capston.service.exception.myException.MyNonUniqueResultException;
 import com.jumanji.capston.service.exception.orderException.OrderNotPaidException;
 import com.jumanji.capston.service.exception.reviewException.ReviewHasExistException;
 import com.jumanji.capston.service.exception.reviewException.ReviewIsNotYoursException;
 import com.jumanji.capston.service.exception.reviewException.ReviewNotFoundException;
 import com.jumanji.capston.service.interfaces.BasicService;
-import com.jumanji.capston.service.interfaces.ReviewService;
-import org.apache.kafka.common.errors.ApiException;
-import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 
-import javax.persistence.NonUniqueResultException;
-import java.sql.Time;
+import javax.annotation.Nullable;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ReviewServiceImpl implements ReviewService, BasicService {
+public class ReviewServiceImpl implements BasicService<Review, Review.Request> {
     @Autowired
     ReviewRepository reviewRepository;
     @Autowired
@@ -39,17 +32,17 @@ public class ReviewServiceImpl implements ReviewService, BasicService {
 
 
     @Override
-    public Review get(String reviewId) {
-        return (Review) isPresent(reviewId);
+    public Review get(@Nullable String authorization, String... reviewId) {
+        return isPresent(reviewId[0]);
     }
 
     @Override
-    public List<Review> getList(String shopId) {
-        return reviewRepository.findAllByShopIdOrderByRegTimeDesc(shopId);
+    public List<Review> getList(@Nullable String authorization,String... shopId) {
+        return reviewRepository.findAllByShopIdOrderByRegTimeDesc(shopId[0]);
     }
 
     @Override
-    public Review post(String authorization, Review.Request request) {
+    public Review post(@Nullable String authorization, Review.Request request) {
         System.out.println("리뷰등록's shopId : " + request.getShopId());
 
         String loginId = userService.getMyId(authorization);
@@ -98,18 +91,18 @@ public class ReviewServiceImpl implements ReviewService, BasicService {
     }
 
     @Override
-    public void delete(String authorization, String reviewId) {
+    public void delete(@Nullable String authorization, String... reviewId) {
         String loginId = userService.getMyId(authorization);
         // 유효성 검사
         userService.isPresent(loginId); // 요청 유저가 존재하는지.
-        Review review = isOwnReview(loginId, reviewId); // 자신의 리뷰인지. 안에서 리뷰 존재여부 확인.
+        Review review = isOwnReview(loginId, reviewId[0]); // 자신의 리뷰인지. 안에서 리뷰 존재여부 확인.
         // 그 외의 유효성 검사는 등록 시에 진행하였기 때문에 여기까지만.
 
         reviewRepository.delete(review);
     }
 
     @Override
-    public Object isPresent(String reviewId) {
+    public Review isPresent(String reviewId) {
         Optional<Review> review = reviewRepository.findById(reviewId);
         if(review.isPresent())return review.get();
         throw new ReviewNotFoundException();

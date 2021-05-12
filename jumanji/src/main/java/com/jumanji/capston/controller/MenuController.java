@@ -37,7 +37,7 @@ public class MenuController  {
 //    public ResponseEntity<?> selectMenu(){
 //        return null;
 //    }
-    @Transactional(readOnly = true)
+
     @GetMapping("menus/{menuId}")
     public ResponseEntity<?> selectMenuById(@PathVariable String menuId) {
 //        String menuId = request.getShopId() + request.getName();
@@ -47,7 +47,7 @@ public class MenuController  {
     }
 
 
-    @Transactional(readOnly = true)
+
     @GetMapping("menus/list/{shopId}")
     public ResponseEntity<?> selectMenuList(@PathVariable String shopId) {
         List<Menu> menuList = menuService.getList(shopId);
@@ -60,7 +60,7 @@ public class MenuController  {
     }
 
 
-    @Transactional
+
     @PostMapping("menus") // post
     public ResponseEntity<?> postMenu(@RequestHeader String authorization, Menu.Request request) {
         Menu menu = menuService.post(authorization, request);
@@ -68,7 +68,7 @@ public class MenuController  {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @Transactional
+
     @PatchMapping("menus") // patch
     public ResponseEntity<?> patchMenu(@RequestHeader String authorization, @RequestBody Menu.Request request) {
         Menu menu =  menuService.patch(authorization, request);
@@ -77,15 +77,15 @@ public class MenuController  {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @Transactional
-    @DeleteMapping("menus/{menuId}") // Delete
-    public ResponseEntity<?> deleteMenu(@RequestHeader String authorization, @PathVariable String menuId) throws AuthenticationException {
+
+    @DeleteMapping("shops/{shopId}/menus/{menuId}") // Delete
+    public ResponseEntity<?> deleteMenu(@RequestHeader String authorization, @PathVariable String shopId, @PathVariable String menuId) throws AuthenticationException {
         System.out.println("메뉴 삭제 요청");
-        menuService.delete(authorization, menuId);
+        menuService.delete(authorization, shopId, menuId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @Transactional
+
     @PatchMapping("menus/{menuId}/popular")
     public ResponseEntity<?> updateShopIsOpen(@RequestHeader String authorization, @PathVariable String menuId) {
         Menu menu = menuService.patchStatus(authorization, menuId, "popular");
@@ -94,7 +94,7 @@ public class MenuController  {
 
 
     //
-    @Transactional
+
     @PatchMapping("menus/{menuId}/sale")
     public ResponseEntity<?> updateShopIsRsPos(@RequestHeader String authorization, @PathVariable String menuId) {
         Menu menu = menuService.patchStatus(authorization, menuId, "sale");

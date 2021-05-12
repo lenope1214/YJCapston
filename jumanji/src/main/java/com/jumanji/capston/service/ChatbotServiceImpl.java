@@ -3,41 +3,47 @@ package com.jumanji.capston.service;
 import com.jumanji.capston.data.Chatbot;
 import com.jumanji.capston.repository.ChatbotRepository;
 import com.jumanji.capston.service.interfaces.BasicService;
-import com.jumanji.capston.service.interfaces.ChatbotService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Nullable;
+import java.util.List;
+
 @Service
-public class ChatbotServiceImpl implements ChatbotService, BasicService {
+public class ChatbotServiceImpl implements BasicService<Chatbot, Chatbot.Request> {
 
     @Autowired
     ChatbotRepository chatbotRepository;
 
 
     @Override
-    public ResponseEntity<?> get(String chatbotId) {
+    public Chatbot get(@Nullable String authorization, String... str) {
         return null;
     }
 
     @Override
-    public ResponseEntity<?> post(Chatbot.Request request) {
+    public List<Chatbot> getList(@Nullable String authorization, String... str) {
         return null;
     }
 
     @Override
-    public ResponseEntity<?> patch(Chatbot.Request request) {
+    public Chatbot post(@Nullable String authorization, Chatbot.Request request) {
         return null;
     }
 
     @Override
-    public ResponseEntity<?> delete(String chatbotId) {
+    public Chatbot patch(@Nullable String authorization, Chatbot.Request request) {
         return null;
     }
 
     @Override
-    public Object isPresent(String id) {
-        return false;
+    public void delete(@Nullable String authorization, String... str) {
+
+    }
+
+    @Override
+    public Chatbot isPresent(String id) {
+        return null;
     }
 
     @Override
