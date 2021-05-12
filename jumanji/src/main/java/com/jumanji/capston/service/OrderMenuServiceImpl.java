@@ -9,19 +9,20 @@ import com.jumanji.capston.repository.UserRepository;
 import com.jumanji.capston.service.exception.orderMenuException.OrderMenuNotFoundException;
 import com.jumanji.capston.service.exception.shopException.ShopMissMatchException;
 import com.jumanji.capston.service.interfaces.BasicService;
-import com.jumanji.capston.service.interfaces.OrderMenuService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Nullable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Slf4j
 @Service
-public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
+public class OrderMenuServiceImpl implements BasicService<OrderMenu, OrderMenu.Request> {
     @Autowired
     OrderMenuRepository orderMenuRepository;
     @Autowired
@@ -46,11 +47,20 @@ public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
 
 
     @Override
-    public OrderMenu get(String authorization, String orderMenuId) {
+    public OrderMenu get(@Nullable String authorization, String... str) {
         return null;
     }
 
     @Override
+    public List<OrderMenu> getList(@Nullable String authorization, String... str) {
+        return null;
+    }
+
+    @Override
+    public OrderMenu post(@Nullable String authorization, OrderMenu.Request request) {
+        return null;
+    }
+
     public List<OrderMenu> getList(String authorization, Timestamp orderId) {
         userService.isLogin(authorization);
         orderService.isPresent(orderId);
@@ -67,9 +77,10 @@ public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
         return null;
     }
 
-    @Override
     public List<OrderMenu> post(String authorization, OrderMenu.RequestList requestList) {
         List<OrderMenu> response = new ArrayList<>();
+        Menu menu;
+        Tab table;
         for(OrderMenu.Request request : requestList.getList()){
             OrderMenu orderMenu;
             long orderId = request.getOrderId().getTime();
@@ -77,13 +88,12 @@ public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
             String tabId = request.getShopId() + request.getTabNo();
 
             orderService.isPresent(request.getOrderId());
-            menuService.isPresent(menuId);
-            tableService.isPresent(tabId);
+            menu = menuService.isPresent(menuId);
+            table = tableService.isPresent(tabId);
 
             int orderCount = orderMenuRepository.countByIdContains("" + orderId);
             String orderMenuId = orderId + "o" +String.format("%02d", orderCount);
-            Menu menu = menuService.getMenuInfo(menuId);
-            Tab table = tableService.getTableInfo(tabId);
+
             orderMenu = OrderMenu.builder()
                     .id(orderMenuId)
                     .quantity(request.getQuantity())
@@ -109,13 +119,14 @@ public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
         //유효성 검사
         isPresent(request.getOrderMenuId());
         orderMenu = orderMenuRepository.findById(request.getOrderMenuId()).get();
+        menu = menuService.isPresent(menuId);
+        table = tableService.isPresent(tabId);
 
         equalsShop(menuId.substring(0,10) , orderMenu.getMenu().getId().substring(0, 10));
         shopService.isPresent(menuId.substring(0,10));
 
 
-        if(menuId != null)menu = menuService.getMenuInfo(menuId);
-        if(tabId != null)table = tableService.getTableInfo(tabId);
+
         OrderMenu requestOrder = OrderMenu.builder()
                 .quantity(request.getQuantity())
                 .menu(menu)
@@ -125,13 +136,14 @@ public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
         return orderMenu;
     }
 
-
     @Override
-    public void delete(String authorization, String orderId) {
+    public void delete(@Nullable String authorization, String... str) {
+        String orderId = str[0];
     }
 
-    public Object isPresent(String orderId) {
-        if (orderMenuRepository.findById(orderId).isPresent()) return true;
+    public OrderMenu isPresent(String orderId) {
+        Optional<OrderMenu> om = orderMenuRepository.findById(orderId);
+        if (om.isPresent()) return om.get();
         throw new OrderMenuNotFoundException();
     }
 
@@ -140,8 +152,8 @@ public class OrderMenuServiceImpl implements OrderMenuService, BasicService {
         return false;
     }
 
-    public void equalsShop(String beforeId, String afterId){
-        if(beforeId.equals(afterId))return ;
+    public void equalsShop(String aId, String bId){
+        if(aId.equals(bId))return ;
         throw new ShopMissMatchException();
     }
 //    public ResponseEntity<?> postOrder(Order.Request request) {

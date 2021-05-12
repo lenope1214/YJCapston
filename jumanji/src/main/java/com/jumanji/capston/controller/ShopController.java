@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/")
 public class ShopController {
 //    Logger logger;
 
@@ -37,19 +37,19 @@ public class ShopController {
 
 
     @Transactional(readOnly = true) // get /shop/{shopId}
-    @GetMapping("/shop/{shopId}")  // get shop/{shopId} 식당번호로 식당 조회
+    @GetMapping("shops/{shopId}")  // get shop/{shopId} 식당번호로 식당 조회
     public ResponseEntity<?> getShopById(@PathVariable String shopId) {
         return shopService.getShopByShopId(shopId);
     }
 
 //    @Transactional(readOnly = true)
-//    @GetMapping("/shopIntro/{shopId}") // get /shopIntro/{shopId}
+//    @GetMapping("shopsIntro/{shopId}") // get shopsIntro/{shopId}
 //    public ResponseEntity<?> getShopIntro(@PathVariable String shopId) {
 //        return shopService.getShopIntro(shopId);
 //    }
 
     @Transactional(readOnly = true)
-    @GetMapping("/myShop") // get /myShop
+    @GetMapping("/users/shops") // get /myShop
     public ResponseEntity<?> getMyShop(@RequestHeader String authorization) { // 수정해야함.
         List<Shop> shopList = shopService.getMyShop(authorization);
         List<Shop.Response> response = new ArrayList<>();
@@ -60,7 +60,7 @@ public class ShopController {
     }
 
     @Transactional(readOnly = true)
-    @GetMapping("/shopList") // get /shopList
+    @GetMapping("shops/list") // get shopsList
     public ResponseEntity<?> selectShopList(
             @Nullable @RequestParam String category,
             @Nullable @RequestParam String sortTarget
@@ -71,7 +71,7 @@ public class ShopController {
     }
 
     @Transactional
-    @PostMapping("/shop") // post /shop 매장등록     Form-data로 받음 => Param. requestbody를 안적으면 자동 param 매핑 해주는듯
+    @PostMapping("shops") // post shops 매장등록     Form-data로 받음 => Param. requestbody를 안적으면 자동 param 매핑 해주는듯
     public ResponseEntity<?> postShop(Shop.PostRequest request, @RequestHeader String authorization) throws ParseException {
         Shop result = shopService.post(authorization, request);
         Shop.Response response = new Shop.Response(result);
@@ -79,7 +79,7 @@ public class ShopController {
     }
 
     @Transactional // delete
-    @DeleteMapping("/shop/{shopId}")
+    @DeleteMapping("shops/{shopId}")
     public ResponseEntity<?> deleteShop(@RequestHeader String authorization, @PathVariable String shopId) {
         shopService.delete(authorization, shopId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -87,7 +87,7 @@ public class ShopController {
 
 
     @Transactional
-    @PatchMapping("/shop") // patch /shop
+    @PatchMapping("shops") // patch shops
     public ResponseEntity<?> patchShop(@RequestHeader String authorization, @RequestBody Shop.PatchRequest request) {
         System.out.println("매장수정 시작");
         Shop shop = shopService.patch(authorization, request);
@@ -97,7 +97,7 @@ public class ShopController {
     }
 
     @Transactional
-    @PatchMapping("/shop/{shopId}/open")
+    @PatchMapping("shops/{shopId}/open")
     public ResponseEntity<?> updateShopIsOpen(@RequestHeader String authorization, @PathVariable String shopId) {
         return new ResponseEntity<>(shopService.patchShopIsOpen(authorization, shopId), HttpStatus.OK);
     }
@@ -105,7 +105,7 @@ public class ShopController {
 
     //
     @Transactional
-    @PatchMapping("/shop/{shopId}/reserve")
+    @PatchMapping("shops/{shopId}/reserve")
     public ResponseEntity<?> updateShopIsRsPos(@RequestHeader String authorization, @PathVariable String shopId) {
         return new ResponseEntity<>(shopService.patchSHopIsRsPos(authorization, shopId), HttpStatus.OK);
     }

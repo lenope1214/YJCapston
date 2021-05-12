@@ -1,10 +1,7 @@
 package com.jumanji.capston.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.checkerframework.checker.units.qual.C;
 
 import javax.persistence.*;
@@ -15,7 +12,7 @@ import java.util.List;
 
 @Getter
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor @ToString
 @Table(name = "ORDERS")
 public class Order implements Serializable {
     @Id
@@ -37,6 +34,9 @@ public class Order implements Serializable {
     private String pg;
     @Column(name = "pay_method")
     private String payMethod; // 결제방식
+
+//    @Transient // 영속성 등록 제외?   제외하면 결과 제대로 안나옴ㅋㅋㅋ
+    private char reviewed;
 
 
 //    @Column
@@ -91,6 +91,7 @@ public class Order implements Serializable {
         private String status;
         private String pg;
         private String payMethod; // 결제방식
+        private char reviewed;
 
         public Response(Order order) {
             this.orderId = order.getId();
@@ -101,6 +102,7 @@ public class Order implements Serializable {
             this.usePoint = order.getUsePoint();
             this.status = order.getStatus();
             this.userName = order.getUser().getName();
+            this.reviewed = order.getReviewed();
             this.amount = order.getAmount();
             this.arriveTime = order.getArriveTime();
             this.pg = order.getPg();
@@ -111,9 +113,15 @@ public class Order implements Serializable {
     }
 
     public void update(Request request){
-        if(request.orderRequest != null)this.orderRequest = request.getOrderRequest();
+        System.out.println("OrderRequest >> ? " + request.getOrderRequest());
+        if(request.orderRequest.length() > 0){
+            System.out.println("OrderRequest 변경!");
+            this.orderRequest = request.getOrderRequest();
+            System.out.println(this.orderRequest);
+        }
         if(request.people != 0) this.people = request.people;
         if(request.arriveTime != null)this.arriveTime = request.arriveTime;
+        if(request.amount != 0 ) this.amount = request.amount;
         this.status = "rd";
     }
 
@@ -122,7 +130,7 @@ public class Order implements Serializable {
         this.payMethod = request.getPayMethod();
         this.payTime = new Timestamp(System.currentTimeMillis());
         this.pg = request.getPg();
-        this.amount = request.getAmount();
+        if(request.getAmount() != 0 ) this.amount = request.getAmount();
         this.usePoint = request.getUsePoint();
     }
 

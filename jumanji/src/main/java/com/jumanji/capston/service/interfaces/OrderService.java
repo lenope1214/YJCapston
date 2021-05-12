@@ -12,7 +12,6 @@ import java.util.List;
 
 public interface OrderService {
 
-    Order get(String authorization, Timestamp cartId);
     List<Order> getList(String authorization, String userId);
     Order post(String authorization, Order.Request request);
     Order patch(String authorization, Order.Request request);

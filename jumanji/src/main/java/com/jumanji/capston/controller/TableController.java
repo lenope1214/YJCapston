@@ -12,19 +12,19 @@ import java.util.List;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/")
 public class TableController {
     @Autowired
     TableServiceImpl tableService;
 
-    @GetMapping("/table/{tabId}")
+    @GetMapping("tables/{tabId}")
     public ResponseEntity<?> getTabById(@PathVariable String tabId){
         Tab tab = tableService.get(tabId);
         Tab.Response response = new Tab.Response(tab);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
-    @GetMapping("/tableList/{shopId}")
+    @GetMapping("tables/list/{shopId}")
     public ResponseEntity<?> getTableListByShop(@PathVariable String shopId){
         List<Tab> tabList = tableService.getList(shopId);
         List<Tab.Response> response = new ArrayList<>();
@@ -34,19 +34,19 @@ public class TableController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/table")
+    @PostMapping("tables")
     public ResponseEntity<?> postTable(@RequestHeader String authorization, @RequestBody Tab.Request request){
         Tab tab = tableService.post(authorization, request);
         Tab.Response response = new Tab.Response(tab);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @PatchMapping("/table")
+    @PatchMapping("tables")
     public ResponseEntity<?> patchTable(@RequestHeader String authorization, @RequestBody Tab.Request request){
         return new ResponseEntity<>(tableService.patch(authorization, request), HttpStatus.OK);
     }
 
-    @DeleteMapping("/table/{tabId}")
+    @DeleteMapping("tables/{tabId}")
     public ResponseEntity<?> deleteTable(@RequestHeader String authorization, @PathVariable String tabId){
         tableService.delete(authorization, tabId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

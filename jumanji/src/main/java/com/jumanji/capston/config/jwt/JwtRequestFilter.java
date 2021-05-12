@@ -40,16 +40,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                     "login"
                     , "authenticate"
                     , "join"
-                    , "shopList"
+                    , "shops/list"
                     , "validate"
                     , "validateDscNo"
                     , "searchAddr"
-                    , "shop"
-                    , "shopList"
-                    , "menu"
-                    , "menuList"
-                    , "review"
-                    , "payment/complite"
+                    , "shops"
+                    , "menus"
+                    , "menus/list"
+                    , "reviews"
+                    , "payments/complite"
             );
 
 
@@ -130,7 +129,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             System.out.println("chatting !");
             return true;
         }
-        if(path.startsWith("/api/v1")) {
+        if(path.startsWith("/api/v1/")) {
 //            System.out.println("잘라낸 패스 : "  + path.substring(path.indexOf("/api/v1/") + 8));
             return EXCLUDE_URL.stream().anyMatch(exclude -> exclude.equalsIgnoreCase(path.substring(path.indexOf("/api/v1/") + 8)));
         }

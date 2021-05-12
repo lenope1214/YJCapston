@@ -209,7 +209,7 @@ public class IamportClientService implements com.jumanji.capston.service.externa
             Type listType = new TypeToken<IamportResponse<Iamport.Payment>>() {
             }.getType();
             IamportResponse<Iamport.Payment> payment = gson.fromJson(response, listType);
-
+            System.out.println(payment.toString());
             return payment;
         }
 
@@ -222,7 +222,7 @@ public class IamportClientService implements com.jumanji.capston.service.externa
         String token = this.getToken(authorization);
 
         if (token != null) {
-            String path = "/payments/find/" + merchantUid + "/-paid";
+            String path = "/payments/find/" + merchantUid + "/paid";
             System.out.println("paymentByMerchantUid - path : " + path);
             String response = this.getRequest(path, token);
 

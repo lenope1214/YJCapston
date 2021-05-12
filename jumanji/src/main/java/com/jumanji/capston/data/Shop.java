@@ -86,6 +86,7 @@ public class Shop {
         private char isRsPos;
         private String imgPath;
         private String phone;
+        private String ownerId;
 
         public Response(Shop shop) {
             this.shopId = shop.getId();
@@ -100,6 +101,7 @@ public class Shop {
             this.isRsPos = shop.getIsRsPos();
             this.imgPath = shop.getImgPath();
             this.phone = shop.getPhone();
+            this.ownerId = shop.getOwner().getId();
         }
     }
 
@@ -131,7 +133,7 @@ public class Shop {
     }
 
     public interface Dao{
-        String getId();
+        String getShopId();
         String getName();
         String getIntro();
         String getAddress();
@@ -143,5 +145,6 @@ public class Shop {
         Character getIsRsPos();
         String getImgPath();
         String getScore();
+        String getReviews();
     }
 }

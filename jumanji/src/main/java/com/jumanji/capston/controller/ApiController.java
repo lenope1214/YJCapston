@@ -11,8 +11,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/")
 public class ApiController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -28,7 +32,7 @@ public class ApiController {
 //    private PrincipalDetailsService userDetailService;
 
     @Transactional // 트랜잭션화 시켜서 오류발생시 롤백이 되도록
-    @PostMapping("/join")
+    @PostMapping("join")
     public ResponseEntity<?> join(@RequestBody User.Request request) {
         System.out.println("회원가입 요청 ");
         User user = userService.post(request);
@@ -37,14 +41,14 @@ public class ApiController {
     }
 
     @Transactional(readOnly = true) // 트랜잭션이긴 한데 읽기 전용으로 속도 업 !
-    @PostMapping("/login")
+    @PostMapping("login")
     public ResponseEntity<?> login(@RequestBody User.Request user) {
         System.out.println("/api/v1/login 요청");
         return userService.login(user); // 로그인은 이렇게 두자.
     }
 
 
-    @GetMapping("/validate/{id}") // validate
+    @GetMapping("validate/{id}") // validate
     public ResponseEntity<?> validateOne(@PathVariable String id) {
         if(userService.isEmpty(id))
             return new ResponseEntity<>(HttpStatus.OK);
@@ -52,8 +56,13 @@ public class ApiController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-//    @GetMapping("/ok")
-//    public ResponseEntity<?> updateOk(){
-//        return new ResponseEntity<>("update successfully", HttpStatus.OK);
-//    }
+    @GetMapping("users/{userId}/device-token")
+    public ResponseEntity<?> getDeviceToken(@PathVariable String userId){
+        String deviceToken = userService.getDeviceToken(userId);
+        return new ResponseEntity<>(deviceToken, HttpStatus.OK);
+    }
+
+//    @GetMapping("shop/{shopId}/device-token")
+//    public ResponseEntity<?> getDeviceTokenBy
+
 }

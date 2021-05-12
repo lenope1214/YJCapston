@@ -35,7 +35,7 @@ public class Payment implements Serializable {
 
     public Payment(Order order){
         this.orderId = order.getId();
-        this.payTime = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss").format(order.getPayTime());
+        this.payTime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(order.getPayTime());
         this.status = order.getStatus();
         this.amount = order.getAmount();
         this.payMethod = order.getPayMethod();
@@ -46,8 +46,10 @@ public class Payment implements Serializable {
     @Getter @AllArgsConstructor @NoArgsConstructor
     public static class Request{
         private Timestamp orderId; // 주문번호
+        private String orderRequest;
         private int amount; //
         private int usePoint;
+        private int people;
         private String pg;
         private String payMethod;
         private String holder; // 예금주
@@ -67,13 +69,14 @@ public class Payment implements Serializable {
         private String payMethod;
         private String pg;
 
-        public Response(Order order){
-            this.orderId = order.getId();
-            this.payTime = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss").format(order.getPayTime());
-            this.status = order.getStatus();
-            this.amount = order.getAmount();
-            this.payMethod = order.getPayMethod();
-            this.pg = order.getPg();
+
+        public Response(Payment payment){
+            this.orderId = payment.getOrderId();
+            this.payTime = getPayTime();
+            this.status = payment.getStatus();
+            this.amount = payment.getAmount();
+            this.payMethod = payment.getPayMethod();
+            this.pg = payment.getPg();
         }
     }
 }

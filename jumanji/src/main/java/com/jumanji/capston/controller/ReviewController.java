@@ -16,14 +16,14 @@ import java.util.List;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/")
 public class ReviewController  {
 
     @Autowired
     ReviewServiceImpl reviewService;
 
     @Transactional
-    @GetMapping("/review/{shopId}")
+    @GetMapping("reviews/{shopId}")
     public ResponseEntity<?> getReviewList(@PathVariable String shopId){
         List<Review> reviewList = reviewService.getList(shopId);
         List<Review.Response> response = new ArrayList<>();
@@ -34,7 +34,7 @@ public class ReviewController  {
     }
 
     @Transactional
-    @PostMapping("/review") // Multipart-form 는 json이 아니기 때문에 바디 뺌.
+    @PostMapping("reviews") // Multipart-form 는 json이 아니기 때문에 바디 뺌.
     public ResponseEntity<?> postReview(@RequestHeader String authorization, Review.Request request){
         Review review = reviewService.post(authorization, request);
         Review.Response response = new Review.Response(review);
@@ -42,13 +42,13 @@ public class ReviewController  {
     }
 
     @Transactional
-    @PatchMapping("/review")
+    @PatchMapping("reviews")
     public ResponseEntity<?> patchReview(@RequestHeader String authorization, @RequestBody Review.Request request){
         return null;
     }
 
     @Transactional
-    @DeleteMapping("/review/{reviewId}")
+    @DeleteMapping("reviews/{reviewId}")
     public ResponseEntity<?> deleteReview(@RequestHeader String authorization, @PathVariable String reviewId){
         reviewService.delete(authorization, reviewId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

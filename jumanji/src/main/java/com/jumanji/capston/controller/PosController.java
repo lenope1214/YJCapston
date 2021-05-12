@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/")
 public class PosController {
     @Autowired
     ShopServiceImpl shopService;
@@ -29,9 +29,9 @@ public class PosController {
 
 
     @Transactional(readOnly = true)
-    @GetMapping("/shop/{shopId}/pos")
+    @GetMapping("shops/{shopId}/pos")
     public ResponseEntity<?> getShopPos(@PathVariable String shopId){
-        List<Pos> posList = posService.getShopPos(shopId);
+        List<Pos> posList = posService.getList(null, shopId);
         return new ResponseEntity<>(posList, HttpStatus.OK);
     }
 }

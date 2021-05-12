@@ -24,7 +24,7 @@ import java.util.Optional;
 
 
 @Service
-public class UserServiceImpl implements UserService, BasicService {
+public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
@@ -47,7 +47,6 @@ public class UserServiceImpl implements UserService, BasicService {
 
     @Transactional
     public User get(String id) {
-
         return isPresent(id);
     }
 
@@ -83,6 +82,7 @@ public class UserServiceImpl implements UserService, BasicService {
                 .provider("jumin") /** 얘는 추후에 변경해야함. **/
                 .provider_id(null)
 //                .level(0)
+                .deviceToken(user.getDeviceToken())
                 .build();
         return userRepository.save(userEntity);
     }
@@ -110,11 +110,11 @@ public class UserServiceImpl implements UserService, BasicService {
 
     @Transactional
     public ResponseEntity<?> login(User.Request request) {
-        isPresent(request.getId());
-        User userEntity = userRepository.findById(request.getId()).get();
+
+        User userEntity = isPresent(request.getId());
 //         아이디 오류 후에 아이디, 비번 오류 통합.. 현재는 있는지 확인하기 위해 이렇게 둠.
         checkPW(request, userEntity.getPassword());
-        isWdrw(request.getId());
+//        isWdrw(request.getId());
         final String access_token = jwtTokenUtil.generateToken(userEntity.getId());
         JwtResponse jwtResponse = new JwtResponse(access_token, userEntity.getRole());
         return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
@@ -145,14 +145,14 @@ public class UserServiceImpl implements UserService, BasicService {
 
     public User isPresent(String id) {
         Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) return user.get();
+        if (user.isPresent() && user.get().getIsWdrw() != 'Y') return user.get();
         throw new UserNotFoundException(id);
     }
 
-    public void isWdrw(String id) {
-        if (userRepository.findById(id).get().getIsWdrw() == 'Y')
-            throw new UserNotFoundException();
-    }
+//    public void isWdrw(String id) {
+//        if (userRepository.findById(id).get().getIsWdrw() == 'Y')
+//            throw new UserNotFoundException();
+//    }
 
     /**
      * role args ex) "ADMIN"  "OWNER"  "USER"
@@ -168,7 +168,11 @@ public class UserServiceImpl implements UserService, BasicService {
         return false;
     }
 
-    public void isLogin(String authorization){
-        isPresent(getMyId(authorization));
+    public User isLogin(String authorization){
+        return isPresent(getMyId(authorization));
+    }
+
+    public String getDeviceToken(String userId) {
+        return isPresent(userId).getDeviceToken();
     }
 }

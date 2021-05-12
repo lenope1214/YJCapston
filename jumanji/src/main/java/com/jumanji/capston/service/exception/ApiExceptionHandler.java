@@ -8,6 +8,7 @@ import com.jumanji.capston.service.exception.myException.MyNonUniqueResultExcept
 import com.jumanji.capston.service.exception.orderException.OrderNotFoundException;
 import com.jumanji.capston.service.exception.orderMenuException.OrderMenuNotFoundException;
 import com.jumanji.capston.service.exception.reviewException.ReviewHasExistException;
+import com.jumanji.capston.service.exception.reviewException.ReviewNotFoundException;
 import com.jumanji.capston.service.exception.shopException.NoShopListException;
 import com.jumanji.capston.service.exception.shopException.ShopHasExistException;
 import com.jumanji.capston.service.exception.shopException.ShopMissMatchException;
@@ -157,7 +158,7 @@ public class ApiExceptionHandler{
     public ResponseEntity<ApiErrorResponse> orderNotFound(OrderNotFoundException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
-        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(MyNullPointerException.class)
@@ -180,5 +181,14 @@ public class ApiExceptionHandler{
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(ReviewNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> ReviewNotFoundException(ReviewNotFoundException ex) {
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+
 
 }

@@ -121,4 +121,7 @@ public class WebController {
     public String imptAndroidPayment(){
         return "iamportAndroidPayment";
     }
+
+    @GetMapping("/androidPayComple")
+    public String imptAndroidPayComple(){ return "iamportAndroidPayComple";}
 }

@@ -1,7 +1,7 @@
 package com.jumanji.capston.controller.chatting;
 
 import com.jumanji.capston.data.StompMessage;
-import com.jumanji.capston.service.stomp.StompService;
+//import com.jumanji.capston.service.stomp.StompService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
@@ -20,7 +20,7 @@ import java.util.Set;
 public class ChatController {
     private static final Set<String> SESSION_IDS = new HashSet<>();
     private final SimpMessagingTemplate messagingTemplate;
-    private final StompService stompService;
+//    private final StompService stompService;
 
     @MessageMapping("/chat") // "/pub/chat"
     public void publishChat(StompMessage chatMessage) {
@@ -30,7 +30,7 @@ public class ChatController {
 //            chatMessage.setMessage(chatMessage.getMessage().substring(chatMessage.getMessage().indexOf(":")));
 //        }
 
-        stompService.post(chatMessage);
+//        stompService.post(chatMessage);
         messagingTemplate.convertAndSend("/sub/" + chatMessage.getShopId() + "/" + chatMessage.getType(), chatMessage);
     }
 
