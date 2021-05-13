@@ -4,10 +4,10 @@ import com.jumanji.capston.service.exception.BasicException;
 
 public class MenuHasExistException extends BasicException {
     public MenuHasExistException(){
-        super("2002", "menu id being used");
+        super("error-302", "메뉴정보가 이미 있습니다.");
     }
     public MenuHasExistException(String id){
-        super("2002", "menu is already used id : " + id);
+        super("error-302", "메뉴정보가 이미 있습니다. id : " + id);
     }
     public MenuHasExistException(String code, String message) {
         super(code, message);

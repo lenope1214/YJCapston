@@ -1,14 +1,18 @@
 package com.jumanji.capston.service;
 
 import com.jumanji.capston.data.Employee;
+import com.jumanji.capston.data.EmployeeCommutes;
+import com.jumanji.capston.repository.EmpCommutesRepository;
 import com.jumanji.capston.repository.EmployeeRepository;
 import com.jumanji.capston.service.exception.CanNotBeZero;
+import com.jumanji.capston.service.exception.employeeException.EmployeeAlreadyStartException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeHasExistException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeNotFoundException;
 import com.jumanji.capston.service.interfaces.BasicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.thymeleaf.util.StringUtils;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -18,6 +22,8 @@ import java.util.Optional;
 public class EmployeeServiceImpl implements BasicService<Employee, Employee.Request> {
     @Autowired
     EmployeeRepository employeeRepository;
+    @Autowired
+    EmpCommutesRepository empCommutesRepository;
     @Autowired
     UserServiceImpl userService;
     @Autowired
@@ -125,5 +131,35 @@ public class EmployeeServiceImpl implements BasicService<Employee, Employee.Requ
         Optional<Employee> employee = employeeRepository.findById(empId);
         if(employee.isEmpty())return true;
         else throw new EmployeeHasExistException(empId.substring(11));
+    }
+
+    public EmployeeCommutes workStart(String authorization, EmployeeCommutes.Request request) {
+        // 변수
+        String loginId = userService.getMyId(authorization);
+        String empId = request.getShopId() + 'e' + String.format("%03d", request.getEmpNo());
+        String empCmtId = request.getShopId()+request.getEmpNo();
+        int empWorkCount = 0;
+        // 값 체크
+        System.out.println("empId : " + empId);
+
+        // 유효성 체크
+        shopService.isOwnShop(loginId, request.getShopId());
+        isPresent(empId);
+        // 출근은 있고 퇴근이 없는 열이 있으면 출근중. 요청 취소.
+        isStart(empCmtId);
+
+        // 서비스
+        empWorkCount = empCommutesRepository.countByIdStartsWith(empCmtId);
+        empCmtId += String.format("%04d",empWorkCount);
+        EmployeeCommutes empCommutes = EmployeeCommutes.builder()
+                .id(empCmtId)
+                .build();
+
+        return empCommutesRepository.save(empCommutes);
+    }
+
+    private void isStart(String empCmtId) {
+        if(empCommutesRepository.countByIdStartsWithAndFinishTimeIsNull(empCmtId) > 0)
+            throw new EmployeeAlreadyStartException();
     }
 }

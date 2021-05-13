@@ -1,6 +1,7 @@
 package com.jumanji.capston.controller;
 
 import com.jumanji.capston.data.Employee;
+import com.jumanji.capston.data.EmployeeCommutes;
 import com.jumanji.capston.data.Pos;
 import com.jumanji.capston.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,5 +56,23 @@ public class EmployeeController {
                                             @Query("shopId") String shopId){
         employeeService.delete(authorization, shopId, String.valueOf(empNo));
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @Transactional
+    @PostMapping("/shops/employees/work-start")
+    public ResponseEntity<?> workStart(@RequestHeader String authorization,
+                                       @RequestBody EmployeeCommutes.Request request){
+        EmployeeCommutes employeeCommutes = employeeService.workStart(authorization, request);
+        EmployeeCommutes.Response response = new EmployeeCommutes.Response(employeeCommutes);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @Transactional
+    @PostMapping("/shops/employees/work-finish")
+    public ResponseEntity<?> workFinish(@RequestHeader String authorization,
+                                       @RequestBody EmployeeCommutes.Request request){
+        EmployeeCommutes employeeCommutes = employeeService.workStart(authorization, request);
+        EmployeeCommutes.Response response = new EmployeeCommutes.Response(employeeCommutes);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

@@ -60,6 +60,7 @@ public class DateOperator {
     }
 
     public static String dateToYYYYMMDDHHMMSS(Date date){
+        if(date == null)return null;
         return YYYYMMDDHHMMSS.format(date);
     }
 

@@ -35,6 +35,9 @@ public class Employee {
         if(request.getPhone() != null)phone = request.getPhone();
     }
 
+    /**
+     * empId : shopId(10) + 'e' + empNo(3) 14자리
+     */
     @NoArgsConstructor @Getter
     public static class Request{
         private String shopId;
