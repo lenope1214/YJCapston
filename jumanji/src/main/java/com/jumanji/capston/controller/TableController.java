@@ -26,7 +26,7 @@ public class TableController {
 
     @GetMapping("tables/list/{shopId}")
     public ResponseEntity<?> getTableListByShop(@PathVariable String shopId){
-        List<Tab> tabList = tableService.getList(shopId);
+        List<Tab> tabList = tableService.getList(null, shopId);
         List<Tab.Response> response = new ArrayList<>();
         for(Tab tab : tabList){
             response.add(new Tab.Response(tab));

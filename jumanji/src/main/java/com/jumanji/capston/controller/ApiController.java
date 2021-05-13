@@ -31,7 +31,7 @@ public class ApiController {
 //    @Autowired
 //    private PrincipalDetailsService userDetailService;
 
-    @Transactional // 트랜잭션화 시켜서 오류발생시 롤백이 되도록
+    @Transactional // 오류발생시 롤백이 되도록
     @PostMapping("join")
     public ResponseEntity<?> join(@RequestBody User.Request request) {
         System.out.println("회원가입 요청 ");
@@ -40,7 +40,7 @@ public class ApiController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @Transactional(readOnly = true) // 트랜잭션이긴 한데 읽기 전용으로 속도 업 !
+    @Transactional(readOnly = true)
     @PostMapping("login")
     public ResponseEntity<?> login(@RequestBody User.Request user) {
         System.out.println("/api/v1/login 요청");
