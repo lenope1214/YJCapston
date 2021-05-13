@@ -50,7 +50,7 @@ public class MenuController  {
 
     @GetMapping("menus/list/{shopId}")
     public ResponseEntity<?> selectMenuList(@PathVariable String shopId) {
-        List<Menu> menuList = menuService.getList(shopId);
+        List<Menu> menuList = menuService.getList(null, shopId);
         List<Menu.Response> response = new ArrayList<>();
         for(Menu menu : menuList){
             response.add(new Menu.Response(menu));

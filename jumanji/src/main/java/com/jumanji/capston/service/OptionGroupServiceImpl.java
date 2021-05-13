@@ -5,6 +5,7 @@ import com.jumanji.capston.data.Menu;
 import com.jumanji.capston.data.Option;
 import com.jumanji.capston.data.OptionGroup;
 import com.jumanji.capston.repository.OptionGroupRepository;
+import com.jumanji.capston.service.exception.optionGroupException.OptionGroupNotFoundException;
 import com.jumanji.capston.service.interfaces.BasicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Nullable;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OptionGroupServiceImpl implements BasicService<OptionGroup, OptionGroup.Request> {
@@ -75,7 +77,9 @@ public class OptionGroupServiceImpl implements BasicService<OptionGroup, OptionG
 
     @Override
     public OptionGroup isPresent(String id) {
-        return null;
+        Optional<OptionGroup> optionGroup = optionGroupRepository.findById(id);
+        if(optionGroup.isPresent())return optionGroup.get();
+        throw new OptionGroupNotFoundException();
     }
 
     @Override

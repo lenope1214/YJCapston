@@ -36,6 +36,7 @@ public class Option {
         private String optionGroupId;
     }
 
+    @AllArgsConstructor @Getter
     public static class Response{
         private String optionId;
         private String shopId;
