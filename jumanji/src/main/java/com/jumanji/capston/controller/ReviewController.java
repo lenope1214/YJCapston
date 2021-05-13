@@ -25,7 +25,7 @@ public class ReviewController  {
     @Transactional
     @GetMapping("reviews/{shopId}")
     public ResponseEntity<?> getReviewList(@PathVariable String shopId){
-        List<Review> reviewList = reviewService.getList(shopId);
+        List<Review> reviewList = reviewService.getList(null, shopId);
         List<Review.Response> response = new ArrayList<>();
         for(Review r : reviewList){
             response.add(new Review.Response(r));

@@ -40,7 +40,7 @@ public class PosService implements BasicService<Pos, Pos.Request> {
         List<Pos> posList = new ArrayList<>();
         List<String> orderTabIdList = orderMenuRepository.getTabListByShopId(shopId); // 해당 매장의 사용중인 테이블로 주문메뉴 검색
 
-        List<Tab> shopTabList = tableService.getList(shopId);
+        List<Tab> shopTabList = tableService.getList(null, shopId);
         for(Tab shtab : shopTabList){
             for(String odtab : orderTabIdList){
                 System.out.println("shtab : " + shtab +", odtab : " + odtab);
