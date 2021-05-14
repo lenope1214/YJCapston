@@ -45,10 +45,16 @@ public class OrderMenusController{
         for(OrderMenu orderMenu : orderMenuList){
             responseList.add(new OrderMenu.Response(orderMenu));
         }
+
         return new ResponseEntity<>(responseList, HttpStatus.CREATED);
     }
 
-    @Transactional
+//    @PostMapping("order-menus-test")
+//    public ResponseEntity<?> postOrderTest(@RequestHeader String authorization, @RequestBody OrderMenu.RequestList requestList) {
+//
+//        return new ResponseEntity<>(requestList.getList().get(0).getOptionList().get(0), HttpStatus.OK);
+//    }
+        @Transactional
     @PatchMapping("order-menus")
     public ResponseEntity<?> patchOrder(@RequestHeader String authorization, @RequestBody OrderMenu.Request request) {
         OrderMenu orderMenu= orderMenuService.patch(authorization, request);

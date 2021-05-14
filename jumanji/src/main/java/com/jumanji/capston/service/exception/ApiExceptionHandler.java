@@ -1,6 +1,8 @@
 package com.jumanji.capston.service.exception;
 
 import com.jumanji.capston.service.exception.auth.ForbiddenException;
+import com.jumanji.capston.service.exception.employeeException.EmployeeAlreadyStartException;
+import com.jumanji.capston.service.exception.employeeException.EmployeeDoesNotStartException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeHasExistException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeNotFoundException;
 import com.jumanji.capston.service.exception.menuException.MenuHasExistException;
@@ -226,6 +228,21 @@ public class ApiExceptionHandler{
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
+
+    @ExceptionHandler(EmployeeDoesNotStartException.class)
+    public ResponseEntity<ApiErrorResponse> employeeDoesNotStartException(EmployeeDoesNotStartException ex) {
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(EmployeeAlreadyStartException.class)
+    public ResponseEntity<ApiErrorResponse> employeeAlreadyStartException(EmployeeAlreadyStartException ex) {
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
 
 
 

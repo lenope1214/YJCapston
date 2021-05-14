@@ -6,6 +6,7 @@ import com.jumanji.capston.repository.EmpCommutesRepository;
 import com.jumanji.capston.repository.EmployeeRepository;
 import com.jumanji.capston.service.exception.CanNotBeZero;
 import com.jumanji.capston.service.exception.employeeException.EmployeeAlreadyStartException;
+import com.jumanji.capston.service.exception.employeeException.EmployeeDoesNotStartException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeHasExistException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeNotFoundException;
 import com.jumanji.capston.service.interfaces.BasicService;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.StringUtils;
 
 import javax.annotation.Nullable;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +35,7 @@ public class EmployeeServiceImpl implements BasicService<Employee, Employee.Requ
     public Employee get(String authorization, String... str) {
         String shopId = str[0], empNo = str[1];
         String loginId = userService.getMyId(authorization);
-        String empId = shopId + 'e' + empNo;
+        String empId = shopId + 'e' + String.format("%03d", Integer.parseInt(empNo));
         Employee employee;
         // 유효성 검사
         userService.isLogin(authorization);
@@ -64,13 +66,13 @@ public class EmployeeServiceImpl implements BasicService<Employee, Employee.Requ
 
     @Override
     @Transactional // Transactional이 있는 save는 안된다. 그래서 saveAndFlush를 통해 함수 종료 후에 실행되도록 함.
-    public Employee post(@Nullable String authorization, Employee.Request request)  {
+    public Employee post(@Nullable String authorization, Employee.Request request) {
         String loginId = userService.getMyId(authorization);
         String empId = toEmpId(request.getShopId(), request.getEmpNo());
 
         // 유효성 검사
 
-        if(request.getEmpNo() == 0)throw new CanNotBeZero();
+        if (request.getEmpNo() == 0) throw new CanNotBeZero();
         userService.isLogin(authorization);
         isEmpty(empId);
 
@@ -117,49 +119,78 @@ public class EmployeeServiceImpl implements BasicService<Employee, Employee.Requ
         isEmpty(empId);
     }
 
-    private String toEmpId(String shopId, int empNo){
+    private String toEmpId(String shopId, int empNo) {
         return shopId + 'e' + String.format("%03d", empNo);
     }
 
-    public Employee isPresent(String empId){
+    public Employee isPresent(String empId) {
         Optional<Employee> employee = employeeRepository.findById(empId);
-        if(employee.isPresent())return employee.get();
+        if (employee.isPresent()) return employee.get();
         else throw new EmployeeNotFoundException(empId.substring(11));
     }
 
-    public boolean isEmpty(String empId){
+    public boolean isEmpty(String empId) {
         Optional<Employee> employee = employeeRepository.findById(empId);
-        if(employee.isEmpty())return true;
+        if (employee.isEmpty()) return true;
         else throw new EmployeeHasExistException(empId.substring(11));
     }
 
     public EmployeeCommutes workStart(String authorization, EmployeeCommutes.Request request) {
         // 변수
         String loginId = userService.getMyId(authorization);
-        String empId = request.getShopId() + 'e' + String.format("%03d", request.getEmpNo());
-        String empCmtId = request.getShopId()+request.getEmpNo();
+        String empNo = String.format("%03d", request.getEmpNo());
+        String empId = request.getShopId() + 'e' + empNo;
+        String empCmtId = request.getShopId() + empNo;
         int empWorkCount = 0;
         // 값 체크
         System.out.println("empId : " + empId);
 
         // 유효성 체크
         shopService.isOwnShop(loginId, request.getShopId());
-        isPresent(empId);
+        Employee emp = isPresent(empId);
         // 출근은 있고 퇴근이 없는 열이 있으면 출근중. 요청 취소.
-        isStart(empCmtId);
+        if (isStart(empCmtId)) throw new EmployeeAlreadyStartException();
 
         // 서비스
         empWorkCount = empCommutesRepository.countByIdStartsWith(empCmtId);
-        empCmtId += String.format("%04d",empWorkCount);
+        empCmtId += String.format("%04d", empWorkCount);
+        System.out.println("출근 emp tostring : " + emp.toString());
         EmployeeCommutes empCommutes = EmployeeCommutes.builder()
                 .id(empCmtId)
+                .startTime(new Date())
+                .employee(emp)
                 .build();
-
-        return empCommutesRepository.save(empCommutes);
+        System.out.println("출근 empC tostring : " + empCommutes.toString());
+        empCommutesRepository.save(empCommutes);
+        return empCommutes;
     }
 
-    private void isStart(String empCmtId) {
-        if(empCommutesRepository.countByIdStartsWithAndFinishTimeIsNull(empCmtId) > 0)
-            throw new EmployeeAlreadyStartException();
+    private boolean isStart(String empCmtId) {
+        if (empCommutesRepository.countByIdStartsWithAndFinishTimeIsNull(empCmtId) > 0)
+            return true;
+        return false;
+    }
+
+    public EmployeeCommutes workFinish(String authorization, EmployeeCommutes.Request request) {
+        String loginId = userService.getMyId(authorization);
+        String empNo = String.format("%03d", request.getEmpNo());
+        String empId = request.getShopId() + 'e' + empNo;
+        String empCmtId = request.getShopId() + empNo;
+        Employee emp;
+        int empWorkCount = 0;
+        EmployeeCommutes ec;
+        // 값 체크
+        System.out.println("empId : " + empId);
+
+        // 유효성 체크
+        shopService.isOwnShop(loginId, request.getShopId());
+        emp = isPresent(empId);
+        // 출근은 있고 퇴근이 없는 열이 있으면 출근중. 요청 취소.
+        if (!isStart(empCmtId)) throw new EmployeeDoesNotStartException();
+
+        // 서비스
+        ec = empCommutesRepository.findByShopIdAndEmpNo(empCmtId);
+        ec.finish(emp, new Date());
+        return empCommutesRepository.save(ec);
     }
 }

@@ -20,6 +20,7 @@ public class EmployeeController {
     @Autowired
     EmployeeServiceImpl employeeService;
 
+
     @Transactional(readOnly = true)
     @GetMapping("shops/{shopId}/employees")
     public ResponseEntity<?> getShopEmployees(@RequestHeader String authorization, @PathVariable String shopId){
@@ -63,6 +64,7 @@ public class EmployeeController {
     public ResponseEntity<?> workStart(@RequestHeader String authorization,
                                        @RequestBody EmployeeCommutes.Request request){
         EmployeeCommutes employeeCommutes = employeeService.workStart(authorization, request);
+        System.out.println("출근 empC tostring : " + employeeCommutes.getEmployee().getId());
         EmployeeCommutes.Response response = new EmployeeCommutes.Response(employeeCommutes);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -71,7 +73,7 @@ public class EmployeeController {
     @PostMapping("/shops/employees/work-finish")
     public ResponseEntity<?> workFinish(@RequestHeader String authorization,
                                        @RequestBody EmployeeCommutes.Request request){
-        EmployeeCommutes employeeCommutes = employeeService.workStart(authorization, request);
+        EmployeeCommutes employeeCommutes = employeeService.workFinish(authorization, request);
         EmployeeCommutes.Response response = new EmployeeCommutes.Response(employeeCommutes);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

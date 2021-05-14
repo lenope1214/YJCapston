@@ -25,4 +25,11 @@ public interface EmpCommutesRepository extends JpaRepository<EmployeeCommutes, S
      * @return 해당 직원의 출퇴근 회수 출력
      */
     int countByIdStartsWithAndFinishTimeIsNull(String id);
+
+    @Query(value = "select ec.*\n" +
+            "from EMP_COMMUTES ec\n" +
+            "where id = (SELECT max(ec.ID)\n" +
+            "    KEEP(DENSE_RANK FIRST ORDER BY START_TIME DESC) id FROM EMP_COMMUTES ec\n" +
+            "where substr(ec.id, 0, 13) = :id)", nativeQuery = true)
+    EmployeeCommutes findByShopIdAndEmpNo(String id);
 }

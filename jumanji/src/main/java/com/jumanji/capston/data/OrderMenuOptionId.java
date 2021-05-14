@@ -1,10 +1,7 @@
 package com.jumanji.capston.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
@@ -15,7 +12,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-@Getter
+@Getter @Builder @ToString
 public class OrderMenuOptionId implements Serializable {
     @JoinColumn(name = "order_menu_id", nullable = false)
     @ManyToOne

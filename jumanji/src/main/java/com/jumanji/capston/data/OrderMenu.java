@@ -1,21 +1,19 @@
 package com.jumanji.capston.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 
 @Getter
 @Entity
 @Table(name = "ORDER_MENUS")
-@NoArgsConstructor
+@NoArgsConstructor @ToString
 public class OrderMenu implements Serializable {
     @Id
     private String id; // orderId timestamp(13) + orderList (2) => (15)
@@ -23,7 +21,7 @@ public class OrderMenu implements Serializable {
     @Column(length = 2)
     private int quantity; // 메뉴 수량
 
-    private char using = 'N'; // Y, N, R(예, 아니요, 예약)
+//    private char using = 'N'; // Y, N, R(예, 아니요, 예약)
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id")
@@ -35,13 +33,16 @@ public class OrderMenu implements Serializable {
     @JsonIgnore
     private Tab tab;
 
+    @JsonIgnore @Transient @Setter
+    private List<OrderMenuOption> optionList;
+
     @Builder
     public OrderMenu(String id, int quantity, Menu menu, Tab tab) {
         this.id = id;
         this.quantity = quantity;
         this.menu = menu;
         this.tab = tab;
-        this.using = 'Y';
+//        this.using = 'Y';
     }
 
     @Getter
@@ -50,9 +51,10 @@ public class OrderMenu implements Serializable {
         private String orderMenuId;
         private Timestamp orderId;
         private String shopId;
-        private String menuName;
+        private String menuId;
         private int quantity;
         private String tabNo; // 테이블번호 : 사업자번호 + 테이블번호 ( 2 )
+        private List<OrderMenuOption.Request> optionList;
     }
     @Getter
     @NoArgsConstructor @AllArgsConstructor
@@ -60,20 +62,27 @@ public class OrderMenu implements Serializable {
         List<Request> list;
     }
 
-    @Getter
+    @Getter @AllArgsConstructor
     public static class Response{
         private String orderMenuId;
         private String shopId;
         private int quantity;
         private String menuName;
         private String tableNo;
+        private List<OrderMenuOption.Response> optionList;
+
 
         public Response(OrderMenu order){
+            optionList = new ArrayList<>();
+
             if(order.getId() != null)this.orderMenuId = order.getId();
             this.quantity = order.getQuantity();
             this.shopId = order.getMenu().getId().substring(0, 10);
             this.menuName = order.getMenu().getId().substring(10);
             this.tableNo = order.getTab().getId().substring(10);
+            for(OrderMenuOption omo : order.optionList){
+                this.optionList.add(new OrderMenuOption.Response(omo));
+            }
         }
     }
 

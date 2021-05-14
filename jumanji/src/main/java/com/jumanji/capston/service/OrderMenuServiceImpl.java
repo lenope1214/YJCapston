@@ -1,9 +1,7 @@
 package com.jumanji.capston.service;
 
-import com.jumanji.capston.data.Menu;
-import com.jumanji.capston.data.Order;
-import com.jumanji.capston.data.OrderMenu;
-import com.jumanji.capston.data.Tab;
+import com.jumanji.capston.data.*;
+import com.jumanji.capston.repository.OrderMenuOptionRepository;
 import com.jumanji.capston.repository.OrderMenuRepository;
 import com.jumanji.capston.repository.UserRepository;
 import com.jumanji.capston.service.exception.orderMenuException.OrderMenuNotFoundException;
@@ -37,6 +35,10 @@ public class OrderMenuServiceImpl implements BasicService<OrderMenu, OrderMenu.R
     MenuServiceImpl menuService;
     @Autowired
     UserServiceImpl userService;
+    @Autowired
+    OrderMenuOptionRepository orderMenuOptionRepository;
+    @Autowired
+    OptionServiceImpl optionService;
 
 
     public Set<OrderMenu> getOrderMenuByOrderId(Timestamp orderMenuId) {
@@ -84,7 +86,7 @@ public class OrderMenuServiceImpl implements BasicService<OrderMenu, OrderMenu.R
         for(OrderMenu.Request request : requestList.getList()){
             OrderMenu orderMenu;
             long orderId = request.getOrderId().getTime();
-            String menuId = request.getShopId() + request.getMenuName();
+            String menuId = request.getMenuId();
             String tabId = request.getShopId() + request.getTabNo();
 
             orderService.isPresent(request.getOrderId());
@@ -101,7 +103,29 @@ public class OrderMenuServiceImpl implements BasicService<OrderMenu, OrderMenu.R
                     .tab(table)
                     .build();
             System.out.println(orderMenu.getTab().getId());
-            response.add(orderMenuRepository.save(orderMenu));
+            orderMenuRepository.save(orderMenu); // order menu가 있어야지 option이 들어가므로 먼저 저장.
+
+            if(request.getOptionList().size() > 0){
+                List<OrderMenuOption.Request> optionList = request.getOptionList();
+                List<OrderMenuOption> orderMenuOptionList = new ArrayList<>();
+                for(OrderMenuOption.Request oMoption : optionList){
+                    Option option = optionService.isPresent(oMoption.getOptionId());
+                    OrderMenuOptionId id = OrderMenuOptionId.builder()
+                            .orderMenu(orderMenu)
+                            .option(option)
+                            .build();
+                    OrderMenuOption orderMenuOption =
+                            OrderMenuOption.builder()
+                            .id(id)
+                            .quantity(oMoption.getQuantity())
+                            .build();
+                    orderMenuOptionList.add(orderMenuOption);
+                    orderMenuOptionRepository.save(orderMenuOption);
+                }
+                orderMenu.setOptionList(orderMenuOptionList);
+                System.out.println(orderMenu.toString());
+            }
+            response.add(orderMenu);
         }
         return response;
     }
@@ -111,7 +135,7 @@ public class OrderMenuServiceImpl implements BasicService<OrderMenu, OrderMenu.R
         Order order;
         OrderMenu orderMenu;
         long orderId = request.getOrderId().getTime();
-        String menuId = request.getShopId() + request.getMenuName();
+        String menuId = request.getMenuId();
         String tabId = request.getShopId() + request.getTabNo();
         Menu menu = null;
         Tab table = null;

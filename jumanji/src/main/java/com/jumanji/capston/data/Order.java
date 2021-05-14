@@ -17,7 +17,7 @@ import java.util.List;
 public class Order implements Serializable {
     @Id
     private Timestamp id; // 바구니번호 yyyyMMddhhmmss
-    private String status = "rd"; // rd : 준비중, pd : 결제완료, rf : 환불
+    private String status = "rd"; // rd : 준비중, st : 착석, pd : 결제완료, rf : 환불
     @Column(name = "order_request")
     private String orderRequest; // 요청사항
     @Column(length = 2)
