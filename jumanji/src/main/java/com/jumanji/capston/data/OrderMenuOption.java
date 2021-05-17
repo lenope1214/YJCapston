@@ -26,6 +26,7 @@ public class OrderMenuOption {
         private int quantity;
     }
 
+    @AllArgsConstructor @Getter
     public static class Response{
         private String orderMenuId;
         private String optionId;
