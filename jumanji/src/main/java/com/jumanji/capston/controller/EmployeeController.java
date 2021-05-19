@@ -40,6 +40,13 @@ public class EmployeeController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @Transactional(readOnly = true)
+    @GetMapping("shops/{shopId}/work-times")
+    public ResponseEntity<?> getShopEmpWorkTimes(@RequestHeader String authorization, @PathVariable String shopId,
+                                                 @RequestParam String date, @RequestParam String empNo){
+
+    }
+
     @Transactional
     @PostMapping("shops/employees")
     public ResponseEntity<?> getShopPos(@RequestHeader String authorization, @RequestBody Employee.Request request){
@@ -53,8 +60,8 @@ public class EmployeeController {
     @Transactional
     @DeleteMapping("/shops/employees")
     public ResponseEntity<?> deleteEmployee(@RequestHeader String authorization,
-                                            @Query("empNo") int empNo,
-                                            @Query("shopId") String shopId){
+                                            @RequestParam("empNo") int empNo,
+                                            @RequestParam("shopId") String shopId){
         employeeService.delete(authorization, shopId, String.valueOf(empNo));
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

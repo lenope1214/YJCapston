@@ -64,6 +64,12 @@ public class EmployeeServiceImpl implements BasicService<Employee, Employee.Requ
         return employeeList;
     }
 
+    @Transactional
+    public List<Employee> getWorkTimes(String authorization, String shopId, String date, String empNo){
+        // 직원, 날짜, 직원+날짜로 검색해서 근무시간 확인하기
+
+    }
+
     @Override
     @Transactional // Transactional이 있는 save는 안된다. 그래서 saveAndFlush를 통해 함수 종료 후에 실행되도록 함.
     public Employee post(@Nullable String authorization, Employee.Request request) {
