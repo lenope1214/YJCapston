@@ -35,6 +35,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import javax.persistence.NonUniqueResultException;
 
@@ -243,7 +244,12 @@ public class ApiExceptionHandler{
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
 
-
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public ResponseEntity<ApiErrorResponse> maxUploadSizeExceededException(){
+        ApiErrorResponse response =
+                new ApiErrorResponse("error-file-size", "파일 사이즈가 너무 큽니다!");
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
 
 
 
