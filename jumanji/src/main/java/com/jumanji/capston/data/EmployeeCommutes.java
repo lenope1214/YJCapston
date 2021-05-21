@@ -18,6 +18,7 @@ import java.util.Date;
 public class EmployeeCommutes {
     @Id
     @Column(length = 17)
+    @JsonIgnore
     private String id;
 
     @Column

@@ -1,5 +1,6 @@
 package com.jumanji.capston.service;
 
+import com.jumanji.capston.data.DateOperator;
 import com.jumanji.capston.data.Employee;
 import com.jumanji.capston.data.EmployeeCommutes;
 import com.jumanji.capston.repository.EmpCommutesRepository;
@@ -64,10 +65,27 @@ public class EmployeeServiceImpl implements BasicService<Employee, Employee.Requ
         return employeeList;
     }
 
+    /**
+     *  직원, 날짜, 직원+날짜로 검색해서 근무시간 확인하기
+     */
     @Transactional
-    public List<Employee> getWorkTimes(String authorization, String shopId, String date, String empNo){
-        // 직원, 날짜, 직원+날짜로 검색해서 근무시간 확인하기
+    public List<Employee.Dao> getWorkTimes(String authorization, String shopId, String date, String empNo){
+        // 변수
+        String loginId = userService.getMyId(authorization);
+        String empId = null;
+        // 변수 값 확인
 
+        // 유효성 체크
+        shopService.isOwnShop(loginId, shopId); // 요청 유저의 매장이 맞는지?
+        if(!empNo.equals("") && empNo != null){
+            empId= shopId + 'e' + String.format("%03d", Integer.parseInt(empNo));
+            isPresent(empId);
+        }
+
+        // 서비스
+        // db쿼리문으로 널값 확인해서 하자..
+        List<Employee.Dao> employeeList = employeeRepository.findByDateOrEmpId(empId, date);
+        return employeeList;
     }
 
     @Override
@@ -116,7 +134,7 @@ public class EmployeeServiceImpl implements BasicService<Employee, Employee.Requ
     public void delete(@Nullable String authorization, String... str) {
         String loginId = userService.getMyId(authorization);
         String shopId = str[0], empNo = str[1];
-        String empId = shopId + 'e' + empNo;
+        String empId = shopId + 'e' + String.format("%03d", Integer.parseInt(empNo));
         // 유효성 체크
         userService.isPresent(loginId); // 로그인한 계정이 존재하는지
         shopService.isOwnShop(loginId, empId.substring(0, 10)); // 존재한다면 그 매장이 내 매장인지

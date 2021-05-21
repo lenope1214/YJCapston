@@ -6,9 +6,12 @@ import lombok.*;
 import org.checkerframework.checker.units.qual.C;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.annotation.Nullable;
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Entity
@@ -56,8 +59,12 @@ public class Employee {
         private String empName;
         private String birthday; // yyyyMMdd
         private String hiredate; // yyyyMMdd
-        private char gender; // 성별
+        private char gender = ' '; // 성별
         private String phone; // 전화번호
+        @Nullable
+        private String startTime;
+        @Nullable
+        private String finishTime;
 
         public Response(Employee employee){
             this.shopId = employee.getId().substring(0, 10);
@@ -68,10 +75,36 @@ public class Employee {
             this.gender = employee.getGender();
             this.phone = employee.getPhone();
         }
+
+        public Response(Employee.Dao dao){
+            this.shopId = dao.getEmpId().substring(0, 10);
+            this.empNo = Integer.parseInt(dao.getEmpId().substring(11, 14));
+            this.empName = dao.getEmpName();
+            this.startTime = dao.getStartTime();
+            this.finishTime = dao.getFinishTime();
+            this.phone = dao.getEmpPhone();
+        }
+
+//        public Response(Employee.Dao dao, List<EmployeeCommutes> ecList){
+//            this.shopId = dao.getEmpId().substring(0, 10);
+//            this.empNo = Integer.parseInt(dao.getEmpId().substring(11, 14));
+//            this.empName = dao.getEmpName();
+//            this.startTime = dao.getStartTime();
+//            this.finishTime = dao.getFinishTime();
+//            this.phone = dao.getEmpPhone();
+//            this.workTimes = ecList;
+//        }
     }
 
     public int parseEmpNo(String empId){
         return Integer.parseInt(empId.substring(11, 14));
     }
 
+    public interface Dao{
+        String getEmpId();
+        String getEmpName();
+        String getEmpPhone();
+        String getStartTime();
+        String getFinishTime();
+    }
 }

@@ -14,7 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class UserHasCouponId implements Serializable {
+public class UserCouponId implements Serializable {
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonIgnore

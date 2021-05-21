@@ -7,11 +7,11 @@ import java.util.Date;
 
 @Getter
 @Entity
-@Table(name= "USERHASCOUPONS")
-public class UserHasCoupon {
+@Table(name= "USER_COUPONS")
+public class UserCoupon {
 
     @EmbeddedId
-    private UserHasCouponId id;
+    private UserCouponId id;
     @Column(name = "begin_date")
     private Date beginDate= new Date(); // 사용 마지막 기간
     @Column(name = "expiry_date")

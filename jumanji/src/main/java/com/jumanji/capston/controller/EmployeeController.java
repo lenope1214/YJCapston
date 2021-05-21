@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import retrofit2.http.Query;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,8 +44,13 @@ public class EmployeeController {
     @Transactional(readOnly = true)
     @GetMapping("shops/{shopId}/work-times")
     public ResponseEntity<?> getShopEmpWorkTimes(@RequestHeader String authorization, @PathVariable String shopId,
-                                                 @RequestParam String date, @RequestParam String empNo){
-
+                                                 @Nullable @RequestParam String date, @Nullable @RequestParam String empNo){
+        List<Employee.Dao> employeeList = employeeService.getWorkTimes(authorization,shopId, date, empNo);
+        List<Employee.Response> response = new ArrayList<>();
+        for(Employee.Dao e : employeeList){
+            response.add(new Employee.Response(e));
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Transactional
