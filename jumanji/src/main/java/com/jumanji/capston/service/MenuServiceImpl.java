@@ -77,10 +77,10 @@ public class MenuServiceImpl implements BasicService<Menu, Menu.Request> {
         String imgPath = null;
         if (request.getImg() != null)
             imgPath = storageService.store(request.getImg(), request.getName().replace(" ", "_"), path.split("/"));
-        System.out.println("메뉴 이미지 path : " + imgPath);
-        System.out.println("메뉴명 : " + request.getName());
-        System.out.println("넣는 메뉴명 : " + request.getName().replace(" ", "_"));
-        System.out.println("넣는 메뉴 id : " + menuId);
+//        System.out.println("메뉴 이미지 path : " + imgPath);
+//        System.out.println("메뉴명 : " + request.getName());
+//        System.out.println("넣는 메뉴명 : " + request.getName().replace(" ", "_"));
+//        System.out.println("넣는 메뉴 id : " + menuId);
         menu = Menu.init()
                 .id(menuId)
                 .intro(request.getIntro())
@@ -89,7 +89,7 @@ public class MenuServiceImpl implements BasicService<Menu, Menu.Request> {
                 .imgPath(imgPath)
                 .shop(shop)
                 .build();
-        System.out.println("save 전 menu Id  : " + menu.getId());
+//        System.out.println("save 전 menu Id  : " + menu.getId());
         return menuRepository.saveAndFlush(menu);
     }
 
