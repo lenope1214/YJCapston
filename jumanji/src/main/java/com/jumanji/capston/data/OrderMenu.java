@@ -53,7 +53,7 @@ public class OrderMenu implements Serializable {
         private String shopId;
         private String menuId;
         private int quantity;
-        private String tabNo; // 테이블번호 : 사업자번호 + 테이블번호 ( 2 )
+        private int tabNo; // 테이블번호 : 사업자번호 + 테이블번호 ( 2 )
         private List<OrderMenuOption.Request> optionList;
     }
     @Getter
@@ -69,7 +69,7 @@ public class OrderMenu implements Serializable {
         private int quantity;
         private String menuName;
         private String tableNo;
-        private List<OrderMenuOption.Response> optionList;
+        private List<OrderMenuOption.Response> optionList = new ArrayList<>();
 
 
         public Response(OrderMenu order){
@@ -79,7 +79,8 @@ public class OrderMenu implements Serializable {
             this.quantity = order.getQuantity();
             this.shopId = order.getMenu().getId().substring(0, 10);
             this.menuName = order.getMenu().getId().substring(10);
-            this.tableNo = order.getTab().getId().substring(10);
+            if(order.getTab()!=null)this.tableNo = order.getTab().getId().substring(10);
+            if(order.optionList == null)return;
             for(OrderMenuOption omo : order.optionList){
                 this.optionList.add(new OrderMenuOption.Response(omo));
             }

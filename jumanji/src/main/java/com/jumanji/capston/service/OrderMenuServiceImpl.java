@@ -64,6 +64,7 @@ public class OrderMenuServiceImpl implements BasicService<OrderMenu, OrderMenu.R
     }
 
     public List<OrderMenu> getList(String authorization, Timestamp orderId) {
+//        String orderId = "" + orderLong + 'o';
         userService.isLogin(authorization);
         orderService.isPresent(orderId);
 
@@ -81,17 +82,19 @@ public class OrderMenuServiceImpl implements BasicService<OrderMenu, OrderMenu.R
 
     public List<OrderMenu> post(String authorization, OrderMenu.RequestList requestList) {
         List<OrderMenu> response = new ArrayList<>();
+        
         Menu menu;
-        Tab table;
+        Tab table = null;
+        String tabId = null;
         for(OrderMenu.Request request : requestList.getList()){
             OrderMenu orderMenu;
             long orderId = request.getOrderId().getTime();
             String menuId = request.getMenuId();
-            String tabId = request.getShopId() + request.getTabNo();
+            if(request.getTabNo() != 0)tabId = request.getShopId() + request.getTabNo();
 
             orderService.isPresent(request.getOrderId());
             menu = menuService.isPresent(menuId);
-            table = tableService.isPresent(tabId);
+            if(tabId != null)table = tableService.isPresent(tabId);
 
             int orderCount = orderMenuRepository.countByIdContains("" + orderId);
             String orderMenuId = orderId + "o" +String.format("%02d", orderCount);
@@ -102,10 +105,9 @@ public class OrderMenuServiceImpl implements BasicService<OrderMenu, OrderMenu.R
                     .menu(menu)
                     .tab(table)
                     .build();
-            System.out.println(orderMenu.getTab().getId());
             orderMenuRepository.save(orderMenu); // order menu가 있어야지 option이 들어가므로 먼저 저장.
 
-            if(request.getOptionList().size() > 0){
+            if(request.getOptionList() != null && request.getOptionList().size() > 0){
                 List<OrderMenuOption.Request> optionList = request.getOptionList();
                 List<OrderMenuOption> orderMenuOptionList = new ArrayList<>();
                 for(OrderMenuOption.Request oMoption : optionList){

@@ -22,7 +22,7 @@ public class UserShopMarkController {
     @Transactional(readOnly = true)
     @GetMapping("marks")
     public ResponseEntity<?> getMyMarkList(@RequestHeader String authorization){
-        List<UserShopMark> markShopList = usmService.getList(authorization);
+        List<Shop> markShopList = usmService.getList(authorization);
         UserShopMark.Response response = new UserShopMark.Response(markShopList);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

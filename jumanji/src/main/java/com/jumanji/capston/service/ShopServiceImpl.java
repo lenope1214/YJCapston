@@ -185,8 +185,8 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public void delete(String authorization, String shopId) {
         String loginId = userService.getMyId(authorization); // jwt가 있다는 것은 유저 인증이 완료. isPresent 필요 없음.
-        Shop shopEntity = shopRepository.findById(shopId).get();
         isOwnShop(loginId, shopId);
+        Shop shopEntity = isPresent(shopId);
         shopRepository.delete(shopEntity);
     }
 

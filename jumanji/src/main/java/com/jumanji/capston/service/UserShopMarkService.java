@@ -13,31 +13,36 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserShopMarkService implements BasicService<UserShopMark, UserShopMark.Request> {
+public class UserShopMarkService  {
     private final UserServiceImpl userService;
     private final ShopServiceImpl shopService;
     private final UserShopMarksRepository usmRepository;
 
-    @Override
+
     public UserShopMark get(@Nullable String authorization, String... str) {
         return null;
     }
 
-    @Override
-    public List<UserShopMark> getList(@Nullable String authorization, String... str) {
+
+    public List<Shop> getList(@Nullable String authorization, String... str) {
         // 변수
-        User user;
+        String loginId;
         // 값 체크
         // 유효성 체크
-        user = userService.isLogin(authorization);
-
+        loginId = userService.getMyId(authorization);
         // 서비스
-
+        List<Shop> shopList = usmRepository.findMyMarks(loginId);
         // 값 체크
-        return null;
+        System.out.println("shopList >>>>>>>>>>>>>>>>");
+        for (Shop shop : shopList){
+            System.out.println("shop id : " + shop.getId());
+            System.out.println("shop name : " + shop.getName());
+        }
+        System.out.println("shopList <<<<<<<<<<<<<<<<");
+        return shopList;
     }
 
-    @Override
+
     public UserShopMark post(@Nullable String authorization, UserShopMark.Request request) {
         // 변수
         UserShopMark usm;
@@ -56,22 +61,22 @@ public class UserShopMarkService implements BasicService<UserShopMark, UserShopM
         return usmRepository.save(usm);
     }
 
-    @Override
+
     public UserShopMark patch(@Nullable String authorization, UserShopMark.Request request) {
         return null;
     }
 
-    @Override
+
     public void delete(@Nullable String authorization, String... str) {
 
     }
 
-    @Override
+
     public UserShopMark isPresent(String id) {
         return null;
     }
 
-    @Override
+
     public boolean isEmpty(String id) {
         return false;
     }

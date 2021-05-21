@@ -83,7 +83,7 @@ public class MenuController  {
         System.out.println("메뉴 삭제 요청");
         menuService.delete(authorization, shopId, menuId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+    }// 05m20210426163000
 
 
     @PatchMapping("menus/{menuId}/popular")

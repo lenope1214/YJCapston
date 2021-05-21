@@ -137,4 +137,5 @@ public class Order implements Serializable {
     public void refund(){
         this.status = "rf";
     }
+    public void accept(){ this.status="ac";}
 }

@@ -2,17 +2,19 @@ package com.jumanji.capston.data;
 
 import lombok.*;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "user_shop_marks")
+@Entity
+@Table(name = "user_shop_marks")
 @Getter @NoArgsConstructor @ToString
 public class UserShopMark {
     @EmbeddedId
     private UserShopMarkId id;
+
+    @Transient
+    private List<Shop> markList;
 
     public UserShopMark(User user, Shop shop){
         this.id = new UserShopMarkId(user, shop);
@@ -33,10 +35,9 @@ public class UserShopMark {
             this.user = new User.Response(usm.getId().getUser());
             this.shop = new Shop.Response(usm.getId().getShop());
         }
-        public Response(List<UserShopMark> usmList ){
-            this.user = new User.Response(usmList.get(0).getId().getUser());
-            for(UserShopMark usm : usmList){
-                this.shopList.add(new Shop.Response(usm.getId().getShop()));
+        public Response(List<Shop> markShopList){
+            for(Shop shop : markShopList){
+                this.shopList.add(new Shop.Response(shop));
             }
         }
     }
