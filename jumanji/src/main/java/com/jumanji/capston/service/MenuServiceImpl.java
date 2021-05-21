@@ -83,6 +83,7 @@ public class MenuServiceImpl implements BasicService<Menu, Menu.Request> {
 //        System.out.println("넣는 메뉴 id : " + menuId);
         menu = Menu.init()
                 .id(menuId)
+                .name(request.getName())
                 .intro(request.getIntro())
                 .price(request.getPrice())
                 .duration(request.getDuration())
