@@ -21,7 +21,7 @@ const Pos = ({
             
             <S.PosWrap>
                 
-                <div className="pos-title">
+                {/* <div className="pos-title">
                     <span>{shopId}</span>
                     <Link to={"/posmain/"+shopId}>
                     <button className="title1">포스기</button>
@@ -72,7 +72,8 @@ const Pos = ({
                             className="input-box"
                         />
                     </div>
-            {/* ------------------------------- */}
+            
+
                     <div className="table1">
                         <input 
                             type="text"
@@ -105,7 +106,8 @@ const Pos = ({
                             className="input-box"
                         />
                     </div>
-            {/* ------------------------------- */}
+           
+
                     <div className="table1">
                         <input 
                             type="text"
@@ -136,7 +138,8 @@ const Pos = ({
                             className="input-box"
                         />
                     </div>
-            {/* ------------------------------- */}
+            
+            
                     <div className="table1">
                         <input 
                             type="text"
@@ -169,8 +172,167 @@ const Pos = ({
                     </div>
                         
                 </div>
-    <button onClick={number} className="number">테이블 저장</button>
-                   
+    <button onClick={number} className="number">테이블 저장</button> */}
+
+            <div className="left-container">
+                <div className="shopName">{name}</div>
+            </div>
+            <div className="right-container">
+                <div className="line">
+                    <span className="line-1">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        />
+                    </span>
+                    <span className="line-2">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        />
+                    </span>
+                    <span className="line-3">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                    <span className="line-4">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                    <span className="line-5">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                </div>
+                
+
+                <div className="line">
+                    <span className="line-1">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        />
+                    </span>
+                    <span className="line-2">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        />
+                    </span>
+                    <span className="line-3">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                    <span className="line-4">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                    <span className="line-5">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                </div>
+
+
+                <div className="line">
+                    <span className="line-1">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        />
+                    </span>
+                    <span className="line-2">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        />
+                    </span>
+                    <span className="line-3">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                    <span className="line-4">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                    <span className="line-5">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                </div>
+
+
+                <div className="line">
+                    <span className="line-1">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        />
+                    </span>
+                    <span className="line-2">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        />
+                    </span>
+                    <span className="line-3">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                    <span className="line-4">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                    <span className="line-5">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                </div>
+
+
+                <div className="line">
+                    <span className="line-1">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        />
+                    </span>
+                    <span className="line-2">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        />
+                    </span>
+                    <span className="line-3">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                    <span className="line-4">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                    <span className="line-5">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                </div>
+            </div>
+
                 </S.PosWrap>
             
         </>

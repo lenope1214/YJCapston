@@ -10,7 +10,7 @@ export const getMyInfo = () => {
 };
 
 export const Mypageorder = () => {
-    return apiDefault().get("/orders", {
+    return apiDefault().get("/orders/list", {
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         },

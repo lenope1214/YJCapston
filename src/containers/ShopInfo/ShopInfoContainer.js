@@ -95,7 +95,8 @@ const ShopInfoContainer = (props) => {
     };
 
     const Shop_v3 = () => {
-        putShopopen(shopId).then((res) => {
+        putShopopen(shopId)
+        .then((res) => {
             //history.push("/shopInfo/"+shopId)
             history.push("/myshop");
             alert("오픈여부변경완료+");

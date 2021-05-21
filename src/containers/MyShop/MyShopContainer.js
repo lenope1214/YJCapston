@@ -28,7 +28,7 @@ const MyShopContainer = (props) => {
                 const shop = res.data.map((shop) => {
                     return {
                         img: shop.imgPath,
-                        id: shop.shopId,
+                        shopId: shop.shopId,
                         shopname: shop.name,
                         intro: shop.intro,
                         category: shop.category,
@@ -75,7 +75,11 @@ const MyShopContainer = (props) => {
         <>
             <Header />
 
-            <MyShop shops={shops} removeShop={removeShop} shopId={shopId} />
+            <MyShop 
+            shops={shops} 
+            removeShop={removeShop} 
+            shopId={shopId} 
+            />
         </>
     );
 };

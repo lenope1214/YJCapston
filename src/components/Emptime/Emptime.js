@@ -5,8 +5,12 @@ import reactDom from "react-dom";
 
 const Emptime = ({
     shopId,
+    empNo,
     nowTime,
     nowDate,
+    Start,
+    End,
+    empName,
 }) => {
 
     return(
@@ -14,14 +18,14 @@ const Emptime = ({
             <S.EmptimeWrap>
                 <div className="emptime-container">
                     <div className="main">
-                        <span className="name">임재욱</span>
+                        <span>{shopId}{empName}</span>
                     </div>
                     <div className="main-2">
                         <div className="date">{nowDate}</div> <br/>
                         <div className="time">{nowTime}</div>
                         <div className="work-button">
-                            <button className="work">출근</button>
-                            <button className="after-work">퇴근</button>
+                            <button onClick={Start} className="work">출근</button>
+                            <button onClick={End} className="after-work">퇴근</button>
                         </div>
                     </div>
                                             

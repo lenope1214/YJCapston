@@ -66,7 +66,7 @@ const App = () => {
                     <Route component={PosMainContainer} path="/PosMain/:shopId"/>
                     <Route component={EmployeeContainer} path="/Employee/:shopId"/>
                     <Route component={EmplistContainer} path="/Emplist/:shopId"/>
-                    <Route component={EmptimeContainer} path="/Emptime/:shopId"/>
+                    <Route component={EmptimeContainer} path="/Emptime/:shopId/:empNo"/>
                     <Route component={EmptimelistContainer} path="/Emptimelist/:shopId"/>
                     <Route
                         component={MenuListContainer}

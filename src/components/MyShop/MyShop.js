@@ -52,7 +52,7 @@ const MyShop = ({
                                 return (
                                     <tr>
                                         <td className="body-item-1">
-                                        <Link to={`/menuList/${shop.id}`} className="menu-link">
+                                        <Link to={`/menuList/${shop.shopId}`} className="menu-link">
                                             <img src={`http://3.34.55.186:8088/${shop.img}`}
                                                 width='150'
                                                 height='150'
@@ -61,8 +61,8 @@ const MyShop = ({
                                             </Link>
                                         </td>
                                         <td className="body-item-2">
-                                            <Link to={`/menuList/${shop.id}`} className="menu-link">
-                                                {shop.id}
+                                            <Link to={`/menuList/${shop.shopId}`} className="menu-link">
+                                                {shop.shopId}
                                             </Link>
                                         </td>
                                         <td className="body-item-3">{shop.shopname}</td>

@@ -15,7 +15,7 @@ export const putMenuPopular = (menuId) => {
     return apiDefault().patch(`/menus/${menuId}/popular` ,{},{
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
-        }, 
+        },
     });
 };
 export const putMenuSale = (menuId) => {

@@ -27,7 +27,7 @@ realTime
             
             <table className="emp-list">
                 <thead className="table-head">
-                <th className="item-1">직원번호</th>
+                    <th className="item-1">직원번호</th>
                     <th className="item-1">이름</th>
                     <th className="item-1">생년월일</th>
                     <th className="item-1">고용날짜</th>
@@ -49,7 +49,7 @@ realTime
                             <tr>
                                 <td className="body-item-2">{emp.empNo}</td>
                                 <td className="body-item-1">
-                                <Link to={`/emptime/${shopId}`} className="emp-link">
+                                <Link to={`/emptime/${shopId}/${emp.empNo}`} className="emp-link">
                                     {emp.empName}
                                 </Link>
                                 </td>

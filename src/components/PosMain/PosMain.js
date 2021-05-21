@@ -20,7 +20,7 @@ const PosMain = ({
                     <Link to={"/pos/"+shopId}>
                     <button className="main-button1">테이블 현황</button>
                     </Link>
-                    <Link to={"/employee/"+shopId}>
+                    <Link to={"/emplist/"+shopId}>
                     <button className="main-button2">직원관리</button>
                     </Link>
                     <button className="main-button3">예약관리</button> 

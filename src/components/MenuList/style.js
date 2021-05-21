@@ -37,7 +37,7 @@ a { color: black;}
     width: 100%; 
     border-collapse: collapse;
     padding-bottom: 100px;   
-    background: white;
+    width: 100%; 
     border-radius: 3% 3% 0 0;
 }
 
