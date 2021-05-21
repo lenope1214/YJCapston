@@ -90,6 +90,13 @@ public class OrderController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @PatchMapping("orders/accept")
+    public ResponseEntity<?> orderAccept(@RequestHeader String authorization, @RequestBody Order.Request request){
+        Order order = orderService.orderAccept(authorization, request);
+        Order.Response response = new Order.Response(order);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     @Transactional
     @GetMapping("orders/admin")
     public ResponseEntity<?> getOrderAll(){

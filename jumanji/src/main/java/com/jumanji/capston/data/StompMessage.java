@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class StompMessage {
     private Integer shopId;
     private String type;
+    private String roomId;
     private String username;
     private String message;
 }

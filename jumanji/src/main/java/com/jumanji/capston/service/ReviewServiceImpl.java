@@ -58,7 +58,7 @@ public class ReviewServiceImpl implements BasicService<Review, Review.Request> {
         if(!order.getStatus().equals("pd"))throw new OrderNotPaidException(); //결제가 아니면 결제완료부터 하라 함.
         isEmpty(request.getOrderId()); // 같은 주문 번호로 리뷰 여러번 쓰는거 막기
         //TODO 추후에 결제완료 후 일정 시간 뒤에 적게 해야 함.
-
+//        System.out.println(request.getImg().getName());
         if (request.getImg() != null)
             imgPath = storageService.store(request.getImg(), request.getImg().getName(), uri.split("/"));
         Date regDate = new Date();
@@ -82,6 +82,7 @@ public class ReviewServiceImpl implements BasicService<Review, Review.Request> {
                 .order(order)
                 .build();
         review = reviewRepository.save(review);
+        System.out.println("등록된 리뷰의 imgUrl : " + review.getImgUrl() );
         return review;
     }
 

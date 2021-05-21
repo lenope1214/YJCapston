@@ -34,6 +34,7 @@ public class Option {
         private int price;
         private int max;
         private String optionGroupId;
+        private int no;
     }
 
     @AllArgsConstructor @Getter

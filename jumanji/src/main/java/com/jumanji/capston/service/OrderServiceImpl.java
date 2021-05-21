@@ -150,6 +150,25 @@ public class OrderServiceImpl implements OrderService {
         return orderList;
     }
 
+    public Order orderAccept(String authorization, Order.Request request) {
+        // 변수
+        String loginId;
+        Order order;
+
+        // 값 체크
+
+        // 유효성 체크
+        loginId = userService.getMyId(authorization);
+        shopService.isOwnShop(loginId, request.getShopId());
+        order = isPresent(request.getOrderId());
+
+        // 서비스
+        order.accept();
+
+        // 값 체크
+        return order;
+    }
+
     public void statusUpdate(Order order) {
         orderRepository.save(order);
     }
@@ -157,4 +176,6 @@ public class OrderServiceImpl implements OrderService {
     public Object getList() {
         return orderRepository.findAll();
     }
+
+
 }

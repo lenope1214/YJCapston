@@ -31,7 +31,7 @@ public class ChatController {
 //        }
 
 //        stompService.post(chatMessage);
-        messagingTemplate.convertAndSend("/sub/" + chatMessage.getShopId() + "/" + chatMessage.getType(), chatMessage);
+        messagingTemplate.convertAndSend("/sub/" + chatMessage.getShopId() + "/" + chatMessage.getType() + "/" + chatMessage.getRoomId(), chatMessage);
     }
 
     @EventListener(SessionConnectEvent.class)

@@ -27,7 +27,7 @@ import java.util.List;
 @Component
 @ResponseStatus(value = HttpStatus.UNAUTHORIZED, reason = "login required")
 public class JwtRequestFilter extends OncePerRequestFilter {
-
+    private static final String EXPATH = "/api/v1/";
     @Autowired
     private PrincipalDetailsService jwtUserDetailService;
 
@@ -58,6 +58,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
 //        System.out.println("In JwtRequestFilter");
         if (shouldNotFilter(request)) {
+            System.out.println("jwt 확인 안함!");
             filterChain.doFilter(request, response);
         }
         final String requestTokenHeader = request.getHeader("Authorization");
@@ -120,8 +121,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        System.out.println("요청 url : " +request.getServletPath());
-//        for(String path :request.getServletPath().split("/") ){
+//        System.out.println("요청 url : " +request.getServletPath());
+//        for(String path :request.getServletPath().split("/") ){65
 //            System.out.println("-------> " + path);
 //        }
         String path =  request.getServletPath();
@@ -130,8 +131,14 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             return true;
         }
         if(path.startsWith("/api/v1/")) {
-//            System.out.println("잘라낸 패스 : "  + path.substring(path.indexOf("/api/v1/") + 8));
-            return EXCLUDE_URL.stream().anyMatch(exclude -> exclude.equalsIgnoreCase(path.substring(path.indexOf("/api/v1/") + 8)));
+            final String PATH = path.substring(path.indexOf("EXPATH") + EXPATH.length()+1);
+//            System.out.println("잘라낸 패스 : "  + PATH);
+
+//            for(Object str : EXCLUDE_URL.toArray()){
+//                System.out.println(str);
+//            }
+//            System.out.println(EXCLUDE_URL.stream().anyMatch(exclude -> exclude.startsWith(PATH)));
+            return EXCLUDE_URL.stream().anyMatch(exclude -> exclude.startsWith(PATH));
         }
         return false;
     }

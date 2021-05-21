@@ -1,12 +1,20 @@
 package com.jumanji.capston.service.exception;
 
 import com.jumanji.capston.service.exception.auth.ForbiddenException;
+import com.jumanji.capston.service.exception.employeeException.EmployeeAlreadyStartException;
+import com.jumanji.capston.service.exception.employeeException.EmployeeDoesNotStartException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeHasExistException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeNotFoundException;
 import com.jumanji.capston.service.exception.menuException.MenuHasExistException;
 import com.jumanji.capston.service.exception.myException.MyNonUniqueResultException;
+import com.jumanji.capston.service.exception.optionException.OptionHasExistException;
+import com.jumanji.capston.service.exception.optionException.OptionNotFoundException;
+import com.jumanji.capston.service.exception.optionGroupException.OptionGroupHasExistException;
+import com.jumanji.capston.service.exception.optionGroupException.OptionGroupNotFoundException;
 import com.jumanji.capston.service.exception.orderException.OrderNotFoundException;
 import com.jumanji.capston.service.exception.orderMenuException.OrderMenuNotFoundException;
+import com.jumanji.capston.service.exception.orderMenuOptionException.OrderMenuOptionHasExistException;
+import com.jumanji.capston.service.exception.orderMenuOptionException.OrderMenuOptionNotFoundException;
 import com.jumanji.capston.service.exception.reviewException.ReviewHasExistException;
 import com.jumanji.capston.service.exception.reviewException.ReviewNotFoundException;
 import com.jumanji.capston.service.exception.shopException.NoShopListException;
@@ -176,18 +184,66 @@ public class ApiExceptionHandler{
     }
 
     @ExceptionHandler(ReviewHasExistException.class)
-    public ResponseEntity<ApiErrorResponse> myNonUniqueResultException(ReviewHasExistException ex) {
+    public ResponseEntity<ApiErrorResponse> reviewHasExistException(ReviewHasExistException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(ReviewNotFoundException.class)
-    public ResponseEntity<ApiErrorResponse> ReviewNotFoundException(ReviewNotFoundException ex) {
+    @ExceptionHandler(OptionNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> optionNotFoundException(OptionNotFoundException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(OptionHasExistException.class)
+    public ResponseEntity<ApiErrorResponse> optionHasExistException(OptionHasExistException ex) {
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+    @ExceptionHandler(OptionGroupNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> optionGroupNotFoundException(OptionGroupNotFoundException ex) {
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(OptionGroupHasExistException.class)
+    public ResponseEntity<ApiErrorResponse> optionGroupHasExistException(OptionGroupHasExistException ex) {
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(OrderMenuOptionNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> orderMenuOptionNotFoundException(OrderMenuOptionNotFoundException ex) {
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(OrderMenuOptionHasExistException.class)
+    public ResponseEntity<ApiErrorResponse> orderMenuOptionHasExistException(OrderMenuOptionHasExistException ex) {
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(EmployeeDoesNotStartException.class)
+    public ResponseEntity<ApiErrorResponse> employeeDoesNotStartException(EmployeeDoesNotStartException ex) {
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(EmployeeAlreadyStartException.class)
+    public ResponseEntity<ApiErrorResponse> employeeAlreadyStartException(EmployeeAlreadyStartException ex) {
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
 
 
 
