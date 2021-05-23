@@ -77,6 +77,7 @@ public class Order implements Serializable {
 
     @Getter
     public static class Response{
+        private String userId; // 암호화 해서 주고받자..
         private Timestamp orderId;
         private String shopId;
         private int people;
@@ -94,6 +95,7 @@ public class Order implements Serializable {
         private char reviewed;
 
         public Response(Order order) {
+            this.userId = order.getUser().getId(); // 암호화 해서 주고받자..
             this.orderId = order.getId();
             this.shopId = order.getShop().getId();
             this.shopName = order.getShop().getName();
