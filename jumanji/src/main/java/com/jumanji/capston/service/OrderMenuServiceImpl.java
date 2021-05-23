@@ -3,10 +3,13 @@ package com.jumanji.capston.service;
 import com.jumanji.capston.data.*;
 import com.jumanji.capston.repository.OrderMenuOptionRepository;
 import com.jumanji.capston.repository.OrderMenuRepository;
+import com.jumanji.capston.repository.OrderRepository;
 import com.jumanji.capston.repository.UserRepository;
+import com.jumanji.capston.service.exception.OrderException.OrderNotMineException;
 import com.jumanji.capston.service.exception.orderMenuException.OrderMenuNotFoundException;
 import com.jumanji.capston.service.exception.shopException.ShopMissMatchException;
 import com.jumanji.capston.service.interfaces.BasicService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,9 +23,11 @@ import java.util.Set;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class OrderMenuServiceImpl implements BasicService<OrderMenu, OrderMenu.Request> {
     @Autowired
     OrderMenuRepository orderMenuRepository;
+    private final OrderRepository orderRepository;
     @Autowired
     ShopServiceImpl shopService;
     @Autowired
@@ -86,15 +91,18 @@ public class OrderMenuServiceImpl implements BasicService<OrderMenu, OrderMenu.R
         Menu menu;
         Tab table = null;
         String tabId = null;
+        String loginId = userService.getMyId(authorization);
         for(OrderMenu.Request request : requestList.getList()){
             OrderMenu orderMenu;
             long orderId = request.getOrderId().getTime();
+            Timestamp orderTime = new Timestamp(orderId);
             String menuId = request.getMenuId();
             if(request.getTabNo() != 0)tabId = request.getShopId() + request.getTabNo();
 
             orderService.isPresent(request.getOrderId());
             menu = menuService.isPresent(menuId);
             if(tabId != null)table = tableService.isPresent(tabId);
+            if(!isMyOrder(loginId, orderTime))throw new OrderNotMineException(); // 내 주문요청이 아니면 오류 던지기
 
             int orderCount = orderMenuRepository.countByIdContains("" + orderId);
             String orderMenuId = orderId + "o" +String.format("%02d", orderCount);
@@ -171,6 +179,13 @@ public class OrderMenuServiceImpl implements BasicService<OrderMenu, OrderMenu.R
         Optional<OrderMenu> om = orderMenuRepository.findById(orderId);
         if (om.isPresent()) return om.get();
         throw new OrderMenuNotFoundException();
+    }
+
+    public boolean isMyOrder(String loginId, Timestamp orderId){
+        char om = orderRepository.isMyOrder(loginId, orderId);
+        System.out.println("내 주문요청이야? " + om );
+        if(om == 'Y')return true;
+        return false;
     }
 
     @Override
