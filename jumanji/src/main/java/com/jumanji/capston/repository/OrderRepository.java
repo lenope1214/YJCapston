@@ -1,6 +1,7 @@
 package com.jumanji.capston.repository;
 
 import com.jumanji.capston.data.Order;
+import com.jumanji.capston.data.OrderMenu;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -23,6 +24,16 @@ public interface OrderRepository extends JpaRepository<Order, Timestamp> {
             "               where r.USER_ID = :userId), o.id, 'Y', 'N') reviewed\n" +
             "from orders o", nativeQuery = true)
     List<Order> myOrderListContainsReviewed(String userId);
+
+
+    @Query(value = "select \n" +
+            "       case\n" +
+            "           when o.USER_ID = :userId then 'Y'\n" +
+            "           else 'N'\n" +
+            "           end result\n" +
+            "from ORDERS o\n" +
+            "where id = :id", nativeQuery = true)
+    char isMyOrder(String userId, Timestamp id);
 
 
 

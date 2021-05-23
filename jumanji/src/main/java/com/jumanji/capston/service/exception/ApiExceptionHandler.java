@@ -1,5 +1,6 @@
 package com.jumanji.capston.service.exception;
 
+import com.jumanji.capston.service.exception.OrderException.OrderNotMineException;
 import com.jumanji.capston.service.exception.auth.ForbiddenException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeAlreadyStartException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeDoesNotStartException;
@@ -251,6 +252,10 @@ public class ApiExceptionHandler{
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-
-
+    @ExceptionHandler(OrderNotMineException.class)
+    public ResponseEntity<ApiErrorResponse> orderNotMineException(OrderNotMineException ex) {
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+    }
 }

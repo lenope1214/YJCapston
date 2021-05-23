@@ -13,4 +13,7 @@ public class StompMessage {
     private String roomId;
     private String username;
     private String message;
+    private String orderList;
+    private String orderId;
+    private String orderNumber;
 }

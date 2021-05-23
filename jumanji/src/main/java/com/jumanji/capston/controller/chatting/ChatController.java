@@ -31,6 +31,26 @@ public class ChatController {
 //        }
 
 //        stompService.post(chatMessage);
+        System.out.println("스톰프 메세지 >>>>>>>");
+//        private Integer shopId;
+//        private String type;
+//        private String roomId;
+//        private String username;
+//        private String message;
+//        private String orderList;
+//        private String orderId;
+//        private String orderNumber;
+        System.out.println(
+                "shopId : " + chatMessage.getShopId() +"\n" +
+                "type : " + chatMessage.getType() + "\n" +
+                "roomId : " + chatMessage.getRoomId() + "\n" +
+                "username : " + chatMessage.getUsername() + "\n" +
+                "message : " + chatMessage.getMessage()+ "\n" +
+                "orderList : " + chatMessage.getOrderList() + "\n" +
+                "orderId : " + chatMessage.getOrderId() + "\n" +
+                "orderNumber : " + chatMessage.getOrderNumber()
+        );
+        System.out.println("스톰프 메세지 <<<<<<<");
         messagingTemplate.convertAndSend("/sub/" + chatMessage.getShopId() + "/" + chatMessage.getType() + "/" + chatMessage.getRoomId(), chatMessage);
     }
 
