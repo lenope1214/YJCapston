@@ -36,4 +36,11 @@ public class UserShopMarkController {
 //        return new ResponseEntity<>(response, HttpStatus.CREATED);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+    @Transactional
+    @DeleteMapping("marks/{shopId}")
+    public ResponseEntity<?> delete(@RequestHeader String authorization, @PathVariable String shopId){
+        usmService.delete(authorization, shopId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
