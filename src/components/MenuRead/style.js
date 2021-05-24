@@ -5,7 +5,7 @@ background: #F2F2F2;
 text-align: left;
 
 .form-label {
-    padding: 40px 0 4z0px 40px;
+    padding: 40px 0 40px 40px;
     text-align: center;
 }
 .menu-title { 

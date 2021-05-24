@@ -25,6 +25,11 @@ const ShopOrder = ({
     handleRequest,
     handlePeople,
     people,
+    handlepoint,
+    pointcheck,
+    lastprcie,
+    publish,
+    connect,
 }) => {
     return (
         <>
@@ -188,13 +193,26 @@ const ShopOrder = ({
                             <div>
                                 <div className="box-title">결제 정보</div>
                                 <div className="subtitle">할인 쿠폰</div>
-                                <div>
-                                    <input value="없음" className="input-box" />
-                                </div>
+                                <input value="없음" className="input-box" />
+                            </div>
+                            <div className="subtitle">현재 포인트</div>
+                            <input
+                                value={jmuserinfo.point - pointcheck}
+                                className="input-box"
+                            ></input>
+                            <br />
+                            <input
+                                className="input-box"
+                                placeholder="사용할 포인트를 입력해주세요"
+                                value={pointcheck}
+                                onChange={handlepoint}
+                            />
+
+                            <div>
                                 <div className="subtitle">총결제 금액</div>
                                 <div>
                                     <input
-                                        value={jmallprice}
+                                        value={jmallprice - pointcheck}
                                         className="input-box"
                                     />
                                 </div>
@@ -210,6 +228,8 @@ const ShopOrder = ({
                             <button className="button2" onClick={goBack}>
                                 취소
                             </button>
+                            <button onClick={connect}> test1</button>
+                            <button onClick={publish}>test2</button>
                         </div>
                     </body>
                 </div>

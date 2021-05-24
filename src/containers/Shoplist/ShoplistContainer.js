@@ -69,6 +69,8 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         id: rstrt.id,
                         addressDetail: rstrt.addressDetail,
                         img: rstrt.imgPath,
+                        reviews: rstrt.reviews,
+                        score: rstrt.score,
                     };
                 });
                 setRestaurant(rstrt);
@@ -90,6 +92,8 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         id: rstrt.id,
                         addressDetail: rstrt.addressDetail,
                         img: rstrt.imgPath,
+                        reviews: rstrt.reviews,
+                        score: rstrt.score,
                     };
                 });
                 setRestaurant(rstrt);
@@ -111,6 +115,8 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         id: rstrt.id,
                         addressDetail: rstrt.addressDetail,
                         img: rstrt.imgPath,
+                        reviews: rstrt.reviews,
+                        score: rstrt.score,
                     };
                 });
                 setRestaurant(rstrt);
@@ -132,6 +138,8 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         id: rstrt.id,
                         addressDetail: rstrt.addressDetail,
                         img: rstrt.imgPath,
+                        reviews: rstrt.reviews,
+                        score: rstrt.score,
                     };
                 });
                 setRestaurant(rstrt);
@@ -153,6 +161,8 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         id: rstrt.id,
                         addressDetail: rstrt.addressDetail,
                         img: rstrt.imgPath,
+                        reviews: rstrt.reviews,
+                        score: rstrt.score,
                     };
                 });
                 setRestaurant(rstrt);
@@ -174,6 +184,8 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         id: rstrt.id,
                         addressDetail: rstrt.addressDetail,
                         img: rstrt.imgPath,
+                        reviews: rstrt.reviews,
+                        score: rstrt.score,
                     };
                 });
                 setRestaurant(rstrt);
@@ -195,6 +207,8 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         id: rstrt.id,
                         addressDetail: rstrt.addressDetail,
                         img: rstrt.imgPath,
+                        reviews: rstrt.reviews,
+                        score: rstrt.score,
                     };
                 });
                 setRestaurant(rstrt);
@@ -216,6 +230,8 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         id: rstrt.id,
                         addressDetail: rstrt.addressDetail,
                         img: rstrt.imgPath,
+                        reviews: rstrt.reviews,
+                        score: rstrt.score,
                     };
                 });
                 setRestaurant(rstrt);
@@ -237,6 +253,8 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         id: rstrt.id,
                         addressDetail: rstrt.addressDetail,
                         img: rstrt.imgPath,
+                        reviews: rstrt.reviews,
+                        score: rstrt.score,
                     };
                 });
                 setRestaurant(rstrt);
@@ -258,6 +276,8 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         id: rstrt.id,
                         addressDetail: rstrt.addressDetail,
                         img: rstrt.imgPath,
+                        reviews: rstrt.reviews,
+                        score: rstrt.score,
                     };
                 });
                 console.log(rstrt);
@@ -302,6 +322,8 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         id: rstrt.shopId,
                         addressDetail: rstrt.addressDetail,
                         img: rstrt.imgPath,
+                        reviews: rstrt.reviews,
+                        score: rstrt.score,
                     };
                 });
                 console.log(rstrt);

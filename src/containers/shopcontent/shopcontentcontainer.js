@@ -10,8 +10,9 @@ import {
     jmthing,
     getReviewlist,
 } from "../../lib/shopcontent/index";
-import Geocode from "react-geocode";
+import Geocode, { fromAddress } from "react-geocode";
 import { getMenuList } from "../../lib/MenuList";
+import { removeReviews } from "../../lib/shopcontent/index";
 
 Geocode.setApiKey("AIzaSyBvpJoGP7dKHRovDgP4CSByczdZC7vrz18");
 Geocode.setLanguage("kr");
@@ -181,6 +182,7 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
                     regdate: reviewlist.regDate,
                     score: reviewlist.score,
                     imgUrl: reviewlist.imgUrl,
+                    reviewId: reviewlist.reviewId,
                 };
             });
             setReviewList(reviewlist);
@@ -215,6 +217,21 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
                     alert("로그인서버문제");
                 }
             });
+    };
+
+    const removeReview = (id) => {
+        removeReviews(id)
+        .then((res) =>{
+            alert("삭제되었습니다.");
+            window.location.reload();
+        })
+        .catch((err) => {
+            // alert(err.response.status);
+            if(err.response.status == 500) {
+                // alert(err);
+                alert("리뷰 작성자가 아닙니다.");
+            } else alert("리뷰 삭제 에러");
+        });
     };
 
     const order = () => {
@@ -304,6 +321,7 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
             order={order}
             shopId={shopId}
             reviewList={reviewList}
+            removeReview={removeReview}
             // jmmenuReducer={jmmenuReducer}
         />
     );

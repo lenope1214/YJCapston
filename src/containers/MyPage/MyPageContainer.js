@@ -135,6 +135,7 @@ const MyPageContainer = (props) => {
                         jmamount: orderjmlist.totalAmount,
                         jmshopName: orderjmlist.shopName,
                         jmshopId: orderjmlist.shopId,
+                        jmreviewed: orderjmlist.reviewed,
                     };
                 });
                 setJmlist(orderjmlist);

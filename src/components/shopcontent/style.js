@@ -690,7 +690,7 @@ export const shopcontentWrap = styled.div`
     .review-title {
         background: white;
         transform: translateY(3px);
-        padding-left: 10px;
+        padding-left: 40px;
         padding-top: 10px;
         padding-bottom: 20px;
         font-weight: bold;
@@ -700,13 +700,15 @@ export const shopcontentWrap = styled.div`
         background: white;
         margin-top: 3px;
         margin-bottom: 3px;
+        width: 100%;
     }
     .review-1 {
         padding-top: 14px;
-        padding-left: 10px;
+        padding-left: 30px;
         padding-bottom: 10px;
         font-weight: bold;
         font-size: 14px;
+        width: 10%;
     }
     .useritem {
         height: 40px;
@@ -717,7 +719,7 @@ export const shopcontentWrap = styled.div`
         transform: translateY(-14px);
     }
     .review-2 {
-        padding-left: 14px;
+        padding-left: 34px;
         padding-bottom: 10px;
         font-weight: bold;   
         transform: translateY(-8px);
@@ -727,19 +729,19 @@ export const shopcontentWrap = styled.div`
         margin-right: 5px;
     }
     .review-3 {
-        padding-left: 14px;
+        padding-left: 34px;
         padding-bottom: 10px;
         font-size: 13px;
         color: gray;
         transform: translateY(-8px);
     }
     .review-4 {
-        padding-left: 14px;
+        padding-left: 34px;
         padding-bottom: 10px;
     }
     .review-5 {
-        padding-left: 14px;
-        padding-bottom: 20px;
+        padding-left: 34px;
+        padding-bottom: 25px;
         font-size: 15px;
     }
     .none-review {
@@ -753,6 +755,16 @@ export const shopcontentWrap = styled.div`
     }
     .imgbox-none {
         display: none;
+    }
+    .delete {
+        float: right;
+        margin-top: 10px;
+        margin-right: 50px;
+        background: none;
+        border: 0px;
+        color: gray;
+        border-bottom: 1px solid gray;
+        cursor: pointer;
     }
 `;
 

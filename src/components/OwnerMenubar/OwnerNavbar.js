@@ -21,6 +21,9 @@ const OwnerNavbar = ({shopId}) => {
                 <NavLink to="/myshop" activeClassName="active">
                     <li className="nav-item">매장 목록</li>
                 </NavLink>
+                <NavLink to={"/qrcode/"+thisShopId} activeClassName="active">
+                    <li className="nav-item">QR코드</li>
+                </NavLink>
             </ul>
         </nav>
         </S.NavWrap>

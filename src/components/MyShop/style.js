@@ -1,145 +1,79 @@
-
 import styled from "styled-components";
 
 export const MyShopWrap = styled.div`
-background: #F2F2F2;
+background-color: #F2F2F2;
 a { color: black;}
 
+.topimg {
+    margin-top: 90px;
+    height: 200px;
+    width: 100%;
+    margin-bottom: 50px;
+    position: absolute;
+}
+.topimg-text {
+    font-family: "Wemakeprice-Bold";
+    margin-top: 170px;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    font-size: 46px;
+    color: white;
+}
 .menu-container {
-    padding-top: 160px;
-    padding-left: 50%;
-    transform: translateX(-27%);
-    width: 70%;
-    padding-bottom: 70px;
+    position: absolute;
+    margin-left: 20%;
+    margin-top: 330px;
+    width: 60%;
+    background-color: white;
 }
 
-.btn-link, btn-link:visited {
-    margin-top: 120px;
+.img {
+    padding-left: 10px;
+}
+.btn-link {
+    float: right;
     color: whitesmoke;
-    font-size: 1.2em;
-    margin: 16px 0px;
-    display: block;
-    font-weight: bold;
+    font-size: 14px;
     background: black;
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 8.5px );
-    -webkit-backdrop-filter: blur( 8.5px );
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-    border-radius: 10px;
-    width: 85%;
-    max-width: 800px;
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
+    width: 120px;
+    height: 38px;
     text-decoration: none;
     margin: 0 auto;
+    cursor: pointer;
+    margin-bottom: 80px;
+}
+td {
+    display: inline-block;
+    top: 0;
 }
 
-.img-box {
-    border-radius: 15%;
-    text-align: center;
+.td1 {
 }
 
-.menu-list {
-    margin-top: 70px;
-    width: 100%; 
-    border-collapse: collapse;
-    padding-bottom: 160px;   
+.td2 {
+    
+    padding-left: 20px;
+    transform: translateY(-16px);
+}
+
+.td3 {
+    padding-right: 20px;
+    float: right;
+}
+.oneblock {
     background: white;
-    border-radius: 3% 3% 0 0;
+    margin-bottom: 15px;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
 }
 
-.menu-link {
-    text-decoration: none;
-    text-align: center;
-}
-
-th, td {
-    border-bottom: 1px solid #444444;
+.img {
+    margin-top: 15px;
 }
 
 .menu-title {
     margin-bottom : 70px;
-}
-
-.item-1{
-    width: 20%;
-    padding:20px;
-    text-align: center;
-}
-.item-2{
-    width: 20%;
-    text-align: center;
-   
-}
-.item-3{
-    width: 15%;
-    text-align: center;
-}
-.item-4{
-    width: 15%;
-    text-align: center;
-   
-}
-.item-5{
-    width: 15%;
-    text-align: center;
-    
-}
-.item-6{
-    width: 5%;
-    text-align: center;
-}
-.item-7{
-    width: 5%;
-    text-align: center;
-}
-.item-8{
-    width: 10%;
-    text-align: center;
-}
-
-.body-item-1{
-    width: 20%;
-    padding:20px;
-    text-align: center;
-}
-.body-item-2{
-    width: 15%;
-    text-align: center;
-}
-.body-item-3{
-    width: 15%;
-    text-align: center;
-    
-}
-.body-item-4{
-    width: 15%;
-    text-align: center;
-}
-.body-item-5{
-    width: 15%;
-    text-align: center;
-}
-.body-item-6{
-    width: 10%;
-    text-align: center;
-}
-.body-item-7{
-    padding: 15px;
-    font-size: 19px;
-    text-aling: center;
-  
-}
-//.body-item-7{
-//    width: 10%;
-//    text-align: center;
-//}
-.body-item-8{
-    padding: 15px;
-    font-size: 19px;
-    text-aling: center;
-  
 }
 
 .delete-button{
@@ -153,5 +87,45 @@ th, td {
     text-align: center;
     padding: 20px;
     font-size: 24px;
+}
+.itembutton {
+    margin-left: 20px;
+    background: none;
+    border: 1px solid gray;
+    height: 36px;
+    width: 84px;
+    margin-top: 50%;
+    transform: translateY(-18px);
+    cursor: pointer;
+}
+.shopname {
+    font-size: 18px;
+    font-weight: bold;
+    color: skyblue;
+}
+.address1 {
+    font-size: 14px;
+    color: #FF9900;
+    line-height: 10px;
+}
+.rspos1 {
+    font-size: 14px;
+    color: #FF9900;
+    line-height: 10px;
+}
+.address2 {
+    font-size: 13px;
+    line-height: 5px;
+    padding-left: 10px;
+}
+.rspos2 {
+    font-size: 14px;
+    line-height: 5px;
+    padding-left: 10px;
+}
+.isopen2 {
+    font-size: 13px;
+    line-height: 5px;
+    padding-left: 10px;
 }
 `;

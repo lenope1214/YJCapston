@@ -15,6 +15,8 @@ const ShopInfo = ({
     addressDetail,
     isRsPos,
     shopName,
+    shopPhone,
+    handleShopphone,
     handleShopName,
     // handleId,
     shopIntro,
@@ -42,9 +44,11 @@ const ShopInfo = ({
     handleComplete,     
     handleRoadAddr,
     img,
-    shop
+    shop,
+    goBack
 }
 ) => {
+    console.log(isOpen);
     
     const postCodeStyle = {
         display: "block",
@@ -56,18 +60,28 @@ const ShopInfo = ({
         left: "50%",
         transform: "translate(-50%, -50%)",
     };
-
+    
     return(
         <>
         <S.InfoWrap>
         <div className="total-body">
                 <div className="title">매장 정보</div>
             <div className="label">
+                매장사진
+            </div>
+            <div className="img-box">
+            <img src={`http://3.34.55.186:8088/${img}`}
+                width='400'
+                height='300'
+                className="img-box-box"
+            />
+            </div>
+            <div className="label">
                 사업자아이디
             </div>
             <input
                 type="text"
-                value={id}
+                value={shopId}
                 className="input-box"
                 disabled
             />
@@ -84,6 +98,39 @@ const ShopInfo = ({
                 className="input-box"
                 disabled
             />
+
+            {/* <div className="label">전화번호</div>
+                <select id="txtMobile1" defaultValue="053" className="phone-box1">
+            
+                    <option value="" disabled={true}>
+                        ::선택::
+                    </option>
+                        <option value="010">010</option>
+                        <option value="02">02</option>
+                        <option value="051">051</option>
+                        <option value="053">053</option>
+                        <option value="031">031</option>
+                </select>
+                    -
+                <input
+                    className="phone-box"
+                    type="text"
+                    id="txtMobile2"
+                    size="4"
+                    onkeypress="onlyNumber();"
+                    // value={shopPhone.substring(3, 7)}
+                    
+                />
+
+                    -
+                <input
+                    className="phone-box"
+                    type="text"
+                    id="txtMobile3"
+                    size="4"
+                    onkeypress="onlyNumber();"
+                    // value={shopPhone.substring(7, 11)}
+                /> */}
 
             <div className="label">
                 매장소개
@@ -221,8 +268,13 @@ const ShopInfo = ({
             />
             </span> */}
             
-            
-            <button onClick={Shop_v2} className="rs-button">예약여부변경하기</button>
+            <input
+                type="text"
+                id="rspos"
+                value={isRsPos}
+                className="input-box1"
+                />
+            <button onClick={Shop_v2} className="button0">예약여부변경하기</button>
             {/* <span className="open">{isRsPos}</span> */}
         </div>
             
@@ -230,7 +282,13 @@ const ShopInfo = ({
             오픈여부
             </div>
         <div>
-            <button onClick={Shop_v3} className="open-button">오픈여부변경하기</button>
+        <input
+                type="text"
+                id="open"
+                value={isOpen}
+                className="input-box1"
+                />
+            <button onClick={Shop_v3} className="button0">오픈여부변경하기</button>
             {/* <span className="open">{isOpen}</span>                 */}
         </div>    
 
@@ -238,9 +296,9 @@ const ShopInfo = ({
 
         <div className="button-box">
             <button onClick={Shop_v1} className="button3">수정</button>
-            <Link to="/myshop">
-            <button className="button4" >취소</button>
-            </Link>
+            
+            <button className="button4" onClick={goBack} >취소</button>
+            
         </div> 
 
         

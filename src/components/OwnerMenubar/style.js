@@ -39,7 +39,7 @@ ul {
 .nav-item {
     position:relative;
     height:100%;
-    width:33%;
+    width:25%;
     float:left;
     text-align: center;
 }

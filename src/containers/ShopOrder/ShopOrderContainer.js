@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { useHistory } from "react-router";
 import ShopOrder from "../../components/ShopOrder/ShopOrder";
 import {
@@ -6,7 +6,9 @@ import {
     getMyInfo,
     getshopinfo,
     patchorder,
+    paymentservice,
 } from "../../lib/ShopOrder/index";
+import * as StompJs from "@stomp/stompjs";
 // import { jmthing } from "../shopcontent/shopcontentcontainer";
 
 const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
@@ -25,6 +27,7 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
     const [jmallprice, setjmallpirce] = useState();
     const [request, setRequest] = useState();
     const [people, setPeople] = useState();
+    const [pointcheck, setpointcheck] = useState(0);
 
     const openmodal = () => {
         setModal(true);
@@ -37,6 +40,19 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
     const handleRequest = (e) => {
         const value = e.target.value;
         setRequest(value);
+    };
+
+    const handlepoint = (e) => {
+        const value = e.target.value;
+        setpointcheck(value);
+        if (jmallprice - pointcheck < 0) {
+            alert("포인트를 너무 많이 사용하셨어요. 다시입력해주세요");
+            setpointcheck("");
+        }
+        if (jmuserinfo.point < value) {
+            alert("보유한 포인트보다 많아요. 다시 입력해주세요");
+            setpointcheck("");
+        }
     };
 
     const handlePeople = (e) => {
@@ -60,6 +76,7 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
         setJmorderid(localStorage.getItem("orderId"));
         setJmorderlist(JSON.parse(localStorage.getItem("orderlist")));
         setjmallpirce(localStorage.getItem("allPrice"));
+        connect();
     }, []);
 
     const patchcontent = () => {
@@ -81,7 +98,6 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 alert("err");
             });
     };
-    console.log(jmuserinfo);
 
     const getshopinfor = () => {
         getshopinfo(localStorage.getItem("shopId"))
@@ -124,6 +140,71 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
         history.goBack();
     };
 
+    //실시간 알림
+    const ROOM_SEQ = 1;
+    const client = useRef({});
+
+    const connect = () => {
+        client.current = new StompJs.Client({
+            brokerURL: "ws:/3.34.55.186:8088/ws-stomp/websocket", // 웹소켓 서버로 직접 접속
+            // webSocketFactory: () => new SockJS("/ws-stomp/websocket"), // proxy를 통한 접속
+            connectHeaders: {
+                socket_token: "jmj-chatting",
+            },
+            debug: function (str) {
+                console.log(str);
+            },
+            reconnectDelay: 5000,
+            heartbeatIncoming: 4000,
+            heartbeatOutgoing: 4000,
+            onConnect: () => {
+                subscribe();
+            },
+            onStompError: (frame) => {
+                console.error(frame);
+            },
+        });
+        jmorderlist.map((jmorder_list) => {
+            console.log(jmorder_list.name, jmorder_list.count);
+        });
+
+        console.log(client.current);
+
+        const subscribe = () => {
+            client.current.subscribe(`/sub/chat/1`, ({ body }) => {
+                // if (
+                //     window.confirm(
+                //         "예약주문이 왔어요! \n" +
+                //             "주문내용은 다음과 같아요!\n" +
+                //             "주문자 : " +
+                //             {}
+                //     )
+                // ) {
+                //     alert("happy");
+                // } else {
+                //     // 환불;
+                // }
+            });
+        };
+
+        client.current.activate();
+    };
+
+    const disconnect = () => {
+        client.current.deactivate();
+    };
+
+    const publish = () => {
+        if (!client.current.connected) {
+            return;
+        }
+
+        client.current.publish({
+            destination: `/sub/chat/2`,
+            body: JSON.stringify({ roomSeq: ROOM_SEQ, message: jmorderlist }),
+        });
+    };
+
     //결제 api
 
     const onClickPayment = () => {
@@ -135,7 +216,7 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
             pg: "inicis", // PG사
             pay_method: "card", // 결제수단
             merchant_uid: localStorage.getItem("orderId"), // 주문번호
-            amount: jmallprice, // 결제금액
+            amount: jmallprice - pointcheck, // 결제금액
             name: jmshopinfo.name, // 매장이름
             buyer_name: jmuserinfo.name, // 구매자 이름
             buyer_tel: jmuserinfo.phone, // 구매자 전화번호
@@ -153,12 +234,24 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
         if (success) {
             patchcontent();
 
+            publish();
+            setTimeout(() => {
+                paymentservice(jmallprice, pointcheck);
+            }, 3000);
+
             alert("결제 성공");
             history.push("/PaymentDone");
         } else {
             alert(`결제 실패: ${error_msg}`);
         }
     };
+
+    useEffect(() => {
+        return () => {
+            console.log(1);
+            // disconnect();
+        };
+    }, []);
 
     return (
         <>
@@ -184,6 +277,10 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 request={request}
                 handlePeople={handlePeople}
                 people={people}
+                handlepoint={handlepoint}
+                pointcheck={pointcheck}
+                connect={connect}
+                publish={publish}
             />
         </>
     );

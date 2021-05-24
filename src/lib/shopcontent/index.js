@@ -15,6 +15,17 @@ export const getReviewlist = (id) => {
     });
 };
 
+export const removeReviews = (
+    id
+) => {
+    return apiDefault().delete(`/review/${id}`
+        , {
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+            },
+        });
+};
+
 export const getShoplist = () => {
     return apiDefault().get("/shopList", {});
 };
