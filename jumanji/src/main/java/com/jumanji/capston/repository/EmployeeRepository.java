@@ -42,4 +42,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
             "    and e.id = decode(:empId, null, e.id, :empId)", nativeQuery = true)
     List<Employee.Dao> findByDateOrEmpId(String empId, String date);
 
+
+    @Query(value = "", nativeQuery = true)
+    List<Employee.Dao> findByBetweenDateOrEmpId(String empId, String date);
+
 }
