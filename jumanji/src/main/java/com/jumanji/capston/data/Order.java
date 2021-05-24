@@ -35,6 +35,8 @@ public class Order implements Serializable {
     @Column(name = "pay_method")
     private String payMethod; // 결제방식
 
+    private char accept = 'N';
+
 //    @Transient // 영속성 등록 제외?   제외하면 결과 제대로 안나옴ㅋㅋㅋ
     private char reviewed;
 
@@ -92,6 +94,8 @@ public class Order implements Serializable {
         private String status;
         private String pg;
         private String payMethod; // 결제방식
+        @Setter
+        private List<OrderMenu> orderMenuList;
         private char reviewed;
 
         public Response(Order order) {
@@ -139,5 +143,7 @@ public class Order implements Serializable {
     public void refund(){
         this.status = "rf";
     }
-    public void accept(){ this.status="ac";}
+    public void accept(){
+        this.accept ='Y';
+    }
 }

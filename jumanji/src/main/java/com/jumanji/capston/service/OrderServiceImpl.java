@@ -39,6 +39,11 @@ public class OrderServiceImpl implements OrderService {
 //        return new ResponseEntity<>(response, HttpStatus.OK);
 //    }
 
+    public Order get(String authorization, Timestamp orderId){
+        String userId = userService.getMyId(authorization);
+        isOwnOrder(orderId, userId);
+        return isPresent(orderId);
+    }
 
     public List<Order> getList(String authorization) {
         String loginId = userService.getMyId(authorization);

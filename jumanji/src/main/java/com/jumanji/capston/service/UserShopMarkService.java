@@ -43,7 +43,7 @@ public class UserShopMarkService  {
     }
 
 
-    public UserShopMark post(@Nullable String authorization, UserShopMark.Request request) {
+    public void post(@Nullable String authorization, UserShopMark.Request request) {
         // 변수
         UserShopMark usm;
         User user;
@@ -56,9 +56,11 @@ public class UserShopMarkService  {
 
         // 서비스
         usm = new UserShopMark(user, shop);
+        usmRepository.save(usm);
 
         // 값 확인
-        return usmRepository.save(usm);
+
+//        return usmRepository.save(usm);
     }
 
 
