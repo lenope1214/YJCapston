@@ -25,16 +25,16 @@ public class UserShopMark {
         private String shopId;
     }
 
-    @Getter @AllArgsConstructor
+    @Getter
     public static class Response{
-        private User.Response user;
-        private Shop.Response shop;
+//        private User.Response user;
+//        private Shop.Response shop;
         private List<Shop.Response> shopList = new ArrayList<>();
 
-        public Response(UserShopMark usm){
-            this.user = new User.Response(usm.getId().getUser());
-            this.shop = new Shop.Response(usm.getId().getShop());
-        }
+//        public Response(UserShopMark usm){
+//            this.user = new User.Response(usm.getId().getUser());
+//            this.shop = new Shop.Response(usm.getId().getShop());
+//        }
         public Response(List<Shop> markShopList){
             for(Shop shop : markShopList){
                 this.shopList.add(new Shop.Response(shop));

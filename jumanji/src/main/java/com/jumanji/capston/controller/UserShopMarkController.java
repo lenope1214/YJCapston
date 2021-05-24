@@ -30,8 +30,10 @@ public class UserShopMarkController {
     @Transactional
     @PostMapping("marks")
     public ResponseEntity<?> post(@RequestHeader String authorization, @RequestBody UserShopMark.Request request){
-        UserShopMark usm = usmService.post(authorization,request);
-        UserShopMark.Response response = new UserShopMark.Response(usm);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+//        UserShopMark usm =
+                usmService.post(authorization,request);
+//        UserShopMark.Response response = new UserShopMark.Response(usm);
+//        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
