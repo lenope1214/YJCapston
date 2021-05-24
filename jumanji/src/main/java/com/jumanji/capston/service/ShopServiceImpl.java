@@ -159,6 +159,7 @@ public class ShopServiceImpl implements ShopService {
                 .category(request.getCategory())
                 .imgPath(imgPath)
                 .owner(user)
+                .phone(request.getPhone())
                 .build();
         Shop shop = shopRepository.save(shopEntity);
         return shop;

@@ -38,6 +38,7 @@ public class Shop {
     private char isOpen = 'N';
     @Column(name = "img_path")
     private String imgPath;
+    @Column(length = 11)
     private String phone;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
