@@ -170,8 +170,9 @@ public class OrderServiceImpl implements OrderService {
         // 서비스
         order.accept();
 
+
         // 값 체크
-        return order;
+        return orderRepository.save(order);
     }
 
     public void statusUpdate(Order order) {
