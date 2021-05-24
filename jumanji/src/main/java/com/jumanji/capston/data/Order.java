@@ -92,6 +92,8 @@ public class Order implements Serializable {
         private String status;
         private String pg;
         private String payMethod; // 결제방식
+        @Setter
+        private List<OrderMenu> orderMenuList;
         private char reviewed;
 
         public Response(Order order) {

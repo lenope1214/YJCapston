@@ -63,13 +63,13 @@ public class OrderController {
         Long orderLong = Long.parseLong(orderId);
         Timestamp orderTime = new Timestamp(orderLong);
         List<OrderMenu> orderMenuList = orderMenuService.getList(authorization, orderTime);
-//        Order order =orderService.get(authorization,orderTime);
-//        Order.Response response = new Order.Response(order);
-        List<OrderMenu.Response> response = new ArrayList<>();
+        Order order =orderService.get(authorization,orderTime);
+        Order.Response response = new Order.Response(order);
 
-        for(OrderMenu orderMenu : orderMenuList){
-            response.add(new OrderMenu.Response(orderMenu));
-        }
+        response.setOrderMenuList(orderMenuList);
+//        for(OrderMenu orderMenu : orderMenuList){
+//            response.add(new OrderMenu.Response(orderMenu));
+//        }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
