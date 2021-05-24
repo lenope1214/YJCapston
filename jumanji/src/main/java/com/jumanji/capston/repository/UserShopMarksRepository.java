@@ -13,4 +13,7 @@ public interface UserShopMarksRepository extends JpaRepository<UserShopMark, Use
     @Query(value = "select usm.id.shop from UserShopMark usm where usm.id.user.id = :loginId")
     List<Shop> findMyMarks(String loginId);
 
+    @Query(value = "delete from UserShopMark where id.user.id = :id and id.shop.id = :shopId")
+    void deleteByShopID(String id, String shopId);
+
 }

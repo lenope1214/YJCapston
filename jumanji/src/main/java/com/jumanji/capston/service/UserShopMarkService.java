@@ -70,7 +70,19 @@ public class UserShopMarkService  {
 
 
     public void delete(@Nullable String authorization, String... str) {
+        // 변수
+        String loginId;
+        String shopId = str[0];
 
+        // 값 체크
+
+        // 유효성 체크
+        loginId = userService.getMyId(authorization);
+
+        // 서비스
+        usmRepository.deleteByShopID(loginId, shopId);
+
+        // 값 체크
     }
 
 
