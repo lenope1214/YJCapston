@@ -12,7 +12,8 @@ import java.util.List;
 
 @Getter
 @Entity
-@NoArgsConstructor @ToString
+@NoArgsConstructor
+@ToString
 @Table(name = "ORDERS")
 public class Order implements Serializable {
     @Id
@@ -22,13 +23,13 @@ public class Order implements Serializable {
     private String orderRequest; // 요청사항
     @Column(length = 2)
     private int people;
-    @Column(name="use_point", length = 5)
+    @Column(name = "use_point", length = 5)
     private int usePoint; // 사용된 포인트
     @Column(length = 8)
     private int amount; // 가격 총합
     @Column(name = "arrive_time")
     private Timestamp arriveTime; // 가게 도착시간
-    @Column(name="pay_time")
+    @Column(name = "pay_time")
     private Timestamp payTime; // 결제 일자 yyyyMMdd
     @Column(length = 9)
     private String pg;
@@ -37,7 +38,7 @@ public class Order implements Serializable {
 
     private char accept = 'N';
 
-//    @Transient // 영속성 등록 제외?   제외하면 결과 제대로 안나옴ㅋㅋㅋ
+    //    @Transient // 영속성 등록 제외?   제외하면 결과 제대로 안나옴ㅋㅋㅋ
     private char reviewed;
 
 
@@ -45,12 +46,13 @@ public class Order implements Serializable {
 //    private char delay; // 딜레이 얘는 뭔지 모르겠다. 나중에 다시 생각
 
 
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shop_id", updatable = false) @JsonIgnore // 이거 없으면 fetchType lazy라서 json 변환중에 오류남.
+    @JoinColumn(name = "shop_id", updatable = false)
+    @JsonIgnore // 이거 없으면 fetchType lazy라서 json 변환중에 오류남.
     private Shop shop;
     @JoinColumn(name = "user_id", updatable = false)
-    @ManyToOne(fetch = FetchType.LAZY) @JsonIgnore // 이거 없으면 fetchType lazy라서 json 변환중에 오류남.
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore // 이거 없으면 fetchType lazy라서 json 변환중에 오류남.
     private User user;
 
     @Builder
@@ -60,7 +62,8 @@ public class Order implements Serializable {
         this.user = user;
     }
 
-    @Getter @AllArgsConstructor
+    @Getter
+    @AllArgsConstructor
     @NoArgsConstructor
     public static class Request {
         private Timestamp orderId;
@@ -78,7 +81,7 @@ public class Order implements Serializable {
     }
 
     @Getter
-    public static class Response{
+    public static class Response {
         private String userId; // 암호화 해서 주고받자..
         private Timestamp orderId;
         private String shopId;
@@ -94,6 +97,7 @@ public class Order implements Serializable {
         private String status;
         private String pg;
         private String payMethod; // 결제방식
+        private char accept;
         @Setter
         private List<OrderMenu> orderMenuList;
         private char reviewed;
@@ -113,37 +117,40 @@ public class Order implements Serializable {
             this.arriveTime = order.getArriveTime();
             this.pg = order.getPg();
             this.payMethod = order.getPayMethod();
-            if(payTime != null)this.payTime = DateOperator.dateToYYYYMMDD(order.getPayTime(), true) + DateOperator.dateToHHMM(order.getPayTime(), true);
+            this.accept = order.getAccept();
+            if (payTime != null)
+                this.payTime = DateOperator.dateToYYYYMMDD(order.getPayTime(), true) + DateOperator.dateToHHMM(order.getPayTime(), true);
             this.totalAmount = order.getAmount() - order.getUsePoint();
         }
     }
 
-    public void update(Request request){
+    public void update(Request request) {
         System.out.println("OrderRequest >> ? " + request.getOrderRequest());
-        if(request.orderRequest.length() > 0){
+        if (request.orderRequest.length() > 0) {
             System.out.println("OrderRequest 변경!");
             this.orderRequest = request.getOrderRequest();
             System.out.println(this.orderRequest);
         }
-        if(request.people != 0) this.people = request.people;
-        if(request.arriveTime != null)this.arriveTime = request.arriveTime;
-        if(request.amount != 0 ) this.amount = request.amount;
+        if (request.people != 0) this.people = request.people;
+        if (request.arriveTime != null) this.arriveTime = request.arriveTime;
+        if (request.amount != 0) this.amount = request.amount;
         this.status = "rd";
     }
 
-    public void pay(Payment.Request request){
+    public void pay(Payment.Request request) {
         this.status = "pd";
         this.payMethod = request.getPayMethod();
         this.payTime = new Timestamp(System.currentTimeMillis());
         this.pg = request.getPg();
-        if(request.getAmount() != 0 ) this.amount = request.getAmount();
+        if (request.getAmount() != 0) this.amount = request.getAmount();
         this.usePoint = request.getUsePoint();
     }
 
-    public void refund(){
+    public void refund() {
         this.status = "rf";
     }
-    public void accept(){
-        this.accept ='Y';
+
+    public void accept() {
+        this.accept = 'Y';
     }
 }
