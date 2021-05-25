@@ -41,7 +41,7 @@ public class MenuController  {
     @GetMapping("menus/{menuId}")
     public ResponseEntity<?> selectMenuById(@PathVariable String menuId) {
 //        String menuId = request.getShopId() + request.getName();
-        Menu menu = menuService.get(menuId);
+        Menu menu = menuService.get(null, menuId);
         Menu.Response response = new Menu.Response(menu);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
