@@ -124,7 +124,7 @@ public class Order implements Serializable {
         }
     }
 
-    public void update(Request request) {
+    public void patch(Request request) {
         System.out.println("OrderRequest >> ? " + request.getOrderRequest());
         if (request.orderRequest.length() > 0) {
             System.out.println("OrderRequest 변경!");

@@ -74,17 +74,17 @@ public class OrderController {
     }
 
 
-    @Transactional
-    @PostMapping("orders")
-    public ResponseEntity<?> postOrder(@RequestHeader String authorization, @RequestBody Order.Request request){
-//        System.out.println("request info \n" + request.getQuantity() +"\n" + request.getOrderRequest() +"\n" + request.getShopId() +"\n" + request.getUserId());
-        Order order = orderService.post(authorization, request);
-        Order.Response response = new Order.Response(order);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
-    }
+//    @Transactional
+//    @PostMapping("orders")
+//    public ResponseEntity<?> postOrder(@RequestHeader String authorization, @RequestBody Order.Request request){
+//        Order order = orderService.post(authorization, request);
+//        Order.Response response = new Order.Response(order);
+//        return new ResponseEntity<>(response, HttpStatus.CREATED);
+//    }
 
+    @PostMapping("orders")
     @PatchMapping("orders")
-    public ResponseEntity<?> patchOrder(@RequestHeader String authorization, @RequestBody Order.Request request){
+    public ResponseEntity<?> postOrder(@RequestHeader String authorization, @RequestBody Order.Request request){
         Order order = orderService.patch(authorization, request);
         Order.Response response = new Order.Response(order);
         return new ResponseEntity<>(response, HttpStatus.OK);

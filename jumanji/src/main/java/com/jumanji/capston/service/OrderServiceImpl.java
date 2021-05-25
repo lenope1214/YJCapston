@@ -69,18 +69,8 @@ public class OrderServiceImpl implements OrderService {
         return orderList;
     }
 
-    @Override
-    public Order post(String authorization, Order.Request request) {
+    public Order post(String loginId, User user, Shop shop, Order.Request request) {
         Order order;
-        Shop shop;
-        User user;
-        String loginId = userService.getMyId(authorization);
-
-
-        //isEmpty 는 필요 x 주문은 매번 새로운 애기 때문.
-        shop = shopService.isPresent(request.getShopId());
-        user = userService.isPresent(loginId);
-
         order = Order.builder()
                 .id(new Timestamp(System.currentTimeMillis()))
 //                .orderRequest(request.getOrderRequest()) // 얘와 밑의 얘네 둘은 결제 완료 후에 들어갈 예정
@@ -96,16 +86,18 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public Order patch(String authorization, Order.Request request) {
         Order order;
-        System.out.println("request info \nrequest.getOrderId()" + request.getOrderId() + "\n" +
-                "request.getPeople" + request.getPeople() + "\n" +
-                "request.getOrderRequest" + request.getOrderRequest());
+        User user;
+        Shop shop;
+        // 주문번호가 같이 들어오면, 있는 주문번호를 수정하는것이기 때문에 그대로 검색해서 수정. 없으면 새로운 주문이므로 생성
+
         String loginId = userService.getMyId(authorization);
 
         // 유효성 검사.
-        userService.isPresent(loginId);
-        order = isPresent(request.getOrderId()); // 있는지~
+        user = userService.isPresent(loginId);
+        shop = shopService.isPresent(request.getShopId());
+        order = request.getOrderId() != null ? isOwnOrder(request.getOrderId(), loginId) : post(loginId, user, shop, request);
 
-        order.update(request);
+        order.patch(request);
 
         order = orderRepository.saveAndFlush(order);
         return order;
@@ -132,8 +124,6 @@ public class OrderServiceImpl implements OrderService {
     public Order isOwnOrder(Timestamp orderId, String userId){
         Order order = isPresent(orderId);
         String _uId =order.getUser().getId();
-        System.out.println("order isOwnOrder\n_uId : " + _uId);
-        System.out.println("userId : " + userId);
         if(_uId.equals(userId))return order;
         else throw new OrderNotFoundException(""+orderId.getTime());
     }
