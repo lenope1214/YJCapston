@@ -98,10 +98,10 @@ public class MenuServiceImpl implements BasicService<Menu, Menu.Request> {
         return menuRepository.saveAndFlush(menu);
     }
 
-    public Menu patchStatus(String authorization, String menuId, String target) {
+    public Menu patchStatus(String authorization,String shopId, String menuId, String target) {
         String loginId = userService.getMyId(authorization);
-        shopService.isOwnShop(loginId, menuId.substring(0, 10));
-        shopService.isPresent(menuId.substring(0, 10));
+        shopService.isOwnShop(loginId, shopId);
+        // TODO 매장번호 확인해야하는데.. shops/{shopId} 를 추가해야 할까
         Menu menu = menuService.isPresent(menuId);
         menu.reverseStatus(target);
         return menuRepository.save(menu);

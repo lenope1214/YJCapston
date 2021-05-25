@@ -86,18 +86,18 @@ public class MenuController  {
     }// 05m20210426163000
 
 
-    @PatchMapping("menus/{menuId}/popular")
-    public ResponseEntity<?> updateShopIsOpen(@RequestHeader String authorization, @PathVariable String menuId) {
-        Menu menu = menuService.patchStatus(authorization, menuId, "popular");
+    @PatchMapping("shops/{shopId}/menus/{menuId}/popular")
+    public ResponseEntity<?> updateShopIsOpen(@RequestHeader String authorization, @PathVariable String shopId, @PathVariable String menuId) {
+        Menu menu = menuService.patchStatus(authorization, shopId, menuId, "popular");
         return new ResponseEntity<>(menu.getIsPopular(), HttpStatus.OK);
     }
 
 
     //
 
-    @PatchMapping("menus/{menuId}/sale")
-    public ResponseEntity<?> updateShopIsRsPos(@RequestHeader String authorization, @PathVariable String menuId) {
-        Menu menu = menuService.patchStatus(authorization, menuId, "sale");
+    @PatchMapping("shops/{shopId}/menus/{menuId}/sale")
+    public ResponseEntity<?> updateShopIsRsPos(@RequestHeader String authorization, @PathVariable String shopId, @PathVariable String menuId) {
+        Menu menu = menuService.patchStatus(authorization, shopId, menuId, "sale");
         return new ResponseEntity<>(menu.getIsSale(), HttpStatus.OK);
     }
 }
