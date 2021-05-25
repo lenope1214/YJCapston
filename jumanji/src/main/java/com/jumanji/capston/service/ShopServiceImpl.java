@@ -90,11 +90,7 @@ public class ShopServiceImpl implements ShopService {
         return result;
     }
 
-    @Override
-    public Shop get(String shopId) {
-        isPresent(shopId);
-        return shopRepository.findById(shopId).get();
-    }
+
 
     @Override
     public ResponseEntity<?> getList(String category, String sortTarget) {

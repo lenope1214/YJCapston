@@ -5,9 +5,7 @@ import com.jumanji.capston.repository.OrderMenuOptionRepository;
 import com.jumanji.capston.repository.OrderMenuRepository;
 import com.jumanji.capston.repository.OrderRepository;
 import com.jumanji.capston.repository.UserRepository;
-import com.jumanji.capston.service.exception.OrderException.OrderNotMineException;
-import com.jumanji.capston.service.exception.orderMenuException.OrderMenuNotFoundException;
-import com.jumanji.capston.service.exception.shopException.ShopMissMatchException;
+import com.jumanji.capston.service.exception.orderException.OrderNotMineException;
 import com.jumanji.capston.service.interfaces.BasicService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+
 
 @Slf4j
 @Service
@@ -178,7 +177,7 @@ public class OrderMenuServiceImpl implements BasicService<OrderMenu, OrderMenu.R
     public OrderMenu isPresent(String orderId) {
         Optional<OrderMenu> om = orderMenuRepository.findById(orderId);
         if (om.isPresent()) return om.get();
-        throw new OrderMenuNotFoundException();
+        throw new com.jumanji.capston.service.exception.orderMenuException.OrderMenuNotFoundException();
     }
 
     public boolean isMyOrder(String loginId, Timestamp orderId){
@@ -195,7 +194,7 @@ public class OrderMenuServiceImpl implements BasicService<OrderMenu, OrderMenu.R
 
     public void equalsShop(String aId, String bId){
         if(aId.equals(bId))return ;
-        throw new ShopMissMatchException();
+        throw new com.jumanji.capston.service.exception.shopException.ShopMissMatchException();
     }
 //    public ResponseEntity<?> postOrder(Order.Request request) {
 //        Order order;

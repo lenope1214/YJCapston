@@ -50,32 +50,9 @@ public class OrderServiceImpl implements OrderService {
         List<Order> orderList = new ArrayList<>();
         for (Order.MyInfo order : orderRepository.myOrderListContainsReviewed(loginId)) {
             System.out.println("order.Tostring : " + order.toString());
-            /**
-             * private String status = "rd"; // rd : 준비중, st : 착석, pd : 결제완료, rf : 환불
-             *     @Column(name = "order_request")
-             *     private String orderRequest; // 요청사항
-             *     @Column(length = 2)
-             *     private int people;
-             *     @Column(name = "use_point", length = 5)
-             *     private int usePoint; // 사용된 포인트
-             *     @Column(length = 8)
-             *     private int amount; // 가격 총합
-             *     @Column(name = "arrive_time")
-             *     private Timestamp arriveTime; // 가게 도착시간
-             *     @Column(name = "pay_time")
-             *     private Timestamp payTime; // 결제 일자 yyyyMMdd
-             *     @Column(length = 9)
-             *     private String pg;
-             *     @Column(name = "pay_method")
-             *     private String payMethod; // 결제방식
-             *
-             *     private char accept = 'N';
-             *
-             *     @Transient // 영속성 등록 제외?   제외하면 결과 제대로 안나옴ㅋㅋㅋ 왜???????????
-             *     @Setter
-             *     private char reviewed;
-             */
-            Order o = new Order(order);
+            Shop shop = shopService.isPresent(order.getShopId());
+            Order o = new Order(order.getId(), shop, null);
+            o.setOrder(order);
             System.out.println("o.toString : " + o.toString());
 //            o.setReviewed(order.getReviewed());
             orderList.add(o);

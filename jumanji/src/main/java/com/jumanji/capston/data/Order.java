@@ -14,7 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @Table(name = "ORDERS")
-@AllArgsConstructor @Builder
 public class Order implements Serializable {
     @Id
     private Timestamp id; // 바구니번호 yyyyMMddhhmmss
@@ -59,17 +58,26 @@ public class Order implements Serializable {
     @JsonIgnore // 이거 없으면 fetchType lazy라서 json 변환중에 오류남.
     private User user;
 
-//    @Builder
-//    public Order(Timestamp id, Shop shop, User user) {
-//        this.id = id;
-//        this.shop = shop;
-//        this.user = user;
-//    }
+    @Builder
+    public Order(Timestamp id, Shop shop, User user) {
+        this.id = id;
+        this.shop = shop;
+        this.user = user;
+    }
 
-    public Order(Order.MyInfo o){
+    public void setOrder(Order.MyInfo o){
         this.id = o.getId();
+        this.status = o.getStatus();
+        this.orderRequest = o.getOrderRequest();
+        this.usePoint = o.getUsePoint();
         this.reviewed = o.getReviewed();
-        this.shop =
+        this.arriveTime = o.getArriveTime();
+        this.payTime = o.getPayTime();
+        this.people = o.getPeople();
+        this.pg = o.getPg();
+        this.payMethod = o.getPayMethod();
+        this.amount = o.getAmount();
+        this.accept = o.getAccept();
     }
 
 
@@ -96,13 +104,13 @@ public class Order implements Serializable {
 
     @Getter
     public static class Response {
-        private String userId; // 암호화 해서 주고받자..
         private Timestamp orderId;
+        private String userId; // 암호화 해서 주고받자..
+        private String userName;
         private String shopId;
+        private String shopName;
         private int people;
         private String orderRequest;
-        private String shopName;
-        private String userName;
         private int usePoint; // 사용된 포인트
         private int amount; // 가격 총합
         private int totalAmount; // 할인 적용 가격
@@ -118,15 +126,19 @@ public class Order implements Serializable {
 
 
         public Response(Order order) {
-            this.userId = order.getUser().getId(); // 암호화 해서 주고받자..
+            if(order.getUser()!=null){
+                if(order.getUser().getId() !=null)this.userId = order.getUser().getId(); // 암호화 해서 주고받자..
+                if(order.getUser().getName()!=null)this.userName = order.getUser().getName();
+            }
+            if(order.getShop()!=null){
+                this.shopId = order.getShop().getId();
+                this.shopName = order.getShop().getName();
+            }
             this.orderId = order.getId();
-            this.shopId = order.getShop().getId();
-            this.shopName = order.getShop().getName();
             this.people = order.getPeople();
             this.orderRequest = order.getOrderRequest();
             this.usePoint = order.getUsePoint();
             this.status = order.getStatus();
-            this.userName = order.getUser().getName();
             this.reviewed = order.getReviewed();
             this.amount = order.getAmount();
             this.arriveTime = order.getArriveTime();
@@ -169,19 +181,21 @@ public class Order implements Serializable {
 
 
     public interface MyInfo{
-        public Timestamp getId();
-        public String getStatus();
-        public String getOrderRequest();
-        public int getPeople();
-        public int getUsePoint();
-        public int getAmount();
-        public Timestamp getArriveTime();
-        public Timestamp getPayTime();
-        public String getPg();
-        public String getPayMethod();
-        public char getAccept();
-        public char getReviewed();
-        public Shop getShop();
-        public User getUser();
+        Timestamp getId();
+         String getStatus();
+         String getOrderRequest();
+         int getPeople();
+         int getUsePoint();
+         int getAmount();
+         Timestamp getArriveTime();
+         Timestamp getPayTime();
+         String getPg();
+         String getPayMethod();
+         char getAccept();
+         char getReviewed();
+         String getShopId();
+         String getUserId();
+//        Order getOrders(); 이건 불가능
+//        String getReviewed(); 이건 가능.
     }
 }
