@@ -2,7 +2,6 @@ package com.jumanji.capston.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.checkerframework.checker.units.qual.C;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @Table(name = "ORDERS")
+@AllArgsConstructor @Builder
 public class Order implements Serializable {
     @Id
     private Timestamp id; // 바구니번호 yyyyMMddhhmmss
@@ -38,8 +38,12 @@ public class Order implements Serializable {
 
     private char accept = 'N';
 
-    //    @Transient // 영속성 등록 제외?   제외하면 결과 제대로 안나옴ㅋㅋㅋ
+    @Transient // 영속성 등록 제외?   제외하면 결과 제대로 안나옴ㅋㅋㅋ 왜???????????
+    @Setter
     private char reviewed;
+//    public void setReviewedY(){
+//        reviewed = 'Y';
+//    }
 
 
 //    @Column
@@ -55,12 +59,22 @@ public class Order implements Serializable {
     @JsonIgnore // 이거 없으면 fetchType lazy라서 json 변환중에 오류남.
     private User user;
 
-    @Builder
-    public Order(Timestamp id, Shop shop, User user) {
-        this.id = id;
-        this.shop = shop;
-        this.user = user;
+//    @Builder
+//    public Order(Timestamp id, Shop shop, User user) {
+//        this.id = id;
+//        this.shop = shop;
+//        this.user = user;
+//    }
+
+    public Order(Order.MyInfo o){
+        this.id = o.getId();
+        this.reviewed = o.getReviewed();
+        this.shop =
     }
+
+
+
+
 
     @Getter
     @AllArgsConstructor
@@ -102,6 +116,7 @@ public class Order implements Serializable {
         private List<OrderMenu> orderMenuList;
         private char reviewed;
 
+
         public Response(Order order) {
             this.userId = order.getUser().getId(); // 암호화 해서 주고받자..
             this.orderId = order.getId();
@@ -121,6 +136,9 @@ public class Order implements Serializable {
             if (payTime != null)
                 this.payTime = DateOperator.dateToYYYYMMDD(order.getPayTime(), true) + DateOperator.dateToHHMM(order.getPayTime(), true);
             this.totalAmount = order.getAmount() - order.getUsePoint();
+        }
+        public void setReviewed(char v){
+            this.reviewed = v;
         }
     }
 
@@ -147,5 +165,23 @@ public class Order implements Serializable {
 
     public void accept() {
         this.accept = 'Y';
+    }
+
+
+    public interface MyInfo{
+        public Timestamp getId();
+        public String getStatus();
+        public String getOrderRequest();
+        public int getPeople();
+        public int getUsePoint();
+        public int getAmount();
+        public Timestamp getArriveTime();
+        public Timestamp getPayTime();
+        public String getPg();
+        public String getPayMethod();
+        public char getAccept();
+        public char getReviewed();
+        public Shop getShop();
+        public User getUser();
     }
 }

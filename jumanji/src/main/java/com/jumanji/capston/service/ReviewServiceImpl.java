@@ -1,6 +1,7 @@
 package com.jumanji.capston.service;
 
 import com.jumanji.capston.data.*;
+import com.jumanji.capston.repository.OrderRepository;
 import com.jumanji.capston.repository.ReviewRepository;
 import com.jumanji.capston.service.exception.orderException.OrderNotPaidException;
 import com.jumanji.capston.service.exception.reviewException.ReviewHasExistException;
@@ -29,6 +30,8 @@ public class ReviewServiceImpl implements BasicService<Review, Review.Request> {
     ShopServiceImpl shopService;
     @Autowired
     OrderServiceImpl orderService;
+    @Autowired
+    OrderRepository orderRepository;
 
 
     @Override
@@ -70,6 +73,8 @@ public class ReviewServiceImpl implements BasicService<Review, Review.Request> {
         System.out.println("해당 날짜 리뷰 개수 : " + countDayReviews);
         reviewId = StringUtils.append(reviewId, String.format("%03d", countDayReviews));
         System.out.println("개수 붙인 후 reivewId : " + reviewId);
+//        order.setReviewedY();
+        orderRepository.save(order);
         review = Review.init()
                 .id(reviewId)
                 .content(request.getContent())
