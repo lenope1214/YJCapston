@@ -82,8 +82,7 @@ public class OrderController {
 //        return new ResponseEntity<>(response, HttpStatus.CREATED);
 //    }
 
-    @PostMapping("orders")
-    @PatchMapping("orders")
+    @RequestMapping(value = "orders", method = {RequestMethod.POST, RequestMethod.PATCH})
     public ResponseEntity<?> postOrder(@RequestHeader String authorization, @RequestBody Order.Request request){
         Order order = orderService.patch(authorization, request);
         Order.Response response = new Order.Response(order);

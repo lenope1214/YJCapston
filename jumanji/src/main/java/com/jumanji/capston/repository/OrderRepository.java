@@ -18,11 +18,13 @@ public interface OrderRepository extends JpaRepository<Order, Timestamp> {
 
 
     @Query(value = "select o.*,\n" +
-            "       DECODE((select o.id\n" +
-            "               from ORDERS o\n" +
-            "                        left join REVIEWS R on o.ID = R.ORDER_ID\n" +
-            "               where r.USER_ID = :userId), o.id, 'Y', 'N') reviewed\n" +
-            "from orders o", nativeQuery = true)
+            "                case\n" +
+            "                    when r.id is not null then 'Y'\n" +
+            "                    else 'N' end\n" +
+            "                    reviewed\n" +
+            "from orders o\n" +
+            "         left join REVIEWS R on o.ID = R.ORDER_ID\n" +
+            "where o.USER_ID = :userId", nativeQuery = true)
     List<Order> myOrderListContainsReviewed(String userId);
 
 

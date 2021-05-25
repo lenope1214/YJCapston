@@ -125,15 +125,10 @@ public class Order implements Serializable {
     }
 
     public void patch(Request request) {
-        System.out.println("OrderRequest >> ? " + request.getOrderRequest());
-        if (request.orderRequest.length() > 0) {
-            System.out.println("OrderRequest 변경!");
+        if (request.getOrderRequest()!=null && request.orderRequest.length() > 0) {
             this.orderRequest = request.getOrderRequest();
-            System.out.println(this.orderRequest);
         }
         if (request.people != 0) this.people = request.people;
-        if (request.arriveTime != null) this.arriveTime = request.arriveTime;
-        if (request.amount != 0) this.amount = request.amount;
         this.status = "rd";
     }
 

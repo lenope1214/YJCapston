@@ -3,6 +3,7 @@ package com.jumanji.capston.service;
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.data.User;
 import com.jumanji.capston.data.UserShopMark;
+import com.jumanji.capston.data.UserShopMarkId;
 import com.jumanji.capston.repository.UserShopMarksRepository;
 import com.jumanji.capston.service.interfaces.BasicService;
 import lombok.RequiredArgsConstructor;
@@ -78,9 +79,10 @@ public class UserShopMarkService  {
 
         // 유효성 체크
         loginId = userService.getMyId(authorization);
+        UserShopMark usm = usmRepository.findByUserIdAndShopId(loginId, shopId);
 
         // 서비스
-        usmRepository.deleteByShopID(loginId, shopId);
+        usmRepository.delete(usm);
 
         // 값 체크
     }
