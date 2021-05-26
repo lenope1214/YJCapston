@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -45,7 +46,7 @@ import retrofit2.Response;
 public class AddEmployeesActivity extends AppCompatActivity {
 
     DatePickerDialog.OnDateSetListener setListener;
-    EditText et_empphone, et_empname, et_empbirth, et_emphire;
+    EditText et_empphone, et_empname, et_empbirth, et_emphire, et_empno;
     Button btn_addemp;
     RadioGroup rg_gender;
     RadioButton rb_male, rb_female;
@@ -76,6 +77,7 @@ public class AddEmployeesActivity extends AppCompatActivity {
         et_empphone = findViewById(R.id.et_empphone);
         et_empbirth = findViewById(R.id.et_empbirth);
         et_emphire = findViewById(R.id.et_emphire);
+        et_empno = findViewById(R.id.et_empno);
 
         btn_addemp = findViewById(R.id.btn_addemp);
         rg_gender = findViewById(R.id.rg_gender);
@@ -272,12 +274,13 @@ public class AddEmployeesActivity extends AppCompatActivity {
                 System.out.println("77777777"+hiredate.getTime());
                 Log.d("4444444", et_emphire.getText().toString());
                 Log.d("5555555", gender);
+                Log.d("6666666", et_empno.getText().toString());
+
 
                 Map<String, Object> map = new HashMap();
                 map.put("shopId", MainActivity_O.shopNumber);
-                Log.d("6666666", MainActivity_O.shopNumber);
                 //TODO 직원번호도 보내주세요
-                map.put("empNo", 14);
+                map.put("empNo", et_empno.getText().toString());
                 map.put("empName", et_empname.getText().toString());
                 map.put("birthday", birthday.getTime());
                 map.put("hiredate", hiredate.getTime());

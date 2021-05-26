@@ -1,5 +1,7 @@
 package com.example.jmjapp.Fragment;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.jmjapp.R;
+import com.example.jmjapp.user.MapActivity;
 import com.example.jmjapp.user.ShopDetailActivity;
 
 import java.util.ArrayList;
@@ -20,7 +23,7 @@ public class InfoFragment extends Fragment {
     private RecyclerView rv_restaurant_list;
     private RecyclerView rv_info_list;
     ArrayList mItems = new ArrayList<>();
-    TextView shop_detail_intro, shop_detail_time, shop_detail_addr;
+    TextView shop_detail_intro, shop_detail_time, shop_detail_addr , tv_gomap;
 
     public static InfoFragment newInstance() {
         // Required empty public constructor
@@ -41,11 +44,19 @@ public class InfoFragment extends Fragment {
             shop_detail_time = view.findViewById(R.id.shop_detail_time);
             shop_detail_addr = view.findViewById(R.id.shop_detail_addr);
 
+            //지도
+            tv_gomap = view.findViewById(R.id.tv_gomap);
+
             shopNumber = ShopDetailActivity.shopNumber;
             Log.d("Daw",shopNumber);
             shop_detail_intro.setText(ShopDetailActivity.shopIntro);
             shop_detail_time.setText(ShopDetailActivity.shopOpen + " ~ " + ShopDetailActivity.shopClose);
-            shop_detail_addr.setText(ShopDetailActivity.shopAddress + ShopDetailActivity.shopDetailAddress);
+            shop_detail_addr.setText(ShopDetailActivity.shopAddress +"\n"+ShopDetailActivity.shopDetailAddress );
+
+            tv_gomap.setOnClickListener(v -> {
+                Intent intent = new Intent(getContext(), MapActivity.class);
+                startActivity(intent);
+            });
 //            Shop shop = new Shop(ShopDetailActivity.shopIntro);
 //
 //            rv_info_list.setHasFixedSize(true);

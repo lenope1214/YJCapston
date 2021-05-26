@@ -1,5 +1,6 @@
 package com.example.jmjapp.user;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -14,12 +15,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+
 import com.example.jmjapp.R;
 import com.google.android.gms.location.*;
 import com.google.android.gms.maps.*;
@@ -40,6 +43,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private GoogleMap map;
     private Marker currentMarker = null;
 
+    Context context;
+
     // The entry point to the Fused Location Provider.
     private FusedLocationProviderClient mFusedLocationProviderClient; // Deprecated된 FusedLocationApi를 대체
     private LocationRequest locationRequest;
@@ -52,7 +57,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int UPDATE_INTERVAL_MS = 1000 * 60 * 1;  // 1분 단위 시간 갱신
-    private static final int FASTEST_UPDATE_INTERVAL_MS = 1000 * 30 ; // 30초 단위로 화면 갱신
+    private static final int FASTEST_UPDATE_INTERVAL_MS = 1000 * 30; // 30초 단위로 화면 갱신
 
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
@@ -71,7 +76,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Layout을 inflate 하는 곳
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             mCurrentLocation = savedInstanceState.getParcelable(KEY_LOCATION);
             CameraPosition mCameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
         }
@@ -111,14 +116,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public void onStart() { // 유저에게 Fragment가 보이도록 해준다.
         super.onStart();
         mapView.onStart();
-        Log.d(TAG,"onStart");
+        Log.d(TAG, "onStart");
     }
 
     @Override
     public void onStop() {
         super.onStop();
         mapView.onStop();
-        if(mFusedLocationProviderClient != null) {
+        if (mFusedLocationProviderClient != null) {
             Log.d(TAG, "onStop : removeLocationUpdates");
             mFusedLocationProviderClient.removeLocationUpdates(locationCallback);
         }
@@ -136,9 +141,28 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mapView.onResume();
         if (mLocationPermissionGranted) {
             Log.d(TAG, "onResume : requestLocationUpdates");
+            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             mFusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);
-            if (map!=null)
-                map.setMyLocationEnabled(true);
+            if (map != null)
+                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }map.setMyLocationEnabled(true);
         }
     }
 

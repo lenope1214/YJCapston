@@ -78,6 +78,7 @@ public class PageEightFragment extends Fragment {
                             adapter.setItems(mItems);
                             rv_restaurant_list.setLayoutManager(new LinearLayoutManager(getActivity()));
                             rv_restaurant_list.setAdapter(adapter);
+
                         }
                     } else {
                         Toast.makeText(getContext(), "조회 실패", Toast.LENGTH_LONG).show();
