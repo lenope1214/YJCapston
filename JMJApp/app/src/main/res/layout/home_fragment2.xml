@@ -79,12 +79,12 @@
                 android:layout_height="wrap_content">
 
             <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/viewPager2"
-                    android:layout_width="0dp"
-                    android:layout_height="150dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                android:id="@+id/viewPager2"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -96,10 +96,10 @@
 
             <ImageView
                 android:id="@+id/koreanfood"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="60dp"
                 android:background="@drawable/korean"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -107,9 +107,9 @@
 
             <ImageView
                 android:id="@+id/japansesfood"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="48dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="60dp"
                 android:background="@drawable/japan"
                 app:layout_constraintEnd_toStartOf="@+id/chinesefood"
                 app:layout_constraintStart_toEndOf="@+id/koreanfood"
@@ -118,9 +118,9 @@
 
             <ImageView
                 android:id="@+id/chinesefood"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="50dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="60dp"
                 android:layout_marginEnd="50dp"
                 android:background="@drawable/china"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -168,10 +168,10 @@
 
             <ImageView
                 android:id="@+id/meat"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="60dp"
                 android:background="@drawable/meat"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/koreantv"
@@ -179,9 +179,9 @@
 
             <ImageView
                 android:id="@+id/bunsick"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="50dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="60dp"
                 android:background="@drawable/dduck"
                 app:layout_constraintEnd_toStartOf="@+id/soju"
                 app:layout_constraintStart_toEndOf="@+id/meat"
@@ -190,9 +190,9 @@
 
             <ImageView
                 android:id="@+id/soju"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="50dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="60dp"
                 android:layout_marginEnd="50dp"
                 android:background="@drawable/italy"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -240,10 +240,10 @@
 
             <ImageView
                 android:id="@+id/fastfood"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="60dp"
                 android:background="@drawable/fastfood"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/meattv"
@@ -251,9 +251,9 @@
 
             <ImageView
                 android:id="@+id/tang"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="50dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="60dp"
                 android:background="@drawable/tang"
                 app:layout_constraintEnd_toStartOf="@+id/dessert"
                 app:layout_constraintStart_toEndOf="@+id/fastfood"
@@ -262,9 +262,9 @@
 
             <ImageView
                 android:id="@+id/dessert"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="50dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="60dp"
                 android:layout_marginEnd="50dp"
                 android:background="@drawable/dessert"
                 app:layout_constraintEnd_toEndOf="parent"

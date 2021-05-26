@@ -206,6 +206,7 @@ public class MyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), OperationGuideActivity.class);
+//                Intent intent = new Intent(getActivity(), MapActivity.class);
                 startActivity(intent);
             }
         });

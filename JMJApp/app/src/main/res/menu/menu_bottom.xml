@@ -5,12 +5,13 @@
     <item
         android:id="@+id/tab1"
         android:icon="@drawable/monitor"
-        android:title="포스"/>
+        android:title="포스"
+        android:visible="true" />
 
     <item
-            android:id="@+id/tab2"
-            android:icon="@drawable/map"
-            android:title="지도"/>
+        android:id="@+id/tab2"
+        android:icon="@drawable/map"
+        android:title="지도" />
 
     <item
             android:id="@+id/tab3"

@@ -114,15 +114,16 @@
             app:layout_constraintHorizontal_bias="0.0"/>
 
     <TextView
-            android:textSize="20sp"
-            android:fontFamily="@font/we_semibold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="원"
-            tools:ignore="MissingConstraints"
-            app:layout_constraintStart_toEndOf="@+id/menu_price_et"
-            app:layout_constraintTop_toTopOf="@+id/menu_price_et"
-            app:layout_constraintBottom_toBottomOf="@+id/menu_price_et"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:fontFamily="@font/we_semibold"
+        android:text="원"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/menu_price_et"
+        app:layout_constraintStart_toEndOf="@+id/menu_price_et"
+        app:layout_constraintTop_toTopOf="@+id/menu_price_et"
+        tools:ignore="MissingConstraints" />
 
     <TextView
             android:text="소요시간"
@@ -152,15 +153,16 @@
             app:layout_constraintHorizontal_bias="0.0"/>
 
     <TextView
-            android:textSize="20sp"
-            android:fontFamily="@font/we_semibold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="분"
-            tools:ignore="MissingConstraints"
-            app:layout_constraintStart_toEndOf="@+id/menu_time_et"
-            app:layout_constraintTop_toTopOf="@+id/menu_time_et"
-            app:layout_constraintBottom_toBottomOf="@+id/menu_time_et"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:fontFamily="@font/we_semibold"
+        android:text="분"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/menu_time_et"
+        app:layout_constraintStart_toEndOf="@+id/menu_time_et"
+        app:layout_constraintTop_toTopOf="@+id/menu_time_et"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
             android:layout_width="208dp"

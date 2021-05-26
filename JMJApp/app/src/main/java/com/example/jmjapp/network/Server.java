@@ -11,12 +11,8 @@ public class Server {
     private final ServerApi api;
 
     private Server() {
-        //String url = "http://3.34.55.186:8088/api/v1/"; // aws
+//        String url = "http://3.34.55.186:8088/api/v1/"; // aws
         String url = "http://192.168.1.65:8088/api/v1/"; // 로컬
-
-        Gson gson = new GsonBuilder()
-                .setDateFormat("yyyy-MM-dd HH:mm:ss")
-                .create();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)

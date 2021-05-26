@@ -5,6 +5,8 @@
     <string name="naver_client_secret">UMIP9mr0Ho</string>
     <string name="naver_client_name">JMJApplication</string>
 
+    <string name="google_maps_key">AIzaSyAGh5EzhZihoU3VUJBXmiF9FNqJYgy7ujo</string>
     <string name="title_item_list">Items</string>
     <string name="title_item_detail">Item Detail</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
