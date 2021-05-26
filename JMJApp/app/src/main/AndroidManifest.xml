@@ -34,23 +34,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".user.MapActivity"></activity>
-        <!--
-             The API key for Google Maps-based APIs is defined as a string resource.
-             (See the file "res/values/google_maps_api.xml").
-             Note that the API key is linked to the encryption key used to sign the APK.
-             You need a different API key for each encryption key, including the release key that is used to
-             sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/.
-        -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBsOenPE-jI9_n_oVttc-uDoCFBb4Vdiis" />
+        <activity android:name=".owner.ReservationManagementActivity"></activity>
+        <activity android:name=".practicePush.MainActivity3" />
+        <activity android:name=".owner.push.BellActivity_O" />
+        <activity android:name=".payment.PaymentResultActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="web1"
+                    android:scheme="iamporttest" />
+            </intent-filter>
+        </activity>
         <activity android:name=".owner.AddEmployeesActivity" />
         <activity android:name=".owner.EmployeesManagementActivity" />
-        <activity android:name=".payment.PaymentWebview">
-        </activity>
+        <activity android:name=".payment.PaymentWebview" />
         <activity android:name=".user.OrderActivity" />
         <activity android:name=".owner.ShopUpdateActivity" />
         <activity android:name=".user.BasketActivity" />
@@ -76,6 +77,25 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <service
+            android:name=".owner.push.MyFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true"
+            android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".user.push.UserFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true"
+            android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
         <activity android:name=".user.MainActivity" />
         <activity android:name=".user.MenuActivity" />

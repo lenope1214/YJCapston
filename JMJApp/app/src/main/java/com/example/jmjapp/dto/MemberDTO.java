@@ -25,6 +25,7 @@ public class MemberDTO {
         private int point; // 포인트
         private String provider; // 소셜
         private String providerId; // 해당 소셜에서의 아이디(primary key)
+        private String deviceToken;
     }
     @Data
     public static class Order {

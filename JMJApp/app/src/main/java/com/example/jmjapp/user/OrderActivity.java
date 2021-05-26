@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -25,11 +26,17 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.jmjapp.R;
 import com.example.jmjapp.databinding.ActivityOrderBinding;
 import com.example.jmjapp.dto.MemberDTO;
+import com.example.jmjapp.dto.Order;
 import com.example.jmjapp.dto.Shop;
 import com.example.jmjapp.network.Server;
 import com.example.jmjapp.payment.PaymentWebview;
+import com.example.jmjapp.user.ShopDetailActivity;
 
+import java.sql.Timestamp;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,19 +50,22 @@ public class OrderActivity extends AppCompatActivity {
     private static final int PAYMENT_ACTIVITY = 10000;
 
     private ActivityOrderBinding binding;
-    private int count = 1;
+    static public int count = 1;
     int t1Hour, t1Minute;
     DatePickerDialog.OnDateSetListener setListener;
     private AlertDialog dialog;
     private Call<MemberDTO> memberDTOCall;
     private Call<Shop> shopCall;
-    private int sum = 0;
-    private String resTime, resDate, resName, resPhone, resAddr, resShop, jwt;
-    private Long orderId;
+    static public int sum = 0;
+    static public String resTime, resDate, resId, resName, resPhone, resAddr, resShop, jwt, userId, resDate2;
+    static public Long orderId;
 
-    private String order_request_et;
+    EditText order_request_et;
+
+    static public String orderRequest;
 
     private Call<ResponseBody> responseBodyCall;
+    private Call<Order> orderCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +85,8 @@ public class OrderActivity extends AppCompatActivity {
 
         SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
         jwt = pref.getString("token", "tokenIsNull");
+        userId = pref.getString("user_id", "");
+        Log.d("userid",userId);
 
 //        memberDTOCall = Server.getInstance().getApi().getUser("Bearer " + jwt);
 //        memberDTOCall.enqueue(new Callback<MemberDTO>() {
@@ -105,7 +117,8 @@ public class OrderActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     resAddr = response.body().getAddress();
                     resShop = response.body().getName();
-                    Log.d("result123 ", "성공" + resShop + resAddr);
+                    resId = response.body().getShopId();
+                    Log.d("result123 ", "성공" + resShop + resAddr + resId);
                 } else {
                     Log.d("wlfkfdmfgofk", "wlfkfdmfgofk");
                 }
@@ -116,7 +129,11 @@ public class OrderActivity extends AppCompatActivity {
             }
         });
 
-        order_request_et = binding.orderRequestEt.getText().toString();
+       // order_request_et = binding.orderRequestEt.getText().toString();
+        //Log.d("orderrrrr", order_request_et);
+
+        order_request_et = (EditText) findViewById(R.id.order_request_et);
+
 
         binding.orderShopName.setText(ShopDetailActivity.shopName);
 
@@ -133,6 +150,7 @@ public class OrderActivity extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year, int month, int day) {
                         month = month + 1;
                         resDate = year + "년" + month + "월" + day + "일";
+                        resDate2 = String.valueOf(year+"-"+month+"-"+day);
                         binding.orderChooseDateText.setText(resDate);
                     }
                 }, year, month, day);
@@ -154,7 +172,7 @@ public class OrderActivity extends AppCompatActivity {
                                 t1Minute = minute;
 
                                 resTime = t1Hour + "시" + t1Minute + "분";
-                                Log.d("daw", String.valueOf(t1Minute));
+                                Log.d("daw", String.valueOf(t1Hour+t1Minute));
 
 
                                 time(resTime, t1Minute, t1Hour, binding.orderChooseTimeText);
@@ -230,6 +248,7 @@ public class OrderActivity extends AppCompatActivity {
         Log.d("orderRequest1", binding.orderRequestEt.getText().toString());
         Log.d("people1", String.valueOf(count));
         Log.d("amount2", String.valueOf(sum));
+        orderRequest = binding.orderRequestEt.getText().toString();
 
         binding.orderPayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -241,92 +260,117 @@ public class OrderActivity extends AppCompatActivity {
                     dialog.show();
                 } else {
                     Map<String, String> map = new HashMap();
-                    map.put("orderId", String.valueOf(orderId));
+                    map.put("shopId", ShopDetailActivity.shopNumber);
+                    //map.put("orderId", String.valueOf(orderId));
+                    Log.d("res",resDate2);
+                    Log.d("result", resDate2 +" "+t1Hour+":"+t1Minute+":"+ 0 + 0);
+                    String strDate = resDate2 +" "+t1Hour+":"+t1Minute+":"+ 0 + 0;
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    Date dateSeongbok = dateFormat.parse(strDate, new ParsePosition(0));
+                    Long dateSeongbok2 = dateSeongbok.getTime();
+                    Log.d("soeng", String.valueOf(dateSeongbok2));
+
+                    Long arriveTime = new Date(year, month, day, t1Hour, t1Minute).getTime();
+                    Log.d("arriveTime",String.valueOf(arriveTime));
+
+                    map.put("arriveTime", String.valueOf(dateSeongbok2));
                     map.put("orderRequest", binding.orderRequestEt.getText().toString());
                     map.put("people", String.valueOf(count));
 
-                    Log.d("orderId1", String.valueOf(orderId));
+                    Log.d("orderId1", ShopDetailActivity.shopNumber);
                     Log.d("orderRequest1", binding.orderRequestEt.getText().toString());
                     Log.d("people1", String.valueOf(count));
 
-                    responseBodyCall = Server.getInstance().getApi().updateOrder("Bearer " + jwt, map);
-                    responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                    orderCall = Server.getInstance().getApi().updateOrder("Bearer " + jwt, map);
+                    orderCall.enqueue(new Callback<Order>() {
                         @Override
-                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        public void onResponse(Call<Order> call, Response<Order> response) {
                             if (response.isSuccessful()) {
                                 Log.d("연결성공여부", String.valueOf(response.code()));
+                                orderId = Long.valueOf(response.body().getOrderId());
+                                Log.d("orderididid", String.valueOf(orderId));
+//                                String orderId2 = String.valueOf(new Timestamp(orderId));
+//                                String year = orderId2.substring(0,4);
+//                                String month = orderId2.substring(5,7);
+//                                String day = orderId2.substring(8,10);
+//
+//                                String hour = orderId2.substring(11,13);
+//                                String min = orderId2.substring(14,16);
+
+//                                System.out.println(orderId2);
+//
+//                                System.out.println(year+"년"+month+"월"+day+"일 " +hour+"시"+min+"분");
+                                payment(orderId);
                             } else {
                                 Log.d("연결실패1", "연결실패1");
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-                            Log.d("연결실패2", "연결실패2");
+                        public void onFailure(Call<Order> call, Throwable t) {
+                            Log.d("연결실패232", "연결실패232"+t.getCause());
                         }
                     });
-
-                    Map<String, String> map2 = new HashMap();
-                    map2.put("orderId", String.valueOf(orderId));
-                    map2.put("amount", String.valueOf(sum));
-                    map2.put("usePoint", "359");
-                    map2.put("pg", "inicis");
-                    map2.put("payMethod", "card");
-
-                    Log.d("orderId2", String.valueOf(orderId));
-                    Log.d("amount2", String.valueOf(sum));
-
-
-                    responseBodyCall = Server.getInstance().getApi().payment("Bearer " + jwt, map2);
-                    responseBodyCall.enqueue(new Callback<ResponseBody>() {
-                        @SneakyThrows
-                        @Override
-                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                            if (response.isSuccessful()) {
-                                Log.d("성공123", "성공123");
-
-                                Intent intent = new Intent(OrderActivity.this, PaymentWebview.class);
-                                intent.putExtra("shopNumber", ShopDetailActivity.shopNumber);
-                                intent.putExtra("price", sum);
-                                intent.putExtra("people", count);
-                                intent.putExtra("resDate", resDate);
-                                intent.putExtra("resTime", resTime);
-                                intent.putExtra("resShop", resShop);
-                                intent.putExtra("resAddr", resAddr);
-                                intent.putExtra("resName", resName);
-                                intent.putExtra("resPhone", resPhone);
-                                intent.putExtra("orderId", orderId);
-                                startActivityForResult(intent, PAYMENT_ACTIVITY);
-                                /**
-                                 *  웹뷰로 데이터 전달 필요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                                 **/
-                            } else {
-                                Log.d("실패13", "실패13" + response.errorBody().string() + response.code());
-                                return;
-                            }
-
-
-                        }
-
-                        @Override
-                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-                            Log.d("실패2", "실패2");
-                        }
-                    });
-
-
                 }
+            }
+        });
+    }
+
+    private void payment(Long orderId) {
+        Map<String, String> map2 = new HashMap();
+        map2.put("orderId", String.valueOf(orderId));
+        map2.put("amount", String.valueOf(sum));
+        map2.put("usePoint", "359");
+        map2.put("pg", "inicis");
+        map2.put("payMethod", "card");
+
+        Log.d("orderId2", String.valueOf(orderId));
+        Log.d("amount2", String.valueOf(sum));
+
+        responseBodyCall = Server.getInstance().getApi().payment("Bearer " + jwt, map2);
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @SneakyThrows
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    Log.d("성공123", "성공123");
+
+                    Intent intent = new Intent(OrderActivity.this, PaymentWebview.class);
+                    intent.putExtra("shopNumber", ShopDetailActivity.shopNumber);
+                    intent.putExtra("price", sum);
+                    intent.putExtra("people", count);
+                    intent.putExtra("resDate", resDate);
+                    intent.putExtra("resTime", resTime);
+                    intent.putExtra("resShop", resShop);
+                    intent.putExtra("resAddr", resAddr);
+                    intent.putExtra("resId", resId);
+                    intent.putExtra("resPhone", resPhone);
+                    intent.putExtra("orderId", orderId);
+                    intent.putExtra("orderRequest", orderRequest);
+                    startActivityForResult(intent, PAYMENT_ACTIVITY);
+                    /**
+                     *  웹뷰로 데이터 전달 필요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                     **/
+                } else {
+                    Log.d("실패13", "실패13" + response.errorBody().string() + response.code());
+                    return;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("실패2", "실패2");
             }
         });
     }
 
     private void time(String time, int t2Minute, int t2Hour, TextView shop_update_closetime) {
         if (String.valueOf(t2Minute).toString().length() == 1 && String.valueOf(t2Hour).toString().length() == 1) {
-            shop_update_closetime.setText("0" + t2Hour + "시" + ":" + "0" + t2Minute + "분");
+            shop_update_closetime.setText(String.format("%02d", t2Hour) + "시" + ":" + String.format("%02d", t2Minute) + "분");
         } else if (String.valueOf(t2Hour).toString().length() == 1) {
-            shop_update_closetime.setText("0" + t2Hour + "시" + ":" + t2Minute + "분");
+            shop_update_closetime.setText(String.format("%02d", t2Hour) + "시" + ":" + t2Minute + "분");
         } else if (String.valueOf(t2Minute).toString().length() == 1) {
-            shop_update_closetime.setText(t2Hour + "시" + ":" + "0" + t2Minute + "분");
+            shop_update_closetime.setText(t2Hour + "시" + ":" + String.format("%02d", t2Minute) + "분");
         } else {
             shop_update_closetime.setText(time);
         }

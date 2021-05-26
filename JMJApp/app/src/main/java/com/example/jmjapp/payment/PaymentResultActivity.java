@@ -2,15 +2,48 @@ package com.example.jmjapp.payment;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
-import com.example.jmjapp.R;
-import com.example.jmjapp.databinding.ActivityOrderBinding;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.jmjapp.databinding.ActivityPaymentResultBinding;
+import com.example.jmjapp.network.Server;
+import com.example.jmjapp.practicePush.MainActivity3;
+import com.example.jmjapp.user.MainActivity;
+import com.example.jmjapp.user.OrderActivity;
+import com.example.jmjapp.user.ShopDetailActivity;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import lombok.SneakyThrows;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PaymentResultActivity extends AppCompatActivity {
     ActivityPaymentResultBinding binding;
+
+    static RequestQueue requestQueue;
+    private String reqId, jwt, device_token, resTime,
+            resDate, orderRquest, resShop, ownerId, resId;
+    private Long orderId;
+    private int sum, count;
+
+    private Call<ResponseBody> responseBodyCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +51,169 @@ public class PaymentResultActivity extends AppCompatActivity {
         binding = ActivityPaymentResultBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
+        jwt = pref.getString("token",   "tokenIsNull");
 
+        Log.d("jwt", jwt);
+        ownerId = ShopDetailActivity.ownerId;
+        Log.d("ownerid99",ownerId);
+
+        resTime = OrderActivity.resTime;
+        resDate = OrderActivity.resDate;
+        sum = OrderActivity.sum;
+        count = OrderActivity.count;
+        orderRquest = OrderActivity.orderRequest;
+        resShop = OrderActivity.resShop;
+        orderId = OrderActivity.orderId;
+        resId = OrderActivity.resId;
+
+        Log.d("orderRequest123", orderRquest);
+
+        Map<String, String> map = new HashMap();
+//        map.put("resTime", resTime);
+//        map.put("resDate", resDate);
+//        map.put("sum", String.valueOf(sum));
+//        map.put("count", String.valueOf(count));
+//        map.put("orderRequest", orderRquest);
+//        map.put("resShop", resShop);
+        map.put("orderId", String.valueOf(orderId));
+        map.put("resId", resId);
+        map.put("status", "toOwner");
+
+        binding.reservationComp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                send(map);
+                Intent intent = new Intent(PaymentResultActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
+
+        responseBodyCall = Server.getInstance().getApi().deviceToken(ownerId);
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @SneakyThrows
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    device_token = response.body().string();
+                    Log.d("deviceToken!!!!!!!!!!", device_token);
+                } else {
+                    Log.d("실패1111", "실패1111");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("실패2222", "실패2222");
+            }
+        });
+
+
+//        Log.d("mapmpaap", map.get("resTime")+map.get("resDate")+map.get("sum")+map.get("count")+map.get("orderRequest")+map.get("resShop"));
+
+//        binding.btnbtn2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String input = binding.btnbtn.getText().toString();
+//                send("안녕하세요.");
+//            }
+//        });
+
+
+        if (requestQueue == null) {
+            requestQueue = Volley.newRequestQueue(getApplicationContext());
+        }
+    }
+
+    private void send(Map<String, String> map) {
+        JSONObject requestData = new JSONObject();
+
+        try {
+            requestData.put("priority", "high");
+
+            JSONObject dataObj = new JSONObject();
+
+//            dataObj.put("resTime", map.get("resTime"));
+//            dataObj.put("resDate", map.get("resDate"));
+//            dataObj.put("sum", map.get("sum"));
+//            dataObj.put("count", map.get("count"));
+//            dataObj.put("resShop", map.get("resShop"));
+            dataObj.put("orderId", map.get("orderId"));
+            dataObj.put("resId", map.get("resId"));
+            dataObj.put("status", map.get("status"));
+            requestData.put("data", dataObj);
+            JSONArray idArray = new JSONArray();
+
+            idArray.put(0, "ctgNzO5SL04:APA91bFyTGXC5WKgWuS_oAXQrXDVe_pTvPnTiXJtBJPVSM0750M3WGocpffwRL5CIGtv3P01uwL0UQV_qwKhlisCO_UAJP7ITnmw_9FIbcIAh_1Hw0UYEqKQl0Oy_RP4chKkLkiccC7J");
+            requestData.put("registration_ids", idArray);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        sendData(requestData, new SendResponseListener() {
+
+            @Override
+            public void onRequestCompleted() {
+                println("onRequestCompleted() 호출됨.");
+            }
+
+            @Override
+            public void onRequestStarted() {
+                println("onRequestStarted() 호출됨.");
+            }
+
+            @Override
+            public void onRequestWithError(VolleyError error) {
+                println("onRequestWithError() 호출됨.");
+            }
+        });
+    }
+
+    public interface SendResponseListener {
+        public void onRequestStarted();
+        public void onRequestCompleted();
+        public void onRequestWithError(VolleyError error);
+    }
+
+    public void sendData(JSONObject requestData, final SendResponseListener listener) {
+        JsonObjectRequest request = new JsonObjectRequest(
+
+                Request.Method.POST, "https://fcm.googleapis.com/fcm/send", requestData, new com.android.volley.Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                listener.onRequestCompleted();
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onRequestWithError(error);
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<String, String>();
+                headers.put("Authorization", "key=AAAAMsCw7yQ:APA91bGlT_VTfm9xHFMcguW36JMt6VXKVY2s-VgFnpUyrAZz2Gjhe8reRkLOMLp5dBG2kju74sUmeD4co8EQvZgszn4-4UUlaL0pdrttVcf9N50Jjk32Vdv1tGFASC0Nm_ss5VEdd68z");
+                return headers;
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+        };
+
+        request.setShouldCache(false);
+        listener.onRequestStarted();
+        requestQueue.add(request);
+    }
+
+    public void println(String data) {
+        binding.textView123.append("!@#$%^&*()@#$%^&*"+data + "\n");
     }
 }

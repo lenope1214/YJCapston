@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.example.jmjapp.IntroScreen;
 import com.example.jmjapp.R;
 import com.example.jmjapp.network.Server;
 
@@ -33,6 +35,7 @@ public class OwnerJoinActivity extends AppCompatActivity {
 
     private Call<ResponseBody> responseBodyCall;
     private Call<String> stringCall;
+    private String newToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,8 @@ public class OwnerJoinActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.close);
+
+        newToken = IntroScreen.newToken;
 
         et_join_owner_id = (EditText) findViewById(R.id.et_join_owner_id);
         et_join_owner_pw = (EditText) findViewById(R.id.et_join_owner_pw);
@@ -132,6 +137,7 @@ public class OwnerJoinActivity extends AppCompatActivity {
                     map.put("name", et_join_owner_name.getText().toString());
                     map.put("phone", et_join_owner_phone.getText().toString());
                     map.put("role", "ROLE_OWNER");
+                    map.put("deviceToken", newToken);
 
                     stringCall = Server.getInstance().getApi().join(map);
                     stringCall.enqueue(new Callback<String>() {
