@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.socket.messaging.SessionConnectEvent;
@@ -25,33 +26,15 @@ public class ChatController {
     @MessageMapping("/chat") // "/pub/chat"
     public void publishChat(StompMessage chatMessage) {
         log.info("publishChat : {}", chatMessage);
-//        if(chatMessage.getMessage().contains(":")){
-//            chatMessage.setUsername(chatMessage.getMessage().substring(0, chatMessage.getMessage().indexOf(":")));
-//            chatMessage.setMessage(chatMessage.getMessage().substring(chatMessage.getMessage().indexOf(":")));
-//        }
 
-//        stompService.post(chatMessage);
-        System.out.println("스톰프 메세지 >>>>>>>");
-//        private Integer shopId;
-//        private String type;
-//        private String roomId;
-//        private String username;
-//        private String message;
-//        private String orderList;
-//        private String orderId;
-//        private String orderNumber;
-        System.out.println(
-                "shopId : " + chatMessage.getShopId() +"\n" +
-                "type : " + chatMessage.getType() + "\n" +
-                "roomId : " + chatMessage.getRoomId() + "\n" +
-                "username : " + chatMessage.getUsername() + "\n" +
-                "message : " + chatMessage.getMessage()+ "\n" +
-                "orderList : " + chatMessage.getOrderList() + "\n" +
-                "orderId : " + chatMessage.getOrderId() + "\n" +
-                "orderNumber : " + chatMessage.getOrderNumber()
-        );
-        System.out.println("스톰프 메세지 <<<<<<<");
         messagingTemplate.convertAndSend("/sub/" + chatMessage.getShopId() + "/" + chatMessage.getType() + "/" + chatMessage.getRoomId(), chatMessage);
+    }
+
+    @MessageMapping("/test/chat")
+    @SendTo("/sub/test/chat")
+    public StompMessage testChat(StompMessage stompMessage){
+        System.out.println(stompMessage.toString());
+        return stompMessage;
     }
 
     @EventListener(SessionConnectEvent.class)

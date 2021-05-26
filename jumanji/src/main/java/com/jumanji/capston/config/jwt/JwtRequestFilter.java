@@ -58,7 +58,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
 //        System.out.println("In JwtRequestFilter");
         if (shouldNotFilter(request)) {
-            System.out.println("jwt 확인 안함!");
             filterChain.doFilter(request, response);
         }
         final String requestTokenHeader = request.getHeader("Authorization");
@@ -121,13 +120,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-//        System.out.println("요청 url : " +request.getServletPath());
+        System.out.println("요청 url : [" +request.getMethod() + "] " + request.getServletPath());
 //        for(String path :request.getServletPath().split("/") ){65
 //            System.out.println("-------> " + path);
 //        }
         String path =  request.getServletPath();
         if(path.startsWith("/ws-stomp") || path.startsWith("/start")){
-            System.out.println("chatting !");
             return true;
         }
         if(path.startsWith("/api/v1/")) {

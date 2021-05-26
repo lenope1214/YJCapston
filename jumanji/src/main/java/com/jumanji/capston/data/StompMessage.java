@@ -3,10 +3,11 @@ package com.jumanji.capston.data;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor @ToString
 public class StompMessage {
     private Integer shopId;
     private String type;
