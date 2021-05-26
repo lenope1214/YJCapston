@@ -224,6 +224,9 @@ public interface ServerApi {
     @POST("payments") // 주문등록
     Call<ResponseBody> payment(@Header("Authorization")String jwt, @Body Map<String, String> map);
 
+    @POST("marks")  // 찜 등록
+    Call<ResponseBody> regzzim(@Header("Authorization")String jwt, @Body Map<String, String> map);
+
     @POST("order-menus") // 주문 메뉴 등록
     Call<ResponseBody> order_menus(@Header("Authorization")String jwt, @Body Map<String, List<OrderMenu>> map);
 
@@ -257,6 +260,9 @@ public interface ServerApi {
 
     @GET("users/{userId}/device-token") // 기기토큰 받기
     Call<ResponseBody> deviceToken(@Path("userId") String userId);
+
+    @GET("marks") // 찜 목록 조회
+    Call<Mark.MarkList> getMarks(@Header("Authorization")String jwt);
 
     @GET("orders/{orderId}") // 특정 주문 확인
     Call<Order> orderOne(@Header("Authorization") String jwt,
@@ -329,6 +335,10 @@ public interface ServerApi {
 
     @GET("menus/list/{shopId}") // 한 매장의 메뉴리스트
     Call<List<Menu>> menuList(@Path("shopId") String shopId);
+
+    @GET("shop/{shopId}/employees") // 해당 매장의 직원리스트
+    Call<List<Employee>> empList(@Header("Authorization") String jwt,
+                                 @Path("shopId") String shopId);
 
     @GET("users/shops") // 한 유저의 매장리스트
     Call<List<Shop>> myShop2(@Header("Authorization") String jwt);
