@@ -1,6 +1,7 @@
 package com.example.jmjapp.user;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -12,6 +13,8 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuView;
+
 import com.example.jmjapp.*;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -27,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
     ZzimFragment zzimFragment;
 
     BottomNavigationView bottomNavigation;
+    SharedPreferences orderNumber;
+    String QR = null;
+
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,21 +43,46 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
         String user_id = pref.getString("user_id", null);
-        
+
         homeFragment = new HomeFragment();
         posFragment = new PosFragment();
         mapFragment = new MapFragment();
         myFragment = new MyFragment();
         zzimFragment = new ZzimFragment();
 
+        try {
+            ShopDetailActivity.orderCheck.equals("1");
+        } catch (Exception e) {
+            ShopDetailActivity.orderCheck = "0";
+        }
+
         Bundle bundle = new Bundle();
         bundle.putString("user_id", user_id);
         myFragment.setArguments(bundle);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
+//
+//        try {
+//            QR = getIntent().getStringExtra("QR");
+//
+//            if (orderCheck == 1 && QR.equals("order")) {
+//                getSupportFragmentManager().beginTransaction().replace(R.id.container, posFragment).commit();
+//            }
+//
+//        } catch (Exception e) {
+//            return;
+//        }
 
         final BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
-        bottomNavigation.setSelectedItemId(R.id.tab3);
+
+
+        if (ShopDetailActivity.orderCheck.equals("1")){
+            bottomNavigation.setSelectedItemId(R.id.tab1);
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, posFragment).commit();
+        } else {
+            bottomNavigation.setSelectedItemId(R.id.tab3);
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
+        }
+
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -139,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
         });
+
         alBuilder.setTitle("앱 종료");
         alBuilder.show();
     }

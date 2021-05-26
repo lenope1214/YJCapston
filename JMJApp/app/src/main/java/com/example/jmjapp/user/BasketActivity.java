@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.jmjapp.*;
 import com.example.jmjapp.Adapter.BasketRecyclerAdapter;
+import com.example.jmjapp.dto.Basket;
 import com.example.jmjapp.dto.Menu;
 import com.example.jmjapp.network.Server;
 import com.google.android.material.snackbar.Snackbar;
@@ -35,8 +36,11 @@ public class BasketActivity extends AppCompatActivity {
     private BasketRecyclerAdapter adapter;
     private ArrayList<Menu> mItems = new ArrayList();
 
-    private String jwt, shopId;
+    private String jwt;
     private Call<ResponseBody> responseBodyCall;
+
+
+    SharedPreferences orderNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +53,21 @@ public class BasketActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.arrowback);
 
+//        shopNumber = ShopDetailActivity.shopNumber;
+//        tableNumber = getIntent().getStringExtra("tableNumber");
+//        orderNumber = getSharedPreferences("orderCheck",MODE_PRIVATE);
+//        orderCheck = orderNumber.getInt("OrderNumber", 0);
+
+        System.out.println(ShopDetailActivity.shopNumber + "!@#" + ShopDetailActivity.tableNumber + "!@#" + ShopDetailActivity.orderCheck + "!@#");
+
         basket_reservation_btn = findViewById(R.id.basket_reservation_btn);
         rv_basket_list = (RecyclerView) findViewById(R.id.rv_basket_list);
 
         SharedPreferences pref = getSharedPreferences("basket", MODE_PRIVATE);
         SharedPreferences pref2 = getSharedPreferences("auth", MODE_PRIVATE);
+
         int list_size = pref.getInt("list_size", 0);
         jwt = pref2.getString("token", null);
-        shopId = ShopDetailActivity.shopNumber;
 
         for(int i = list_size - 1; i >= 0; i--) {
             mItems.add(new Menu(i, pref.getString("list_" + i + "_name", "메뉴이름"),
@@ -70,42 +81,56 @@ public class BasketActivity extends AppCompatActivity {
         basket_reservation_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Map<String, String> map = new HashMap();
-                map.put("shopId", shopId);
 
-                if (jwt != null) {
-                    responseBodyCall = Server.getInstance().getApi().order("Bearer " + jwt, map);
-                    responseBodyCall.enqueue(new Callback<ResponseBody>() {
-                        @SneakyThrows
-                        @Override
-                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                            if (response.code() == 201) {
-                                Log.d("성공", "성공");
-                                JSONObject jsonObject = new JSONObject(response.body().string());
-                                Log.d("result ", String.valueOf(jsonObject));
-                                Long orderId = (Long) jsonObject.get("orderId");
-                                System.out.println(orderId);
+                try {
+                    ShopDetailActivity.orderCheck.equals("1");
+                } catch (Exception e) {
+                    ShopDetailActivity.orderCheck = "0";
+                }
 
-                                Intent intent = new Intent(BasketActivity.this, OrderActivity.class);
-                                intent.putExtra("orderId", orderId);
-                                startActivity(intent);
-                            } else {
-                                Log.d("실패", "실패" + response.code());
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-                            Log.d("연결실패", "연결실패");
-                        }
-                    });
+                if(ShopDetailActivity.orderCheck.equals("1")){
+                    Intent intent = new Intent(BasketActivity.this, MainActivity.class);
+                    intent.putExtra("QR","order");
+                    intent.putExtra("shopNumber",ShopDetailActivity.shopNumber);
+                    startActivity(intent);
                 } else {
-                    Snackbar.make(v, "로그인이 필요한 서비스입니다.", Snackbar.LENGTH_SHORT).setAction("확인", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            return;
-                        }
-                    }).show();
+                    Map<String, String> map = new HashMap();
+                    map.put("shopId", ShopDetailActivity.shopNumber);
+
+                    if (jwt != null) {
+                        responseBodyCall = Server.getInstance().getApi().order("Bearer " + jwt, map);
+                        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                            @SneakyThrows
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                if (response.code() == 201) {
+                                    Log.d("성공", "성공");
+                                    JSONObject jsonObject = new JSONObject(response.body().string());
+                                    Log.d("result ", String.valueOf(jsonObject));
+                                    Long orderId = (Long) jsonObject.get("orderId");
+                                    System.out.println(orderId);
+
+                                    Intent intent = new Intent(BasketActivity.this, OrderActivity.class);
+                                    intent.putExtra("orderId", orderId);
+                                    startActivity(intent);
+                                } else {
+                                    Log.d("실패", "실패" + response.code());
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                Log.d("연결실패", "연결실패");
+                            }
+                        });
+                    } else {
+                        Snackbar.make(v, "로그인이 필요한 서비스입니다.", Snackbar.LENGTH_SHORT).setAction("확인", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                return;
+                            }
+                        }).show();
+                    }
                 }
             }
         });

@@ -46,11 +46,10 @@
 
     <EditText
         android:id="@+id/et_empname"
-        android:layout_width="0dp"
+        android:layout_width="185dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
         android:background="@drawable/edittext_login2"
         android:ems="10"
         android:fontFamily="@font/we_semibold"
@@ -62,8 +61,6 @@
         android:paddingBottom="10dp"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_empinfo"
         tools:ignore="MissingConstraints" />
@@ -133,6 +130,27 @@
         app:layout_constraintTop_toBottomOf="@+id/et_empphone"
         tools:ignore="MissingConstraints" />
 
+    <EditText
+        android:id="@+id/et_empno"
+        android:layout_width="185dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/edittext_login2"
+        android:ems="10"
+        android:fontFamily="@font/we_semibold"
+        android:gravity="left"
+        android:hint="직원번호(1~999)"
+        android:maxLength="3"
+        android:padding="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/et_empname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_empname"
+        tools:ignore="MissingConstraints" />
+
     <ImageView
         android:id="@+id/imageView23"
         android:layout_width="150dp"
@@ -191,6 +209,8 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rg_gender" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
