@@ -139,7 +139,7 @@ public class Order implements Serializable {
             this.orderRequest = order.getOrderRequest();
             this.usePoint = order.getUsePoint();
             this.status = order.getStatus();
-            this.reviewed = order.getReviewed();
+            this.reviewed = order.getReviewed() == ' ' ? 'N' : 'Y';
             this.amount = order.getAmount();
             this.arriveTime = order.getArriveTime();
             this.pg = order.getPg();

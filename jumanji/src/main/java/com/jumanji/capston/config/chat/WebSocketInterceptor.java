@@ -9,8 +9,6 @@ import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.messaging.support.ChannelInterceptor;
 import org.springframework.stereotype.Component;
 
-import javax.security.auth.message.AuthException;
-
 @Slf4j
 @Component
 public class WebSocketInterceptor implements ChannelInterceptor {
@@ -18,12 +16,15 @@ public class WebSocketInterceptor implements ChannelInterceptor {
     @Override
     public Message<?> preSend(Message<?> message, MessageChannel channel) {
         StompHeaderAccessor accessor = StompHeaderAccessor.wrap(message);
-
+//        System.out.println("메세지는 여기서 찍나요? full message : " + message);
+//        System.out.println("auth:" + accessor.getNativeHeader("Authorization"));
+//        System.out.println(accessor.getHeader("nativeHeaders").getClass());
+//        System.out.println("accessor : " + accessor);
         if (accessor.getCommand() == StompCommand.CONNECT) {
-            System.out.println("스톰프 커맨드 커넥트.");
+//            System.out.println("스톰프 커맨드 커넥트.");
 //            String authToken = accessor.getFirstNativeHeader("socket_token");
 //
-//            if (!"jmj-chatting".equals(authToken)) {
+//            if (!"jmj-chatting".equals(authToken)) { // token 확인..
 //                throw new AuthException("fail");
 //            }
         }
