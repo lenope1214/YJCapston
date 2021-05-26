@@ -19,6 +19,7 @@ public class  Shop {
     private String category;
     private char isOpen;
     private String imgPath;
+    private String ownerId;
 
 
     public Shop(String id) {

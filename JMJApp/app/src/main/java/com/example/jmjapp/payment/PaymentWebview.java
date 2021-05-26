@@ -18,7 +18,8 @@ import com.example.jmjapp.R;
 public class PaymentWebview extends Activity {
     private WebView paymentWebView;
     private static final String APP_SCHEME = "iamporttest://web1";
-    private String shopNumber, jwt, resDate, resTime, resShop, resAddr, resName, resPhone;
+    private String shopNumber, jwt, resId, resDate, resTime, resShop, resAddr, resName, resPhone;
+    static public String orderRequest;
     private Long orderId;
     private int resPrice, resPeople;
 
@@ -53,8 +54,12 @@ public class PaymentWebview extends Activity {
         resPhone = intent.getStringExtra("resPhone");
         resAddr = intent.getStringExtra("resAddr");
         resName = intent.getStringExtra("resName");
+        resId = intent.getStringExtra("resId");
         resShop = intent.getStringExtra("resShop");
+        orderRequest = intent.getStringExtra("orderRequest");
         orderId = intent.getLongExtra("orderId",123);
+
+        Log.d("leeyoungmin", orderRequest);
 
         Uri intentData = intent.getData();
 
@@ -68,8 +73,8 @@ public class PaymentWebview extends Activity {
             Log.d("people", String.valueOf(resPeople));
 
             paymentWebView.addJavascriptInterface(new MyJavaScriptInterface(), "android");
-            paymentWebView.loadUrl("http://192.168.1.77:8088/androidPayment");
-            //paymentWebView.loadUrl("http://3.34.55.186:8088/androidPayment");
+            //paymentWebView.loadUrl("http://192.168.1.62:8088/androidPayment");
+            paymentWebView.loadUrl("http://3.34.55.186:8088/androidPayment");
         } else {
             //isp 인증 후 복귀했을 때 결제 후속조치
             Log.d("실행2", "실행2");

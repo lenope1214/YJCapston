@@ -29,7 +29,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
+        <activity android:name=".owner.ReservationManagementActivity"></activity>
+        <activity android:name=".practicePush.MainActivity3" />
+        <activity android:name=".owner.push.BellActivity_O" />
         <activity android:name=".payment.PaymentResultActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -42,24 +44,9 @@
                     android:scheme="iamporttest" />
             </intent-filter>
         </activity>
-        <activity android:name=".owner.BellActivity_O" />
-        <activity android:name=".push.Firebase2" />
-        <activity android:name=".push.Firebase" />
-
-        <service
-            android:name=".push.MyFirebaseMessagingService"
-            android:enabled="true"
-            android:exported="true"
-            android:stopWithTask="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-
         <activity android:name=".owner.AddEmployeesActivity" />
         <activity android:name=".owner.EmployeesManagementActivity" />
-        <activity android:name=".payment.PaymentWebview">
-        </activity>
+        <activity android:name=".payment.PaymentWebview" />
         <activity android:name=".user.OrderActivity" />
         <activity android:name=".owner.ShopUpdateActivity" />
         <activity android:name=".user.BasketActivity" />
@@ -88,6 +75,25 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <service
+            android:name=".owner.push.MyFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true"
+            android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".user.push.UserFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true"
+            android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
         <activity android:name=".user.MainActivity" />
         <activity android:name=".user.MenuActivity" />

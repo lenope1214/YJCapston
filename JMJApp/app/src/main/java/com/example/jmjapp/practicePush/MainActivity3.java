@@ -1,12 +1,12 @@
-package com.example.jmjapp.push;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.jmjapp.practicePush;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -16,6 +16,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.jmjapp.R;
+import com.example.jmjapp.databinding.ActivityMain3Binding;
+import com.example.jmjapp.databinding.ActivityOrderBinding;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,22 +25,24 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Firebase2 extends AppCompatActivity {
+public class MainActivity3 extends AppCompatActivity {
+    private ActivityMain3Binding binding;
     EditText editText;
     TextView textView;
 
     static RequestQueue requestQueue;
-    static String regId = "dEg_zcKtK-A:APA91bH_EVX1cHNt36qTTsqrxHz6ervIT5H_2mCKUEaHII0x-InRrsOBaV7obGr0CB6-bDAn9WFXbw9lPloNAr26cxdd8qWP3iLVcmJuBlaBuSvkEX7wA3EFDuWZ8gKOpkdxKgibNc4C";
+    static String regId = "dhh_qemy9ZA:APA91bE08nTfizqr46JQI4XKTKiIxDfxwwrBqTgawodeq7GmcuQrL-273sIXuAJzd9vonTyroVD8DHKaWsd1iozD6Bm5i9LS-PhyH0w-knKcpwGGACUvkpA0ov4xKGNXuPeYdkYW2hbS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_firebase2);
+        binding = ActivityMain3Binding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        editText = findViewById(R.id.editTextTextPersonName);
-        textView = findViewById(R.id.textView42);
+        editText = binding.editText;
+        textView = binding.textView;
 
-        Button button = findViewById(R.id.button4);
+        Button button = binding.button;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +54,7 @@ public class Firebase2 extends AppCompatActivity {
         if (requestQueue == null) {
             requestQueue = Volley.newRequestQueue(getApplicationContext());
         }
+
     }
 
     public void send(String input) {
@@ -88,6 +93,7 @@ public class Firebase2 extends AppCompatActivity {
         });
     }
 
+
     public interface SendResponseListener {
         public void onRequestStarted();
         public void onRequestCompleted();
@@ -97,9 +103,7 @@ public class Firebase2 extends AppCompatActivity {
     public void sendData(JSONObject requestData, final SendResponseListener listener) {
         JsonObjectRequest request = new JsonObjectRequest(
 
-                Request.Method.POST, "https://fcm.googleapis.com/fcm/send",
-                requestData,
-                new Response.Listener<JSONObject>() {
+                Request.Method.POST, "https://fcm.googleapis.com/fcm/send", requestData, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 listener.onRequestCompleted();
@@ -119,8 +123,7 @@ public class Firebase2 extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<String, String>();
-                headers.put("Authorization",
-                        "key=AAAAMsCw7yQ:APA91bGlT_VTfm9xHFMcguW36JMt6VXKVY2s-VgFnpUyrAZz2Gjhe8reRkLOMLp5dBG2kju74sUmeD4co8EQvZgszn4-4UUlaL0pdrttVcf9N50Jjk32Vdv1tGFASC0Nm_ss5VEdd68z");
+                headers.put("Authorization", "key=AAAAMsCw7yQ:APA91bGlT_VTfm9xHFMcguW36JMt6VXKVY2s-VgFnpUyrAZz2Gjhe8reRkLOMLp5dBG2kju74sUmeD4co8EQvZgszn4-4UUlaL0pdrttVcf9N50Jjk32Vdv1tGFASC0Nm_ss5VEdd68z");
                 return headers;
             }
 
@@ -135,7 +138,8 @@ public class Firebase2 extends AppCompatActivity {
         requestQueue.add(request);
     }
 
+
     public void println(String data) {
-        textView.append(data+"\n");
+        textView.append(data + "\n");
     }
 }

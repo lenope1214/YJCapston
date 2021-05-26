@@ -31,7 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class ShopDetailFragment_O extends Fragment {
+public class  ShopDetailFragment_O extends Fragment {
     Button toggle_button_on, toggle_button_off, toggle_button_res_on, toggle_button_res_off;
     TextView owner_logout_btn, owner_name_tv;
     ConstraintLayout shop_detail_menu_button, shop_detail_update_button, move_employee_option;

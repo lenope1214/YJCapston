@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.jmjapp.IntroScreen;
 import com.example.jmjapp.R;
 import com.example.jmjapp.network.Server;
 
@@ -39,6 +40,7 @@ public class JoinActivity extends AppCompatActivity {
     private AlertDialog dialog;
     private Call<ResponseBody> responseBodyCall;
     private Call<String> stringCall;
+    private String newToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,8 @@ public class JoinActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.close);
+
+        newToken = IntroScreen.newToken;
 
         et_id = (EditText) findViewById(R.id.et_id);
         et_pw = (EditText) findViewById(R.id.et_password);
@@ -139,6 +143,8 @@ public class JoinActivity extends AppCompatActivity {
                     map.put("name", et_name.getText().toString());
                     map.put("phone", et_phone.getText().toString());
                     map.put("role", "ROLE_USER");
+                    map.put("deviceToken", newToken);
+                    Log.d("newToken", newToken);
 
                     stringCall = Server.getInstance().getApi().join(map);
                     stringCall.enqueue(new Callback<String>() {

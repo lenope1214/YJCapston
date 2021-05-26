@@ -17,7 +17,9 @@ import com.bumptech.glide.Glide;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Menu;
 import com.example.jmjapp.network.Server;
+import com.example.jmjapp.owner.MainActivity_O;
 import com.example.jmjapp.owner.MenuDetailActivity;
+import com.example.jmjapp.owner.ShopDetailFragment_O;
 
 import lombok.SneakyThrows;
 import okhttp3.ResponseBody;
@@ -219,7 +221,7 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
                     builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            responseBodyCall = Server.getInstance().getApi().updateSale("Bearer " + jwt, menuId);
+                            responseBodyCall = Server.getInstance().getApi().updateSale("Bearer " + jwt, MainActivity_O.shopNumber, menuId);
                             responseBodyCall.enqueue(new Callback<ResponseBody>() {
                                 @SneakyThrows
                                 @Override
@@ -257,7 +259,7 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
                     builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            responseBodyCall = Server.getInstance().getApi().updateSale("Bearer " + jwt, menuId);
+                            responseBodyCall = Server.getInstance().getApi().updateSale("Bearer " + jwt, MainActivity_O.shopNumber, menuId);
                             responseBodyCall.enqueue(new Callback<ResponseBody>() {
                                 @SneakyThrows
                                 @Override
@@ -302,7 +304,7 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
                     builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            responseBodyCall = Server.getInstance().getApi().updatePopular("Bearer " + jwt, menuId);
+                            responseBodyCall = Server.getInstance().getApi().updatePopular("Bearer " + jwt, MainActivity_O.shopNumber, menuId);
                             responseBodyCall.enqueue(new Callback<ResponseBody>() {
                                 @SneakyThrows
                                 @Override
@@ -340,7 +342,7 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
                     builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            responseBodyCall = Server.getInstance().getApi().updatePopular("Bearer " + jwt, menuId);
+                            responseBodyCall = Server.getInstance().getApi().updatePopular("Bearer " + jwt, MainActivity_O.shopNumber, menuId);
                             responseBodyCall.enqueue(new Callback<ResponseBody>() {
                                 @SneakyThrows
                                 @Override

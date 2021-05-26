@@ -36,6 +36,7 @@ public class ShopDetailActivity extends AppCompatActivity {
     static public String shopAddress;
     static public String shopDetailAddress;
     static public String shopImgPath;
+    static public String ownerId;
 
     TextView shop_detail_shopname, shop_detail_review, shop_detail_reply, shop_detail_avgtext;
     ImageView shop_detail_avgstar, shop_detail_phonecall_img, shop_detail_zzim_img;
@@ -126,8 +127,10 @@ public class ShopDetailActivity extends AppCompatActivity {
                     shopAddress = shop.getAddress();
                     shopDetailAddress = shop.getAddressDetail();
                     shopImgPath = shop.getImgPath();
+                    ownerId = shop.getOwnerId();
+
                     Log.d("rawa@@@@@@@@w",shopIntro + "@" + shopOpen + "@"  + shopClose + "@" + shopIsOpen + "@"
-                            + shopIsRsPos + "@" + shopAddress + "@" + shopDetailAddress);
+                            + shopIsRsPos + "@" + shopAddress + "@" + shopDetailAddress +"@" + ownerId);
 
                     DetailPagerAdapter detailPagerAdapter = new DetailPagerAdapter(getSupportFragmentManager());
                     ViewPager viewPager = (ViewPager)findViewById(R.id.shop_detail_viewpager3);
