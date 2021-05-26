@@ -79,7 +79,7 @@ public class MenuServiceImpl implements BasicService<Menu, Menu.Request> {
 //        System.out.println("Img.getResource 기본값 : " + request.getImg().getResource()); // 출력 : MultipartFile resource [img]
 //        System.out.println("Img.size 기본값 : " + request.getImg().getSize()); size : 0
 
-        if (request.getImg().getSize() != 0)
+        if (request.getImg() != null && request.getImg().getSize() != 0)
             imgPath = storageService.store(request.getImg(), request.getName().replace(" ", "_"), path.split("/"));
 //        System.out.println("메뉴 이미지 path : " + imgPath);
 //        System.out.println("메뉴명 : " + request.getName());

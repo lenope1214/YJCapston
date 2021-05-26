@@ -47,6 +47,7 @@ public class Iamport {
         private String refund_account;
 
         public CancelData(String uid, boolean imp_uid_or_not) {
+            System.out.println("uid : " + uid);
             if ( imp_uid_or_not ) {
                 this.imp_uid = uid;
             } else {

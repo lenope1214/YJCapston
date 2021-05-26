@@ -126,8 +126,8 @@ public class User implements Serializable {
         public MyInfo(User user, List<Order> orderList){
             this.user = new Response(user);
             List<Order.Response> orderResponseList = new ArrayList<>();
-            for(Order order : orderList){
-                orderResponseList.add(new Order.Response(order));
+            for(Order o : orderList){
+                orderResponseList.add(new Order.Response(o));
             }
             this.orderList = orderResponseList;
         }

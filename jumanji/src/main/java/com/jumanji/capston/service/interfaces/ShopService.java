@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface ShopService {
-    public Shop get(String shopId);
 
     public ResponseEntity<?> getList(String category, String sortTarget);
 

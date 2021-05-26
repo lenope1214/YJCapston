@@ -6,6 +6,7 @@ import com.jumanji.capston.repository.ReviewRepository;
 import com.jumanji.capston.service.OrderMenuServiceImpl;
 import com.jumanji.capston.service.OrderServiceImpl;
 import com.jumanji.capston.service.UserServiceImpl;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,7 @@ public class OrderController {
     public ResponseEntity<?> getOrderList(@RequestHeader String authorization){
         List<Order> orderList = orderService.getList(authorization);
         List<Order.Response> response = new ArrayList<>();
-        for(Order order : orderList ){
+        for(Order order : orderList){
             response.add(new Order.Response(order));
         }
         return new ResponseEntity<>(response, HttpStatus.OK);

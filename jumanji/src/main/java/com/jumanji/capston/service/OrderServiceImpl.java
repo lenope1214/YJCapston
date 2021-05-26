@@ -48,13 +48,20 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getList(String authorization) {
         String loginId = userService.getMyId(authorization);
         List<Order> orderList = new ArrayList<>();
-
-        for (Order order : orderRepository.myOrderListContainsReviewed(loginId)) {
-            System.out.println(order.getReviewed());
-            orderList.add(order);
+        Order o;
+        Shop shop;
+        for (Order.MyInfo order : orderRepository.myOrderListContainsReviewed(loginId)) {
+            shop = shopService.isPresent(order.getShopId());
+            o = new Order(order.getId(), shop, null);
+            o.init(order);
+            orderList.add(o);
         }
+
         return orderList;
     }
+
+
+
 
     @Override
     public List<Order> getList(String authorization, String userId) {
@@ -98,7 +105,7 @@ public class OrderServiceImpl implements OrderService {
         order = request.getOrderId() != null ? isOwnOrder(request.getOrderId(), loginId) : post(loginId, user, shop, request);
 
         order.patch(request);
-
+        System.out.println("arrtime : " + order.getArriveTime());
         order = orderRepository.saveAndFlush(order);
         return order;
     }

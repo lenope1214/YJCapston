@@ -2,7 +2,6 @@ package com.jumanji.capston.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.checkerframework.checker.units.qual.C;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -38,8 +37,12 @@ public class Order implements Serializable {
 
     private char accept = 'N';
 
-    //    @Transient // 영속성 등록 제외?   제외하면 결과 제대로 안나옴ㅋㅋㅋ
+    @Transient // 영속성 등록 제외?   제외하면 결과 제대로 안나옴ㅋㅋㅋ 왜???????????
+    @Setter
     private char reviewed;
+//    public void setReviewedY(){
+//        reviewed = 'Y';
+//    }
 
 
 //    @Column
@@ -62,6 +65,25 @@ public class Order implements Serializable {
         this.user = user;
     }
 
+    public void init(Order.MyInfo o){
+        this.id = o.getId();
+        this.status = o.getStatus();
+        this.orderRequest = o.getOrderRequest();
+        this.usePoint = o.getUsePoint();
+        this.reviewed = o.getReviewed();
+        this.arriveTime = o.getArriveTime();
+        this.payTime = o.getPayTime();
+        this.people = o.getPeople();
+        this.pg = o.getPg();
+        this.payMethod = o.getPayMethod();
+        this.amount = o.getAmount();
+        this.accept = o.getAccept();
+    }
+
+
+
+
+
     @Getter
     @AllArgsConstructor
     @NoArgsConstructor
@@ -82,13 +104,13 @@ public class Order implements Serializable {
 
     @Getter
     public static class Response {
-        private String userId; // 암호화 해서 주고받자..
         private Timestamp orderId;
+        private String userId; // 암호화 해서 주고받자..
+        private String userName;
         private String shopId;
+        private String shopName;
         private int people;
         private String orderRequest;
-        private String shopName;
-        private String userName;
         private int usePoint; // 사용된 포인트
         private int amount; // 가격 총합
         private int totalAmount; // 할인 적용 가격
@@ -102,16 +124,21 @@ public class Order implements Serializable {
         private List<OrderMenu> orderMenuList;
         private char reviewed;
 
+
         public Response(Order order) {
-            this.userId = order.getUser().getId(); // 암호화 해서 주고받자..
+            if(order.getUser()!=null){
+                if(order.getUser().getId() !=null)this.userId = order.getUser().getId(); // 암호화 해서 주고받자..
+                if(order.getUser().getName()!=null)this.userName = order.getUser().getName();
+            }
+            if(order.getShop()!=null){
+                this.shopId = order.getShop().getId();
+                this.shopName = order.getShop().getName();
+            }
             this.orderId = order.getId();
-            this.shopId = order.getShop().getId();
-            this.shopName = order.getShop().getName();
             this.people = order.getPeople();
             this.orderRequest = order.getOrderRequest();
             this.usePoint = order.getUsePoint();
             this.status = order.getStatus();
-            this.userName = order.getUser().getName();
             this.reviewed = order.getReviewed();
             this.amount = order.getAmount();
             this.arriveTime = order.getArriveTime();
@@ -122,6 +149,9 @@ public class Order implements Serializable {
                 this.payTime = DateOperator.dateToYYYYMMDD(order.getPayTime(), true) + DateOperator.dateToHHMM(order.getPayTime(), true);
             this.totalAmount = order.getAmount() - order.getUsePoint();
         }
+        public void setReviewed(char v){
+            this.reviewed = v;
+        }
     }
 
     public void patch(Request request) {
@@ -129,6 +159,7 @@ public class Order implements Serializable {
             this.orderRequest = request.getOrderRequest();
         }
         if (request.people != 0) this.people = request.people;
+        if(request.getArriveTime() != null)this.arriveTime = request.getArriveTime();
         this.status = "rd";
     }
 
@@ -147,5 +178,25 @@ public class Order implements Serializable {
 
     public void accept() {
         this.accept = 'Y';
+    }
+
+
+    public interface MyInfo{
+        Timestamp getId();
+         String getStatus();
+         String getOrderRequest();
+         int getPeople();
+         int getUsePoint();
+         int getAmount();
+         Timestamp getArriveTime();
+         Timestamp getPayTime();
+         String getPg();
+         String getPayMethod();
+         char getAccept();
+         char getReviewed();
+         String getShopId();
+         String getUserId();
+//        Order getOrders(); 이건 불가능
+//        String getReviewed(); 이건 가능.
     }
 }

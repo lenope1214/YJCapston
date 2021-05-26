@@ -90,11 +90,7 @@ public class ShopServiceImpl implements ShopService {
         return result;
     }
 
-    @Override
-    public Shop get(String shopId) {
-        isPresent(shopId);
-        return shopRepository.findById(shopId).get();
-    }
+
 
     @Override
     public ResponseEntity<?> getList(String category, String sortTarget) {
@@ -143,7 +139,7 @@ public class ShopServiceImpl implements ShopService {
         userService.isAuth(user.getRole(), "OWNER");
 
 
-        if (request.getImg() != null)
+        if (request.getImg() != null && request.getImg().getSize() > 0)
             imgPath = storageService.store(request.getImg(), request.getImg().getName(), uri.split("/"));
         Date openTime = DateOperator.stringToMilisecond(request.getOpenTime());
         Date closeTime = DateOperator.stringToMilisecond(request.getCloseTime());

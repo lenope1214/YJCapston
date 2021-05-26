@@ -1,13 +1,12 @@
 package com.jumanji.capston.service.exception;
 
-import com.jumanji.capston.service.exception.OrderException.OrderNotMineException;
+import com.jumanji.capston.service.exception.orderException.OrderNotMineException;
 import com.jumanji.capston.service.exception.auth.ForbiddenException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeAlreadyStartException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeDoesNotStartException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeHasExistException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeNotFoundException;
 import com.jumanji.capston.service.exception.menuException.MenuHasExistException;
-import com.jumanji.capston.service.exception.myException.MyNonUniqueResultException;
 import com.jumanji.capston.service.exception.optionException.OptionHasExistException;
 import com.jumanji.capston.service.exception.optionException.OptionNotFoundException;
 import com.jumanji.capston.service.exception.optionGroupException.OptionGroupHasExistException;
@@ -18,7 +17,6 @@ import com.jumanji.capston.service.exception.orderMenuException.OrderMenuNotFoun
 import com.jumanji.capston.service.exception.orderMenuOptionException.OrderMenuOptionHasExistException;
 import com.jumanji.capston.service.exception.orderMenuOptionException.OrderMenuOptionNotFoundException;
 import com.jumanji.capston.service.exception.reviewException.ReviewHasExistException;
-import com.jumanji.capston.service.exception.reviewException.ReviewNotFoundException;
 import com.jumanji.capston.service.exception.shopException.NoShopListException;
 import com.jumanji.capston.service.exception.shopException.ShopHasExistException;
 import com.jumanji.capston.service.exception.shopException.ShopMissMatchException;
@@ -29,9 +27,7 @@ import com.jumanji.capston.service.exception.userException.UserHasExistException
 import com.jumanji.capston.service.exception.userException.UserNotFoundException;
 import io.jsonwebtoken.MalformedJwtException;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.hibernate.exception.ConstraintViolationException;
-import org.hibernate.exception.spi.SQLExceptionConverter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MissingRequestHeaderException;

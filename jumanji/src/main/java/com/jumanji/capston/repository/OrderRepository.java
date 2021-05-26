@@ -17,15 +17,36 @@ public interface OrderRepository extends JpaRepository<Order, Timestamp> {
     List<Order> findAllByShop_Id(String shopId);
 
 
-    @Query(value = "select o.*,\n" +
-            "                case\n" +
-            "                    when r.id is not null then 'Y'\n" +
-            "                    else 'N' end\n" +
-            "                    reviewed\n" +
+    @Query(value = "select o.ID id,\n" +
+            "       o.STATUS,\n" +
+            "       o.ORDER_REQUEST orderRequest,\n" +
+            "       o.PEOPLE,\n" +
+            "       o.USE_POINT     usePoint,\n" +
+            "       o.AMOUNT,\n" +
+            "       o.ARRIVE_TIME   arriveTime,\n" +
+            "       o.PAY_TIME      payTime,\n" +
+            "       o.PG,\n" +
+            "       o.PAY_METHOD    payMethod,\n" +
+            "       o.ACCEPT,\n" +
+            "       o.SHOP_ID       shopId,\n" +
+            "       o.USER_ID       userId,\n" +
+            "       o.REASON,\n" +
+            "       case\n" +
+            "           when r.id is not null then 'Y'\n" +
+            "           else 'N' end\n" +
+            "                     reviewed\n" +
             "from orders o\n" +
             "         left join REVIEWS R on o.ID = R.ORDER_ID\n" +
             "where o.USER_ID = :userId", nativeQuery = true)
-    List<Order> myOrderListContainsReviewed(String userId);
+//    @Query(value = "select orders.*,\n" +
+//            "       case\n" +
+//            "           when r.id is not null then 'Y'\n" +
+//            "           else 'N' end\n" +
+//            "                     reviewed\n" +
+//            "from orders orders\n" +
+//            "         left join REVIEWS R on orders.ID = R.ORDER_ID\n" +
+//            "where orders.USER_ID = :userId", nativeQuery = true)
+    List<Order.MyInfo> myOrderListContainsReviewed(String userId);
 
 
     @Query(value = "select \n" +
