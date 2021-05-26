@@ -12,7 +12,7 @@ import retrofit2.http.Query;
 import javax.transaction.Transactional;
 
 @RestController
-@RequestMapping("/iamport")
+@RequestMapping("/iamport/")
 public class IamportController {
     @Autowired
     private IamportClientService service;
@@ -23,7 +23,7 @@ public class IamportController {
         return new ResponseEntity<>(service.getToken(authorization), HttpStatus.OK);
     }
 
-    @org.springframework.transaction.annotation.Transactional
+    @Transactional
     @GetMapping("cancel")
     public ResponseEntity<?> payCanceled(@RequestHeader String authorization, @Query("m_id") String m_id) throws Exception {
         return new ResponseEntity<>(service.cancelPayment(authorization, m_id), HttpStatus.OK);

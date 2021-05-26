@@ -65,7 +65,7 @@ public class Order implements Serializable {
         this.user = user;
     }
 
-    public void setOrder(Order.MyInfo o){
+    public void init(Order.MyInfo o){
         this.id = o.getId();
         this.status = o.getStatus();
         this.orderRequest = o.getOrderRequest();
@@ -159,6 +159,7 @@ public class Order implements Serializable {
             this.orderRequest = request.getOrderRequest();
         }
         if (request.people != 0) this.people = request.people;
+        if(request.getArriveTime() != null)this.arriveTime = request.getArriveTime();
         this.status = "rd";
     }
 

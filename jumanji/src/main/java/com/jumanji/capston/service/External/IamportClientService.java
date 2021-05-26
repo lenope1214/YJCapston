@@ -253,6 +253,7 @@ public class IamportClientService implements com.jumanji.capston.service.externa
 
         if (token != null) {
             Iamport.CancelData cancelData = new Iamport.CancelData(m_id, false); // imp_uid 가 아니면, m_id 넣게 되어있음.
+            System.out.println("m_id : " + cancelData.getMerchant_uid());
             String cancelJsonData = gson.toJson(cancelData);
             StringEntity data = new StringEntity(cancelJsonData);
 
