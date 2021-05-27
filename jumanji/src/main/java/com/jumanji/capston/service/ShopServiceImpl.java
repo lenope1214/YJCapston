@@ -76,6 +76,7 @@ public class ShopServiceImpl implements ShopService {
         System.out.println("shop id : " + shopId);
 
         shop = isPresent(shopId);
+        // 찜 등록 여부 response에 같이 담기.
         Shop.Response response = new Shop.Response(shop);
 //        if(shop.getImgPath()!=null)response.setImg(storageService.loadImg(shop.getImgPath()));
         return new ResponseEntity<>(response, HttpStatus.OK);
