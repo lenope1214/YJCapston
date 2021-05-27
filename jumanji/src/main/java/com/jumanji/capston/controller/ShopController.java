@@ -38,8 +38,10 @@ public class ShopController {
 
     @Transactional(readOnly = true) // get /shop/{shopId}
     @GetMapping("shops/{shopId}")  // get shop/{shopId} 식당번호로 식당 조회
-    public ResponseEntity<?> getShopById(@PathVariable String shopId) {
-        return shopService.getShopByShopId(shopId);
+    public ResponseEntity<?> getShopById(
+            @Nullable @RequestHeader String authorization,
+            @PathVariable String shopId) {
+        return shopService.getShopByShopId(authorization, shopId);
     }
 
 //    @Transactional(readOnly = true)

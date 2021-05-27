@@ -105,6 +105,11 @@ public class Shop {
             this.phone = shop.getPhone();
             this.ownerId = shop.getOwner().getId();
         }
+
+        public Response(Shop shop, char marked){
+            this(shop);
+            this.marked = marked;
+        }
     }
 
 

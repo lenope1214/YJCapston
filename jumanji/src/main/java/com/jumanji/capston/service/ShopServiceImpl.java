@@ -3,16 +3,20 @@ package com.jumanji.capston.service;
 import com.jumanji.capston.data.DateOperator;
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.data.User;
+import com.jumanji.capston.data.UserShopMark;
 import com.jumanji.capston.repository.ShopRepository;
 import com.jumanji.capston.repository.UserRepository;
+import com.jumanji.capston.repository.UserShopMarksRepository;
 import com.jumanji.capston.service.exception.auth.ForbiddenException;
 import com.jumanji.capston.service.exception.shopException.ShopHasExistException;
 import com.jumanji.capston.service.exception.shopException.ShopNotFoundException;
 import com.jumanji.capston.service.interfaces.ShopService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 
@@ -22,6 +26,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ShopServiceImpl implements ShopService {
     @Autowired
     ShopRepository shopRepository;
@@ -31,8 +36,7 @@ public class ShopServiceImpl implements ShopService {
     UserServiceImpl userService;
     @Autowired
     StorageServiceImpl storageService;
-    @Autowired
-    HttpHeaders httpHeaders;
+    private final UserShopMarksRepository usmRepository;
 
 
     public List<Shop> getShopListByOwnerId(String id) {
@@ -70,14 +74,22 @@ public class ShopServiceImpl implements ShopService {
         return reverseIsRsPos(shop);
     }
 
-    public ResponseEntity<?> getShopByShopId(String shopId) {
+    public ResponseEntity<?> getShopByShopId(@Nullable String authorization, String shopId) {
+        // 변수
         Shop shop;
-        System.out.println("ShopController in getShopById");
-        System.out.println("shop id : " + shopId);
+        String loginId = null;
+        char marked = 'N';
 
+        // 값 확인 - 디버그로 하기.
+
+        // 서비스
+        if(authorization!=null)loginId = userService.getMyId(authorization);
+        if (loginId != null) {
+            marked = usmRepository.findByUserIdAndShopId(loginId, shopId)!=null ?'Y':'N' ;
+        }
         shop = isPresent(shopId);
-        // 찜 등록 여부 response에 같이 담기.
-        Shop.Response response = new Shop.Response(shop);
+        //TODO 찜 등록 여부 response에 같이 담기.
+        Shop.Response response = new Shop.Response(shop, marked);
 //        if(shop.getImgPath()!=null)response.setImg(storageService.loadImg(shop.getImgPath()));
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -90,7 +102,6 @@ public class ShopServiceImpl implements ShopService {
         List<Shop> result = getShopListByOwnerId(userEntity.getId());
         return result;
     }
-
 
 
     @Override
@@ -201,9 +212,8 @@ public class ShopServiceImpl implements ShopService {
     }
 
     /**
-     *
      * @param loginId : 유저가 로그인한 아이디
-     * @param shopId : 입력된 매장 아이디
+     * @param shopId  : 입력된 매장 아이디
      * @return 내 매장이면 true, 아니면 권한없음 에러가 던져진다.
      */
     public boolean isOwnShop(String loginId, String shopId) {
@@ -224,7 +234,7 @@ public class ShopServiceImpl implements ShopService {
         return shopRepository.findAll().size();
     }
 
-    public String toOracleChar(String str){
+    public String toOracleChar(String str) {
         return "'" + str + "'";
     }
 
