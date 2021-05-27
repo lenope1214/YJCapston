@@ -33,8 +33,8 @@ public class Option {
         private String name;
         private int price;
         private int max;
+        private int no; //순번
         private String optionGroupId;
-        private int no;
     }
 
     @AllArgsConstructor @Getter

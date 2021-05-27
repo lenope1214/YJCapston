@@ -88,6 +88,7 @@ public class Shop {
         private String imgPath;
         private String phone;
         private String ownerId;
+        private char marked = 'N';
 
         public Response(Shop shop) {
             this.shopId = shop.getId();
@@ -103,6 +104,11 @@ public class Shop {
             this.imgPath = shop.getImgPath();
             this.phone = shop.getPhone();
             this.ownerId = shop.getOwner().getId();
+        }
+
+        public Response(Shop shop, char marked){
+            this(shop);
+            this.marked = marked;
         }
     }
 
