@@ -17,7 +17,7 @@ public class OptionGroupController {
     @Autowired
     private OptionGroupServiceImpl optionGroupService;
 
-    @GetMapping("/api/v1/menus/options/groups/{menuId}")
+    @GetMapping("menus/options/groups/{menuId}")
     public ResponseEntity<?> getByMenuId(){
         return null;
     }
