@@ -5,6 +5,8 @@ import com.jumanji.capston.data.User;
 import com.jumanji.capston.data.UserShopMark;
 import com.jumanji.capston.data.UserShopMarkId;
 import com.jumanji.capston.repository.UserShopMarksRepository;
+import com.jumanji.capston.service.exception.markException.MarkHasExistException;
+import com.jumanji.capston.service.exception.markException.MarkNotFoundException;
 import com.jumanji.capston.service.interfaces.BasicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -60,11 +62,11 @@ public class UserShopMarkService  {
         shop = shopService.isPresent(request.getShopId());
         usmId = new UserShopMarkId(user, shop);
 //        usm = new UserShopMarkId();
-        usm = isPresent(usmId);
+        isEmpty(usmId);
 
 
         // 서비스
-        System.out.println(usm.toString());
+        usm = new UserShopMark(usmId);
         usmRepository.save(usm);
 
         // 값 확인
@@ -99,11 +101,13 @@ public class UserShopMarkService  {
     public UserShopMark isPresent(UserShopMarkId id) {
         Optional<UserShopMark> usm = usmRepository.findById(id);
         if(usm.isPresent())return usm.get();
-        return null;
+        throw new MarkHasExistException(id.getShop().getId());
     }
 
 
-    public boolean isEmpty(String id) {
-        return false;
+    public void isEmpty(UserShopMarkId id) {
+        Optional<UserShopMark> usm = usmRepository.findById(id);
+        if(!usm.isEmpty())
+            throw new MarkNotFoundException(id.getShop().getId());
     }
 }

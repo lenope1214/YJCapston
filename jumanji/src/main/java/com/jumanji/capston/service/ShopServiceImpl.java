@@ -92,8 +92,7 @@ public class ShopServiceImpl implements ShopService {
         System.out.println("로그인 아이디 : " + loginId);
         if (loginId != null) {
             usm = usmRepository.findByUserIdAndShopId(loginId, shopId);
-            System.out.println(usm.toString());
-            marked = usm.getId().getShop().getId().equals(shopId) ? 'Y' : 'N' ;
+            if(usm != null)marked = usm.getId().getShop().getId().equals(shopId) ? 'Y' : 'N' ;
         }
         System.out.println("marked : " + marked);
         shop = isPresent(shopId);
