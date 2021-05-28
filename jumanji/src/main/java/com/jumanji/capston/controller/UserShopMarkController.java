@@ -30,6 +30,7 @@ public class UserShopMarkController {
     @Transactional
     @PostMapping("marks")
     public ResponseEntity<?> post(@RequestHeader String authorization, @RequestBody UserShopMark.Request request){
+        System.out.println("marks post >>");
 //        UserShopMark usm =
                 usmService.post(authorization,request);
 //        UserShopMark.Response response = new UserShopMark.Response(usm);

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -47,16 +48,23 @@ public class UserShopMarkService  {
     public void post(@Nullable String authorization, UserShopMark.Request request) {
         // 변수
         UserShopMark usm;
+        UserShopMarkId usmId;
         User user;
         Shop shop;
-        // 값 체크4
+        // 값 체크
+
 
         // 유효성 체크
+
         user = userService.isLogin(authorization);
         shop = shopService.isPresent(request.getShopId());
+        usmId = new UserShopMarkId(user, shop);
+//        usm = new UserShopMarkId();
+        usm = isPresent(usmId);
+
 
         // 서비스
-        usm = new UserShopMark(user, shop);
+        System.out.println(usm.toString());
         usmRepository.save(usm);
 
         // 값 확인
@@ -88,7 +96,9 @@ public class UserShopMarkService  {
     }
 
 
-    public UserShopMark isPresent(String id) {
+    public UserShopMark isPresent(UserShopMarkId id) {
+        Optional<UserShopMark> usm = usmRepository.findById(id);
+        if(usm.isPresent())return usm.get();
         return null;
     }
 
