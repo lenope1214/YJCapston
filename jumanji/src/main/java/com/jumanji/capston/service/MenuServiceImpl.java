@@ -69,7 +69,6 @@ public class MenuServiceImpl implements BasicService<Menu, Menu.Request> {
         String menuId = request.getShopId().substring(0, 2) + 'm' + DateOperator.dateToYYYYMMDDHHMMSS(new Date());
         System.out.println("menuId : " + menuId);
 
-
         isEmpty(menuId);
         shop = shopService.isPresent(request.getShopId());
         System.out.println("메뉴 추가");

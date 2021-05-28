@@ -16,6 +16,10 @@ public class UserShopMark {
     @Transient
     private List<Shop> markList;
 
+    public UserShopMark(UserShopMarkId id){
+        this.id = id;
+    }
+
     public UserShopMark(User user, Shop shop){
         this.id = new UserShopMarkId(user, shop);
     }

@@ -4,6 +4,7 @@ import lombok.*;
 import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
 import org.junit.Ignore;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -54,6 +55,9 @@ public class User implements Serializable {
 //        this.addressDetail = addressDetail;
 //    }
 
+    public String encodeId(){
+        return new BCryptPasswordEncoder().encode(this.id);
+    }
     @Builder(builderMethodName = "createUser")
     public User(String id, String password, String address, String addressDetail, String name, Date birthday, String role, String email, Date sign_date, String provider, String provider_id, String phone, String deviceToken) {
         this.id = id;

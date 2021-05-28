@@ -102,7 +102,7 @@ public class Menu {
 
     @Getter
     public static class Response{
-        private String id;
+        private String menuId;
         private String shopId;
         private String name;
         private String intro;
@@ -114,8 +114,7 @@ public class Menu {
 
         public Response(Menu menu){
 //            this.id = menu.getId().substring(0,10);
-            System.out.println("결과 name : " + menu.getId().substring(10).replace("_", " "));
-            this.id = menu.getId();
+            this.menuId = menu.getId();
             this.shopId = menu.getShop().getId();
             this.name = menu.getName();
             this.intro = menu.getIntro();

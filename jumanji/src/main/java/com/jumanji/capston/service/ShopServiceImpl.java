@@ -1,5 +1,6 @@
 package com.jumanji.capston.service;
 
+import com.jumanji.capston.config.s3.S3Uploader;
 import com.jumanji.capston.data.DateOperator;
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.data.User;
@@ -20,6 +21,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,6 +39,8 @@ public class ShopServiceImpl implements ShopService {
     @Autowired
     StorageServiceImpl storageService;
     private final UserShopMarksRepository usmRepository;
+    @Autowired
+    S3Uploader s3Uploader;
 
 
     public List<Shop> getShopListByOwnerId(String id) {
@@ -78,17 +82,23 @@ public class ShopServiceImpl implements ShopService {
         // 변수
         Shop shop;
         String loginId = null;
+        UserShopMark usm;
         char marked = 'N';
 
         // 값 확인 - 디버그로 하기.
 
         // 서비스
         if(authorization!=null)loginId = userService.getMyId(authorization);
+        System.out.println("로그인 아이디 : " + loginId);
         if (loginId != null) {
-            marked = usmRepository.findByUserIdAndShopId(loginId, shopId)!=null ?'Y':'N' ;
+            usm = usmRepository.findByUserIdAndShopId(loginId, shopId);
+            System.out.println(usm.toString());
+            marked = usm.getId().getShop().getId().equals(shopId) ? 'Y' : 'N' ;
         }
+        System.out.println("marked : " + marked);
         shop = isPresent(shopId);
         //TODO 찜 등록 여부 response에 같이 담기.
+
         Shop.Response response = new Shop.Response(shop, marked);
 //        if(shop.getImgPath()!=null)response.setImg(storageService.loadImg(shop.getImgPath()));
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -99,8 +109,8 @@ public class ShopServiceImpl implements ShopService {
         System.out.println("ShopController in getMyShop");
         String loginId = userService.getMyId(authorization);
         User userEntity = userRepository.findById(loginId).get();
-        List<Shop> result = getShopListByOwnerId(userEntity.getId());
-        return result;
+        List<Shop> myShopList = getShopListByOwnerId(userEntity.getId());
+        return myShopList;
     }
 
 
@@ -151,8 +161,14 @@ public class ShopServiceImpl implements ShopService {
         userService.isAuth(user.getRole(), "OWNER");
 
 
-        if (request.getImg() != null && request.getImg().getSize() > 0)
+        if (request.getImg() != null && request.getImg().getSize() > 0) {
             imgPath = storageService.store(request.getImg(), request.getImg().getName(), uri.split("/"));
+            try {
+                s3Uploader.upload(request.getImg(), imgPath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         Date openTime = DateOperator.stringToMilisecond(request.getOpenTime());
         Date closeTime = DateOperator.stringToMilisecond(request.getCloseTime());
         Shop shopEntity;
