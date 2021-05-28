@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OptionGroupRepository extends JpaRepository<OptionGroup, String> {
-
+    OptionGroup findByMenu_Id(String menuId);
 }

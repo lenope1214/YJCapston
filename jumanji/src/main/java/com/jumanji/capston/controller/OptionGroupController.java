@@ -18,8 +18,10 @@ public class OptionGroupController {
     private OptionGroupServiceImpl optionGroupService;
 
     @GetMapping("menus/options/groups/{menuId}")
-    public ResponseEntity<?> getByMenuId(){
-        return null;
+    public ResponseEntity<?> getByMenuId(@PathVariable String menuId){
+        OptionGroup oGroup = optionGroupService.get(null, menuId);
+        OptionGroup.Response response = new OptionGroup.Response(oGroup);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("menus/options/groups")
