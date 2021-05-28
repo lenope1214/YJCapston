@@ -50,6 +50,7 @@ public class OptionGroup {
         private int optionGroupMin;
         private int optionGroupMax;
         private String menuId;
+        private List<Option> optionList;
 
         public Response(OptionGroup og){
             this.optionGroupId = og.getId();
@@ -57,6 +58,7 @@ public class OptionGroup {
             this.optionGroupMin = og.getMin();
             this.optionGroupMax = og.getMax();
             this.menuId = og.getMenu().getId();
+            this.optionList = og.getOptionList();
         }
     }
 }
