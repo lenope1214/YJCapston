@@ -81,7 +81,7 @@ dependencies {
     // jitpack   github    username:repository:version
     implementation 'com.github.iamport:iamport-rest-client-java:0.2.14'
 
-    // apachi http client
+    // apachi http client 
     // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
     implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.2'
     // https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka
