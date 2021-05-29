@@ -10,6 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/api/v1/")
 public class OptionGroupController {
@@ -19,8 +22,11 @@ public class OptionGroupController {
 
     @GetMapping("menus/options/groups/{menuId}")
     public ResponseEntity<?> getByMenuId(@PathVariable String menuId){
-        OptionGroup oGroup = optionGroupService.get(null, menuId);
-        OptionGroup.Response response = new OptionGroup.Response(oGroup);
+        List<OptionGroup> oGroupList = optionGroupService.getList(null, menuId);
+        List<OptionGroup.Response> response = new ArrayList<>();
+        for(OptionGroup optionGroup : oGroupList){
+            response.add(new OptionGroup.Response(optionGroup));
+        }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

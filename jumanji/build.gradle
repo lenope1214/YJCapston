@@ -75,7 +75,7 @@ dependencies {
 
     //aws s3
     // https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk
-    implementation group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.1029'
+//    implementation group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.1029'
 //    implementation 'org.springframework.cloud:spring-cloud-starter-aws'
 
     // jitpack   github    username:repository:version

@@ -1,6 +1,5 @@
 package com.jumanji.capston.service;
 
-import com.jumanji.capston.config.s3.S3Uploader;
 import com.jumanji.capston.data.DateOperator;
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.data.User;
@@ -39,8 +38,8 @@ public class ShopServiceImpl implements ShopService {
     @Autowired
     StorageServiceImpl storageService;
     private final UserShopMarksRepository usmRepository;
-    @Autowired
-    S3Uploader s3Uploader;
+//    @Autowired
+//    S3Uploader s3Uploader;
 
 
     public List<Shop> getShopListByOwnerId(String id) {
@@ -162,11 +161,11 @@ public class ShopServiceImpl implements ShopService {
 
         if (request.getImg() != null && request.getImg().getSize() > 0) {
             imgPath = storageService.store(request.getImg(), request.getImg().getName(), uri.split("/"));
-            try {
-                s3Uploader.upload(request.getImg(), imgPath);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                s3Uploader.upload(request.getImg(), imgPath);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
         }
         Date openTime = DateOperator.stringToMilisecond(request.getOpenTime());
         Date closeTime = DateOperator.stringToMilisecond(request.getCloseTime());

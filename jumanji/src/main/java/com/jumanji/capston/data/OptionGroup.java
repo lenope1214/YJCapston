@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -28,10 +29,8 @@ public class OptionGroup {
     @JsonIgnore
     private Menu menu;
 
-    @Transient
-    @JoinColumn
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Option> optionList;
+    @OneToMany(mappedBy = "optionGroup",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Option> optionList = new ArrayList<>();
 
     @NoArgsConstructor @Getter
     public static class Request{
@@ -46,17 +45,17 @@ public class OptionGroup {
     @AllArgsConstructor @Getter // getter 없으니까 반환할때 값 못불러와서 실패.
     public static class Response{
         private String optionGroupId;
-        private String optionGroupName;
-        private int optionGroupMin;
-        private int optionGroupMax;
+        private String ogName;
+        private int ogMin;
+        private int ogMax;
         private String menuId;
         private List<Option> optionList;
 
         public Response(OptionGroup og){
             this.optionGroupId = og.getId();
-            this.optionGroupName = og.getName();
-            this.optionGroupMin = og.getMin();
-            this.optionGroupMax = og.getMax();
+            this.ogName = og.getName();
+            this.ogMin = og.getMin();
+            this.ogMax = og.getMax();
             this.menuId = og.getMenu().getId();
             this.optionList = og.getOptionList();
         }
