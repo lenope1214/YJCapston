@@ -110,8 +110,9 @@ public class BellActivity_O extends AppCompatActivity {
                                 adapter = new AlarmListRecyclerAdapter(getApplicationContext(), mItems);
                                 alarm_list.setLayoutManager(new LinearLayoutManager(getApplication()));
                                 alarm_list.setAdapter(adapter);
+                                Log.d("awdawd", list.getOrderId());
                             }
-                        }
+                       }
                     } else {
                         Log.d("bell실패", "bell실패");
                     }

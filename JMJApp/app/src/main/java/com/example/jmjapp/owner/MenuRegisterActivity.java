@@ -1,5 +1,6 @@
 package com.example.jmjapp.owner;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.example.jmjapp.R;
+import com.example.jmjapp.dto.Menu;
 import com.example.jmjapp.network.Server;
 
 import lombok.SneakyThrows;
@@ -44,16 +46,16 @@ public class MenuRegisterActivity extends AppCompatActivity {
 
     private String path, jwt;
     private Uri selectedImageUri;
-    private Call<ResponseBody> responseBodyCall;
+    private Call<Menu> menuCall;
 
-    boolean isPhotoCaptured;
-    boolean isPhotoFileSaved;
-    boolean isPhotoCanceled;
+    static public Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_register);
+
+        activity = MenuRegisterActivity.this;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.menu_register_toolbar);
         toolbar.setTitle("");
@@ -133,22 +135,26 @@ public class MenuRegisterActivity extends AppCompatActivity {
 
                 Log.d("awd",String.valueOf(idBody)+nameBody+introBody+priceBody+timeBody);
 
-                responseBodyCall = Server.getInstance().getApi().insertMenu("Bearer " + jwt, map, body);
-                responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                menuCall = Server.getInstance().getApi().insertMenu("Bearer " + jwt, map, body);
+                menuCall.enqueue(new Callback<Menu>() {
                     @SneakyThrows
                     @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    public void onResponse(Call<Menu> call, Response<Menu> response) {
                         if(response.code() == 201) {
+                            String menuId = response.body().getMenuId();
+
+                            Intent intent = new Intent(MenuRegisterActivity.this, MenuOptionGroupActivity.class);
+                            intent.putExtra("menuId", menuId);
+                            intent.putExtra("shopNumber", shopNumber);
+                            intent.putExtra("menuName", menu_name_et.getText().toString());
+                            intent.putExtra("menuIntro", menu_intro_et.getText().toString());
+                            intent.putExtra("menuPrice", menu_price_et.getText().toString());
+                            intent.putExtra("menuTime", menu_time_et.getText().toString());
+                            intent.putExtra("imgPath", file);
+                            startActivity(intent);
+
                             Log.d("result : " , "메뉴등록 성공");
-                            AlertDialog.Builder builder = new AlertDialog.Builder(MenuRegisterActivity.this);
-                            dialog = builder.setMessage("메뉴가 등록되었습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    finish();
-                                }
-                            }).create();
-                            builder.setCancelable(false);
-                            dialog.show();
+
                         } else if(response.code() == 400) {
                             Log.d("adw",response.errorBody().string());
                             Log.d("result : ", "메뉴등록 실패");
@@ -160,7 +166,7 @@ public class MenuRegisterActivity extends AppCompatActivity {
 
                     @SneakyThrows
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) { ;
+                    public void onFailure(Call<Menu> call, Throwable t) { ;
                         Log.d("result : " , "연결실패2");
                     }
                 });
@@ -179,7 +185,7 @@ public class MenuRegisterActivity extends AppCompatActivity {
     @Override
     protected void onDestroy(){
         super.onDestroy();
-        if(responseBodyCall!=null)
-            responseBodyCall.cancel();
+        if(menuCall!=null)
+            menuCall.cancel();
     }
 }

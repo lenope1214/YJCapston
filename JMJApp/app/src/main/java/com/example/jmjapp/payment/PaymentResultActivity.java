@@ -17,7 +17,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.jmjapp.databinding.ActivityPaymentResultBinding;
 import com.example.jmjapp.network.Server;
-import com.example.jmjapp.practicePush.MainActivity3;
 import com.example.jmjapp.user.MainActivity;
 import com.example.jmjapp.user.OrderActivity;
 import com.example.jmjapp.user.ShopDetailActivity;

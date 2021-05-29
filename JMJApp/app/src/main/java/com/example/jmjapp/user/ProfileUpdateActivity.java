@@ -17,11 +17,16 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.jmjapp.JMJApplication;
 import com.example.jmjapp.R;
+import com.example.jmjapp.dto.Order;
+import com.example.jmjapp.dto.OrderMenu;
 import com.example.jmjapp.network.Server;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import lombok.SneakyThrows;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,6 +40,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
     private AlertDialog dialog;
     private String jwt;
     private Call<ResponseBody> responseBodyCall;
+    private Call<OrderMenu> orderMenuCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +57,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
 
         SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
         jwt = pref.getString("token", null);
-        Log.d("llllllllllllllllll", "Bearer " + jwt);
+        Log.d("jwt", "Bearer " + jwt);
 
         user_profile_id = findViewById(R.id.user_profile_id);
         user_profile_id.setText(id);
@@ -143,6 +149,45 @@ public class ProfileUpdateActivity extends AppCompatActivity {
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
                         Log.d("연결실패", "왜???????????");
 
+                    }
+                });
+            }
+        });
+
+        Button btn = findViewById(R.id.testbtn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("btn실행", "btn실행");
+
+                Map<String, List<OrderMenu>> map = new HashMap();
+                List<OrderMenu> omList = new ArrayList<>();
+
+                OrderMenu om1 = new OrderMenu().builder()
+                        .orderId("1622108941558")
+                        .shopId("0532552288")
+                        .menuId("51m20210408072439")
+                        .quantity("3")
+                        .build();
+                omList.add(om1);
+
+                map.put("list", omList);
+
+                responseBodyCall = Server.getInstance().getApi().order_menus("Bearer " + jwt, map);
+                responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                    @SneakyThrows
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("성공","성공");
+                        } else {
+                            Log.d("실패","실패"+response.errorBody().string());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.d("실패2","실패2");
                     }
                 });
             }

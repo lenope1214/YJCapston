@@ -77,7 +77,7 @@ public class MenuDetailActivity extends AppCompatActivity {
                         List<Menu> menuList = response.body();
                         mItems.clear();
                         for(Menu list : menuList) {
-                            mItems.add(new Menu(list.getId(), list.getName(), list.getIntro(),
+                            mItems.add(new Menu(list.getMenuId(), list.getName(), list.getIntro(),
                                     list.getIsSale(), list.getIsPopular(),list.getPrice(),
                                     list.getDuration(), list.getImgPath()));
                             menu_list.setHasFixedSize(true);

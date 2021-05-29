@@ -73,8 +73,8 @@ public class PaymentWebview extends Activity {
             Log.d("people", String.valueOf(resPeople));
 
             paymentWebView.addJavascriptInterface(new MyJavaScriptInterface(), "android");
-            //paymentWebView.loadUrl("http://192.168.1.62:8088/androidPayment");
-            paymentWebView.loadUrl("http://3.34.55.186:8088/androidPayment");
+            paymentWebView.loadUrl("http://192.168.1.65:8088/androidPayment");
+            //paymentWebView.loadUrl("http://3.34.55.186:8088/androidPayment");
         } else {
             //isp 인증 후 복귀했을 때 결제 후속조치
             Log.d("실행2", "실행2");

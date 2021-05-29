@@ -39,8 +39,6 @@ public class MyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.my_fragment, container, false);
 
-        String id = ((JMJApplication) this.getActivity().getApplication()).getId();
-
         Bundle bundle = getArguments();
         user_id = bundle.getString("user_id", "nothing");
 
@@ -73,7 +71,7 @@ public class MyFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                if (id == null) {
+                if (user_id.equals("nothing")) {
                     new AlertDialog.Builder(getActivity()) // TestActivity 부분에는 현재 Activity의 이름 입력.
                             .setMessage("로그인이 필요한 서비스입니다.")     // 제목 부분 (직접 작성)
                             .setPositiveButton("로그인", new DialogInterface.OnClickListener() {      // 버튼1 (직접 작성)
@@ -101,7 +99,7 @@ public class MyFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                if (id == null) {
+                if (user_id.equals("nothing")) {
                     new AlertDialog.Builder(getActivity()) // TestActivity 부분에는 현재 Activity의 이름 입력.
                             .setMessage("로그인이 필요한 서비스입니다.")     // 제목 부분 (직접 작성)
                             .setPositiveButton("로그인", new DialogInterface.OnClickListener() {      // 버튼1 (직접 작성)
@@ -129,7 +127,7 @@ public class MyFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                if (id == null) {
+                if (user_id.equals("nothing")) {
                     new AlertDialog.Builder(getActivity()) // TestActivity 부분에는 현재 Activity의 이름 입력.
                             .setMessage("로그인이 필요한 서비스입니다.")     // 제목 부분 (직접 작성)
                             .setPositiveButton("로그인", new DialogInterface.OnClickListener() {      // 버튼1 (직접 작성)
@@ -157,7 +155,7 @@ public class MyFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                if (id == null) {
+                if (user_id.equals("nothing")) {
                     new AlertDialog.Builder(getActivity()) // TestActivity 부분에는 현재 Activity의 이름 입력.
                             .setMessage("로그인이 필요한 서비스입니다.")     // 제목 부분 (직접 작성)
                             .setPositiveButton("로그인", new DialogInterface.OnClickListener() {      // 버튼1 (직접 작성)

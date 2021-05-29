@@ -180,21 +180,23 @@
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintTop_toBottomOf="@+id/menu_time_et"
             app:layout_constraintBottom_toTopOf="@+id/menu_register_btn"/>
+
     <Button
             android:id="@+id/menu_register_btn"
-            android:layout_width="120dp"
-            android:layout_height="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
             android:gravity="center"
             android:fontFamily="@font/we_semibold"
             android:textColor="#D0BCA1"
             android:textStyle="bold"
+            android:textSize="20sp"
             tools:ignore="MissingConstraints"
             android:background="@drawable/button_login"
-            android:text="등록"
+            android:text="다음"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
-            android:layout_marginBottom="36dp"/>
+            android:layout_margin="10dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

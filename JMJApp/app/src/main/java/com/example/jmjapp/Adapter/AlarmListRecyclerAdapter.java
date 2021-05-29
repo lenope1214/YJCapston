@@ -87,6 +87,7 @@ public class AlarmListRecyclerAdapter extends RecyclerView.Adapter<AlarmListRecy
         orderId = mItems.get(position).getOrderId();
         arriveTime = mItems.get(position).getArriveTime();
         orderRequest = mItems.get(position).getOrderRequest();
+        Log.d("arc", String.valueOf(arriveTime));
 
         String resTime = String.valueOf(new Timestamp(arriveTime));
         String year = resTime.substring(0,4);

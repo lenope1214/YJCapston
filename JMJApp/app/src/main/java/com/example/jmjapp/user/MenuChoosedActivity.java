@@ -20,7 +20,7 @@ public class MenuChoosedActivity extends AppCompatActivity {
     private String menuName, menuImage;
     private int menuCount;
     public static int menuPrice;
-    private String menuIntro;
+    private String menuIntro, menuId;
     TextView menu_choosed_name, menu_choosed_price, menu_choosed_intro;
     ImageView menu_choosed_img;
     Button menu_choosed_btn;
@@ -38,11 +38,13 @@ public class MenuChoosedActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.arrowback);
 
         Intent intent = getIntent();
+        menuId = intent.getStringExtra("menuId");
         menuName = intent.getStringExtra("menuName");
         menuPrice = intent.getIntExtra("menuPrice", 0);
         menuIntro = intent.getStringExtra("menuIntro");
         menuImage = intent.getStringExtra("menuImage");
         Log.d("shopNumber", ShopDetailActivity.shopNumber);
+        Log.d("menuId", menuId);
 
         char is_rs_pos = ShopDetailActivity.shopIsRsPos;
 
