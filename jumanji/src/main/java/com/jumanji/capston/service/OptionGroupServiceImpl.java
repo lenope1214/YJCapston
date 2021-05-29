@@ -29,20 +29,20 @@ public class OptionGroupServiceImpl implements BasicService<OptionGroup, OptionG
 
     @Override
     public OptionGroup get(@Nullable String authorization, String... str) {
+        return null;
+    }
+
+    @Override
+    public List<OptionGroup> getList(@Nullable String authorization, String... str) {
         String menuId = str[0];
 //        String loginId = userService.getMyId(authorization);
 
         menuService.isPresent(menuId);
 
-        OptionGroup oGroup = optionGroupRepository.findByMenu_Id(menuId);
+        List<OptionGroup> oGroupList = optionGroupRepository.findByMenu_Id(menuId);
 
 
-        return oGroup;
-    }
-
-    @Override
-    public List<OptionGroup> getList(@Nullable String authorization, String... str) {
-        return null;
+        return oGroupList;
     }
 
     @Override

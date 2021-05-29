@@ -5,7 +5,9 @@ import com.jumanji.capston.data.OptionGroup;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface OptionGroupRepository extends JpaRepository<OptionGroup, String> {
-    OptionGroup findByMenu_Id(String menuId);
+    List<OptionGroup> findByMenu_Id(String menuId);
 }
