@@ -12,19 +12,39 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.example.jmjapp.*;
+import com.example.jmjapp.Adapter.MenuChooseOptionGroupsAdapter;
+import com.example.jmjapp.Adapter.MenuMoveOptionAdapter;
+import com.example.jmjapp.Adapter.RestaurantRecyclerAdapter;
+import com.example.jmjapp.dto.OptionGroups;
+import com.example.jmjapp.dto.Shop;
+import com.example.jmjapp.network.Server;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MenuChoosedActivity extends AppCompatActivity {
     private String menuName, menuImage;
     private int menuCount;
     public static int menuPrice;
-    private String menuIntro, menuId;
+    private String menuIntro, menuId, jwt;
     TextView menu_choosed_name, menu_choosed_price, menu_choosed_intro;
     ImageView menu_choosed_img;
     Button menu_choosed_btn;
     boolean is_it_already;
+    private RecyclerView menu_choose_option_list;
+    private Call <List<OptionGroups>> optionGroupsCall;
+    private MenuChooseOptionGroupsAdapter adapter;
+    ArrayList<OptionGroups> mItems = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +56,9 @@ public class MenuChoosedActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.arrowback);
+
+        SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
+        jwt = pref.getString("token", "");
 
         Intent intent = getIntent();
         menuId = intent.getStringExtra("menuId");
@@ -53,11 +76,38 @@ public class MenuChoosedActivity extends AppCompatActivity {
         menu_choosed_intro = findViewById(R.id.menu_choosed_intro);
         menu_choosed_img = findViewById(R.id.menu_choosed_img);
         menu_choosed_btn = findViewById(R.id.menu_choosed_btn);
+        menu_choose_option_list = findViewById(R.id.menu_choose_option_list);
 
         menu_choosed_name.setText(menuName);
         menu_choosed_price.setText(menuPrice + "원");
         menu_choosed_intro.setText(menuIntro);
         Glide.with(this).load("http://3.34.55.186:8088/" + menuImage).override(500,500).into(menu_choosed_img);
+
+        optionGroupsCall = Server.getInstance().getApi().optionGroupsList("Bearer " + jwt, menuId);
+        optionGroupsCall.enqueue(new Callback<List<OptionGroups>>() {
+            @Override
+            public void onResponse(Call<List<OptionGroups>> call, Response<List<OptionGroups>> response) {
+                if (response.isSuccessful()) {
+                    Log.d("OptionsGroup 성공", "OptionsGroup 성공");
+                    List<OptionGroups> optionGroupsList = response.body();
+                    for (OptionGroups list : optionGroupsList) {
+                        mItems.add(new OptionGroups(list.getOptionGroupId(), list.getOgName(),
+                                list.getOgMin(), list.getOgMax(), list.getMenuId()));
+                        menu_choose_option_list.setHasFixedSize(true);
+                        adapter = new MenuChooseOptionGroupsAdapter(getApplicationContext(), mItems);
+                        menu_choose_option_list.setLayoutManager(new LinearLayoutManager(getApplication()));
+                        menu_choose_option_list.setAdapter(adapter);
+                    }
+                } else {
+                    Log.d("OptionsGroup 실패1", "OptionsGroup 실패1");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<OptionGroups>> call, Throwable t) {
+                Log.d("OptionsGroup 실패2", "OptionsGroup 실패2");
+            }
+        });
 
         if (is_rs_pos == 'Y') {
             menu_choosed_btn.setOnClickListener(new View.OnClickListener() {

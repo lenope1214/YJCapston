@@ -1,98 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".user.MenuChoosedActivity">
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".user.MenuChoosedActivity">
-
-    <androidx.appcompat.widget.Toolbar
-            android:id="@+id/menu_choosed_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#B89C75"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            tools:ignore="MissingConstraints"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-        <TextView
-                android:id="@+id/tv_menu_choosed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:text="메뉴상세"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
-
-    </androidx.appcompat.widget.Toolbar>
-
-    <ImageView
-        android:id="@+id/menu_choosed_img"
-        android:layout_width="match_parent"
-        android:layout_height="244dp"
-        android:layout_margin="10dp"
+        android:layout_height="780dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/menu_choosed_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menu_choosed_toolbar"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-            android:id="@+id/menu_choosed_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="메뉴이름"
-            android:textSize="30sp"
-            android:fontFamily="@font/we_semibold"
-            tools:ignore="MissingConstraints"
-            app:layout_constraintTop_toBottomOf="@+id/menu_choosed_img"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="36dp"
-            android:layout_marginStart="24dp"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-            android:id="@+id/menu_choosed_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/we_semibold"
-            android:text="메뉴가격"
-            android:textSize="25sp"
-            tools:ignore="MissingConstraints"
-            app:layout_constraintTop_toBottomOf="@+id/menu_choosed_name"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="24dp"/>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/menu_choosed_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#B89C75"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints">
 
-    <TextView
-            android:id="@+id/menu_choosed_intro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/we_semibold"
-            android:text="메뉴설명"
-            android:textSize="20sp"
-            tools:ignore="MissingConstraints"
-            app:layout_constraintTop_toBottomOf="@+id/menu_choosed_price"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="32dp"
-            android:layout_marginStart="24dp"/>
+                <TextView
+                    android:id="@+id/tv_menu_choosed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:text="메뉴상세"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <ImageView
+                android:id="@+id/menu_choosed_img"
+                android:layout_width="match_parent"
+                android:layout_height="244dp"
+                android:layout_margin="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/menu_choosed_toolbar"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/menu_choosed_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/we_semibold"
+                android:text="메뉴이름"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/menu_choosed_img"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/menu_choosed_intro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/we_semibold"
+                android:text="메뉴설명"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/menu_choosed_name"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/textView44"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/we_semibold"
+                android:text="기본"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/menu_choosed_intro"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/menu_choosed_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/we_semibold"
+                android:text="메뉴가격"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/menu_choosed_intro"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/menu_choose_option_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView44"
+                tools:ignore="MissingConstraints" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
     <Button
-            android:id="@+id/menu_choosed_btn"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:text="담기"
-            android:textStyle="bold"
-            android:textColor="@color/colorButton1"
-            android:background="#B89C75"
-            android:textSize="20sp"
-            android:layout_margin="10dp"
-            tools:ignore="MissingConstraints"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+        android:id="@+id/menu_choosed_btn"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_margin="10dp"
+        android:background="#B89C75"
+        android:text="담기"
+        android:textColor="@color/colorButton1"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

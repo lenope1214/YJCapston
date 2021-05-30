@@ -34,7 +34,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".owner.MenuOptionActivity"></activity>
+        <activity android:name=".owner.MenuMoveDetailActivity"></activity>
+        <activity android:name=".owner.MenuOptionActivity" />
         <activity android:name=".owner.MenuOptionGroupActivity" />
         <activity android:name=".user.ReservationOrderDetailActivity" />
         <activity android:name=".owner.ReservationManagementActivity" />

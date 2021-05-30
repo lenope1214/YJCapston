@@ -21,10 +21,12 @@ public class MenuOptionAdapter extends RecyclerView.Adapter<MenuOptionAdapter.It
     Context context;
     ArrayList<OptionGroups> mItems;
     ArrayList<Options> optionsItems;
+    private String optionGroupId;
 
-    public MenuOptionAdapter(Context context, ArrayList<OptionGroups> optionGroups) {
+    public MenuOptionAdapter(Context context, ArrayList<OptionGroups> optionGroups, String optionGroupId1) {
         this.context = context;
         mItems = optionGroups;
+        optionGroupId = optionGroupId1;
     }
 
 //    public basketRecyclerAdapter(Context context) {
@@ -49,7 +51,7 @@ public class MenuOptionAdapter extends RecyclerView.Adapter<MenuOptionAdapter.It
 
         holder.layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         holder.menu_option_option_list.setLayoutManager(holder.layoutManager);
-        holder.adapter = new MenuOptionOptionAdapter();
+        holder.adapter = new MenuOptionOptionAdapter(optionGroupId);
         holder.menu_option_option_list.setAdapter(holder.adapter);
 
         holder.option_option_group_add.setOnClickListener(new View.OnClickListener() {

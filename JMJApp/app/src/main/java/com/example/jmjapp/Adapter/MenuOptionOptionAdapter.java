@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import lombok.SneakyThrows;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,6 +37,11 @@ import retrofit2.Response;
 public class MenuOptionOptionAdapter extends RecyclerView.Adapter<MenuOptionOptionAdapter.ItemViewHolder> {
     ArrayList<Options> items = new ArrayList<>();
     private Context context;
+    private String optionGroupId;
+
+    public MenuOptionOptionAdapter(String optionGroupId1) {
+        optionGroupId = optionGroupId1;
+    }
 
     // 새로운 뷰 홀더 생성
     @NonNull
@@ -52,12 +58,14 @@ public class MenuOptionOptionAdapter extends RecyclerView.Adapter<MenuOptionOpti
         Options item = items.get(position);
         holder.setItem(item);
 
+        Log.d("123qwe", optionGroupId);
+
         holder.option_option_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("클릭","클릭");
 
-                holder.optionGroupId = MenuOptionGroupActivity.optionGroupId;
+                //holder.optionGroupId = MenuOptionGroupActivity.optionGroupId;
                 holder.jwt = MenuOptionGroupActivity.jwt;
 
 //                SharedPreferences pref = context.getSharedPreferences("auth_o", Context.MODE_PRIVATE);
@@ -68,10 +76,11 @@ public class MenuOptionOptionAdapter extends RecyclerView.Adapter<MenuOptionOpti
                 holder.map.put("price", holder.option_option_price.getText().toString());
                 holder.map.put("max", holder.option_option_max.getText().toString());
                 holder.map.put("no", holder.option_option_no.getText().toString());
-                holder.map.put("optionGroupId", holder.optionGroupId);
+                holder.map.put("optionGroupId", optionGroupId);
 
                 holder.optionsCall = Server.getInstance().getApi().registerOption("Bearer " + holder.jwt, holder.map);
                 holder.optionsCall.enqueue(new Callback<Options>() {
+                    @SneakyThrows
                     @Override
                     public void onResponse(Call<Options> call, Response<Options> response) {
                         if (response.isSuccessful()) {
@@ -86,7 +95,7 @@ public class MenuOptionOptionAdapter extends RecyclerView.Adapter<MenuOptionOpti
                             builder.setCancelable(false);
                             holder.dialog.show();
                         } else {
-                            Log.d("Options 실패1", "Options 실패1");
+                            Log.d("Options 실패1", "Options 실패1"+response.errorBody().string());
                         }
                     }
 

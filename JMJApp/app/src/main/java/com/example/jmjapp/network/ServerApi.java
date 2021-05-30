@@ -364,6 +364,10 @@ public interface ServerApi {
     Call<List<OptionGroups>> optionGroupsList(@Header("Authorization") String jwt,
                                         @Path("menuId") String menuId);
 
+    @GET("menus/options/{optionGroupId}") // 특정 메뉴의 옵션 리스트
+    Call<List<Options>> optionsList(@Header("Authorization") String jwt,
+                                    @Path("optionGroupId") String optionGroupId);
+
     /**
      * update update update update
      */

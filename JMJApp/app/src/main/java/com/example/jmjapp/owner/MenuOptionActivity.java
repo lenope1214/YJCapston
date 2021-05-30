@@ -92,7 +92,7 @@ public class MenuOptionActivity extends AppCompatActivity {
                         mItems.add(new OptionGroups(list.getOptionGroupId(), list.getOgName(),
                                 list.getOgMin(), list.getOgMax(), list.getMenuId()));
                         menu_option_list.setHasFixedSize(true);
-                        adapter = new MenuOptionAdapter(getApplicationContext(), mItems);
+                        adapter = new MenuOptionAdapter(getApplicationContext(), mItems, optionGroupId);
                         menu_option_list.setLayoutManager(new LinearLayoutManager(getApplication()));
                         menu_option_list.setAdapter(adapter);
                     }
