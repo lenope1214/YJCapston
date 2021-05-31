@@ -6,7 +6,9 @@ import org.hibernate.annotations.Fetch;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /*
 last update 2021-02-23
@@ -48,6 +50,17 @@ public class Menu {
     @JsonIgnore
     private Shop shop;
 
+    @OneToMany(mappedBy = "menu",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OptionGroup> optionGroupList = new ArrayList<>();
+
+    public void patch(Menu.Request request){
+        this.name = request.getName();
+        this.intro = request.getIntro();
+        this.price = request.getPrice();
+        this.duration = request.getDuration();
+//        private MultipartFile img;
+    }
+
     @Builder(builderMethodName = "init")
     public Menu(String id, String name, String intro, int price, int duration, String imgPath, Shop shop) {
         this.id = id;
@@ -84,7 +97,6 @@ public class Menu {
 
     @Getter @Setter
     public static class Request{
-        private String id;
         private String shopId;
         private String menuId;
         private String name;
@@ -111,6 +123,8 @@ public class Menu {
         private char isSale;
         private char isPopular;
         private String imgPath;
+        private List<OptionGroup> optionGroupList = new ArrayList<>();
+
 
         public Response(Menu menu){
 //            this.id = menu.getId().substring(0,10);
@@ -123,6 +137,7 @@ public class Menu {
             this.isSale = menu.getIsSale();
             this.isPopular = menu.getIsPopular();
             this.imgPath = menu.getImgPath();
+            this.optionGroupList = menu.getOptionGroupList();
         }
 //        public void parse(Menu menu){
 //

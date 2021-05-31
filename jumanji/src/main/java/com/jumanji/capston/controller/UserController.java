@@ -43,8 +43,8 @@ public class UserController  {
         String userRole = userService.isPresent(loginId).getRole();
         userService.isAuth(userRole, "ADMIN");
         List<User.Response> response = new ArrayList<>();
-        for (User _user : userService.getList(authorization)) {
-            response.add(new User.Response(_user));
+        for (User user : userService.getList(authorization)) {
+            response.add(new User.Response(user));
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

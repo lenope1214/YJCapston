@@ -19,6 +19,8 @@ public class OptionGroupController {
 
     @Autowired
     private OptionGroupServiceImpl optionGroupService;
+    @Autowired
+    private OptionServiceImpl optionService;
 
     @GetMapping("menus/options/groups/{menuId}")
     public ResponseEntity<?> getByMenuId(@PathVariable String menuId){

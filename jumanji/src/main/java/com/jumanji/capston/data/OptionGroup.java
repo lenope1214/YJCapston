@@ -42,6 +42,7 @@ public class OptionGroup {
         private String shopId;
     }
 
+
     @AllArgsConstructor @Getter // getter 없으니까 반환할때 값 못불러와서 실패.
     public static class Response{
         private String optionGroupId;
