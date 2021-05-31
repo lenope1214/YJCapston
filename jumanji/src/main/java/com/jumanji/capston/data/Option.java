@@ -48,7 +48,7 @@ public class Option {
 
         public Response(Option option){
             this.optionId = option.getId();
-//            this.shopId = option.getOptionGroup().getMenu().getShop().getId(); 얘는 하려면 컬럼 추가하는게 나을듯. 조인이 너무 많음
+            this.shopId = option.getOptionGroup().getMenu().getShop().getId();
             this.name = option.getName();
             this.price = option.getPrice();
             this.optionMax = option.getMax();

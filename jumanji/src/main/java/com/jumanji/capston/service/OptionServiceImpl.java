@@ -34,7 +34,9 @@ public class OptionServiceImpl implements BasicService<Option, Option.Request> {
 
     @Override
     public List<Option> getList(@Nullable String authorization, String... str) {
-        return null;
+        String oGroupId = str[0];
+        List<Option> optionList = optionRepository.findByOptionGroup_IdContains(oGroupId);
+        return optionList;
     }
 
     @Override

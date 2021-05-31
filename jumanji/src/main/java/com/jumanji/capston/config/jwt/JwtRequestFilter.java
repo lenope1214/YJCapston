@@ -49,6 +49,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                     , "menus/list"
                     , "reviews"
                     , "payments/complite"
+                    , "menus/options"
             );
 
 
