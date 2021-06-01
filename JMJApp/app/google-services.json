@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:341492105142:android:fd8a5eccf3e2b317470b17",
         "android_client_info": {
-          "package_name": "code.codesample.samplepush"
+          "package_name": "com.example.jmjapp"
         }
       },
       "oauth_client": [
