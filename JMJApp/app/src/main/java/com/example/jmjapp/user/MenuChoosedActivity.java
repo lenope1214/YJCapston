@@ -76,38 +76,39 @@ public class MenuChoosedActivity extends AppCompatActivity {
         menu_choosed_intro = findViewById(R.id.menu_choosed_intro);
         menu_choosed_img = findViewById(R.id.menu_choosed_img);
         menu_choosed_btn = findViewById(R.id.menu_choosed_btn);
-        menu_choose_option_list = findViewById(R.id.menu_choose_option_list);
+        //menu_choose_option_list = findViewById(R.id.menu_choose_option_list);
 
         menu_choosed_name.setText(menuName);
         menu_choosed_price.setText(menuPrice + "원");
         menu_choosed_intro.setText(menuIntro);
         Glide.with(this).load("http://3.34.55.186:8088/" + menuImage).override(500,500).into(menu_choosed_img);
 
-        optionGroupsCall = Server.getInstance().getApi().optionGroupsList("Bearer " + jwt, menuId);
-        optionGroupsCall.enqueue(new Callback<List<OptionGroups>>() {
-            @Override
-            public void onResponse(Call<List<OptionGroups>> call, Response<List<OptionGroups>> response) {
-                if (response.isSuccessful()) {
-                    Log.d("OptionsGroup 성공", "OptionsGroup 성공");
-                    List<OptionGroups> optionGroupsList = response.body();
-                    for (OptionGroups list : optionGroupsList) {
-                        mItems.add(new OptionGroups(list.getOptionGroupId(), list.getOgName(),
-                                list.getOgMin(), list.getOgMax(), list.getMenuId()));
-                        menu_choose_option_list.setHasFixedSize(true);
-                        adapter = new MenuChooseOptionGroupsAdapter(getApplicationContext(), mItems);
-                        menu_choose_option_list.setLayoutManager(new LinearLayoutManager(getApplication()));
-                        menu_choose_option_list.setAdapter(adapter);
-                    }
-                } else {
-                    Log.d("OptionsGroup 실패1", "OptionsGroup 실패1");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<OptionGroups>> call, Throwable t) {
-                Log.d("OptionsGroup 실패2", "OptionsGroup 실패2");
-            }
-        });
+//        optionGroupsCall = Server.getInstance().getApi().optionGroupsList("Bearer " + jwt, menuId);
+//        optionGroupsCall.enqueue(new Callback<List<OptionGroups>>() {
+//            @Override
+//            public void onResponse(Call<List<OptionGroups>> call, Response<List<OptionGroups>> response) {
+//                if (response.isSuccessful()) {
+//                    Log.d("OptionsGroup 성공", "OptionsGroup 성공");
+//                    List<OptionGroups> optionGroupsList = response.body();
+//                    for (OptionGroups list : optionGroupsList) {
+//                        mItems.add(new OptionGroups(list.getOptionGroupId(), list.getOgName(),
+//                                list.getOgMin(), list.getOgMax(), list.getMenuId()));
+//                        Log.d("listmax", String.valueOf(list.getOgMax()));
+//                        menu_choose_option_list.setHasFixedSize(true);
+//                        adapter = new MenuChooseOptionGroupsAdapter(getApplicationContext(), mItems, list.getOgMax(), menuName);
+//                        menu_choose_option_list.setLayoutManager(new LinearLayoutManager(getApplication()));
+//                        menu_choose_option_list.setAdapter(adapter);
+//                    }
+//                } else {
+//                    Log.d("OptionsGroup 실패1", "OptionsGroup 실패1");
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<OptionGroups>> call, Throwable t) {
+//                Log.d("OptionsGroup 실패2", "OptionsGroup 실패2");
+//            }
+//        });
 
         if (is_rs_pos == 'Y') {
             menu_choosed_btn.setOnClickListener(new View.OnClickListener() {

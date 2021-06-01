@@ -141,17 +141,18 @@ public class MenuRegisterActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Menu> call, Response<Menu> response) {
                         if(response.code() == 201) {
-                            String menuId = response.body().getMenuId();
-
-                            Intent intent = new Intent(MenuRegisterActivity.this, MenuOptionGroupActivity.class);
-                            intent.putExtra("menuId", menuId);
-                            intent.putExtra("shopNumber", shopNumber);
-                            intent.putExtra("menuName", menu_name_et.getText().toString());
-                            intent.putExtra("menuIntro", menu_intro_et.getText().toString());
-                            intent.putExtra("menuPrice", menu_price_et.getText().toString());
-                            intent.putExtra("menuTime", menu_time_et.getText().toString());
-                            intent.putExtra("imgPath", file);
-                            startActivity(intent);
+                            finish();
+//                            String menuId = response.body().getMenuId();
+//
+//                            Intent intent = new Intent(MenuRegisterActivity.this, MenuOptionGroupActivity.class);
+//                            intent.putExtra("menuId", menuId);
+//                            intent.putExtra("shopNumber", shopNumber);
+//                            intent.putExtra("menuName", menu_name_et.getText().toString());
+//                            intent.putExtra("menuIntro", menu_intro_et.getText().toString());
+//                            intent.putExtra("menuPrice", menu_price_et.getText().toString());
+//                            intent.putExtra("menuTime", menu_time_et.getText().toString());
+//                            intent.putExtra("imgPath", file);
+//                            startActivity(intent);
 
                             Log.d("result : " , "메뉴등록 성공");
 

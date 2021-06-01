@@ -11,6 +11,6 @@ public class Options {
     private String optionId;
     private String name;
     private int price;
-    private int max; // 최대 개수
+    private int optionMax; // 최대 개수
     private String optionGroupId;
 }

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -63,7 +64,7 @@ public class MenuMoveOptionAdapter extends RecyclerView.Adapter<MenuMoveOptionAd
                     List<Options> optionsList = response.body();
                     for (Options list : optionsList) {
                         holder.items.add(new Options(list.getOptionId(), list.getName(),
-                                list.getPrice(), list.getMax(), list.getOptionGroupId()));
+                                list.getPrice(), list.getOptionMax(), list.getOptionGroupId()));
                         holder.menu_move_option_option_list.setHasFixedSize(true);
                         holder.adapter = new MenuMoveOptionOptionAdapter(context, holder.items);
                         holder.menu_move_option_option_list.setLayoutManager(new LinearLayoutManager(context));
