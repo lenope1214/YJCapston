@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_menu2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/edge8"
+    android:orientation="vertical"
+    android:paddingBottom="20dp">
+
+    <EditText
+        android:id="@+id/option_option_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edittext_login3"
+        android:gravity="center"
+        android:hint="옵션이름 ex) 순한맛 or 매운맛"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/option_option_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:background="@drawable/edittext_login3"
+        android:gravity="center"
+        android:hint="옵션가격"
+        app:layout_constraintBottom_toBottomOf="@+id/option_option_name"
+        app:layout_constraintStart_toEndOf="@+id/option_option_name"
+        app:layout_constraintTop_toTopOf="@+id/option_option_name"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="원"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/option_option_price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/option_option_price"
+        app:layout_constraintTop_toTopOf="@+id/option_option_price"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/option_option_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/edittext_login3"
+        android:gravity="center"
+        android:hint="순번 ex) 1 or 2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/option_option_name"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/option_option_max"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/edittext_login3"
+        android:gravity="center"
+        android:hint="최대 개수"
+        app:layout_constraintBottom_toBottomOf="@+id/option_option_no"
+        app:layout_constraintStart_toEndOf="@+id/option_option_no"
+        app:layout_constraintTop_toTopOf="@+id/option_option_no"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/option_option_save"
+        android:layout_width="66dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginLeft="64dp"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittext_login3"
+        android:text="저장"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/option_option_max"
+        app:layout_constraintTop_toBottomOf="@+id/option_option_price"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

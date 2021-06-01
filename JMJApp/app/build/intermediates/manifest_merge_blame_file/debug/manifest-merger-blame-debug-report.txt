@@ -1,0 +1,576 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.jmjapp"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="16"
+8-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="30" />
+9-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml
+10    <!--
+11         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+12         Google Maps Android API v2, but you must specify either coarse or fine
+13         location permissions for the "MyLocation" functionality.
+14    -->
+15    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+15-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:9:5-79
+15-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:9:22-76
+16
+17    <permission
+17-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:11:5-13:47
+18        android:name="com.example.jmjapp.permission.MAPS_RECEIVE"
+18-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:12:9-66
+19        android:protectionLevel="signature" />
+19-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:13:9-44
+20
+21    <uses-permission android:name="org.techtown.location.permission.MAPS_RECEIVE" />
+21-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:15:5-85
+21-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:15:22-82
+22    <uses-permission android:name="android.permission.INTERNET" />
+22-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:16:5-67
+22-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:16:22-64
+23    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+23-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:17:5-98
+23-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:17:22-95
+24    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+24-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:18:5-81
+24-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:18:22-78
+25    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+25-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:19:5-81
+25-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:19:22-78
+26    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+26-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:20:5-80
+26-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:20:22-77
+27    <uses-permission android:name="android.permission.CAMERA" />
+27-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:21:5-65
+27-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:21:22-62
+28
+29    <uses-feature android:name="android.hardware.camera" />
+29-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:23:5-60
+29-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:23:19-57
+30    <uses-feature android:name="android.hardware.camera.autofocus" />
+30-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:24:5-70
+30-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:24:19-67
+31
+32    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+32-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/a4af1b090770a3d2b28b961f1538bed4/jetified-naveridlogin-android-sdk-4.2.6/AndroidManifest.xml:13:5-79
+32-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/a4af1b090770a3d2b28b961f1538bed4/jetified-naveridlogin-android-sdk-4.2.6/AndroidManifest.xml:13:22-76
+33
+34    <uses-feature
+34-->[com.google.android.gms:play-services-maps:17.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/1d73c0cf0109a8b2e77a4b2ebec098e8/jetified-play-services-maps-17.0.0/AndroidManifest.xml:26:5-28:35
+35        android:glEsVersion="0x00020000"
+35-->[com.google.android.gms:play-services-maps:17.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/1d73c0cf0109a8b2e77a4b2ebec098e8/jetified-play-services-maps-17.0.0/AndroidManifest.xml:27:9-41
+36        android:required="true" />
+36-->[com.google.android.gms:play-services-maps:17.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/1d73c0cf0109a8b2e77a4b2ebec098e8/jetified-play-services-maps-17.0.0/AndroidManifest.xml:28:9-32
+37    <uses-feature
+37-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/9c0049f7a34a76e57d5c511cbdf2268a/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:27:5-29:36
+38        android:name="android.hardware.camera.front"
+38-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/9c0049f7a34a76e57d5c511cbdf2268a/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:28:9-53
+39        android:required="false" />
+39-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/9c0049f7a34a76e57d5c511cbdf2268a/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:29:9-33
+40    <uses-feature
+40-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/9c0049f7a34a76e57d5c511cbdf2268a/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:35:5-37:36
+41        android:name="android.hardware.camera.flash"
+41-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/9c0049f7a34a76e57d5c511cbdf2268a/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:36:9-53
+42        android:required="false" />
+42-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/9c0049f7a34a76e57d5c511cbdf2268a/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:37:9-33
+43    <uses-feature
+43-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/9c0049f7a34a76e57d5c511cbdf2268a/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:38:5-40:36
+44        android:name="android.hardware.screen.landscape"
+44-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/9c0049f7a34a76e57d5c511cbdf2268a/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:39:9-57
+45        android:required="false" />
+45-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/9c0049f7a34a76e57d5c511cbdf2268a/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:40:9-33
+46    <uses-feature
+46-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/9c0049f7a34a76e57d5c511cbdf2268a/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:41:5-43:36
+47        android:name="android.hardware.wifi"
+47-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/9c0049f7a34a76e57d5c511cbdf2268a/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:42:9-45
+48        android:required="false" />
+48-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/9c0049f7a34a76e57d5c511cbdf2268a/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:43:9-33
+49
+50    <uses-permission android:name="android.permission.WAKE_LOCK" />
+50-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:25:5-68
+50-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:25:22-65
+51    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+51-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:26:5-110
+51-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:26:22-107
+52    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+52-->[com.google.firebase:firebase-iid:20.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/8fd1944630d7c4b73ca68bf0ac0251f9/jetified-firebase-iid-20.0.0/AndroidManifest.xml:26:5-82
+52-->[com.google.firebase:firebase-iid:20.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/8fd1944630d7c4b73ca68bf0ac0251f9/jetified-firebase-iid-20.0.0/AndroidManifest.xml:26:22-79
+53
+54    <application
+54-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:26:5-130:19
+55        android:name="com.example.jmjapp.JMJApplication"
+55-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:27:9-39
+56        android:allowBackup="true"
+56-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:28:9-35
+57        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+57-->[androidx.core:core:1.3.1] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/3c63f9ebd4aabd06b688629ed4199369/core-1.3.1/AndroidManifest.xml:24:18-86
+58        android:debuggable="true"
+59        android:hardwareAccelerated="true"
+59-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:29:9-43
+60        android:icon="@mipmap/ic_launcher"
+60-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:30:9-43
+61        android:label="@string/app_name"
+61-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:31:9-41
+62        android:requestLegacyExternalStorage="true"
+62-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:32:9-52
+63        android:roundIcon="@mipmap/ic_launcher_round"
+63-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:33:9-54
+64        android:supportsRtl="true"
+64-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:34:9-35
+65        android:testOnly="true"
+66        android:theme="@style/AppTheme"
+66-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:35:9-40
+67        android:usesCleartextTraffic="true" >
+67-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:36:9-44
+68        <activity android:name="com.example.jmjapp.owner.MenuMoveDetailActivity" />
+68-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:37:9-75
+68-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:37:19-63
+69        <activity android:name="com.example.jmjapp.owner.MenuOptionActivity" />
+69-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:38:9-62
+69-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:38:19-59
+70        <activity android:name="com.example.jmjapp.owner.MenuOptionGroupActivity" />
+70-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:39:9-67
+70-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:39:19-64
+71        <activity android:name="com.example.jmjapp.user.ReservationOrderDetailActivity" />
+71-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:40:9-73
+71-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:40:19-70
+72        <activity android:name="com.example.jmjapp.owner.ReservationManagementActivity" />
+72-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:41:9-73
+72-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:41:19-70
+73        <activity android:name="com.example.jmjapp.practicePush.MainActivity3" />
+73-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:42:9-64
+73-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:42:19-61
+74        <activity android:name="com.example.jmjapp.owner.push.BellActivity_O" />
+74-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:43:9-63
+74-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:43:19-60
+75        <activity android:name="com.example.jmjapp.payment.PaymentResultActivity" >
+75-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:44:9-55:20
+75-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:44:19-64
+76            <intent-filter>
+76-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:45:13-54:29
+77                <action android:name="android.intent.action.VIEW" />
+77-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:46:17-69
+77-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:46:25-66
+78
+79                <category android:name="android.intent.category.DEFAULT" />
+79-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:48:17-76
+79-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:48:27-73
+80                <category android:name="android.intent.category.BROWSABLE" />
+80-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:49:17-78
+80-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:49:27-75
+81
+82                <data
+82-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:51:17-53:52
+83                    android:host="web1"
+83-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:52:21-40
+84                    android:scheme="iamporttest" />
+84-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:53:21-49
+85            </intent-filter>
+86        </activity>
+87        <activity android:name="com.example.jmjapp.owner.AddEmployeesActivity" />
+87-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:56:9-64
+87-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:56:19-61
+88        <activity android:name="com.example.jmjapp.owner.EmployeesManagementActivity" />
+88-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:57:9-71
+88-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:57:19-68
+89        <activity android:name="com.example.jmjapp.payment.PaymentWebview" />
+89-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:58:9-60
+89-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:58:19-57
+90        <activity android:name="com.example.jmjapp.user.OrderActivity" />
+90-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:59:9-56
+90-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:59:19-53
+91        <activity android:name="com.example.jmjapp.owner.ShopUpdateActivity" />
+91-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:60:9-62
+91-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:60:19-59
+92        <activity android:name="com.example.jmjapp.user.BasketActivity" />
+92-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:61:9-57
+92-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:61:19-54
+93        <activity android:name="com.example.jmjapp.user.MenuChoosedActivity" />
+93-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:62:9-62
+93-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:62:19-59
+94        <activity android:name="com.example.jmjapp.owner.MenuRegisterActivity" />
+94-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:63:9-64
+94-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:63:19-61
+95        <activity android:name="com.example.jmjapp.owner.MenuDetailActivity" />
+95-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:64:9-62
+95-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:64:19-59
+96        <activity android:name="com.example.jmjapp.owner.ListShopActivity" />
+96-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:65:9-60
+96-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:65:19-57
+97        <activity android:name="com.example.jmjapp.owner.OwnerLoginActivity" />
+97-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:66:9-62
+97-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:66:19-59
+98        <activity android:name="com.example.jmjapp.user.MembershipWithdrawal" />
+98-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:67:9-63
+98-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:67:19-60
+99        <activity android:name="com.example.jmjapp.user.RecordZzim" />
+99-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:68:9-53
+99-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:68:19-50
+100        <activity android:name="com.example.jmjapp.user.RecordReview" />
+100-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:69:9-55
+100-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:69:19-52
+101        <activity android:name="com.example.jmjapp.user.RecordVisit" />
+101-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:70:9-54
+101-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:70:19-51
+102        <activity android:name="com.example.jmjapp.user.RecordPoint" />
+102-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:71:9-54
+102-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:71:19-51
+103        <activity android:name="com.example.jmjapp.user.OperationGuideActivity" />
+103-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:72:9-65
+103-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:72:19-62
+104        <activity android:name="com.example.jmjapp.user.CustomerServiceActivity" />
+104-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:73:9-66
+104-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:73:19-63
+105        <activity android:name="com.example.jmjapp.user.NoticeActivity" />
+105-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:74:9-57
+105-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:74:19-54
+106
+107        <uses-library android:name="com.google.android.maps" />
+107-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:76:9-64
+107-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:76:23-61
+108        <uses-library
+108-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:77:9-79:40
+109            android:name="org.apache.http.legacy"
+109-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:78:13-50
+110            android:required="false" />
+110-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:79:13-37
+111
+112        <meta-data
+112-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:81:9-83:69
+113            android:name="com.google.android.gms.version"
+113-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:82:13-58
+114            android:value="@integer/google_play_services_version" />
+114-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:83:13-66
+115
+116        <service
+116-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:85:9-93:19
+117            android:name="com.example.jmjapp.owner.push.MyFirebaseMessagingService"
+117-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:86:13-66
+118            android:enabled="true"
+118-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:87:13-35
+119            android:exported="true"
+119-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:88:13-36
+120            android:stopWithTask="false" >
+120-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:89:13-41
+121            <intent-filter>
+121-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:90:13-92:29
+122                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+122-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:91:17-78
+122-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:91:25-75
+123            </intent-filter>
+124        </service>
+125        <service
+125-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:94:9-102:19
+126            android:name="com.example.jmjapp.user.push.UserFirebaseMessagingService"
+126-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:95:13-67
+127            android:enabled="true"
+127-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:96:13-35
+128            android:exported="true"
+128-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:97:13-36
+129            android:stopWithTask="false" >
+129-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:98:13-41
+130            <intent-filter>
+130-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:90:13-92:29
+131                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+131-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:91:17-78
+131-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:91:25-75
+132            </intent-filter>
+133        </service>
+134
+135        <activity android:name="com.example.jmjapp.user.MainActivity" />
+135-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:104:9-55
+135-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:104:19-52
+136        <activity android:name="com.example.jmjapp.user.MenuActivity" />
+136-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:105:9-55
+136-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:105:19-52
+137        <activity android:name="com.example.jmjapp.user.BellActivity" />
+137-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:106:9-55
+137-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:106:19-52
+138        <activity android:name="com.example.jmjapp.user.QrReaderActivity" />
+138-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:107:9-59
+138-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:107:19-56
+139        <activity android:name="com.example.jmjapp.user.ProfileUpdateActivity" />
+139-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:108:9-64
+139-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:108:19-61
+140        <activity android:name="com.example.jmjapp.IntroScreen" >
+140-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:109:9-115:20
+140-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:109:19-46
+141            <intent-filter>
+141-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:110:13-114:29
+142                <action android:name="android.intent.action.MAIN" />
+142-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:111:17-69
+142-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:111:25-66
+143
+144                <category android:name="android.intent.category.LAUNCHER" />
+144-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:113:17-77
+144-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:113:27-74
+145            </intent-filter>
+146        </activity>
+147        <activity
+147-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:116:9-120:63
+148            android:name="com.example.jmjapp.user.CaptureAct"
+148-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:117:13-44
+149            android:screenOrientation="fullSensor"
+149-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:118:13-51
+150            android:stateNotNeeded="true"
+150-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:119:13-42
+151            android:windowSoftInputMode="stateAlwaysHidden" />
+151-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:120:13-60
+152        <activity android:name="com.example.jmjapp.user.LoginActivity" />
+152-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:121:9-56
+152-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:121:19-53
+153        <activity android:name="com.example.jmjapp.owner.MainActivity_O" />
+153-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:122:9-58
+153-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:122:19-55
+154        <activity android:name="com.example.jmjapp.owner.RegisterNoActivity" />
+154-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:123:9-62
+154-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:123:19-59
+155        <activity android:name="com.example.jmjapp.owner.RegisterShopActivity" />
+155-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:124:9-64
+155-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:124:19-61
+156        <activity android:name="com.example.jmjapp.user.JoinActivity" />
+156-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:125:9-55
+156-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:125:19-52
+157        <activity android:name="com.example.jmjapp.user.ShopDetailActivity" /> <!-- <activity android:name=".user.LogoutActivity"> -->
+157-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:126:9-61
+157-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:126:19-58
+158        <!-- </activity> -->
+159        <activity android:name="com.example.jmjapp.owner.OwnerJoinActivity" />
+159-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:128:9-61
+159-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:128:19-58
+160        <activity android:name="com.example.jmjapp.owner.WebViewActivity" />
+160-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:129:9-59
+160-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:129:19-56
+161        <activity
+161-->[com.github.lakue119:LakuePopupActivity:1.0.1] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/3bbabd5b796c316b5c5047ad91c82a4b/jetified-LakuePopupActivity-1.0.1/AndroidManifest.xml:12:9-14:59
+162            android:name="com.lakue.lakuepopupactivity.PopupActivity"
+162-->[com.github.lakue119:LakuePopupActivity:1.0.1] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/3bbabd5b796c316b5c5047ad91c82a4b/jetified-LakuePopupActivity-1.0.1/AndroidManifest.xml:13:13-70
+163            android:theme="@android:style/Theme.Dialog" />
+163-->[com.github.lakue119:LakuePopupActivity:1.0.1] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/3bbabd5b796c316b5c5047ad91c82a4b/jetified-LakuePopupActivity-1.0.1/AndroidManifest.xml:14:13-56
+164        <activity
+164-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/a4af1b090770a3d2b28b961f1538bed4/jetified-naveridlogin-android-sdk-4.2.6/AndroidManifest.xml:17:9-19:67
+165            android:name="com.nhn.android.naverlogin.ui.OAuthLoginActivity"
+165-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/a4af1b090770a3d2b28b961f1538bed4/jetified-naveridlogin-android-sdk-4.2.6/AndroidManifest.xml:18:13-76
+166            android:theme="@style/Theme.AppCompat.Light.Dialog" />
+166-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/a4af1b090770a3d2b28b961f1538bed4/jetified-naveridlogin-android-sdk-4.2.6/AndroidManifest.xml:19:13-64
+167        <activity
+167-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/a4af1b090770a3d2b28b961f1538bed4/jetified-naveridlogin-android-sdk-4.2.6/AndroidManifest.xml:20:9-23:47
+168            android:name="com.nhn.android.naverlogin.ui.OAuthLoginInAppBrowserActivity"
+168-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/a4af1b090770a3d2b28b961f1538bed4/jetified-naveridlogin-android-sdk-4.2.6/AndroidManifest.xml:21:13-88
+169            android:configChanges="orientation|screenSize"
+169-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/a4af1b090770a3d2b28b961f1538bed4/jetified-naveridlogin-android-sdk-4.2.6/AndroidManifest.xml:22:13-59
+170            android:label="OAuth2.0 In-app" />
+170-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/a4af1b090770a3d2b28b961f1538bed4/jetified-naveridlogin-android-sdk-4.2.6/AndroidManifest.xml:23:13-44
+171        <activity
+171-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/a4af1b090770a3d2b28b961f1538bed4/jetified-naveridlogin-android-sdk-4.2.6/AndroidManifest.xml:24:9-40:20
+172            android:name="com.nhn.android.naverlogin.ui.OAuthCustomTabActivity"
+172-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/a4af1b090770a3d2b28b961f1538bed4/jetified-naveridlogin-android-sdk-4.2.6/AndroidManifest.xml:25:13-80
+173            android:configChanges="orientation|screenSize"
+173-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/a4af1b090770a3d2b28b961f1538bed4/jetified-naveridlogin-android-sdk-4.2.6/AndroidManifest.xml:26:13-59
+174            android:launchMode="singleTask"
+174-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/a4af1b090770a3d2b28b961f1538bed4/jetified-naveridlogin-android-sdk-4.2.6/AndroidManifest.xml:27:13-44
+175            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+175-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/a4af1b090770a3d2b28b961f1538bed4/jetified-naveridlogin-android-sdk-4.2.6/AndroidManifest.xml:28:13-72
+176            <intent-filter>
+176-->[com.naver.nid:naveridlogin-android-sdk:4.2.6] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/a4af1b090770a3d2b28b961f1538bed4/jetified-naveridlogin-android-sdk-4.2.6/AndroidManifest.xml:29:13-39:29
+177                <action android:name="android.intent.action.VIEW" />
+177-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:46:17-69
+177-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:46:25-66
+178
+179                <category android:name="android.intent.category.DEFAULT" />
+179-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:48:17-76
+179-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:48:27-73
+180                <category android:name="android.intent.category.BROWSABLE" />
+180-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:49:17-78
+180-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:49:27-75
+181                <!-- Intent URL 에서 로그인 액티비티를 실행하기 위해 설정 -->
+182                <data
+182-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:51:17-53:52
+183                    android:host="authorize"
+183-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:52:21-40
+184                    android:path="/"
+185                    android:scheme="naver3rdpartylogin" />
+185-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:53:21-49
+186            </intent-filter>
+187        </activity>
+188        <activity
+188-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/9c0049f7a34a76e57d5c511cbdf2268a/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:46:9-52:63
+189            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+189-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/9c0049f7a34a76e57d5c511cbdf2268a/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:47:13-74
+190            android:clearTaskOnLaunch="true"
+190-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/9c0049f7a34a76e57d5c511cbdf2268a/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:48:13-45
+191            android:screenOrientation="sensorLandscape"
+191-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/9c0049f7a34a76e57d5c511cbdf2268a/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:49:13-56
+192            android:stateNotNeeded="true"
+192-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/9c0049f7a34a76e57d5c511cbdf2268a/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:50:13-42
+193            android:theme="@style/zxing_CaptureTheme"
+193-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/9c0049f7a34a76e57d5c511cbdf2268a/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:51:13-54
+194            android:windowSoftInputMode="stateAlwaysHidden" />
+194-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/9c0049f7a34a76e57d5c511cbdf2268a/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:52:13-60
+195
+196        <receiver
+196-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:29:9-33:20
+197            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+197-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:30:13-85
+198            android:enabled="true"
+198-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:31:13-35
+199            android:exported="false" >
+199-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:32:13-37
+200        </receiver>
+201        <receiver
+201-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:34:9-42:20
+202            android:name="com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver"
+202-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:35:13-100
+203            android:enabled="true"
+203-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:36:13-35
+204            android:exported="true"
+204-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:37:13-36
+205            android:permission="android.permission.INSTALL_PACKAGES" >
+205-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:38:13-69
+206            <intent-filter>
+206-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:39:13-41:29
+207                <action android:name="com.android.vending.INSTALL_REFERRER" />
+207-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:40:17-79
+207-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:40:25-76
+208            </intent-filter>
+209        </receiver>
+210
+211        <service
+211-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:44:9-47:40
+212            android:name="com.google.android.gms.measurement.AppMeasurementService"
+212-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:45:13-84
+213            android:enabled="true"
+213-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:46:13-35
+214            android:exported="false" />
+214-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:47:13-37
+215        <service
+215-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:48:9-52:72
+216            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+216-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:49:13-87
+217            android:enabled="true"
+217-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:50:13-35
+218            android:exported="false"
+218-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:51:13-37
+219            android:permission="android.permission.BIND_JOB_SERVICE" />
+219-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/6593eccfbf7e012f9c0ae7cd99729df1/jetified-play-services-measurement-17.2.0/AndroidManifest.xml:52:13-69
+220        <!--
+221             FirebaseMessagingService performs security checks at runtime,
+222             but set to not exported to explicitly avoid allowing another app to call it.
+223        -->
+224        <service
+224-->[com.google.firebase:firebase-messaging:20.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/76fe9c22b17ae94e47fb8d4a41b4bca5/jetified-firebase-messaging-20.0.0/AndroidManifest.xml:28:9-34:19
+225            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+225-->[com.google.firebase:firebase-messaging:20.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/76fe9c22b17ae94e47fb8d4a41b4bca5/jetified-firebase-messaging-20.0.0/AndroidManifest.xml:29:13-82
+226            android:exported="false" >
+226-->[com.google.firebase:firebase-messaging:20.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/76fe9c22b17ae94e47fb8d4a41b4bca5/jetified-firebase-messaging-20.0.0/AndroidManifest.xml:30:13-37
+227            <intent-filter android:priority="-500" >
+227-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:90:13-92:29
+228                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+228-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:91:17-78
+228-->/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/AndroidManifest.xml:91:25-75
+229            </intent-filter>
+230        </service>
+231        <service
+231-->[com.google.android.gms:play-services-measurement-api:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/f0aba3ad9dd604c67eb8896abfc272d9/jetified-play-services-measurement-api-17.2.0/AndroidManifest.xml:27:9-33:19
+232            android:name="com.google.firebase.components.ComponentDiscoveryService"
+232-->[com.google.android.gms:play-services-measurement-api:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/f0aba3ad9dd604c67eb8896abfc272d9/jetified-play-services-measurement-api-17.2.0/AndroidManifest.xml:28:13-84
+233            android:exported="false" >
+233-->[com.google.android.gms:play-services-measurement-api:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/f0aba3ad9dd604c67eb8896abfc272d9/jetified-play-services-measurement-api-17.2.0/AndroidManifest.xml:29:13-37
+234            <meta-data
+234-->[com.google.android.gms:play-services-measurement-api:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/f0aba3ad9dd604c67eb8896abfc272d9/jetified-play-services-measurement-api-17.2.0/AndroidManifest.xml:30:13-32:85
+235                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+235-->[com.google.android.gms:play-services-measurement-api:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/f0aba3ad9dd604c67eb8896abfc272d9/jetified-play-services-measurement-api-17.2.0/AndroidManifest.xml:31:17-139
+236                android:value="com.google.firebase.components.ComponentRegistrar" />
+236-->[com.google.android.gms:play-services-measurement-api:17.2.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/f0aba3ad9dd604c67eb8896abfc272d9/jetified-play-services-measurement-api-17.2.0/AndroidManifest.xml:32:17-82
+237            <meta-data
+237-->[com.google.firebase:firebase-iid:20.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/8fd1944630d7c4b73ca68bf0ac0251f9/jetified-firebase-iid-20.0.0/AndroidManifest.xml:32:13-34:85
+238                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+238-->[com.google.firebase:firebase-iid:20.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/8fd1944630d7c4b73ca68bf0ac0251f9/jetified-firebase-iid-20.0.0/AndroidManifest.xml:33:17-96
+239                android:value="com.google.firebase.components.ComponentRegistrar" />
+239-->[com.google.firebase:firebase-iid:20.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/8fd1944630d7c4b73ca68bf0ac0251f9/jetified-firebase-iid-20.0.0/AndroidManifest.xml:34:17-82
+240            <meta-data
+240-->[com.google.firebase:firebase-auth:19.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/bb8ceca9f2545f5a3187418f01056519/jetified-firebase-auth-19.0.0/AndroidManifest.xml:36:13-38:85
+241                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+241-->[com.google.firebase:firebase-auth:19.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/bb8ceca9f2545f5a3187418f01056519/jetified-firebase-auth-19.0.0/AndroidManifest.xml:37:17-109
+242                android:value="com.google.firebase.components.ComponentRegistrar" />
+242-->[com.google.firebase:firebase-auth:19.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/bb8ceca9f2545f5a3187418f01056519/jetified-firebase-auth-19.0.0/AndroidManifest.xml:38:17-82
+243        </service>
+244
+245        <receiver
+245-->[com.google.firebase:firebase-iid:20.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/8fd1944630d7c4b73ca68bf0ac0251f9/jetified-firebase-iid-20.0.0/AndroidManifest.xml:37:9-44:20
+246            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+246-->[com.google.firebase:firebase-iid:20.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/8fd1944630d7c4b73ca68bf0ac0251f9/jetified-firebase-iid-20.0.0/AndroidManifest.xml:38:13-78
+247            android:exported="true"
+247-->[com.google.firebase:firebase-iid:20.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/8fd1944630d7c4b73ca68bf0ac0251f9/jetified-firebase-iid-20.0.0/AndroidManifest.xml:39:13-36
+248            android:permission="com.google.android.c2dm.permission.SEND" >
+248-->[com.google.firebase:firebase-iid:20.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/8fd1944630d7c4b73ca68bf0ac0251f9/jetified-firebase-iid-20.0.0/AndroidManifest.xml:40:13-73
+249            <intent-filter>
+249-->[com.google.firebase:firebase-iid:20.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/8fd1944630d7c4b73ca68bf0ac0251f9/jetified-firebase-iid-20.0.0/AndroidManifest.xml:41:13-43:29
+250                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+250-->[com.google.firebase:firebase-iid:20.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/8fd1944630d7c4b73ca68bf0ac0251f9/jetified-firebase-iid-20.0.0/AndroidManifest.xml:42:17-81
+250-->[com.google.firebase:firebase-iid:20.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/8fd1944630d7c4b73ca68bf0ac0251f9/jetified-firebase-iid-20.0.0/AndroidManifest.xml:42:25-78
+251            </intent-filter>
+252        </receiver>
+253
+254        <activity
+254-->[com.google.firebase:firebase-auth:19.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/bb8ceca9f2545f5a3187418f01056519/jetified-firebase-auth-19.0.0/AndroidManifest.xml:24:9-31:50
+255            android:name="com.google.firebase.auth.internal.FederatedSignInActivity"
+255-->[com.google.firebase:firebase-auth:19.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/bb8ceca9f2545f5a3187418f01056519/jetified-firebase-auth-19.0.0/AndroidManifest.xml:25:13-85
+256            android:excludeFromRecents="true"
+256-->[com.google.firebase:firebase-auth:19.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/bb8ceca9f2545f5a3187418f01056519/jetified-firebase-auth-19.0.0/AndroidManifest.xml:26:13-46
+257            android:exported="true"
+257-->[com.google.firebase:firebase-auth:19.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/bb8ceca9f2545f5a3187418f01056519/jetified-firebase-auth-19.0.0/AndroidManifest.xml:27:13-36
+258            android:launchMode="singleTask"
+258-->[com.google.firebase:firebase-auth:19.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/bb8ceca9f2545f5a3187418f01056519/jetified-firebase-auth-19.0.0/AndroidManifest.xml:28:13-44
+259            android:permission="com.google.firebase.auth.api.gms.permission.LAUNCH_FEDERATED_SIGN_IN"
+259-->[com.google.firebase:firebase-auth:19.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/bb8ceca9f2545f5a3187418f01056519/jetified-firebase-auth-19.0.0/AndroidManifest.xml:29:13-102
+260            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+260-->[com.google.firebase:firebase-auth:19.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/bb8ceca9f2545f5a3187418f01056519/jetified-firebase-auth-19.0.0/AndroidManifest.xml:30:13-72
+261        <activity
+261-->[com.google.android.gms:play-services-auth:17.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/ff0dfa02a20c6c5887c05bdfa613ec64/jetified-play-services-auth-17.0.0/AndroidManifest.xml:23:9-27:75
+262            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+262-->[com.google.android.gms:play-services-auth:17.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/ff0dfa02a20c6c5887c05bdfa613ec64/jetified-play-services-auth-17.0.0/AndroidManifest.xml:24:13-93
+263            android:excludeFromRecents="true"
+263-->[com.google.android.gms:play-services-auth:17.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/ff0dfa02a20c6c5887c05bdfa613ec64/jetified-play-services-auth-17.0.0/AndroidManifest.xml:25:13-46
+264            android:exported="false"
+264-->[com.google.android.gms:play-services-auth:17.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/ff0dfa02a20c6c5887c05bdfa613ec64/jetified-play-services-auth-17.0.0/AndroidManifest.xml:26:13-37
+265            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+265-->[com.google.android.gms:play-services-auth:17.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/ff0dfa02a20c6c5887c05bdfa613ec64/jetified-play-services-auth-17.0.0/AndroidManifest.xml:27:13-72
+266        <!--
+267            Service handling Google Sign-In user revocation. For apps that do not integrate with
+268            Google Sign-In, this service will never be started.
+269        -->
+270        <service
+270-->[com.google.android.gms:play-services-auth:17.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/ff0dfa02a20c6c5887c05bdfa613ec64/jetified-play-services-auth-17.0.0/AndroidManifest.xml:33:9-36:110
+271            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+271-->[com.google.android.gms:play-services-auth:17.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/ff0dfa02a20c6c5887c05bdfa613ec64/jetified-play-services-auth-17.0.0/AndroidManifest.xml:34:13-89
+272            android:exported="true"
+272-->[com.google.android.gms:play-services-auth:17.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/ff0dfa02a20c6c5887c05bdfa613ec64/jetified-play-services-auth-17.0.0/AndroidManifest.xml:35:13-36
+273            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION" />
+273-->[com.google.android.gms:play-services-auth:17.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/ff0dfa02a20c6c5887c05bdfa613ec64/jetified-play-services-auth-17.0.0/AndroidManifest.xml:36:13-107
+274
+275        <activity
+275-->[com.google.android.gms:play-services-base:17.1.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/0fd8b02d0d41f79009dd5fe87957b32a/jetified-play-services-base-17.1.0/AndroidManifest.xml:23:9-26:75
+276            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+276-->[com.google.android.gms:play-services-base:17.1.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/0fd8b02d0d41f79009dd5fe87957b32a/jetified-play-services-base-17.1.0/AndroidManifest.xml:24:13-79
+277            android:exported="false"
+277-->[com.google.android.gms:play-services-base:17.1.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/0fd8b02d0d41f79009dd5fe87957b32a/jetified-play-services-base-17.1.0/AndroidManifest.xml:25:13-37
+278            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+278-->[com.google.android.gms:play-services-base:17.1.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/0fd8b02d0d41f79009dd5fe87957b32a/jetified-play-services-base-17.1.0/AndroidManifest.xml:26:13-72
+279
+280        <provider
+280-->[com.google.firebase:firebase-common:19.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/71d31ee4ed5c0c4b24006ed8ca6cf980/jetified-firebase-common-19.0.0/AndroidManifest.xml:12:9-16:39
+281            android:name="com.google.firebase.provider.FirebaseInitProvider"
+281-->[com.google.firebase:firebase-common:19.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/71d31ee4ed5c0c4b24006ed8ca6cf980/jetified-firebase-common-19.0.0/AndroidManifest.xml:13:13-77
+282            android:authorities="com.example.jmjapp.firebaseinitprovider"
+282-->[com.google.firebase:firebase-common:19.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/71d31ee4ed5c0c4b24006ed8ca6cf980/jetified-firebase-common-19.0.0/AndroidManifest.xml:14:13-72
+283            android:exported="false"
+283-->[com.google.firebase:firebase-common:19.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/71d31ee4ed5c0c4b24006ed8ca6cf980/jetified-firebase-common-19.0.0/AndroidManifest.xml:15:13-37
+284            android:initOrder="100" />
+284-->[com.google.firebase:firebase-common:19.0.0] /Users/leeseongbok/.gradle/caches/transforms-2/files-2.1/71d31ee4ed5c0c4b24006ed8ca6cf980/jetified-firebase-common-19.0.0/AndroidManifest.xml:16:13-36
+285    </application>
+286
+287</manifest>

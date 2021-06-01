@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout-v21/activity_menu_option.xml",
+        "source": "/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/res/layout-v21/activity_menu_option.xml"
+    },
+    {
+        "merged": "/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout-v21/activity_menu.xml",
+        "source": "/Users/leeseongbok/Documents/GitHub/YJCapston/JMJApp/app/src/main/res/layout-v21/activity_menu.xml"
+    }
+]
