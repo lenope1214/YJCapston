@@ -1,6 +1,6 @@
 package com.jumanji.capston.controller.externalApiController;
 
-import com.jumanji.capston.service.External.AddressSearchApiService;
+import com.jumanji.capston.service.external.AddressSearchApiService;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,7 +16,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/")
 public class AddressSearchApiController {
     @Autowired
     HttpHeaders httpHeaders;
@@ -31,7 +31,7 @@ public class AddressSearchApiController {
         private String countPerPage;
     }
 
-    @GetMapping("/searchAddr")
+    @GetMapping("searchAddr")
     public ResponseEntity<?> getAddressResult(AddrParameters parameters){
 //        public ResponseEntity<?> getAddressResult(@RequestBody SearchAddressRequest request){
 //        String currentPage = request.getCurrentPage();
