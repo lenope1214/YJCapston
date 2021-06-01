@@ -1,34 +1,24 @@
 package com.jumanji.capston.controller.externalApiController;
 
-import com.jumanji.capston.data.Payment;
-import com.jumanji.capston.data.externalData.iamport.Iamport;
-import com.jumanji.capston.service.external.IamportClientService;
+import com.jumanji.capston.service.External.IamportClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import retrofit2.http.Query;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.transaction.Transactional;
 
 @RestController
-@RequestMapping("/iamport/")
+@RequestMapping("/iamport")
 public class IamportController {
     @Autowired
     private IamportClientService service;
 
     @Transactional
-    @PostMapping("get-token")
-    public ResponseEntity<?> usersGetToken(@RequestHeader String authorization) throws Exception {
-        return new ResponseEntity<>(service.getToken(authorization), HttpStatus.OK);
+    @PostMapping("/users/getToken")
+    public ResponseEntity<?> usersGetToken() throws Exception {
+        return new ResponseEntity<>(service.getToken(), HttpStatus.OK);
     }
-
-    @Transactional
-    @GetMapping("cancel")
-    public ResponseEntity<?> payCanceled(@RequestHeader String authorization, @Query("m_id") String m_id) throws Exception {
-        return new ResponseEntity<>(service.cancelPayment(authorization, m_id), HttpStatus.OK);
-    }
-
-
-
 }

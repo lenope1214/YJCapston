@@ -14,48 +14,42 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1")
 public class OrderMenusController{
     @Autowired
     OrderMenuServiceImpl orderMenuService;
 
 
     @Transactional(readOnly = true)
-    @GetMapping("order-menus/{orderMenuId}")
+    @GetMapping("/order-menu/{orderMenuId}")
     public ResponseEntity<?> selectOrderByOrderId(@PathVariable Timestamp orderMenuId) {
         System.out.println("orderMenuId : " + orderMenuId);
         List<OrderMenu.Response> response = new ArrayList<>();
-        Set<OrderMenu> orderMenuSet = orderMenuService.getOrderMenuByOrderId(orderMenuId);
+        Set<OrderMenu> orderMenuSet = orderMenuService.getOrderMenuByCartId(orderMenuId);
         System.out.println("주문메뉴 개수 : " + orderMenuSet.size());
-        for(OrderMenu orderMenu : orderMenuSet){
+        for(OrderMenu order : orderMenuSet){
             System.out.println("orderList info \n" +
-                    "order.getId() : "+ orderMenu.getId() + "\n" +
-                    "order.getMenuId : " + orderMenu.getMenu().getId().substring(10) +"\n" +
+                    "order.getId() : "+ order.getId() + "\n" +
+                    "order.getMenuId : " + order.getMenu().getId().substring(10) +"\n" +
                     "order.get");
-            response.add(new OrderMenu.Response(orderMenu));
+            response.add(new OrderMenu.Response(order));
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Transactional
-    @PostMapping("order-menus")
+    @PostMapping("/order-menu")
     public ResponseEntity<?> postOrder(@RequestHeader String authorization, @RequestBody OrderMenu.RequestList requestList) {
         List<OrderMenu> orderMenuList = orderMenuService.post(authorization, requestList);
         List<OrderMenu.Response> responseList= new ArrayList<>();
         for(OrderMenu orderMenu : orderMenuList){
             responseList.add(new OrderMenu.Response(orderMenu));
         }
-
         return new ResponseEntity<>(responseList, HttpStatus.CREATED);
     }
 
-//    @PostMapping("order-menus-test")
-//    public ResponseEntity<?> postOrderTest(@RequestHeader String authorization, @RequestBody OrderMenu.RequestList requestList) {
-//
-//        return new ResponseEntity<>(requestList.getList().get(0).getOptionList().get(0), HttpStatus.OK);
-//    }
-        @Transactional
-    @PatchMapping("order-menus")
+    @Transactional
+    @PatchMapping("/order-menu")
     public ResponseEntity<?> patchOrder(@RequestHeader String authorization, @RequestBody OrderMenu.Request request) {
         OrderMenu orderMenu= orderMenuService.patch(authorization, request);
         OrderMenu.Response response = new OrderMenu.Response(orderMenu);

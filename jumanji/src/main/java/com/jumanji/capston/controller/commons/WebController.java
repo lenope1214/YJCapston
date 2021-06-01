@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.transaction.Transactional;
-
 @Controller
 public class WebController {
 
@@ -115,13 +113,4 @@ public class WebController {
 
     @GetMapping("daumAddr")
     public String daumAddr(){ return "daumAddr";}
-
-    @Transactional
-    @GetMapping("/androidPayment")
-    public String imptAndroidPayment(){
-        return "iamportAndroidPayment";
-    }
-
-    @GetMapping("/androidPayComple")
-    public String imptAndroidPayComple(){ return "iamportAndroidPayComple";}
 }
