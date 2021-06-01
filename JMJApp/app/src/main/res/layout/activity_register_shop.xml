@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/register_shop_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/tv_shop_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:text="매장 등록"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <EditText
+        android:id="@+id/shop_et_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/edittext_login2"
+        android:ems="10"
+        android:fontFamily="@font/we_semibold"
+        android:gravity="start"
+        android:hint="사업자번호"
+        android:inputType="number"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/register_shop_toolbar"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/shop_et_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittext_login2"
+        android:ems="10"
+        android:fontFamily="@font/we_semibold"
+        android:gravity="start"
+        android:hint="매장이름"
+        android:inputType="text"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/shop_et_id"
+        app:layout_constraintStart_toStartOf="@+id/shop_et_id"
+        app:layout_constraintTop_toBottomOf="@+id/shop_et_id"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/shop_et_intro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittext_login2"
+        android:ems="10"
+        android:fontFamily="@font/we_semibold"
+        android:gravity="start"
+        android:hint="매장소개"
+        android:inputType="text"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/shop_et_name"
+        app:layout_constraintStart_toStartOf="@+id/shop_et_name"
+        app:layout_constraintTop_toBottomOf="@+id/shop_et_name"
+        tools:ignore="MissingConstraints" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout9"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:paddingStart="30dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="30dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/shop_et_intro"
+        app:layout_constraintStart_toStartOf="@+id/shop_et_intro"
+        app:layout_constraintTop_toBottomOf="@+id/shop_et_intro"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/shop_et_open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/we_semibold"
+            android:text="오픈시간"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/we_semibold"
+            android:text="~"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/shop_et_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/we_semibold"
+            android:text="마감시간"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <EditText
+        android:id="@+id/shop_et_addr"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/edittext_login2"
+        android:ems="10"
+        android:fontFamily="@font/we_semibold"
+        android:gravity="start"
+        android:hint="매장주소"
+        android:inputType="text"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/shop_et_intro"
+        app:layout_constraintStart_toStartOf="@+id/shop_et_intro"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout9"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/search_addr"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="18dp"
+        android:background="@drawable/button_search"
+        android:fontFamily="@font/we_semibold"
+        android:foreground="@drawable/searching"
+        android:scrollbarDefaultDelayBeforeFade="800"
+        android:textColor="#D0BCA1"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/shop_et_addr"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/shop_et_addr"
+        app:layout_constraintTop_toTopOf="@+id/shop_et_addr"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/shop_et_addr_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/edittext_login2"
+        android:ems="10"
+        android:fontFamily="@font/we_semibold"
+        android:gravity="start"
+        android:hint="매장상세주소"
+        android:inputType="text"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/shop_et_addr"
+        app:layout_constraintStart_toStartOf="@+id/shop_et_addr"
+        app:layout_constraintTop_toBottomOf="@+id/shop_et_addr"
+        tools:ignore="MissingConstraints" />
+
+    <Spinner
+        android:id="@+id/shop_et_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shop_et_addr_detail" />
+
+    <Button
+        android:id="@+id/shop_register"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/button_login"
+        android:fontFamily="@font/we_semibold"
+        android:gravity="center"
+        android:text="등록"
+        android:textColor="#D0BCA1"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/shop_et_category"
+        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintStart_toStartOf="@+id/shop_et_category"
+        app:layout_constraintTop_toBottomOf="@+id/shop_et_category"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

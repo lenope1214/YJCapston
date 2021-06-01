@@ -11,7 +11,7 @@
 //@Table(name="refunds")
 //public class Refund implements Serializable {
 //    @Id
-//    @ManyToOne(fetch = FetchType.LAZY)
+//    @ManyToOne
 //    @JoinColumn(name = "payments_id")
 //    private Payment id;
 //
