@@ -38,6 +38,24 @@ public class Option {
     }
 
     @AllArgsConstructor @Getter
+    public static class Get{
+        private String optionId;
+        private String shopId;
+        private String name;
+        private int price;
+        private int optionMax;
+
+        public Get(Option option){
+            this.optionId = option.getId();
+            this.shopId = option.getOptionGroup().getMenu().getShop().getId();
+            this.name = option.getName();
+            this.price = option.getPrice();
+            this.optionMax = option.getMax();
+        }
+    }
+
+
+    @AllArgsConstructor @Getter
     public static class Response{
         private String optionId;
         private String shopId;

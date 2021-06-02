@@ -124,7 +124,7 @@ public class User implements Serializable {
 
     @Getter
     public static class MyInfo{
-        private Response user = null;
+        private Response user;
         private List<Order.Response> orderList;
 
         public MyInfo(User user, List<Order> orderList){

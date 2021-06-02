@@ -95,7 +95,6 @@ public class ShopServiceImpl implements ShopService {
         }
         System.out.println("marked : " + marked);
         shop = isPresent(shopId);
-        //TODO 찜 등록 여부 response에 같이 담기.
 
         Shop.Response response = new Shop.Response(shop, marked);
 //        if(shop.getImgPath()!=null)response.setImg(storageService.loadImg(shop.getImgPath()));
@@ -230,7 +229,7 @@ public class ShopServiceImpl implements ShopService {
      * @param shopId  : 입력된 매장 아이디
      * @return 내 매장이면 true, 아니면 권한없음 에러가 던져진다.
      */
-    public boolean isOwnShop(String loginId, String shopId) {
+    public void isOwnShop(String loginId, String shopId) {
         System.out.println("보유매장 비교 유저아디 : " + loginId);
         System.out.println("보유매장 비교 매장번호 : " + shopId);
         User loginUser = userService.get(loginId);
@@ -238,7 +237,7 @@ public class ShopServiceImpl implements ShopService {
         for (Shop shop : shopRepository.findByOwnerId(loginId)) {
             if (shop.getId().equals(shopId)) {
                 System.out.println("보유매장 매칭된 매장번호 : " + shop.getId());
-                return true;
+                return ;
             }
         }
         throw new ForbiddenException();

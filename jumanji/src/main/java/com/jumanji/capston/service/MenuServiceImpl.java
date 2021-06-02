@@ -51,13 +51,9 @@ public class MenuServiceImpl implements BasicService<Menu, Menu.Request> {
     @Transactional(readOnly = true)
     public List<Menu> getList(@Nullable String authorization, String... str) {
         String shopId = str[0];
-        System.out.println("menuList >> shopId : " + shopId);
         shopService.isPresent(shopId);
         List<Menu> menuList;
         menuList = menuRepository.findByShopId(shopId);
-        System.out.println("menuList info");
-        System.out.println(menuList.size());
-
         return menuList;
     }
 
@@ -67,23 +63,13 @@ public class MenuServiceImpl implements BasicService<Menu, Menu.Request> {
         Menu menu;
         Shop shop;
         String menuId = request.getShopId().substring(0, 2) + 'm' + DateOperator.dateToYYYYMMDDHHMMSS(new Date());
-        System.out.println("menuId : " + menuId);
 
         isEmpty(menuId);
         shop = shopService.isPresent(request.getShopId());
-        System.out.println("메뉴 추가");
         String path = "shop/" + request.getShopId() + "/" + "menu";
         String imgPath = null;
-//        System.out.println("Img 기본값 : " + request.getImg()); // multipart 객체
-//        System.out.println("Img.getResource 기본값 : " + request.getImg().getResource()); // 출력 : MultipartFile resource [img]
-//        System.out.println("Img.size 기본값 : " + request.getImg().getSize()); size : 0
-
         if (request.getImg() != null && request.getImg().getSize() != 0)
             imgPath = storageService.store(request.getImg(), request.getName().replace(" ", "_"), path.split("/"));
-//        System.out.println("메뉴 이미지 path : " + imgPath);
-//        System.out.println("메뉴명 : " + request.getName());
-//        System.out.println("넣는 메뉴명 : " + request.getName().replace(" ", "_"));
-//        System.out.println("넣는 메뉴 id : " + menuId);
         menu = Menu.init()
                 .id(menuId)
                 .name(request.getName())
@@ -93,14 +79,12 @@ public class MenuServiceImpl implements BasicService<Menu, Menu.Request> {
                 .imgPath(imgPath)
                 .shop(shop)
                 .build();
-//        System.out.println("save 전 menu Id  : " + menu.getId());
         return menuRepository.saveAndFlush(menu);
     }
 
     public Menu patchStatus(String authorization,String shopId, String menuId, String target) {
         String loginId = userService.getMyId(authorization);
         shopService.isOwnShop(loginId, shopId);
-        // TODO 매장번호 확인해야하는데.. shops/{shopId} 를 추가해야 할까
         Menu menu = menuService.isPresent(menuId);
         menu.reverseStatus(target);
         return menuRepository.save(menu);
@@ -108,7 +92,18 @@ public class MenuServiceImpl implements BasicService<Menu, Menu.Request> {
 
     @Override
     public Menu patch(String authorization, Menu.Request request) {
-        return null;
+        // 변수
+        String loginId = userService.getMyId(authorization);
+        Menu menu;
+        // 유효성 체크
+        shopService.isOwnShop(loginId,request.getShopId());
+        menu = isPresent(request.getMenuId());
+
+        // 서비스
+        menu.patch(request);
+        menuRepository.saveAndFlush(menu);
+
+        return menu;
     }
 
     @Override

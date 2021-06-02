@@ -53,36 +53,29 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public List<User> getList(String authorization) {
-        String loginId = getMyId(authorization);
-        isPresent(loginId);
-        User user = userRepository.findById(loginId).get();
-        System.out.println("로그인 아이디의 권한 : " + user.getRole());
-        isAuth(user.getRole(), "ADMIN");
-
-
         return userRepository.findAll();
     }
 
     @Transactional
-    public User post(User.Request user) {
-        isEmpty(user.getId());
-        String rawPassword = user.getPassword();
+    public User post(User.Request request) {
+        isEmpty(request.getId());
+        String rawPassword = request.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         User userEntity = User.createUser()
-                .id(user.getId())
+                .id(request.getId())
                 .password(encPassword)
-                .name(user.getName())
-                .phone(user.getPhone())
-                .email(user.getEmail())
+                .name(request.getName())
+                .phone(request.getPhone())
+                .email(request.getEmail())
                 .sign_date(new Date())
-                .birthday(user.getBirthday())
-                .address(user.getAddress())
-                .addressDetail(user.getAddressDetail())
-                .role(user.getRole())
+                .birthday(request.getBirthday())
+                .address(request.getAddress())
+                .addressDetail(request.getAddressDetail())
+                .role(request.getRole())
                 .provider("jumin") /** 얘는 추후에 변경해야함. **/
                 .provider_id(null)
 //                .level(0)
-                .deviceToken(user.getDeviceToken())
+                .deviceToken(request.getDeviceToken())
                 .build();
         return userRepository.save(userEntity);
     }
@@ -165,7 +158,7 @@ public class UserServiceImpl implements UserService {
         if (userRole.equals("ROLE_ADMIN")) return true; // 어드민은 무조건 가능.
         if (userRole.equals("ROLE_OWNER")) return !role.equals("ADMIN"); // OWNER는 어드민 권한만 아니면 다 가능.
         if (userRole.equals("ROLE_USER")) return role.equals("USER"); // 유저는 유저만 가능.
-        return false;
+        throw new ForbiddenException();// ;
     }
 
     public User isLogin(String authorization){

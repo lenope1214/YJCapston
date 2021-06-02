@@ -21,9 +21,9 @@ public class OptionController {
     @GetMapping("menus/options/{optionGroupId}")
     public ResponseEntity<?> getOptionList(@PathVariable String optionGroupId){
         List<Option> optionList = optionService.getList(null, optionGroupId);
-        List<Option.Response> response = new ArrayList<>();
+        List<Option.Get> response = new ArrayList<>();
         for(Option option : optionList){
-            response.add(new Option.Response(option));
+            response.add(new Option.Get(option));
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
