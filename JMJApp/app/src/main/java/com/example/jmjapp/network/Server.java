@@ -11,8 +11,9 @@ public class Server {
     private final ServerApi api;
 
     private Server() {
-        String url = "http://3.34.55.186:8088/api/v1/"; // aws
-        //String url = "http://192.168.1.65:8088/api/v1/"; // 로컬
+//        String url = "http://3.34.55.186:8088/api/v1/"; // aws
+//        String url = "http://192.168.1.65:8088/api/v1/"; // 학교 와이파이 통할때
+        String url = "http://10.0.2.2:8088/api/v1/"; // 애뮬로 로컬에서 할때
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)

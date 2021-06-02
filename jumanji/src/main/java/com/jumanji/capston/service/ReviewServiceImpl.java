@@ -39,6 +39,12 @@ public class ReviewServiceImpl implements BasicService<Review, Review.Request> {
         return isPresent(reviewId[0]);
     }
 
+    public List<Review> getMyReviewList(String authorization){
+        String loginId = userService.getMyId(authorization);
+        List<Review> reviewList = reviewRepository.findAllByUser_IdOrderByIdDesc(loginId);
+        return reviewList;
+    }
+
     @Override
     public List<Review> getList(@Nullable String authorization,String... shopId) {
         return reviewRepository.findAllByShopIdOrderByRegTimeDesc(shopId[0]);

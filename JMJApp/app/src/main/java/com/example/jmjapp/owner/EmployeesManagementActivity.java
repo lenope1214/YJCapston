@@ -5,18 +5,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.jmjapp.Adapter.EmployeeAdapter;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Employee;
-import com.example.jmjapp.dto.Shop;
 import com.example.jmjapp.network.Server;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -34,6 +31,7 @@ public class EmployeesManagementActivity extends AppCompatActivity {
     ArrayList<Employee> mItems = new ArrayList<>();
 
     private String jwt;
+
 
     private Call<List<Employee>> listEmpCall;
 
@@ -57,7 +55,7 @@ public class EmployeesManagementActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        rv_employees = findViewById(R.id.rv_employees);
+        rv_employees = findViewById(R.id.rv_chatbots);
 
         showEmpList();
 

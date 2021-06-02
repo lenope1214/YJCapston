@@ -1,14 +1,11 @@
 package com.jumanji.capston.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Getter
+@Getter @NoArgsConstructor
 @Entity
 @Table(name = "chatbots")
 public class Chatbot {
@@ -24,6 +21,13 @@ public class Chatbot {
     @JsonIgnore
     private Shop shop;
 
+    @Builder
+    public Chatbot(String question, String answer, Shop shop){
+        this.question = question;
+        this.answer = answer;
+        this.shop = shop;
+    }
+
     @Data
     public static class Request {
         private String question;
@@ -33,10 +37,12 @@ public class Chatbot {
 
     @Data
     public static class Response {
+        private Long chatbotId;
         private String question;
         private String answer;
 
         public Response(Chatbot chatbot) {
+            this.chatbotId = chatbot.getId();
             this.question = chatbot.getQuestion();
             this.answer = chatbot.getAnswer();
         }

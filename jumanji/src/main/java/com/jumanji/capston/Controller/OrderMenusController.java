@@ -21,17 +21,12 @@ public class OrderMenusController{
 
 
     @Transactional(readOnly = true)
-    @GetMapping("order-menus/{orderMenuId}")
-    public ResponseEntity<?> selectOrderByOrderId(@PathVariable Timestamp orderMenuId) {
-        System.out.println("orderMenuId : " + orderMenuId);
+    @GetMapping("order-menus/{orderId}")
+
+    public ResponseEntity<?> selectOrderByOrderId(@PathVariable String orderId) {
         List<OrderMenu.Response> response = new ArrayList<>();
-        Set<OrderMenu> orderMenuSet = orderMenuService.getOrderMenuByOrderId(orderMenuId);
-        System.out.println("주문메뉴 개수 : " + orderMenuSet.size());
+        Set<OrderMenu> orderMenuSet = orderMenuService.getOrderMenuByOrderId(orderId);
         for(OrderMenu orderMenu : orderMenuSet){
-            System.out.println("orderList info \n" +
-                    "order.getId() : "+ orderMenu.getId() + "\n" +
-                    "order.getMenuId : " + orderMenu.getMenu().getId().substring(10) +"\n" +
-                    "order.get");
             response.add(new OrderMenu.Response(orderMenu));
         }
         return new ResponseEntity<>(response, HttpStatus.OK);

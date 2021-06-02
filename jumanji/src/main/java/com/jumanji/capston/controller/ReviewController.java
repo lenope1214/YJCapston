@@ -23,6 +23,17 @@ public class ReviewController  {
     ReviewServiceImpl reviewService;
 
     @Transactional
+    @GetMapping("/users/reviews")
+    public ResponseEntity<?> getMyReviews(@RequestHeader String authorization){
+        List<Review> reviewList = reviewService.getMyReviewList(authorization);
+        List<Object> response = new ArrayList<>();
+        for(Review review : reviewList){
+            response.add(new Review.Response(review));
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @Transactional
     @GetMapping("reviews/{shopId}")
     public ResponseEntity<?> getReviewList(@PathVariable String shopId){
         List<Review> reviewList = reviewService.getList(null, shopId);

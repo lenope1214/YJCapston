@@ -173,15 +173,7 @@
 
 package com.example.jmjapp.network;
 
-import com.example.jmjapp.dto.Employee;
-import com.example.jmjapp.dto.Mark;
-import com.example.jmjapp.dto.MemberDTO;
-import com.example.jmjapp.dto.Menu;
-import com.example.jmjapp.dto.OptionGroups;
-import com.example.jmjapp.dto.Options;
-import com.example.jmjapp.dto.Order;
-import com.example.jmjapp.dto.OrderMenu;
-import com.example.jmjapp.dto.Shop;
+import com.example.jmjapp.dto.*;
 import com.google.android.gms.internal.measurement.zzim;
 
 import java.util.ArrayList;
@@ -405,5 +397,19 @@ public interface ServerApi {
     @DELETE("menus/{menuId}") // 메뉴 삭제
     Call<ResponseBody> deleteMenu(@Header("Authorization") String jwt,
                                   @Path("menuId") String menuId);
+
+
+
+    // 이성복 추가 부분==========================================================
+    @GET("shops/{shopId}/chatbots") // 내 주문 메뉴리스트 확인
+    Call<List<Chatbot>> myShopsChatbots(@Header("Authorization") String jwt,
+                                        @Path("shopId")String shopId);
+
+    @POST("chatbots") // 챗봇 등록
+    Call<ResponseBody> insertChatbot(@Header("Authorization") String jwt,
+                                 @Body Map<String, Object> map);
+
+    // 이성복 추가 부분==========================================================
+
 
 }
