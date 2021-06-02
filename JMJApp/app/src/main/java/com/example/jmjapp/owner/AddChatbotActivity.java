@@ -37,8 +37,8 @@ public class AddChatbotActivity extends AppCompatActivity {
         binding = ActivityAddChatbotBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        answer = binding.answer;
-        question = binding.question;
+        answer = binding.chatbotAnswer;
+        question = binding.chatbotQuestion;
         submitBtn = binding.submitBtn;
         resetBtn = binding.resetBtn;
 

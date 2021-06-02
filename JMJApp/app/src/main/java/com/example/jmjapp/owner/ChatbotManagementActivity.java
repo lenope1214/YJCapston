@@ -107,11 +107,6 @@ public class ChatbotManagementActivity extends AppCompatActivity {
         Log.d("onResume", "onResume 실행");
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        Log.d("onDetach", "onDetach 실행");
-    }
 
     @Override
     public void onDestroy() {
