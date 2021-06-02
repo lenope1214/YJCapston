@@ -48,7 +48,7 @@ public class PaymentServiceImpl implements PaymentService {
         System.out.println("맞는지 검사 후");
         order.pay(request);
         System.out.println(order.toString());
-        if(remainPoint > 0)
+        if(request.getUsePoint() > 0 && remainPoint > 0)
             user.setPoint(remainPoint);
         else
             throw new PayPointOverException();
