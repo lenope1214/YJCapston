@@ -103,7 +103,7 @@ public class Shop {
             this.isRsPos = shop.getIsRsPos();
             this.imgPath = shop.getImgPath();
             this.phone = shop.getPhone();
-            this.ownerId = shop.getOwner().encodeId();
+            this.ownerId = shop.getOwner().getId();
         }
 
 

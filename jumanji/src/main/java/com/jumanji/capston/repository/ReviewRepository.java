@@ -24,4 +24,6 @@ public interface ReviewRepository extends JpaRepository<Review, String> {
             "left join REVIEWS R on o.ID = R.ORDER_ID\n" +
             "where r.USER_ID = :userId",nativeQuery = true)
     String myReviewList(String userId);
+
+    List<Review> findAllByUser_IdOrderByIdDesc(String userId);
 }
