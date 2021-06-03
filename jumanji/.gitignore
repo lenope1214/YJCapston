@@ -1,6 +1,5 @@
 HELP.md
 .gradle
-.DS_Store
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
@@ -13,7 +12,6 @@ build/
 .classpath
 .factorypath
 .project
-.DS_Store
 .settings
 .springBeans
 .sts4-cache
@@ -29,7 +27,6 @@ bin/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-.DS_Store
 #!**/uploads/
 
 ### NetBeans ###
@@ -38,7 +35,5 @@ out/
 /dist/
 /nbdist/
 /.nb-gradle/
-.DS_Store
 ### VS Code ###
 .vscode/
-.DS_Store
