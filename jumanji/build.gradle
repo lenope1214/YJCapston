@@ -100,8 +100,8 @@ dependencies {
 //    useJUnitPlatform()
 //}
 
-bootJar{
-    archiveBaseName = '-'
-    archiveFileName = 'capston-0.0.1-SNAPSHOT.jar'
-    archiveVersion ='0.0.0'
-}
+//bootJar{
+//    archiveBaseName = '-'
+//    archiveFileName = 'capston-0.0.1-SNAPSHOT.jar'
+//    archiveVersion ='0.0.0'
+//}
