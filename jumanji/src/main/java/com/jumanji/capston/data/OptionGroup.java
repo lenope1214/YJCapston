@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Builder @AllArgsConstructor
 @Entity(name = "option_groups") @NoArgsConstructor // entity has to no args constructor
 public class OptionGroup {
     @Id
@@ -27,15 +28,6 @@ public class OptionGroup {
     @ManyToOne
     @JsonIgnore
     private Menu menu;
-
-    @Builder
-    public OptionGroup(String id, String name, int min, int max, Menu menu){
-        this.id = id;
-        this.name = name;
-        this.min = min;
-        this.max = max;
-        this.menu = menu;
-    }
 
     @OneToMany(mappedBy = "optionGroup",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Option> optionList = new ArrayList<>();

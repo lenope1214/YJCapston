@@ -16,8 +16,6 @@ public interface OrderMenuRepository extends JpaRepository<OrderMenu, String> {
 
     Set<OrderMenu> findByTab_IdStartsWith(String tabId);
 
-    Set<OrderMenu> findByIdStartsWith(String orderId);
-
     @Query(value = "select om.*\n" +
             "from ORDER_MENUS om\n" +
             "where om.TAB_ID  like :shopId || '%' and\n" +

@@ -1,6 +1,9 @@
 package com.jumanji.capston.data;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 import retrofit2.http.Multipart;
 
@@ -33,7 +36,7 @@ public class Review {
     private User user;
     @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(nullable = false) @JsonIgnore
     private Shop shop;// 식당번호
-    @OneToOne(fetch = FetchType.LAZY) @JoinColumn(nullable = false) @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(nullable = false) @JsonIgnore
     private Order order;// 식당번호
 
     @Builder(builderMethodName = "init")
@@ -51,7 +54,7 @@ public class Review {
 
 
 
-    @Getter @AllArgsConstructor @ToString // 얘는 NoArgs대신 AllArgs.. 왜?
+    @Getter @AllArgsConstructor
     public class Request{
         private String reviewId;
         private String shopId;

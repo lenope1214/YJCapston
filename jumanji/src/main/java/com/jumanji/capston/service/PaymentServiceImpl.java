@@ -2,9 +2,7 @@ package com.jumanji.capston.service;
 
 import com.jumanji.capston.data.Order;
 import com.jumanji.capston.data.Payment;
-import com.jumanji.capston.data.User;
 import com.jumanji.capston.repository.OrderRepository;
-import com.jumanji.capston.service.exception.orderException.PayPointOverException;
 import com.jumanji.capston.service.interfaces.BasicService;
 import com.jumanji.capston.service.interfaces.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +37,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Transactional
     public Payment post(String authorization, Payment.Request request) {
         String loginId = userService.getMyId(authorization);
-        User user = userService.isPresent(loginId); // 그 사용자가 맞는지 확인
-        int remainPoint = user.getPoint() - request.getUsePoint();
+        userService.isPresent(loginId); // 그 사용자가 맞는지 확인
 
         // order가 내거인지
         System.out.println("내 주문이 맞는지?");
@@ -48,10 +45,6 @@ public class PaymentServiceImpl implements PaymentService {
         System.out.println("맞는지 검사 후");
         order.pay(request);
         System.out.println(order.toString());
-        if(request.getUsePoint() > 0 && remainPoint > 0)
-            user.setPoint(remainPoint);
-        else
-            throw new PayPointOverException();
         Payment payment = new Payment(order);
         System.out.println("결제시간 : " + payment.getPayTime());
         System.out.println();

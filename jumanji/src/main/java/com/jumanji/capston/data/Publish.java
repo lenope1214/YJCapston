@@ -8,7 +8,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "publishs")
 @Getter @NoArgsConstructor
 public class Publish implements Serializable {
     @Id

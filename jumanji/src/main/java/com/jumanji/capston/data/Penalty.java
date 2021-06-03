@@ -8,11 +8,10 @@ import java.sql.Timestamp;
 
 @Getter
 @Entity
-@Table(name = "penalties")
 public class Penalty {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+//    @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -20,11 +20,11 @@ public class WebController {
     public String login(){
         return "loginForm";
     }
-//
-//    @GetMapping("/")
-//    public String index(){
-//        return "index";
-//    }
+
+    @GetMapping("/")
+    public String index(){
+        return "index";
+    }
 
     @GetMapping("/test/login")
     public @ResponseBody String testLogin(

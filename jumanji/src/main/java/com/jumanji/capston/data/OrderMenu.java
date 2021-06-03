@@ -78,7 +78,7 @@ public class OrderMenu implements Serializable {
             if(order.getId() != null)this.orderMenuId = order.getId();
             this.quantity = order.getQuantity();
             this.shopId = order.getMenu().getId().substring(0, 10);
-            this.menuName = order.getMenu().getName();
+            this.menuName = order.getMenu().getId().substring(10);
             if(order.getTab()!=null)this.tableNo = order.getTab().getId().substring(10);
             if(order.optionList == null)return;
             for(OrderMenuOption omo : order.optionList){

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout::layout(~{::title}, ~{}, ~{::#content})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Menus</title>
+</head>
+<body>
+<div id="content">
+    Menus
+    <table>
+        <thead>
+        <tr>
+            <th>Menu</th>
+            <th>Price</th>
+            <th>Crew</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="m: ${menus}">
+            <td th:text="${m.name}"></td>
+            <td th:text="${#numbers.formatInteger(m.price, 1, 'COMMA')}"></td>
+            <td th:text="${m.crew.nickname}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

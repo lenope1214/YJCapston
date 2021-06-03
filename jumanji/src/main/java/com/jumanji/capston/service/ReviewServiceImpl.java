@@ -39,12 +39,6 @@ public class ReviewServiceImpl implements BasicService<Review, Review.Request> {
         return isPresent(reviewId[0]);
     }
 
-    public List<Review> getMyReviewList(String authorization){
-        String loginId = userService.getMyId(authorization);
-        List<Review> reviewList = reviewRepository.findAllByUser_IdOrderByIdDesc(loginId);
-        return reviewList;
-    }
-
     @Override
     public List<Review> getList(@Nullable String authorization,String... shopId) {
         return reviewRepository.findAllByShopIdOrderByRegTimeDesc(shopId[0]);
@@ -53,7 +47,6 @@ public class ReviewServiceImpl implements BasicService<Review, Review.Request> {
     @Override
     public Review post(@Nullable String authorization, Review.Request request) {
         System.out.println("리뷰등록's shopId : " + request.getShopId());
-        System.out.println("리뷰등록's orderId : " + request.getOrderId());
 
         String loginId = userService.getMyId(authorization);
         String uri = "shop/" + request.getShopId() + "/review/"; // TODO 얘를 storage service에서 만들어 주는 메소드를 만들어야 할듯.
