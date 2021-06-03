@@ -38,7 +38,6 @@ public class PaymentServiceImpl implements PaymentService {
     public Payment post(String authorization, Payment.Request request) {
         String loginId = userService.getMyId(authorization);
         userService.isPresent(loginId); // 그 사용자가 맞는지 확인
-        //
 
         // order가 내거인지
         System.out.println("내 주문이 맞는지?");
