@@ -55,7 +55,7 @@ public class EmployeesManagementActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        rv_employees = findViewById(R.id.rv_chatbots);
+        rv_employees = findViewById(R.id.rv_employees);
 
         showEmpList();
 

@@ -407,7 +407,11 @@ public interface ServerApi {
 
     @POST("chatbots") // 챗봇 등록
     Call<ResponseBody> insertChatbot(@Header("Authorization") String jwt,
-                                 @Body Map<String, Object> map);
+                                     @Body Map<String, Object> map);
+
+    @PATCH("chatbots") // 챗봇 등록
+    Call<ResponseBody> patchChatbot(@Header("Authorization") String jwt,
+                                     @Body Map<String, Object> map);
 
     // 이성복 추가 부분==========================================================
 

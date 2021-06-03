@@ -23,7 +23,7 @@ import java.util.Set;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class OrderMenuServiceImpl implements BasicService<OrderMenu, OrderMenu.Request> {
+public class OrderMenuServiceImpl implements BasicService<OrderMenu, OrderMenu.Request, String> {
     @Autowired
     OrderMenuRepository orderMenuRepository;
     private final OrderRepository orderRepository;

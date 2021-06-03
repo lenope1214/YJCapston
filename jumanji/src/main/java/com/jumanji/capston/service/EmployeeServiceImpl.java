@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmployeeServiceImpl implements BasicService<Employee, Employee.Request> {
+public class EmployeeServiceImpl implements BasicService<Employee, Employee.Request, String> {
     @Autowired
     EmployeeRepository employeeRepository;
     @Autowired

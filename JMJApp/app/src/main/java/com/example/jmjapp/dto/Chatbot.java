@@ -3,13 +3,13 @@ package com.example.jmjapp.dto;
 import lombok.*;
 
 @Data
-@AllArgsConstructor
+@AllArgsConstructor @Builder
 @NoArgsConstructor
 public class Chatbot {
-    private Long id;
+    private Long chatbotId;
     private String question;
     private String answer;
-    private String shopId;
+//    private String shopId;
 
 //    @Builder
 //    public Chatbot(String question, String answer, Shop shop){

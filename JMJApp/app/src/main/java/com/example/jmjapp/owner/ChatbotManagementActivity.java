@@ -1,6 +1,5 @@
 package com.example.jmjapp.owner;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -9,12 +8,10 @@ import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.jmjapp.Adapter.MyOrderListAdapter;
+import com.example.jmjapp.Adapter.ChatbotListAdapter;
 import com.example.jmjapp.R;
 import com.example.jmjapp.databinding.ActivityChatbotManagementBinding;
 import com.example.jmjapp.dto.Chatbot;
-import com.example.jmjapp.dto.Employee;
-import com.example.jmjapp.dto.Order;
 import com.example.jmjapp.network.Server;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import lombok.SneakyThrows;
@@ -28,6 +25,7 @@ import java.util.List;
 public class ChatbotManagementActivity extends AppCompatActivity {
     ActivityChatbotManagementBinding binding;
     FloatingActionButton fab_addchatbots;
+    ChatbotListAdapter adapter;
     RecyclerView rv_chatbots;
     ArrayList<Chatbot> mItems = new ArrayList<>();
     private Call<List<Chatbot>> listChatbotCall;
@@ -43,7 +41,7 @@ public class ChatbotManagementActivity extends AppCompatActivity {
         fab_addchatbots = binding.fabAddchatbots;
 
         fab_addchatbots.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AddChatbotActivity.class);
+            Intent intent = new Intent(this, ChatbotSettingActivity.class);
             startActivity(intent);
         });
 
@@ -53,7 +51,7 @@ public class ChatbotManagementActivity extends AppCompatActivity {
 
         shopId = MainActivity_O.shopNumber;
         Toolbar toolbar = (Toolbar) findViewById(R.id.chatbot_toolbar);
-        toolbar.setTitle("툴바셋타이틀");
+        toolbar.setTitle(""); // 이거 없으면 JMJApplication 뜸.
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.arrowback);
@@ -68,20 +66,23 @@ public class ChatbotManagementActivity extends AppCompatActivity {
             public void onResponse(Call<List<Chatbot>> call, Response<List<Chatbot>> response) {
                 if (response.isSuccessful()) {
                     Log.d("mychatbots 성공", "mychatbots 성공");
-//                    List<Order> orderList = response.body();
-//                    Log.d("or", String.valueOf(orderList));
-//                    mItems.clear();
-//                    for (Order list : orderList) {
-//                        mItems.add(new Order(list.getOrderId(), list.getStatus(), list.getOrderRequest(),
-//                                list.getPeople(), list.getUsePoint(), list.getAmount(),
-//                                list.getArriveTime(), list.getPayTime(), list.getPg(),
-//                                list.getPayMethod(), list.getShopId(), list.getShopName(), list.getUserName(),
-//                                list.getReason(), list.getReviewed(), list.getUserId(), list.getAccept()));
-//                        Log.d("accept", String.valueOf(list.getAccept()));
-//                        rs_order_list.setHasFixedSize(true);
-//                        adapter = new MyOrderListAdapter(getActivity(), mItems);
-//                        rs_order_list.setLayoutManager(new LinearLayoutManager(getActivity()));
-//                        rs_order_list.setAdapter(adapter);
+                    Log.d("chatbot response : ", "onResponse: " + response.body());
+                    List<Chatbot> chatbotList = response.body();
+                    mItems.clear();
+                    for (Chatbot chatbot : chatbotList) {
+                        mItems.add(Chatbot.builder()
+                                .chatbotId(chatbot.getChatbotId())
+                                .question(chatbot.getQuestion())
+                                .answer(chatbot.getAnswer())
+                                .build());
+                        System.out.println("chatbotList is null ? " + chatbotList == null);
+
+                        rv_chatbots.setHasFixedSize(true);
+                        adapter = new ChatbotListAdapter(getApplicationContext(), mItems);
+                        rv_chatbots.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        rv_chatbots.setAdapter(adapter);
+
+                    }
                 } else {
                     Log.d("mychatbots 실패1", "mychatbots 실패1" + response.errorBody().string());
                 }
@@ -91,6 +92,8 @@ public class ChatbotManagementActivity extends AppCompatActivity {
             public void onFailure(Call<List<Chatbot>> call, Throwable t) {
                 Log.d("mychatbots 실패2", "mychatbots 실패2" + t.getCause());
             }
+
+
         });
 
     }

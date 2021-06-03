@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class OptionGroupServiceImpl implements BasicService<OptionGroup, OptionGroup.Request> {
+public class OptionGroupServiceImpl implements BasicService<OptionGroup, OptionGroup.Request, String> {
     @Autowired
     OptionGroupRepository optionGroupRepository;
     @Autowired

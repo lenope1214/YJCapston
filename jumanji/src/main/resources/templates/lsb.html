@@ -1,72 +1,72 @@
-<!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <title>Title</title>
-</head>
-<body>
-    <span>아이디</span>
-    <span>제목</span>
-    <span>내용</span>
-    <div th:each="board:${boardList}"> <!-- for <each> 리스트를 가져와서 하나씩 반복문 돌림 -->
-        <span th:text="${board.getId()}"></span>
-        <span th:text="${board.getTitle()}"></span>
-        <span th:text="${board.getContents()}"></span>
-    </div>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en"-->
+<!--      xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <span>아이디</span>-->
+<!--    <span>제목</span>-->
+<!--    <span>내용</span>-->
+<!--    <div th:each="board:${boardList}"> &lt;!&ndash; for <each> 리스트를 가져와서 하나씩 반복문 돌림 &ndash;&gt;-->
+<!--        <span th:text="${board.getId()}"></span>-->
+<!--        <span th:text="${board.getTitle()}"></span>-->
+<!--        <span th:text="${board.getContents()}"></span>-->
+<!--    </div>-->
 
-    <form action="/board" method="post">
-        글번호<input id="id">
-        제목<input id="title" name="title">
-        내용<input id="contents" name="contents">
-        <input type="submit" value="등록">
-        <input id="updateBtn" type="button" value="수정"> <!-- 등록은 form으로 하면 됨. 수정, 삭제 -> ajax를 쓰는게 좋다. -->
-        <input id="deleteBtn" type="button" value="삭제"> <!-- 등록은 form으로 하면 됨. 수정, 삭제 -> ajax를 쓰는게 좋다. -->
-        <input type="reset">
-    </form>
-</body>
-<script>
-    $(function(){
+<!--    <form action="/board" method="post">-->
+<!--        글번호<input id="id">-->
+<!--        제목<input id="title" name="title">-->
+<!--        내용<input id="contents" name="contents">-->
+<!--        <input type="submit" value="등록">-->
+<!--        <input id="updateBtn" type="button" value="수정"> &lt;!&ndash; 등록은 form으로 하면 됨. 수정, 삭제 -> ajax를 쓰는게 좋다. &ndash;&gt;-->
+<!--        <input id="deleteBtn" type="button" value="삭제"> &lt;!&ndash; 등록은 form으로 하면 됨. 수정, 삭제 -> ajax를 쓰는게 좋다. &ndash;&gt;-->
+<!--        <input type="reset">-->
+<!--    </form>-->
+<!--</body>-->
+<!--<script>-->
+<!--    $(function(){-->
 
-        $('#updateBtn').click((event)=>{ // 수정
-            const title=$('#title').val();
-            const id = $('#id').val();
-            const contents = $('#contents').val();
-            const path='/updateBoard';
-            const data = JSON.stringify({
-                'id' : id,
-                'title':title,
-                'contents' : contents,
-            });
+<!--        $('#updateBtn').click((event)=>{ // 수정-->
+<!--            const title=$('#title').val();-->
+<!--            const id = $('#id').val();-->
+<!--            const contents = $('#contents').val();-->
+<!--            const path='/updateBoard';-->
+<!--            const data = JSON.stringify({-->
+<!--                'id' : id,-->
+<!--                'title':title,-->
+<!--                'contents' : contents,-->
+<!--            });-->
 
-            $.ajax({
-                url:path,
-                type:'post',
-                data:data,
-                contentType: 'application/json',
-            }).done((result)=>{
-                location.href="/lsb";
-            });
-        });
+<!--            $.ajax({-->
+<!--                url:path,-->
+<!--                type:'post',-->
+<!--                data:data,-->
+<!--                contentType: 'application/json',-->
+<!--            }).done((result)=>{-->
+<!--                location.href="/lsb";-->
+<!--            });-->
+<!--        });-->
 
-        $('#deleteBtn').click((event)=>{ // 삭제
-            const id = $('#id').val();
-            const path='/deleteBoard';
-            const data = JSON.stringify({
-                'id' : id,
-            });
+<!--        $('#deleteBtn').click((event)=>{ // 삭제-->
+<!--            const id = $('#id').val();-->
+<!--            const path='/deleteBoard';-->
+<!--            const data = JSON.stringify({-->
+<!--                'id' : id,-->
+<!--            });-->
 
-            $.ajax({
-                url:path,
-                type:'post',
-                data:data,
-                contentType: 'application/json',
-            }).done((result)=>{
-                location.href="/lsb";
-            });
-        }); // 삭제버튼 끝
-        // 3시간만에
-    });
-</script>
-</html>
+<!--            $.ajax({-->
+<!--                url:path,-->
+<!--                type:'post',-->
+<!--                data:data,-->
+<!--                contentType: 'application/json',-->
+<!--            }).done((result)=>{-->
+<!--                location.href="/lsb";-->
+<!--            });-->
+<!--        }); // 삭제버튼 끝-->
+<!--        // 3시간만에-->
+<!--    });-->
+<!--</script>-->
+<!--</html>-->

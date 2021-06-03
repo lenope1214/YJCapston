@@ -48,7 +48,8 @@ public class PaymentServiceImpl implements PaymentService {
         System.out.println("맞는지 검사 후");
         order.pay(request);
         System.out.println(order.toString());
-        if(remainPoint < 0)
+        System.out.println("남은 포인트 : " + remainPoint);
+        if(remainPoint >= 0)
             user.setPoint(remainPoint);
         else
             throw new PayPointOverException();
@@ -56,6 +57,7 @@ public class PaymentServiceImpl implements PaymentService {
         System.out.println("결제시간 : " + payment.getPayTime());
         System.out.println();
         orderRepository.saveAndFlush(order);
+        userService.save(user);
         return payment;
     }
 

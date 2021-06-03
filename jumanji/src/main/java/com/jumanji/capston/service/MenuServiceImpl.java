@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MenuServiceImpl implements BasicService<Menu, Menu.Request> {
+public class MenuServiceImpl implements BasicService<Menu, Menu.Request, String> {
     @Autowired
     MenuRepository menuRepository;
     @Autowired

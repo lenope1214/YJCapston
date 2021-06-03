@@ -1,5 +1,7 @@
 package com.jumanji.capston.service;
 
+import com.jumanji.capston.data.UserCoupon;
+import com.jumanji.capston.data.UserCouponId;
 import com.jumanji.capston.repository.UserHasCouponRepository;
 import com.jumanji.capston.service.interfaces.BasicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,27 +11,27 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 @Service
-public class UserHasCouponServiceImpl implements BasicService {
+public class UserHasCouponServiceImpl implements BasicService<UserCoupon, UserCoupon.Request, UserCouponId> {
     @Autowired
     UserHasCouponRepository userHasCouponRepository;
 
     @Override
-    public Object get(@Nullable String authorization, String... str) {
+    public UserCoupon get(@Nullable String authorization, String... str) {
         return null;
     }
 
     @Override
-    public List getList(@Nullable String authorization, String... str) {
+    public List<UserCoupon> getList(@Nullable String authorization, String... str) {
         return null;
     }
 
     @Override
-    public Object post(@Nullable String authorization, Object request) {
+    public UserCoupon post(@Nullable String authorization, UserCoupon.Request request) {
         return null;
     }
 
     @Override
-    public Object patch(@Nullable String authorization, Object request) {
+    public UserCoupon patch(@Nullable String authorization, UserCoupon.Request request) {
         return null;
     }
 
@@ -39,12 +41,12 @@ public class UserHasCouponServiceImpl implements BasicService {
     }
 
     @Override
-    public Object isPresent(String id) {
+    public UserCoupon isPresent(UserCouponId id) {
         return null;
     }
 
     @Override
-    public boolean isEmpty(String id) {
+    public boolean isEmpty(UserCouponId id) {
         return false;
     }
 }

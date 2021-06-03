@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TableServiceImpl implements BasicService<Tab, Tab.Request> {
+public class TableServiceImpl implements BasicService<Tab, Tab.Request, String> {
     @Autowired
     TableRepository tableRepository;
     @Autowired

@@ -34,7 +34,9 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
-        <activity android:name=".owner.AddChatbotActivity">
+        <activity android:name=".user.ChatbotDetailActivity">
+        </activity>
+        <activity android:name=".owner.ChatbotSettingActivity">
         </activity>
         <activity android:name=".owner.ChatbotManagementActivity">
         </activity>
