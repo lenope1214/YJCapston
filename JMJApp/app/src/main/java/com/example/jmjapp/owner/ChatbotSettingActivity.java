@@ -59,17 +59,14 @@ public class ChatbotSettingActivity extends AppCompatActivity {
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.isSuccessful()) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-                        Dialog dialog = builder.setMessage("챗봇이 수정되었습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        builder.setMessage("챗봇이 수정되었습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(getApplicationContext(), ChatbotManagementActivity.class);
-                                startActivity(intent);
-                                finish();
                             }
-                        }).create();
+                        }).create().show();
                         builder.setCancelable(false);
-                        dialog.show();
                         Log.d("result : ", "챗봇 수정 성공");
+                        finish();
 
                     } else if (response.code() == 400) {
                         Log.d("result 400 : ", "챗봇등록 실패");

@@ -46,6 +46,14 @@ public class ChatbotManagementActivity extends AppCompatActivity {
         });
 
 
+
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d("onStart", "onStart 실행");
         SharedPreferences pref = getSharedPreferences("auth_o", MODE_PRIVATE);
         jwt = pref.getString("token", null);
 
@@ -95,19 +103,13 @@ public class ChatbotManagementActivity extends AppCompatActivity {
 
 
         });
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d("onStart", "onStart 실행");
     }
 
     @Override
     public void onResume() {
         super.onResume();
         Log.d("onResume", "onResume 실행");
+
     }
 
 
