@@ -23,6 +23,17 @@ public class ReviewController  {
     ReviewServiceImpl reviewService;
 
     @Transactional
+    @GetMapping("/users/reviews")
+    public ResponseEntity<?> getMyReviews(@RequestHeader String authorization){
+        List<Review> reviewList = reviewService.getMyReviewList(authorization);
+        List<Object> response = new ArrayList<>();
+        for(Review review : reviewList){
+            response.add(new Review.Response(review));
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @Transactional
     @GetMapping("reviews/{shopId}")
     public ResponseEntity<?> getReviewList(@PathVariable String shopId){
         List<Review> reviewList = reviewService.getList(null, shopId);
@@ -36,6 +47,7 @@ public class ReviewController  {
     @Transactional
     @PostMapping("reviews") // Multipart-form 는 json이 아니기 때문에 바디 뺌.
     public ResponseEntity<?> postReview(@RequestHeader String authorization, Review.Request request){
+        System.out.println(request.toString());
         Review review = reviewService.post(authorization, request);
         Review.Response response = new Review.Response(review);
         return new ResponseEntity<>(response, HttpStatus.CREATED);

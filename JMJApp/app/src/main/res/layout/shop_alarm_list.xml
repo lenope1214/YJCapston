@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_menu2"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="@drawable/edge8"
+    android:orientation="vertical"
+    android:paddingBottom="5dp">
+
+    <TextView
+        android:id="@+id/alarm_resDate_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="예약날짜"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/alarm_resTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:text="예약날짜"
+        app:layout_constraintBottom_toBottomOf="@+id/alarm_resDate_tv"
+        app:layout_constraintStart_toEndOf="@+id/alarm_resDate_tv"
+        app:layout_constraintTop_toTopOf="@+id/alarm_resDate_tv"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/alarm_request_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="15dp"
+        android:text="요청사항"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alarm_userId"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/alarm_request"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="15dp"
+        android:text="요청사항"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alarm_request_tv"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/alarm_userId_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="15dp"
+        android:text="손님"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alarm_resDate_tv"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/alarm_userId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:text="손님"
+        app:layout_constraintBottom_toBottomOf="@+id/alarm_userId_tv"
+        app:layout_constraintStart_toEndOf="@+id/alarm_userId_tv"
+        app:layout_constraintTop_toTopOf="@+id/alarm_userId_tv"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/alarm_orderMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="주문메뉴 보기 >>"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/alarm_accept"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:text="수락"
+        app:layout_constraintBottom_toBottomOf="@+id/alarm_reject"
+        app:layout_constraintEnd_toStartOf="@+id/alarm_reject"
+        app:layout_constraintTop_toTopOf="@+id/alarm_reject"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/alarm_reject"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="4dp"
+        android:text="거절"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

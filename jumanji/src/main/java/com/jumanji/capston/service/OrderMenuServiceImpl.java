@@ -45,9 +45,8 @@ public class OrderMenuServiceImpl implements BasicService<OrderMenu, OrderMenu.R
     OptionServiceImpl optionService;
 
 
-    public Set<OrderMenu> getOrderMenuByOrderId(Timestamp orderMenuId) {
-        System.out.println("orderMenuId : " +orderMenuId.toString());
-        Set<OrderMenu> orderList = orderMenuRepository.findByTab_IdStartsWith(orderMenuId.toString());
+    public Set<OrderMenu> getOrderMenuByOrderId(String orderId) {
+        Set<OrderMenu> orderList = orderMenuRepository.findByIdStartsWith(orderId);
         return orderList;
     }
 
