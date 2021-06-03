@@ -91,6 +91,7 @@ public class Order implements Serializable {
         private String payMethod; // 결제방식
         private String shopId;
         private String userId;
+        private List<OrderMenu> orderMenuList;
     }
 
     @Getter
@@ -111,9 +112,9 @@ public class Order implements Serializable {
         private String pg;
         private String payMethod; // 결제방식
         private char accept;
-        @Setter
-        private List<OrderMenu> orderMenuList;
         private char reviewed;
+        @Setter
+        private List<OrderMenu.Response> orderMenuList;
 
 
         public Response(Order order) {
