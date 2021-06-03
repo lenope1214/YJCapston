@@ -71,9 +71,6 @@ public class OrderController {
             omResponseList.add(new OrderMenu.Response(om));
         }
         response.setOrderMenuList(omResponseList);
-//        for(OrderMenu orderMenu : orderMenuList){
-//            response.add(new OrderMenu.Response(orderMenu));
-//        }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
