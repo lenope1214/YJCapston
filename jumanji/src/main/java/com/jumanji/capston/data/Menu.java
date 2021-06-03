@@ -95,7 +95,7 @@ public class Menu {
     }
 
 
-    @Getter @Setter
+    @Getter @Setter @Data
     public static class Request{
         private String shopId;
         private String menuId;
