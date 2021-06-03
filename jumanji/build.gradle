@@ -48,8 +48,8 @@ dependencies {
 
     implementation 'org.projectlombok:lombok:1.18.16'
     annotationProcessor "org.projectlombok:lombok:1.18.16"
-    annotationProcessor('org.projectlombok:lombok')
-    testAnnotationProcessor('org.projectlombok:lombok')
+//    annotationProcessor('org.projectlombok:lombok')
+//    testAnnotationProcessor('org.projectlombok:lombok')
 
 //    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
@@ -100,8 +100,8 @@ dependencies {
 //    useJUnitPlatform()
 //}
 
-bootJar{
-    archiveBaseName = '-'
-    archiveFileName = 'capston-0.0.1-SNAPSHOT.jar'
-    archiveVersion ='0.0.0'
-}
+//bootJar{
+//    archiveBaseName = '-'
+//    archiveFileName = 'capston-0.0.1-SNAPSHOT.jar'
+//    archiveVersion ='0.0.0'
+//}
