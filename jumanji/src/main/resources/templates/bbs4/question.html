@@ -1,0 +1,62 @@
+<!--<!DOCTYPE HTML>-->
+<!--<html lang="ko" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head th:replace="layout/layout :: head"> &lt;!&ndash; 레이아-->
+<!--	웃 폴더의 레이아웃의 header를 들고옴&ndash;&gt;-->
+<!--</head>-->
+<!--<body class="is-preload">-->
+<!--<div th:replace="layout/layout :: topbar"></div>-->
+<!--<div th:replace="layout/layout :: loginCheck"></div>-->
+
+<!--&lt;!&ndash;<div th:replace="layout/layout :: header"></div>&ndash;&gt;-->
+<!--<div id="main">-->
+<!--    <section class="two">-->
+<!--        <h1>문의작성</h1>-->
+<!--        <br>-->
+<!--        <div class="container">-->
+<!--            <div class="input-group input-group-lg">-->
+<!--                <div class="input-group-prepend">-->
+<!--                    <span class="input-group-text">제목</span>-->
+<!--                </div>-->
+<!--                <input type="text" class="form-control" aria-label="Sizing example input"-->
+<!--                       aria-describedby="inputGroup-sizing-lg" id="title">-->
+<!--            </div>-->
+<!--            <br><br>-->
+
+<!--            <div class="input-group input-group-lg">-->
+<!--                <div class="input-group-prepend">-->
+<!--                    <span class="input-group-text">내용</span>-->
+<!--                </div>-->
+<!--                <textarea class="form-control" aria-label="Sizing example input"-->
+<!--                          aria-describedby="inputGroup-sizing-lg"  id="content"></textarea>-->
+<!--            </div>-->
+<!--            <br><br>-->
+
+<!--            <div class="input-group input-group-lg">-->
+<!--                <div class="input-group-prepend">-->
+<!--                    <span class="input-group-text">작성자</span>-->
+<!--                </div>-->
+<!--                <input type="text" class="form-control" aria-label="Sizing example input"-->
+<!--                       aria-describedby="inputGroup-sizing-lg" th:value="${session.user.name}" id="writer">-->
+<!--            </div>-->
+<!--            <br><br>-->
+
+<!--            <div class="input-group input-group-lg">-->
+<!--                <div class="input-group-prepend">-->
+<!--                    <span class="input-group-text">이메일</span>-->
+<!--                </div>-->
+<!--                <input type="text" class="form-control" aria-label="Sizing example input"-->
+<!--                       aria-describedby="inputGroup-sizing-lg"  id="email">-->
+<!--            </div>-->
+<!--            <br>-->
+
+<!--            <div style="float:right">-->
+<!--                <button id="questionWrite" class="btn btn-success">완료</button>-->
+<!--                <button id="back" class="btn btn-info">뒤로</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+<!--</div>-->
+<!--<input type="hidden" th:value="${session.user.mno}" id="mno">-->
+<!--<div th:replace="layout/layout :: footer"></div>-->
+<!--</body>-->
+<!--</html>-->

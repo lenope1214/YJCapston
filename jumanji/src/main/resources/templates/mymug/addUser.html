@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout::layout(~{::title}, ~{}, ~{::#content})}" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <title th:text="|사용자 추가|"></title>
+</head>
+<body>
+<script th:inline="javascript">
+    $(function(){
+        $('#send').click((event)=>{
+            const userid=$('#userid').val();
+            const name=$('#username').val();
+            const path='/api/adduser';
+            const json = JSON.stringify({
+                'userid':userid,
+                'name':name
+            });
+            const csrfToken=/*[[${_csrf.token}]]*/ null;
+            const csrfHeader=/*[[${_csrf.headerName}]]*/ null;
+            $.ajax({
+                url:path,
+                type:'POST',
+                contentType: 'application/json',
+                data:json,
+                beforeSend:function(xhr){ xhr.setRequestHeader(csrfHeader, csrfToken);}
+            }).done((result)=>{
+                console.log(result.userid);
+                $('#result').text(result.userid);
+            });
+        });
+    });
+</script>
+<input id="userid" type="text" placeholder="userid">
+<input id="username" type="text" placeholder="name">
+<button id="send">저장</button>
+<p id="result"></p>
+</body>
+</html>

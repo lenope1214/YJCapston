@@ -37,6 +37,17 @@ public class Order implements Serializable {
 
     private char accept = 'N';
 
+    @Transient // 영속성 등록 제외?   제외하면 결과 제대로 안나옴ㅋㅋㅋ 왜???????????
+    @Setter
+    private char reviewed;
+//    public void setReviewedY(){
+//        reviewed = 'Y';
+//    }
+
+
+//    @Column
+//    private char delay; // 딜레이 얘는 뭔지 모르겠다. 나중에 다시 생각
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shop_id", updatable = false)
@@ -46,9 +57,6 @@ public class Order implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore // 이거 없으면 fetchType lazy라서 json 변환중에 오류남.
     private User user;
-    @JoinColumn
-    @OneToOne(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Review review;
 
     @Builder
     public Order(Timestamp id, Shop shop, User user) {
@@ -62,6 +70,7 @@ public class Order implements Serializable {
         this.status = o.getStatus();
         this.orderRequest = o.getOrderRequest();
         this.usePoint = o.getUsePoint();
+        this.reviewed = o.getReviewed();
         this.arriveTime = o.getArriveTime();
         this.payTime = o.getPayTime();
         this.people = o.getPeople();
@@ -91,7 +100,6 @@ public class Order implements Serializable {
         private String payMethod; // 결제방식
         private String shopId;
         private String userId;
-        private List<OrderMenu> orderMenuList;
     }
 
     @Getter
@@ -112,9 +120,9 @@ public class Order implements Serializable {
         private String pg;
         private String payMethod; // 결제방식
         private char accept;
-        private char reviewed;
         @Setter
-        private List<OrderMenu.Response> orderMenuList;
+        private List<OrderMenu> orderMenuList;
+        private char reviewed;
 
 
         public Response(Order order) {
@@ -131,7 +139,7 @@ public class Order implements Serializable {
             this.orderRequest = order.getOrderRequest();
             this.usePoint = order.getUsePoint();
             this.status = order.getStatus();
-            this.reviewed = order.getReview() != null ? 'Y' : 'N';
+            this.reviewed = order.getReviewed() == ' ' ? 'N' : 'Y';
             this.amount = order.getAmount();
             this.arriveTime = order.getArriveTime();
             this.pg = order.getPg();
