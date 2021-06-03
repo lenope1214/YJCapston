@@ -19,6 +19,9 @@ const ShopInfoContainer = (props) => {
     const [shopId, setShopId] = useState("");
     const [shopName, setShopName] = useState(null);
     const [shopIntro, setShopIntro] = useState(null);
+    const [phone1, setPhone1] = useState("");
+    const [phone2, setPhone2] = useState("");
+    const [phone3, setPhone3] = useState("");
     const [shopOpenTime, setShopOpenTime] = useState(null);
     const [shopCloseTime, setShopCloseTime] = useState(null);
     const [shopAddress, setShopAddress] = useState(null);
@@ -33,6 +36,15 @@ const ShopInfoContainer = (props) => {
         },
     ]);
 
+        //-------선택한 아이디정보 가져오기
+        useEffect(() => {
+            ShowShopInfo(props.match.params.shopId);
+            setShopId(props.match.params.shopId);
+        }, []);
+    
+
+    const phone = phone1 + phone2 + phone3;
+
     const handleShopName = (e) => {
         const value = e.target.value;
         setShopName(value);
@@ -41,6 +53,21 @@ const ShopInfoContainer = (props) => {
         const value = e.target.value;
         setShopIntro(value);
     };
+    const handlePhone1 = (e) => {
+        const value = e.target.value;
+        setPhone1(value);
+    }
+
+    const handlePhone2 = (e) => {
+        const value = e.target.value;
+        setPhone2(value);
+    }
+
+    const handlePhone3 = (e) => {
+        const value = e.target.value;
+        setPhone3(value);
+    }
+    
     const handleShopOpenTime = (e) => {
         const value = e.target.value;
         setShopOpenTime(value);
@@ -111,6 +138,7 @@ const ShopInfoContainer = (props) => {
             shopOpenTime,
             shopCloseTime,
             // shopAddress,
+            phone,
             roadAddr,
             shopAddressDetail
             // shopCategory
@@ -124,11 +152,6 @@ const ShopInfoContainer = (props) => {
             });
     };
 
-    //-------선택한 아이디정보 가져오기
-    useEffect(() => {
-        ShowShopInfo(props.match.params.shopId);
-        setShopId(props.match.params.shopId);
-    }, []);
 
     const ShowShopInfo = () => {
         getShopInfo(props.match.params.shopId)
@@ -136,6 +159,7 @@ const ShopInfoContainer = (props) => {
                 setShopInfo(res.data);
                 setRoadAddr(res.data.address);
                 console.log(res.data);
+                
             })
             .catch((err) => {
                 alert("showshopInfo err");
@@ -235,6 +259,8 @@ const ShopInfoContainer = (props) => {
 
         setMessage("");
     };
+
+    
     return (
         <>
             <Header />
@@ -251,6 +277,7 @@ const ShopInfoContainer = (props) => {
                 isOpen={shopInfo.isOpen}
                 addressDetail={shopInfo.addressDetail}
                 isRsPos={shopInfo.isRsPos}
+                phone={shopInfo.phone}
                 shopId={shopId}
                 shopName={shopName}
                 handleShopName={handleShopName}
@@ -277,6 +304,9 @@ const ShopInfoContainer = (props) => {
                 modal={modal}
                 openModal={openmodal}
                 closeModal={closemodal}
+                handlePhone1={handlePhone1}
+                handlePhone2={handlePhone2}
+                handlePhone3={handlePhone3}
                 // handleShopreserve={handleShopreserve}
             />
         </>

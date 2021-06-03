@@ -9,27 +9,71 @@ export const EmptimelistWrap = styled.div`
     padding-bottom: 70px;
 }
 .emptime-table{
-    border:1px solid black;
+    // border:1px solid black;
     margin-left:18%;
     width:70%;
 }
 .emptime-list{
     // border:1px solid black;
     width: 100%; 
-    
+    padding-bottom:100px;
 }
 
 .item-1{
-    width:25%;
+    width:15%;
+    text-align:center;
+    padding-top:10px;
+    padding-bottom:10px;
 }
 .item-2{
-    width:25%;
+    width:20%;
+    text-align:center;
+    padding-top:10px;
+    padding-bottom:10px;
 }
 .item-3{
     width:25%;
+    text-align:center;
+    padding-top:10px;
+    padding-bottom:10px;
 }
 .item-4{
     width:25%;
+    text-align:center;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+.table-head{
+    background: #DDDDDD;
+    
+}
+.body-item-1{
+    width:10%;
+    text-align:center;
+    padding-top:10px;
+    padding-bottom:10px;
+    border-bottom:3px solid #F2F2F2;
+}
+.body-item-2{
+    width:25%;
+    text-align:center;
+    padding-top:10px;
+    padding-bottom:10px;
+    border-bottom:3px solid #F2F2F2;
+}
+.body-item-3{
+    width:25%;
+    text-align:center;
+    padding-top:10px;
+    padding-bottom:10px;
+    border-bottom:3px solid #F2F2F2;
+}
+.body-item-4{
+    width:25%;
+    text-align:center;
+    padding-top:10px;
+    padding-bottom:10px;
+    border-bottom:3px solid #F2F2F2;
 }
 .title{
     font-weight:bold;

@@ -40,25 +40,26 @@ const MenuListContainer = (props) => {
                     };
                 });
                 setMenues(menu);
+                
             })
             .catch((err) => {
                 alert("MenuListContainer Err");
             });
     };
 
-    const removeMenu = (id) => {
-        console.log("메뉴 아이디" + id);
-        removeMenues(id)
-            .then((res) => {
-                alert("삭제되었습니다.");
+    // const removeMenu = (id) => {
+    //     console.log("메뉴 아이디" + id);
+    //     removeMenues(id)
+    //         .then((res) => {
+    //             alert("삭제되었습니다.");
 
-                history.push(`/menulist/${shopId}`);
-                window.location.reload();
-            })
-            .catch((err) => {
-                alert("메뉴 삭제 에러");
-            });
-    };
+    //             history.push(`/menulist/${shopId}`);
+    //             window.location.reload();
+    //         })
+    //         .catch((err) => {
+    //             alert("메뉴 삭제 에러");
+    //         });
+    // };
 
     const client = useRef({});
     const [chatMessages, setChatMessages] = useState([]);
@@ -138,7 +139,12 @@ const MenuListContainer = (props) => {
             <Header />
             <OwnerNavbar shopId={shopId} />
 
-            <MenuList menues={menues} removeMenu={removeMenu} shopId={shopId} />
+            <MenuList 
+                menues={menues}
+                // removeMenu={removeMenu}
+                shopId={shopId} 
+                
+                />
         </>
     );
 };

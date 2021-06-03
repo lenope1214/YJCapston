@@ -7,6 +7,7 @@ import { getMenuRead, putMenuPopular, putMenuSale, putMenuRead } from '../../lib
 
 export const MenuReadContainer = (props) => {
     const history = useHistory();
+    const [shopId, setShopId] = useState("");
     const [menuRead, setMenuRead] = useState([]);
     const [menuPrice, setMenuPrice] = useState(null);
     const [menuImg, setMenuImg] = useState(null);
@@ -31,6 +32,7 @@ export const MenuReadContainer = (props) => {
         const value = e.target.value;
         setMenuDuration(value)
     }
+    
 
     const ReadMenu = () => {
         putMenuRead(
@@ -50,13 +52,14 @@ export const MenuReadContainer = (props) => {
 
     useEffect(() => {
         showMenuRead(props.match.params.menuId);
-        setMenuId(props.match.params.menuId);
+        setMenuId(props.match.params.id);
     }, []);
 
     const showMenuRead = () => {
         getMenuRead(props.match.params.menuId)
             .then((res) => {
                 setMenuRead(res.data);
+                console.log(menuRead.shopId);
             })
             .catch((err) => {
                 console.log(props.match.params.menuId)
@@ -64,10 +67,12 @@ export const MenuReadContainer = (props) => {
             });
     };
     const menu_v2 = () => {
-        putMenuPopular(menuId,)
+        putMenuPopular(props.match.params.menuId,menuRead.shopId)
         .then((res)=> {
-            history.push(`/menu/${menuId}`);
+            
             alert("인기 여부 변경");
+            // history.goBack();
+            // history.push(`/menu/${menuId}`);
             window.location.reload();
         })
         .catch((err)=> {
@@ -76,14 +81,15 @@ export const MenuReadContainer = (props) => {
 
     };
     const menu_v3 = () => {
-        putMenuSale(menuId,)
+        putMenuSale(props.match.params.menuId,menuRead.shopId)
         .then((res)=> {
-            history.push(`/menu/${menuId}`);
-            alert("인기 여부 변경");
+            // history.push(`/menu/${menuId}`);
+            alert("판매 여부 변경");
+            // history.goBack();
             window.location.reload();
         })
         .catch((err)=> {
-            alert("인기여부 변경 에러");
+            alert("판매 여부 변경 에러");
         });
 
     };
@@ -96,8 +102,10 @@ export const MenuReadContainer = (props) => {
         <div>
             <Header />
             <hr />
-            {/* <OwnerNavbar /> */}
+            <OwnerNavbar 
+            shopId={shopId}/>
             <MenuRead
+                shopId={menuRead.shopId}
                 id={menuRead.id, console.log(menuId)}
                 name={menuRead.name}
                 price={menuRead.price}

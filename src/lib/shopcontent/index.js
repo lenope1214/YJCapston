@@ -24,7 +24,11 @@ export const getshopmenu = (shopId) => {
 };
 
 export const getshopinfo = (shopId) => {
-    return apiDefault().get(`/shops/${shopId}`, {});
+    return apiDefault().get(`/shops/${shopId}`, {
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        },
+    });
 };
 
 export const cartNumber = (shopId) => {
@@ -41,4 +45,25 @@ export const cartNumber = (shopId) => {
             },
         }
     );
+};
+
+export const postMark = (shopId) => {
+    return apiDefault().post(`/marks`,
+    {
+        shopId:shopId
+    },{
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        },
+    });
+};
+
+export const deleteMark = (shopId) => {
+    return apiDefault().delete(`/marks/${shopId}`,
+    {
+    
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        },
+    });
 };

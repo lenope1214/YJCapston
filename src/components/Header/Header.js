@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import moment from 'moment';
 import 'moment/locale/ko';
 import {useInterval} from 'react-use';
+//npm i react-use   설치하기
 
 const Header = () => {
     

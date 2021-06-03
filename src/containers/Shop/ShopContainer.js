@@ -245,6 +245,7 @@ const ShopContainer = () => {
                 handleshopId={handleshopId}
                 shopname={shopname}
                 handleShopname={handleShopname}
+                phone={phone}
                 handlePhone1={handlePhone1}
                 handlePhone2={handlePhone2}
                 handlePhone3={handlePhone3}

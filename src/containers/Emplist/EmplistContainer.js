@@ -64,7 +64,7 @@ const EmplistContainer = (props) => {
         removeemps()
             .then((res) => {
                 alert("직원삭제완료");
-                history.push(`/emplist/${shopId}`);
+                // history.push(`/emplist/${shopId}`);
                 window.location.reload();
             })
             .catch((err) => {

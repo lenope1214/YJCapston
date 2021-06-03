@@ -4,12 +4,14 @@ import Header from "../../components/Header/Header";
 import Empbar from "../../components/Empbar/Empbar";
 import Employee from "../../components/Employee/Employee";
 import { useHistory } from "react-router-dom";
-import { postEmp } from "../../lib/Employee";
+import { postEmp,getShopInfo, } from "../../lib/Employee";
 import PosNavbar from "../../components/PosNavbar/PosNavbar";
 
 const EmployeeContainer = (props) => {
     
     const history = useHistory();
+    const [shopInfo, setShopInfo] = useState({});
+    const [roadAddr, setRoadAddr] = useState("주소를 입력하세요.");
     const [shopId, setShopId] = useState("");
     const [empNo, setEmpNo] = useState("");
     const [empName, setEmpName] = useState("");
@@ -81,6 +83,23 @@ const EmployeeContainer = (props) => {
             });
     };
 
+    useEffect(() => {
+        ShowShopInfo(props.match.params.shopId);
+        setShopId(props.match.params.shopId);
+    }, []);
+
+    const ShowShopInfo = () => {
+        getShopInfo(props.match.params.shopId)
+            .then((res) => {
+                setShopInfo(res.data);
+                setRoadAddr(res.data.address);
+                console.log(res.data);
+                
+            })
+            .catch((err) => {
+                alert("showshopInfo err");
+            });
+    };
     return(
         <>
         <Header/>
@@ -110,6 +129,8 @@ const EmployeeContainer = (props) => {
         handlephone2={handlephone2}
         handlephone3={handlephone3}
         handlegender={handlegender}
+
+        name={shopInfo.name}
         />
         </>
     );

@@ -8,7 +8,7 @@ export const postReview = (
         formData,
         
     }, {
-        headers: {           
+        headers: {
             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
             "content-type": "multipart/form-data",
         },

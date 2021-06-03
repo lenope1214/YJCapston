@@ -2,6 +2,7 @@ import React from "react"
 import * as S from "./style";
 
 const MenuRead = ({
+    shopId,
     name,
     intro,
     price,
@@ -44,7 +45,8 @@ const MenuRead = ({
                                 <td>
                                     <input
                                         type="text"
-                                        value={name}
+                                        // value={name}
+                                        value={shopId}
                                         className="input-box"
                                         readOnly
                                     />

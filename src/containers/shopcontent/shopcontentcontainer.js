@@ -9,6 +9,8 @@ import {
     cartNumber,
     jmthing,
     getReviewlist,
+    postMark,
+    deleteMark,
 } from "../../lib/shopcontent/index";
 import Geocode from "react-geocode";
 import { getMenuList } from "../../lib/MenuList";
@@ -98,6 +100,7 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
         getshopinfo(param.shopId)
             .then((res) => {
                 setShopIntro(res.data);
+                
             })
 
             .catch((err) => {
@@ -279,6 +282,31 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
     //     }
     // };
 
+    const Mark = () => {
+        if (shopIntro.marked == "N"){
+            postMark(shopId)
+       
+            .then((res) => {
+                window.location.reload();
+                alert("찜등록 완료");
+            })
+            .catch((err) => {
+                alert("찜 등록 에러")
+            });
+        }
+        else if (shopIntro.marked == "Y"){
+            deleteMark(shopId)
+                .then((res) => {
+                    window.location.reload();
+                    alert("찜해제 완료");
+                })
+                .catch((err) => {
+                    alert("찜 해제 에러");
+                });
+        }
+    };
+    
+
     return (
         <Shopcontent
             id={id}
@@ -304,6 +332,8 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
             order={order}
             shopId={shopId}
             reviewList={reviewList}
+            Mark={Mark}
+            // MarkDelete={MarkDelete}
             // jmmenuReducer={jmmenuReducer}
         />
     );

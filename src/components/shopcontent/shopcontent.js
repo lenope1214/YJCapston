@@ -29,6 +29,8 @@ const Shopcontent = ({
     closehandleModal,
     order,
     reviewList,
+    Mark,
+    MarkDelete,
 }) => {
     var x = (lat *= 1);
     var y = (lag *= 1);
@@ -52,6 +54,13 @@ const Shopcontent = ({
 
     let a = null;
     let imgbox="";
+    let b = null;
+
+    if (shopIntro.marked =="N"){
+        b = "🖤"
+    }else{
+        b = "💗"
+    };
 
     return (
         <>
@@ -112,7 +121,11 @@ const Shopcontent = ({
                                                 AWS_BASE_URL + shopIntro.imgPath
                                             }
                                         />
+                                        
+                                            
+
                                     </div>
+                                    {/* ☝ */}
                                     <div class="shopcon_1">
                                         <span>
                                             <span class="shopother1">
@@ -124,8 +137,12 @@ const Shopcontent = ({
                                         <div>
                                             <div class="shopother2">
                                                 {shopIntro.category}
+                                                
                                             </div>
+                                            <button className="mark" onClick={Mark}>{b}</button>
+                                            
                                         </div>
+                                        
                                         <br />
                                         <div>
                                             <div class="shopother3">

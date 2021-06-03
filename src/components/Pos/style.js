@@ -133,6 +133,15 @@ export const PosWrap = styled.div`
 // }
 
 
+.table{
+    width:100px;
+    height:100px;
+    border:1px solid black;
+    display: inline-block;
+    margin-left:40px;
+}
+
+
 .left-container{
     border-right:1px solid black;
    margin-top:53px;
@@ -199,4 +208,14 @@ export const PosWrap = styled.div`
 .input-box{
     width:30px;
 }
+
+.box {
+
+    margin: 5%;
+    width:36px;
+    height: 36px;
+    background: #000;
+    display: inline-block;
+  }
+
 `

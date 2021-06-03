@@ -14,6 +14,7 @@ import {
     getShoplistjjimtang,
     getShoplistcafe,
     getShoplistfastfood,
+    getShoplistMarks,
 } from "../../lib/Shoplist/index";
 import Shopcontent from "../../components/shopcontent/shopcontent";
 
@@ -31,7 +32,17 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
             addressDetail: "",
             img: "",
         },
-    ]);
+    ]); 
+    // const [marklist, setmarklist] = useState(
+    //     {
+    //         name: "",
+    //         category: "",
+    //         address: "",
+    //         intro: "",
+    //         addressDetail: "",
+    //         img: "",
+    //     }
+    // );
 
     const openmodal = () => {
         setModal(true);
@@ -66,12 +77,13 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         name: rstrt.name,
                         intro: rstrt.intro,
                         category: rstrt.category,
-                        id: rstrt.id,
+                        id: rstrt.shopId,
                         addressDetail: rstrt.addressDetail,
                         img: rstrt.imgPath,
                     };
                 });
                 setRestaurant(rstrt);
+                console.log(rstrt);
             })
             .catch((err) => {
                 alert("매장이없습니다.");
@@ -87,7 +99,7 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         name: rstrt.name,
                         intro: rstrt.intro,
                         category: rstrt.category,
-                        id: rstrt.id,
+                        id: rstrt.shopId,
                         addressDetail: rstrt.addressDetail,
                         img: rstrt.imgPath,
                     };
@@ -108,7 +120,7 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         name: rstrt.name,
                         intro: rstrt.intro,
                         category: rstrt.category,
-                        id: rstrt.id,
+                        id: rstrt.shopId,
                         addressDetail: rstrt.addressDetail,
                         img: rstrt.imgPath,
                     };
@@ -129,7 +141,7 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         name: rstrt.name,
                         intro: rstrt.intro,
                         category: rstrt.category,
-                        id: rstrt.id,
+                        id: rstrt.shopId,
                         addressDetail: rstrt.addressDetail,
                         img: rstrt.imgPath,
                     };
@@ -150,7 +162,7 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         name: rstrt.name,
                         intro: rstrt.intro,
                         category: rstrt.category,
-                        id: rstrt.id,
+                        id: rstrt.shopId,
                         addressDetail: rstrt.addressDetail,
                         img: rstrt.imgPath,
                     };
@@ -171,7 +183,7 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         name: rstrt.name,
                         intro: rstrt.intro,
                         category: rstrt.category,
-                        id: rstrt.id,
+                        id: rstrt.shopId,
                         addressDetail: rstrt.addressDetail,
                         img: rstrt.imgPath,
                     };
@@ -192,7 +204,7 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         name: rstrt.name,
                         intro: rstrt.intro,
                         category: rstrt.category,
-                        id: rstrt.id,
+                        id: rstrt.shopId,
                         addressDetail: rstrt.addressDetail,
                         img: rstrt.imgPath,
                     };
@@ -213,7 +225,7 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         name: rstrt.name,
                         intro: rstrt.intro,
                         category: rstrt.category,
-                        id: rstrt.id,
+                        id: rstrt.shopId,
                         addressDetail: rstrt.addressDetail,
                         img: rstrt.imgPath,
                     };
@@ -234,7 +246,7 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         name: rstrt.name,
                         intro: rstrt.intro,
                         category: rstrt.category,
-                        id: rstrt.id,
+                        id: rstrt.shopId,
                         addressDetail: rstrt.addressDetail,
                         img: rstrt.imgPath,
                     };
@@ -255,12 +267,11 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         name: rstrt.name,
                         intro: rstrt.intro,
                         category: rstrt.category,
-                        id: rstrt.id,
+                        id: rstrt.shopId,
                         addressDetail: rstrt.addressDetail,
                         img: rstrt.imgPath,
                     };
                 });
-                console.log(rstrt);
                 setRestaurant(rstrt);
             })
             .catch((err) => {
@@ -294,6 +305,7 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
             .then((res) => {
                 console.log(res.data);
                 const rstrt = res.data.map((rstrt) => {
+                    console.log(res.data);
                     return {
                         address: rstrt.address,
                         name: rstrt.name,
@@ -304,7 +316,7 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         img: rstrt.imgPath,
                     };
                 });
-                console.log(rstrt);
+                
                 setRestaurant(rstrt);
             })
             .catch((err) => {
@@ -338,6 +350,59 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
             });
     };
 
+    const showMarks = () => {
+        getShoplistMarks()
+            .then((res) => {
+                console.log("asdf"+res.data)
+                const rstrt = res.data.shopList.map((rstrt) => {
+                    return {
+                        address: rstrt.address,
+                        name: rstrt.name,
+                        intro: rstrt.intro,
+                        category: rstrt.category,
+                        id: rstrt.shopId,
+                        addressDetail: rstrt.addressDetail,
+                        img: rstrt.imgPath,
+                    };
+                });
+                setRestaurant(rstrt);
+            })
+            .catch((err) => {
+                const status = err?.response?.status;
+                if(status==400) {
+                    alert("로그인을 해주세요");
+                }else {
+                    alert("err");
+                }
+            });
+    };
+
+
+    // const showMarks = () => {
+    //     getMark()
+    //     .then((res) => {
+    //         setmarklist(res.data);
+            
+    //         const marks = res.data.map((marks) => {
+    //             return {
+    //                 //여기에 get요청했을때 서버에서 어떤데이터를 주는가?
+    //                 address: marks.address,
+    //                     name: marks.name,
+    //                     intro: marks.intro,
+    //                     category: marks.category,
+    //                     id: marks.shopId,
+    //                     addressDetail: marks.addressDetail,
+    //                     img: marks.imgPath,
+    //                 };
+
+    //         });
+    //         setmarklist(marks);
+    //     })
+    //     .catch((err) => {
+    //         alert("err");
+    //     })
+    // }
+
     return (
         <>
             <Shoplist
@@ -363,6 +428,8 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 showcafe={showcafe}
                 showfastfood={showfastfood}
                 showShoplist={showShoplist}
+                showMarks={showMarks}
+                // marklist={marklist}
             />
         </>
     );

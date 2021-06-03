@@ -23,3 +23,11 @@ export const postEmp = (
         }, 
     });
 };
+
+export const getShopInfo = (shopId) => {
+    return apiDefault().get(`/shops/${shopId}`,{
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        }, 
+    });
+};

@@ -96,6 +96,7 @@ const Shop = ({
                                 <option value="051">051</option>
                                 <option value="053">053</option>
                                 <option value="031">031</option>
+                                <option value="050">050</option>
                             </select>
                             <span>-</span>
                             <input

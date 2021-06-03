@@ -33,6 +33,18 @@ const PosContainer = (props) => {
         setNum(value);
         }
 
+        // function add_div(){
+
+        //     var div = document.createElement('div');
+        
+        
+        
+        //     div.innerHTML = document.getElementById('room_type').innerHTML;
+        
+        //     document.getElementById('field').appendChild(div);
+        
+        // }
+
 
         useEffect(() => {
             ShowShopInfo(props.match.params.shopId);
@@ -77,7 +89,11 @@ const PosContainer = (props) => {
     //             alert("err");
     //     });
     // };
-
+   
+    
+    
+    
+   
     
     return (
         <>
@@ -94,6 +110,7 @@ const PosContainer = (props) => {
               nowTime={nowTime}
               name={shopInfo.name}
               roadAddr={roadAddr}
+            //   add_div={add_div}
             />
         </>
     );

@@ -31,6 +31,7 @@ export const putShopInfo = (
     shopIntro,
     shopOpenTime,
     shopCloseTime,
+    phone,
     // shopAddress,
     roadAddr,
     shopAddressDetail,
@@ -41,6 +42,7 @@ export const putShopInfo = (
     ,{
         shopId:shopId,
         intro:shopIntro,
+        phone:phone,
         openTime:shopOpenTime,
         closeTime:shopCloseTime,
         address:roadAddr,

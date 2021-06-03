@@ -50,3 +50,11 @@ export const getShoplistcafe = () => {
 export const getShoplistfastfood = () => {
     return apiDefault().get(`shops/list?category=패스트푸드&sortTarget=score`, {});
 };
+
+export const getShoplistMarks = () => {
+    return apiDefault().get("marks",{
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        },
+    })
+}

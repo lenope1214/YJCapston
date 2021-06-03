@@ -6,6 +6,7 @@ import {timelist} from "../../lib/Emptimelist/index";
 const Emptimelist = ({
     shopId,
     emps,
+    times,
     empName,
     empNo,
     handleEmpNo,
@@ -36,14 +37,14 @@ const Emptimelist = ({
                     <span className="title3">직원검색
                     <select className="option"
                             id="empNo"
-                            value={empNo}
+                            // value={empNo}
                             onChange={handleEmpNo}
                     >
                        <option value="" disable={true}>선택</option>
                     {!!emps.length && emps.map((emp) => {
                         return (
                             
-                            <option>{emp.empNo}</option>
+                            <option value={emp.empNo}>{emp.empName}</option>
                         )
                     })}
                     
@@ -59,20 +60,22 @@ const Emptimelist = ({
                 <table className="emptime-list">
                     <thead className="table-head">
                         <th className="item-1">이름</th>
-                        <th className="item-2">날짜</th>
+                        <th className="item-2">전화번호</th>
                         <th className="item-3">출근시간</th>
                         <th className="item-4">퇴근시간</th>
                     </thead>
                     
                     <tbody>
 
-                        {!!timelist.length && timelist.map((time) => {
+                        {!!times.length && times.map((time) => {
                             return(
-
+                                
                         <tr>
-                            <td className="body-item-1">{time.time.Name}</td>
-                            <td className="body-item-2">d</td>
-                            <td className="body-item-3"></td>
+                            <td className="body-item-1">{time.empName}</td>
+                            <td className="body-item-2">{time.phone}</td>
+                            <td className="body-item-3">{time.startTime}</td>
+                            <td className="body-item-4">{time.finishTime}</td>
+                            
                         </tr>
                         )
                     })}

@@ -441,7 +441,7 @@ export const shopcontentWrap = styled.div`
         float: left;
     }
     .shopcon {
-        padding-top: 2%;
+        padding-top: 0%;
         position: relative;
         width: 60%;
         margin: 20px auto;
@@ -492,7 +492,8 @@ export const shopcontentWrap = styled.div`
         text-align: left;
         color: gray;
         font-size: 13px;
-        padding-bottom: 2%;
+        padding-bottom: 0%;
+        border:1px solid balck;
     }
     .shopother3 {
         width: 98%;
@@ -754,6 +755,19 @@ export const shopcontentWrap = styled.div`
     .imgbox-none {
         display: none;
     }
+    .mark{
+        // background: #FD2F2F;
+        background:white;
+        color:red;
+        border:1px solid white;
+        
+        width:80px;
+        height:70px;
+        font-size:70px;
+        border-radius:3px;
+        position: relative;
+       top:-30px;
+    }
 `;
 
 export const LoginWrap = styled.div`
@@ -813,4 +827,5 @@ export const LoginWrap = styled.div`
         background: gray;
         color: white;
     }
+    
 `;

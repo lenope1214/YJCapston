@@ -54,7 +54,14 @@ const EmptimeContainer = (props) => {
             alert("출근!");
         })
         .catch((err) => {
-            alert("출근!");
+            const status = err?.response?.status;
+            if(status== 409){
+            alert("직원이 이미 출근 등록을 하였습니다.");
+            }else if(status==200){
+                alert("출근등록 성공");
+            }else {
+                alert("출근");
+            }
         });
     };
 
@@ -68,6 +75,8 @@ const EmptimeContainer = (props) => {
             const status = err?.response?.status;
             if(status== 409){
             alert("출근 등록을 하지 않았습니다.");
+            }else if(status == 200){
+                alert("퇴근등록 성공");
             }else {
                 alert("퇴근");
             }

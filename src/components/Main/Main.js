@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
-import topimg from "./img/메인화면이미지3.jpg";
-import juminicon from "./img/주민아이콘.png";
-import downimg from "./img/다운로드.png";
-import peopleimg from "./img/주민사람.png";
-import backimg2 from "./img/backimg.jpg";
-import shopimg from "./img/새로운매장.png";
-import backimg3 from "./img/종이질감갈색화면.png";
-import scroll1 from "./img/손글씨 스크롤(흰색).png";
-import qrimg from "./img/노랑QR이미지.png";
-import chatimg from "./img/챗봇이미지2.png";
 import * as S from "./style";
 import { Link } from "react-router-dom";
 import { debounce, throttle } from "lodash";
-import reserveimg from "./img/갈색예약주문.png";
+import steak from "./img/backvideo.mp4";
+import dia from "./img/dia.png";
+import sample from "./img/sample.PNG";
+import sampleback1 from "./img/sample1.png";
+import icons from "./img/icons.PNG";
+import item1 from "./img/C_QRITEM.png";
+import item2 from "./img/C_RESITEM.png";
+import item3 from "./img/C_CHATITEM.png";
+import $ from 'jquery';
+//npm install --save jquery 설치하기
+window.$ = $;
+
 
 const Main = ({
     isLogin,
@@ -33,7 +34,6 @@ const Main = ({
             height,
         };
     }
-
     function useWindowDimensions() {
         const [windowDimensions, setWindowDimensions] = useState(
             getWindowDimensions()
@@ -52,479 +52,231 @@ const Main = ({
     }
 
     const { height, width } = useWindowDimensions();
-    const scrollTo1 = () => {
-        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-    };
-    const scrollTo2 = () => {
-        window.scrollTo({ top: height, left: 0, behavior: "smooth" });
-    };
-    const scrollTo3 = () => {
-        window.scrollTo({ top: height * 2, left: 0, behavior: "smooth" });
-    };
-    const scrollTo4 = () => {
-        window.scrollTo({ top: height * 3, left: 0, behavior: "smooth" });
-    };
 
-    const useScrollDirection = () => {
-        const [scrollDirection, setScrollDirection] = useState("");
-        const [prevOffset, setPrevOffset] = useState(0);
-        const toggleScrollDirection = debounce(() => {
-            // 여기
-            let scrollY = window.scrollY;
-            if (scrollY === 0) {
-                setScrollDirection("");
+    $(document).ready(function() {
+        var delay = false;
+        var currentPage = 1;
+        var pageCount = $(".section").length;
+        var swipe = document.getElementsByTagName('.section');
+      
+        $(document).on('mousewheel DOMMouseScroll', function(event) {
+              event.preventDefault();
+              if (delay) return;
+              delay = true;
+              setTimeout(function() { delay = false }, 100)
+      
+              var wd = event.originalEvent.wheelDelta || -event.originalEvent.detail;
+              console.log(wd);
+      
+              if (wd < 0) {
+                  if (currentPage < pageCount) {
+                      currentPage++;
+                      console.log(currentPage);
+                  }
+              } else {
+                  if (1 < currentPage) {
+                      currentPage--;
+                      console.log(currentPage);
+                  }
+              }
+              if (currentPage == 1) {
+                  window.scrollTo({top:0, left: 0, behavior: "smooth"})
+                  $('.scroll-down').removeClass('none');
+                  $('.title').removeClass('black');
+                  $('.link').removeClass('black');
+                  $('.log-but').removeClass('black');
+                  $('#tag1').removeClass('black2');
+                $('#tag2').removeClass('black2');
+                $('#tag3').removeClass('black2');
+              } else if (currentPage == 2) {
+                  window.scrollTo({top: height, left: 0, behavior: "smooth"})
+                  $('.scroll-down').removeClass('none');
+                  $('.title').removeClass('black');
+                  $('.link').removeClass('black');
+                  $('.log-but').removeClass('black');
+                  $('#tag1').removeClass('black2');
+                $('#tag2').removeClass('black2');
+                $('#tag3').removeClass('black2');
+              } else if (currentPage == 3) {
+                window.scrollTo({top: height*2.1, left: 0, behavior: "smooth"})
+                $('.scroll-down').addClass('none');
+                $('.title').addClass('black');
+                $('.link').addClass('black');
+                $('.log-but').addClass('black');
+                $('#tag1').addClass('black2');
+                $('#tag2').addClass('black2');
+                $('#tag3').addClass('black2');
             }
-            if (scrollY > prevOffset) {
-                setScrollDirection("down");
-            } else if (scrollY < prevOffset) {
-                setScrollDirection("up");
-            }
-            setPrevOffset(scrollY); // 시도 해봄
-        },200);
-        useEffect(() => {
-            window.addEventListener("scroll", toggleScrollDirection);
-            return () => {
-                window.removeEventListener("scroll", toggleScrollDirection);
-            };
-        });
-        return scrollDirection;
-    };
 
-    const [but1, setbut1] = useState("");
-    const [but2, setbut2] = useState("");
-    const [but3, setbut3] = useState("");
-    const [but4, setbut4] = useState("");
-    const [img1, setimg1] = useState("");
-    const [img2, setimg2] = useState("");
-    const direction = useScrollDirection("");
-
-    useEffect(
-        throttle(() => {
-            if (window.scrollY === 0) {
-                setimg2("-none");
-                setimg1("");
-            } else if (window.scrollY === height * 3) {
-                setimg2("");
-                setimg1("-none");
-            } else {
-                setimg2("");
-                setimg1("");
-            }
-            if (0 <= window.scrollY && window.scrollY < height) {
-                setbut1("-selected");
-                setbut2("");
-                setbut3("");
-                setbut4("");
-            } else if (
-                height <= window.scrollY &&
-                window.scrollY < height * 2
-            ) {
-                setbut1("");
-                setbut2("-selected");
-                setbut3("");
-                setbut4("");
-            } else if (
-                height * 2 <= window.scrollY &&
-                window.scrollY < height * 3
-            ) {
-                setbut1("");
-                setbut2("");
-                setbut3("-selected");
-                setbut4("");
-            } else if (window.scrollY === height * 3) {
-                setbut1("");
-                setbut2("");
-                setbut3("");
-                setbut4("-selected");
-            }
-            if (window.scrollY < height) {
-                if (direction === "down") {
-                    window.scrollTo({
-                        top: height,
-                        left: 0,
-                        behavior: "smooth",
-                    });
-                    setbut1("");
-                    setbut2("-selected");
-                    setbut3("");
-                    setbut4("");
-                } else if (direction === "up") {
-                    setimg2("-none");
-                    setimg1("");
-                    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-                }
-            } else if (window.scrollY > height && window.scrollY < height * 2) {
-                if (direction === "down") {
-                    window.scrollTo({
-                        top: height * 2,
-                        left: 0,
-                        behavior: "smooth",
-                    });
-                    setbut1("");
-                    setbut2("");
-                    setbut3("-selected");
-                    setbut4("");
-                } else if (direction === "up") {
-                    window.scrollTo({
-                        top: height,
-                        left: 0,
-                        behavior: "smooth",
-                    });
-                }
-            } else if (
-                window.scrollY > height * 2 &&
-                window.scrollY < height * 3
-            ) {
-                if (direction === "down") {
-                    window.scrollTo({
-                        top: height * 3,
-                        left: 0,
-                        behavior: "smooth",
-                    });
-                    setbut1("");
-                    setbut2("");
-                    setbut3("");
-                    setbut4("-selected");
-                    setimg2("");
-                    setimg1("-none");
-                } else if (direction === "up") {
-                    window.scrollTo({
-                        top: height * 2,
-                        left: 0,
-                        behavior: "smooth",
-                    });
-                }
-            }
-        }, 500)
-    );
+              $('#tag' + currentPage).addClass('active');
+              for (var i = 1; i <= pageCount; i++) {
+                  if (i != currentPage) {
+                      $('#tag' + i).removeClass('active');
+                  }
+              }
+          });
+      });  
 
     return (
         <>
             <S.MainWrap>
-                {/* <div className={"scroll-img2"+img2}>
-                    <img src={scroll3} >
-
-                    </img>
-                </div> */}
                 <div className="App">
-                    <div className="black-nav">
-                        <div className="left-nav">
-                            주문
-                            <span
-                                style={{
-                                    fontSize: "25px",
-                                    paddingTop: "10px",
-                                }}
-                            >
-                                의
-                            </span>
-                            민족
+                    <div className="header">
+                        <div className="title">
+                            <span className="title1">주문</span>
+                            <span className="title2">의</span>
+                            <span className="title3">민족</span>
                         </div>
-                        <div className="center-nav">
-                            <input
-                                type="text"
-                                placeholder="매장을 검색하세요."
-                                style={{
-                                    width: "300px",
-                                    border: "0",
-                                    borderRadius: "7px 0 0 7px",
-                                    backgroundColor: "white",
-                                    hegight: "20px",
-                                }}
-                            ></input>
-                            <button
-                                style={{
-                                    border: "0",
-                                    width: "10%",
-                                    borderRadius: "0 7px 7px 0",
-                                    backgroundColor: "white",
-                                    color: "grey",
-                                }}
-                            >
-                                검색
-                            </button>
-                        </div>
-                        {isLogin ? (
-                            <>
-                                <div className="right-nav">
-                                    <button
-                                        className="right2-nav"
-                                        onClick={logout}
-                                    >
-                                        LOG OUT
-                                    </button>
+                        <span className="link">사업자</span>
+                        <span className="link">사용자</span>
+                        <span className="link">어플다운</span>
+                        <div className="log-box">
+                            {isLogin ? (
+                                <>
                                     <Link to="/mypage">
                                         <button
-                                            className="right2-nav"
-                                            onClick={() => {
-                                                window.scrollTo(0, 0);
-                                            }}
+                                            className="log-but"
+                                            onClick={() => { window.scrollTo(0, 0); }}
                                         >
                                             MY PAGE
                                         </button>
                                     </Link>
-                                </div>
-                                <div className="scroll-nav">
                                     <button
-                                        className={"right1-nav" + but1}
-                                        onClick={scrollTo1}
+                                        className="log-but"
+                                        onClick={logout}
+                                        
                                     >
-                                        메인
+                                        LOG OUT
                                     </button>
-                                    <button
-                                        className={"right1-nav" + but2}
-                                        onClick={scrollTo2}
-                                    >
-                                        어플
-                                    </button>
-                                    <button
-                                        className={"right1-nav" + but3}
-                                        onClick={scrollTo3}
-                                    >
-                                        사업자
-                                    </button>
-                                    <button
-                                        className={"right1-nav" + but4}
-                                        onClick={scrollTo4}
-                                    >
-                                        매장
-                                    </button>
-                                </div>
-                            </>
-                        ) : (
-                            <>
-                                <div className="right-nav">
-                                    <button
-                                        className="right2-nav"
-                                        onClick={openModal}
-                                    >
-                                        LOG IN
-                                    </button>
+                                </>
+                            ) : (
+                                <>
                                     <Link to="/register">
                                         <button
-                                            className="right2-nav"
+                                            className="log-but"
                                             onClick={() => {
                                                 window.scrollTo(0, 0);
                                             }}
                                         >
-                                            {" "}
                                             JOIN
                                         </button>
                                     </Link>
-                                </div>
-                                <div className="scroll-nav">
                                     <button
-                                        className={"right1-nav" + but1}
-                                        onClick={scrollTo1}
+                                        className="log-but"
+                                        onClick={openModal}
                                     >
-                                        메인
+                                        LOG IN
                                     </button>
-                                    <button
-                                        className={"right1-nav" + but2}
-                                        onClick={scrollTo2}
-                                    >
-                                        어플
-                                    </button>
-                                    <button
-                                        className={"right1-nav" + but3}
-                                        onClick={scrollTo3}
-                                    >
-                                        사업자
-                                    </button>
-                                    <button
-                                        className={"right1-nav" + but4}
-                                        onClick={scrollTo4}
-                                    >
-                                        매장
-                                    </button>
-                                </div>
-                            </>
-                        )}
+                                </>
+                            )}
+                        </div>
                     </div>
+                    <ul class="ul">
+                        <li id="tag1" class="active"></li>
+                        <li id="tag2"></li>
+                        <li id="tag3"></li>
+                    </ul>
+                    <div className="scroll-down">
+                        ∨
+                    </div>
+                    <div className="section" id="sec1">
                     <div className="adimg">
-                        <div className="topimg">
-                            <img
-                                src={topimg}
-                                width="100%"
-                                height="100%"
-                                className="topimg-img"
-                            />
-                        </div>
-                        <div className="topimg-up">
-                            누구나 이용하기 쉬운 서비스
-                        </div>
-                        <div className="topimg-text">
-                            주문과 예약은{" "}
-                            <span className="jumintext">주민</span>에서
-                        </div>
-                        <div className="toptop">
-                            <div className="toptop-item">
-                                <div className="title-of-item">QR코드 주문</div>
-                                <img src={qrimg} className="items-img2" />
-                            </div>
-                            <div className="toptop-item">
-                                <div className="title-of-item">예약 주문</div>
-                                <img src={reserveimg} className="items-img2" />
-                            </div>
-                            <div className="toptop-item">
-                                <div className="title-of-item">챗봇 문의</div>
-                                <img src={chatimg} className="items-img2" />
-                            </div>
-                        </div>
+                        <video autoPlay muted loop className="backvideo">
+                            <source src={steak} type="video/mp4">
+                            </source>
 
-                        {/* <div className="toptext">
-                            
-                            <div className="top-item-title">주요 서비스</div>
-                            <hr className="hr"/>
-                            <div className="top-item">
-                                <img src={qrimg}
-                                className="items-img"
-                                />
-                            </div>
-                            <div className="top-item">
-                            <img src={reserveimg}
-                                className="items-img"
-                                />
-                            </div>
-                            <div className="top-item">
-                            <img src={chatimg}
-                                className="items-img"
-                                />
-                            </div>
-                        </div> */}
-                    </div>
-
-                    <div className="but-item1">
-                        {/* <div className="backimg2">
-                            <img src={backimg2} width="100%" height="700px" />
-                        </div> */}
-                        <div className="backimg3">
-                            <img
-                                src={backimg3}
-                                width="100%"
-                                height="100%"
-                                className="backimg-img"
-                            />
-                        </div>
-                        <div className="but-item1-text">
-                            <p>주문의민족</p>
-                            <p>모든 기능</p>
-                            <p>이용하기!</p>
-                        </div>
-                        <div className="but-item1-icon">
-                            <img src={juminicon} width="200px" height="200px" />
-                            <div className="but-item1-but">
-                                <button
-                                    onClick={() => {
-                                        console.log(1);
-                                    }}
-                                    style={{
-                                        fontSize: "30px",
-                                        fontFamily: "Wemakeprice-Bold",
-                                        height: "130px",
-                                        width: "210px",
-                                        borderRadius: "60px",
-                                        border: 0,
-                                    }}
-                                >
-                                    주민앱<br></br>
-                                    다운로드<br></br>
-                                    <img src={downimg} width="40px" />
-                                </button>
-                            </div>
-                        </div>
-                        <div className="but-item1-text2">
-                            <p>주민 앱 다운시 모든 기능</p>
-                            <p>편리하게 사용 가능!</p>
-                        </div>
-                    </div>
-                    <div className="but-item2">
-                        <div className="backimg2">
-                            <img
-                                src={backimg2}
-                                width="100%"
-                                height="100%"
-                                className="backimg-img"
-                            />
-                        </div>
-                        <div className="but-item2-text">
-                            <p>웹으로도</p>
-                            <p>가능한</p>
-                            <p>사업자 등록</p>
-                            <p>매장 관리!</p>
-                        </div>
-                        <div className="but-item2-icon">
-                            <img src={peopleimg} width="300px" height="300px" />
-                            <div className="but-item2-but">
+                        </video>
+                        <div className="videotext">
+                            <p className="vt0">THE</p>
+                            <p className="vt1">ORDER<span className="of"> OF</span> THE PEOPLE</p>
+                            <img src={dia} width="240px" height="80px" className="dia"></img>
+                            <div className="but-box">
                                 <Link to="/myshop">
-                                    <button
-                                        style={{
-                                            fontSize: "30px",
-                                            fontFamily: "Wemakeprice-Bold",
-                                            height: "100px",
-                                            width: "210px",
-                                            borderRadius: "60px",
-                                            border: 0,
-                                        }}
-                                    >
-                                        사업자<br></br>
-                                        페이지로<br></br>→
-                                    </button>
+                                    <button className="link-button1">식당관리</button>
                                 </Link>
+                                <br />
+                                <Link to="/shoplist">
+                                    <button className="link-button2">예약하기</button>
+                                </Link>
+                                <br />
+                                <button className="link-button3">어플다운</button>
+                                <br />
                             </div>
-                        </div>
-                        <div className="but-item2-text2">
-                            <p>주민 앱 다운시 모든 기능</p>
-                            <p>편리하게 사용 가능!</p>
                         </div>
                     </div>
-                    <div className="but-item3">
-                        <div className="backimg2">
-                            <img
-                                src={backimg3}
-                                width="100%"
-                                height="100%"
-                                className="backimg-img"
-                            />
-                        </div>
-                        <div className="but-item3-text">
-                            <p>집에서</p>
-                            <p>매장 둘러보고</p>
-                            <p>예약하자!</p>
-                        </div>
-                        <div className="but-item3-icon">
-                            <img src={shopimg} width="250px" height="250px" />
-                            <div className="but-item3-but">
-                                <Link to="/shoplist">
-                                    <button
-                                        className="but-item3-but"
-                                        onclick="href='/shoplist'"
-                                        style={{
-                                            fontSize: "30px",
-                                            fontFamily: "Wemakeprice-Bold",
-                                            height: "130px",
-                                            width: "230px",
-                                            borderRadius: "60px",
-                                            border: 0,
-                                        }}
-                                    >
-                                        매장 둘러보고<br></br>
-                                        예약하기<br></br>→
-                                    </button>
-                                </Link>
+                    </div>
+                    <div className="section" id="sec2">
+                    <div className="secondbox">
+                        <img src={sampleback1} className="secondimg" />
+
+                        <div className="second-text">
+                            <p className="second-title">SERVICE 서비스</p>
+                            <hr width="70px" className="hr" />
+                            <div className="item-1">
+                                <img src={item1} width="200px" height="200px" />
+                                <p className="itemtitle">QR 주문</p>
+                                <p className="itemdesc">
+                                    직원 호출 없이 <br />
+                                테이블에 앉아서 <br />
+                                QR 코드로 주문
+                            </p>
+                            </div>
+                            <div className="item-2">
+                                <img src={item2} width="200px" height="200px" />
+                                <p className="itemtitle">예약 기능</p>
+                                <p className="itemdesc">
+                                    식당에 가기 전, <br />
+                                컴퓨터나 핸드폰으로 <br />
+                                예약해서 시간 아끼기!
+                            </p>
+                            </div>
+                            <div className="item-3">
+                                <img src={item3} width="200px" height="200px" />
+                                <p className="itemtitle">챗봇 상담</p>
+                                <p className="itemdesc">
+                                    식당이 바쁜 때에 <br />
+                                챗봇 상담으로 <br />
+                                질문 가능!
+                            </p>
                             </div>
                         </div>
-                        <div className="but-item3-text2">
-                            <p>웹에서도 매장 둘러보고</p>
-                            <p>예약 가능한 주문의 민족</p>
+                    </div>
+                    </div>
+                    <div className="section" id="sec3">
+                        <div className="preparing">
+                            <div className="left">
+                                <div className="left-1">
+                                <span>주만지      </span>                                
+                                <span className="left11">영진전문대</span>
+                                <br></br>
+                                <span>WD-A </span>
+                                <span className="left22">JUMANJI</span>
+                                </div>
+                                <div className="left-2">
+                                    <img src={icons} />
+                                </div>
+                                <div className="left-3">
+                                <br/><br/>
+                                    (주)주만지<br/>
+                                    영진전문대학교 3-WD-A반<br/>
+                                    <br/>
+                                    사업자번호: 000-00-00000
+                                    <br/><br/>
+                                    캡스톤프로젝트<br/>
+                                    전화번호 : 010-0000-0000<br/>
+                                    메일 : jumanji@naver.com<br/>
+                                </div>
+                            </div>
+                            <div className="right">
+                                <Link to="/register">
+                                <button className="button-1">회원가입하러 가기</button>
+                                </Link><br/>
+                                <button className="button-1" onClick={openModal}>로그인하러 가기</button><br/>
+                                <button className="button-1">어플다운하러 가기</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <footer>
-                    <div className={"scroll-img" + img1}>
-                        <img src={scroll1} width="300px"></img>
-                    </div>
-                </footer>
             </S.MainWrap>
 
             {modal && (

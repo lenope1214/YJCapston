@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import * as S from "./style";
+import {removeMenus} from "../../lib/MenuList/index";
 
-const MenuList = ({ menues, removeMenu, shopId }) => {
+const MenuList = ({ menues, shopId }) => {
     return (
         <>
             <S.MenuWrap>
@@ -30,7 +31,7 @@ const MenuList = ({ menues, removeMenu, shopId }) => {
                                 return (
                                     <tr>
                                         <td className="body-item-1">
-                                            <Link to={`/menu/${shopId}${menu.name}`} className="menu-link">
+                                            <Link to={`/menu/${menu.id}`} className="menu-link">
                                                 <img src={`http://3.34.55.186:8088/${menu.img}`}
                                                     width='150'
                                                     height='150'
@@ -40,14 +41,18 @@ const MenuList = ({ menues, removeMenu, shopId }) => {
 
                                         </td>
                                         <td className="body-item-2">
-                                            <Link to={`/menu/${shopId}${menu.name}`} className="menu-link">
+                                            <Link to={`/menu/${menu.id}`} className="menu-link">
                                                 {menu.name}
                                             </Link>
                                         </td>
-                                        <td className="body-item-3"><Link to={`/menu/${shopId}${menu.name}`} className="menu-link">
+                                        <td className="body-item-3"><Link to={`/menu/${menu.id}`} className="menu-link">
                                             {menu.price}
                                         </Link></td>
-                                        <td className="body-item-4" onClick={() => removeMenu(`${menu.id}`)}><button className="delete-button">X</button></td>
+                                        <td className="body-item-4" onClick={async() => {
+                                                            const res = await removeMenus(
+                                                                    shopId,menu.id
+                                                                );
+                                                            }}><button className="delete-button">X</button></td>
                                     </tr>
                                 );
                             })}

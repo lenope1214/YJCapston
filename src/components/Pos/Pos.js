@@ -9,11 +9,29 @@ const Pos = ({
    handleNum,
    number,
    nowTime,
+   add_div,
+   remove_div,
 }) => {
     const [thisShopId, setThisShopId] = useState("");
     useEffect(() => {
         setThisShopId(shopId);
     })
+    
+    
+    
+    
+    
+    // function remove_div(obj){
+    
+    // document.getElementById('field').removeChild(obj.parentNode);
+    
+    // }
+    
+    
+    
+   
+
+   
     return (
         <>
             
@@ -21,164 +39,32 @@ const Pos = ({
             
             <S.PosWrap>
                 
-                {/* <div className="pos-title">
-                    <span>{shopId}</span>
-                    <Link to={"/posmain/"+shopId}>
-                    <button className="title1">포스기</button>
-                    </Link>
-                    <button className="title2">직원관리</button>
-                    <button className="title3">예약관리</button>
-                    <span>{nowTime}</span>
-                </div>
-                <div className="left-container">
-                    <div className="left-head">테이블 번호</div>
-
-                    <div className="left-body">메뉴명/단가/수량/할인/금액</div>
-
-                    <div className="left-body2">해당테이블의 주문현황</div>
-
-                    <div className="left-body3">합계</div>
-
-                    <div className="left-body4">매출</div>
-                </div>
-                <div className="right-container">
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                            />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                            />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                            />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-            
-
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                            value={num}
-                            onChange={handleNum}
-                            />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-           
-
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-            
-            
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-                        
-                </div>
-    <button onClick={number} className="number">테이블 저장</button> */}
+                
 
             <div className="left-container">
                 <div className="shopName">{name}</div>
+                
             </div>
             <div className="right-container">
-                <div className="line">
+                
+
+            <input type="button" value="추가" onclick={add_div}/><br/>
+
+            <div id="room_type">
+
+                <div className="box"></div>
+
+            {/* <input type="button" value="삭제" onclick={remove_div(this)}/> */}
+
+            </div>
+
+            <div id="field"></div>
+
+
+
+
+
+                {/* <div className="line">
                     <span className="line-1">
                         <input
                             className="input-box"  
@@ -330,7 +216,7 @@ const Pos = ({
                             className="input-box"  
                             type="text"
                         /></span>
-                </div>
+                </div> */}
             </div>
 
                 </S.PosWrap>

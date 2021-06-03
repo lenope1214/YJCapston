@@ -27,6 +27,7 @@ import EmptimeContainer from "./containers/Emptime/EmptimeContainer";
 import * as StompJs from "@stomp/stompjs";
 import EmptimelistContainer from "./containers/Emptimelist/EmptimelistContainer";
 
+
 const ROOM_SEQ = 1;
 
 const App = () => {
