@@ -1,6 +1,1 @@
-temp/node_modules/.DS_Store
-temp/.DS_Store
-jumanji/src/main/java/com/jumanji/capston/config/.DS_Store
-jumanji/src/main/java/com/jumanji/capston/controller/.DS_Store
-jumanji/src/main/java/com/jumanji/capston/service/.DS_Store
-jumanji/src/main/java/com/jumanji/capston/service/exception/.DS_Store
+.DS_Store
