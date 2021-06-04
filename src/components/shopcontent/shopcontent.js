@@ -31,6 +31,7 @@ const Shopcontent = ({
     reviewList,
     Mark,
     MarkDelete,
+    removeReview
 }) => {
     var x = (lat *= 1);
     var y = (lag *= 1);
@@ -237,7 +238,7 @@ const Shopcontent = ({
                                 </table>
                             </div>
                             <div className="review-box">
-                                <div className="review-title">리뷰 리스트</div>
+                                <div className="review-title">리뷰 리스트 ({reviewList.length})</div>
                                             {!reviewList.length && (
                                                
                                                     <td className="none-review">등록된 리뷰가 없습니다.</td>
@@ -264,7 +265,7 @@ const Shopcontent = ({
                                                 return (
                                                     
                                                     <div className="review-item">
-                                                    <tr>
+                                                    <tr className="review-1">
                                                         <td className="review-1">
                                                             <span>
                                                             <img src={useritem} 
@@ -273,6 +274,7 @@ const Shopcontent = ({
                                                             <span className="username">
                                                             {review.userId}
                                                             </span>
+                                                            <span><button onClick={() => removeReview(`${review.reviewId}`)} className="delete">삭제</button></span>
                                                         </td>
                                                         </tr>
                                                         <tr>  

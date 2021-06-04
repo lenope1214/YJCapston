@@ -12,8 +12,9 @@ import {
     postMark,
     deleteMark,
 } from "../../lib/shopcontent/index";
-import Geocode from "react-geocode";
+import Geocode, { fromAddress } from "react-geocode";
 import { getMenuList } from "../../lib/MenuList";
+import { removeReviews } from "../../lib/shopcontent/index";
 
 Geocode.setApiKey("AIzaSyBvpJoGP7dKHRovDgP4CSByczdZC7vrz18");
 Geocode.setLanguage("kr");
@@ -46,9 +47,6 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
         openTime: "",
         imgPath: "",
     });
-    // const [,] = useState({
-
-    // })
 
     const [jmMenu, setJmMenu] = useState([]);
 
@@ -100,7 +98,6 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
         getshopinfo(param.shopId)
             .then((res) => {
                 setShopIntro(res.data);
-                
             })
 
             .catch((err) => {
@@ -121,18 +118,8 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
             if (jmMenu[i].name === name) {
                 const copy = [...jmMenu];
                 copy[i].count++;
-
                 sum = jmMenu[i].count * jmMenu[i].price;
-
-                // for (let j = 0 ; j < jmMenu.length; j++){
-                //     jmMenu[i];
-                // }
-                // for (let j = 0; j < jmMenu.length; j++) {
-                //     setpricesum(sum[i]);
-                // }
-
                 setJmMenu(copy);
-
                 break;
             }
         }
@@ -162,7 +149,7 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
                     };
                 });
                 setMenu(getmenulist);
-                console.log("menu "+menu.name);
+                console.log("menu " + menu.name);
             })
             .catch((err) => {
                 console.log(err);
@@ -174,23 +161,24 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
 
     const getreview = () => {
         getReviewlist(param.shopId)
-        .then((res) => {
-            const reviewlist = res.data.map((reviewlist) => {
-                return {
-                    reviewId: reviewlist.reviewId,
-                    userId: reviewlist.userId,
-                    shopId: reviewlist.shopId,
-                    content: reviewlist.content,
-                    regdate: reviewlist.regDate,
-                    score: reviewlist.score,
-                    imgUrl: reviewlist.imgUrl,
-                };
-            });
-            setReviewList(reviewlist);
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+            .then((res) => {
+                const reviewlist = res.data.map((reviewlist) => {
+                    return {
+                        reviewId: reviewlist.reviewId,
+                        userId: reviewlist.userId,
+                        shopId: reviewlist.shopId,
+                        content: reviewlist.content,
+                        regdate: reviewlist.regDate,
+                        score: reviewlist.score,
+                        imgUrl: reviewlist.imgUrl,
+                        reviewId: reviewlist.reviewId,
+                    };
+                });
+                setReviewList(reviewlist);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
 
     const login = () => {
@@ -217,6 +205,21 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
                 } else {
                     alert("로그인서버문제");
                 }
+            });
+    };
+
+    const removeReview = (id) => {
+        removeReviews(id)
+            .then((res) => {
+                alert("삭제되었습니다.");
+                window.location.reload();
+            })
+            .catch((err) => {
+                // alert(err.response.status);
+                if (err.response.status == 500) {
+                    // alert(err);
+                    alert("리뷰 작성자가 아닙니다.");
+                } else alert("리뷰 삭제 에러");
             });
     };
 
@@ -270,18 +273,6 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
             }
         );
     };
-
-    // const jmmenuReducer = (action, state = jmMenu) => {
-    //     console.log(state);
-    //     switch (action.type) {
-    //         case JMMENU: {
-    //             return state;
-    //         }
-    //         default:
-    //             return state;
-    //     }
-    // };
-
     const Mark = () => {
         if (shopIntro.marked == "N"){
             postMark(shopId)
@@ -305,7 +296,6 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
                 });
         }
     };
-    
 
     return (
         <Shopcontent
@@ -332,16 +322,10 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
             order={order}
             shopId={shopId}
             reviewList={reviewList}
+            removeReview={removeReview}
             Mark={Mark}
-            // MarkDelete={MarkDelete}
-            // jmmenuReducer={jmmenuReducer}
         />
     );
 };
 
 export default Shopcontentcontainer;
-
-// export const jmthing = React.createContext((jmMenu) => {
-//     console.log(jmMenu);
-//     return jmMenu;
-// });

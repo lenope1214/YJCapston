@@ -31,13 +31,15 @@ export const putMenuRead = (
     menuIntro,
     menuId,
     duration,
+    shopId,
 ) => {
-    return apiDefault().patch("/menu"
-        , {
+    return apiDefault().patch("/menus"
+        , {           
             price: menuPrice,
             intro: menuIntro,
             menuId: menuId,
             duration: duration,
+            shopId:shopId,
         }, {
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,

@@ -51,7 +51,7 @@ const MyShopContainer = (props) => {
                     alert("로그인이 필요합니다!");
                     history.push("/");
                 } else if (status == 404) {
-                    alert("사업자 계정이 아니에요!");
+                    alert("등록된 매장이 없습니다.");
                     history.push("/");
                 } else {
                     alert("로그인서버문제");

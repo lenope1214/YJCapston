@@ -30,7 +30,7 @@ export const MenuReadContainer = (props) => {
 
     const handleDuration = (e) => {
         const value = e.target.value;
-        setMenuDuration(value)
+        setMenuDuration(value);
     }
     
 
@@ -38,8 +38,9 @@ export const MenuReadContainer = (props) => {
         putMenuRead(
             menuPrice,
             menuIntro,
-            menuId,
+            menuRead.menuId,
             menuDuration,
+            menuRead.shopId
         )
             .then((res) => {
                 history.goBack();
@@ -59,7 +60,8 @@ export const MenuReadContainer = (props) => {
         getMenuRead(props.match.params.menuId)
             .then((res) => {
                 setMenuRead(res.data);
-                console.log(menuRead.shopId);
+               
+               
             })
             .catch((err) => {
                 console.log(props.match.params.menuId)
@@ -125,7 +127,7 @@ export const MenuReadContainer = (props) => {
                 isPopular={menuRead.isPopular}
                 isSale={menuRead.isSale}
                 menu_v2={menu_v2}
-                menu_v3={menu_v3}
+                menu_v3={menu_v3}           
             />
         </div>
     );

@@ -441,7 +441,7 @@ export const shopcontentWrap = styled.div`
         float: left;
     }
     .shopcon {
-        padding-top: 0%;
+        padding-top: 2%;
         position: relative;
         width: 60%;
         margin: 20px auto;
@@ -492,8 +492,7 @@ export const shopcontentWrap = styled.div`
         text-align: left;
         color: gray;
         font-size: 13px;
-        padding-bottom: 0%;
-        border:1px solid balck;
+        padding-bottom: 2%;
     }
     .shopother3 {
         width: 98%;
@@ -691,7 +690,7 @@ export const shopcontentWrap = styled.div`
     .review-title {
         background: white;
         transform: translateY(3px);
-        padding-left: 10px;
+        padding-left: 40px;
         padding-top: 10px;
         padding-bottom: 20px;
         font-weight: bold;
@@ -701,13 +700,15 @@ export const shopcontentWrap = styled.div`
         background: white;
         margin-top: 3px;
         margin-bottom: 3px;
+        width: 100%;
     }
     .review-1 {
         padding-top: 14px;
-        padding-left: 10px;
+        padding-left: 30px;
         padding-bottom: 10px;
         font-weight: bold;
         font-size: 14px;
+        width: 10%;
     }
     .useritem {
         height: 40px;
@@ -718,7 +719,7 @@ export const shopcontentWrap = styled.div`
         transform: translateY(-14px);
     }
     .review-2 {
-        padding-left: 14px;
+        padding-left: 34px;
         padding-bottom: 10px;
         font-weight: bold;   
         transform: translateY(-8px);
@@ -728,19 +729,19 @@ export const shopcontentWrap = styled.div`
         margin-right: 5px;
     }
     .review-3 {
-        padding-left: 14px;
+        padding-left: 34px;
         padding-bottom: 10px;
         font-size: 13px;
         color: gray;
         transform: translateY(-8px);
     }
     .review-4 {
-        padding-left: 14px;
+        padding-left: 34px;
         padding-bottom: 10px;
     }
     .review-5 {
-        padding-left: 14px;
-        padding-bottom: 20px;
+        padding-left: 34px;
+        padding-bottom: 25px;
         font-size: 15px;
     }
     .none-review {
@@ -755,11 +756,22 @@ export const shopcontentWrap = styled.div`
     .imgbox-none {
         display: none;
     }
+    .delete {
+        float: right;
+        margin-top: 10px;
+        margin-right: 50px;
+        background: none;
+        border: 0px;
+        color: gray;
+        border-bottom: 1px solid gray;
+        cursor: pointer;
+    }
     .mark{
         // background: #FD2F2F;
         background:white;
         color:red;
         border:1px solid white;
+        display:flex;
         
         width:80px;
         height:70px;
@@ -827,5 +839,4 @@ export const LoginWrap = styled.div`
         background: gray;
         color: white;
     }
-    
 `;

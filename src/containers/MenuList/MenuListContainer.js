@@ -30,17 +30,17 @@ const MenuListContainer = (props) => {
             .then((res) => {
                 setMenues(res.data);
                 const menu = res.data.map((menu) => {
-                    console.log(menu.id);
+                    
                     return {
                         img: menu.imgPath,
-                        id: menu.id,
+                        id: menu.menuId,
                         name: menu.name,
                         intro: menu.intro,
                         price: menu.price,
                     };
                 });
                 setMenues(menu);
-                
+                console.log(menu.id);
             })
             .catch((err) => {
                 alert("MenuListContainer Err");

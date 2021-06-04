@@ -46,9 +46,10 @@ const MenuRead = ({
                                     <input
                                         type="text"
                                         // value={name}
-                                        value={shopId}
+                                        // value={shopId}
                                         className="input-box"
-                                        readOnly
+                                        placeholder={name}
+                                        // readOnly
                                     />
                                 </td>
                             </tr>

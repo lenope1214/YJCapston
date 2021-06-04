@@ -145,7 +145,10 @@ const Shoplist = ({
                                     <button>검색</button>
                                 </div>
                                 <div class="list_shop">
-                                    {restaurant.map((shop) => {
+                                    {!restaurant.length && (
+                                        <div className="none-shop">매장이 없습니다.</div>
+                                    )}
+                                    {!!restaurant.length && restaurant.map((shop) => {
                                         return (
                                             <Link
                                                 to={`/shopcontent/${shop.id}`}
@@ -174,7 +177,7 @@ const Shoplist = ({
                                                                 </div> */}
                                                             </div>
                                                             <div class="listAddress">
-                                                                평점 ★ 4.3 (21)
+                                                                평점 ★ {shop.score} ({shop.reviews})
                                                             </div>
 
                                                             {/* <div>
@@ -188,8 +191,6 @@ const Shoplist = ({
                                             </Link>
                                         );
                                     })}
-                                
-                                    
                                 </div>
                                 {/* {restaurant.map((test, i) => {
                                     return <div test={i}>{test.intro}</div>;
