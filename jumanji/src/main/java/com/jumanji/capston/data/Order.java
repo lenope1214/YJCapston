@@ -99,6 +99,7 @@ public class Order implements Serializable {
         private Timestamp orderId;
         private String userId; // 암호화 해서 주고받자..
         private String userName;
+        private String userPhone;
         private String shopId;
         private String shopName;
         private int people;
@@ -121,6 +122,7 @@ public class Order implements Serializable {
             if(order.getUser()!=null){
                 if(order.getUser().getId() !=null)this.userId = order.getUser().getId(); // 암호화 해서 주고받자..
                 if(order.getUser().getName()!=null)this.userName = order.getUser().getName();
+                if(order.getUser().getPhone()!=null)this.userPhone = order.getUser().getPhone();
             }
             if(order.getShop()!=null){
                 this.shopId = order.getShop().getId();

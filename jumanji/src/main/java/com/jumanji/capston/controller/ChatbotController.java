@@ -32,4 +32,11 @@ public class ChatbotController  {
         Chatbot.Response response = new Chatbot.Response(chatbot);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+
+    @PatchMapping("chatbots")
+    public ResponseEntity<?> patchChatbot(@RequestHeader String authorization, @RequestBody Chatbot.Request request){
+        Chatbot chatbot = chatbotService.patch(authorization, request);
+        Chatbot.Response response = new Chatbot.Response(chatbot);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
 }

@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ReviewServiceImpl implements BasicService<Review, Review.Request> {
+public class ReviewServiceImpl implements BasicService<Review, Review.Request, String> {
     @Autowired
     ReviewRepository reviewRepository;
     @Autowired

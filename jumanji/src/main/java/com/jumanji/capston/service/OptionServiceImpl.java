@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class OptionServiceImpl implements BasicService<Option, Option.Request> {
+public class OptionServiceImpl implements BasicService<Option, Option.Request, String> {
     // DI
     @Autowired
     UserServiceImpl userService;

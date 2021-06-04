@@ -28,8 +28,14 @@ public class Chatbot {
         this.shop = shop;
     }
 
+    public void update(Request request) {
+        this.question = request.getQuestion();
+        this.answer = request.getAnswer();
+    }
+
     @Data
     public static class Request {
+        private Long chatbotId;
         private String question;
         private String answer;
         private String shopId;
