@@ -57,6 +57,7 @@ public class ChatbotListAdapter extends RecyclerView.Adapter<ChatbotListAdapter.
             intent.putExtra("chatbotId", mItems.get(position).getChatbotId());
             intent.putExtra("question", mItems.get(position).getQuestion());
             intent.putExtra("answer", mItems.get(position).getAnswer());
+            intent.putExtra("isAdd", false);
             context.startActivity(intent);
         });
 

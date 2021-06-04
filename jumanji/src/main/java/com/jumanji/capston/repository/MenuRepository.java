@@ -11,6 +11,9 @@ public interface MenuRepository extends JpaRepository<Menu, String> {
 //    public BigDecimal getMenuSeqNextVal();
 List<Menu> findByIdContains(String id);
 
+    Menu findByIdOrName(String id, String name);
+
+
     List<Menu> findByShopId(String id);
 
     int countMenusByIdContains(String id);

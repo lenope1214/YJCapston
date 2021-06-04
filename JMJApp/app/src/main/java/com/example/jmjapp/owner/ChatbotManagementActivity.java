@@ -42,6 +42,7 @@ public class ChatbotManagementActivity extends AppCompatActivity {
 
         fab_addchatbots.setOnClickListener(v -> {
             Intent intent = new Intent(this, ChatbotSettingActivity.class);
+            intent.putExtra("isAdd", true);
             startActivity(intent);
         });
 

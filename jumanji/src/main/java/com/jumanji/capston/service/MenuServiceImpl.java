@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MenuServiceImpl implements BasicService<Menu, Menu.Request, String> {
+public class MenuServiceImpl {
     @Autowired
     MenuRepository menuRepository;
     @Autowired
@@ -39,7 +39,7 @@ public class MenuServiceImpl implements BasicService<Menu, Menu.Request, String>
         return menuRepository.countMenusByIdContains(id);
     }
 
-    @Override
+    
     @Transactional(readOnly = true)
     public Menu get(@Nullable String authorization, String... str) {
         String menuId = str[0];
@@ -47,7 +47,7 @@ public class MenuServiceImpl implements BasicService<Menu, Menu.Request, String>
         return menu;
     }
 
-    @Override
+    
     @Transactional(readOnly = true)
     public List<Menu> getList(@Nullable String authorization, String... str) {
         String shopId = str[0];
@@ -57,14 +57,14 @@ public class MenuServiceImpl implements BasicService<Menu, Menu.Request, String>
         return menuList;
     }
 
-    @Override
+    
     @Transactional
     public Menu post(String authorization, Menu.Request request) {
         Menu menu;
         Shop shop;
         String menuId = request.getShopId().substring(0, 2) + 'm' + DateOperator.dateToYYYYMMDDHHMMSS(new Date());
 
-        isEmpty(menuId);
+        isEmpty(menuId, request.getName());
         shop = shopService.isPresent(request.getShopId());
         String path = "shop/" + request.getShopId() + "/" + "menu";
         String imgPath = null;
@@ -90,23 +90,28 @@ public class MenuServiceImpl implements BasicService<Menu, Menu.Request, String>
         return menuRepository.save(menu);
     }
 
-    @Override
+    
     public Menu patch(String authorization, Menu.Request request) {
         // 변수
         String loginId = userService.getMyId(authorization);
+        String path = "shop/" + request.getShopId() + "/" + "menu";
+        String imgPath = null;
         Menu menu;
+
         // 유효성 체크
         shopService.isOwnShop(loginId,request.getShopId());
         menu = isPresent(request.getMenuId());
 
         // 서비스
-        menu.patch(request);
+        if (request.getImg() != null && request.getImg().getSize() != 0)
+            imgPath = storageService.store(request.getImg(), request.getName().replace(" ", "_"), path.split("/"));
+        menu.patch(request, imgPath);
         menuRepository.saveAndFlush(menu);
 
         return menu;
     }
 
-    @Override
+    
     public void delete(@Nullable String authorization, String... str){
         String shopId = str[0];
         String menuId = str[1];
@@ -120,20 +125,20 @@ public class MenuServiceImpl implements BasicService<Menu, Menu.Request, String>
         menuRepository.delete(menu);
     }
 
-    @Override
+    
     public Menu isPresent(String id) {
         Optional<Menu> menu = menuRepository.findById(id);
         if(menu.isPresent())return menu.get();
         throw new MenuNotFoundException();
     }
 
-    @Override
-    public boolean isEmpty(String id) {
-        Optional<Menu> menu = menuRepository.findById(id);
-        if(menu.isEmpty())return true;
+    
+    public boolean isEmpty(String id, String name) {
+        Menu menu = menuRepository.findByIdOrName(id,name);
+        if(menu == null)return true;
         throw new MenuHasExistException();
     }
-//    @Override
+//    
 //    @Transactional
 
 }

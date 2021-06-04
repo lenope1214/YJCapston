@@ -15,6 +15,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.ViewPager;
 import com.example.jmjapp.Adapter.DetailPagerAdapter;
 import com.example.jmjapp.R;
+import com.example.jmjapp.databinding.ActivityShopDetail3Binding;
+import com.example.jmjapp.databinding.ActivityShopDetailBinding;
 import com.example.jmjapp.dto.Mark;
 import com.example.jmjapp.dto.Shop;
 import com.example.jmjapp.network.Server;
@@ -32,7 +34,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ShopDetailActivity extends AppCompatActivity {
-
+    ActivityShopDetail3Binding binding;
     static public String orderCheck;
     static public String tableNumber;
     static public String shopNumber;
@@ -49,7 +51,7 @@ public class ShopDetailActivity extends AppCompatActivity {
     static public String ownerId;
 
     TextView shop_detail_shopname, shop_detail_review, shop_detail_reply, shop_detail_avgtext;
-    ImageView shop_detail_avgstar, shop_detail_phonecall_img, shop_detail_zzim_img;
+    ImageView shop_detail_avgstar, shop_detail_phonecall_img, shop_detail_zzim_img, chatbot_img;
     ConstraintLayout shop_detail_phonecall, shop_detail_zzim;
     FloatingActionButton order_basket;
 
@@ -68,7 +70,8 @@ public class ShopDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shop_detail3);
+        binding = ActivityShopDetail3Binding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
         jwt = pref.getString("token", null);
@@ -89,6 +92,7 @@ public class ShopDetailActivity extends AppCompatActivity {
         shop_detail_phonecall_img = (ImageView) findViewById(R.id.shop_detail_phonecall_img);
         shop_detail_zzim_img = (ImageView) findViewById(R.id.shop_detail_zzim_img);
         order_basket = (FloatingActionButton) findViewById(R.id.order_basket);
+        chatbot_img = binding.chatbotImg;
 
         shopNumber = getIntent().getStringExtra("shopNumber");
         tableNumber = getIntent().getStringExtra("tableNumber");
@@ -99,6 +103,10 @@ public class ShopDetailActivity extends AppCompatActivity {
 //        System.out.println(orderCheck+"OOOOOOOOOOOOOOOOOOOOOOO");
         System.out.println(shopNumber + "%^&" + tableNumber + "%^&" + orderCheck + "%^&");
 
+        chatbot_img.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ChatbotListActivity.class);
+            startActivity(intent);
+        });
         
         shop_detail_phonecall.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -31,40 +31,45 @@ public class ChatbotSettingActivity extends AppCompatActivity {
     private Call<ResponseBody> postChatbot;
     SharedPreferences pref;
 
+    private void submitSw(boolean isAdd){
+        System.out.println("isAdd : " + isAdd);
+        if(isAdd){
+            submitBtn.setText("추가");
+        }else{
+            submitBtn.setText("수정");
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
         Long chatbotId = getIntent().getLongExtra("chatbotId", 0);
         String question = getIntent().getStringExtra("question");
         String answer = getIntent().getStringExtra("answer");
-
+        Boolean isAdd = getIntent().getBooleanExtra("isAdd", true);
         questionET.setText(question);
         answerET.setText(answer);
 
-        submitBtn.setText("수정");
+        submitSw(isAdd);
 
         submitBtn.setOnClickListener(v -> {
             pref = getSharedPreferences("auth_o", MODE_PRIVATE);
             String jwt = pref.getString("token", null);
             Map<String, Object> map = new HashMap();
+            if(!isAdd)map.put("chatbotId" , chatbotId);
             map.put("shopId", MainActivity_O.shopNumber);
-            map.put("chatbotId" , chatbotId);
             map.put("question", questionET.getText().toString());
             map.put("answer", answerET.getText().toString());
 
-            postChatbot = Server.getInstance().getApi().patchChatbot("Bearer " + jwt, map);
+
+            postChatbot = isAdd ?
+                    Server.getInstance().getApi().insertChatbot("Bearer " + jwt, map)
+                    : Server.getInstance().getApi().patchChatbot("Bearer " + jwt, map)  ;
             postChatbot.enqueue(new Callback<ResponseBody>() {
                 @SneakyThrows
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.isSuccessful()) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-                        builder.setMessage("챗봇이 수정되었습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        }).create().show();
-                        builder.setCancelable(false);
                         Log.d("result : ", "챗봇 수정 성공");
                         finish();
 
@@ -72,7 +77,7 @@ public class ChatbotSettingActivity extends AppCompatActivity {
                         Log.d("result 400 : ", "챗봇등록 실패");
                         System.out.println(response.errorBody().string());
                     } else {
-                        Log.d("result : ", "연결실패" + "@@@@@");
+                        Log.d("result : ", "챗봇 세팅 연결실패" + "@@@@@");
                     }
 
                 }
@@ -100,52 +105,6 @@ public class ChatbotSettingActivity extends AppCompatActivity {
         resetBtn.setOnClickListener(v -> {
             questionET.setText("");
             answerET.setText("");
-        });
-
-
-        submitBtn.setOnClickListener(v -> {
-            pref = getSharedPreferences("auth_o", MODE_PRIVATE);
-            String jwt = pref.getString("token", null);
-            Map<String, Object> map = new HashMap();
-            map.put("shopId", MainActivity_O.shopNumber);
-
-            map.put("question", questionET.getText().toString());
-            map.put("answer", answerET.getText().toString());
-
-            postChatbot = Server.getInstance().getApi().insertChatbot("Bearer " + jwt, map);
-            postChatbot.enqueue(new Callback<ResponseBody>() {
-                @SneakyThrows
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    if (response.isSuccessful()) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-                        Dialog dialog = builder.setMessage("챗봇이 등록되었습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(getApplicationContext(), ChatbotManagementActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                        }).create();
-                        builder.setCancelable(false);
-                        dialog.show();
-                        Log.d("result : ", "챗봇 등록 성공");
-
-                    } else if (response.code() == 400) {
-                        Log.d("result 400 : ", "챗봇등록 실패");
-                        System.out.println(response.errorBody().string());
-                    } else {
-                        Log.d("result : ", "연결실패" + "@@@@@");
-                    }
-
-                }
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                }
-            });
-
         });
     }
 
