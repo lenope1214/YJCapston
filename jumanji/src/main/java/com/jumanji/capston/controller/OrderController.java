@@ -66,8 +66,11 @@ public class OrderController {
         List<OrderMenu> orderMenuList = orderMenuService.getList(authorization, orderTime);
         Order order =orderService.get(authorization,orderTime);
         Order.Response response = new Order.Response(order);
-
-        response.setOrderMenuList(orderMenuList);
+        List<OrderMenu.Response> omResponseList = new ArrayList<>();
+        for(OrderMenu om : orderMenuList){
+            omResponseList.add(new OrderMenu.Response(om));
+        }
+        response.setOrderMenuList(omResponseList);
 //        for(OrderMenu orderMenu : orderMenuList){
 //            response.add(new OrderMenu.Response(orderMenu));
 //        }

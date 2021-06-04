@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class PosService implements BasicService<Pos, Pos.Request> {
+public class PosService implements BasicService<Pos, Pos.Request, String> {
     @Autowired
     OrderMenuRepository orderMenuRepository;
     @Autowired

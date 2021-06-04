@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmployeeServiceImpl implements BasicService<Employee, Employee.Request> {
+public class EmployeeServiceImpl implements BasicService<Employee, Employee.Request, String> {
     @Autowired
     EmployeeRepository employeeRepository;
     @Autowired
@@ -137,7 +137,7 @@ public class EmployeeServiceImpl implements BasicService<Employee, Employee.Requ
         String empId = shopId + 'e' + String.format("%03d", Integer.parseInt(empNo));
         // 유효성 체크
         userService.isPresent(loginId); // 로그인한 계정이 존재하는지
-        shopService.isOwnShop(loginId, empId.substring(0, 10)); // 존재한다면 그 매장이 내 매장인지
+        shopService.isOwnShop(loginId, shopId); // 존재한다면 그 매장이 내 매장인지
         Employee e = isPresent(empId); // 존재하는 직원인지
         employeeRepository.delete(e);
         isEmpty(empId);

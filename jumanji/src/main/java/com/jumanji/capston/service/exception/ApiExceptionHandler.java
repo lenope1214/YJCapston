@@ -13,6 +13,7 @@ import com.jumanji.capston.service.exception.optionGroupException.OptionGroupHas
 import com.jumanji.capston.service.exception.optionGroupException.OptionGroupNotFoundException;
 import com.jumanji.capston.service.exception.orderException.OrderNotFoundException;
 import com.jumanji.capston.service.exception.orderException.OrderNotPaidException;
+import com.jumanji.capston.service.exception.orderException.PayPointOverException;
 import com.jumanji.capston.service.exception.orderMenuException.OrderMenuNotFoundException;
 import com.jumanji.capston.service.exception.orderMenuOptionException.OrderMenuOptionHasExistException;
 import com.jumanji.capston.service.exception.orderMenuOptionException.OrderMenuOptionNotFoundException;
@@ -263,5 +264,11 @@ public class ApiExceptionHandler{
         return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
     }
 
+    @ExceptionHandler(PayPointOverException.class)
+    public ResponseEntity<ApiErrorResponse> payPointOverException(PayPointOverException ex) {
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
 
 }

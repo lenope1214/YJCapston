@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public interface BasicService<T, R> {
+public interface BasicService<T, R, PK> {
     public T get(@Nullable String authorization, String... str);
     public List<T> getList(@Nullable String authorization, String... str);
     public T post(@Nullable String authorization, R request);
@@ -16,6 +16,6 @@ public interface BasicService<T, R> {
 
 
 
-    public T isPresent(String id);
-    public boolean isEmpty(String id);
+    public T isPresent(PK id);
+    public boolean isEmpty(PK id);
 }

@@ -23,7 +23,7 @@ import java.util.Set;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class OrderMenuServiceImpl implements BasicService<OrderMenu, OrderMenu.Request> {
+public class OrderMenuServiceImpl implements BasicService<OrderMenu, OrderMenu.Request, String> {
     @Autowired
     OrderMenuRepository orderMenuRepository;
     private final OrderRepository orderRepository;
@@ -45,9 +45,8 @@ public class OrderMenuServiceImpl implements BasicService<OrderMenu, OrderMenu.R
     OptionServiceImpl optionService;
 
 
-    public Set<OrderMenu> getOrderMenuByOrderId(Timestamp orderMenuId) {
-        System.out.println("orderMenuId : " +orderMenuId.toString());
-        Set<OrderMenu> orderList = orderMenuRepository.findByTab_IdStartsWith(orderMenuId.toString());
+    public Set<OrderMenu> getOrderMenuByOrderId(String orderId) {
+        Set<OrderMenu> orderList = orderMenuRepository.findByIdStartsWith(orderId);
         return orderList;
     }
 

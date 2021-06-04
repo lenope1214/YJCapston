@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 @Service
-public class CouponServiceImpl implements BasicService<Coupon, Coupon.Request> {
+public class CouponServiceImpl implements BasicService<Coupon, Coupon.Request, Long> {
     @Autowired
     CouponRepository couponRepository;
 
@@ -41,12 +41,13 @@ public class CouponServiceImpl implements BasicService<Coupon, Coupon.Request> {
     }
 
     @Override
-    public Coupon isPresent(String id) {
+    public Coupon isPresent(Long id) {
         return null;
     }
 
     @Override
-    public boolean isEmpty(String id) {
+    public boolean isEmpty(Long id) {
         return false;
     }
+
 }
