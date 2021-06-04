@@ -53,12 +53,12 @@ public class Menu {
     @OneToMany(mappedBy = "menu",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OptionGroup> optionGroupList = new ArrayList<>();
 
-    public void patch(Menu.Request request){
-        this.name = request.getName();
-        this.intro = request.getIntro();
-        this.price = request.getPrice();
-        this.duration = request.getDuration();
-//        private MultipartFile img;
+    public void patch(Menu.Request request, String imgPath){
+        if(request.getName() != null)this.name = request.getName();
+        if(request.getIntro() != null)this.intro = request.getIntro();
+        if(request.getPrice() != 0)this.price = request.getPrice();
+        if(request.getDuration() != 0)this.duration = request.getDuration();
+        if(imgPath != null) this.imgPath = imgPath;
     }
 
     @Builder(builderMethodName = "init")

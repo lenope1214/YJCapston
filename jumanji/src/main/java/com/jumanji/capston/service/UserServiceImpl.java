@@ -168,4 +168,8 @@ public class UserServiceImpl implements UserService {
     public String getDeviceToken(String userId) {
         return isPresent(userId).getDeviceToken();
     }
+
+    public void save(User user) {
+        userRepository.save(user);
+    }
 }

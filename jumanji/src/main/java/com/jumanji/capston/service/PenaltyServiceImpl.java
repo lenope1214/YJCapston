@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 @Service
-public class PenaltyServiceImpl implements BasicService<Penalty, Penalty.Request> {
+public class PenaltyServiceImpl implements BasicService<Penalty, Penalty.Request, Long> {
     @Autowired
     PenaltyRepository penaltyRepository;
 
@@ -40,12 +40,12 @@ public class PenaltyServiceImpl implements BasicService<Penalty, Penalty.Request
     }
 
     @Override
-    public Penalty isPresent(String id) {
+    public Penalty isPresent(Long id) {
         return null;
     }
 
     @Override
-    public boolean isEmpty(String id) {
+    public boolean isEmpty(Long id) {
         return false;
     }
 }
