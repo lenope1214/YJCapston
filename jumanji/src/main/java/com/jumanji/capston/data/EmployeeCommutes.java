@@ -2,10 +2,10 @@ package com.jumanji.capston.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.springframework.lang.Nullable;
 
-import javax.annotation.Nullable;
+
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Date;
 

@@ -7,9 +7,9 @@ import com.jumanji.capston.service.exception.chatbotException.ChatbotNotFoundExc
 import com.jumanji.capston.service.interfaces.BasicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Nullable;
 import javax.persistence.GeneratedValue;
 import java.util.List;
 import java.util.Optional;

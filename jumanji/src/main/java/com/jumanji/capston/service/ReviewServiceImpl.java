@@ -9,10 +9,11 @@ import com.jumanji.capston.service.exception.reviewException.ReviewIsNotYoursExc
 import com.jumanji.capston.service.exception.reviewException.ReviewNotFoundException;
 import com.jumanji.capston.service.interfaces.BasicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 
-import javax.annotation.Nullable;
+
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
