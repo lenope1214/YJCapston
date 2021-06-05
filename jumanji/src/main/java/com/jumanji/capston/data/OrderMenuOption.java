@@ -1,11 +1,9 @@
 package com.jumanji.capston.data;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.checkerframework.checker.units.qual.C;
+
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 
 @Entity (name = "order_menu_options")

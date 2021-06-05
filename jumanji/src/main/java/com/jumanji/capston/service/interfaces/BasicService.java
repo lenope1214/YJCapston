@@ -1,10 +1,8 @@
 package com.jumanji.capston.service.interfaces;
 
-import com.jumanji.capston.data.Employee;
-import com.jumanji.capston.data.User;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.lang.Nullable;
 
-import javax.annotation.Nullable;
+
 import java.util.List;
 
 public interface BasicService<T, R, PK> {
