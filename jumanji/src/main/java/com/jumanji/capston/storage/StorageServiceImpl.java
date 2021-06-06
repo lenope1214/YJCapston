@@ -1,4 +1,4 @@
-package com.jumanji.capston.service;
+package com.jumanji.capston.storage;
 
 import com.jumanji.capston.config.StorageConfig;
 import com.jumanji.capston.storage.StorageException;

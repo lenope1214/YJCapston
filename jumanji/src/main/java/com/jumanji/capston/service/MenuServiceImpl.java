@@ -6,7 +6,7 @@ import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.repository.MenuRepository;
 import com.jumanji.capston.service.exception.menuException.MenuHasExistException;
 import com.jumanji.capston.service.exception.menuException.MenuNotFoundException;
-import com.jumanji.capston.service.interfaces.BasicService;
+import com.jumanji.capston.storage.StorageServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.lang.Nullable;

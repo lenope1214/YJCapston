@@ -2,10 +2,10 @@ package com.jumanji.capston.controller;
 
 
 import com.jumanji.capston.data.Shop;
+import com.jumanji.capston.service.PaymentServiceImpl;
 import com.jumanji.capston.service.ShopServiceImpl;
-import com.jumanji.capston.service.StorageServiceImpl;
+import com.jumanji.capston.storage.StorageServiceImpl;
 import com.jumanji.capston.service.UserServiceImpl;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,6 @@ import org.springframework.lang.Nullable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +29,8 @@ public class ShopController {
 
     @Autowired
     UserServiceImpl userService;
+    @Autowired
+    PaymentServiceImpl paymentService;
 
 
     @Autowired
@@ -112,6 +113,19 @@ public class ShopController {
         return new ResponseEntity<>(shopService.patchSHopIsRsPos(authorization, shopId), HttpStatus.OK);
     }
 
+    /**
+     *
+     * @param authorization
+     * @param scope can be day, week, month
+     * @return
+     */
+    @Transactional
+    @GetMapping("shops/statistics")
+    public ResponseEntity<?> shopStatistics(@RequestHeader String authorization, @RequestParam String scope){
+        //TODO 매출 리스트 쫙 뽑아주고, 총 매출 보여주기.
+
+        return null;
+    }
 //    private List<Shop> getMyShopList(String loginId) {
 //        return shopService.findByOwnerId(loginId);
 //    }

@@ -8,6 +8,7 @@ import com.jumanji.capston.service.exception.reviewException.ReviewHasExistExcep
 import com.jumanji.capston.service.exception.reviewException.ReviewIsNotYoursException;
 import com.jumanji.capston.service.exception.reviewException.ReviewNotFoundException;
 import com.jumanji.capston.service.interfaces.BasicService;
+import com.jumanji.capston.storage.StorageServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;

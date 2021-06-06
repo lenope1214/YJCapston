@@ -1,6 +1,6 @@
 package com.jumanji.capston.controller.commons;
 
-import com.jumanji.capston.service.StorageServiceImpl;
+import com.jumanji.capston.storage.StorageServiceImpl;
 import com.jumanji.capston.storage.StorageFileNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;

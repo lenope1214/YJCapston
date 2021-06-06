@@ -3,7 +3,7 @@ package com.jumanji.capston.controller;
 import com.jumanji.capston.data.Menu;
 import com.jumanji.capston.service.MenuServiceImpl;
 import com.jumanji.capston.service.ShopServiceImpl;
-import com.jumanji.capston.service.StorageServiceImpl;
+import com.jumanji.capston.storage.StorageServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
