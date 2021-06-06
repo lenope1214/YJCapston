@@ -4,9 +4,10 @@ import com.jumanji.capston.data.Coupon;
 import com.jumanji.capston.repository.CouponRepository;
 import com.jumanji.capston.service.interfaces.BasicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Nullable;
+
 import java.util.List;
 
 @Service
