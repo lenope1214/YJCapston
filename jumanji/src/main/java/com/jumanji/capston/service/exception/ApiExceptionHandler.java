@@ -1,31 +1,17 @@
 package com.jumanji.capston.service.exception;
 
-import com.jumanji.capston.service.exception.orderException.OrderNotMineException;
-import com.jumanji.capston.service.exception.auth.ForbiddenException;
-import com.jumanji.capston.service.exception.employeeException.EmployeeAlreadyStartException;
-import com.jumanji.capston.service.exception.employeeException.EmployeeDoesNotStartException;
-import com.jumanji.capston.service.exception.employeeException.EmployeeHasExistException;
-import com.jumanji.capston.service.exception.employeeException.EmployeeNotFoundException;
-import com.jumanji.capston.service.exception.menuException.MenuHasExistException;
-import com.jumanji.capston.service.exception.optionException.OptionHasExistException;
-import com.jumanji.capston.service.exception.optionException.OptionNotFoundException;
-import com.jumanji.capston.service.exception.optionGroupException.OptionGroupHasExistException;
-import com.jumanji.capston.service.exception.optionGroupException.OptionGroupNotFoundException;
-import com.jumanji.capston.service.exception.orderException.OrderNotFoundException;
-import com.jumanji.capston.service.exception.orderException.OrderNotPaidException;
-import com.jumanji.capston.service.exception.orderException.PayPointOverException;
-import com.jumanji.capston.service.exception.orderMenuException.OrderMenuNotFoundException;
-import com.jumanji.capston.service.exception.orderMenuOptionException.OrderMenuOptionHasExistException;
-import com.jumanji.capston.service.exception.orderMenuOptionException.OrderMenuOptionNotFoundException;
-import com.jumanji.capston.service.exception.reviewException.ReviewHasExistException;
-import com.jumanji.capston.service.exception.shopException.NoShopListException;
-import com.jumanji.capston.service.exception.shopException.ShopHasExistException;
-import com.jumanji.capston.service.exception.shopException.ShopMissMatchException;
-import com.jumanji.capston.service.exception.shopException.ShopNotFoundException;
-import com.jumanji.capston.service.exception.userException.DoLoginExistException;
-import com.jumanji.capston.service.exception.userException.LoginFailedException;
-import com.jumanji.capston.service.exception.userException.UserHasExistException;
-import com.jumanji.capston.service.exception.userException.UserNotFoundException;
+import com.jumanji.capston.service.exception.orderException.*;
+import com.jumanji.capston.service.exception.auth.*;
+import com.jumanji.capston.service.exception.employeeException.*;
+import com.jumanji.capston.service.exception.menuException.*;
+import com.jumanji.capston.service.exception.optionException.*;
+import com.jumanji.capston.service.exception.optionGroupException.*;
+import com.jumanji.capston.service.exception.orderException.*;
+import com.jumanji.capston.service.exception.orderMenuException.*;
+import com.jumanji.capston.service.exception.orderMenuOptionException.*;
+import com.jumanji.capston.service.exception.reviewException.*;
+import com.jumanji.capston.service.exception.shopException.*;
+import com.jumanji.capston.service.exception.userException.*;
 import io.jsonwebtoken.MalformedJwtException;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.exception.ConstraintViolationException;
@@ -38,8 +24,9 @@ import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import javax.persistence.NonUniqueResultException;
 
-@ControllerAdvice @RequiredArgsConstructor
-public class ApiExceptionHandler{
+@ControllerAdvice
+@RequiredArgsConstructor
+public class ApiExceptionHandler {
 
 
     @ExceptionHandler(UserNotFoundException.class)
@@ -64,42 +51,42 @@ public class ApiExceptionHandler{
     }
 
     @ExceptionHandler(ShopNotFoundException.class)
-    public ResponseEntity<ApiErrorResponse> shopException(ShopNotFoundException ex){
+    public ResponseEntity<ApiErrorResponse> shopException(ShopNotFoundException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(ShopHasExistException.class)
-    public ResponseEntity<ApiErrorResponse> shopException(ShopHasExistException ex){
+    public ResponseEntity<ApiErrorResponse> shopException(ShopHasExistException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(OrderMenuNotFoundException.class)
-    public ResponseEntity<?> orderException(OrderMenuNotFoundException ex){
-        ApiErrorResponse response=
+    public ResponseEntity<?> orderException(OrderMenuNotFoundException ex) {
+        ApiErrorResponse response =
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(MenuHasExistException.class)
-    public ResponseEntity<?> menuException(MenuHasExistException ex){
+    public ResponseEntity<?> menuException(MenuHasExistException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(ShopMissMatchException.class)
-    public ResponseEntity<?> menuException(ShopMissMatchException ex){
+    public ResponseEntity<?> menuException(ShopMissMatchException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(DoLoginExistException.class)
-    public ResponseEntity<?> AuthenticationException(DoLoginExistException ex){
+    public ResponseEntity<?> AuthenticationException(DoLoginExistException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
 //        new ApiErrorResponse("error-0000 : 권한없음", "로그인해주세요");
@@ -107,28 +94,28 @@ public class ApiExceptionHandler{
     }
 
     @ExceptionHandler(NoShopListException.class)
-    public ResponseEntity<?> shopException(NoShopListException ex){
+    public ResponseEntity<?> shopException(NoShopListException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
-        return  new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<?> dataDuplicateKeyException(ConstraintViolationException ex){
+    public ResponseEntity<?> dataDuplicateKeyException(ConstraintViolationException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse("ORA-0001", ex.getConstraintName(), ex.getSQL());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MalformedJwtException.class)
-    public ResponseEntity<?> jwtException(MalformedJwtException ex){
+    public ResponseEntity<?> jwtException(MalformedJwtException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse("token-0001", "토큰이 제대로 넘어오지 않습니다.");
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MissingRequestHeaderException.class)
-    public ResponseEntity<?> missingHeader(MissingRequestHeaderException ex){
+    public ResponseEntity<?> missingHeader(MissingRequestHeaderException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse("badRequest-0001", "헤더가 제대로 넘어오지 않습니다.");
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -196,18 +183,21 @@ public class ApiExceptionHandler{
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
+
     @ExceptionHandler(OptionHasExistException.class)
     public ResponseEntity<ApiErrorResponse> optionHasExistException(OptionHasExistException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
+
     @ExceptionHandler(OptionGroupNotFoundException.class)
     public ResponseEntity<ApiErrorResponse> optionGroupNotFoundException(OptionGroupNotFoundException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
+
     @ExceptionHandler(OptionGroupHasExistException.class)
     public ResponseEntity<ApiErrorResponse> optionGroupHasExistException(OptionGroupHasExistException ex) {
         ApiErrorResponse response =
@@ -244,7 +234,7 @@ public class ApiExceptionHandler{
     }
 
     @ExceptionHandler(MaxUploadSizeExceededException.class)
-    public ResponseEntity<ApiErrorResponse> maxUploadSizeExceededException(){
+    public ResponseEntity<ApiErrorResponse> maxUploadSizeExceededException() {
         ApiErrorResponse response =
                 new ApiErrorResponse("error-file-size", "파일 사이즈가 너무 큽니다!");
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
