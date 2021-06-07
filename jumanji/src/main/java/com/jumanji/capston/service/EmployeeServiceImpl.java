@@ -85,7 +85,7 @@ public class EmployeeServiceImpl implements BasicService<Employee, Employee.Requ
 
         // 서비스
         // db쿼리문으로 널값 확인해서 하자..
-        List<Employee.Dao> employeeList = employeeRepository.findByDateOrEmpId(empId, date);
+        List<Employee.Dao> employeeList = employeeRepository.findByDateOrEmpId(shopId, empId, date);
         return employeeList;
     }
 

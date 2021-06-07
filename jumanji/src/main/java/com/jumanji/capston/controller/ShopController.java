@@ -1,10 +1,11 @@
 package com.jumanji.capston.controller;
 
 
+import com.jumanji.capston.data.Menu;
+import com.jumanji.capston.data.Review;
 import com.jumanji.capston.data.Shop;
-import com.jumanji.capston.service.ShopServiceImpl;
-import com.jumanji.capston.service.StorageServiceImpl;
-import com.jumanji.capston.service.UserServiceImpl;
+import com.jumanji.capston.data.UserShopMark;
+import com.jumanji.capston.service.*;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,11 +31,16 @@ public class ShopController {
 
     @Autowired
     UserServiceImpl userService;
+    @Autowired
+    MenuServiceImpl menuService;
+    @Autowired
+    ReviewServiceImpl reviewService;
+    @Autowired
+    UserShopMarkService usmService;
 
 
     @Autowired
     StorageServiceImpl storageService;
-
 
 
     @Transactional(readOnly = true) // get /shop/{shopId}
@@ -42,14 +48,10 @@ public class ShopController {
     public ResponseEntity<?> getShopById(
             @Nullable @RequestHeader String authorization, // 찜 정보 가져올때 사용.
             @PathVariable String shopId) {
-        return shopService.getShopByShopId(authorization, shopId);
+        Shop shop = shopService.getShopByShopId(authorization, shopId);
+        Shop.Response response = new Shop.Response(shop);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
-//    @Transactional(readOnly = true)
-//    @GetMapping("shopsIntro/{shopId}") // get shopsIntro/{shopId}
-//    public ResponseEntity<?> getShopIntro(@PathVariable String shopId) {
-//        return shopService.getShopIntro(shopId);
-//    }
 
     @Transactional(readOnly = true)
     @GetMapping("/users/shops") // get /myShop
@@ -60,6 +62,20 @@ public class ShopController {
             response.add(new Shop.Response(shop));
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @Transactional(readOnly = true)
+    @GetMapping("/users/shops/{shopId}") // get /myShop
+    public ResponseEntity<?> getMyShopByShopId(@RequestHeader String authorization,
+                                               @PathVariable String shopId) {
+        Shop shop = shopService.getShopByShopId(authorization, shopId);
+        List<Menu> menuList = menuService.getList(null, shopId);
+        List<Review> reviewList = reviewService.getList(null, shopId);
+        UserShopMark usm = usmService.get(authorization, shopId);
+        char marked = usm == null ? 'N' : 'Y';
+        Shop.Info response = new Shop.Info(shop, menuList, reviewList, marked);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
     }
 
     @Transactional(readOnly = true)

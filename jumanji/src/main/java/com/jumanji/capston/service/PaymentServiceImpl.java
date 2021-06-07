@@ -22,7 +22,16 @@ public class PaymentServiceImpl implements PaymentService {
     @Autowired
     UserServiceImpl userService;
     @Autowired
+    ShopServiceImpl shopService;
+    @Autowired
     OrderRepository orderRepository;
+
+    public List<Payment> getShopStatistics(String shopId, String scope, String date){
+
+        // 유효성 체크
+//        shopService.isOwnShop();
+        return null;
+    }
 
 
     @Override

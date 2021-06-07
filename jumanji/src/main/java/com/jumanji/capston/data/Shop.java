@@ -3,13 +3,14 @@ package com.jumanji.capston.data;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Getter
@@ -45,8 +46,9 @@ public class Shop {
     @JsonIgnore
     private User owner;
 
-    @Getter @NoArgsConstructor
-    public static class PatchRequest{
+    @Getter
+    @NoArgsConstructor
+    public static class PatchRequest {
         private String shopId;
         private String name;
         private String intro;
@@ -59,8 +61,9 @@ public class Shop {
         private MultipartFile img;
     }
 
-    @Getter @AllArgsConstructor
-    public static class PostRequest{
+    @Getter
+    @AllArgsConstructor
+    public static class PostRequest {
         private String shopId;
         private String name;
         private String intro;
@@ -73,7 +76,8 @@ public class Shop {
         private MultipartFile img;
     }
 
-    @Getter @Setter
+    @Getter
+    @Setter
     public static class Response implements Serializable {
         private String shopId;
         private String name;
@@ -107,7 +111,7 @@ public class Shop {
         }
 
 
-        public Response(Shop shop, char marked){
+        public Response(Shop shop, char marked) {
             this(shop);
             this.marked = marked;
         }
@@ -131,7 +135,7 @@ public class Shop {
     }
 
     public void update(Shop.PatchRequest patch) {
-        if(patch.getPhone() != null) this.phone = patch.getPhone();
+        if (patch.getPhone() != null) this.phone = patch.getPhone();
         if (patch.getIntro() != null) this.intro = patch.getIntro();
         if (patch.getOpenTime() != null) this.openTime = DateOperator.stringToMilisecond(patch.getOpenTime());
         if (patch.getCloseTime() != null) this.closeTime = DateOperator.stringToMilisecond(patch.getCloseTime());
@@ -140,19 +144,61 @@ public class Shop {
         if (patch.getCategory() != null) this.category = patch.getCategory();
     }
 
-    public interface Dao{
+    @ToString @Getter @NoArgsConstructor
+    public static class Info {
+        Shop.Response shopInfo;
+        List<Menu.Response> menuList = new ArrayList<>();
+        List<Review.Response> reviewList = new ArrayList<>();
+
+        public Info(Shop shop, char marked) {
+            this.shopInfo = new Response(shop, marked);
+        }
+
+
+        public Info(Shop shop, List<Menu> menuList, List<Review> reviewList, char marked) {
+            this(shop, marked);
+            setInfo(menuList, reviewList);
+        }
+
+        /**
+         * @param menuList   식당의 메뉴 리스트
+         * @param reviewList 식당의 리뷰 리스트
+         */
+        public void setInfo(List<Menu> menuList, List<Review> reviewList) {
+            for (Menu menu : menuList) {
+                this.menuList.add(new Menu.Response(menu));
+            }
+            for (Review review : reviewList) {
+                this.reviewList.add(new Review.Response(review));
+            }
+        }
+    }
+
+    public interface Dao {
         String getShopId();
+
         String getName();
+
         String getIntro();
+
         String getAddress();
+
         String getAddressDetail();
+
         String getCategory();
+
         String getOpenTime();
+
         String getCloseTime();
+
         Character getIsOpen();
+
         Character getIsRsPos();
+
         String getImgPath();
+
         String getScore();
+
         String getReviews();
     }
 }

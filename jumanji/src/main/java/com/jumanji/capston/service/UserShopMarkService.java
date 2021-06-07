@@ -24,8 +24,26 @@ public class UserShopMarkService  {
     private final UserShopMarksRepository usmRepository;
 
 
+    /**
+     *
+     * @param authorization = jwt
+     * @param str = shopId 하나만 보내기.
+     * @return
+     */
     public UserShopMark get(@Nullable String authorization, String... str) {
-        return null;
+        UserShopMark usm = null;
+        String shopId = str[0];
+        char marked = 'N';
+        String loginId = null;
+
+        if(authorization!=null)loginId = userService.getMyId(authorization);
+        System.out.println("로그인 아이디 : " + loginId);
+        if (loginId != null) {
+            usm = usmRepository.findByUserIdAndShopId(loginId, shopId);
+            if(usm != null)marked = usm.getId().getShop().getId().equals(shopId) ? 'Y' : 'N' ;
+        }
+        System.out.println("marked : " + marked);
+        return usm;
     }
 
 

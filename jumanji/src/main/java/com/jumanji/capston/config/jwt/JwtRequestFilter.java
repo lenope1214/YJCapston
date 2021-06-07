@@ -38,18 +38,18 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private static final List<String> EXCLUDE_URL =
             List.of(
                     "login"
-                    , "authenticate"
                     , "join"
-                    , "shops/list"
+                    , "authenticate"
                     , "validate"
                     , "validateDscNo"
-                    , "searchAddr"
                     , "shops"
+                    , "shops/list"
                     , "menus"
                     , "menus/list"
+                    , "menus/options"
                     , "reviews"
                     , "payments/complite"
-                    , "menus/options"
+                    , "searchAddr"
             );
 
 
@@ -131,13 +131,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
         if(path.startsWith("/api/v1/")) {
             final String PATH = path.substring(path.indexOf("EXPATH") + EXPATH.length()+1);
-//            System.out.println("잘라낸 패스 : "  + PATH);
+//            System.out.println("잘라낸 패스 : "  + PATH + "참 거짓 ? " + EXCLUDE_URL.stream().anyMatch(exclude -> exclude.startsWith(PATH.split("/")[0])));
 
 //            for(Object str : EXCLUDE_URL.toArray()){
 //                System.out.println(str);
 //            }
 //            System.out.println(EXCLUDE_URL.stream().anyMatch(exclude -> exclude.startsWith(PATH)));
-            return EXCLUDE_URL.stream().anyMatch(exclude -> exclude.startsWith(PATH));
+            return EXCLUDE_URL.stream().anyMatch(exclude -> exclude.startsWith(PATH.split("/")[0]));
         }
         return false;
     }

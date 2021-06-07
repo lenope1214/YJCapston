@@ -1,7 +1,5 @@
-package com.jumanji.capston.controller.externalApiController;
+package com.jumanji.capston.controller.external;
 
-import com.jumanji.capston.data.Payment;
-import com.jumanji.capston.data.externalData.iamport.Iamport;
 import com.jumanji.capston.service.external.IamportClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

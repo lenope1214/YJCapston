@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.websocket.server.PathParam;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.List;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
@@ -45,7 +46,7 @@ public class PaymentController {
         System.out.println("request info" +
                 "request.getQueryString" + request.getQueryString()+"\n" +
                 "merchantUid.substring(merchant_.length()) : " + merchantUid.substring("merchant_".length()));
-        IamportResponse<Iamport.Payment> response = null;
+        Iamport.IamportResponse<Iamport.Payment> response = null;
         String mId = merchantUid;
         if(merchantUid.contains("_")){
             mId = mId.substring(mId.indexOf('_')+1);
@@ -80,6 +81,18 @@ public class PaymentController {
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
-
+    /**
+     *
+     * @param shopId 요청 식당 번호
+     * @param scope 요청 기준, 일(day), 주(week), 월(month)
+     * @param date  요청 일자 yyyyMMdd
+     * @return
+     */
+    @Transactional
+    @GetMapping("shops/{shopId}/payments/statistics")
+    public ResponseEntity<?> getStatistics(@PathVariable String shopId, @RequestParam String scope, @RequestParam String date){
+        List<Payment> paymentList;
+        return null;
+    }
 
 }

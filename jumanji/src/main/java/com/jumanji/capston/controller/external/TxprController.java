@@ -1,4 +1,4 @@
-package com.jumanji.capston.controller.externalApiController;
+package com.jumanji.capston.controller.external;
 
 import com.jumanji.capston.service.external.TxprService;
 import org.springframework.beans.factory.annotation.Autowired;
