@@ -23,14 +23,10 @@ public class IamportController {
 
     @Transactional
     @GetMapping("cancel")
-    public ResponseEntity<?> payCancel(@RequestHeader String authorization, @Query("m_id") String m_id) throws Exception {
+    public ResponseEntity<?> payCanceled(@RequestHeader String authorization, @Query("m_id") String m_id) throws Exception {
         return new ResponseEntity<>(service.cancelPayment(authorization, m_id), HttpStatus.OK);
     }
 
-    @Transactional
-    @GetMapping("shop/cancel")
-    public ResponseEntity<?> payShopCancel(@RequestHeader String authorization, @Query("m_id") String m_id) throws Exception {
-        return new ResponseEntity<>(service.cancelPayment(authorization, m_id), HttpStatus.OK);
-    }
+
 
 }

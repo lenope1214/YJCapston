@@ -33,7 +33,6 @@ public class Tab implements Serializable {
         this.id = tabId;
         this.qrCode = qrCode;
         this.seatQty = seatQty;
-        this.using = 'N';
     }
 
     public void update(Request request) {
