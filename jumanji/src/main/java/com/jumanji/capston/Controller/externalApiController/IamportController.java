@@ -29,6 +29,10 @@ public class IamportController {
         return new ResponseEntity<>(service.cancelPayment(authorization, m_id), HttpStatus.OK);
     }
 
-
+    @Transactional
+    @GetMapping("shop/cancel")
+    public ResponseEntity<?> payShopCanceled(@RequestHeader String authorization, @Query("m_id") String m_id) throws Exception {
+        return new ResponseEntity<>(service.cancelPayment(authorization, m_id), HttpStatus.OK);
+    }
 
 }
