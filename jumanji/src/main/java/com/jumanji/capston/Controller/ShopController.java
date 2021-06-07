@@ -36,11 +36,10 @@ public class ShopController {
     StorageServiceImpl storageService;
 
 
-
     @Transactional(readOnly = true) // get /shop/{shopId}
     @GetMapping("shops/{shopId}")  // get shop/{shopId} 식당번호로 식당 조회
     public ResponseEntity<?> getShopById(
-            @Nullable @RequestHeader String authorization, // 찜 정보 가져올때 사용.
+            @Nullable @RequestHeader String authorization,
             @PathVariable String shopId) {
         return shopService.getShopByShopId(authorization, shopId);
     }
@@ -56,7 +55,7 @@ public class ShopController {
     public ResponseEntity<?> getMyShop(@RequestHeader String authorization) { // 수정해야함.
         List<Shop> shopList = shopService.getMyShop(authorization);
         List<Shop.Response> response = new ArrayList<>();
-        for (Shop shop : shopList) {
+        for(Shop shop: shopList){
             response.add(new Shop.Response(shop));
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -116,5 +115,6 @@ public class ShopController {
 //    private List<Shop> getMyShopList(String loginId) {
 //        return shopService.findByOwnerId(loginId);
 //    }
+
 
 }

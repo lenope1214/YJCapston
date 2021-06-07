@@ -85,7 +85,6 @@ public class ShopServiceImpl implements ShopService {
         char marked = 'N';
 
         // 값 확인 - 디버그로 하기.
-        shop = isPresent(shopId);
 
         // 서비스
         if(authorization!=null)loginId = userService.getMyId(authorization);
@@ -95,6 +94,7 @@ public class ShopServiceImpl implements ShopService {
             if(usm != null)marked = usm.getId().getShop().getId().equals(shopId) ? 'Y' : 'N' ;
         }
         System.out.println("marked : " + marked);
+        shop = isPresent(shopId);
 
         Shop.Response response = new Shop.Response(shop, marked);
 //        if(shop.getImgPath()!=null)response.setImg(storageService.loadImg(shop.getImgPath()));
