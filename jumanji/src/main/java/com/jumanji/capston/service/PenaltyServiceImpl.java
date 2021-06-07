@@ -4,9 +4,10 @@ import com.jumanji.capston.data.Penalty;
 import com.jumanji.capston.repository.PenaltyRepository;
 import com.jumanji.capston.service.interfaces.BasicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Nullable;
+
 import java.util.List;
 
 @Service

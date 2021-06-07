@@ -4,9 +4,10 @@ import com.jumanji.capston.data.*;
 import com.jumanji.capston.repository.OrderMenuRepository;
 import com.jumanji.capston.service.interfaces.BasicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Nullable;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;

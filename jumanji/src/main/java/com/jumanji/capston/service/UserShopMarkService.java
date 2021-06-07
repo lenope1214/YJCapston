@@ -9,9 +9,10 @@ import com.jumanji.capston.service.exception.markException.MarkHasExistException
 import com.jumanji.capston.service.exception.markException.MarkNotFoundException;
 import com.jumanji.capston.service.interfaces.BasicService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Nullable;
+
 import java.util.List;
 import java.util.Optional;
 
