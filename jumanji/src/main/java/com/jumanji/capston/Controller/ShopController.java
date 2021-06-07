@@ -24,7 +24,7 @@ import java.util.List;
 public class ShopController {
 //    Logger logger;
 
-    // test
+
     @Autowired
     ShopServiceImpl shopService;
 
