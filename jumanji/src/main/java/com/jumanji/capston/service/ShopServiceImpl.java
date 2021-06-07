@@ -84,7 +84,7 @@ public class ShopServiceImpl implements ShopService {
         // 값 확인 - 디버그로 하기.
 
         // 서비스
-        
+
         shop = isPresent(shopId);
 
 //        if(shop.getImgPath()!=null)response.setImg(storageService.loadImg(shop.getImgPath()));
