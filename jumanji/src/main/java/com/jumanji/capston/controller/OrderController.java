@@ -61,10 +61,13 @@ public class OrderController {
     @Transactional(readOnly = true)
     @GetMapping("orders/{orderId}")
     public ResponseEntity<?> getOrder(@PathVariable String orderId){
+        System.out.println("주문 검색 by 주문번호 검색 orderId : " + orderId);
         Long orderLong = Long.parseLong(orderId);
         Timestamp orderTime = new Timestamp(orderLong);
         List<OrderMenu> orderMenuList = orderMenuService.getList(null, orderTime);
+        System.out.println("OrderId to timestamp : " + orderTime);
         Order order =orderService.get(orderTime);
+        System.out.println("넘어가나?");
         Order.Response response = new Order.Response(order);
         List<OrderMenu.Response> omResponseList = new ArrayList<>();
         for(OrderMenu om : orderMenuList){
