@@ -20,6 +20,7 @@ const MenuRegisterFormContainer = (props) => {
 
     function isName(menuname) {
         let menunameRegExp = /^[가-힣]{2,20}$/;
+        let menunameRegExp = /^[0-9]{2,6}$/;
         return menunameRegExp.test(menuname);
     }
 

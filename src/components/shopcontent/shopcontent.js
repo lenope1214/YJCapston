@@ -229,7 +229,7 @@ const Shopcontent = ({
                                                         {menukind.intro}
                                                     </td>
                                                     <td class="menu-item">
-                                                        {menukind.price}
+                                                        {menukind.price}원
                                                     </td>
                                                 </tr>
                                             );

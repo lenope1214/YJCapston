@@ -175,6 +175,7 @@ const Shop = ({
                             <option value="한식">한식</option>
                             <option value="일식">일식</option>
                             <option value="중식">중식</option>
+                            <option value="양식">양식</option>
                             <option value="고기">고기</option>
                             <option value="분식">분식</option>
                             <option value="술집">술집</option>

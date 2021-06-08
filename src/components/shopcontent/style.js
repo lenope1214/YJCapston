@@ -441,13 +441,13 @@ export const shopcontentWrap = styled.div`
         float: left;
     }
     .shopcon {
-        padding-top: 2%;
+        padding-top: 0%;
         position: relative;
         width: 60%;
         margin: 20px auto;
         display: block;
         background-color: white;
-        height: 540px;
+        height: 590px;
     }
     .shopcon_2 {
         position: relative;
@@ -771,7 +771,7 @@ export const shopcontentWrap = styled.div`
         background:white;
         color:red;
         border:1px solid white;
-        display:flex;
+        // display:flex;
         
         width:80px;
         height:70px;

@@ -4,6 +4,7 @@ import Shopcontent from "../../components/shopcontent/shopcontent";
 import { useHistory, useParams } from "react-router-dom";
 import {
     getshopinfo,
+    getshopinfo2,
     getshopmenu,
     postLogin,
     cartNumber,
@@ -95,14 +96,24 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
     }, [param.shopId]);
 
     const getinfo = () => {
-        getshopinfo(param.shopId)
-            .then((res) => {
-                setShopIntro(res.data);
-            })
+        if (!sessionStorage.getItem("access_token")) {
+            getshopinfo(param.shopId)
+                .then((res) => {
+                    setShopIntro(res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        } else {
+            getshopinfo2(param.shopId)
+                .then((res) => {
+                    setShopIntro(res.data);
+                })
 
-            .catch((err) => {
-                console.log(err);
-            });
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
     };
 
     let sum = 0;
@@ -282,7 +293,10 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
                 alert("찜등록 완료");
             })
             .catch((err) => {
-                alert("찜 등록 에러")
+                const status = err?.response?.status;
+                    if(status== 400){
+                    alert("로그인후 이용해 주세요.");
+                    }
             });
         }
         else if (shopIntro.marked == "Y"){

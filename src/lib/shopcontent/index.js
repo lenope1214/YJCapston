@@ -33,8 +33,20 @@ export const getshopmenu = (shopId) => {
     return apiDefault().get(`/menus/list/${shopId}`, {});
 };
 
+export const getshopinfo2 = (shopId) => { 
+    return apiDefault().get(`/shops/${shopId}`, {
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        },
+    });
+};
+
 export const getshopinfo = (shopId) => {
-    return apiDefault().get(`/shops/${shopId}`, {});
+    return apiDefault().get(`/shops/${shopId}`, {
+        // headers: {
+        //     Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        // },
+    });
 };
 
 export const cartNumber = (shopId) => {

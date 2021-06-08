@@ -41,7 +41,7 @@ const MenuList = ({ menues, shopId }) => {
                                     <td className="td2">
                                         <p className="shopname">{menu.name}</p>
                                         <p className="address1">PRICE</p>
-                                        <p className="address2"> {menu.price}</p>
+                                        <p className="address2"> {menu.price}원</p>
                                     </td>
                                     <td className="td3">
                                     <Link to={`/menu/${menu.id}`} className="menu-link">

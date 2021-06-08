@@ -3,9 +3,9 @@ import styled from "styled-components";
 export const EmplistWrap = styled.div`
 .emp-container {
     padding-top: 80px;
-    margin-left: 550px;
+    margin-left: 35%;
     transform: translateX(-27%);
-    width: 92%;
+    width: 80%;
     padding-bottom: 70px;
 }
 .emp-link {
@@ -24,14 +24,41 @@ export const EmplistWrap = styled.div`
     font-weight: bold ;
 }
 .table-head{
+    width:100%;
     background: #DDDDDD;
 }
 .item-1{
+    width:15%;
     padding-top:10px;
     padding-bottom:10px;
 }
 .item-2{
-    width:60px;
+    width:10%;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+.item-3{
+    width:15%;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+.item-4{
+    width:15%;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+.item-5{
+    width:15%;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+.item-6{
+    width:10%;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+.item-7{
+    width:4%;
     position:center;
     padding-bottom:10px;
 }

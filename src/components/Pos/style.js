@@ -176,6 +176,7 @@ export const PosWrap = styled.div`
     border:1px solid black;
     display: inline-block;
     margin-left:40px;
+    margin-top:0px;
 }
 .line-2{
     width:100px;
@@ -217,5 +218,8 @@ export const PosWrap = styled.div`
     background: #000;
     display: inline-block;
   }
-
+.addGroupbut{
+    margin-top:40px;
+    margin-left:40px;
+}
 `

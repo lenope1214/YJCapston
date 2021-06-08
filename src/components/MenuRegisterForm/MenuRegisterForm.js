@@ -32,10 +32,10 @@ const MenuRegisterForm = ({
                 $(".groupbox").append("<hr width='400px'/>")
                 $(".groupbox").append("<div class='label'>그룹명</div>")
                 $(".groupbox").append("<input type='text' id='g"+i+"'/><br/>")
-                $(".groupbox").append("<div class='label'>옵션 추가</div>")
-                $(".groupbox").append("<div class='inputbox"+i+"'></div><br/>")
-                $(".groupbox").append("<input type='button' value='추가' class='addinputbut" + i +"' /><br/>")   
-                console.log("그룹 i = "+i);
+                // $(".groupbox").append("<div class='label'>옵션 추가</div>")
+                // $(".groupbox").append("<div class='inputbox"+i+"'></div><br/>")
+                // $(".groupbox").append("<input type='button' value='추가' class='addinputbut" + i +"' /><br/>")   
+                // console.log("그룹 i = "+i);
             });
         });
     }

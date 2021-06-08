@@ -117,8 +117,9 @@ console.log(shopphone1);
                     defaultValue="050" 
                     className="phone-box1" 
                     // placeholder={shopphone1}
-                    value={phone1} 
-                    onChange={handlePhone1}
+                    value={shopphone1} 
+                    // onChange={handlePhone1}
+                    disabled
                     
                     >
 
@@ -145,7 +146,7 @@ console.log(shopphone1);
                     value={phone2}
                     onChange={handlePhone2}
                     placeholder={shopphone2}
-                    
+                    disabled
                 />
 
                     -
@@ -160,6 +161,7 @@ console.log(shopphone1);
                     value={phone3}
                     onChange={handlePhone3}
                     placeholder={shopphone3}
+                    disabled
                 />
 
             <div className="label">

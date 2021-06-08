@@ -28,12 +28,12 @@ realTime
             <table className="emp-list">
                 <thead className="table-head">
                     <th className="item-1">직원번호</th>
-                    <th className="item-1">이름</th>
-                    <th className="item-1">생년월일</th>
-                    <th className="item-1">고용날짜</th>
-                    <th className="item-1">전화번호</th>
-                    <th className="item-1">성별</th>
-                    <th className="item-2"></th>
+                    <th className="item-2">이름</th>
+                    <th className="item-3">생년월일</th>
+                    <th className="item-4">고용날짜</th>
+                    <th className="item-5">전화번호</th>
+                    <th className="item-6">성별</th>
+                    <th className="item-7"></th>
                     
                 </thead>
                 <tbody>

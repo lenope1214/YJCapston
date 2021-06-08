@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import * as S from "./style";
 import { Link } from "react-router-dom";
+import $ from 'jquery';
+//npm install --save jquery 설치하기
+window.$ = $;
 
 const Pos = ({
    shopId,
@@ -9,29 +12,40 @@ const Pos = ({
    handleNum,
    number,
    nowTime,
-   add_div,
-   remove_div,
+ 
 }) => {
     const [thisShopId, setThisShopId] = useState("");
     useEffect(() => {
         setThisShopId(shopId);
     })
     
-    
-    
-    
-    
-    // function remove_div(obj){
-    
-    // document.getElementById('field').removeChild(obj.parentNode);
-    
-    // }
-    
-    
-    
-   
+    let i=0;
+    let g=0;
 
-   
+    //테이블 추가 버튼 이벤트
+    const addGroup = () => {
+        $(document).ready(function(){
+            $('.addGroupbut').unbind("click");
+            $('.addGroupbut').bind("click",function(){
+                
+                // $(".groupbox").append("<hr width='400px'/>")
+                $(".groupbox").append("<span class='line-1'></span>")
+                // $(".groupbox").append("<input type='text' id='g"+i+"'/><br/>")
+            });
+        });
+    }
+
+    //테이블 삭제 이벤트
+    const deleteGroup = () =>{
+        $(document).ready(function(){
+            $('.deleteGroupbut').unbind("click");
+            $('.deleteGroupbut').bind("click",function(){
+                
+                $('.line-1:last-child').remove();
+            });
+        });
+    };
+  
     return (
         <>
             
@@ -46,23 +60,25 @@ const Pos = ({
                 
             </div>
             <div className="right-container">
-                
-
-            <input type="button" value="추가" onclick={add_div}/><br/>
-
-            <div id="room_type">
-
-                <div className="box"></div>
-
-            {/* <input type="button" value="삭제" onclick={remove_div(this)}/> */}
-
-            </div>
-
-            <div id="field"></div>
 
 
+                    {/* 테이블추가 되는 영역 */}
+                    <span className="groupbox">
+                                        
+                    </span>
+    
+                    {/* 테이블추가 버튼 */}
+                    <input type="button" value="+
+                    " className="addGroupbut" onClick={addGroup()}/>
 
 
+                    {/* 테이블삭제버튼 */}
+                    <input type="button" value="-
+                    " className="deleteGroupbut" onClick={deleteGroup()}/>
+                                        
+                    {/* <button className="addGroupbut">+</button> */}
+
+             
 
                 {/* <div className="line">
                     <span className="line-1">
