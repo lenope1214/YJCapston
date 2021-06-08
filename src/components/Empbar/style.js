@@ -24,9 +24,10 @@ export const EmpbarWrap = styled.div`
     color:white;
     border:white;
     position:absolute;
+    top:53px;
     left:0px;
     width:100px;
-   height:130px;
+   height:150px;
 }
 .menu-2{
     position: fixed;
@@ -35,9 +36,9 @@ export const EmpbarWrap = styled.div`
     border:white;
     position:absolute;
     left:0px;
-    top:130px;
+    top:203px;
     width:100px;
-   height:130px;
+   height:150px;
 }
 .menu-3{
     position: fixed;
@@ -46,9 +47,9 @@ export const EmpbarWrap = styled.div`
     border:white;
     position:absolute;
     left:0px;
-    top:260px;
+    top:353px;
     width:100px;
-   height:130px;
+   height:150px;
 }
 .menu-4{
     position: fixed;
@@ -57,22 +58,17 @@ export const EmpbarWrap = styled.div`
     border:white;
     position:absolute;
     left:0px;
-    top:390px;
+    top:503px;
     width:100px;
-   height:130px;
+   height:150px;
 }
 button:hover{
     // background-color:#8AC1F2;
-    background-color:#22A2F8;
+    background-color:#41D1E1;
 } 
 .menu-bar{
     position:fixed;
 }
-
-
-
-
-
 
 
 `

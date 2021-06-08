@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 export const shopcontentWrap = styled.div`
+    background: #F2F2F2;
     @font-face {
+    
         font-family: "Wemakeprice-Bold";
         src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Wemakeprice-Bold.woff")
             format("woff");
@@ -25,7 +27,8 @@ export const shopcontentWrap = styled.div`
 
     .App {
         text-align: center;
-        background-color: white;
+        background-color: #F2F2F2;
+        min-width: 1200px;
     }
     .jmmjlink {
         color: black;
@@ -44,6 +47,7 @@ export const shopcontentWrap = styled.div`
         position: fixed;
         z-index: 8;
         background-color: white;
+        min-width: 80%;
     }
     .adimg {
         position: relative;
@@ -77,59 +81,62 @@ export const shopcontentWrap = styled.div`
         opacity: 1;
     }
     .center-nav input {
-        width: 300px;
-        border-color: #a7a7a7;
-        border-right: 1;
-        border-radius: 2px 0 0 2px;
+        width: 356px;
+        border-radius: 5px 0 0 5px;
         background-color: white;
         height: 40px;
         opacity: 1;
-        border-style: solid;
+        border: 1px solid #a7a7a7;
     }
 
     .center-nav button {
         border-color: #a7a7a7;
-        width: 10%;
+        width: 50px;
         border-left: 0;
-        border-radius: 0 2px 2px 0;
-        background-color: white;
-        height: 46px;
+        border-radius: 0 5px 5px 0;
+        background-color: black;
+        color: white;
+        height: 44px;
         opacity: 1;
-        border-style: solid;
+        border: none;
+        transform: translateX(-44px);
     }
 
     .right1-nav {
         width: 100px;
-        background-color: black;
         border: none;
-        color: white;
+        color: black;
         padding: 15px 0;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 15px;
+        font-size: 16px;
         margin: 4px;
         cursor: pointer;
         opacity: 1;
+        font-weight: bold;
+        background: none;
     }
     .right2-nav {
         width: 100px;
-        background-color: black;
         border: none;
-        color: white;
         padding: 15px 0;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 15px;
+        font-size: 16px;
         margin: 4px;
         cursor: pointer;
         opacity: 1;
+        background: none;
+        font-weight: bold;
     }
     .right-nav {
         padding-right: 2%;
     }
-
+    body {
+        background: #F2F2F2;
+    }
     .but-item1 {
         position: absolute;
         margin-top: 700px;
@@ -434,17 +441,19 @@ export const shopcontentWrap = styled.div`
         float: left;
     }
     .shopcon {
-        padding-top: 2%;
+        padding-top: 0%;
         position: relative;
         width: 60%;
         margin: 20px auto;
         display: block;
+        background-color: white;
+        height: 590px;
     }
     .shopcon_2 {
         position: relative;
         width: 100%;
         margin: 0 auto;
-        height: 100%;
+        background-color: white;
     }
     .shop_img2 {
         width: 70%;
@@ -467,13 +476,15 @@ export const shopcontentWrap = styled.div`
         width: 50%;
         margin: 0 auto;
         border-top: 5px solid #555;
+        background-color: white;
+        max-height: 470px;
     }
     .shopother1 {
         font-size: 23px;
         float: left;
         padding: 2%;
         margin: 2px;
-        font-weight: bolder;
+        font-weight: bolder; 
     }
     .shopother2 {
         padding-top: 3px;
@@ -550,13 +561,15 @@ export const shopcontentWrap = styled.div`
         min-width: 100%;
     }
     .tablebody {
-        padding-top: 40%;
+        padding-top: 30px;
+       
     }
     table {
         margin: auto;
         width: 60%;
         text-align: center;
         border-top: 1px solid #e8e8e8;
+        background: white;
     }
     th {
         padding: 10px;
@@ -667,6 +680,105 @@ export const shopcontentWrap = styled.div`
         border-radius: 10px;
         border: none;
         box-shadow: 2px 2px 5px 2px gray;
+    }
+    .review-box {
+        margin-top: 70px;
+        width: 60%;
+        margin-left: 20%;
+        text-align: left;
+    }
+    .review-title {
+        background: white;
+        transform: translateY(3px);
+        padding-left: 40px;
+        padding-top: 10px;
+        padding-bottom: 20px;
+        font-weight: bold;
+        border-bottom: 1px solid #F2F2F2;
+    }
+    .review-item {
+        background: white;
+        margin-top: 3px;
+        margin-bottom: 3px;
+        width: 100%;
+    }
+    .review-1 {
+        padding-top: 14px;
+        padding-left: 30px;
+        padding-bottom: 10px;
+        font-weight: bold;
+        font-size: 14px;
+        width: 10%;
+    }
+    .useritem {
+        height: 40px;
+    }
+    .username {
+        display: inline-block;
+        margin-left: 10px;
+        transform: translateY(-14px);
+    }
+    .review-2 {
+        padding-left: 34px;
+        padding-bottom: 10px;
+        font-weight: bold;   
+        transform: translateY(-8px);
+    }
+    .red {
+        color: red;
+        margin-right: 5px;
+    }
+    .review-3 {
+        padding-left: 34px;
+        padding-bottom: 10px;
+        font-size: 13px;
+        color: gray;
+        transform: translateY(-8px);
+    }
+    .review-4 {
+        padding-left: 34px;
+        padding-bottom: 10px;
+    }
+    .review-5 {
+        padding-left: 34px;
+        padding-bottom: 25px;
+        font-size: 15px;
+    }
+    .none-review {
+        text-align: center;
+        font-size: 17px;
+        background: white;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        width: 10%;
+        color: gray;
+    }
+    .imgbox-none {
+        display: none;
+    }
+    .delete {
+        float: right;
+        margin-top: 10px;
+        margin-right: 50px;
+        background: none;
+        border: 0px;
+        color: gray;
+        border-bottom: 1px solid gray;
+        cursor: pointer;
+    }
+    .mark{
+        // background: #FD2F2F;
+        background:white;
+        color:red;
+        border:1px solid white;
+        // display:flex;
+        
+        width:80px;
+        height:70px;
+        font-size:70px;
+        border-radius:3px;
+        position: relative;
+       top:-30px;
     }
 `;
 

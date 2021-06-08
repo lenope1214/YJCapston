@@ -27,4 +27,10 @@ export const headerWrap = styled.div`
         text-decoration: none;
         color: black;
     }
+    .date{
+        margin-left:900px;
+    }
+    .time{
+        margin-left:40px;
+    }
 `;

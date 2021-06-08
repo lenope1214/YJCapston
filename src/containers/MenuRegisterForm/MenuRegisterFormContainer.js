@@ -20,6 +20,7 @@ const MenuRegisterFormContainer = (props) => {
 
     function isName(menuname) {
         let menunameRegExp = /^[가-힣]{2,20}$/;
+        let menunameRegExp = /^[0-9]{2,6}$/;
         return menunameRegExp.test(menuname);
     }
 
@@ -85,7 +86,7 @@ const MenuRegisterFormContainer = (props) => {
         formData.append("intro", menudesc);
         formData.append("duration", duration);
         
-        const res = await apiDefault().post("/menu",
+        const res = await apiDefault().post("/menus",
             formData,
         {
             headers: {

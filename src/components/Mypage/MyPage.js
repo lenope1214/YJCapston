@@ -5,7 +5,8 @@ import * as S from "./style";
 
 import DaumPostcode from "react-daum-postcode";
 import topimg from "../Main/img/QR코드사진2.png";
-import { ordermenulist, requirelist } from "../../lib/MyPage";
+import { ordermenulist, requirelist} from "../../lib/MyPage";
+import {getOrderId} from "../../containers/MyPage/MyPageContainer";
 
 const MyPage = ({
     Pw,
@@ -24,6 +25,7 @@ const MyPage = ({
     require,
     orderinfom,
     closeModal,
+    getOrderId,
 }) => {
     const postCodeStyle = {
         display: "block",
@@ -192,9 +194,16 @@ const MyPage = ({
                                             <td className="orderitem4">
                                                 결제완료
                                             </td>
+                                            <td className="orderitem5">
+                                                <Link to={`/addreview/${jmlist2.jmshopId}/${jmlist2.jmid}`}>
+                                                <button className="review-button"
+                                                >리뷰쓰기</button>
+                                                </Link>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <button
+                                             className="orderitem1-name"
                                                 onClick={async () => {
                                                     const res = await ordermenulist(
                                                         jmlist2.jmid
@@ -211,8 +220,8 @@ const MyPage = ({
                                                 {jmlist2.jmamount}
                                                 <span className="won">원</span>
                                             </td>
-                                            <td className="orderitem3">
-                                                {jmlist2.jmorderRequest}
+                                            <td className="orderitem3-req">
+                                                {/* {jmlist2.jmorderRequest} */}
                                             </td>
 
                                             <td className="orderitem4-button">
@@ -222,14 +231,14 @@ const MyPage = ({
                                                         const res = await requirelist(
                                                             jmlist2.jmid
                                                         ).then((res) => {
-                                                            alert("환불완료");
+                                                            alert("취소 완료");
                                                             console.log(
                                                                 res.data
                                                             );
                                                         });
                                                     }}
                                                 >
-                                                    환불
+                                                    취소
                                                 </button>
                                             </td>
                                         </tr>

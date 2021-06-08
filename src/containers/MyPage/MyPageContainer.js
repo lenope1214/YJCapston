@@ -9,7 +9,7 @@ import {
 } from "../../lib/MyPage";
 import { useHistory } from "react-router-dom";
 
-const MyPageContainer = () => {
+const MyPageContainer = (props) => {
     const handleComplete = (data) => {
         let fullAddress = data.address;
         let extraAddress = "";
@@ -29,7 +29,7 @@ const MyPageContainer = () => {
 
         handleRoadAddr(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
     };
-
+    
     const history = useHistory();
     const [Pw, setPw] = useState("");
     const [user, setUser] = useState({
@@ -134,6 +134,7 @@ const MyPageContainer = () => {
                         jmpeople: orderjmlist.people,
                         jmamount: orderjmlist.totalAmount,
                         jmshopName: orderjmlist.shopName,
+                        jmshopId: orderjmlist.shopId,
                     };
                 });
                 setJmlist(orderjmlist);
@@ -165,3 +166,4 @@ const MyPageContainer = () => {
 };
 
 export default MyPageContainer;
+

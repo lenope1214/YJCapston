@@ -9,7 +9,7 @@ export const postMenu = (
     shopId,
 ) => {
     alert("postMenu함수 실행");
-    return apiDefault().post("/menu", {
+    return apiDefault().post("/menus", {
         formData,
         name: menuname,
         price: price,

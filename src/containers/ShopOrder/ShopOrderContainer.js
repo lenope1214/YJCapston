@@ -28,6 +28,7 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
     const [request, setRequest] = useState();
     const [people, setPeople] = useState();
     const [pointcheck, setpointcheck] = useState(0);
+    const [jmshopId, setjmshopId] = useState("");
 
     const openmodal = () => {
         setModal(true);
@@ -76,6 +77,7 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
         setJmorderid(localStorage.getItem("orderId"));
         setJmorderlist(JSON.parse(localStorage.getItem("orderlist")));
         setjmallpirce(localStorage.getItem("allPrice"));
+        setjmshopId(localStorage.getItem("shopId"));
         connect();
     }, []);
 
@@ -83,6 +85,10 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
         patchorder(request, people)
             .then((res) => {
                 console.log(res);
+                localStorage.setItem("orderId", res.data.orderId);
+                if (localStorage.orderId == res.data.orderId) {
+                    return;
+                }
             })
             .catch((err) => {
                 alert("err");
@@ -171,20 +177,23 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
         console.log(client.current);
 
         const subscribe = () => {
-            client.current.subscribe(`/sub/chat/1`, ({ body }) => {
-                // if (
-                //     window.confirm(
-                //         "예약주문이 왔어요! \n" +
-                //             "주문내용은 다음과 같아요!\n" +
-                //             "주문자 : " +
-                //             {}
-                //     )
-                // ) {
-                //     alert("happy");
-                // } else {
-                //     // 환불;
-                // }
-            });
+            client.current.subscribe(
+                `/sub/${jmshopId}/u/roomId`,
+                ({ body }) => {
+                    // if (
+                    //     window.confirm(
+                    //         "예약주문이 왔어요! \n" +
+                    //             "주문내용은 다음과 같아요!\n" +
+                    //             "주문자 : " +
+                    //             {}
+                    //     )
+                    // ) {
+                    //     alert("happy");
+                    // } else {
+                    //     // 환불;
+                    // }
+                }
+            );
         };
 
         client.current.activate();
@@ -200,8 +209,14 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
         }
 
         client.current.publish({
-            destination: `/sub/chat/2`,
-            body: JSON.stringify({ roomSeq: ROOM_SEQ, message: jmorderlist }),
+            destination: `/sub/${jmshopId}/o/roomId`,
+            body: JSON.stringify({
+                orderlist: jmorderlist,
+                orderid: jmuserinfo,
+                ordernumber: localStorage.getItem("orderId"),
+                // orderlist: jmorderlist,
+                // jmid : jmid,
+            }),
         });
     };
 
@@ -232,12 +247,20 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
         const { success, merchant_uid, error_msg } = response;
 
         if (success) {
-            patchcontent();
-
-            publish();
             setTimeout(() => {
-                paymentservice(jmallprice, pointcheck);
+                paymentservice(jmallprice, pointcheck)
+                    .then((res) => {
+                        console.log(res);
+                        // localStorage.removeItem("orderlist");
+                    })
+                    .catch((err) => {
+                        alert(err);
+                    });
             }, 3000);
+
+            setTimeout(() => {
+                publish();
+            }, 1000);
 
             alert("결제 성공");
             history.push("/PaymentDone");

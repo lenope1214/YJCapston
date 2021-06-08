@@ -8,7 +8,7 @@ export const postQRcode = (
     qrCode,
     seatQty,
 ) => {
-    return apiDefault().post("/table",{      
+    return apiDefault().post("/tables",{      
     shopId:shopId,
     no:tabno,
     qrCode:qrCode,
@@ -23,7 +23,7 @@ export const postQRcode = (
 
 
 export const getAddQR = (shopId) => {
-    return apiDefault().get(`/tableList/${shopId}`
+    return apiDefault().get(`/tables/list/${shopId}`
     ,{
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
@@ -34,7 +34,7 @@ export const getAddQR = (shopId) => {
 export const removetables = (
     tabId,
 ) => {
-    return apiDefault().delete(`/table/${tabId}`
+    return apiDefault().delete(`/tables/${tabId}`
     ,{
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,

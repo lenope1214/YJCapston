@@ -8,6 +8,7 @@ const ShopInfo = ({
     id,
     name,
     intro,
+    phone,
     openTime,
     closeTime,
     category,
@@ -45,10 +46,22 @@ const ShopInfo = ({
     handleRoadAddr,
     img,
     shop,
-    goBack
+    goBack,
+    phone1,
+    handlePhone1,
+    phone2,
+    handlePhone2,
+    phone3,
+    handlePhone3,
 }
 ) => {
+    // console.log(phone);
     
+const shopphone1 = phone ? phone.substring(0,3) : '';
+const shopphone2 = phone ? phone.substring(3, 7) : '';
+const shopphone3 = phone ? phone.substring(7, 11) : '';
+
+console.log(shopphone1);
     const postCodeStyle = {
         display: "block",
         position: "fixed",
@@ -98,17 +111,28 @@ const ShopInfo = ({
                 disabled
             />
 
-            {/* <div className="label">전화번호</div>
-                <select id="txtMobile1" defaultValue="053" className="phone-box1">
+            <div className="label">전화번호</div>
+                <select 
+                    id="txtMobile1" 
+                    defaultValue="050" 
+                    className="phone-box1" 
+                    // placeholder={shopphone1}
+                    value={shopphone1} 
+                    // onChange={handlePhone1}
+                    disabled
+                    
+                    >
+
             
-                    <option value="" disabled={true}>
+                    <option value="" >
                         ::선택::
                     </option>
                         <option value="010">010</option>
-                        <option value="02">02</option>
+                        {/* <option value="02">02</option> */}
                         <option value="051">051</option>
                         <option value="053">053</option>
                         <option value="031">031</option>
+                        <option value="050">050</option>
                 </select>
                     -
                 <input
@@ -117,8 +141,12 @@ const ShopInfo = ({
                     id="txtMobile2"
                     size="4"
                     onkeypress="onlyNumber();"
-                    // value={shopPhone.substring(3, 7)}
                     
+                    
+                    value={phone2}
+                    onChange={handlePhone2}
+                    placeholder={shopphone2}
+                    disabled
                 />
 
                     -
@@ -128,8 +156,13 @@ const ShopInfo = ({
                     id="txtMobile3"
                     size="4"
                     onkeypress="onlyNumber();"
-                    // value={shopPhone.substring(7, 11)}
-                /> */}
+                   
+                  
+                    value={phone3}
+                    onChange={handlePhone3}
+                    placeholder={shopphone3}
+                    disabled
+                />
 
             <div className="label">
                 매장소개
@@ -283,7 +316,7 @@ const ShopInfo = ({
         <div>
         <input
                 type="text"
-                id="rspos"
+                id="open"
                 value={isOpen}
                 className="input-box1"
                 />

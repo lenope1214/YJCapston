@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import * as S from "./style";
 import { Link } from "react-router-dom";
+import $ from 'jquery';
+//npm install --save jquery 설치하기
+window.$ = $;
 
 const Pos = ({
    shopId,
@@ -8,167 +11,230 @@ const Pos = ({
    num,
    handleNum,
    number,
+   nowTime,
+ 
 }) => {
     const [thisShopId, setThisShopId] = useState("");
     useEffect(() => {
         setThisShopId(shopId);
     })
+    
+    let i=0;
+    let g=0;
+
+    //테이블 추가 버튼 이벤트
+    const addGroup = () => {
+        $(document).ready(function(){
+            $('.addGroupbut').unbind("click");
+            $('.addGroupbut').bind("click",function(){
+                
+                // $(".groupbox").append("<hr width='400px'/>")
+                $(".groupbox").append("<span class='line-1'></span>")
+                // $(".groupbox").append("<input type='text' id='g"+i+"'/><br/>")
+            });
+        });
+    }
+
+    //테이블 삭제 이벤트
+    const deleteGroup = () =>{
+        $(document).ready(function(){
+            $('.deleteGroupbut').unbind("click");
+            $('.deleteGroupbut').bind("click",function(){
+                
+                $('.line-1:last-child').remove();
+            });
+        });
+    };
+  
     return (
         <>
             
 
             
             <S.PosWrap>
-                <div className="pos-title">
-                    <span>{shopId}</span>
-                    <Link to={"/posmain/"+shopId}>
-                    <button className="title1">포스기</button>
-                    </Link>
-                    <button className="title2">직원관리</button>
-                    <button className="title3">예약관리</button>
-                    <span>현재시간</span>
+                
+                
+
+            <div className="left-container">
+                <div className="shopName">{name}</div>
+                
+            </div>
+            <div className="right-container">
+
+
+                    {/* 테이블추가 되는 영역 */}
+                    <span className="groupbox">
+                                        
+                    </span>
+    
+                    {/* 테이블추가 버튼 */}
+                    <input type="button" value="+
+                    " className="addGroupbut" onClick={addGroup()}/>
+
+
+                    {/* 테이블삭제버튼 */}
+                    <input type="button" value="-
+                    " className="deleteGroupbut" onClick={deleteGroup()}/>
+                                        
+                    {/* <button className="addGroupbut">+</button> */}
+
+             
+
+                {/* <div className="line">
+                    <span className="line-1">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        />
+                    </span>
+                    <span className="line-2">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        />
+                    </span>
+                    <span className="line-3">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                    <span className="line-4">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                    <span className="line-5">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
                 </div>
-                <div className="left-container">
-                    <div className="left-head">테이블 번호</div>
+                
 
-                    <div className="left-body">메뉴명/단가/수량/할인/금액</div>
-
-                    <div className="left-body2">해당테이블의 주문현황</div>
-
-                    <div className="left-body3">합계</div>
-
-                    <div className="left-body4">매출</div>
+                <div className="line">
+                    <span className="line-1">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        />
+                    </span>
+                    <span className="line-2">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        />
+                    </span>
+                    <span className="line-3">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                    <span className="line-4">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                    <span className="line-5">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
                 </div>
-                <div className="right-container">
-                    <div className="table1">
-                        <input 
+
+
+                <div className="line">
+                    <span className="line-1">
+                        <input
+                            className="input-box"  
                             type="text"
-                            className="input-box"
-                            />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                            />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                            />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
                         />
-                    </div>
-                    <div className="table1">
-                        <input 
+                    </span>
+                    <span className="line-2">
+                        <input
+                            className="input-box"  
                             type="text"
-                            className="input-box"
                         />
-                    </div>
-            {/* ------------------------------- */}
-                    <div className="table1">
-                        <input 
+                    </span>
+                    <span className="line-3">
+                        <input
+                            className="input-box"  
                             type="text"
-                            className="input-box"
-                            value={num}
-                            onChange={handleNum}
-                            />
-                    </div>
-                    <div className="table1">
-                        <input 
+                        /></span>
+                    <span className="line-4">
+                        <input
+                            className="input-box"  
                             type="text"
-                            className="input-box"
-                        />
-                    </div>
-                    <div className="table1">
-                        <input 
+                        /></span>
+                    <span className="line-5">
+                        <input
+                            className="input-box"  
                             type="text"
-                            className="input-box"
-                        />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-            {/* ------------------------------- */}
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-            {/* ------------------------------- */}
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-                    <div className="table1">
-                        <input 
-                            type="text"
-                            className="input-box"
-                        />
-                    </div>
-                        
+                        /></span>
                 </div>
-    <button onClick={number} className="number">테이블 저장</button>
-                   
+
+
+                <div className="line">
+                    <span className="line-1">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        />
+                    </span>
+                    <span className="line-2">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        />
+                    </span>
+                    <span className="line-3">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                    <span className="line-4">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                    <span className="line-5">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                </div>
+
+
+                <div className="line">
+                    <span className="line-1">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        />
+                    </span>
+                    <span className="line-2">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        />
+                    </span>
+                    <span className="line-3">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                    <span className="line-4">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                    <span className="line-5">
+                        <input
+                            className="input-box"  
+                            type="text"
+                        /></span>
+                </div> */}
+            </div>
+
                 </S.PosWrap>
             
         </>

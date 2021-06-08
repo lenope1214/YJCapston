@@ -5,16 +5,26 @@ import Empbar from "../../components/Empbar/Empbar";
 import Emplist from "../../components/Emplist/Emplist";
 import { useHistory } from "react-router-dom";
 import { getempList, removeemps } from "../../lib/Emplist";
+import moment from 'moment';
+import 'moment/locale/ko';
+import {useInterval} from 'react-use';
+import PosNavbar from "../../components/PosNavbar/PosNavbar";
+//npm i react-use   설치하기
+
 
 const EmplistContainer = (props) => {
     const history = useHistory();
     const [shopId, setShopId] = useState("");
     const [empNo, setEmpNo] = useState("");
     const [emps, setEmps] = useState([{}]);
-    // const nowTime = moment().format("YYYY.MM.DD");
-    // console.log(nowTime);
-    // const date=new Date();
-    // console.log(date.getFullYear());
+
+    const [realTime, setRealTime] = useState(Date.now());
+    const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
+   
+
+    useInterval(() => {
+        setRealTime(Date.now());
+      }, 1000);
 
     const handleempNo = (e) => {
         const value = e.target.value;
@@ -54,7 +64,7 @@ const EmplistContainer = (props) => {
         removeemps()
             .then((res) => {
                 alert("직원삭제완료");
-                history.push(`/emplist/${shopId}`);
+                // history.push(`/emplist/${shopId}`);
                 window.location.reload();
             })
             .catch((err) => {
@@ -66,6 +76,7 @@ const EmplistContainer = (props) => {
         <>
             <Header />
             <OwnerNavbar shopId={shopId} />
+            <PosNavbar shopId={shopId}/>
             <Empbar shopId={shopId} />
             <Emplist
                 shopId={shopId}
@@ -73,6 +84,8 @@ const EmplistContainer = (props) => {
                 removeemp={removeemp}
                 empNo={empNo}
                 handleempNo={handleempNo}
+                nowTime={nowTime}
+                realTime={realTime}
             />
         </>
     );

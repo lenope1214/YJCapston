@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Shop from "../Shop/Shop";
 import * as S from "./style";
+import topimg from "../Main/img/QR코드사진2.png";
 
 const MyShop = ({
     isLogin,
@@ -14,78 +15,59 @@ const MyShop = ({
     return (
         <>
             <S.MyShopWrap>
-                <div className="menu-container">
+                <body>
+                <div className="totals">
+                    <div>
+                        <img src={topimg} className="topimg" />
+                    </div>
+                    <div className="topimg-text">
+                        <p>매장 목록</p>
+                    </div>
+                    <div className="menu-container">
+                        {!shops.length && (
+                            <div>
+                                <td colSpan="8" className="empty-list">목록이 비었습니다.</td>
+                            </div>
+                        )}
+                        {!!shops.length && shops.map((shop) => {
+                            // console.log(shop.closeTime);
+                            return (
 
-                    <h2 className="menu-title">매장 목록</h2>
-                    
-                    <Link to="/shop">
-                    <button className="btn-link">
-                            매장등록하기
+                                <div className="oneblock">
+                                    <td className="td1">
+                                        <img src={`http://3.34.55.186:8088/${shop.img}`}
+                                            width='250'
+                                            height='190'
+                                            className="img">
+                                        </img>
+                                    </td>
+                                    <td className="td2">
+                                        <p className="shopname">{shop.shopname}</p>
+                                        <p className="address1">ADDRESS</p>
+                                        <p className="address2"> {shop.address}</p>
+                                        <p className="rspos1">RESERVE</p>
+                                        <p className="rspos2"> {shop.isRsPos}</p>
+                                        <p className="rspos1">OPEN</p>
+                                        <p className="isopen2"> {shop.isOpen}</p>
+                                    </td>
+                                    <td className="td3">
+                                        <Link to={`/menuList/${shop.shopId}`} className="menu-link">
+                                            <span><button className="itembutton">매장보기</button></span>
+                                        </Link>
+                                        <span onClick={() => removeShop(`${shop.shopId}`)}><button className="itembutton">매장삭제</button></span>
+                                    </td>
+                                </div>
+
+                            );
+                        })}
+                        <Link to="/shop">
+                            <button className="btn-link">
+                                매장 등록
                     </button>
-                    </Link>
-                    
-
-                    <table className="menu-list">
-                        <thead>
-                            <th align="center" className="item-1">매장사진</th>
-                            <th align="center" className="item-2">매장번호</th>
-                            <th align="center" className="item-3">매장이름</th>
-                            {/* <th align="center" className="intro">매장소개</th> */}
-                            <th align="center" className="item-4">카테고리</th>
-                            {/* <th align="center" className="openTime">오픈시간</th>
-            <th align="center" className="closeTime">마감시간</th> */}
-                            <th align="center" className="item-5">매장주소</th>
-                            {/* <th align="center" className="addressDetail">매장상세주소</th> */}
-                            <th align="center" className="item-6">예약</th>
-	               <th align="center" className="item-7">오픈</th>
-                            <th align="center" className="item-8"></th>
-                        </thead>
-                        <tbody>
-
-                            {!shops.length && (
-                                <tr>
-                                    <td colSpan="8" className="empty-list">목록이 비었습니다.</td>
-                                </tr>
-                            )}
-                            {!!shops.length && shops.map((shop) => {
-                                // console.log(shop.closeTime);
-                                return (
-                                    <tr>
-                                        <td className="body-item-1">
-                                        <Link to={`/menuList/${shop.id}`} className="menu-link">
-                                            <img src={`http://3.34.55.186:8088/${shop.img}`}
-                                                width='150'
-                                                height='150'
-                                                className="img-box">
-                                            </img>
-                                            </Link>
-                                        </td>
-                                        <td className="body-item-2">
-                                            <Link to={`/menuList/${shop.id}`} className="menu-link">
-                                                {shop.id}
-                                            </Link>
-                                        </td>
-                                        <td className="body-item-3">{shop.shopname}</td>
-                                        {/* <td>{shop.intro}</td> */}
-                                        <td className="body-item-4">{shop.category}</td>
-                                        {/* <td>{shop.openTime}</td>
-                                        <td>{shop.closeTime}</td> */}
-                                        <td className="body-item-5">{shop.address}</td>
-                                        {/* <td>{shop.addressDetail}</td> */}
-                                        <td className="body-item-6">{shop.isRsPos}</td>
-			                            <td className="body-item-7">{shop.isOpen}</td>
-                                        <td className="body-item-8" onClick={() => removeShop(`${shop.id}`)}><button className="delete-button">X</button></td>
-
-                                    </tr>
-
-                                );
-                            })}
-
-                        </tbody>
-                    </table>
+                        </Link>
+                    </div>
                 </div>
-
-               
+                </body>
             </S.MyShopWrap>
         </>
     );

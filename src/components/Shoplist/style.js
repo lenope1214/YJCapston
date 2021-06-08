@@ -525,6 +525,9 @@ export const ShoplistWrap = styled.div`
         margin: 0 auto;
         padding: 0.5% 1% 0.5% 2%;
     }
+    .topCategory button:hover{
+        font-weight:900;
+    }
 
     .listcategory {
         display: block;
@@ -554,7 +557,42 @@ export const ShoplistWrap = styled.div`
     }
     .hrstyle {
         margin-top: 16px;
-        width: 160px;
+        height:2px;
+        width: 150px;
         margin-bottom: 10px;
+        // display:inline;
+        
     }
+    // .hrstyle2 {
+    //     margin-top: 16px;
+    //     width: 140px;
+    //     margin-bottom: 10px;
+    // }
+    .all-category{
+        // position: relative;
+        font-weight:bold;
+        font-size:30px;
+        background:white;
+        border:0px;
+        margin-right:20px;
+    }
+    // .all-category:hover{
+    //     // background-color:gray;
+    //     font-size:35px;
+    // }
+    .mark-category{
+        font-weight:bold;
+        font-size:30px;
+        background:white;
+        border:0px;
+        margin-left:20px;
+    }
+    .mark-category:hover{
+        font-size:35px;
+    }
+    hr{
+        background-color:black;
+        height:30px;
+    }
+    
 `;

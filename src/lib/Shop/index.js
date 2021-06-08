@@ -24,7 +24,7 @@ export const postShop =(
     img_url,
     roadAddr
 ) => {
-    return  apiDefault().post("/shop",{
+    return  apiDefault().post("/shops",{
      shopId:id,
      name:shopname,
      phone:phone,

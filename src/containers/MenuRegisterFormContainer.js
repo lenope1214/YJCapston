@@ -83,7 +83,7 @@ const MenuRegisterFormContainer = (props) => {
         formData.append("intro", menudesc);
         formData.append("duration", duration);
         
-        const res = await apiDefault().post("/menu",
+        const res = await apiDefault().post("/menus",
             formData,
         {
             headers: {
