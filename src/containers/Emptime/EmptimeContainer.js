@@ -8,7 +8,7 @@ import moment from 'moment';
 import 'moment/locale/ko';
 import {useInterval} from 'react-use';
 import PosNavbar from "../../components/PosNavbar/PosNavbar";
-import {postWorkstart, postWorkend, getEmpInfo} from "../../lib/Emptime";
+import {postWorkstart, postWorkend, getEmpInfo,getShopInfo } from "../../lib/Emptime";
 
 const EmptimeContainer = (props) => {
     const history = useHistory();
@@ -19,6 +19,7 @@ const EmptimeContainer = (props) => {
     const [realTime, setRealTime] = useState(Date.now());
     const nowDate = moment().format('YYYY년MM월DD일');
     const nowTime = moment().format('HH:mm:ss');
+    const [shopInfo, setShopInfo] = useState({});
 
     useInterval(() => { 
         setRealTime(Date.now());
@@ -27,12 +28,24 @@ const EmptimeContainer = (props) => {
 
     useEffect(() => {
         setShopId(props.match.params.shopId);
-        
+        ShowShopInfo(props.match.params.shopId);
         ShowEmpInfo(props.match.params.empNo);
         setEmpNo(props.match.params.empNo);
         
     }, []);
     
+    const ShowShopInfo = () => {
+        getShopInfo(props.match.params.shopId)
+            .then((res) => {
+                setShopInfo(res.data);
+                
+                console.log(res.data);
+            })
+            .catch((err) => {
+                alert("showshopInfo err");
+            });
+    };
+
     const ShowEmpInfo = () => {
         getEmpInfo(props.match.params.shopId,props.match.params.empNo)
         // getEmpInfo(props.match.params.empNo)
@@ -103,6 +116,7 @@ const EmptimeContainer = (props) => {
         empInfo={empInfo}
         empNo={empInfo.empNo}
         empName={empInfo.empName}
+        shopname={shopInfo.name}
         />
         </>
     )

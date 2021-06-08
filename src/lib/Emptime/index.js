@@ -9,6 +9,13 @@ export const getEmpInfo = (shopId,empNo) => {
     })
 }
 
+export const getShopInfo = (shopId) => {
+    return apiDefault().get(`/shops/${shopId}`,{
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        }, 
+    });
+};
 
 export const postWorkstart = (
     shopId,

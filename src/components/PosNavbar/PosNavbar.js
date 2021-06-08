@@ -19,10 +19,20 @@ const PosNavbar = ({shopId}) => {
                 <NavLink to={"/emplist/"+thisShopId} activeClassName="active">
                 <li className="pos-item">직원관리</li>
                 </NavLink>
-                <NavLink to={"/"} activeClassName="active">
-                <li className="pos-item">예약관리</li>
-                </NavLink>
-                <NavLink to={"/"} activeClassName="active">
+                {/* <NavLink to={"/"} activeClassName="active"> */}
+
+                <li className="pos-item1"
+                onClick={() =>
+                                window.open(
+                                    `http://localhost:3000/Shopsocketlist/${shopId}`,
+                                    "_blank",
+                                    "location = no, toolbars= no, status= no, width = 500, height = 500 , scrollbars = no"
+                                )
+                            }
+                >예약관리</li>
+                
+                {/* </NavLink> */}
+                <NavLink to={"/saleslist/" + shopId} activeClassName="active">
                 <li className="pos-item">매출관리</li>
                 </NavLink>
             </ul>

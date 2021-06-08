@@ -7,6 +7,9 @@ a {
 a:hover{
     color:darkgray;
 }
+pos-item:hover{
+    color:darkgray;
+}
 nav {
     position: fixed;
     display: flex;
@@ -35,5 +38,15 @@ ul {
     float:left;
     text-align: center;
 }
-
+.pos-item1 {
+    position:relative;
+    height:100%;
+    width:25%;
+    float:left;
+    color:black;
+    text-align: center;
+}
+pos-item1:hover{
+    color:darkgray;
+}
 `

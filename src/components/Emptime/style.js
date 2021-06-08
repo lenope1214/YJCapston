@@ -59,4 +59,13 @@ export const EmptimeWrap = styled.div`
 button:hover{
     background-color:#41D1E1;
 }
+.shopname{
+    font-weight:bold;
+    font-size:25px;
+}
+.empname{
+    margin-left:50px;
+    font-weight:bold;
+    font-size:20px;
+}
 `

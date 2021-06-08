@@ -15,7 +15,7 @@ console.log(shopId);
     return(
         <>
             <Header/>
-            <OwnerNavbar/>
+            <OwnerNavbar shopId={shopId}/>
             <PosMain
             shopId={shopId}
             />

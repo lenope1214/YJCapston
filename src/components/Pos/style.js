@@ -175,8 +175,8 @@ export const PosWrap = styled.div`
     height:100px;
     border:1px solid black;
     display: inline-block;
-    margin-left:40px;
-    margin-top:0px;
+    margin-left:50px;
+    margin-top:30px;
 }
 .line-2{
     width:100px;
@@ -211,7 +211,6 @@ export const PosWrap = styled.div`
 }
 
 .box {
-
     margin: 5%;
     width:36px;
     height: 36px;
@@ -219,7 +218,16 @@ export const PosWrap = styled.div`
     display: inline-block;
   }
 .addGroupbut{
-    margin-top:40px;
-    margin-left:40px;
+    margin-left:50px;
+    background:gary;
+    border:0px;
+   font-size:30px;
+   padding-left:10px;
+}
+.deleteGroupbut{
+    background:gary;
+    border:0px;
+    left:50px;
+    font-size:30px;
 }
 `

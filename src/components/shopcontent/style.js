@@ -447,7 +447,7 @@ export const shopcontentWrap = styled.div`
         margin: 20px auto;
         display: block;
         background-color: white;
-        height: 590px;
+        height: 620px;
     }
     .shopcon_2 {
         position: relative;
@@ -588,6 +588,11 @@ export const shopcontentWrap = styled.div`
         border: 1px solid #000000;
         min-height: 300px;
         width: 220px;
+    }
+    .menu-item1 {
+        font-weight:bold;
+        text-align: center;
+        padding: 10px 0 10px 0;
     }
     .menu-item {
         text-align: center;

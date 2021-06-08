@@ -30,7 +30,10 @@ const Pos = ({
                 
                 // $(".groupbox").append("<hr width='400px'/>")
                 $(".groupbox").append("<span class='line-1'></span>")
+                
                 // $(".groupbox").append("<input type='text' id='g"+i+"'/><br/>")
+                i++;
+                console.log(i);
             });
         });
     }
@@ -73,6 +76,7 @@ const Pos = ({
 
 
                     {/* 테이블삭제버튼 */}
+                    
                     <input type="button" value="-
                     " className="deleteGroupbut" onClick={deleteGroup()}/>
                                         
