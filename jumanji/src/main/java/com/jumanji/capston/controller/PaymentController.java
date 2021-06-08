@@ -90,9 +90,10 @@ public class PaymentController {
      */
     @Transactional
     @GetMapping("shops/{shopId}/payments/statistics")
-    public ResponseEntity<?> getStatistics(@PathVariable String shopId, @RequestParam String scope, @RequestParam String date){
-        List<Payment> paymentList;
-        return null;
+    public ResponseEntity<?> getStatistics(@RequestHeader String authorization, @PathVariable String shopId, @RequestParam String scope, @RequestParam String date){
+        Payment.StatisticsDAO statistics = paymentService.getShopStatistics(authorization, shopId, scope, date);
+
+        return new ResponseEntity<>(statistics, HttpStatus.OK);
     }
 
 }

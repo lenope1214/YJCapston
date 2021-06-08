@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jumanji.capston.config.IamportConfig;
 import com.jumanji.capston.data.Order;
+import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.data.externalData.iamport.*;
 import com.jumanji.capston.service.OrderServiceImpl;
 import com.jumanji.capston.service.ShopServiceImpl;
@@ -162,7 +163,6 @@ public class IamportClientService implements com.jumanji.capston.service.externa
     }
 
     public String getToken(String authorization) throws Exception {
-        String loginId = userService.getMyId(authorization);
         // 유효성 체크
         userService.isLogin(authorization);
 
@@ -251,6 +251,43 @@ public class IamportClientService implements com.jumanji.capston.service.externa
         Order order = orderService.isOwnOrder(orderIdTime, loginId);
 
         if (token != null) {
+            Iamport.CancelData cancelData = new Iamport.CancelData(m_id, false); // imp_uid 가 아니면, m_id 넣게 되어있음.
+            System.out.println("m_id : " + cancelData.getMerchant_uid());
+            String cancelJsonData = gson.toJson(cancelData);
+            StringEntity data = new StringEntity(cancelJsonData);
+
+            String response = this.postRequest("/payments/cancel", token, data);
+
+            Type listType = new TypeToken<Iamport.IamportResponse<Iamport.Payment>>() {
+            }.getType();
+            Iamport.IamportResponse<Iamport.Payment> payment = gson.fromJson(response, listType);
+            order.refund();
+            orderService.statusUpdate(order);
+            return payment;
+        }
+        return null;
+    }
+
+
+    public Iamport.IamportResponse<Iamport.Payment> cancelPaymentByShop(String authorization, String m_id, String shopId) throws Exception {
+        String token = this.getToken(authorization);
+        String loginId = userService.getMyId(authorization);
+        Long orderId = Long.parseLong(m_id);
+        Timestamp orderIdTime = new Timestamp(orderId);
+        Order order = null;
+        Shop shop = null;
+        System.out.println("cancel info >>>>>>>>>" +
+                "loginId : " + loginId + "\n" +
+                "orderId : " + orderId + "\n" +
+                "orderIdTime : " + orderIdTime);
+        // 유효성 체크
+        userService.isLogin(authorization);
+        shopService.isOwnShop(loginId, shopId);
+        order = orderService.isPresent(orderIdTime);
+
+//        Order order = orderService.isOwnOrder(orderIdTime, loginId);
+
+        if (token != null && order.getShop().getId().equals(shopId)) {
             Iamport.CancelData cancelData = new Iamport.CancelData(m_id, false); // imp_uid 가 아니면, m_id 넣게 되어있음.
             System.out.println("m_id : " + cancelData.getMerchant_uid());
             String cancelJsonData = gson.toJson(cancelData);

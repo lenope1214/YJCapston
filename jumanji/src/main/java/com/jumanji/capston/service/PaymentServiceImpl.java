@@ -26,11 +26,15 @@ public class PaymentServiceImpl implements PaymentService {
     @Autowired
     OrderRepository orderRepository;
 
-    public List<Payment> getShopStatistics(String shopId, String scope, String date){
+    public Payment.StatisticsDAO getShopStatistics(String authorization, String shopId, String scope, String date){
+        String loginId = userService.getMyId(authorization);
+        Payment.StatisticsDAO paymentList= null;
 
         // 유효성 체크
-//        shopService.isOwnShop();
-        return null;
+        shopService.isOwnShop(loginId, shopId); // 내 식당인지
+
+        paymentList = orderRepository.getStatistics(shopId, scope, date);
+        return paymentList;
     }
 
 

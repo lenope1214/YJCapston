@@ -39,4 +39,10 @@ public class ChatbotController  {
         Chatbot.Response response = new Chatbot.Response(chatbot);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+
+    @DeleteMapping("chatbots/{chatbotId}")
+    public ResponseEntity<?> deleteChatbot(@RequestHeader String authorization, @PathVariable Long chatbotId){
+        chatbotService.delete(authorization, chatbotId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
