@@ -32,7 +32,8 @@ const Shopsocketlist = ({ list }) => {
                                 <button
                                     onClick={async () => {
                                         const res = await requirelist(
-                                            list.ordernumber
+                                            list.ordernumber,
+                                            list.shopId
                                         ).then((res) => {
                                             alert("취소 완료");
                                             console.log(res.data);

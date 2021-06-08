@@ -55,13 +55,14 @@ const ShopsocketlistContainer = (props) => {
                 return jmorder_list.name + jmorder_list.count;
             });
             let orderphone = JSON.parse(body).orderid.phone;
+            let shopId = JSON.parse(body).ordershopId;
 
             // console.log(JSON.parse(body).ordernumber);
 
             setlist((prev) => {
                 return [
                     ...prev,
-                    { ordernumber, orderid, orderlist, orderphone },
+                    { ordernumber, orderid, orderlist, orderphone, shopId },
                 ];
             });
 

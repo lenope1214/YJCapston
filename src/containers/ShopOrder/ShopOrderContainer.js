@@ -214,6 +214,7 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 orderlist: jmorderlist,
                 orderid: jmuserinfo,
                 ordernumber: localStorage.getItem("orderId"),
+                ordershopId: jmshopId,
                 // orderlist: jmorderlist,
                 // jmid : jmid,
             }),
