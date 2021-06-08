@@ -28,6 +28,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Autowired
     OrderRepository orderRepository;
 
+
     public Payment.StatisticsDAO getShopStatistics(String authorization, String shopId, String date){
         String loginId = userService.getMyId(authorization);
         Payment.StatisticsDAO statistics = null;

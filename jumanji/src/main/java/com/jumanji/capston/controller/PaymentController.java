@@ -94,6 +94,6 @@ public class PaymentController {
         Payment.StatisticsDAO statistics = paymentService.getShopStatistics(authorization, shopId, date);
 //        statistics
         return new ResponseEntity<>(statistics, HttpStatus.OK);
-    }
+
 
 }
