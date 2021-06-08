@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
@@ -85,6 +86,7 @@ public class Payment implements Serializable {
         private Long pd;
         private Long rf;
     }
+
 
     public interface StatisticsDAO{
         Integer getSumPd();

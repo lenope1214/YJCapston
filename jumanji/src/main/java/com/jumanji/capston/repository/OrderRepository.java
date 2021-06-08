@@ -60,20 +60,20 @@ public interface OrderRepository extends JpaRepository<Order, Timestamp> {
             "where id = :id", nativeQuery = true)
     char isMyOrder(String userId, Timestamp id);
 
-    @Query(value = "select distinct (select sum(o2.AMOUNT)\n" +
+    @Query(value = "select distinct nvl((select sum(o2.AMOUNT)\n" +
             "                 from orders o2\n" +
             "                 where o2.STATUS = 'pd'\n" +
             "                   and o2.SHOP_ID = :shopId\n" +
-            "                   and o2.PAY_TIME >= to_char(sysdate - (to_char(sysdate, 'yyMMdd')  - :date), 'yyMMdd')) sumPd,\n" +
-            "                (select sum(o2.AMOUNT)\n" +
+            "                   and o2.PAY_TIME >= to_char(sysdate - (to_char(sysdate, 'yyyyMMdd')  - :date), 'yyyyMMdd')),0) sumPd,\n" +
+            "                nvl((select sum(o2.AMOUNT)\n" +
             "                 from orders o2\n" +
             "                 where o2.STATUS = 'rf'\n" +
             "                   and o2.SHOP_ID = :shopId\n" +
-            "                   and o2.PAY_TIME >= to_char(sysdate - to_char(sysdate, 'yyMMdd') - :date, 'yyMMdd')) sumRf,\n" +
-            "                to_char(sysdate - (to_char(sysdate, 'yyMMdd')  - :date), 'yyMMdd')\n" +
+            "                   and o2.PAY_TIME >= to_char(sysdate - (to_char(sysdate, 'yyyyMMdd') - :date), 'yyyyMMdd')), 0) sumRf,\n" +
+            "                to_char(sysdate - (to_char(sysdate, 'yyyyMMdd')  - :date), 'yyyyMMdd')\n" +
             "from ORDERS o\n" +
-            "where o.PAY_TIME >= to_char(sysdate - (to_char(sysdate, 'yyMMdd')  - :date), 'yyMMdd')", nativeQuery = true)
-    Payment.StatisticsDAO getStatistics(String shopId, String scope, String date);
+            "where o.PAY_TIME >= to_char(sysdate - (to_char(sysdate, 'yyyyMMdd')  - :date), 'yyyyMMdd')", nativeQuery = true)
+    Payment.StatisticsDAO getStatistics(String shopId, String date);
 
 //    Order findByOrderAndShop(Order order, Shop shop);
 

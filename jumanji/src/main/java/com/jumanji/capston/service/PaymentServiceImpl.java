@@ -1,5 +1,6 @@
 package com.jumanji.capston.service;
 
+import com.jumanji.capston.data.DateOperator;
 import com.jumanji.capston.data.Order;
 import com.jumanji.capston.data.Payment;
 import com.jumanji.capston.data.User;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -26,15 +28,19 @@ public class PaymentServiceImpl implements PaymentService {
     @Autowired
     OrderRepository orderRepository;
 
-    public Payment.StatisticsDAO getShopStatistics(String authorization, String shopId, String scope, String date){
+    public Payment.StatisticsDAO getShopStatistics(String authorization, String shopId, String date){
         String loginId = userService.getMyId(authorization);
-        Payment.StatisticsDAO paymentList= null;
+        Payment.StatisticsDAO statistics = null;
 
         // 유효성 체크
-        shopService.isOwnShop(loginId, shopId); // 내 식당인지
-
-        paymentList = orderRepository.getStatistics(shopId, scope, date);
-        return paymentList;
+        if(shopId == null)throw new NullPointerException("Shop Id를 입력해 주세요.");
+//        shopService.isOwnShop(loginId, shopId); // 내 식당인지
+        if(date == null)date = DateOperator.dateToYYYYMMDD(new Date(), false);
+        System.out.println("목표 식당 : " + shopId);
+        System.out.println("지정 월 : " + date);
+        statistics = orderRepository.getStatistics(shopId, date);
+        System.out.println("====================\nstatistics.getSumPd() : " + statistics.getSumPd() + "\nstatistics.getSumRf() : " + statistics.getSumRf());
+        return statistics;
     }
 
 

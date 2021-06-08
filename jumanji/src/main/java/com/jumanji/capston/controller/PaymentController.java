@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import retrofit2.http.Query;
@@ -84,15 +85,14 @@ public class PaymentController {
     /**
      *
      * @param shopId 요청 식당 번호
-     * @param scope 요청 기준, 일(day), 주(week), 월(month)
      * @param date  요청 일자 yyyyMMdd
      * @return
      */
     @Transactional
     @GetMapping("shops/{shopId}/payments/statistics")
-    public ResponseEntity<?> getStatistics(@RequestHeader String authorization, @PathVariable String shopId, @RequestParam String scope, @RequestParam String date){
-        Payment.StatisticsDAO statistics = paymentService.getShopStatistics(authorization, shopId, scope, date);
-
+    public ResponseEntity<?> getStatistics(@RequestHeader String authorization, @PathVariable String shopId, @Nullable @RequestParam String date){
+        Payment.StatisticsDAO statistics = paymentService.getShopStatistics(authorization, shopId, date);
+//        statistics
         return new ResponseEntity<>(statistics, HttpStatus.OK);
     }
 
