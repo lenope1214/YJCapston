@@ -82,7 +82,7 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
     }, []);
 
     const patchcontent = () => {
-        patchorder(request, people)
+        patchorder(request, people, jmshopId)
             .then((res) => {
                 console.log(res);
                 localStorage.setItem("orderId", res.data.orderId);
@@ -248,6 +248,10 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
         const { success, merchant_uid, error_msg } = response;
 
         if (success) {
+            setTimeout(() => {
+                patchcontent();
+            }, 1000);
+
             setTimeout(() => {
                 paymentservice(jmallprice, pointcheck)
                     .then((res) => {

@@ -19,13 +19,14 @@ export const getMyInfo = () => {
     });
 };
 
-export const patchorder = (request, people) => {
+export const patchorder = (request, people, shopId) => {
     return apiDefault().patch(
         "/orders",
         {
             orderId: localStorage.getItem("orderId"),
             orderRequest: request,
             people: people,
+            shopId: shopId,
         },
         {
             headers: {
