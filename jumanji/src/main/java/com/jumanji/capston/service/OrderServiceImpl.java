@@ -39,6 +39,10 @@ public class OrderServiceImpl implements OrderService {
 //        return new ResponseEntity<>(response, HttpStatus.OK);
 //    }
 
+    public Order get(Timestamp orderId){
+        return isPresent(orderId);
+    }
+
     public Order get(String authorization, Timestamp orderId){
         String userId = userService.getMyId(authorization);
         isOwnOrder(orderId, userId);
@@ -179,6 +183,7 @@ public class OrderServiceImpl implements OrderService {
     public Object getList() {
         return orderRepository.findAll();
     }
+
 
 
 }

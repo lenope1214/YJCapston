@@ -8,8 +8,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateOperator {
+    static final SimpleDateFormat YYMMDD = new SimpleDateFormat("yyMMdd"); // hh : 0-11 HH : 0-23
     static final SimpleDateFormat YYYYMMDD = new SimpleDateFormat("yyyyMMdd"); // hh : 0-11 HH : 0-23
     static final SimpleDateFormat YYYYMMDDHHMMSS = new SimpleDateFormat("yyyyMMddHHmmss");
+    static final SimpleDateFormat SYYMMDD = new SimpleDateFormat("yy/MM/dd"); // hh : 0-11 HH : 0-23
     static final SimpleDateFormat SYYYYMMDD = new SimpleDateFormat("yyyy/MM/dd");
     static final SimpleDateFormat SYYYYMMDDHHMMSS = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     public static Date stringToMilisecond(String date) {
@@ -33,6 +35,17 @@ public class DateOperator {
             return dateFormat.format(date);
         }
         throw new MyNullPointerException("dateToHHMM", "Date", "date");
+    }
+
+    public static String dateToYYMMDD(Date date, boolean slash) {
+
+        if (date != null) {
+            if(!slash){
+                return YYMMDD.format(date);
+            }
+            return SYYMMDD.format(date);
+        }
+        throw new MyNullPointerException("dateToYYYYMMDD", "Date", "date");
     }
 
     public static String dateToYYYYMMDD(Date date, boolean slash) {

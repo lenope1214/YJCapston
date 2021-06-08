@@ -1,4 +1,4 @@
-package com.jumanji.capston.controller.externalApiController;
+package com.jumanji.capston.controller.external;
 
 import com.jumanji.capston.service.external.NaverPlaceSearchService;
 import org.springframework.beans.factory.annotation.Autowired;

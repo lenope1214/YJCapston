@@ -77,28 +77,18 @@ public class ShopServiceImpl implements ShopService {
         return reverseIsRsPos(shop);
     }
 
-    public ResponseEntity<?> getShopByShopId(@Nullable String authorization, String shopId) {
+    public Shop getShopByShopId(@Nullable String authorization, String shopId) {
         // 변수
         Shop shop;
-        String loginId = null;
-        UserShopMark usm;
-        char marked = 'N';
 
         // 값 확인 - 디버그로 하기.
 
         // 서비스
-        if(authorization!=null)loginId = userService.getMyId(authorization);
-        System.out.println("로그인 아이디 : " + loginId);
-        if (loginId != null) {
-            usm = usmRepository.findByUserIdAndShopId(loginId, shopId);
-            if(usm != null)marked = usm.getId().getShop().getId().equals(shopId) ? 'Y' : 'N' ;
-        }
-        System.out.println("marked : " + marked);
+
         shop = isPresent(shopId);
 
-        Shop.Response response = new Shop.Response(shop, marked);
 //        if(shop.getImgPath()!=null)response.setImg(storageService.loadImg(shop.getImgPath()));
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return shop;
     }
 
 

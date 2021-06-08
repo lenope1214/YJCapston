@@ -38,9 +38,10 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
             "    left join EMP_COMMUTES ec\n" +
             "    on e.ID = SUBSTR(ec.id, 0, 10) || 'e' || substr(ec.id, 11, 3)\n" +
             "    where\n" +
-            "    to_char(START_TIME, 'yyyy-MM-dd') = decode(:date, null, to_char(START_TIME, 'yyyy-MM-dd'), :date)\n" +
-            "    and e.id = decode(:empId, null, e.id, :empId)", nativeQuery = true)
-    List<Employee.Dao> findByDateOrEmpId(String empId, String date);
+            "       substr(ec.id, 0, 10) = :shopId" +
+            "       and to_char(START_TIME, 'yyyy-MM-dd') = decode(:date, null, to_char(START_TIME, 'yyyy-MM-dd'), :date)\n" +
+            "       and e.id = decode(:empId, null, e.id, :empId)", nativeQuery = true)
+    List<Employee.Dao> findByDateOrEmpId(String shopId, String empId, String date);
 
 
 //    @Query(value = "", nativeQuery = true)

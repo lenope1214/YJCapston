@@ -48,7 +48,13 @@ public class MenuServiceImpl {
         return menu;
     }
 
-    
+
+    /**
+     *
+     * @param authorization  be null
+     * @param str [0] : shopId
+     * @return
+     */
     @Transactional(readOnly = true)
     public List<Menu> getList(@Nullable String authorization, String... str) {
         String shopId = str[0];

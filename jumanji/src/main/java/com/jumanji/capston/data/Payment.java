@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
@@ -58,7 +59,7 @@ public class Payment implements Serializable {
         private String refundAccount; // 환불 계좌
     }
 
-    @Getter
+    @Getter @NoArgsConstructor
     public static class Response{
         private Timestamp orderId;
         private String payTime;
@@ -78,5 +79,17 @@ public class Payment implements Serializable {
             this.payMethod = payment.getPayMethod();
             this.pg = payment.getPg();
         }
+    }
+
+    @Getter @NoArgsConstructor @AllArgsConstructor
+    public static class Statistics{
+        private Long pd;
+        private Long rf;
+    }
+
+
+    public interface StatisticsDAO{
+        Integer getSumPd();
+        Integer getSumRf();
     }
 }

@@ -46,6 +46,7 @@ public class TableController {
         return new ResponseEntity<>(tableService.patch(authorization, request), HttpStatus.OK);
     }
 
+
     @DeleteMapping("tables/{tabId}")
     public ResponseEntity<?> deleteTable(@RequestHeader String authorization, @PathVariable String tabId){
         tableService.delete(authorization, tabId);

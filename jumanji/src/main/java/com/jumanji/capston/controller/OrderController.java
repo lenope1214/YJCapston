@@ -60,11 +60,11 @@ public class OrderController {
 
     @Transactional(readOnly = true)
     @GetMapping("orders/{orderId}")
-    public ResponseEntity<?> getOrder(@RequestHeader String authorization, @PathVariable String orderId){
+    public ResponseEntity<?> getOrder(@PathVariable String orderId){
         Long orderLong = Long.parseLong(orderId);
         Timestamp orderTime = new Timestamp(orderLong);
-        List<OrderMenu> orderMenuList = orderMenuService.getList(authorization, orderTime);
-        Order order =orderService.get(authorization,orderTime);
+        List<OrderMenu> orderMenuList = orderMenuService.getList(null, orderTime);
+        Order order =orderService.get(orderTime);
         Order.Response response = new Order.Response(order);
         List<OrderMenu.Response> omResponseList = new ArrayList<>();
         for(OrderMenu om : orderMenuList){

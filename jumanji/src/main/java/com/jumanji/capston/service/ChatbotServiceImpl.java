@@ -4,9 +4,7 @@ import com.jumanji.capston.data.Chatbot;
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.repository.ChatbotRepository;
 import com.jumanji.capston.service.exception.chatbotException.ChatbotNotFoundException;
-import com.jumanji.capston.service.interfaces.BasicService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
@@ -67,8 +65,11 @@ public class ChatbotServiceImpl {
     }
 
     
-    public void delete(@Nullable String authorization, String... str) {
+    public void delete(@Nullable String authorization, Long chatbotId) {
+        String loginId = userService.getMyId(authorization);
 
+        Chatbot chatbot = isPresent(chatbotId);
+        chatbotRepository.delete(chatbot);
     }
 
     

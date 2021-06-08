@@ -69,7 +69,7 @@ public class OrderMenuServiceImpl implements BasicService<OrderMenu, OrderMenu.R
 
     public List<OrderMenu> getList(String authorization, Timestamp orderId) {
 //        String orderId = "" + orderLong + 'o';
-        userService.isLogin(authorization);
+//        userService.isLogin(authorization);
         orderService.isPresent(orderId);
 
         List<OrderMenu> orderMenuList;
