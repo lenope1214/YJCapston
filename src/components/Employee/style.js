@@ -4,7 +4,7 @@ export const EmployeeWrap = styled.div`
 background: #F2F2F2;
 
 .emp-container{
-    padding-top: 20px;
+    padding-top: 100px;
     width: 50%;
     padding-left:35%;
     padding-bottom:100px;

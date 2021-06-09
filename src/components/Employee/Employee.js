@@ -29,6 +29,7 @@ hiredate2,
 handlehiredate2,
 hiredate3,
 handlehiredate3,
+name,
 }) => {
 
     return(
@@ -36,12 +37,22 @@ handlehiredate3,
         <S.EmployeeWrap>
     <div className="emp-container">
         <div className="label-title"><h2>직원등록</h2></div>
-        <div className="label">매장번호</div>
+        {/* <div className="label">매장번호</div>
             <div>
                 <input 
                     type="text"
                     id="shopid"
                     value={shopId}
+                    className="input-box"
+                    disabled
+                />
+            </div> */}
+            <div className="label">매장이름</div>
+            <div>
+                <input 
+                    type="text"
+                    id="shopid"
+                    value={name}
                     className="input-box"
                     disabled
                 />

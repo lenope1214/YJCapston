@@ -23,7 +23,12 @@ import PosMainContainer from "./containers/PosMain/PosMainContainer";
 import EmployeeContainer from "./containers/Employee/EmployeeContainer";
 import EmplistContainer from "./containers/Emplist/EmplistContainer";
 import AddReviewContainer from "./containers/AddReview/AddReviewContainer";
+import EmptimeContainer from "./containers/Emptime/EmptimeContainer";
 import * as StompJs from "@stomp/stompjs";
+import EmptimelistContainer from "./containers/Emptimelist/EmptimelistContainer";
+import ShopsocketlistContainer from "./containers/Shopsocketlist/ShopsocketlistContainer";
+import SaleslistContainer from "./containers/saleslist/SaleslistContainer";
+import ChattingContainer from "./containers/Chatting/ChattingContainer";
 
 const ROOM_SEQ = 1;
 
@@ -60,10 +65,32 @@ const App = () => {
                     <Route path="/shop" component={ShopContainer} />
                     <Route path="/MyShop" component={MyShopContainer} />
                     <Route component={QRcodeContainer} path="/QRcode/:shopId" />
-                    <Route component={PosContainer} path="/Pos/:shopId"/>
-                    <Route component={PosMainContainer} path="/PosMain/:shopId"/>
-                    <Route component={EmployeeContainer} path="/Employee/:shopId"/>
-                    <Route component={EmplistContainer} path="/Emplist/:shopId"/>
+                    <Route component={PosContainer} path="/Pos/:shopId" />
+                    <Route
+                        component={PosMainContainer}
+                        path="/PosMain/:shopId"
+                    />
+                    <Route
+                        component={SaleslistContainer}
+                        path="/saleslist/:shopId"
+                    />
+
+                    <Route
+                        component={EmployeeContainer}
+                        path="/Employee/:shopId"
+                    />
+                    <Route
+                        component={EmplistContainer}
+                        path="/Emplist/:shopId"
+                    />
+                    <Route
+                        component={EmptimeContainer}
+                        path="/Emptime/:shopId/:empNo"
+                    />
+                    <Route
+                        component={EmptimelistContainer}
+                        path="/Emptimelist/:shopId"
+                    />
                     <Route
                         component={MenuListContainer}
                         path="/menuList/:shopId"
@@ -78,7 +105,10 @@ const App = () => {
                     />
                     <Route component={EventContainer} path="/event" />
                     <Route component={MenuReadContainer} path="/menu/:menuId" />
-                    <Route component={AddReviewContainer} path='/addreview/:shopId/:orderId' />
+                    <Route
+                        component={AddReviewContainer}
+                        path="/addreview/:shopId/:orderId"
+                    />
                     <Route
                         path="/shopcontent/:shopId"
                         component={() => (
@@ -121,6 +151,14 @@ const App = () => {
                     ></Route>
                     <Route path="/test" component={TestChat} />
                     <Route
+                        path="/Shopsocketlist/:shopId"
+                        component={ShopsocketlistContainer}
+                    ></Route>
+                    <Route
+                        path="/chat/:shopId"
+                        component={ChattingContainer}
+                    ></Route>
+                    <Route
                         path="/"
                         component={() => (
                             <MainContainer
@@ -132,6 +170,7 @@ const App = () => {
                     />
                 </Switch>
             </Router>
+            {/* <Route path="/test" component={TestChat} /> */}
         </>
     );
 };

@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
 export const ShopsWrap = styled.div`
-bottom: 0;
-margin: 0;
-padding: 0;
 background: #F2F2F2;
     @font-face {
         font-family: "Wemakeprice-Bold";

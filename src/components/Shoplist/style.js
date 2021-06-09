@@ -121,10 +121,8 @@ export const ShoplistWrap = styled.div`
     }
     .left-nav {
         display: flex;
-        margin-left: 10%;
+        padding-left: 10%;
         flex-grow: 1;
-        color: black;
-        text-decoration: none;
     }
 
     .center-nav {
@@ -421,13 +419,14 @@ export const ShoplistWrap = styled.div`
         padding-bottom: 4px;
     }
     .topCategory button {
-        width: 160px;
+        width: 8%;
         padding-top: 4px;
         padding-bottom: 4px;
     }
 
     .topCategory {
         box-shadow: 0px 0, 0 1px #a7a7a7, 0px 0 #a7a7a7, 0 -1px #a7a7a7;
+        min-width: 1590px;
         margin: 0 auto;
     }
     .cityreview {
@@ -526,6 +525,9 @@ export const ShoplistWrap = styled.div`
         margin: 0 auto;
         padding: 0.5% 1% 0.5% 2%;
     }
+    .topCategory button:hover{
+        font-weight:900;
+    }
 
     .listcategory {
         display: block;
@@ -555,11 +557,42 @@ export const ShoplistWrap = styled.div`
     }
     .hrstyle {
         margin-top: 16px;
-        width: 160px;
+        height:2px;
+        width: 150px;
         margin-bottom: 10px;
+        // display:inline;
+        
     }
-    .none-shop {
-        margin-top: 100px;
-        margin-bottom: 100px;
+    // .hrstyle2 {
+    //     margin-top: 16px;
+    //     width: 140px;
+    //     margin-bottom: 10px;
+    // }
+    .all-category{
+        // position: relative;
+        font-weight:bold;
+        font-size:30px;
+        background:white;
+        border:0px;
+        margin-right:20px;
     }
+    // .all-category:hover{
+    //     // background-color:gray;
+    //     font-size:35px;
+    // }
+    .mark-category{
+        font-weight:bold;
+        font-size:30px;
+        background:white;
+        border:0px;
+        margin-left:20px;
+    }
+    .mark-category:hover{
+        font-size:35px;
+    }
+    hr{
+        background-color:black;
+        height:30px;
+    }
+    
 `;

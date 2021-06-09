@@ -11,6 +11,7 @@ import item1 from "./img/C_QRITEM.png";
 import item2 from "./img/C_RESITEM.png";
 import item3 from "./img/C_CHATITEM.png";
 import $ from 'jquery';
+//npm install --save jquery 설치하기
 window.$ = $;
 
 

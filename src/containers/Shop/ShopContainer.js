@@ -127,7 +127,7 @@ const ShopContainer = () => {
         console.log(formData);
 
         const res = await apiDefault()
-            .post("/shop",
+            .post("/shops",
 
                 formData,
 
@@ -245,6 +245,7 @@ const ShopContainer = () => {
                 handleshopId={handleshopId}
                 shopname={shopname}
                 handleShopname={handleShopname}
+                phone={phone}
                 handlePhone1={handlePhone1}
                 handlePhone2={handlePhone2}
                 handlePhone3={handlePhone3}

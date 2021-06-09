@@ -441,13 +441,13 @@ export const shopcontentWrap = styled.div`
         float: left;
     }
     .shopcon {
-        padding-top: 2%;
+        padding-top: 0%;
         position: relative;
         width: 60%;
         margin: 20px auto;
         display: block;
         background-color: white;
-        height: 540px;
+        height: 620px;
     }
     .shopcon_2 {
         position: relative;
@@ -588,6 +588,11 @@ export const shopcontentWrap = styled.div`
         border: 1px solid #000000;
         min-height: 300px;
         width: 220px;
+    }
+    .menu-item1 {
+        font-weight:bold;
+        text-align: center;
+        padding: 10px 0 10px 0;
     }
     .menu-item {
         text-align: center;
@@ -764,6 +769,28 @@ export const shopcontentWrap = styled.div`
         border: 0px;
         color: gray;
         border-bottom: 1px solid gray;
+        cursor: pointer;
+    }
+    .mark{
+        // background: #FD2F2F;
+        background:white;
+        color:red;
+        border:1px solid white;
+        width:80px;
+        height:70px;
+        font-size:40px;
+        border-radius:3px;
+        display: flex;
+        margin-top: -50px;
+        padding-left: 50px;
+    }
+    .chatbut {
+        margin-top: 20px;
+        width: 260px;
+        height: 40px;
+        background: #333333;
+        color: white;
+        border: 0px;
         cursor: pointer;
     }
 `;

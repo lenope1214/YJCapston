@@ -8,6 +8,7 @@ const ShopInfo = ({
     id,
     name,
     intro,
+    phone,
     openTime,
     closeTime,
     category,
@@ -45,11 +46,22 @@ const ShopInfo = ({
     handleRoadAddr,
     img,
     shop,
-    goBack
+    goBack,
+    phone1,
+    handlePhone1,
+    phone2,
+    handlePhone2,
+    phone3,
+    handlePhone3,
 }
 ) => {
-    console.log(isOpen);
+    // console.log(phone);
     
+const shopphone1 = phone ? phone.substring(0,3) : '';
+const shopphone2 = phone ? phone.substring(3, 7) : '';
+const shopphone3 = phone ? phone.substring(7, 11) : '';
+
+console.log(shopphone1);
     const postCodeStyle = {
         display: "block",
         position: "fixed",
@@ -60,6 +72,20 @@ const ShopInfo = ({
         left: "50%",
         transform: "translate(-50%, -50%)",
     };
+
+    let a = null;
+    if (isRsPos == "Y"){
+        a="예약가능";
+    }else{
+        a="예약불가능";
+    }
+
+    let b = null;
+    if (isRsPos == "Y"){
+        b="매장오픈";
+    }else{
+        b="매장미오픈";
+    }
     
     return(
         <>
@@ -99,17 +125,28 @@ const ShopInfo = ({
                 disabled
             />
 
-            {/* <div className="label">전화번호</div>
-                <select id="txtMobile1" defaultValue="053" className="phone-box1">
+            <div className="label">전화번호</div>
+                <select 
+                    id="txtMobile1" 
+                    defaultValue="050" 
+                    className="phone-box1" 
+                    // placeholder={shopphone1}
+                    value={shopphone1} 
+                    // onChange={handlePhone1}
+                    disabled
+                    
+                    >
+
             
-                    <option value="" disabled={true}>
+                    <option value="" >
                         ::선택::
                     </option>
                         <option value="010">010</option>
-                        <option value="02">02</option>
+                        {/* <option value="02">02</option> */}
                         <option value="051">051</option>
                         <option value="053">053</option>
                         <option value="031">031</option>
+                        <option value="050">050</option>
                 </select>
                     -
                 <input
@@ -118,8 +155,12 @@ const ShopInfo = ({
                     id="txtMobile2"
                     size="4"
                     onkeypress="onlyNumber();"
-                    // value={shopPhone.substring(3, 7)}
                     
+                    
+                    value={phone2}
+                    onChange={handlePhone2}
+                    placeholder={shopphone2}
+                    disabled
                 />
 
                     -
@@ -129,8 +170,13 @@ const ShopInfo = ({
                     id="txtMobile3"
                     size="4"
                     onkeypress="onlyNumber();"
-                    // value={shopPhone.substring(7, 11)}
-                /> */}
+                   
+                  
+                    value={phone3}
+                    onChange={handlePhone3}
+                    placeholder={shopphone3}
+                    disabled
+                />
 
             <div className="label">
                 매장소개
@@ -227,65 +273,31 @@ const ShopInfo = ({
                 value={shopAddressDetail}
                 className="input-box"
             />
-            {/* --------여기서부터 --------------- */}
             
-            <div className="label">
+            <div className="form-label">
             예약가능여부
             </div>
         <div>
-            {/* <span className="info-10"
-                // style={{
-                //     fontSize:"20px",
-                //     paddingTop:"20px",
-                // }}
-            >
-                
-            가능
-            <input 
-                type="radio"
-                id="is_rs_pos1"
-                name="is_rs_pos"
-                // placeholder={isRsPos ="Y"}
-            
-                value={isRsPos = "Y"}
-                // onChange={handleIs_rs_pos}
-            />
-            </span>
-            <span className="info-11"
-                // style={{
-                //     fontSize:"20px",
-                //     paddingTop:"20px",
-                // }}
-            >
-            불가능
-            <input
-                type="radio"
-                id="is_rs_pos2"
-                name="is_rs_pos"
-                // placeholder={isRsPos ="N"}
-                value={isRsPos = "N"}
-                // onChange={handleIs_rs_pos}
-            />
-            </span> */}
-            
             <input
                 type="text"
                 id="rspos"
-                value={isRsPos}
+                // value={isRsPos}
+                value={a}
                 className="input-box1"
                 />
             <button onClick={Shop_v2} className="button0">예약여부변경하기</button>
             {/* <span className="open">{isRsPos}</span> */}
         </div>
             
-            <div className="label">
+            <div className="form-label">
             오픈여부
             </div>
         <div>
         <input
                 type="text"
                 id="open"
-                value={isOpen}
+                // value={isOpen}
+                value={b}
                 className="input-box1"
                 />
             <button onClick={Shop_v3} className="button0">오픈여부변경하기</button>

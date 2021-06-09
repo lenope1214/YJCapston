@@ -9,7 +9,7 @@ export const postEmp = (
     phone,
     gender,
 ) => {
-    return apiDefault().post("/shop/employee",{
+    return apiDefault().post("/shops/employees",{
     shopId:shopId,
     empNo:empNo,
     empName:empName,
@@ -18,6 +18,14 @@ export const postEmp = (
     phone:phone,
     gender:gender,    
     },{
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        }, 
+    });
+};
+
+export const getShopInfo = (shopId) => {
+    return apiDefault().get(`/shops/${shopId}`,{
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         }, 

@@ -8,24 +8,25 @@ export const postLogin = (id, password) => {
 };
 
 export const getshopinfo = (shopId) => {
-    return apiDefault().get(`/shop/${shopId}`, {});
+    return apiDefault().get(`/shops/${shopId}`, {});
 };
 
 export const getMyInfo = () => {
-    return apiDefault().get("/user", {
+    return apiDefault().get("/users", {
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         },
     });
 };
 
-export const patchorder = (request, people) => {
+export const patchorder = (request, people, shopId) => {
     return apiDefault().patch(
-        "/order",
+        "/orders",
         {
             orderId: localStorage.getItem("orderId"),
             orderRequest: request,
             people: people,
+            shopId: shopId,
         },
         {
             headers: {
@@ -39,7 +40,7 @@ export const patchorder = (request, people) => {
 export const paymentservice = (jmallprice, pointcheck) => {
     console.log(Math.floor((jmallprice - pointcheck) * 0.01));
     return apiDefault().post(
-        "/payment",
+        "/payments",
         {
             orderId: localStorage.getItem("orderId"),
             pg: "inisis",

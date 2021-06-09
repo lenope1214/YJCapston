@@ -10,8 +10,28 @@ const MyShop = ({
     openModal,
     shops,
     removeShop,
-    Id
+    Id,
+    shop,
+    isRsPos,
+    isOpen,
 }) => {
+
+    let a = null;
+    let b = null;
+
+    // if (isRsPos == "Y"){
+    //     a="예약가능";
+    // }else{
+    //     a="예약불가능";
+    // }
+
+    // let b = null;
+    // if (isOpen == "Y"){
+    //     b="매장오픈";
+    // }else{
+    //     b="매장미오픈";
+    // }
+
     return (
         <>
             <S.MyShopWrap>
@@ -30,8 +50,21 @@ const MyShop = ({
                             </div>
                         )}
                         {!!shops.length && shops.map((shop) => {
+                            if(shop.isRsPos == "Y"){
+                                a="예약가능";
+                            }else{
+                                a="예약불가능";
+                            }
+
+                            if(shop.isOpen == "Y"){
+                                b="매장오픈";
+                            }else{
+                                b="매장미오픈";
+                            }
                             // console.log(shop.closeTime);
                             return (
+
+                                
 
                                 <div className="oneblock">
                                     <td className="td1">
@@ -46,15 +79,17 @@ const MyShop = ({
                                         <p className="address1">ADDRESS</p>
                                         <p className="address2"> {shop.address}</p>
                                         <p className="rspos1">RESERVE</p>
-                                        <p className="rspos2"> {shop.isRsPos}</p>
+                                        {/* <p className="rspos2"> {shop.isRsPos}</p> */}
+                                        <p className="rspos2"> {a}</p>
                                         <p className="rspos1">OPEN</p>
-                                        <p className="isopen2"> {shop.isOpen}</p>
+                                        {/* <p className="isopen2"> {shop.isOpen}</p> */}
+                                        <p className="isopen2"> {b}</p>
                                     </td>
                                     <td className="td3">
-                                        <Link to={`/menuList/${shop.id}`} className="menu-link">
+                                        <Link to={`/menuList/${shop.shopId}`} className="menu-link">
                                             <span><button className="itembutton">매장보기</button></span>
                                         </Link>
-                                        <span onClick={() => removeShop(`${shop.id}`)}><button className="itembutton">매장삭제</button></span>
+                                        <span onClick={() => removeShop(`${shop.shopId}`)}><button className="itembutton">매장삭제</button></span>
                                     </td>
                                 </div>
 

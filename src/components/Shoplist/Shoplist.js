@@ -27,6 +27,9 @@ const Shoplist = ({
     showjjimtang,
     showcafe,
     showfastfood,
+    showMarks,
+    marklist
+    
 }) => {
     console.log(restaurant);
     let AWS_BASE_URL = "http://3.34.55.186:8088/";
@@ -35,7 +38,6 @@ const Shoplist = ({
             <S.ShoplistWrap>
                 <div class="App">
                     <div class="black-nav">
-                        <Link to="/" className="left-nav">
                         <div class="left-nav">
                             주문
                             <span
@@ -48,7 +50,6 @@ const Shoplist = ({
                             </span>
                             민족
                         </div>
-                        </Link>
                         <div class="center-nav">
                             <input
                                 type="text"
@@ -110,8 +111,8 @@ const Shoplist = ({
                             <button onClick={showfastfood}>
                                 <li>패스트푸드</li>
                             </button>
-                            <button>
-                                <li class="cityreview">실시간 리뷰</li>
+                            <button onClick={showMarks}>
+                                <li class="cityreview">찜 목록</li>
                             </button>
                             <button onClick={showShoplist}>
                                 <li class="reviewevent">모두보기</li>
@@ -122,8 +123,13 @@ const Shoplist = ({
                                 <img class="mainimg-img" src={mainpicture} />
                             </div>
                             <div class="guidetext">
-                                매장 보기
+                                
+                                <button className="all-category" onClick={showShoplist}>매장 목록</button>     
+                                {/* <Link to="/Marklist"> */}
+                                {/* <button className="mark-category" onClick={showMarks}>찜 목록</button>  */}
+                                {/* </Link> */}
                                 <hr class="hrstyle" />
+                                {/* <hr class="hrstyle2" /> */}
                             </div>
                             <div clasName="menulist">
                                 <div class="leftCategory">
