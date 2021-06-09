@@ -9,17 +9,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderMenu {
-    private String orderId;
+    private String orderMenuId;
     private String shopId;
-    private String menuId;
+    private String menuName;
     private String quantity;
-    private int tabNo;
+    private int tableNo;
 
-    public OrderMenu(String orderId, String shopId, String menuId, String quantity) {
-        this.orderId = orderId;
-        this.shopId = shopId;
-        this.menuId = menuId;
+    private String orderId;
+    private String menuId;
+
+//    private List<Option> optionList;
+
+    public OrderMenu(String menuName, String quantity) {
+        this.menuName = menuName;
         this.quantity = quantity;
     }
-//    private List<Option> optionList;
 }

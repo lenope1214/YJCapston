@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.example.jmjapp.R;
+import com.example.jmjapp.dto.Order;
+import com.example.jmjapp.network.Server;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -22,18 +25,33 @@ import org.json.JSONObject;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLOutput;
+import java.util.HashMap;
+import java.util.Map;
 
 import lombok.SneakyThrows;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class QrReaderActivity extends AppCompatActivity {
     SharedPreferences pref;
     SharedPreferences.Editor editor;
-    String orderNumber;
+    static public String orderCheck = "0";
+    static public String tablenum, shopnum1, shopnum2, orderId;
+
+    private String jwt;
+
+    private Call<Order> orderCall;
+    private Call<ResponseBody> responseBodyCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_reader);
+
+        SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
+        jwt = pref.getString("token","");
 
         scanCode();
     }
@@ -54,14 +72,37 @@ public class QrReaderActivity extends AppCompatActivity {
             //QRcode 결과가 있으면
             if(result.getContents() != null) {
                 String str = result.getContents();
-                String shopnum1 = str.substring(str.lastIndexOf("shopcontent/")+12);
-                String shopnum2 = shopnum1.substring(0,10);
-                String tablenum = shopnum1.substring(11,12);
+                shopnum1 = str.substring(str.lastIndexOf("shopcontent/")+12);
+                shopnum2 = shopnum1.substring(0,10);
+                tablenum = shopnum1.substring(11,12);
+
+                Map<String, String> map = new HashMap();
+                map.put("shopId", shopnum2);
+
+                orderCall = Server.getInstance().getApi().updateOrder("Bearer " + jwt, map);
+                orderCall.enqueue(new Callback<Order>() {
+                    @Override
+                    public void onResponse(Call<Order> call, Response<Order> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("orderTable 성공", "orderTable 성공");
+                            orderId = response.body().getOrderId();
+                            Log.d("orderId", orderId);
+                            updateTable(orderId);
+                        } else {
+                            Log.d("orderTable 실패1", "orderTable 실패1");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Order> call, Throwable t) {
+                        Log.d("orderTable 실패2", "orderTable 실패2"+t.getCause());
+                    }
+                });
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage(result.getContents());
-                builder.setTitle("Scanning Result");
-                builder.setPositiveButton("move", new DialogInterface.OnClickListener() {
+                builder.setMessage("어서오세요!");
+                builder.setTitle("알림");
+                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @SneakyThrows
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -78,24 +119,20 @@ public class QrReaderActivity extends AppCompatActivity {
 //                            editor.putInt("OrderNumber",1);
 //                            editor.apply();
 
-                            orderNumber = "1";
+                            orderCheck = "1";
 
-                            Intent intent = new Intent(QrReaderActivity.this,ShopDetailActivity.class);
+                            Intent intent = new Intent(QrReaderActivity.this, MainActivity.class);
                             intent.putExtra("shopNumber",shopnum2);
                             intent.putExtra("tableNumber", tablenum);
-                            intent.putExtra("orderCheck", orderNumber);
-
+                            intent.putExtra("orderCheck", orderCheck);
+                            intent.putExtra("QR", "order");
+                            intent.putExtra("orderId", orderId);
 
                             startActivity(intent);
                         } catch (Exception e ) {
                             e.getStackTrace();
                         }
 
-                    }
-                }).setNegativeButton("finish", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
                     }
                 });
                 AlertDialog dialog = builder.create();
@@ -109,6 +146,33 @@ public class QrReaderActivity extends AppCompatActivity {
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    private void updateTable(String orderId) {
+        Map<String, String> map = new HashMap();
+        map.put("shopId", shopnum2);
+        map.put("no", tablenum);
+        map.put("orderId", orderId);
+        map.put("using", "Y");
+        Log.d("orderIdtoUpdateTable", orderId);
+
+        responseBodyCall = Server.getInstance().getApi().updateTable("Bearer " + jwt, map);
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @SneakyThrows
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    Log.d("updateTable 성공", "updateTable 성공");
+                } else {
+                    Log.d("updateTable 실패1", "updateTable 실패1"+response.errorBody().string());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("updateTable 실패2", "updateTable 실패2"+t.getCause());
+            }
+        });
     }
 
 }

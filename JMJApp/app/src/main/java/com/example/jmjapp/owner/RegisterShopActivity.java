@@ -152,7 +152,7 @@ public class RegisterShopActivity extends AppCompatActivity {
                 map.put("closeTime", close_timeBody);
                 map.put("category", categoryBody);
 
-                //Log.d("qweq@@@", String.valueOf(idBody.)+nameBody+introBody+addressBody+address_detailBody+open_timeBody+close_timeBody+categoryBody);
+                Log.d("qweq@@@", String.valueOf(idBody)+nameBody+introBody+addressBody+address_detailBody+open_timeBody+close_timeBody+categoryBody);
 
                 shopCall = Server.getInstance().getApi().insertShop("Bearer " + jwt, map);
                 shopCall.enqueue(new Callback<Shop>() {

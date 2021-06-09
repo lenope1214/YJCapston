@@ -42,7 +42,7 @@ public class WebViewActivity extends AppCompatActivity {
                 browser.loadUrl("javascript:sample2_execDaumPostcode();");
             }
         });
-        browser.loadUrl("http://192.168.1.77:8088/daumAddr");
-        //browser.loadUrl("http://3.34.55.186:8088/daumAddr");
+        //browser.loadUrl("http://192.168.1.77:8088/daumAddr");
+        browser.loadUrl("http://3.34.55.186:8088/daumAddr");
     }
 }

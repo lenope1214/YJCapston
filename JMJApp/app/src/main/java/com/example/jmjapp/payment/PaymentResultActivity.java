@@ -78,6 +78,9 @@ public class PaymentResultActivity extends AppCompatActivity {
         map.put("orderId", String.valueOf(orderId));
         map.put("resId", resId);
         map.put("status", "toOwner");
+        map.put("jwt", jwt);
+
+        Log.d("qweasdd","qweasdd");
 
         binding.reservationComp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,18 +136,21 @@ public class PaymentResultActivity extends AppCompatActivity {
 
             JSONObject dataObj = new JSONObject();
 
-//            dataObj.put("resTime", map.get("resTime"));
-//            dataObj.put("resDate", map.get("resDate"));
-//            dataObj.put("sum", map.get("sum"));
-//            dataObj.put("count", map.get("count"));
-//            dataObj.put("resShop", map.get("resShop"));
+            dataObj.put("resTime", map.get("resTime"));
+            dataObj.put("resDate", map.get("resDate"));
+            dataObj.put("sum", map.get("sum"));
+            dataObj.put("count", map.get("count"));
+            dataObj.put("resShop", map.get("resShop"));
             dataObj.put("orderId", map.get("orderId"));
             dataObj.put("resId", map.get("resId"));
             dataObj.put("status", map.get("status"));
+            dataObj.put("jwt", map.get("jwt"));
             requestData.put("data", dataObj);
             JSONArray idArray = new JSONArray();
 
-            idArray.put(0, "ctgNzO5SL04:APA91bFyTGXC5WKgWuS_oAXQrXDVe_pTvPnTiXJtBJPVSM0750M3WGocpffwRL5CIGtv3P01uwL0UQV_qwKhlisCO_UAJP7ITnmw_9FIbcIAh_1Hw0UYEqKQl0Oy_RP4chKkLkiccC7J");
+            Log.d("qweasd","Qweasd");
+
+            idArray.put(0, "fQZfmHb2gbs:APA91bGvHvx4Bc4RscaCbtIQsx3dbzvMZ2GSYhAg2fU962DK1O2JMN81C3VFA716r0zcC078Z1zenHdT1KDYU6IkeeQgEWnHd_3_htwNW21WDWpEwF0zPuqERLQNd-glrFOcKbmoy-DL");
             requestData.put("registration_ids", idArray);
         } catch (Exception e) {
             e.printStackTrace();
@@ -197,7 +203,7 @@ public class PaymentResultActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<String, String>();
-                headers.put("Authorization", "key=AAAAMsCw7yQ:APA91bGlT_VTfm9xHFMcguW36JMt6VXKVY2s-VgFnpUyrAZz2Gjhe8reRkLOMLp5dBG2kju74sUmeD4co8EQvZgszn4-4UUlaL0pdrttVcf9N50Jjk32Vdv1tGFASC0Nm_ss5VEdd68z");
+                headers.put("Authorization", "key=AAAASNKJ6g4:APA91bEbZnK-PXSqFhJ1CVQ4DIa1NZ1NUHCtRyJ9fIWJPJBebuQosfVDa75uI0Nl7qQKZ8RFFb-s2H9bGVIBYw3od5zg6fKxPUgpms2Hk1O_IMxNAGU-8P4ir-Og-Z1lGIK1-ZYptD_t");
                 return headers;
             }
 

@@ -15,6 +15,7 @@ import com.example.jmjapp.*;
 import com.example.jmjapp.Adapter.BasketRecyclerAdapter;
 import com.example.jmjapp.dto.Basket;
 import com.example.jmjapp.dto.Menu;
+import com.example.jmjapp.dto.OrderMenu;
 import com.example.jmjapp.network.Server;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -22,6 +23,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import lombok.SneakyThrows;
@@ -58,6 +60,10 @@ public class BasketActivity extends AppCompatActivity {
 //        orderNumber = getSharedPreferences("orderCheck",MODE_PRIVATE);
 //        orderCheck = orderNumber.getInt("OrderNumber", 0);
 
+        Intent intent = getIntent();
+        String qr = intent.getStringExtra("qr");
+        String shopId = intent.getStringExtra("shopNumber");
+
         System.out.println(ShopDetailActivity.shopNumber + "!@#" + ShopDetailActivity.tableNumber + "!@#" + ShopDetailActivity.orderCheck + "!@#");
 
         basket_reservation_btn = findViewById(R.id.basket_reservation_btn);
@@ -82,16 +88,65 @@ public class BasketActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                try {
-                    ShopDetailActivity.orderCheck.equals("1");
-                } catch (Exception e) {
-                    ShopDetailActivity.orderCheck = "0";
-                }
+//                try {
+//                    ShopDetailActivity.orderCheck.equals("1");
+//                } catch (Exception e) {
+//                    ShopDetailActivity.orderCheck = "0";
+//                }
 
-                if(ShopDetailActivity.orderCheck.equals("1")){
+                if(qr != null){
+                    Log.d("qr주문","qr주문");
+                    Log.d("shopId", shopId);
+                    Log.d("orderId", QrReaderActivity.orderId);
+
+                    SharedPreferences pref3 = getSharedPreferences("basket", MODE_PRIVATE);
+                    int list_size2 = pref3.getInt("list_size", 0);
+
+                    String[] list_id =  new String[list_size2];
+                    int[] list_count = new int[list_size2];
+
+                    for (int i = 0; i < list_size2; i++) {
+                        list_id[i] = pref3.getString("list_" + i + "_id", null);
+                        list_count[i] = pref3.getInt("list_" + i + "_count", 0);
+                    }
+
+                    Map<String, List<OrderMenu>> map = new HashMap();
+                    List<OrderMenu> omList = new ArrayList<>();
+
+                    for (int i = 0; i < list_size2; i++) {
+                        OrderMenu om = new OrderMenu().builder()
+                                .orderId(String.valueOf(QrReaderActivity.orderId))
+                                .shopId(shopId)
+                                .menuId(list_id[i])
+                                .quantity(String.valueOf(list_count[i]))
+                                .build();
+                        omList.add(om);
+                    }
+
+                    map.put("list", omList);
+
+                    responseBodyCall = Server.getInstance().getApi().order_menus("Bearer " + jwt, map);
+                    responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                        @SneakyThrows
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            if (response.isSuccessful()) {
+                                Log.d("orderMenu 성공", "orderMenu 성공");
+                                Log.d("qweasd", response.body().string());
+                            } else {
+                                Log.d("orderMenu 실패1", "orderMenu 실패1"+response.errorBody().string());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Log.d("orderMenu 실패2", "orderMenu 실패2");
+                        }
+                    });
+
                     Intent intent = new Intent(BasketActivity.this, MainActivity.class);
-                    intent.putExtra("QR","order");
-                    intent.putExtra("shopNumber",ShopDetailActivity.shopNumber);
+                    intent.putExtra("QROrder","QROrder");
+                    intent.putExtra("shopNumber", shopId);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(BasketActivity.this, OrderActivity.class);

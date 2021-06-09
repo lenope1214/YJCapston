@@ -59,7 +59,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String orderId2 = data.get("orderId2");
         String msg = data.get("msg");
         String status = data.get("status");
-        Log.d("status===",status);
+        String jwt = data.get("jwt");
+
+        //Log.d("status===",status);
         //Log.d(TAG, "from : " + from + ", contents : " + qwe);
 
 //        sendToActivity(getApplicationContext(), from, resTime, resDate,
@@ -80,31 +82,32 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         if (status.equals("toOwner")) {
             if (remoteMessage.getNotification() != null) { //포그라운드
-                sendNotification(remoteMessage.getNotification().getBody(), remoteMessage.getNotification().getTitle(), from, orderId, resId);
+                sendNotification(remoteMessage.getNotification().getBody(), remoteMessage.getNotification().getTitle(), from, orderId, resId, jwt);
                 Log.d("owenr포그라운드", "owenr포그라운드");
                 //up_Nt(remoteMessage.getData().get("orderCnt1"),null,null);
             } else if (remoteMessage.getData().size() > 0) { //백그라운드
-                sendNotification(remoteMessage.getData().get("resTime"), remoteMessage.getData().get("resDate"), from, orderId, resId);
+                sendNotification(remoteMessage.getData().get("resTime"), remoteMessage.getData().get("resDate"), from, orderId, resId, jwt);
                 Log.d("owenr백그라운드", "owenr백그라운드");
                 //up_Nt(remoteMessage.getData().get("orderCnt1"),null,null);
             }
         } else if (status.equals("toUser")) {
             if (remoteMessage.getNotification() != null) { //포그라운드
-                sendNotificationToUser(remoteMessage.getNotification().getBody(), remoteMessage.getNotification().getTitle(), from, orderId2, msg);
+                sendNotificationToUser(remoteMessage.getNotification().getBody(), remoteMessage.getNotification().getTitle(), from, orderId2, msg, jwt);
                 Log.d("user포그라운드", "user포그라운드");
             } else if (remoteMessage.getData().size() > 0) { //백그라운드
-                sendNotificationToUser(remoteMessage.getData().get("orderId2"), remoteMessage.getData().get("msg"), from, orderId2, msg);
+                sendNotificationToUser(remoteMessage.getData().get("orderId2"), remoteMessage.getData().get("msg"), from, orderId2, msg, jwt);
                 Log.d("user백그라운드", "user백그라운드");
             }
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void sendNotificationToUser(String messageBody, String messageTitle, String from, String orderId2, String msg) {
+    private void sendNotificationToUser(String messageBody, String messageTitle, String from, String orderId2, String msg, String jwt) {
         Intent intent = new Intent(this, BellActivity.class);
         intent.putExtra("from", from);
         intent.putExtra("orderId", orderId2);
         intent.putExtra("msg", msg);
+        intent.putExtra("jwt", jwt);
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
@@ -161,7 +164,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private void sendToActivity(Context context, String from,
                                 String resTime, String resDate,
-                                String sum, String count, String resShop, String orderId, String resId) {
+                                String sum, String count, String resShop, String orderId, String resId, String jwt) {
         Intent intent = new Intent(context, BellActivity_O.class);
         intent.putExtra("from", from);
         intent.putExtra("resTime", resTime);
@@ -171,6 +174,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         intent.putExtra("resShop", resShop);
         intent.putExtra("orderId", orderId);
         intent.putExtra("resId", resId);
+        intent.putExtra("jwt", jwt);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         context.startActivity(intent);
@@ -178,12 +182,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void sendNotification(String messageBody, String messageTitle, String from,
-                                   String orderId, String resId)  {
+                                   String orderId, String resId, String jwt)  {
         //////////////////////////// 포그라운드 및 백그라운드 푸시알림 처리 ////////////////////////////
         Intent intent = new Intent(this, BellActivity_O.class);
         intent.putExtra("from", from);
         intent.putExtra("orderId", orderId);
         intent.putExtra("resId", resId);
+        intent.putExtra("jwt", jwt);
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,

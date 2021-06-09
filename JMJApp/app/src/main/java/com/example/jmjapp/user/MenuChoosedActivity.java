@@ -46,6 +46,8 @@ public class MenuChoosedActivity extends AppCompatActivity {
     private MenuChooseOptionGroupsAdapter adapter;
     ArrayList<OptionGroups> mItems = new ArrayList<>();
 
+    private char is_rs_pos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,10 +68,17 @@ public class MenuChoosedActivity extends AppCompatActivity {
         menuPrice = intent.getIntExtra("menuPrice", 0);
         menuIntro = intent.getStringExtra("menuIntro");
         menuImage = intent.getStringExtra("menuImage");
-        Log.d("shopNumber", ShopDetailActivity.shopNumber);
-        Log.d("menuId", menuId);
+//        Log.d("shopNumber", ShopDetailActivity.shopNumber);
+//        Log.d("menuId", menuId);
 
-        char is_rs_pos = ShopDetailActivity.shopIsRsPos;
+        String qr = intent.getStringExtra("qr");
+        if (qr != null) {
+            Log.d("qr rs_pos","qr rs_pos");
+            is_rs_pos = QrMenuActivity.is_rs_pos;
+        } else {
+            Log.d("rs_pos", "rs_pos");
+            is_rs_pos = ShopDetailActivity.shopIsRsPos;
+        }
 
         menu_choosed_name = findViewById(R.id.menu_choosed_name);
         menu_choosed_price = findViewById(R.id.menu_choosed_price);
@@ -119,12 +128,18 @@ public class MenuChoosedActivity extends AppCompatActivity {
                     String shopNumber = pref2.getString("shop_number", "no_shop");
 
                     if(shopNumber.equals("no_shop")) {
-                        editor2.putString("shop_number", ShopDetailActivity.shopNumber);
-                        editor2.apply();
-                        shopNumber = pref2.getString("shop_number", "no_shop");
+                        if (qr != null) {
+                            editor2.putString("shop_number", QrMenuActivity.shopNumber);
+                            editor2.apply();
+                            shopNumber = pref2.getString("shop_number", "no_shop");
+                        } else {
+                            editor2.putString("shop_number", ShopDetailActivity.shopNumber);
+                            editor2.apply();
+                            shopNumber = pref2.getString("shop_number", "no_shop");
+                        }
                     }
-
-                    if (shopNumber.equals(ShopDetailActivity.shopNumber)) {
+                    //Log.d("shopp", QrMenuActivity.shopNumber);
+                    if (shopNumber.equals(ShopDetailActivity.shopNumber) || shopNumber.equals(QrMenuActivity.shopNumber)) {
                         SharedPreferences pref = getSharedPreferences("basket", MODE_PRIVATE);
                         SharedPreferences.Editor editor = pref.edit();
 
@@ -145,6 +160,7 @@ public class MenuChoosedActivity extends AppCompatActivity {
                             editor.putInt("list_" + list_size + "_price", menuPrice);
                             editor.putInt("list_" + list_size + "_count", menuCount);
                             editor.putString("list_" + list_size + "_img", menuImage);
+                            editor.putString("list_" + list_size + "_id", menuId);
                             editor.putInt("list_size", list_size + 1);
                             editor.apply();
                         } else {

@@ -17,8 +17,10 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.jmjapp.JMJApplication;
 import com.example.jmjapp.R;
+import com.example.jmjapp.dto.Mark;
 import com.example.jmjapp.dto.Order;
 import com.example.jmjapp.dto.OrderMenu;
+import com.example.jmjapp.dto.Shop;
 import com.example.jmjapp.network.Server;
 
 import java.util.ArrayList;
@@ -40,7 +42,10 @@ public class ProfileUpdateActivity extends AppCompatActivity {
     private AlertDialog dialog;
     private String jwt;
     private Call<ResponseBody> responseBodyCall;
-    private Call<OrderMenu> orderMenuCall;
+    //private Call<OrderMenu> orderMenuCall;
+    private Call<List<OrderMenu>> orderMenuCall;
+    private Call<Order.OrderMenuList> getOrderMenus;
+    private Call<Order> orderCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +63,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
         jwt = pref.getString("token", null);
         Log.d("jwt", "Bearer " + jwt);
+        Log.d("jwt123", jwt);
 
         user_profile_id = findViewById(R.id.user_profile_id);
         user_profile_id.setText(id);
@@ -158,38 +164,111 @@ public class ProfileUpdateActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("btn실행", "btn실행");
-
-                Map<String, List<OrderMenu>> map = new HashMap();
-                List<OrderMenu> omList = new ArrayList<>();
-
-                OrderMenu om1 = new OrderMenu().builder()
-                        .orderId("1622108941558")
-                        .shopId("0532552288")
-                        .menuId("51m20210408072439")
-                        .quantity("3")
-                        .build();
-                omList.add(om1);
-
-                map.put("list", omList);
-
-                responseBodyCall = Server.getInstance().getApi().order_menus("Bearer " + jwt, map);
-                responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                orderCall = Server.getInstance().getApi().orderOne("Bearer " + jwt, "1622685111001");
+                orderCall.enqueue(new Callback<Order>() {
                     @SneakyThrows
                     @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    public void onResponse(Call<Order> call, Response<Order> response) {
                         if (response.isSuccessful()) {
-                            Log.d("성공","성공");
+                            Log.d("s","s");
                         } else {
-                            Log.d("실패","실패"+response.errorBody().string());
+                            Log.d("no","no"+response.errorBody().string());
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Log.d("실패2","실패2");
+                    public void onFailure(Call<Order> call, Throwable t) {
+                        Log.d("s2","s2");
                     }
                 });
+
+//                getOrderMenus = Server.getInstance().getApi().orderOneMenu("Bearer " + jwt, "1622591304095");
+//                getOrderMenus.enqueue(new Callback<Order.OrderMenuList>() {
+//                    @SneakyThrows
+//                    @Override
+//                    public void onResponse(Call<Order.OrderMenuList> call, Response<Order.OrderMenuList> response) {
+//                        if (response.isSuccessful()) {
+//                            Log.d("order_orderMenu 성공", "order_orderMenu 성공");
+//                            List<OrderMenu> orderMenuList = response.body().getOrderMenuList();
+//
+//                            for (OrderMenu list : orderMenuList) {
+//                                Log.d("list_quantity", list.getQuantity());
+//                            }
+//                        } else {
+//                            Log.d("order_orderMenu 실패1", "order_orderMenu 실패1"+response.errorBody().string());
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<Order.OrderMenuList> call, Throwable t) {
+//                        Log.d("order_orderMenu 실패2", "order_orderMenu 실패2");
+//                    }
+//                });
+
+//                orderMenuCall = Server.getInstance().getApi().order_orderMenu("Bearer " + jwt, "1621620310128");
+//                orderMenuCall.enqueue(new Callback<List<OrderMenu>>() {
+//                    @SneakyThrows
+//                    @Override
+//                    public void onResponse(Call<List<OrderMenu>> call, Response<List<OrderMenu>> response) {
+//                        if (response.isSuccessful()) {
+//                            Log.d("oprderId", "1621620310128");
+//                            Log.d("order_orderMenu 성공", "order_orderMenu 성공");
+//                            List<OrderMenu> orderMenuList = response.body();
+//                            Log.d("response.body", response.body().toString());
+//                            for (OrderMenu list : orderMenuList) {
+//
+//                            }
+//                            String[] list_id = new String[orderMenuList.size()];
+//                            int[] list_count = new int[orderMenuList.size()];
+//                            Log.d("size", String.valueOf(orderMenuList.size()));
+//                            for(OrderMenu list : orderMenuList) {
+//                                for (int i = 0; i < orderMenuList.size(); i++) {
+//                                    list_id[i] = list.getMenuId();
+//                                    Log.d("list_id", list_id[i]);
+//                                }
+//                            }
+//                        } else {
+//                            Log.d("order_orderMenu 실패1", "order_orderMenu 실패1"+response.errorBody().string());
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<List<OrderMenu>> call, Throwable t) {
+//                        Log.d("order_orderMenu 실패2", "order_orderMenu 실패2");
+//                    }
+//                });
+//                Log.d("btn실행", "btn실행");
+//
+//                Map<String, List<OrderMenu>> map = new HashMap();
+//                List<OrderMenu> omList = new ArrayList<>();
+//
+//                OrderMenu om1 = new OrderMenu().builder()
+//                        .orderId("1622108941558")
+//                        .shopId("0532552288")
+//                        .menuId("51m20210408072439")
+//                        .quantity("3")
+//                        .build();
+//                omList.add(om1);
+//
+//                map.put("list", omList);
+
+//                responseBodyCall = Server.getInstance().getApi().order_menus("Bearer " + jwt, map);
+//                responseBodyCall.enqueue(new Callback<ResponseBody>() {
+//                    @SneakyThrows
+//                    @Override
+//                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                        if (response.isSuccessful()) {
+//                            Log.d("성공","성공");
+//                        } else {
+//                            Log.d("실패","실패"+response.errorBody().string());
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                        Log.d("실패2","실패2");
+//                    }
+//                });
             }
         });
     }

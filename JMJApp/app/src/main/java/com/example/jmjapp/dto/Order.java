@@ -3,6 +3,7 @@ package com.example.jmjapp.dto;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,4 +30,9 @@ public class Order {
     private char reviewed;
     private String userId;
     private char accept;
+
+    @Data
+    public static class OrderMenuList {
+        private List<OrderMenu> orderMenuList;
+    }
 }

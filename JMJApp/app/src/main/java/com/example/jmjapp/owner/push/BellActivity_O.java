@@ -43,7 +43,7 @@ public class BellActivity_O extends AppCompatActivity {
 
     private Call<List<Order>> listOrderCall;
 
-    private String resTime, from, resDate, resShop, sum, count, orderId, jwt, resId;
+    private String resTime, from, resDate, resShop, sum, count, orderId, jwt, resId, jwtUser;
     TextView textView;
 
     @Override
@@ -82,6 +82,7 @@ public class BellActivity_O extends AppCompatActivity {
 //        resShop = intent.getStringExtra("resShop");
         orderId = intent.getStringExtra("orderId");
         resId = intent.getStringExtra("resId");
+        jwtUser = intent.getStringExtra("jwt");
         //binding.qwe123.setText(resTime);
 
         if (from != null) {
@@ -107,7 +108,7 @@ public class BellActivity_O extends AppCompatActivity {
                                         list.getReason(), list.getReviewed(), list.getUserId(), list.getAccept()));
                                 Log.d("accept", String.valueOf(list.getAccept()));
                                 alarm_list.setHasFixedSize(true);
-                                adapter = new AlarmListRecyclerAdapter(getApplicationContext(), mItems);
+                                adapter = new AlarmListRecyclerAdapter(getApplicationContext(), mItems, jwtUser);
                                 alarm_list.setLayoutManager(new LinearLayoutManager(getApplication()));
                                 alarm_list.setAdapter(adapter);
                                 Log.d("awdawd", list.getOrderId());
