@@ -325,7 +325,7 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
             .then((res) => {
                 console.log(res.data);
                 const rstrt = res.data.map((rstrt) => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     return {
                         address: rstrt.address,
                         name: rstrt.name,
@@ -336,10 +336,13 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         img: rstrt.imgPath,
                         reviews: rstrt.reviews,
                         score: rstrt.score,
+                        isRsPos:rstrt.isRsPos,
+                        isOpen:rstrt.isOpen,
                     };
                 });
                 
                 setRestaurant(rstrt);
+                console.log(res.data);
             })
             .catch((err) => {
                 alert("매장이없습니다.");
@@ -390,6 +393,7 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                     };
                 });
                 setRestaurant(rstrt);
+                
             })
             .catch((err) => {
                 const status = err?.response?.status;

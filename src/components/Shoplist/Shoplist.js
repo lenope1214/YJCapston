@@ -33,6 +33,12 @@ const Shoplist = ({
 }) => {
     console.log(restaurant);
     let AWS_BASE_URL = "http://3.34.55.186:8088/";
+
+    let a = null;
+  
+    let b = null;
+
+
     return (
         <>
             <S.ShoplistWrap>
@@ -149,6 +155,18 @@ const Shoplist = ({
                                         <div className="none-shop">매장이 없습니다.</div>
                                     )}
                                     {!!restaurant.length && restaurant.map((shop) => {
+                                        if(shop.isRsPos == "N"){
+                                         a="예약불가능";
+                                        }else{
+                                            a="";
+                                        }
+
+                                        if(shop.isOpen =="N"){
+                                            b="미오픈"
+                                        }else{
+                                            a="";
+                                        }
+
                                         return (
                                             <Link
                                                 to={`/shopcontent/${shop.id}`}
@@ -167,8 +185,8 @@ const Shoplist = ({
 
                                                         <div class="listcontent">
                                                             <div class="linesetting">
-                                                                <div class="listname">
-                                                                    {shop.name}
+                                                                <div>
+                                                                    <span  class="listname">{shop.name}</span><span class="rspos_n">{a}</span>
                                                                 </div>
                                                                 {/* <div class="listcategory">
                                                                     {
@@ -177,7 +195,7 @@ const Shoplist = ({
                                                                 </div> */}
                                                             </div>
                                                             <div class="listAddress">
-                                                                평점 ★ {shop.score} ({shop.reviews})
+                                                                평점 ★ {shop.score} ({shop.reviews})<span class="isopen_n">{b}</span>
                                                             </div>
 
                                                             {/* <div>

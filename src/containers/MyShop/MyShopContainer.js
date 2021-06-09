@@ -79,6 +79,8 @@ const MyShopContainer = (props) => {
             shops={shops} 
             removeShop={removeShop} 
             shopId={shopId} 
+            isRsPos={shops.isRsPos}
+            isOpen={shops.isOpen}
             />
         </>
     );

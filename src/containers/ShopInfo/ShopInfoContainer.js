@@ -114,7 +114,7 @@ const ShopInfoContainer = (props) => {
             .then((res) => {
                 // history.push("/shopInfo/"+shopId)
                 history.push("/myshop");
-                alert("예약여부변경완료");
+                alert("예약여부변경완료!");
             })
             .catch((err) => {
                 alert("예약변경에러");
@@ -126,7 +126,7 @@ const ShopInfoContainer = (props) => {
         .then((res) => {
             //history.push("/shopInfo/"+shopId)
             history.push("/myshop");
-            alert("오픈여부변경완료+");
+            alert("오픈여부변경완료!");
         });
     };
 

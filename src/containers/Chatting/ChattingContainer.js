@@ -11,8 +11,19 @@ const ChattingContainer = () => {
     const param = useParams();
 
     useEffect(() => {
-        getUserId();
-        getShopname();
+        localStorage.setItem(
+            "accesstoken",
+            sessionStorage.getItem("access_token")
+        );
+        if (localStorage.getItem("accesstoken")) {
+            getUserId();
+            getShopname();
+            if (!sessionStorage.getItem("access_token")) {
+                alert("로그인을 부탁할게요");
+                window.close();
+            }
+        }
+
     }, []);
 
     const getUserId = () => {
@@ -21,7 +32,7 @@ const ChattingContainer = () => {
             console.log(res.data.user.role);
             if (res.data.user.role == "ROLE_OWNER") {
                 Setowner("사장님");
-            } else {
+            }  else if (res.data.user.role = "ROLE_USER") {
                 Setowner("고객님");
             }
         });

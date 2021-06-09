@@ -25,7 +25,7 @@ const PosMain = ({ shopId }) => {
                             className="main-button3"
                             onClick={() =>
                                 window.open(
-                                    `http://localhost:3000/Shopsocketlist/${shopId}`,
+                                    `http://3.34.55.186:3000/Shopsocketlist/${shopId}`,
                                     "_blank",
                                     "location = no, toolbars= no, status= no, width = 500, height = 500 , scrollbars = no"
                                 )
@@ -39,7 +39,7 @@ const PosMain = ({ shopId }) => {
                         <button
                             onClick={() =>
                                 window.open(
-                                    `http://localhost:3000/chat/${shopId}`,
+                                    `http://3.34.55.186:3000/chat/${shopId}`,
                                     "_blank",
                                     "location = no, toolbars= no, status= no, width = 400, height = 500 , scrollbars = no"
                                 )

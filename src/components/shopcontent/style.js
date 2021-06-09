@@ -785,6 +785,26 @@ export const shopcontentWrap = styled.div`
         position: relative;
        top:-30px;
     }
+    .rspos_y{
+        color:blue;
+        font-weight:bold;
+        font-size:20px;
+    }
+    .rspos_n{
+        color:red;
+        font-weight:bold;
+        font-size:20px;
+    }
+    .isopen_y{
+        color:blue;
+        font-weight:bold;
+        font-size:20px;
+    }
+    .isopen_n{
+        color:red;
+        font-weight:bold;
+        font-size:20px;
+    }
 `;
 
 export const LoginWrap = styled.div`

@@ -56,11 +56,26 @@ const Shopcontent = ({
     let a = null;
     let imgbox = "";
     let b = null;
+    let rspos_y = null;
+    let rspos_n = null;
+    let isopen_y = null;
+    let isopen_n = null;
 
     if (shopIntro.marked == "N") {
         b = "🖤";
     } else {
         b = "💗";
+    }
+
+    if (shopIntro.isRsPos == "N"){
+        rspos_n = "불가능";
+    } else {
+        rspos_y = "가능";
+    }
+    if (shopIntro.isOpen == "N"){
+        isopen_n="미오픈";
+    }else {
+        isopen_y = "오픈";
     }
 
     return (
@@ -151,12 +166,14 @@ const Shopcontent = ({
                                         </div>
                                         <div>
                                             <div class="shopother4">
-                                                예약 여부 : {shopIntro.isRsPos}
+                                                {/* 예약 여부 : {shopIntro.isRsPos} */}
+                                                예약 여부 : <span class="rspos_y">{rspos_y}</span><span class="rspos_n">{rspos_n}</span>
                                             </div>
                                         </div>
                                         <div>
                                             <div class="shopother5">
-                                                오픈 여부 : {shopIntro.isOpen}
+                                                {/* 오픈 여부 : {shopIntro.isOpen} */}
+                                                오픈 여부 : <span class="isopen_y">{isopen_y}</span><span class="isopen_n">{isopen_n}</span>
                                             </div>
                                         </div>
 
@@ -187,7 +204,7 @@ const Shopcontent = ({
                                                 <button
                                                     onClick={() =>
                                                         window.open(
-                                                            `http://localhost:3000/chat/${shopIntro.shopId}`,
+                                                            `http://3.34.55.186:3000/chat/${shopIntro.shopId}`,
                                                             "_blank",
                                                             "location = no, toolbars= no, status= no, width = 400, height = 500 , scrollbars = no"
                                                         )
