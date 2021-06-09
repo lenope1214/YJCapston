@@ -56,12 +56,30 @@ const Shopcontent = ({
     let a = null;
     let imgbox = "";
     let b = null;
+    let isrspos_y = null;
+    let isrspos_n = null;
+    let isopen_y = null;
+    let isopen_n = null;
+    let ispopular = null;
 
     if (shopIntro.marked == "N") {
         b = "🖤";
     } else {
         b = "💗";
     }
+
+    if(shopIntro.isRsPos =="Y"){
+        isrspos_y = "예약가능";
+    }else{
+        isrspos_n = "예약불가능";
+    }
+    if(shopIntro.isOpen == "Y"){
+        isopen_y = "오픈";
+    }else{
+        isopen_n = "미오픈";
+    }
+    
+
 
     return (
         <>
@@ -151,12 +169,14 @@ const Shopcontent = ({
                                         </div>
                                         <div>
                                             <div class="shopother4">
-                                                예약 여부 : {shopIntro.isRsPos}
+                                                {/* 예약 여부 : {shopIntro.isRsPos} */}
+                                               예약 여부 :  <span class="isrspos_y">{isrspos_y}</span><span class="isrspos_n">{isrspos_n}</span>
                                             </div>
                                         </div>
                                         <div>
                                             <div class="shopother5">
-                                                오픈 여부 : {shopIntro.isOpen}
+                                                {/* 오픈 여부 : {shopIntro.isOpen} */}
+                                               오픈 여부 :  <span class="isopen_y">{isopen_y}</span><span class="isopen_n">{isopen_n}</span>
                                             </div>
                                         </div>
 
@@ -211,6 +231,12 @@ const Shopcontent = ({
                                     </thead>
                                     <tbody>
                                         {menu.map((menukind) => {
+                                            if(menukind.isPopular == "Y"){
+                                                ispopular="인기!!";
+                                            }else{
+                                                ispopular="";
+                                            }
+                                        
                                             return (
                                                 <tr>
                                                     <td class="menu-item">
@@ -233,8 +259,8 @@ const Shopcontent = ({
                                                         </button>
                                                     </td>
 
-                                                    <td class="menu-item1">
-                                                        {menukind.name}
+                                                    <td >
+                                                    <span class="ispopular">{ispopular}</span><br/><span class="menu-item1">{menukind.name}</span>
                                                     </td>
 
                                                     <td class="menu-item">

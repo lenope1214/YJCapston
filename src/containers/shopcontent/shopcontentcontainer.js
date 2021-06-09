@@ -157,6 +157,7 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
                         img: getmenulist.imgPath,
                         intro: getmenulist.intro,
                         price: getmenulist.price,
+                        isPopular: getmenulist.isPopular,
                     };
                 });
                 setMenu(getmenulist);

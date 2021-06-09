@@ -594,5 +594,10 @@ export const ShoplistWrap = styled.div`
         background-color:black;
         height:30px;
     }
-    
+    .isrspos{
+        color:red;
+    }
+    .isopen{
+        color:red;
+    }
 `;

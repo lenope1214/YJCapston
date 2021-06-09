@@ -188,7 +188,7 @@ const Main = ({
                         </video>
                         <div className="videotext">
                             <p className="vt0">THE</p>
-                            <p className="vt1">ORDER<span className="of"> OF</span> THE PEOPLE</p>
+                            <p className="vt1">PEOPLE<span className="of"> OF</span> THE ORDER</p>
                             <img src={dia} width="240px" height="80px" className="dia"></img>
                             <div className="but-box">
                                 <Link to="/myshop">

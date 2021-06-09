@@ -228,8 +228,8 @@ const ShopOrder = ({
                             <button className="button2" onClick={goBack}>
                                 취소
                             </button>
-                            <button onClick={connect}> test1</button>
-                            <button onClick={publish}>test2</button>
+                            {/* <button onClick={connect}> test1</button>
+                            <button onClick={publish}>test2</button> */}
                         </div>
                     </body>
                 </div>

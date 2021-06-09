@@ -33,6 +33,10 @@ const Shoplist = ({
 }) => {
     console.log(restaurant);
     let AWS_BASE_URL = "http://3.34.55.186:8088/";
+
+    let isrspos = null;
+    let isopen = null;
+
     return (
         <>
             <S.ShoplistWrap>
@@ -149,6 +153,18 @@ const Shoplist = ({
                                         <div className="none-shop">매장이 없습니다.</div>
                                     )}
                                     {!!restaurant.length && restaurant.map((shop) => {
+                                        if( shop.isRsPos == "N"){
+                                            isrspos = "예약불가능";
+                                        }else{
+                                            isrspos = "";
+                                        }
+
+                                        if( shop.isOpen == "N"){
+                                            isopen = "미오픈";
+                                        }else{
+                                            isopen = "";
+                                        }
+
                                         return (
                                             <Link
                                                 to={`/shopcontent/${shop.id}`}
@@ -167,8 +183,8 @@ const Shoplist = ({
 
                                                         <div class="listcontent">
                                                             <div class="linesetting">
-                                                                <div class="listname">
-                                                                    {shop.name}
+                                                                <div >
+                                                                    <span class="listname">{shop.name}</span><span class="isrspos">{isrspos}</span>
                                                                 </div>
                                                                 {/* <div class="listcategory">
                                                                     {
@@ -177,7 +193,7 @@ const Shoplist = ({
                                                                 </div> */}
                                                             </div>
                                                             <div class="listAddress">
-                                                                평점 ★ {shop.score} ({shop.reviews})
+                                                                평점 ★ {shop.score} ({shop.reviews})<span class="isopen">{isopen}</span>
                                                             </div>
 
                                                             {/* <div>

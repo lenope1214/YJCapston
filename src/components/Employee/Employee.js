@@ -78,7 +78,7 @@ name,
                     className="input-box"
                 />
             </div>
-        <div className="label">나이</div>
+        <div className="label">생년월일</div>
             <div>
                 <input
                     type="date"
