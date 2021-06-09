@@ -1,6 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as StompJs from "@stomp/stompjs";
 import { useParams } from "react-router";
+import * as S from "./style";
+import juminicon from "./img/주민아이콘3.png";
+import juminiconn from "./img/주민아이콘5.png";
+import $ from 'jquery';
+//npm install --save jquery 설치하기
+window.$ = $;
+
 const ROOM_SEQ = 1;
 
 const Chatting = ({ id, shopname, owner }) => {
@@ -62,6 +69,7 @@ const Chatting = ({ id, shopname, owner }) => {
                 ..._chatMessages,
                 JSON.parse(body),
             ]);
+            console.log(chatMessages.id);
         });
     };
 
@@ -76,35 +84,57 @@ const Chatting = ({ id, shopname, owner }) => {
             body: JSON.stringify({
                 roomSeq: ROOM_SEQ,
                 message: message,
-                id: id + "(" + owner + ")",
+                id: owner,
             }),
         });
         console.log("ASDf" + message);
         console.log("ASDf" + id);
+        console.log("00000000" + owner);
 
         setMessage("");
     };
 
+    let a = null;
+    let b = null;
+
     return (
-        <div>
+        <>
+        <S.ChattingWrap>
+        <div className="total">
             <div class="a">
                 {" "}
-                <div>
-                    <h2>{shopname}의 채팅방입니다!</h2>
+                <div className="shopname">
+                    <h2>{shopname} 채팅방</h2>
                 </div>
                 <div>
-                    {chatMessages && chatMessages.length > 0 && (
+                    {/* {chatMessages && chatMessages.length > 0 && ( */}
+
                         <div>
-                            {chatMessages.map((_chatMessage, index) => (
-                                <div key={index}>
-                                    <span>
-                                        {_chatMessage.id}:{_chatMessage.message}
-                                    </span>
+                            {chatMessages.map((_chatMessage, index) =>  {
+                            // (    
+                                if (_chatMessage.id=="사장님") {
+                                    a="chat"
+                                    b=juminicon
+                                } else {
+                                    a="chat-user"
+                                    b=juminiconn
+                                }
+                                return(
+                                <div key={index}  className={a}>
+                                    <div>
+                                        {/* {_chatMessage.id} :  */}
+                                        <img src={b} width='40px'></img>
+                                    </div>
+                                    <div className="chat-body">
+                                    <p className="chat-body-name">{_chatMessage.id}</p>
+                                    <p className="chat-body-body">{_chatMessage.message}</p>
+                                    </div>
                                 </div>
-                            ))}
+                                );
+                            // )
+                        })}
                         </div>
-                    )}
-                    <div>HELLO</div>{" "}
+                    {/* )} */}
                     <div class="abc">
                         <input
                             type={"text"}
@@ -114,13 +144,16 @@ const Chatting = ({ id, shopname, owner }) => {
                             onKeyPress={(e) =>
                                 e.which === 13 && publish(message)
                             }
+                            className="msg-input"
                         />
-                        <button onClick={() => publish(message)}>전송</button>
+                        <button onClick={() => publish(message)} className="msg-but">전송</button>
                     </div>
                 </div>
                 <div ref={divRref} />
             </div>
         </div>
+        </S.ChattingWrap>
+            </>
     );
 };
 
