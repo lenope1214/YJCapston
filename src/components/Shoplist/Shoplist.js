@@ -164,7 +164,7 @@ const Shoplist = ({
                                         if(shop.isOpen =="N"){
                                             b="미오픈"
                                         }else{
-                                            a="";
+                                            b="";
                                         }
 
                                         return (
