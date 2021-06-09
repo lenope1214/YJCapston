@@ -23,11 +23,11 @@ const PosNavbar = ({shopId}) => {
 
                 <li className="pos-item1"
                 onClick={() =>
-                                window.open(
-                                    `http://localhost:3000/Shopsocketlist/${shopId}`,
-                                    "_blank",
-                                    "location = no, toolbars= no, status= no, width = 500, height = 500 , scrollbars = no"
-                                )
+                    window.open(
+                        `http://3.34.55.186:3000/Shopsocketlist/${shopId}`,
+                        "_blank",
+                        "location = no, toolbars= no, status= no, width = 500, height = 500 , scrollbars = no"
+                    )
                             }
                 >예약관리</li>
                 
