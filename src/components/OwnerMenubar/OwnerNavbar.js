@@ -18,8 +18,8 @@ const OwnerNavbar = ({shopId}) => {
                 <NavLink to={"/shopInfo/"+thisShopId} activeClassName="active">
                     <li className="nav-item">매장 소개</li>
                 </NavLink>
-                <NavLink to="/myshop" activeClassName="active">
-                    <li className="nav-item">매장 목록</li>
+                <NavLink to={"/pos/"+thisShopId} activeClassName="active">
+                    <li className="nav-item">포스기</li>
                 </NavLink>
                 <NavLink to={"/qrcode/"+thisShopId} activeClassName="active">
                     <li className="nav-item">QR코드</li>
