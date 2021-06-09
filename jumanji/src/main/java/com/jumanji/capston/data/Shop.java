@@ -46,6 +46,8 @@ public class Shop {
     @JsonIgnore
     private User owner;
 
+
+
     @Getter
     @NoArgsConstructor
     public static class PatchRequest {
@@ -82,6 +84,8 @@ public class Shop {
         private String shopId;
         private String name;
         private String intro;
+        private double score;
+        private int reviews;
         private String address;
         private String addressDetail;
         private String category;
@@ -92,7 +96,29 @@ public class Shop {
         private String imgPath;
         private String phone;
         private String ownerId;
+        @Setter
         private char marked = 'N';
+
+        public Response(Shop.Dao dao) {
+            this.shopId = dao.getShopId();
+            this.name = dao.getName();
+            this.intro = dao.getIntro();
+            this.address = dao.getAddress();
+            this.addressDetail = dao.getAddressDetail();
+            this.category = dao.getCategory();
+            this.openTime = dao.getOpenTime();
+            this.closeTime = dao.getCloseTime();
+            this.isOpen = dao.getIsOpen();
+            this.isRsPos = dao.getIsRsPos();
+            this.imgPath = dao.getImgPath();
+            this.score = Double.parseDouble(dao.getScore());
+            this.reviews = Integer.parseInt(dao.getReviews());
+        }
+
+        public Response(Shop.Dao dao, char marked){
+            this(dao);
+            this.marked = marked;
+        }
 
         public Response(Shop shop) {
             this.shopId = shop.getId();
@@ -144,7 +170,9 @@ public class Shop {
         if (patch.getCategory() != null) this.category = patch.getCategory();
     }
 
-    @ToString @Getter @NoArgsConstructor
+    @ToString
+    @Getter
+    @NoArgsConstructor
     public static class Info {
         Shop.Response shopInfo;
         List<Menu.Response> menuList = new ArrayList<>();
@@ -176,29 +204,17 @@ public class Shop {
 
     public interface Dao {
         String getShopId();
-
         String getName();
-
         String getIntro();
-
         String getAddress();
-
         String getAddressDetail();
-
         String getCategory();
-
         String getOpenTime();
-
         String getCloseTime();
-
         Character getIsOpen();
-
         Character getIsRsPos();
-
         String getImgPath();
-
         String getScore();
-
         String getReviews();
     }
 }

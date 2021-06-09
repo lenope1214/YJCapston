@@ -49,7 +49,10 @@ public class ShopController {
             @Nullable @RequestHeader String authorization,
             @PathVariable String shopId) {
         Shop shop = shopService.getShopByShopId(authorization, shopId);
+        UserShopMark usm = usmService.get(authorization, shopId);
+        char marked = usm == null ? 'N' : 'Y';
         Shop.Response response = new Shop.Response(shop);
+        response.setMarked(marked);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -58,7 +61,7 @@ public class ShopController {
     public ResponseEntity<?> getMyShop(@RequestHeader String authorization) { // 수정해야함.
         List<Shop> shopList = shopService.getMyShop(authorization);
         List<Shop.Response> response = new ArrayList<>();
-        for(Shop shop: shopList){
+        for (Shop shop : shopList) {
             response.add(new Shop.Response(shop));
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -81,12 +84,31 @@ public class ShopController {
     @Transactional(readOnly = true)
     @GetMapping("shops/list") // get shopsList
     public ResponseEntity<?> selectShopList(
+            @Nullable @RequestHeader String authorization,
             @Nullable @RequestParam String category,
             @Nullable @RequestParam String sortTarget
     ) {
-        System.out.println("샵리스트 >> ");
-//        return shopService.getShopList();
-        return shopService.getList(category, sortTarget); // 얘는 이렇게 하는게 좋을듯..
+        char marked;
+        List<Shop> usmList = new ArrayList<>();
+        List<Shop.Dao> daoList = shopService.getList(category, sortTarget); // 얘는 이렇게 하는게 좋을듯..
+        List<Shop.Response> response = new ArrayList<>();
+//        if(authorization != null){
+//            usmList = usmService.getList(authorization);
+//        }
+//        for (Shop.Dao dao : daoList) {
+//            marked = 'N';
+//            for(Shop shop : usmList){
+//                if(shop.getId().equals(dao.getShopId())){
+//                    marked = 'Y';
+//                    usmList.remove(shop);
+//                }
+//            }
+//            response.add(new Shop.Response(dao, marked));
+//        }
+        for(Shop.Dao dao : daoList){
+            response.add(new Shop.Response(dao));
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Transactional

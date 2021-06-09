@@ -71,7 +71,7 @@ public class ReviewServiceImpl implements BasicService<Review, Review.Request, S
         //TODO 추후에 결제완료 후 일정 시간 뒤에 적게 해야 함.
 //        System.out.println(request.getImg().getName());
         if (request.getImg() != null)
-            imgPath = storageService.store(request.getImg(), request.getImg().getName(), uri.split("/"));
+            imgPath = storageService.store(request.getImg(), request.getImg().getResource().getFilename().replace(" ", "_"), uri.split("/"));
         Date regDate = new Date();
         Timestamp regTime = new Timestamp(regDate.getTime());
         Review review;

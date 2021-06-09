@@ -18,10 +18,7 @@ import com.jumanji.capston.service.exception.orderMenuException.OrderMenuNotFoun
 import com.jumanji.capston.service.exception.orderMenuOptionException.OrderMenuOptionHasExistException;
 import com.jumanji.capston.service.exception.orderMenuOptionException.OrderMenuOptionNotFoundException;
 import com.jumanji.capston.service.exception.reviewException.ReviewHasExistException;
-import com.jumanji.capston.service.exception.shopException.NoShopListException;
-import com.jumanji.capston.service.exception.shopException.ShopHasExistException;
-import com.jumanji.capston.service.exception.shopException.ShopMissMatchException;
-import com.jumanji.capston.service.exception.shopException.ShopNotFoundException;
+import com.jumanji.capston.service.exception.shopException.*;
 import com.jumanji.capston.service.exception.userException.DoLoginExistException;
 import com.jumanji.capston.service.exception.userException.LoginFailedException;
 import com.jumanji.capston.service.exception.userException.UserHasExistException;
@@ -271,4 +268,10 @@ public class ApiExceptionHandler{
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(ShopNotOpenException.class)
+    public ResponseEntity<ApiErrorResponse> shopNotOpenException(ShopNotOpenException ex) {
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
 }

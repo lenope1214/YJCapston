@@ -5,6 +5,7 @@ import com.jumanji.capston.repository.OrderRepository;
 import com.jumanji.capston.repository.ReviewRepository;
 import com.jumanji.capston.service.exception.orderException.OrderHasExistException;
 import com.jumanji.capston.service.exception.orderException.OrderNotFoundException;
+import com.jumanji.capston.service.exception.shopException.ShopNotOpenException;
 import com.jumanji.capston.service.interfaces.OrderService;
 import jdk.jfr.TransitionTo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,12 +107,17 @@ public class OrderServiceImpl implements OrderService {
         // 유효성 검사.
         user = userService.isPresent(loginId);
         shop = shopService.isPresent(request.getShopId());
+        isOpen(shop);
         order = request.getOrderId() != null ? isOwnOrder(request.getOrderId(), loginId) : post(loginId, user, shop, request);
 
         order.patch(request);
         System.out.println("arrtime : " + order.getArriveTime());
         order = orderRepository.saveAndFlush(order);
         return order;
+    }
+
+    private void isOpen(Shop shop) {
+        if(shop.getIsOpen() == 'N')throw new ShopNotOpenException();
     }
 
 //    @Override
