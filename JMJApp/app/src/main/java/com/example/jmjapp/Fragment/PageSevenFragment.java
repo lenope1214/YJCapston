@@ -79,7 +79,7 @@ public class PageSevenFragment extends Fragment {
                             rv_restaurant_list.setAdapter(adapter);
                         }
                     } else {
-                        Toast.makeText(getContext(), "조회 실패", Toast.LENGTH_LONG).show();
+                        return;
                     }
                 }
             }

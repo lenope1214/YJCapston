@@ -2,17 +2,20 @@ package com.example.jmjapp.owner;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 
 import com.example.jmjapp.Adapter.BasketRecyclerAdapter;
 import com.example.jmjapp.Adapter.PosMenuListAdapter;
 import com.example.jmjapp.Adapter.QrMenuRecyclerAdapter;
 import com.example.jmjapp.Adapter.TableDetailAdapter;
+import com.example.jmjapp.R;
 import com.example.jmjapp.databinding.ActivityTableDetailBinding;
 import com.example.jmjapp.dto.Menu;
 import com.example.jmjapp.dto.Order;
@@ -49,6 +52,12 @@ public class TableDetailActivity extends AppCompatActivity {
         binding = ActivityTableDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.table_detail_toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.arrowback);
+
         Intent intent = getIntent();
         tabId = intent.getStringExtra("tabId");
         shopId = intent.getStringExtra("shopId");
@@ -68,6 +77,8 @@ public class TableDetailActivity extends AppCompatActivity {
         Log.d("tabNo", tabNo);
         Log.d("using", String.valueOf(using));
         Log.d("orderId", orderId);
+
+        binding.tableDetailNo.setText(tabNo + "번 테이블");
 
         rv_table_detail_list = binding.rvTableDetailList;
         adapter = new TableDetailAdapter(getApplicationContext());
@@ -102,5 +113,13 @@ public class TableDetailActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

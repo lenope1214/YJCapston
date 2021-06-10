@@ -2,6 +2,7 @@ package com.example.jmjapp.owner;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -86,7 +87,7 @@ public class MenuDetailActivity extends AppCompatActivity {
                             menu_list.setAdapter(adapter);
                         }
                     } else {
-                        Toast.makeText(getApplicationContext(), "조회 실패", Toast.LENGTH_LONG).show();
+                        Log.d("qwe","Qwe");
                     }
                 }
             }

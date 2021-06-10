@@ -39,13 +39,14 @@ import retrofit2.Response;
 
 public class PosFragment extends Fragment {
     Button btn_order,btn_payment;
-    TextView tv_tablenum;
+    TextView tv_tablenum, tv_tableName;
     private String shopId, orderId, jwt;
     RecyclerView pos_menu_list;
     private PosMenuListAdapter adapter;
     private ArrayList<OrderMenu> mItems = new ArrayList();
     private Call<List<OrderMenu>> listOrderMenuCall;
     private Call<Order.OrderMenuList> getOrderMenus;
+    private Call<Shop> shopCall;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,9 +67,28 @@ public class PosFragment extends Fragment {
         orderId = QrReaderActivity.orderId;
 
         pos_menu_list = rootView.findViewById(R.id.pos_menu_list);
+        tv_tableName = rootView.findViewById(R.id.tv_tableName);
 
         SharedPreferences pref = getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
         jwt = pref.getString("token", "");
+
+        shopCall = Server.getInstance().getApi().shop(shopId);
+        shopCall.enqueue(new Callback<Shop>() {
+            @Override
+            public void onResponse(Call<Shop> call, Response<Shop> response) {
+                if (response.isSuccessful()) {
+                    Log.d("shop 조회 성공", "shop 조회 성공");
+                    tv_tableName.setText(response.body().getName());
+                } else {
+                    Log.d("shop 조회 실패1", "shop 조회 실패1");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Shop> call, Throwable t) {
+                Log.d("shop 조회 실패2", "shop 조회 실패2");
+            }
+        });
 
 //        SharedPreferences pref2 = getActivity().getSharedPreferences("basket", Context.MODE_PRIVATE);
 //        SharedPreferences.Editor editor = pref2.edit();

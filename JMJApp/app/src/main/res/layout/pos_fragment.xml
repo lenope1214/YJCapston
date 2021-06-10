@@ -53,17 +53,32 @@
             android:id="@+id/tv_tablenum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="12dp"
+            android:text="테이블 번호"
+            android:fontFamily="@font/we_semibold"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tableName" />
+
+        <TextView
+            android:id="@+id/tv_tableName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/we_semibold"
             android:text="테이블 번호"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/pos_menu_list"
-            android:layout_width="348dp"
-            android:layout_height="443dp"
+            android:layout_width="346dp"
+            android:layout_height="383dp"
             android:layout_margin="10dp"
             android:nestedScrollingEnabled="false"
             android:scrollbars="vertical"
@@ -72,34 +87,37 @@
             app:layout_constraintHorizontal_bias="0.492"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_tablenum"
-            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintVertical_bias="0.838"
             tools:ignore="MissingConstraints" />
 
         <Button
             android:id="@+id/btn_order"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
             android:layout_marginBottom="50dp"
+            android:background="@drawable/btn_style"
             android:text="주문"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/btn_payment"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:text="결제"
+            android:background="@drawable/btn_style"
             app:layout_constraintBottom_toBottomOf="@+id/btn_order"
             app:layout_constraintEnd_toStartOf="@+id/btn_chatbot"
             app:layout_constraintStart_toEndOf="@+id/btn_order" />
 
         <Button
             android:id="@+id/btn_chatbot"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="50dp"
             android:text="챗봇"
+            android:background="@drawable/btn_style"
             app:layout_constraintBottom_toBottomOf="@+id/btn_payment"
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

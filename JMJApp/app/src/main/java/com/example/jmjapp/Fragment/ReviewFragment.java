@@ -63,11 +63,22 @@ public class ReviewFragment extends Fragment {
                              Bundle savedInstanceState) {
         if(view == null) {
             view = inflater.inflate(R.layout.fragment_review, container, false);
-            rv_review_list = (RecyclerView) view.findViewById(R.id.rv_review_list);
-            adapter = new ReviewRecyclerAdapter(getContext());
-            shopNumber = ShopDetailActivity.shopNumber;
-            showReviewList();
+
         }
+
+
+
+        return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        rv_review_list = (RecyclerView) view.findViewById(R.id.rv_review_list);
+        adapter = new ReviewRecyclerAdapter(getContext());
+        shopNumber = ShopDetailActivity.shopNumber;
+        showReviewList();
 
         listOrderCall = Server.getInstance().getApi().myOrder("Bearer " + jwt);
         listOrderCall.enqueue(new Callback<List<Order>>() {
@@ -121,7 +132,6 @@ public class ReviewFragment extends Fragment {
             }
         });
 
-        return view;
     }
 
     private void showReviewList() {
@@ -129,6 +139,8 @@ public class ReviewFragment extends Fragment {
         jwt = pref.getString("token", "");
         Log.d("매장", shopNumber);
         Log.d("토큰", jwt);
+
+        mItems.clear();
 
         reviewCall = Server.getInstance().getApi().reviewList("Bearer " + jwt, shopNumber);
         reviewCall.enqueue(new Callback<List<Review>>() {
