@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_menu"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="100"
+    android:background="@drawable/edge8"
+    android:orientation="vertical"
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:id="@+id/review_my_shop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/we_semibold"
+        android:text="매장이름"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <RatingBar
+        android:id="@+id/review_my_ratingBar"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:isIndicator="false"
+        android:numStars="5"
+        android:rating="5"
+        android:stepSize="1"
+        app:layout_constraintBottom_toBottomOf="@+id/review_my_shop"
+        app:layout_constraintStart_toEndOf="@+id/review_my_shop"
+        app:layout_constraintTop_toTopOf="@+id/review_my_shop" />
+
+    <TextView
+        android:id="@+id/review_my_regDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:fontFamily="@font/we_semibold"
+        android:text="날짜"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/review_my_btn"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/review_my_img"
+        android:layout_width="345dp"
+        android:layout_height="187dp"
+        android:layout_marginTop="9dp"
+        android:background="@drawable/img_ready"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/review_my_regDate"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/review_my_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/we_semibold"
+        android:text="리뷰내용"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/review_my_img"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/review_my_btn"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:background="@drawable/btn_style"
+        android:text="삭제"
+        app:layout_constraintBottom_toBottomOf="@+id/review_my_ratingBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/review_my_ratingBar"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

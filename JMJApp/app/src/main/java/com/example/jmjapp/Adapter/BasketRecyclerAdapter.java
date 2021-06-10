@@ -54,6 +54,8 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter<BasketRecyclerAd
                 ArrayList<Integer> menu_price_list = new ArrayList<Integer>();
                 ArrayList<Integer> menu_count_list = new ArrayList<Integer>();
                 ArrayList<String> menu_img_list = new ArrayList<String>();
+                ArrayList<String> menu_id_list = new ArrayList<String>();
+
 
                 SharedPreferences pref = context.getSharedPreferences("basket", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
@@ -71,22 +73,26 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter<BasketRecyclerAd
                     int[] list_price = new int[list_size];
                     int[] list_count = new int[list_size];
                     String[] list_img = new String[list_size];
+                    String[] list_id = new String[list_size];
 
                     list_name[i] = pref.getString("list_" + i + "_name", "nope");
                     list_price[i] = pref.getInt("list_" + i + "_price", 0);
                     list_count[i] = pref.getInt("list_" + i + "_count", 1);
                     list_img[i] = pref.getString("list_" + i + "_img", "nope");
+                    list_id[i] = pref.getString("list_" + i + "_id", "nope");
 
                     menu_name_list.add(list_name[i]);
                     menu_price_list.add(list_price[i]);
                     menu_count_list.add(list_count[i]);
                     menu_img_list.add(list_img[i]);
+                    menu_id_list.add(list_id[i]);
 
                     if(list_name[i] == holder.tv_menu_name.getText().toString()) {
                         menu_name_list.remove(i);
                         menu_price_list.remove(i);
                         menu_count_list.remove(i);
                         menu_img_list.remove(i);
+                        menu_id_list.remove(i);
                     }
                 }
 
@@ -99,6 +105,7 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter<BasketRecyclerAd
                         editor.putInt("list_" + j + "_price", menu_price_list.get(j));
                         editor.putInt("list_" + j + "_count", menu_count_list.get(j));
                         editor.putString("list_" + j + "_img", menu_img_list.get(j));
+                        editor.putString("list_" + j + "_id", menu_id_list.get(j));
                         editor.putInt("list_size", j + 1);
                     }
                     editor.apply();

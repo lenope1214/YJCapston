@@ -49,6 +49,9 @@ public class InfoFragment extends Fragment {
             //지도
             tv_gomap = view.findViewById(R.id.tv_gomap);
 
+            //지도
+            tv_gomap = view.findViewById(R.id.tv_gomap);
+
             shopNumber = ShopDetailActivity.shopNumber;
             Log.d("Daw",shopNumber);
             shop_detail_intro.setText(ShopDetailActivity.shopIntro);

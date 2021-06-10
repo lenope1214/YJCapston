@@ -27,17 +27,18 @@ import com.example.jmjapp.R;
 import com.example.jmjapp.databinding.ActivityOrderBinding;
 import com.example.jmjapp.dto.MemberDTO;
 import com.example.jmjapp.dto.Order;
+import com.example.jmjapp.dto.OrderMenu;
 import com.example.jmjapp.dto.Shop;
 import com.example.jmjapp.network.Server;
 import com.example.jmjapp.payment.PaymentWebview;
-import com.example.jmjapp.user.ShopDetailActivity;
 
-import java.sql.Timestamp;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import lombok.SneakyThrows;
@@ -262,24 +263,24 @@ public class OrderActivity extends AppCompatActivity {
                     Map<String, String> map = new HashMap();
                     map.put("shopId", ShopDetailActivity.shopNumber);
                     //map.put("orderId", String.valueOf(orderId));
-                    Log.d("res",resDate2);
-                    Log.d("result", resDate2 +" "+t1Hour+":"+t1Minute+":"+ 0 + 0);
+//                    Log.d("res",resDate2);
+//                    Log.d("result", resDate2 +" "+t1Hour+":"+t1Minute+":"+ 0 + 0);
                     String strDate = resDate2 +" "+t1Hour+":"+t1Minute+":"+ 0 + 0;
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     Date dateSeongbok = dateFormat.parse(strDate, new ParsePosition(0));
                     Long dateSeongbok2 = dateSeongbok.getTime();
-                    Log.d("soeng", String.valueOf(dateSeongbok2));
+//                    Log.d("soeng", String.valueOf(dateSeongbok2));
 
                     Long arriveTime = new Date(year, month, day, t1Hour, t1Minute).getTime();
-                    Log.d("arriveTime",String.valueOf(arriveTime));
+//                    Log.d("arriveTime",String.valueOf(arriveTime));
 
                     map.put("arriveTime", String.valueOf(dateSeongbok2));
                     map.put("orderRequest", binding.orderRequestEt.getText().toString());
                     map.put("people", String.valueOf(count));
 
-                    Log.d("orderId1", ShopDetailActivity.shopNumber);
-                    Log.d("orderRequest1", binding.orderRequestEt.getText().toString());
-                    Log.d("people1", String.valueOf(count));
+//                    Log.d("orderId1", ShopDetailActivity.shopNumber);
+//                    Log.d("orderRequest1", binding.orderRequestEt.getText().toString());
+//                    Log.d("people1", String.valueOf(count));
 
                     orderCall = Server.getInstance().getApi().updateOrder("Bearer " + jwt, map);
                     orderCall.enqueue(new Callback<Order>() {
@@ -289,18 +290,50 @@ public class OrderActivity extends AppCompatActivity {
                                 Log.d("연결성공여부", String.valueOf(response.code()));
                                 orderId = Long.valueOf(response.body().getOrderId());
                                 Log.d("orderididid", String.valueOf(orderId));
-//                                String orderId2 = String.valueOf(new Timestamp(orderId));
-//                                String year = orderId2.substring(0,4);
-//                                String month = orderId2.substring(5,7);
-//                                String day = orderId2.substring(8,10);
-//
-//                                String hour = orderId2.substring(11,13);
-//                                String min = orderId2.substring(14,16);
 
-//                                System.out.println(orderId2);
-//
-//                                System.out.println(year+"년"+month+"월"+day+"일 " +hour+"시"+min+"분");
-                                payment(orderId);
+                                SharedPreferences pref2 = getSharedPreferences("basket", MODE_PRIVATE);
+                                int list_size = pref2.getInt("list_size", 0);
+                                String[] list_id =  new String[list_size];
+                                int[] list_count = new int[list_size];
+
+                                for (int i = 0; i < list_size; i++) {
+                                    list_id[i] = pref2.getString("list_" + i + "_id", null);
+                                    list_count[i] = pref2.getInt("list_" + i + "_count", 0);
+                                }
+
+                                Map<String, List<OrderMenu>> map2 = new HashMap();
+                                List<OrderMenu> omList = new ArrayList<>();
+
+                                for (int i = 0; i < list_size; i++) {
+                                    OrderMenu om = new OrderMenu().builder()
+                                            .orderId(String.valueOf(orderId))
+                                            .shopId(resId)
+                                            .menuId(list_id[i])
+                                            .quantity(String.valueOf(list_count[i]))
+                                            .build();
+                                    omList.add(om);
+                                }
+
+                                map2.put("list", omList);
+
+                                responseBodyCall = Server.getInstance().getApi().order_menus("Bearer " + jwt, map2);
+                                responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                                    @SneakyThrows
+                                    @Override
+                                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                        if (response.isSuccessful()) {
+                                            Log.d("orderMenu 성공", "orderMenu 성공");
+                                            payment(orderId);
+                                        } else {
+                                            Log.d("orderMenu 실패1", "orderMenu 실패1"+response.errorBody().string());
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                        Log.d("orderMenu 실패2", "orderMenu 실패2");
+                                    }
+                                });
                             } else {
                                 Log.d("연결실패1", "연결실패1");
                             }
@@ -320,7 +353,7 @@ public class OrderActivity extends AppCompatActivity {
         Map<String, String> map2 = new HashMap();
         map2.put("orderId", String.valueOf(orderId));
         map2.put("amount", String.valueOf(sum));
-        map2.put("usePoint", "359");
+        map2.put("usePoint", "0");
         map2.put("pg", "inicis");
         map2.put("payMethod", "card");
 
@@ -347,6 +380,7 @@ public class OrderActivity extends AppCompatActivity {
                     intent.putExtra("resPhone", resPhone);
                     intent.putExtra("orderId", orderId);
                     intent.putExtra("orderRequest", orderRequest);
+                    intent.putExtra("jwt", jwt);
                     startActivityForResult(intent, PAYMENT_ACTIVITY);
                     /**
                      *  웹뷰로 데이터 전달 필요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

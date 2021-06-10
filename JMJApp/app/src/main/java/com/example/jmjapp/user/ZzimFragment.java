@@ -23,6 +23,7 @@ import com.example.jmjapp.network.Server;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.SneakyThrows;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,7 +33,7 @@ public class ZzimFragment extends Fragment {
     private RecyclerView rs_order_list;
     private ArrayList<Order> mItems = new ArrayList();
 
-    private String user_id;
+    private String jwt;
     private Call<List<Order>> listOrderCall;
 
     public ZzimFragment() {
@@ -50,17 +51,20 @@ public class ZzimFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.zzim_fragment, container, false);
 
         SharedPreferences pref = getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
-        user_id = pref.getString("token", "");
+        jwt = pref.getString("token", "");
 
         rs_order_list = rootView.findViewById(R.id.rs_order_list);
 
-        listOrderCall = Server.getInstance().getApi().myOrder("Bearer " + user_id);
+        listOrderCall = Server.getInstance().getApi().myOrder("Bearer " + jwt);
         listOrderCall.enqueue(new Callback<List<Order>>() {
+            @SneakyThrows
             @Override
             public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
                 if (response.isSuccessful()) {
                     Log.d("myOrder 성공", "myOrder 성공");
                     List<Order> orderList = response.body();
+                    Log.d("or", String.valueOf(orderList));
+                    mItems.clear();
                     for(Order list : orderList) {
                         mItems.add(new Order(list.getOrderId(), list.getStatus(), list.getOrderRequest(),
                                 list.getPeople(), list.getUsePoint(), list.getAmount(),
@@ -74,17 +78,48 @@ public class ZzimFragment extends Fragment {
                         rs_order_list.setAdapter(adapter);
                     }
                 } else {
-                    Log.d("myOrder 실패1", "myOrder 실패1");
+                    Log.d("myOrder 실패1", "myOrder 실패1"+response.errorBody().string());
                 }
             }
 
             @Override
             public void onFailure(Call<List<Order>> call, Throwable t) {
-                Log.d("myOrder 실패2", "myOrder 실패2");
+                Log.d("myOrder 실패2", "myOrder 실패2"+t.getCause());
             }
         });
 
         return rootView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d("onStart", "onStart 실행");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("onResume", "onResume 실행");
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.d("onDetach", "onDetach 실행");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d("onDestroy", "onDestroy 실행");
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d("onStop", "onStop 실행");
     }
 
 }

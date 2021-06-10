@@ -2,6 +2,7 @@ package com.example.jmjapp.owner;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -77,7 +78,7 @@ public class MenuDetailActivity extends AppCompatActivity {
                         List<Menu> menuList = response.body();
                         mItems.clear();
                         for(Menu list : menuList) {
-                            mItems.add(new Menu(list.getId(), list.getName(), list.getIntro(),
+                            mItems.add(new Menu(list.getMenuId(), list.getName(), list.getIntro(),
                                     list.getIsSale(), list.getIsPopular(),list.getPrice(),
                                     list.getDuration(), list.getImgPath()));
                             menu_list.setHasFixedSize(true);
@@ -86,7 +87,7 @@ public class MenuDetailActivity extends AppCompatActivity {
                             menu_list.setAdapter(adapter);
                         }
                     } else {
-                        Toast.makeText(getApplicationContext(), "조회 실패", Toast.LENGTH_LONG).show();
+                        Log.d("qwe","Qwe");
                     }
                 }
             }

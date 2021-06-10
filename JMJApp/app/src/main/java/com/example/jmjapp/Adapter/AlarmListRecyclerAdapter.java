@@ -23,14 +23,18 @@ import com.android.volley.toolbox.Volley;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Menu;
 import com.example.jmjapp.dto.Order;
+import com.example.jmjapp.dto.OrderMenu;
 import com.example.jmjapp.network.Server;
 import com.example.jmjapp.payment.PaymentResultActivity;
+import com.example.jmjapp.user.OrderActivity;
+import com.example.jmjapp.user.ShopDetailActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,12 +51,17 @@ public class AlarmListRecyclerAdapter extends RecyclerView.Adapter<AlarmListRecy
     static RequestQueue requestQueue;
 
     private Call<ResponseBody> responseBodyCall;
-    private String device_token, userId, orderId, jwt, orderRequest;
+    private Call<List<OrderMenu>> orderMenuCall;
+    private AlertDialog dialog;
+    private String device_token, userId, orderId, jwt, orderRequest, jwtUser;
+    private String sum = "";
     private Long arriveTime;
+    private Call<Order.OrderMenuList> getOrderMenus;
 
-    public AlarmListRecyclerAdapter(Context context, ArrayList<Order> alarm) {
+    public AlarmListRecyclerAdapter(Context context, ArrayList<Order> alarm, String jwtUser1) {
         this.context = context;
         mItems = alarm;
+        this.jwtUser = jwtUser1;
     }
 
 //    public AlarmListRecyclerAdapter(Context context) {
@@ -87,6 +96,7 @@ public class AlarmListRecyclerAdapter extends RecyclerView.Adapter<AlarmListRecy
         orderId = mItems.get(position).getOrderId();
         arriveTime = mItems.get(position).getArriveTime();
         orderRequest = mItems.get(position).getOrderRequest();
+        Log.d("arc", String.valueOf(arriveTime));
 
         String resTime = String.valueOf(new Timestamp(arriveTime));
         String year = resTime.substring(0,4);
@@ -98,7 +108,7 @@ public class AlarmListRecyclerAdapter extends RecyclerView.Adapter<AlarmListRecy
 
         holder.resTime.setText(year+"년"+month+"월"+day+"일 " +hour+"시"+min+"분");
 
-        if (orderRequest.equals("")) {
+        if (orderRequest == null) {
             holder.orderRequest.setText("요청사항이 없습니다.");
         } else {
             holder.orderRequest.setText(orderRequest);
@@ -127,10 +137,52 @@ public class AlarmListRecyclerAdapter extends RecyclerView.Adapter<AlarmListRecy
         String acceptMsg = "accept";
         String rejectMsg = "reject";
 
+        Log.d("jwt", jwt+orderId);
+
         holder.orderMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "hi", Toast.LENGTH_SHORT).show();
+                getOrderMenus = Server.getInstance().getApi().orderOneMenu(orderId);
+                getOrderMenus.enqueue(new Callback<Order.OrderMenuList>() {
+                    @SneakyThrows
+                    @Override
+                    public void onResponse(Call<Order.OrderMenuList> call, Response<Order.OrderMenuList> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("orderMenu 성공", "orderMenu 성공");
+                            List<OrderMenu> orderMenuList = response.body().getOrderMenuList();
+
+                            String[] list_menuName = new String[orderMenuList.size()];
+                            int[] list_menuCount = new int[orderMenuList.size()];
+
+                            int index = 0;
+
+                            for (OrderMenu list : orderMenuList) {
+                                list_menuName[index] = list.getMenuName();
+                                list_menuCount[index] = Integer.parseInt(list.getQuantity());
+                                index++;
+                            }
+
+                            for (int i = 0; i < orderMenuList.size(); i++) {
+                                String value = list_menuName[i] + "\t\t\t\t" + list_menuCount[i] + "개\n";
+                                sum = sum + value;
+                            }
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                            builder.setTitle("주문메뉴");
+                            builder.setMessage(sum).setPositiveButton("확인", null).create();
+                            builder.show();
+                        } else {
+                            Log.d("orderMenu 실패1", "orderMenu 실패1"+response.errorBody().string());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Order.OrderMenuList> call, Throwable t) {
+                        Log.d("orderMenu 실패2", "orderMenu 실패2");
+                    }
+                });
+
+
             }
         });
 
@@ -238,7 +290,7 @@ public class AlarmListRecyclerAdapter extends RecyclerView.Adapter<AlarmListRecy
             requestData.put("data", dataObj);
             JSONArray idArray = new JSONArray();
 
-            idArray.put(0, device_token);
+            idArray.put(0, "dBQhgexlcJ0:APA91bGYorRaPqrOSnu8V1YIJWUp1YjNbIxQRpkXKno2bPISev8H0j9IGVnVxp7_yaTf6r26PC056hOpw0ok2lrJftrkDjOCprZUD36Z-n4cCVQkQdjznKdBNr8T9razUkQemycgL1eB");
             requestData.put("registration_ids", idArray);
         } catch (Exception e) {
             e.printStackTrace();
@@ -290,7 +342,7 @@ public class AlarmListRecyclerAdapter extends RecyclerView.Adapter<AlarmListRecy
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<String, String>();
-                headers.put("Authorization", "key=AAAAMsCw7yQ:APA91bGlT_VTfm9xHFMcguW36JMt6VXKVY2s-VgFnpUyrAZz2Gjhe8reRkLOMLp5dBG2kju74sUmeD4co8EQvZgszn4-4UUlaL0pdrttVcf9N50Jjk32Vdv1tGFASC0Nm_ss5VEdd68z");
+                headers.put("Authorization", "key=AAAASNKJ6g4:APA91bEbZnK-PXSqFhJ1CVQ4DIa1NZ1NUHCtRyJ9fIWJPJBebuQosfVDa75uI0Nl7qQKZ8RFFb-s2H9bGVIBYw3od5zg6fKxPUgpms2Hk1O_IMxNAGU-8P4ir-Og-Z1lGIK1-ZYptD_t");
                 return headers;
             }
 

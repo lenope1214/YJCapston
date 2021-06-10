@@ -67,7 +67,7 @@ public class MenuFragment extends Fragment {
                         Log.d("성공","성공");
                         List<Menu> menuList = response.body();
                         for(Menu list : menuList) {
-                            mItems.add(new Menu(list.getId(), list.getName(), list.getIntro(),
+                            mItems.add(new Menu(list.getMenuId(), list.getName(), list.getIntro(),
                                     list.getIsSale(), list.getIsPopular(),list.getPrice(),
                                     list.getDuration(), list.getImgPath()));
                             Log.d("list", response.body().toString());

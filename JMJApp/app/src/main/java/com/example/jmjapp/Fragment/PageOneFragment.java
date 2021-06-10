@@ -26,8 +26,8 @@ import java.util.List;
 
 public class PageOneFragment extends Fragment {
     View view;
-    private RestaurantRecyclerAdapter adapter;
     private RecyclerView rv_restaurant_list;
+    private RestaurantRecyclerAdapter adapter;
     ArrayList<Shop> mItems = new ArrayList<>();
 
     private Call<List<Shop>> listShopCall;

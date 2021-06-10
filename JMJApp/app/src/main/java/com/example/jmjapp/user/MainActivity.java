@@ -50,21 +50,28 @@ public class MainActivity extends AppCompatActivity {
         myFragment = new MyFragment();
         zzimFragment = new ZzimFragment();
 
-        try {
-            ShopDetailActivity.orderCheck.equals("1");
-        } catch (Exception e) {
-            ShopDetailActivity.orderCheck = "0";
-        }
+//        try {
+//            ShopDetailActivity.orderCheck.equals("1");
+//        } catch (Exception e) {
+//            ShopDetailActivity.orderCheck = "0";
+//        }
 
         Bundle bundle = new Bundle();
         bundle.putString("user_id", user_id);
         myFragment.setArguments(bundle);
 
-//
+
+       // QR = getIntent().getStringExtra("QR");
+
+//        if (QR != null) {
+//            getSupportFragmentManager().beginTransaction().replace(R.id.container, posFragment).commit();
+//        }
+
+
 //        try {
 //            QR = getIntent().getStringExtra("QR");
 //
-//            if (orderCheck == 1 && QR.equals("order")) {
+//            if (QR.equals("order")) {
 //                getSupportFragmentManager().beginTransaction().replace(R.id.container, posFragment).commit();
 //            }
 //
@@ -75,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         final BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
 
 
-        if (ShopDetailActivity.orderCheck.equals("1")){
+        if (QrReaderActivity.orderCheck.equals("1")){
             bottomNavigation.setSelectedItemId(R.id.tab1);
             getSupportFragmentManager().beginTransaction().replace(R.id.container, posFragment).commit();
         } else {

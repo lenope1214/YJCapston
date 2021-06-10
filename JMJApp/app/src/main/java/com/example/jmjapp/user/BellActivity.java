@@ -19,7 +19,6 @@ import com.example.jmjapp.databinding.ActivityMain4Binding;
 import com.example.jmjapp.dto.Order;
 import com.example.jmjapp.dto.OrderMenu;
 import com.example.jmjapp.network.Server;
-import com.example.jmjapp.practicePush.MainActivity3;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;

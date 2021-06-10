@@ -178,9 +178,13 @@ import com.example.jmjapp.dto.Employee;
 import com.example.jmjapp.dto.Mark;
 import com.example.jmjapp.dto.MemberDTO;
 import com.example.jmjapp.dto.Menu;
+import com.example.jmjapp.dto.OptionGroups;
+import com.example.jmjapp.dto.Options;
 import com.example.jmjapp.dto.Order;
 import com.example.jmjapp.dto.OrderMenu;
+import com.example.jmjapp.dto.Review;
 import com.example.jmjapp.dto.Shop;
+import com.example.jmjapp.dto.Tables;
 import com.google.android.gms.internal.measurement.zzim;
 
 import java.util.ArrayList;
@@ -223,17 +227,29 @@ public interface ServerApi {
     Call<String> join(@Body Map<String, String> map);
 
     @POST("payments") // 주문등록
-    Call<ResponseBody> payment(@Header("Authorization")String jwt, @Body Map<String, String> map);
+    Call<ResponseBody> payment(@Header("Authorization")String jwt,
+                               @Body Map<String, String> map);
+
+    @POST("marks")  // 찜 등록
+    Call<ResponseBody> regzzim(@Header("Authorization")String jwt,
+                               @Body Map<String, String> map);
 
     @POST("marks")  // 찜 등록
     Call<ResponseBody> regzzim(@Header("Authorization")String jwt, @Body Map<String, String> map);
 
     @POST("order-menus") // 주문 메뉴 등록
-    Call<ResponseBody> order_menus(@Header("Authorization")String jwt, @Body Map<String, List<OrderMenu>> map);
+    Call<ResponseBody> order_menus(@Header("Authorization")String jwt,
+                                   @Body Map<String, List<OrderMenu>> map);
 
     @POST("orders") // 주문서 등록
     Call<ResponseBody> order(@Header("Authorization")String jwt,
                              @Body Map<String, String> map);
+
+    @Multipart
+    @POST("reviews") // 리뷰 등록
+    Call<Review> review(@Header("Authorization") String jwt,
+                          @PartMap Map<String, RequestBody> map,
+                          @Part MultipartBody.Part file);
 
     /**
      * read read read read
@@ -269,9 +285,18 @@ public interface ServerApi {
     Call<Order> orderOne(@Header("Authorization") String jwt,
                          @Path("orderId") String orderId);
 
+    @GET("orders/{orderId}") // 특정 주문의 주문메뉴 확인
+    Call<Order.OrderMenuList> orderOneMenu(@Path("orderId") String orderId);
+
     @GET("orders") // 내 주문 메뉴리스트 확인
     Call<List<Order>> myOrder(@Header("Authorization") String jwt);
 
+    @GET("reviews/{shopId}") // 특정 매장의 리뷰 확인
+    Call<List<Review>> reviewList(@Header("Authorization") String jwt,
+                                  @Path("shopId") String shopId);
+
+    @GET("users/reviews") // 특정 유저의 리뷰 리스트
+    Call<List<Review>> myReviewList(@Header("Authorization") String jwt);
 
     /**
      * update update update update
@@ -289,6 +314,10 @@ public interface ServerApi {
     Call<ResponseBody> orderAccept(@Header("Authorization")String jwt,
                                    @Body Map<String, String> map);
 
+    @PATCH("tables") // 테이블 수정
+    Call<ResponseBody> updateTable(@Header("Authorization")String jwt,
+                                   @Body Map<String, String> map);
+
     /**
      * delete delete delete delete
      */
@@ -299,8 +328,9 @@ public interface ServerApi {
     @DELETE("marks/{shopId}")
     Call<ResponseBody> deleteZzim(@Header("Authorization") String jwt, @Path("shopId") String shopId);
 
-
-
+    @DELETE("reviews/{reviewId}")
+    Call<ResponseBody> deleteReview(@Header("Authorization") String jwt,
+                                    @Path("reviewId") String reviewId);
 
     /**
      *
@@ -322,13 +352,25 @@ public interface ServerApi {
 
     @Multipart
     @POST("menus") // 메뉴 등록
-    Call<ResponseBody> insertMenu(@Header("Authorization") String jwt,
+    Call<Menu> insertMenu(@Header("Authorization") String jwt,
                                   @PartMap Map<String, RequestBody> map,
                                   @Part MultipartBody.Part file);
 
     @POST("shops/employees") // 직원 등록
     Call<ResponseBody> insertemp(@Header("Authorization") String jwt,
                                  @Body Map<String, Object> map);
+
+    @POST("menus/options/groups") // 메뉴 옵션 그룹 등록
+    Call<OptionGroups> registerOptionGroups(@Header("Authorization")String jwt,
+                                            @Body Map<String, String> map);
+
+    @POST("menus/options") // 메뉴 옵션 등록
+    Call<Options> registerOption(@Header("Authorization")String jwt,
+                                 @Body Map<String, String> map);
+
+    @POST("tables") // 매장 테이블 등록
+    Call<Tables> registerTable(@Header("Authorization")String jwt,
+                               @Body Map<String, String> map);
 
     /**
      * read read read read
@@ -347,6 +389,22 @@ public interface ServerApi {
     @GET("orders/list/{shopId}") // 특정 식당 주문 리스트 확인
     Call<List<Order>> orderList(@Header("Authorization") String jwt,
                                 @Path("shopId") String shopId);
+
+    @GET("menus/options/groups/{menuId}") // 특정 메뉴의 옵션그룹 리스트
+    Call<List<OptionGroups>> optionGroupsList(@Header("Authorization") String jwt,
+                                        @Path("menuId") String menuId);
+
+    @GET("menus/options/{optionGroupId}") // 특정 메뉴의 옵션 리스트
+    Call<List<Options>> optionsList(@Header("Authorization") String jwt,
+                                    @Path("optionGroupId") String optionGroupId);
+
+    @GET("order-menus/{orderId}") // 특정 주문 메뉴
+    Call<List<OrderMenu>> order_orderMenu(@Header("Authorization") String jwt,
+                                    @Path("orderId") String orderId);
+
+    @GET("tables/list/{shopId}") // 매장 테이블 조회
+    Call<List<Tables>> getTables(@Header("Authorization") String jwt,
+                                 @Path("shopId") String shopId);
 
     /**
      * update update update update

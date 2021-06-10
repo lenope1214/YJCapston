@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Menu {
-    private String id; // 메뉴번호 ( 매장번호 + seq(2) )
+    private String menuId; // 메뉴번호 ( 매장번호 + seq(2) )
 
     private String name; // 메뉴이름
     private String intro; //메뉴설명

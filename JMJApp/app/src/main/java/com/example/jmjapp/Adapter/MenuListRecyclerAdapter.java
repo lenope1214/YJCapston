@@ -2,6 +2,7 @@ package com.example.jmjapp.Adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import com.example.jmjapp.dto.Menu;
 import com.example.jmjapp.network.Server;
 import com.example.jmjapp.owner.MainActivity_O;
 import com.example.jmjapp.owner.MenuDetailActivity;
+import com.example.jmjapp.owner.MenuMoveDetailActivity;
 import com.example.jmjapp.owner.ShopDetailFragment_O;
 
 import lombok.SneakyThrows;
@@ -80,7 +82,7 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
 
         SharedPreferences pref = context.getSharedPreferences("auth_o", Context.MODE_PRIVATE);
         String jwt = pref.getString("token", null);
-        String menuId = (MenuDetailActivity.shopNumber + holder.shop_menu_name.getText().toString());
+        String menuId = mItems.get(position).getMenuId();
 
         holder.menu_update_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -376,6 +378,19 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
                 }
             }
         });
+
+        holder.menu_move.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MenuMoveDetailActivity.class);
+                intent.putExtra("menuId", mItems.get(position).getMenuId());
+                intent.putExtra("menuName", mItems.get(position).getName());
+                intent.putExtra("menuPrice", mItems.get(position).getPrice());
+                intent.putExtra("imgPath", mItems.get(position).getImgPath());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
     }
 
     // 데이터 셋의 크기
@@ -388,7 +403,7 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
     // item layout 에 존재하는 위젯들을 바인딩합니다.
     class ItemViewHolder extends RecyclerView.ViewHolder {
         private ImageView shop_menu_img_update, shop_menu_img;
-        private TextView shop_menu_name;
+        private TextView shop_menu_name, menu_move;
         private TextView shop_menu_price, shop_menu_intro, shop_menu_name_update;
         private TextView shop_menu_duration;
         private CheckBox checkbox_soldout;
@@ -410,6 +425,7 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
             checkbox_popular = (CheckBox) itemView.findViewById(R.id.checkbox_popular);
             menu_update_btn = (Button) itemView.findViewById(R.id.menu_update_btn);
             menu_delete_btn = (Button) itemView.findViewById(R.id.menu_delete_btn);
+            menu_move = (TextView) itemView.findViewById(R.id.menu_move);
 
             // 수정창
             menu_detail_update = (ConstraintLayout) itemView.findViewById(R.id.menu_detail_update);

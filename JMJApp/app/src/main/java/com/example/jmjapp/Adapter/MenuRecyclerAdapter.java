@@ -56,6 +56,7 @@ public class MenuRecyclerAdapter extends RecyclerView.Adapter<MenuRecyclerAdapte
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, MenuChoosedActivity.class);
+                    intent.putExtra("menuId", mItems.get(position).getMenuId());
                     intent.putExtra("menuName", holder.tv_menu_name.getText().toString());
                     intent.putExtra("menuPrice", mItems.get(position).getPrice());
                     intent.putExtra("menuIntro", tv_menu_intro);

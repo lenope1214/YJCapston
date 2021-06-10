@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "158184280360",
-    "project_id": "jumanji-306215",
-    "storage_bucket": "jumanji-306215.appspot.com"
+    "project_number": "312769899022",
+    "project_id": "jmjapp-d4de4",
+    "storage_bucket": "jmjapp-d4de4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:158184280360:android:3cda57c6f5a042432fc01d",
+        "mobilesdk_app_id": "1:312769899022:android:7e703ba5e801f634662a5f",
         "android_client_info": {
           "package_name": "com.example.jmjapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "158184280360-g39hu3shubho63ale585lu00c3hsfls9.apps.googleusercontent.com",
+          "client_id": "312769899022-v5i9s1n45csp39n51lplvfqj7299m3ov.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBsOenPE-jI9_n_oVttc-uDoCFBb4Vdiis"
+          "current_key": "AIzaSyBQL8fmOgHmCuZMPYxWsnn7Ddys_ZVSX9o"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "158184280360-g39hu3shubho63ale585lu00c3hsfls9.apps.googleusercontent.com",
+              "client_id": "312769899022-v5i9s1n45csp39n51lplvfqj7299m3ov.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

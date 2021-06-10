@@ -34,7 +34,7 @@ import java.util.Map;
 public class  ShopDetailFragment_O extends Fragment {
     Button toggle_button_on, toggle_button_off, toggle_button_res_on, toggle_button_res_off;
     TextView owner_logout_btn, owner_name_tv;
-    ConstraintLayout shop_detail_menu_button, shop_detail_update_button, move_employee_option, move_chat_option;
+    ConstraintLayout shop_detail_menu_button, shop_detail_update_button, move_employee_option, move_review_option, move_res_option,  move_chat_option;
     boolean is_check = true;
     boolean is_check2 = true;
     private android.app.AlertDialog dialog;
@@ -386,10 +386,27 @@ public class  ShopDetailFragment_O extends Fragment {
             }
         });
 
-        move_chat_option.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), ChatbotManagementActivity.class);
-            intent.putExtra("shopNumber", shopNumber);
-            startActivity(intent);
+          move_chat_option.setOnClickListener(v -> {
+              Intent intent = new Intent(getActivity(), ChatbotManagementActivity.class);
+              intent.putExtra("shopNumber", shopNumber);
+              startActivity(intent);
+
+        move_review_option = rootView.findViewById(R.id.move_review_option);
+        move_review_option.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ReviewOwnerActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        move_res_option = rootView.findViewById(R.id.move_res_option);
+        move_res_option.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ReservationManagementActivity.class);
+                startActivity(intent);
+            }
         });
 
         return rootView;
