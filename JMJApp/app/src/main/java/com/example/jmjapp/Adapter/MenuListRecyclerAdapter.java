@@ -66,7 +66,7 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
         holder.shop_menu_duration.setText(String.valueOf(mItems.get(position).getDuration()) + "분");
         Glide.with(context).load("http://3.34.55.186:8088/" + mItems.get(position).getImgPath()).into(holder.shop_menu_img);
 
-        if (mItems.get(position).getIsSale() == 'Y') {
+        if (mItems.get(position).getIsSale() == 'N') {
             holder.checkbox_soldout.setChecked(true);
         } else {
             holder.checkbox_soldout.setChecked(false);

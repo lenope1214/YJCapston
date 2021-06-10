@@ -173,6 +173,7 @@
 
 package com.example.jmjapp.network;
 
+import com.example.jmjapp.dto.Chatbot;
 import com.example.jmjapp.dto.Employee;
 import com.example.jmjapp.dto.Mark;
 import com.example.jmjapp.dto.MemberDTO;
@@ -282,7 +283,7 @@ public interface ServerApi {
 
     @PATCH("orders") // 주문서 수정
     Call<Order> updateOrder(@Header("Authorization")String jwt,
-                                   @Body Map<String, String> map);
+                            @Body Map<String, String> map);
 
     @PATCH("orders/accept") // 주문 수락
     Call<ResponseBody> orderAccept(@Header("Authorization")String jwt,
@@ -336,7 +337,7 @@ public interface ServerApi {
     @GET("menus/list/{shopId}") // 한 매장의 메뉴리스트
     Call<List<Menu>> menuList(@Path("shopId") String shopId);
 
-    @GET("shop/{shopId}/employees") // 해당 매장의 직원리스트
+    @GET("shops/{shopId}/employees") // 해당 매장의 직원리스트
     Call<List<Employee>> empList(@Header("Authorization") String jwt,
                                  @Path("shopId") String shopId);
 
@@ -345,19 +346,19 @@ public interface ServerApi {
 
     @GET("orders/list/{shopId}") // 특정 식당 주문 리스트 확인
     Call<List<Order>> orderList(@Header("Authorization") String jwt,
-                          @Path("shopId") String shopId);
+                                @Path("shopId") String shopId);
 
     /**
      * update update update update
      */
 
-    @PATCH("shops/{shopid}/open") // 매장 오픈 수정
+    @PATCH("shops/{shopId}/open") // 매장 오픈 수정
     Call<ResponseBody>  updateOpen(@Header("Authorization") String jwt,
-                                   @Path("shopid") String shopid);
+                                   @Path("shopId") String shopId);
 
-    @PATCH("shops/{shopid}/reserve") // 매장 예약 수정
+    @PATCH("shops/{shopId}/reserve") // 매장 예약 수정
     Call<ResponseBody> updateIsRsPos(@Header("Authorization") String jwt,
-                                     @Path("shopid") String shopid);
+                                     @Path("shopId") String shopId);
 
     @PATCH("shops") // 매장 수정
     Call<ResponseBody> updateShop(@Header("Authorization") String jwt,
@@ -384,5 +385,21 @@ public interface ServerApi {
     @DELETE("menus/{menuId}") // 메뉴 삭제
     Call<ResponseBody> deleteMenu(@Header("Authorization") String jwt,
                                   @Path("menuId") String menuId);
+
+    @GET("shops/{shopId}/chatbots") // 내 주문 메뉴리스트 확인
+    Call<List<Chatbot>> myShopsChatbots(@Header("Authorization") String jwt,
+                                        @Path("shopId")String shopId);
+
+    @POST("chatbots") // 챗봇 등록
+    Call<ResponseBody> insertChatbot(@Header("Authorization") String jwt,
+                                     @Body Map<String, Object> map);
+
+    @PATCH("chatbots") // 챗봇 등록
+    Call<ResponseBody> patchChatbot(@Header("Authorization") String jwt,
+                                    @Body Map<String, Object> map);
+
+    @DELETE("chatbots/{chatbotId}")
+    Call<ResponseBody> deleteChatbot(@Header("Authorization") String jwt,
+                                     @Path("chatbotId") String chatbotId);
 
 }

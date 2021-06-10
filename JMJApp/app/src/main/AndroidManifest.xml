@@ -34,6 +34,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
+
         <activity android:name=".user.MapActivity"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -81,6 +83,10 @@
         <activity android:name=".user.OperationGuideActivity" />
         <activity android:name=".user.CustomerServiceActivity" />
         <activity android:name=".user.NoticeActivity" />
+        <activity android:name=".owner.ChatbotSettingActivity"/>
+        <activity android:name=".owner.ChatbotManagementActivity"/>
+        <activity android:name=".user.ChatbotDetailActivity"/>
+        <activity android:name=".user.ChatbotListActivity"/>
 
         <uses-library android:name="com.google.android.maps" />
         <uses-library

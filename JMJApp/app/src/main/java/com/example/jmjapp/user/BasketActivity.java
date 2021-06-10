@@ -73,43 +73,58 @@ public class BasketActivity extends AppCompatActivity {
                 Intent intent = new Intent(BasketActivity.this, OrderActivity.class);
                 startActivity(intent);
 
-//                Map<String, String> map = new HashMap();
-//                map.put("shopId", shopId);
+                try {
+                    ShopDetailActivity.orderCheck.equals("1");
+                } catch (Exception e) {
+                    ShopDetailActivity.orderCheck = "0";
+                }
+
+                if(ShopDetailActivity.orderCheck.equals("1")){
+                    Intent intent = new Intent(BasketActivity.this, MainActivity.class);
+                    intent.putExtra("QR","order");
+                    intent.putExtra("shopNumber",ShopDetailActivity.shopNumber);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(BasketActivity.this, OrderActivity.class);
+                    startActivity(intent);
+//                    Map<String, String> map = new HashMap();
+//                    map.put("shopId", ShopDetailActivity.shopNumber);
 //
-//                if (jwt != null) {
-//                    responseBodyCall = Server.getInstance().getApi().order("Bearer " + jwt, map);
-//                    responseBodyCall.enqueue(new Callback<ResponseBody>() {
-//                        @SneakyThrows
-//                        @Override
-//                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                            if (response.code() == 201) {
-//                                Log.d("성공", "성공");
-//                                JSONObject jsonObject = new JSONObject(response.body().string());
-//                                Log.d("result ", String.valueOf(jsonObject));
-//                                Long orderId = (Long) jsonObject.get("orderId");
-//                                System.out.println(orderId);
+//                    if (jwt != null) {
+//                        responseBodyCall = Server.getInstance().getApi().order("Bearer " + jwt, map);
+//                        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+//                            @SneakyThrows
+//                            @Override
+//                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                                if (response.code() == 201) {
+//                                    Log.d("성공", "성공");
+//                                    JSONObject jsonObject = new JSONObject(response.body().string());
+//                                    Log.d("result ", String.valueOf(jsonObject));
+//                                    Long orderId = (Long) jsonObject.get("orderId");
+//                                    System.out.println(orderId);
 //
-//                                Intent intent = new Intent(BasketActivity.this, OrderActivity.class);
-//                                intent.putExtra("orderId", orderId);
-//                                startActivity(intent);
-//                            } else {
-//                                Log.d("실패", "실패" + response.code());
+//                                    Intent intent = new Intent(BasketActivity.this, OrderActivity.class);
+//                                    intent.putExtra("orderId", orderId);
+//                                    startActivity(intent);
+//                                } else {
+//                                    Log.d("실패", "실패" + response.code());
+//                                }
 //                            }
-//                        }
 //
-//                        @Override
-//                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                            Log.d("연결실패", "연결실패");
-//                        }
-//                    });
-//                } else {
-//                    Snackbar.make(v, "로그인이 필요한 서비스입니다.", Snackbar.LENGTH_SHORT).setAction("확인", new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            return;
-//                        }
-//                    }).show();
-//                }
+//                            @Override
+//                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                                Log.d("연결실패", "연결실패");
+//                            }
+//                        });
+//                    } else {
+//                        Snackbar.make(v, "로그인이 필요한 서비스입니다.", Snackbar.LENGTH_SHORT).setAction("확인", new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                return;
+//                            }
+//                        }).show();
+//                    }
+                }
             }
         });
     }
