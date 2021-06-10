@@ -1,9 +1,6 @@
 package com.jumanji.capston.repository;
 
-import com.jumanji.capston.data.Order;
-import com.jumanji.capston.data.OrderMenu;
-import com.jumanji.capston.data.Payment;
-import com.jumanji.capston.data.Shop;
+import com.jumanji.capston.data.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -64,16 +61,16 @@ public interface OrderRepository extends JpaRepository<Order, Timestamp> {
             "                 from orders o2\n" +
             "                 where o2.STATUS = 'pd'\n" +
             "                   and o2.SHOP_ID = :shopId\n" +
-            "                   and o2.PAY_TIME >= to_char(sysdate - (to_char(sysdate, 'yyyyMMdd')  - :date), 'yyyyMMdd')),0) sumPd,\n" +
+            "                   and o2.PAY_TIME >= to_char(sysdate - (to_char(sysdate, 'yyyyMMdd')  - :aDate), 'yyyyMMdd')),0) sumPd,\n" +
             "                nvl((select sum(o2.AMOUNT)\n" +
             "                 from orders o2\n" +
             "                 where o2.STATUS = 'rf'\n" +
             "                   and o2.SHOP_ID = :shopId\n" +
-            "                   and o2.PAY_TIME >= to_char(sysdate - (to_char(sysdate, 'yyyyMMdd') - :date), 'yyyyMMdd')), 0) sumRf,\n" +
-            "                to_char(sysdate - (to_char(sysdate, 'yyyyMMdd')  - :date), 'yyyyMMdd')\n" +
+            "                   and o2.PAY_TIME >= to_char(sysdate - (to_char(sysdate, 'yyyyMMdd') - :aDate), 'yyyyMMdd')), 0) sumRf,\n" +
+            "                to_char(sysdate - (to_char(sysdate, 'yyyyMMdd')  - :aDate), 'yyyyMMdd')\n" +
             "from ORDERS o\n" +
-            "where o.PAY_TIME >= to_char(sysdate - (to_char(sysdate, 'yyyyMMdd')  - :date), 'yyyyMMdd')", nativeQuery = true)
-    Payment.StatisticsDAO getStatistics(String shopId, String date);
+            "where o.PAY_TIME >= to_char(sysdate - (to_char(sysdate, 'yyyyMMdd')  - :aDate), 'yyyyMMdd')", nativeQuery = true)
+    Statistics.betweenTotal getBetweenTotal(String shopId, String aDate);
 
 //    Order findByOrderAndShop(Order order, Shop shop);
 

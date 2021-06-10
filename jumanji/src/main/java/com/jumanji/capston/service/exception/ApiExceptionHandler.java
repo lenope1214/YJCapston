@@ -1,6 +1,6 @@
 package com.jumanji.capston.service.exception;
 
-import com.jumanji.capston.service.exception.orderException.OrderNotMineException;
+import com.jumanji.capston.service.exception.orderException.*;
 import com.jumanji.capston.service.exception.auth.ForbiddenException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeAlreadyStartException;
 import com.jumanji.capston.service.exception.employeeException.EmployeeDoesNotStartException;
@@ -11,9 +11,6 @@ import com.jumanji.capston.service.exception.optionException.OptionHasExistExcep
 import com.jumanji.capston.service.exception.optionException.OptionNotFoundException;
 import com.jumanji.capston.service.exception.optionGroupException.OptionGroupHasExistException;
 import com.jumanji.capston.service.exception.optionGroupException.OptionGroupNotFoundException;
-import com.jumanji.capston.service.exception.orderException.OrderNotFoundException;
-import com.jumanji.capston.service.exception.orderException.OrderNotPaidException;
-import com.jumanji.capston.service.exception.orderException.PayPointOverException;
 import com.jumanji.capston.service.exception.orderMenuException.OrderMenuNotFoundException;
 import com.jumanji.capston.service.exception.orderMenuOptionException.OrderMenuOptionHasExistException;
 import com.jumanji.capston.service.exception.orderMenuOptionException.OrderMenuOptionNotFoundException;
@@ -270,6 +267,13 @@ public class ApiExceptionHandler{
 
     @ExceptionHandler(ShopNotOpenException.class)
     public ResponseEntity<ApiErrorResponse> shopNotOpenException(ShopNotOpenException ex) {
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(OrderAmountCanNotZeroException.class)
+    public ResponseEntity<ApiErrorResponse> orderAmountCanNotZeroException(OrderAmountCanNotZeroException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);

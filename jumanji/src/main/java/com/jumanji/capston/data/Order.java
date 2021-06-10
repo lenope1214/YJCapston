@@ -1,6 +1,7 @@
 package com.jumanji.capston.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.jumanji.capston.service.exception.orderException.OrderAmountCanNotZeroException;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,6 +27,8 @@ public class Order implements Serializable {
     private int usePoint; // 사용된 포인트
     @Column(length = 8)
     private int amount; // 가격 총합
+    @Column(name = "comple_amount", length = 9)
+    private int compleAmount;
     @Column(name = "arrive_time")
     private Timestamp arriveTime; // 가게 도착시간
     @Column(name = "pay_time")
@@ -106,7 +109,7 @@ public class Order implements Serializable {
         private String orderRequest;
         private int usePoint; // 사용된 포인트
         private int amount; // 가격 총합
-        private int totalAmount; // 할인 적용 가격
+        private int compleAmount; // 결제된 금액
         private Timestamp arriveTime; // 가게 도착시간
         private String payTime; // 결제 일자 yyyyMMdd
         private String status;
@@ -141,7 +144,7 @@ public class Order implements Serializable {
             this.accept = order.getAccept();
             if (order.getPayTime() != null)
                 this.payTime = DateOperator.dateToYYYYMMDD(order.getPayTime(), true) + DateOperator.dateToHHMM(order.getPayTime(), true);
-            this.totalAmount = order.getAmount() - order.getUsePoint();
+            this.compleAmount = order.getCompleAmount();
         }
         public void setReviewed(char v){
             this.reviewed = v;
@@ -152,6 +155,8 @@ public class Order implements Serializable {
         if (request.getOrderRequest()!=null && request.orderRequest.length() > 0) {
             this.orderRequest = request.getOrderRequest();
         }
+        if(request.getAmount() == 0)throw new OrderAmountCanNotZeroException();
+        this.amount += request.getAmount();
         if (request.people != 0) this.people = request.people;
         if(request.getArriveTime() != null)this.arriveTime = request.getArriveTime();
         this.status = "rd";
@@ -162,8 +167,8 @@ public class Order implements Serializable {
         this.payMethod = request.getPayMethod();
         this.payTime = new Timestamp(System.currentTimeMillis());
         this.pg = request.getPg();
-        if (request.getAmount() != 0) this.amount = request.getAmount();
-        this.usePoint = request.getUsePoint();
+        this.compleAmount += request.getAmount(); // 여기서의 amount : 결제 요청 금액
+        this.usePoint += request.getUsePoint();
     }
 
     public void refund() {

@@ -1,3 +1,4 @@
+
 public String[] week_time(int size) {
 		String 유저명[] = new String[size];
 		int 주간시간[] = new int[size];
@@ -178,3 +179,41 @@ public String[] week_time(int size) {
 
 		return 출력문;
 	}
+
+
+
+
+
+-- what is want?
+-- day 0 ~ 23 ...
+-- week time monday 00 ~ sunday 23:59 ..
+-- http://mopsi.egloos.com/v/10574117
+-- https://jdm.kr/blog/71
+select TRUNC(sysdate, 'IW')     주간_첫날,
+       TRUNC(sysdate - 7, 'IW') 이전주간_첫날,
+       NEXT_DAY(sysdate, '월요일') 다음주간_첫날
+from dual;
+-- day
+-- where orderId == date
+select o.id , o.PAY_TIME,
+       to_char(to_date(:date), 'yyyyMMdd')
+from orders o
+where to_char(o.id, 'yyyyMMdd') = to_char(to_date(:date), 'yyyyMMdd');
+
+-- week
+-- 저번 주 일요일, 다음 주 월요일. 이 사이의 값이면 이번 주 월~일 값이 나옴.
+select o.id , o.PAY_TIME,
+       to_char(o.id, 'yyyyMMdd'),
+       TRUNC(sysdate, 'IW'),
+       trunc(NEXT_DAY(sysdate, '월요일'))
+from orders o
+where o.id > TRUNC(sysdate, 'IW') and
+      o.id < trunc(NEXT_DAY(sysdate, '월요일'))
+order by o.id desc;
+-- select :date,
+--        to_char((next_day(sysdate - 8, '월요일')), 'yyyyMMdd'),
+--        to_char(next_day(sysdate - 2, '월요일'), 'yyyyMMdd')
+-- from dual;
+
+-- month
+
