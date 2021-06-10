@@ -45,6 +45,12 @@ background: #F2F2F2;
     font-size: 18px;
     font-weight: bold;
 }
+.form-label{
+    padding-top: 20px;
+    margin-bottom: 2px;
+    font-size: 18px;
+    font-weight: bold;
+}
 
 .input-box {
     width: 400px;
@@ -57,6 +63,14 @@ background: #F2F2F2;
     height: 76px;
     border-radius: 5px;
     border: 1px solid gray;
+}
+.input-box1{
+    width: 250px;
+    height: 30px;
+    padding-left: 10px;
+    font-size: 16px;
+    border:1px solid gray;
+    border-radius:5px 0px 0px 5px; 
 }
 .select {
     width: 200px;;
@@ -76,7 +90,14 @@ background: #F2F2F2;
     border-radius: 5px;
     border: 1px solid gray;
 }
-
+.button0{
+    
+    width: 140px;
+    height: 35px;
+    border-radius: 0px;
+    border:1px solid gray;
+    border-radius:0px 5px 5px 0px;
+}
 .button3 {
     height: 50px;
     width: 200px;

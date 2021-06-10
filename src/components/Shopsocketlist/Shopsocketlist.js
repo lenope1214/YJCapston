@@ -1,5 +1,5 @@
 import React from "react";
-import { requirelist } from "../../lib/MyPage";
+import { requirelist2 } from "../../lib/MyPage";
 
 const Shopsocketlist = ({ list }) => {
     return (
@@ -31,7 +31,7 @@ const Shopsocketlist = ({ list }) => {
                                 <button>수락</button>
                                 <button
                                     onClick={async () => {
-                                        const res = await requirelist(
+                                        const res = await requirelist2(
                                             list.ordernumber,
                                             list.shopId
                                         ).then((res) => {

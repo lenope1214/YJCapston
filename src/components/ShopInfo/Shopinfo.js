@@ -72,6 +72,20 @@ console.log(shopphone1);
         left: "50%",
         transform: "translate(-50%, -50%)",
     };
+
+    let a = null;
+    if (isRsPos == "Y"){
+        a="예약가능";
+    }else{
+        a="예약불가능";
+    }
+
+    let b = null;
+    if (isOpen == "Y"){
+        b="매장오픈";
+    }else{
+        b="매장미오픈";
+    }
     
     return(
         <>
@@ -259,65 +273,31 @@ console.log(shopphone1);
                 value={shopAddressDetail}
                 className="input-box"
             />
-            {/* --------여기서부터 --------------- */}
             
-            <div className="label">
+            <div className="form-label">
             예약가능여부
             </div>
         <div>
-            {/* <span className="info-10"
-                // style={{
-                //     fontSize:"20px",
-                //     paddingTop:"20px",
-                // }}
-            >
-                
-            가능
-            <input 
-                type="radio"
-                id="is_rs_pos1"
-                name="is_rs_pos"
-                // placeholder={isRsPos ="Y"}
-            
-                value={isRsPos = "Y"}
-                // onChange={handleIs_rs_pos}
-            />
-            </span>
-            <span className="info-11"
-                // style={{
-                //     fontSize:"20px",
-                //     paddingTop:"20px",
-                // }}
-            >
-            불가능
-            <input
-                type="radio"
-                id="is_rs_pos2"
-                name="is_rs_pos"
-                // placeholder={isRsPos ="N"}
-                value={isRsPos = "N"}
-                // onChange={handleIs_rs_pos}
-            />
-            </span> */}
-            
             <input
                 type="text"
                 id="rspos"
-                value={isRsPos}
+                // value={isRsPos}
+                value={a}
                 className="input-box1"
                 />
             <button onClick={Shop_v2} className="button0">예약여부변경하기</button>
             {/* <span className="open">{isRsPos}</span> */}
         </div>
             
-            <div className="label">
+            <div className="form-label">
             오픈여부
             </div>
         <div>
         <input
                 type="text"
                 id="open"
-                value={isOpen}
+                // value={isOpen}
+                value={b}
                 className="input-box1"
                 />
             <button onClick={Shop_v3} className="button0">오픈여부변경하기</button>

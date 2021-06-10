@@ -11,6 +11,7 @@ const Emptime = ({
     Start,
     End,
     empName,
+    shopname,
 }) => {
 
     return(
@@ -18,7 +19,8 @@ const Emptime = ({
             <S.EmptimeWrap>
                 <div className="emptime-container">
                     <div className="main">
-                        <span>{shopId}{empName}</span>
+                        <span className="shopname">{shopname}</span>
+                        <span className="empname">{empName}</span>
                     </div>
                     <div className="main-2">
                         <div className="date">{nowDate}</div> <br/>

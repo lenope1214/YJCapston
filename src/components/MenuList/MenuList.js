@@ -9,8 +9,8 @@ const MenuList = ({ menues, shopId }) => {
         <>
             <S.MenuWrap>
             <body>
-            <Link to={"/posmain/"+shopId}>
-                        <button className="pos-button">포스기로 이동</button>
+            <Link to={"/myshop"}>
+                        <button className="pos-button">매장 목록으로</button>
                     </Link>
                 <div className="totals">
 

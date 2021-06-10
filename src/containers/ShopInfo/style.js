@@ -793,22 +793,6 @@ export const shopcontentWrap = styled.div`
         border: 0px;
         cursor: pointer;
     }
-    .isrspos_y{
-        color:blue;
-    }
-    .isrspos_n{
-        color:red;
-    }
-    .isopen_y{
-        color:blue;
-    }
-    .isopen_n{
-        color:red;
-    }
-    .ispopular{
-        font-weight:normal;
-        color:blue;
-    }
 `;
 
 export const LoginWrap = styled.div`

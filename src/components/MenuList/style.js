@@ -119,10 +119,16 @@ td {
     display: block;
     z-index: 10;
     transform: translateY(400px);
-    margin-left:85%;
-    width:100px;
-    height:40px;
+    margin-left:90%;
+    width: 120px;
+    height: 40px;
     border-radius: 10px;
+    color: white;
+    background: black;
+}
+
+a {
+    text-decoration: none;
 }
 
 `;

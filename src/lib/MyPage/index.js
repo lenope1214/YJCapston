@@ -43,14 +43,20 @@ export const ordermenulist = (id) => {
     });
 };
 
-export const requirelist = (m_id, shopid) => {
+export const requirelist = (id) => {
+    return axios.get(`http://3.34.55.186:8088/iamport/cancel?m_id=${id}`, {
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        },
+    });
+};
+
+export const requirelist2 = (id, shopId) => {
     return axios.get(
-        `http://3.34.55.186:8088/iamport/shop/cancel?shop_id=${shopid}&m_id=${m_id}`,
+        `http://3.34.55.186:8088/iamport/shop/cancel?shop_id=${shopId}&m_id=${id}`,
         {
             headers: {
-                Authorization: `Bearer ${sessionStorage.getItem(
-                    "access_token"
-                )}`,
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
         }
     );

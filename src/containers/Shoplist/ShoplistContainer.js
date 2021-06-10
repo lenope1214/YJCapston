@@ -336,6 +336,8 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                         img: rstrt.imgPath,
                         reviews: rstrt.reviews,
                         score: rstrt.score,
+                        isRsPos: rstrt.isRsPos,
+                        isOpen: rstrt.isOpen,
                     };
                 });
                 

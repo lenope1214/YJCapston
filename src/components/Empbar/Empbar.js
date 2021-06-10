@@ -22,11 +22,11 @@ const Empbar = ({shopId}) => {
             <NavLink to={"/emplist/"+thisShopId}>
             <button className="menu-2">직원 리스트</button>
             </NavLink>
-            <NavLink to={"/emptime/"+thisShopId}>
+            {/* <NavLink to={"/emptime/"+thisShopId}>
             <button className="menu-3">근무시간</button>
-            </NavLink>
+            </NavLink> */}
             <NavLink to={"/emptimelist/"+thisShopId}>
-            <button className="menu-4">근무시간<br/> 리스트</button>
+            <button className="menu-3">근무시간<br/> 리스트</button>
             </NavLink>
         </div>    
          </div> 

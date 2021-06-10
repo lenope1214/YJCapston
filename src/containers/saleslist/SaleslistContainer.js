@@ -1,6 +1,7 @@
 import React from "react";
 import OwnerNavbar from "../../components/OwnerMenubar/OwnerNavbar";
 import Header from "../../components/Header/Header";
+import PosNavbar from "../../components/PosNavbar/PosNavbar";
 import Saleslist from "../../components/saleslist/Saleslist";
 import { useEffect, useState } from "react";
 import { getshoporder } from "../../lib/saleslist/index";
@@ -49,6 +50,7 @@ const SaleslistContainer = (props) => {
         <>
             <Header />
             <OwnerNavbar shopId={shopId} />
+            <PosNavbar shopId={shopId}/>
             <Saleslist shopId={shopId} x={x} />
         </>
     );

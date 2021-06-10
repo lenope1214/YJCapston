@@ -40,6 +40,8 @@ const MyPage = ({
     };
     const [orderid, setorderid] = useState();
 
+    let a = null;
+
     return (
         <>
             <S.MypageWrap>
@@ -177,7 +179,11 @@ const MyPage = ({
 
                             {jmlist.map((jmlist2) => {
                                 console.log(jmlist2);
-
+                                if(jmlist2.jmstatus == "rf"){
+                                    a = "환불완료";
+                                }else{
+                                    a = "결제완료";
+                                }
                                 return (
                                     <div className="orderlist-item">
                                         <tr>
@@ -192,7 +198,7 @@ const MyPage = ({
                                                 <span className="won">명</span>
                                             </td>
                                             <td className="orderitem4">
-                                                결제완료
+                                                {a}
                                             </td>
                                             <td className="orderitem5">
                                                 <Link to={`/addreview/${jmlist2.jmshopId}/${jmlist2.jmid}`}>
