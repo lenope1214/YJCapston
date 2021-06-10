@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./style";
 import { Link } from "react-router-dom";
-import mainpicture from "./img/사용자페이지메인.jpg";
+import mainpicture from "./img/userpagemain.jpg";
 import yangtimjang from "./img/yangtimjang.png";
 
 const Shoplist = ({
@@ -28,8 +28,7 @@ const Shoplist = ({
     showcafe,
     showfastfood,
     showMarks,
-    marklist
-    
+    marklist,
 }) => {
     console.log(restaurant);
     let AWS_BASE_URL = "http://3.34.55.186:8088/";
@@ -127,8 +126,12 @@ const Shoplist = ({
                                 <img class="mainimg-img" src={mainpicture} />
                             </div>
                             <div class="guidetext">
-                                
-                                <button className="all-category" onClick={showShoplist}>매장 목록</button>     
+                                <button
+                                    className="all-category"
+                                    onClick={showShoplist}
+                                >
+                                    매장 목록
+                                </button>
                                 {/* <Link to="/Marklist"> */}
                                 {/* <button className="mark-category" onClick={showMarks}>찜 목록</button>  */}
                                 {/* </Link> */}
@@ -150,63 +153,84 @@ const Shoplist = ({
                                 </div>
                                 <div class="list_shop">
                                     {!restaurant.length && (
-                                        <div className="none-shop">매장이 없습니다.</div>
+                                        <div className="none-shop">
+                                            매장이 없습니다.
+                                        </div>
                                     )}
-                                    {!!restaurant.length && restaurant.map((shop) => {
-                                        if( shop.isRsPos == "N"){
-                                            isrspos = "예약불가능";
-                                        }else{
-                                            isrspos = "";
-                                        }
+                                    {!!restaurant.length &&
+                                        restaurant.map((shop) => {
+                                            if (shop.isRsPos == "N") {
+                                                isrspos = "예약불가능";
+                                            } else {
+                                                isrspos = "";
+                                            }
 
-                                        if( shop.isOpen == "N"){
-                                            isopen = "미오픈";
-                                        }else{
-                                            isopen = "";
-                                        }
+                                            if (shop.isOpen == "N") {
+                                                isopen = "미오픈";
+                                            } else {
+                                                isopen = "";
+                                            }
 
-                                        return (
-                                            <Link
-                                                to={`/shopcontent/${shop.id}`}
-                                            >
-                                                <button>
-                                                    <div class="testname">
-                                                        <div class="image">
-                                                            <img
-                                                                class="yangtimjang"
-                                                                src={
-                                                                    AWS_BASE_URL +
-                                                                    shop.img
-                                                                }
-                                                            />
-                                                        </div>
+                                            return (
+                                                <Link
+                                                    to={`/shopcontent/${shop.id}`}
+                                                >
+                                                    <button>
+                                                        <div class="testname">
+                                                            <div class="image">
+                                                                <img
+                                                                    class="yangtimjang"
+                                                                    src={
+                                                                        AWS_BASE_URL +
+                                                                        shop.img
+                                                                    }
+                                                                />
+                                                            </div>
 
-                                                        <div class="listcontent">
-                                                            <div class="linesetting">
-                                                                <div >
-                                                                    <span class="listname">{shop.name}</span><span class="isrspos">{isrspos}</span>
-                                                                </div>
-                                                                {/* <div class="listcategory">
+                                                            <div class="listcontent">
+                                                                <div class="linesetting">
+                                                                    <div>
+                                                                        <span class="listname">
+                                                                            {
+                                                                                shop.name
+                                                                            }
+                                                                        </span>
+                                                                        <span class="isrspos">
+                                                                            {
+                                                                                isrspos
+                                                                            }
+                                                                        </span>
+                                                                    </div>
+                                                                    {/* <div class="listcategory">
                                                                     {
                                                                         shop.category
                                                                     }
                                                                 </div> */}
-                                                            </div>
-                                                            <div class="listAddress">
-                                                                평점 ★ {shop.score} ({shop.reviews})<span class="isopen">{isopen}</span>
-                                                            </div>
+                                                                </div>
+                                                                <div class="listAddress">
+                                                                    평점 ★{" "}
+                                                                    {shop.score}{" "}
+                                                                    (
+                                                                    {
+                                                                        shop.reviews
+                                                                    }
+                                                                    )
+                                                                    <span class="isopen">
+                                                                        {isopen}
+                                                                    </span>
+                                                                </div>
 
-                                                            {/* <div>
+                                                                {/* <div>
                                                                 {
                                                                     shop.addressDetail
                                                                 }
                                                             </div> */}
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </button>
-                                            </Link>
-                                        );
-                                    })}
+                                                    </button>
+                                                </Link>
+                                            );
+                                        })}
                                 </div>
                                 {/* {restaurant.map((test, i) => {
                                     return <div test={i}>{test.intro}</div>;

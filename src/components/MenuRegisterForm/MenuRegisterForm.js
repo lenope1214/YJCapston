@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import * as S from "./style";
-import topimg from "../Main/img/QR코드사진2.png";
+import topimg from "../Main/img/QRcode2.png";
 import $ from 'jquery';
 //npm install --save jquery 설치하기
 window.$ = $;
