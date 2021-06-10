@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,17 +14,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.jmjapp.owner.ListShopActivity;
 import com.example.jmjapp.owner.OwnerLoginActivity;
 import com.example.jmjapp.user.MainActivity;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 public class IntroScreen extends AppCompatActivity {
     ImageView user_jmj_img, owner_jmj_img;
     TextView tv_userLogIn, tv_ownerLogIn;
     private AlertDialog dialog;
     String loginId, role, loginId2, role2;
+    static public String newToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.introscreen);
+
+        makeDeviceToken();
 
         SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
 
@@ -69,6 +76,16 @@ public class IntroScreen extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void makeDeviceToken() {
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this, new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult result) {
+                newToken = result.getToken();
+                Log.d("이 기기의 토큰 ::: ", newToken);
+            }
+        });
     }
 
     @Override

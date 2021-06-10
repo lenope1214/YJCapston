@@ -1,10 +1,12 @@
 package com.example.jmjapp.owner;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,11 +14,13 @@ import android.widget.ToggleButton;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.jmjapp.R;
+import com.example.jmjapp.owner.push.BellActivity_O;
 
 
 public class HomeFragment_O extends Fragment {
     ToggleButton toggle_Button;
     TextView text_myshop_name;
+    Button bell_button;
 
     static public String shopNumber;
 
@@ -52,6 +56,15 @@ public class HomeFragment_O extends Fragment {
                     toastMessage = "매장 Off";
                 }
                 Toast.makeText(getActivity().getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        bell_button = rootView.findViewById(R.id.bell_button);
+        bell_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), BellActivity_O.class);
+                startActivity(intent);
             }
         });
 

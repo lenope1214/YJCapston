@@ -2,6 +2,7 @@ package com.example.jmjapp.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,7 @@ public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRe
             public void onClick(View v) {
                 Intent intent = new Intent(context, ShopDetailActivity.class);
                 intent.putExtra("shopNumber", mItems.get(position).getShopId());
-                //Log.d("result : ", shops.get(position).getShopId());
+                Log.d("result : ", mItems.get(position).getShopId());
                 context.startActivity(intent);
             }
         });

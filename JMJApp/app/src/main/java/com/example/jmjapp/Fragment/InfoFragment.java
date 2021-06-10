@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.jmjapp.R;
+import com.example.jmjapp.user.ChatbotListActivity;
 import com.example.jmjapp.user.MapActivity;
 import com.example.jmjapp.user.ShopDetailActivity;
 
@@ -23,7 +24,7 @@ public class InfoFragment extends Fragment {
     private RecyclerView rv_restaurant_list;
     private RecyclerView rv_info_list;
     ArrayList mItems = new ArrayList<>();
-    TextView shop_detail_intro, shop_detail_time, shop_detail_addr , tv_gomap;
+    TextView shop_detail_intro, shop_detail_time, shop_detail_addr , tv_gomap, tv_gochatbot;
 
     public static InfoFragment newInstance() {
         // Required empty public constructor
@@ -43,6 +44,7 @@ public class InfoFragment extends Fragment {
             shop_detail_intro = view.findViewById(R.id.shop_detail_intro);
             shop_detail_time = view.findViewById(R.id.shop_detail_time);
             shop_detail_addr = view.findViewById(R.id.shop_detail_addr);
+            tv_gochatbot = view.findViewById(R.id.tv_gochatbot);
 
             //지도
             tv_gomap = view.findViewById(R.id.tv_gomap);
@@ -55,6 +57,11 @@ public class InfoFragment extends Fragment {
 
             tv_gomap.setOnClickListener(v -> {
                 Intent intent = new Intent(getContext(), MapActivity.class);
+                startActivity(intent);
+            });
+
+            tv_gochatbot.setOnClickListener(v -> {
+                Intent intent = new Intent(getContext(), ChatbotListActivity.class);
                 startActivity(intent);
             });
 //            Shop shop = new Shop(ShopDetailActivity.shopIntro);

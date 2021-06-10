@@ -19,11 +19,19 @@ public class  Shop {
     private String category;
     private char isOpen;
     private String imgPath;
+    private String ownerId;
 
 
     public Shop(String id) {
     }
 
     public Shop(String id, String name, String intro, String openTime, String closeTime, String address, String addressDetail, char isRsPos, char isOpen, String category) {
+    }
+
+    public Shop(String imgPath, String name, String address, String category) {
+        this.imgPath = imgPath;
+        this.name = name;
+        this.address = address;
+        this.category = category;
     }
 }

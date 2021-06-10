@@ -46,6 +46,7 @@ public class ShopDetailActivity extends AppCompatActivity {
     static public String shopAddress;
     static public String shopDetailAddress;
     static public String shopImgPath;
+    static public String ownerId;
 
     TextView shop_detail_shopname, shop_detail_review, shop_detail_reply, shop_detail_avgtext;
     ImageView shop_detail_avgstar, shop_detail_phonecall_img, shop_detail_zzim_img;
@@ -61,8 +62,7 @@ public class ShopDetailActivity extends AppCompatActivity {
 
     private String jwt, userId;
 
-    private boolean zzim;
-    private boolean zzimPlus;
+    boolean zzimReg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,13 +115,18 @@ public class ShopDetailActivity extends AppCompatActivity {
                     List<Shop> markList = response.body().getShopList();
 
                     for (Shop list : markList){
+                        System.out.println(list+"gggggggggggggggggggggg");
+                        System.out.println(list.getShopId()+"sssssssssssssssssssss"+shopNumber+"fffffffffffffffffff");
                         if (list.getShopId().equals(shopNumber)){
+                            System.out.println("RRRRRRRRRRRRRRRRRRRR");
                             shop_detail_zzim_img.setImageResource(R.drawable.zzimred);
-                            zzim = false;
+                            break;
                         } else {
+                            System.out.println("BBBBBBBBBBBBBBBBBBBB");
                             shop_detail_zzim_img.setImageResource(R.drawable.zzimblack);
-                            zzim = true;
                         }
+
+
                     }
 
                 } else {
@@ -143,51 +148,59 @@ public class ShopDetailActivity extends AppCompatActivity {
         shop_detail_zzim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (zzim){
-                    regzzim = Server.getInstance().getApi().regzzim("Bearer "+jwt, map);
-                    regzzim.enqueue(new Callback<ResponseBody>() {
-                        @Override
-                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                            System.out.println(jwt+"//////////////////"+shopNumber);
-                            if (response.code() == 201){
-                                shop_detail_zzim_img.setImageResource(R.drawable.zzimred);
-                                System.out.println("찜 나이스");
-                                zzim = false;
-                            } else {
-                                System.out.println("찜 실패");
-                                System.out.println(response.code()+"ggggggggggggggggggggg");
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-                            System.out.println("찜 등록 네트워크 오류");
-                        }
-                    });
-                } else {
-                    delzzim = Server.getInstance().getApi().deleteZzim("Bearer "+jwt, shopNumber);
-                    delzzim.enqueue(new Callback<ResponseBody>() {
-                        @SneakyThrows
-                        @Override
-                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                            System.out.println(jwt+"????????????????????"+shopNumber+"???????????????"+response.code());
-                            if (response.code() == 201) {
-                                shop_detail_zzim_img.setImageResource(R.drawable.zzimblack);
-                                System.out.println("찜 삭제");
-                                zzim = true;
-                            } else {
-                                System.out.println("찜 삭제 실패");
-                                System.out.println(response.errorBody().string()+"ggggggggggg");;
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-                            System.out.println("찜 삭제 네트워크 오류");
-                        }
-                    });
+                System.out.println(R.drawable.zzimred+"ccccccccccccccccccc");
+                System.out.println(shop_detail_zzim_img.getContext()+"11111111111111111");
+                if (shop_detail_zzim_img.getResources().equals("com.example.jmjapp.user.ShopDetailActivity@1cd699a"))
+                    System.out.println("qqqqqqqqqqqq");
+                else{
+                    System.out.println("gggggggggg");
                 }
+
+
+//                if (zzimReg){
+//                    regzzim = Server.getInstance().getApi().regzzim("Bearer "+jwt, map);
+//                    regzzim.enqueue(new Callback<ResponseBody>() {
+//                        @Override
+//                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                            System.out.println(jwt+"//////////////////"+shopNumber);
+//                            if (response.isSuccessful()){
+//                                shop_detail_zzim_img.setImageResource(R.drawable.zzimred);
+//                                System.out.println("찜 나이스");
+//                                zzimReg = false;
+//                            } else {
+//                                System.out.println("찜 실패");
+//                                System.out.println(response.code()+"ggggggggggggggggggggg");
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                            System.out.println("찜 등록 네트워크 오류");
+//                        }
+//                    });
+//                } else {
+//                    delzzim = Server.getInstance().getApi().deleteZzim("Bearer "+jwt, shopNumber);
+//                    delzzim.enqueue(new Callback<ResponseBody>() {
+//                        @SneakyThrows
+//                        @Override
+//                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                            System.out.println(jwt+"????????????????????"+shopNumber+"???????????????"+response.code());
+//                            if (response.isSuccessful()) {
+//                                shop_detail_zzim_img.setImageResource(R.drawable.zzimblack);
+//                                System.out.println("찜 삭제");
+//                                zzimReg = true;
+//                            } else {
+//                                System.out.println("찜 삭제 실패");
+//                                System.out.println(response.errorBody().string()+"ggggggggggg");;
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                            System.out.println("찜 삭제 네트워크 오류");
+//                        }
+//                    });
+//                }
 
             }
         });
@@ -240,8 +253,10 @@ public class ShopDetailActivity extends AppCompatActivity {
                     shopAddress = shop.getAddress();
                     shopDetailAddress = shop.getAddressDetail();
                     shopImgPath = shop.getImgPath();
+                    ownerId = shop.getOwnerId();
+
                     Log.d("rawa@@@@@@@@w",shopIntro + "@" + shopOpen + "@"  + shopClose + "@" + shopIsOpen + "@"
-                            + shopIsRsPos + "@" + shopAddress + "@" + shopDetailAddress);
+                            + shopIsRsPos + "@" + shopAddress + "@" + shopDetailAddress +"@" + ownerId);
 
                     DetailPagerAdapter detailPagerAdapter = new DetailPagerAdapter(getSupportFragmentManager());
                     ViewPager viewPager = (ViewPager)findViewById(R.id.shop_detail_viewpager3);

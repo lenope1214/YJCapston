@@ -5,9 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.jmjapp.Adapter.RestaurantRecyclerAdapter;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Shop;
@@ -41,10 +43,10 @@ public class PageOneFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if(view == null) {
+        if (view == null) {
             view = inflater.inflate(R.layout.fragment_page_one, container, false);
 
-            rv_restaurant_list = (RecyclerView)view.findViewById(R.id.rv_restaurant_list);
+            rv_restaurant_list = (RecyclerView) view.findViewById(R.id.rv_restaurant_list);
             adapter = new RestaurantRecyclerAdapter(getContext());
             showList("한식");
         }
@@ -62,14 +64,15 @@ public class PageOneFragment extends Fragment {
         listShopCall.enqueue(new Callback<List<Shop>>() {
             @Override
             public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response) {
-                if(response.isSuccessful()) {
-                    if(response.code() == 200) {
+                if (response.isSuccessful()) {
+                    if (response.code() == 200) {
                         List<Shop> shopList = response.body();
-                        for(Shop list : shopList) {
+                        for (Shop list : shopList) {
+                            System.out.println("sId : " + list.getShopId());
                             mItems.add(new Shop(list.getShopId(), list.getName(),
                                     list.getIntro(), list.getCloseTime(), list.getOpenTime(),
                                     list.getAddress(), list.getAddressDetail(), list.getIsRsPos(),
-                                    list.getCategory(), list.getIsOpen(), list.getImgPath()));
+                                    list.getCategory(), list.getIsOpen(), list.getImgPath(), list.getOwnerId()));
                             rv_restaurant_list.setHasFixedSize(true);
                             adapter.setItems(mItems);
                             rv_restaurant_list.setLayoutManager(new LinearLayoutManager(getActivity()));
