@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import * as S from "./style";
 
 import DaumPostcode from "react-daum-postcode";
-import topimg from "../Main/img/QR코드사진2.png";
+import topimg from "../Main/img/QRcode2.png";
 import { ordermenulist, requirelist} from "../../lib/MyPage";
 import {getOrderId} from "../../containers/MyPage/MyPageContainer";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./style";
 import { Link } from "react-router-dom";
-import topimg from "../Main/img/QR코드사진2.png";
+import topimg from "../Main/img/QRcode2.png";
 
 const PaymentDone = ({
     isLogin,
@@ -67,59 +67,79 @@ const PaymentDone = ({
                         )}
                     </div>
                     <div>
-                    <img src={topimg} className="topimg" />
-                </div>
-                <div className="topimg-text">
-                    <p>주문 완료!</p>
-                    <p className="subtext">이용해주셔서 감사합니다.</p>
-                </div>
-                    <body>      
+                        <img src={topimg} className="topimg" />
+                    </div>
+                    <div className="topimg-text">
+                        <p>주문 완료!</p>
+                        <p className="subtext">이용해주셔서 감사합니다.</p>
+                    </div>
+                    <body>
                         <div className="total-body">
                             <div className="body-item">
-                            <h4 className="body-title">주문내역 확인</h4>
-                            <table className="table">
-                                <thead>
-                                    <th>
-                                    <p>총 결제금액</p>
-                                    </th>
-                                    <th>
-                                    <p>주문 메뉴</p>
-                                    </th>
-                                    <th>
-                                    <p>주문 번호</p>
-                                    </th>
-                                </thead>
-                                <tbody>
-                                    <td>
-                                    <p className="price">{localStorage.getItem("allPrice")}</p>
-                                    </td>
-                                    <td>
-                                    <p>
-                                {paymentlist.map((payment_list) => {
-                                    return (
-                                        <span>
-                                            {payment_list.name}{" "}
-                                            {payment_list.count}개{"/"}
-                                        </span>
-                                    );
-                                })}
-                            </p>
-                                    </td>
-                                    <td>
-                                    <p>{localStorage.getItem("orderId")}</p>
-                                    </td>
-                                </tbody>
-                                <tr>
-                                    
-                                </tr>
-                            </table>
-                            <div className="button-div">
-                            <Link to="/shoplist">
-                                <button className="button">매장 목록으로</button>
-                            </Link>
-                            <button className="button" onClick={require}>취소하기</button>
+                                <h4 className="body-title">주문내역 확인</h4>
+                                <table className="table">
+                                    <thead>
+                                        <th>
+                                            <p>총 결제금액</p>
+                                        </th>
+                                        <th>
+                                            <p>주문 메뉴</p>
+                                        </th>
+                                        <th>
+                                            <p>주문 번호</p>
+                                        </th>
+                                    </thead>
+                                    <tbody>
+                                        <td>
+                                            <p className="price">
+                                                {localStorage.getItem(
+                                                    "allPrice"
+                                                )}
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                {paymentlist.map(
+                                                    (payment_list) => {
+                                                        return (
+                                                            <span>
+                                                                {
+                                                                    payment_list.name
+                                                                }{" "}
+                                                                {
+                                                                    payment_list.count
+                                                                }
+                                                                개{"/"}
+                                                            </span>
+                                                        );
+                                                    }
+                                                )}
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                {localStorage.getItem(
+                                                    "orderId"
+                                                )}
+                                            </p>
+                                        </td>
+                                    </tbody>
+                                    <tr></tr>
+                                </table>
+                                <div className="button-div">
+                                    <Link to="/shoplist">
+                                        <button className="button">
+                                            매장 목록으로
+                                        </button>
+                                    </Link>
+                                    <button
+                                        className="button"
+                                        onClick={require}
+                                    >
+                                        취소하기
+                                    </button>
+                                </div>
                             </div>
-                        </div>
                         </div>
                     </body>
                 </div>

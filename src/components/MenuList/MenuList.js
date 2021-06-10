@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import React from "react";
 import * as S from "./style";
 import {removeMenus} from "../../lib/MenuList/index";
-import topimg from "../Main/img/QR코드사진2.png";
+import topimg from "../Main/img/QRcode2.png";
 
 const MenuList = ({ menues, shopId }) => {
     return (

@@ -2,7 +2,7 @@ import * as S from "./style";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
-const PosMain = ({ shopId }) => {
+const PosMain = ({ shopId, openwindow }) => {
     const [thisShopId, setThisShopId] = useState("");
     useEffect(() => {
         setThisShopId(shopId);
@@ -21,16 +21,7 @@ const PosMain = ({ shopId }) => {
                         <Link to={"/emplist/" + shopId}>
                             <button className="main-button2">직원관리</button>
                         </Link>
-                        <button
-                            className="main-button3"
-                            onClick={() =>
-                                window.open(
-                                    `http://localhost:3000/Shopsocketlist/${shopId}`,
-                                    "_blank",
-                                    "location = no, toolbars= no, status= no, width = 500, height = 500 , scrollbars = no"
-                                )
-                            }
-                        >
+                        <button className="main-button3" onClick={openwindow}>
                             예약관리
                         </button>
                         <Link to={"/saleslist/" + shopId}>

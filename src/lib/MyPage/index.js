@@ -50,3 +50,14 @@ export const requirelist = (id) => {
         },
     });
 };
+
+export const requirelist2 = (id, shopId) => {
+    return axios.get(
+        `http://3.34.55.186:8088/iamport/shop/cancel?shop_id=${shopId}&m_id=${id}`,
+        {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        }
+    );
+};

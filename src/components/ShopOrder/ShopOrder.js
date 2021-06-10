@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./style";
 import { Link } from "react-router-dom";
-import topimg from "../Main/img/QR코드사진2.png";
+import topimg from "../Main/img/QRcode2.png";
 
 const ShopOrder = ({
     isLogin,
