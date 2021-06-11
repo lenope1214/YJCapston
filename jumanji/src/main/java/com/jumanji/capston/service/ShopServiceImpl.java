@@ -3,39 +3,43 @@ package com.jumanji.capston.service;
 import com.jumanji.capston.data.DateOperator;
 import com.jumanji.capston.data.Shop;
 import com.jumanji.capston.data.User;
+import com.jumanji.capston.data.UserShopMark;
 import com.jumanji.capston.repository.ShopRepository;
 import com.jumanji.capston.repository.UserRepository;
-import com.jumanji.capston.service.exception.ApiErrorResponse;
-import com.jumanji.capston.service.exception.Auth.ForbiddenException;
-import com.jumanji.capston.service.exception.ShopException.ShopHasExistException;
-import com.jumanji.capston.service.exception.ShopException.ShopNotFoundException;
-import com.jumanji.capston.service.interfaces.BasicService;
+import com.jumanji.capston.repository.UserShopMarksRepository;
+import com.jumanji.capston.service.exception.auth.ForbiddenException;
+import com.jumanji.capston.service.exception.shopException.ShopHasExistException;
+import com.jumanji.capston.service.exception.shopException.ShopNotFoundException;
 import com.jumanji.capston.service.interfaces.ShopService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.util.StringUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class ShopServiceImpl implements ShopService, BasicService {
+@RequiredArgsConstructor
+public class ShopServiceImpl implements ShopService {
     @Autowired
     ShopRepository shopRepository;
     @Autowired
     UserRepository userRepository;
-
     @Autowired
     UserServiceImpl userService;
-
     @Autowired
     StorageServiceImpl storageService;
-
-    @Autowired
-    HttpHeaders httpHeaders;
+    private final UserShopMarksRepository usmRepository;
+//    @Autowired
+//    S3Uploader s3Uploader;
 
 
     public List<Shop> getShopListByOwnerId(String id) {
@@ -61,33 +65,30 @@ public class ShopServiceImpl implements ShopService, BasicService {
 
     public char patchShopIsOpen(String authorization, String shopId) {
         String loginId = userService.getMyId(authorization);
-        isPresent(shopId);
         isOwnShop(loginId, shopId);
-        Shop shop = shopRepository.findById(shopId).get();
+        Shop shop = isPresent(shopId);
         return reverseIsOpen(shop);
     }
 
     public char patchSHopIsRsPos(String authorization, String shopId) {
         String loginId = userService.getMyId(authorization);
-        isPresent(shopId);
         isOwnShop(loginId, shopId);
-        Shop shop = shopRepository.findById(shopId).get();
+        Shop shop = isPresent(shopId);
         return reverseIsRsPos(shop);
     }
 
-    public ResponseEntity<?> getShopByShopId(String shopId) {
+    public Shop getShopByShopId(@Nullable String authorization, String shopId) {
+        // 변수
         Shop shop;
-        System.out.println("ShopController in getShopById");
-        System.out.println("shop id : " + shopId);
-        isPresent(shopId);
-        try {
-            shop = shopRepository.findById(shopId).get();
-        } catch (ShopNotFoundException e) {
-            return new ResponseEntity<>(new ApiErrorResponse(e.getCode(), e.getMessage()), HttpStatus.BAD_REQUEST);
-        }
-        Shop.Response response = new Shop.Response(shop);
+
+        // 값 확인 - 디버그로 하기.
+
+        // 서비스
+
+        shop = isPresent(shopId);
+
 //        if(shop.getImgPath()!=null)response.setImg(storageService.loadImg(shop.getImgPath()));
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return shop;
     }
 
 
@@ -95,42 +96,18 @@ public class ShopServiceImpl implements ShopService, BasicService {
         System.out.println("ShopController in getMyShop");
         String loginId = userService.getMyId(authorization);
         User userEntity = userRepository.findById(loginId).get();
-        List<Shop> result = getShopListByOwnerId(userEntity.getId());
-        return result;
+        List<Shop> myShopList = getShopListByOwnerId(userEntity.getId());
+        return myShopList;
     }
 
-    @Override
-    public Shop get(String shopId) {
-        isPresent(shopId);
-        return shopRepository.findById(shopId).get();
-    }
 
     @Override
-    public ResponseEntity<?> getList(String category, String sortTarget) {
-        if (getShopListSize() != 0) {
-            List<Shop.Response> responseList = new ArrayList<>();
-            sortTarget = sortTarget == null ? "" : sortTarget;
-            category = category == null ? "" : category;
-            System.out.println("카테고리 : " + category);
-            System.out.println("정렬기준 : " + sortTarget);
-            switch (sortTarget) {
-                case "score":
-                    return new ResponseEntity<>(shopRepository.ShopOrderByScore(category), HttpStatus.OK);
-                default:
-                    List<Shop> shopList;
-                    if(category.equals(""))shopList = shopRepository.findAll();
-                    else shopList = shopRepository.findByCategory(category);
-                    for (Shop shop : shopList) {
-                        Shop.Response response = new Shop.Response(shop);
-                        responseList.add(response);
-                    }
-                    break;
-            }
-            // shop.response로 parsing 해서 보내기.
-
-            return new ResponseEntity<>(responseList, HttpStatus.OK);
-        } else
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public List<Shop.Dao> getList(String category, String sortTarget) {
+        List<Shop> shopList = new ArrayList<>();
+        sortTarget = sortTarget == null ? "" : sortTarget;
+        category = category == null ? "" : category;
+        List<Shop.Dao> daoList = shopRepository.getShopListByCategorySortTarget(category, sortTarget);
+        return daoList;
     }
 
     @Override
@@ -138,7 +115,7 @@ public class ShopServiceImpl implements ShopService, BasicService {
         System.out.println("매장등록's shopId : " + request.getShopId());
 
         String loginId = userService.getMyId(authorization);
-        User user = userService.get(loginId);
+        User user = userService.isPresent(loginId);
         String uri = "shop/" + request.getShopId() + "/thumbnail/";
         String imgPath = null;
         System.out.println("openTime : " + request.getOpenTime());
@@ -150,8 +127,19 @@ public class ShopServiceImpl implements ShopService, BasicService {
         userService.isAuth(user.getRole(), "OWNER");
 
 
-        if (request.getImg() != null)
-            imgPath = storageService.store(request.getImg(), request.getImg().getName(), uri.split("/"));
+        if (request.getImg() != null && request.getImg().getSize() > 0) {
+//            System.out.println("imgInfo >>>>>>>>>>>>>>>>>>>>>>>>>");
+//            System.out.println(request.getImg().getResource().getFilename());
+//            System.out.println(request.getImg().getResource().getFilename().replace(" ", "_"));
+//            System.out.println(request.getImg().getName());
+//            System.out.println("imgInfo >>>>>>>>>>>>>>>>>>>>>>>>>");
+            imgPath = storageService.store(request.getImg(), request.getImg().getResource().getFilename().replace(" ", "_"), uri.split("/"));
+//            try {
+//                s3Uploader.upload(request.getImg(), imgPath);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+        }
         Date openTime = DateOperator.stringToMilisecond(request.getOpenTime());
         Date closeTime = DateOperator.stringToMilisecond(request.getCloseTime());
         Shop shopEntity;
@@ -166,6 +154,7 @@ public class ShopServiceImpl implements ShopService, BasicService {
                 .category(request.getCategory())
                 .imgPath(imgPath)
                 .owner(user)
+                .phone(request.getPhone())
                 .build();
         Shop shop = shopRepository.save(shopEntity);
         return shop;
@@ -192,24 +181,29 @@ public class ShopServiceImpl implements ShopService, BasicService {
     @Override
     public void delete(String authorization, String shopId) {
         String loginId = userService.getMyId(authorization); // jwt가 있다는 것은 유저 인증이 완료. isPresent 필요 없음.
-        Shop shopEntity = shopRepository.findById(shopId).get();
         isOwnShop(loginId, shopId);
+        Shop shopEntity = isPresent(shopId);
         shopRepository.delete(shopEntity);
     }
 
     // 있는 매장번호 인지 확인. 없으면 error를 반환하게 된다.
-    public boolean isPresent(String shopId) {
-        if (shopRepository.findById(shopId).isPresent()) return true;
+    public Shop isPresent(String shopId) {
+        Optional<Shop> shop = shopRepository.findById(shopId);
+        if (shop.isPresent()) return shop.get();
         throw new ShopNotFoundException();
     }
 
-    @Override
     public boolean isEmpty(String shopId) {
         if (shopRepository.findById(shopId).isEmpty()) return true;
         throw new ShopHasExistException();
     }
 
-    public boolean isOwnShop(String loginId, String shopId) {
+    /**
+     * @param loginId : 유저가 로그인한 아이디
+     * @param shopId  : 입력된 매장 아이디
+     * @return 내 매장이면 true, 아니면 권한없음 에러가 던져진다.
+     */
+    public void isOwnShop(String loginId, String shopId) {
         System.out.println("보유매장 비교 유저아디 : " + loginId);
         System.out.println("보유매장 비교 매장번호 : " + shopId);
         User loginUser = userService.get(loginId);
@@ -217,7 +211,7 @@ public class ShopServiceImpl implements ShopService, BasicService {
         for (Shop shop : shopRepository.findByOwnerId(loginId)) {
             if (shop.getId().equals(shopId)) {
                 System.out.println("보유매장 매칭된 매장번호 : " + shop.getId());
-                return true;
+                return;
             }
         }
         throw new ForbiddenException();
@@ -226,4 +220,12 @@ public class ShopServiceImpl implements ShopService, BasicService {
     public int getShopListSize() {
         return shopRepository.findAll().size();
     }
+
+    public String toOracleChar(String str) {
+        return "'" + str + "'";
+    }
+
+//    public String getDeviceToken(String shopId) {
+//
+//    }
 }

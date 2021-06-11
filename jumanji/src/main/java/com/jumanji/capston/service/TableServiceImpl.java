@@ -1,45 +1,43 @@
 package com.jumanji.capston.service;
 
+import com.jumanji.capston.data.Order;
 import com.jumanji.capston.data.Tab;
 import com.jumanji.capston.repository.TableRepository;
-import com.jumanji.capston.service.exception.TableException.TableHasExistException;
-import com.jumanji.capston.service.exception.TableException.TableNotFoundException;
+import com.jumanji.capston.service.exception.tableException.TableHasExistException;
+import com.jumanji.capston.service.exception.tableException.TableNotFoundException;
 import com.jumanji.capston.service.interfaces.BasicService;
-import com.jumanji.capston.service.interfaces.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+
+import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class TableServiceImpl implements TableService, BasicService {
+public class TableServiceImpl implements BasicService<Tab, Tab.Request, String> {
     @Autowired
     TableRepository tableRepository;
     @Autowired
     UserServiceImpl userService;
     @Autowired
     ShopServiceImpl shopService;
-
-    public Tab getTableInfo(String tabId) {
-        isPresent(tabId);
-        Tab table = tableRepository.findById(tabId).get();
-        return table;
-    }
+    @Autowired
+    OrderServiceImpl orderService;
 
 
     @Override
-    public Tab get(String tableId) {
-        isPresent(tableId);
-        Tab tab = tableRepository.findById(tableId).get();
+    public Tab get(@Nullable String authorization, String... tableId) {
+        Tab tab = isPresent(tableId[0]);
         return tab;
     }
 
     @Override
-    public List<Tab> getList(String shopId) {
+    public List<Tab> getList(@Nullable String authorization, String... shopId) {
         // 유효성 체크
-        shopService.isPresent(shopId);
-        return tableRepository.findByIdContains(shopId);
+        shopService.isPresent(shopId[0]);
+        return tableRepository.findByIdContains(shopId[0]);
     }
 
     @Override
@@ -66,17 +64,35 @@ public class TableServiceImpl implements TableService, BasicService {
     public Tab patch(String authorization, Tab.Request request) {
         String tabId = toTabId(request.getShopId(), request.getNo());
         String loginId = userService.getMyId(authorization);
-
+        Order order = null;
         // 유효성 검사
         isOwnTable(loginId, request.getShopId(), request.getNo());
-
-        Tab tab = tableRepository.findById(tabId).get();
+        order = orderService.isPresent(new Timestamp(Long.parseLong(request.getOrderId())));
+        Tab tab = isPresent(tabId); // 존재하는 테이블인지 확인
         tab.update(request);
+        if(order != null)tab.setOrder(order);
+        System.out.println("테이블 변경!!!! 정보 : " + tab.toString());
+        tableRepository.saveAndFlush(tab);
+
         return tab;
     }
 
+//    public Tab updateUsing(String authorization, Tab.Request request) {
+//        String tabId = toTabId(request.getShopId(), request.getNo());
+//        String loginId = userService.getMyId(authorization);
+//
+//        // 유효성 검사
+//        isOwnTable(loginId, request.getShopId(), request.getNo());
+//
+//        Tab tab = tableRepository.findById(tabId).get();
+//        tab.update(request);
+//        tableRepository.saveAndFlush(tab);
+//        return tab;
+//    }
+
     @Override
-    public void delete(String authorization, String tableId) {
+    public void delete(@Nullable String authorization, String... str) {
+        String tableId = str[0];
         String loginId = userService.getMyId(authorization);
         isOwnTable(loginId, tableId.substring(0, 10), Integer.parseInt(tableId.substring(10)));
         Tab tab = tableRepository.findById(tableId).get();
@@ -84,8 +100,9 @@ public class TableServiceImpl implements TableService, BasicService {
     }
 
     @Override
-    public boolean isPresent(String id) {
-        if (tableRepository.findById(id).isPresent()) return true;
+    public Tab isPresent(String id) {
+        Optional<Tab> tab = tableRepository.findById(id);
+        if (tab.isPresent()) return tab.get();
         throw new TableNotFoundException();
     }
 
@@ -95,15 +112,14 @@ public class TableServiceImpl implements TableService, BasicService {
         throw new TableHasExistException();
     }
 
-    public void isOwnTable(String loginId, String shopId, int tabNo){
+    public void isOwnTable(String loginId, String shopId, int tabNo) {
         String tabId = toTabId(shopId, tabNo);
         userService.isPresent(loginId); // 존재하는 아이디인지 확인
         shopService.isPresent(shopId);
-        shopService.isOwnShop(loginId, shopId); // 내 매장인지 확인
-        isPresent(tabId); // 존재하는 테이블인지 확인
+//        shopService.isOwnShop(loginId, shopId); // 내 매장인지 확인
     }
 
-    public String toTabId(String shopId, int tabNo){
+    public String toTabId(String shopId, int tabNo) {
         return shopId + String.format("%02d", tabNo);
     }
 }

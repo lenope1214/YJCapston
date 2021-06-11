@@ -24,6 +24,7 @@ import com.example.jmjapp.dto.OrderMenu;
 import com.example.jmjapp.dto.Shop;
 import com.example.jmjapp.network.Server;
 import com.google.android.gms.common.api.Api;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -57,6 +58,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
 
     public static final String TAG="stomp좀 되라 시발";
     private StompClient mStompClient;
+    private Button btn2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,6 +177,9 @@ public class ProfileUpdateActivity extends AppCompatActivity {
         btn.setOnClickListener(v -> {
             new LongOperation().execute("");
         });
+
+        btn2 = findViewById(R.id.testbtn2);
+
 //        btn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -287,25 +292,36 @@ public class ProfileUpdateActivity extends AppCompatActivity {
 //        });
     }
 
+
+
     private class LongOperation extends AsyncTask<String, Void, String> {
         private StompClient mStompClient;
         String TAG = "STOMP ?연결?";
+        String shopId = "7389801057";
 
         @Override
         protected String doInBackground(String... strings) {
             Log.d("LongOperation시작", "LongOperation시작");
-            mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws:/3.34.55.186:8088/ws-stomp/websocket");
+            mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws:/192.168.1.51:8088/ws-stomp/websocket");
             mStompClient.connect();
+            Log.d("연결","연결");
 
-            mStompClient.topic("/topic/chatting").subscribe(topicMessage -> {
-                Log.d("토픽","토픽");
-                Log.d(TAG, topicMessage.getPayload());
+//            mStompClient.topic("/sub/7389801057/o/roomId").subscribe(topicMessage -> {
+//                Log.d("토픽","토픽");
+//                Log.d(TAG, topicMessage.getPayload());
+//            });
+
+            btn2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("qwe","qwe");
+                    Gson jsonObject = new Gson();
+                    mStompClient.send("/pub/jmj", String.valueOf(jsonObject)).subscribe();
+                    Log.d("qwer","qwer");
+                }
             });
 
-            mStompClient.send("/app/hello", "world").subscribe(
-                    () -> Log.d(TAG, "Sent data!"),
-                    error -> Log.e(TAG, "Encountered error while sending data!", error)
-            );
+            Log.d("연결2", "연결2");
 
 
             mStompClient.lifecycle().subscribe(lifecycleEvent -> {
@@ -327,6 +343,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
             return "Executed";
         }
     }
+
 
 //    private void connectStomp() {
 //        StompClient client = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws:/3.34.55.186:8088/ws-stomp/websocket");

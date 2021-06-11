@@ -3,13 +3,14 @@ package com.jumanji.capston.data;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Getter
@@ -38,14 +39,18 @@ public class Shop {
     private char isOpen = 'N';
     @Column(name = "img_path")
     private String imgPath;
+    @Column(length = 11)
     private String phone;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
     @JsonIgnore
     private User owner;
 
-    @Getter @NoArgsConstructor
-    public static class PatchRequest{
+
+
+    @Getter
+    @NoArgsConstructor
+    public static class PatchRequest {
         private String shopId;
         private String name;
         private String intro;
@@ -58,8 +63,9 @@ public class Shop {
         private MultipartFile img;
     }
 
-    @Getter @AllArgsConstructor
-    public static class PostRequest{
+    @Getter
+    @AllArgsConstructor
+    public static class PostRequest {
         private String shopId;
         private String name;
         private String intro;
@@ -72,11 +78,14 @@ public class Shop {
         private MultipartFile img;
     }
 
-    @Getter @Setter
+    @Getter
+    @Setter
     public static class Response implements Serializable {
         private String shopId;
         private String name;
         private String intro;
+        private double score;
+        private int reviews;
         private String address;
         private String addressDetail;
         private String category;
@@ -86,6 +95,30 @@ public class Shop {
         private char isRsPos;
         private String imgPath;
         private String phone;
+        private String ownerId;
+        @Setter
+        private char marked = 'N';
+
+        public Response(Shop.Dao dao) {
+            this.shopId = dao.getShopId();
+            this.name = dao.getName();
+            this.intro = dao.getIntro();
+            this.address = dao.getAddress();
+            this.addressDetail = dao.getAddressDetail();
+            this.category = dao.getCategory();
+            this.openTime = dao.getOpenTime();
+            this.closeTime = dao.getCloseTime();
+            this.isOpen = dao.getIsOpen();
+            this.isRsPos = dao.getIsRsPos();
+            this.imgPath = dao.getImgPath();
+            this.score = Double.parseDouble(dao.getScore());
+            this.reviews = Integer.parseInt(dao.getReviews());
+        }
+
+        public Response(Shop.Dao dao, char marked){
+            this(dao);
+            this.marked = marked;
+        }
 
         public Response(Shop shop) {
             this.shopId = shop.getId();
@@ -94,12 +127,19 @@ public class Shop {
             this.address = shop.getAddress();
             this.addressDetail = shop.getAddressDetail();
             this.category = shop.getCategory();
-            this.openTime = DateOperator.dateToHHMM(shop.getOpenTime());
-            this.closeTime = DateOperator.dateToHHMM(shop.getCloseTime());
+            this.openTime = DateOperator.dateToHHMM(shop.getOpenTime(), true);
+            this.closeTime = DateOperator.dateToHHMM(shop.getCloseTime(), true);
             this.isOpen = shop.getIsOpen();
             this.isRsPos = shop.getIsRsPos();
             this.imgPath = shop.getImgPath();
             this.phone = shop.getPhone();
+            this.ownerId = shop.getOwner().getId();
+        }
+
+
+        public Response(Shop shop, char marked) {
+            this(shop);
+            this.marked = marked;
         }
     }
 
@@ -121,7 +161,7 @@ public class Shop {
     }
 
     public void update(Shop.PatchRequest patch) {
-        if(patch.getPhone() != null) this.phone = patch.getPhone();
+        if (patch.getPhone() != null) this.phone = patch.getPhone();
         if (patch.getIntro() != null) this.intro = patch.getIntro();
         if (patch.getOpenTime() != null) this.openTime = DateOperator.stringToMilisecond(patch.getOpenTime());
         if (patch.getCloseTime() != null) this.closeTime = DateOperator.stringToMilisecond(patch.getCloseTime());
@@ -130,8 +170,40 @@ public class Shop {
         if (patch.getCategory() != null) this.category = patch.getCategory();
     }
 
-    public interface Dao{
-        String getId();
+    @ToString
+    @Getter
+    @NoArgsConstructor
+    public static class Info {
+        Shop.Response shopInfo;
+        List<Menu.Response> menuList = new ArrayList<>();
+        List<Review.Response> reviewList = new ArrayList<>();
+
+        public Info(Shop shop, char marked) {
+            this.shopInfo = new Response(shop, marked);
+        }
+
+
+        public Info(Shop shop, List<Menu> menuList, List<Review> reviewList, char marked) {
+            this(shop, marked);
+            setInfo(menuList, reviewList);
+        }
+
+        /**
+         * @param menuList   식당의 메뉴 리스트
+         * @param reviewList 식당의 리뷰 리스트
+         */
+        public void setInfo(List<Menu> menuList, List<Review> reviewList) {
+            for (Menu menu : menuList) {
+                this.menuList.add(new Menu.Response(menu));
+            }
+            for (Review review : reviewList) {
+                this.reviewList.add(new Review.Response(review));
+            }
+        }
+    }
+
+    public interface Dao {
+        String getShopId();
         String getName();
         String getIntro();
         String getAddress();
@@ -143,5 +215,6 @@ public class Shop {
         Character getIsRsPos();
         String getImgPath();
         String getScore();
+        String getReviews();
     }
 }
