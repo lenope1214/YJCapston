@@ -38,7 +38,7 @@ public class QrReaderActivity extends AppCompatActivity {
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     static public String orderCheck = "0";
-    static public String tablenum, shopnum1, shopnum2, orderId;
+    static public String tablenum, shopnum1, shopnum2, orderId, orderNumber;
 
     private String jwt;
 

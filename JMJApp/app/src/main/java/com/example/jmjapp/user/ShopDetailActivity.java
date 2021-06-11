@@ -63,7 +63,7 @@ public class ShopDetailActivity extends AppCompatActivity {
     private String jwt, userId;
 
     private boolean zzim;
-    private boolean zzimPlus;
+    private boolean zzimPlus, zzimReg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +99,7 @@ public class ShopDetailActivity extends AppCompatActivity {
 //        System.out.println(orderCheck+"OOOOOOOOOOOOOOOOOOOOOOO");
         System.out.println(shopNumber + "%^&" + tableNumber + "%^&" + orderCheck + "%^&");
 
-        
+
         shop_detail_phonecall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

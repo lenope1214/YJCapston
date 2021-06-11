@@ -173,6 +173,7 @@
 
 package com.example.jmjapp.network;
 
+import com.example.jmjapp.dto.Chatbot;
 import com.example.jmjapp.dto.Employee;
 import com.example.jmjapp.dto.Mark;
 import com.example.jmjapp.dto.MemberDTO;
@@ -375,7 +376,7 @@ public interface ServerApi {
     @GET("menus/list/{shopId}") // 한 매장의 메뉴리스트
     Call<List<Menu>> menuList(@Path("shopId") String shopId);
 
-    @GET("shop/{shopId}/employees") // 해당 매장의 직원리스트
+    @GET("shops/{shopId}/employees") // 해당 매장의 직원리스트
     Call<List<Employee>> empList(@Header("Authorization") String jwt,
                                  @Path("shopId") String shopId);
 
@@ -439,5 +440,21 @@ public interface ServerApi {
     @DELETE("menus/{menuId}") // 메뉴 삭제
     Call<ResponseBody> deleteMenu(@Header("Authorization") String jwt,
                                   @Path("menuId") String menuId);
+
+    @GET("shops/{shopId}/chatbots") // 내 주문 메뉴리스트 확인
+    Call<List<Chatbot>> myShopsChatbots(@Header("Authorization") String jwt,
+                                        @Path("shopId")String shopId);
+
+    @POST("chatbots") // 챗봇 등록
+    Call<ResponseBody> insertChatbot(@Header("Authorization") String jwt,
+                                     @Body Map<String, Object> map);
+
+    @PATCH("chatbots") // 챗봇 등록
+    Call<ResponseBody> patchChatbot(@Header("Authorization") String jwt,
+                                    @Body Map<String, Object> map);
+
+    @DELETE("chatbots/{chatbotId}")
+    Call<ResponseBody> deleteChatbot(@Header("Authorization") String jwt,
+                                     @Path("chatbotId") String chatbotId);
 
 }

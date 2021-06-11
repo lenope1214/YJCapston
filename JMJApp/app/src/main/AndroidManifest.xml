@@ -34,6 +34,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
+        <activity android:name=".user.MapActivity"></activity>
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBsOenPE-jI9_n_oVttc-uDoCFBb4Vdiis" />
         <activity android:name=".owner.TableDetailActivity"></activity>
         <activity android:name=".user.QrMenuActivity" />
         <activity android:name=".owner.ReviewOwnerActivity" />
@@ -77,6 +90,10 @@
         <activity android:name=".user.OperationGuideActivity" />
         <activity android:name=".user.CustomerServiceActivity" />
         <activity android:name=".user.NoticeActivity" />
+        <activity android:name=".owner.ChatbotSettingActivity"/>
+        <activity android:name=".owner.ChatbotManagementActivity"/>
+        <activity android:name=".user.ChatbotDetailActivity"/>
+        <activity android:name=".user.ChatbotListActivity"/>
 
         <uses-library android:name="com.google.android.maps" />
         <uses-library

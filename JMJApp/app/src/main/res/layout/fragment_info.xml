@@ -130,6 +130,20 @@
             app:layout_constraintStart_toStartOf="@+id/shop_detail_addr"
             app:layout_constraintTop_toBottomOf="@+id/shop_detail_addr" />
 
+        <TextView
+            android:id="@+id/tv_gochatbot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edittext_login"
+            android:text="챗봇"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/tv_gomap"
+            app:layout_constraintTop_toBottomOf="@+id/shop_detail_addr" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

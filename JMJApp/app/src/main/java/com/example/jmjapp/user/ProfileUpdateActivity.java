@@ -3,6 +3,7 @@ package com.example.jmjapp.user;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -22,17 +23,24 @@ import com.example.jmjapp.dto.Order;
 import com.example.jmjapp.dto.OrderMenu;
 import com.example.jmjapp.dto.Shop;
 import com.example.jmjapp.network.Server;
+import com.google.android.gms.common.api.Api;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.security.auth.login.LoginException;
+
 import lombok.SneakyThrows;
 import okhttp3.ResponseBody;
+import okhttp3.WebSocket;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import ua.naiksoftware.stomp.Stomp;
+import ua.naiksoftware.stomp.client.StompClient;
 
 public class ProfileUpdateActivity extends AppCompatActivity {
 
@@ -46,6 +54,9 @@ public class ProfileUpdateActivity extends AppCompatActivity {
     private Call<List<OrderMenu>> orderMenuCall;
     private Call<Order.OrderMenuList> getOrderMenus;
     private Call<Order> orderCall;
+
+    public static final String TAG="stomp좀 되라 시발";
+    private StompClient mStompClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,117 +172,202 @@ public class ProfileUpdateActivity extends AppCompatActivity {
         });
 
         Button btn = findViewById(R.id.testbtn);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                orderCall = Server.getInstance().getApi().orderOne("Bearer " + jwt, "1622685111001");
-                orderCall.enqueue(new Callback<Order>() {
-                    @SneakyThrows
-                    @Override
-                    public void onResponse(Call<Order> call, Response<Order> response) {
-                        if (response.isSuccessful()) {
-                            Log.d("s","s");
-                        } else {
-                            Log.d("no","no"+response.errorBody().string());
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Order> call, Throwable t) {
-                        Log.d("s2","s2");
-                    }
-                });
-
-//                getOrderMenus = Server.getInstance().getApi().orderOneMenu("Bearer " + jwt, "1622591304095");
-//                getOrderMenus.enqueue(new Callback<Order.OrderMenuList>() {
-//                    @SneakyThrows
-//                    @Override
-//                    public void onResponse(Call<Order.OrderMenuList> call, Response<Order.OrderMenuList> response) {
-//                        if (response.isSuccessful()) {
-//                            Log.d("order_orderMenu 성공", "order_orderMenu 성공");
-//                            List<OrderMenu> orderMenuList = response.body().getOrderMenuList();
-//
-//                            for (OrderMenu list : orderMenuList) {
-//                                Log.d("list_quantity", list.getQuantity());
-//                            }
-//                        } else {
-//                            Log.d("order_orderMenu 실패1", "order_orderMenu 실패1"+response.errorBody().string());
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<Order.OrderMenuList> call, Throwable t) {
-//                        Log.d("order_orderMenu 실패2", "order_orderMenu 실패2");
-//                    }
-//                });
-
-//                orderMenuCall = Server.getInstance().getApi().order_orderMenu("Bearer " + jwt, "1621620310128");
-//                orderMenuCall.enqueue(new Callback<List<OrderMenu>>() {
-//                    @SneakyThrows
-//                    @Override
-//                    public void onResponse(Call<List<OrderMenu>> call, Response<List<OrderMenu>> response) {
-//                        if (response.isSuccessful()) {
-//                            Log.d("oprderId", "1621620310128");
-//                            Log.d("order_orderMenu 성공", "order_orderMenu 성공");
-//                            List<OrderMenu> orderMenuList = response.body();
-//                            Log.d("response.body", response.body().toString());
-//                            for (OrderMenu list : orderMenuList) {
-//
-//                            }
-//                            String[] list_id = new String[orderMenuList.size()];
-//                            int[] list_count = new int[orderMenuList.size()];
-//                            Log.d("size", String.valueOf(orderMenuList.size()));
-//                            for(OrderMenu list : orderMenuList) {
-//                                for (int i = 0; i < orderMenuList.size(); i++) {
-//                                    list_id[i] = list.getMenuId();
-//                                    Log.d("list_id", list_id[i]);
-//                                }
-//                            }
-//                        } else {
-//                            Log.d("order_orderMenu 실패1", "order_orderMenu 실패1"+response.errorBody().string());
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<List<OrderMenu>> call, Throwable t) {
-//                        Log.d("order_orderMenu 실패2", "order_orderMenu 실패2");
-//                    }
-//                });
-//                Log.d("btn실행", "btn실행");
-//
-//                Map<String, List<OrderMenu>> map = new HashMap();
-//                List<OrderMenu> omList = new ArrayList<>();
-//
-//                OrderMenu om1 = new OrderMenu().builder()
-//                        .orderId("1622108941558")
-//                        .shopId("0532552288")
-//                        .menuId("51m20210408072439")
-//                        .quantity("3")
-//                        .build();
-//                omList.add(om1);
-//
-//                map.put("list", omList);
-
-//                responseBodyCall = Server.getInstance().getApi().order_menus("Bearer " + jwt, map);
-//                responseBodyCall.enqueue(new Callback<ResponseBody>() {
-//                    @SneakyThrows
-//                    @Override
-//                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                        if (response.isSuccessful()) {
-//                            Log.d("성공","성공");
-//                        } else {
-//                            Log.d("실패","실패"+response.errorBody().string());
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                        Log.d("실패2","실패2");
-//                    }
-//                });
-            }
+        btn.setOnClickListener(v -> {
+            new LongOperation().execute("");
         });
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                orderCall = Server.getInstance().getApi().orderOne("Bearer " + jwt, "1622685111001");
+////                orderCall.enqueue(new Callback<Order>() {
+////                    @SneakyThrows
+////                    @Override
+////                    public void onResponse(Call<Order> call, Response<Order> response) {
+////                        if (response.isSuccessful()) {
+////                            Log.d("s","s");
+////                        } else {
+////                            Log.d("no","no"+response.errorBody().string());
+////                        }
+////                    }
+////
+////                    @Override
+////                    public void onFailure(Call<Order> call, Throwable t) {
+////                        Log.d("s2","s2");
+////                    }
+////                });
+//
+////                getOrderMenus = Server.getInstance().getApi().orderOneMenu("Bearer " + jwt, "1622591304095");
+////                getOrderMenus.enqueue(new Callback<Order.OrderMenuList>() {
+////                    @SneakyThrows
+////                    @Override
+////                    public void onResponse(Call<Order.OrderMenuList> call, Response<Order.OrderMenuList> response) {
+////                        if (response.isSuccessful()) {
+////                            Log.d("order_orderMenu 성공", "order_orderMenu 성공");
+////                            List<OrderMenu> orderMenuList = response.body().getOrderMenuList();
+////
+////                            for (OrderMenu list : orderMenuList) {
+////                                Log.d("list_quantity", list.getQuantity());
+////                            }
+////                        } else {
+////                            Log.d("order_orderMenu 실패1", "order_orderMenu 실패1"+response.errorBody().string());
+////                        }
+////                    }
+////
+////                    @Override
+////                    public void onFailure(Call<Order.OrderMenuList> call, Throwable t) {
+////                        Log.d("order_orderMenu 실패2", "order_orderMenu 실패2");
+////                    }
+////                });
+//
+////                orderMenuCall = Server.getInstance().getApi().order_orderMenu("Bearer " + jwt, "1621620310128");
+////                orderMenuCall.enqueue(new Callback<List<OrderMenu>>() {
+////                    @SneakyThrows
+////                    @Override
+////                    public void onResponse(Call<List<OrderMenu>> call, Response<List<OrderMenu>> response) {
+////                        if (response.isSuccessful()) {
+////                            Log.d("oprderId", "1621620310128");
+////                            Log.d("order_orderMenu 성공", "order_orderMenu 성공");
+////                            List<OrderMenu> orderMenuList = response.body();
+////                            Log.d("response.body", response.body().toString());
+////                            for (OrderMenu list : orderMenuList) {
+////
+////                            }
+////                            String[] list_id = new String[orderMenuList.size()];
+////                            int[] list_count = new int[orderMenuList.size()];
+////                            Log.d("size", String.valueOf(orderMenuList.size()));
+////                            for(OrderMenu list : orderMenuList) {
+////                                for (int i = 0; i < orderMenuList.size(); i++) {
+////                                    list_id[i] = list.getMenuId();
+////                                    Log.d("list_id", list_id[i]);
+////                                }
+////                            }
+////                        } else {
+////                            Log.d("order_orderMenu 실패1", "order_orderMenu 실패1"+response.errorBody().string());
+////                        }
+////                    }
+////
+////                    @Override
+////                    public void onFailure(Call<List<OrderMenu>> call, Throwable t) {
+////                        Log.d("order_orderMenu 실패2", "order_orderMenu 실패2");
+////                    }
+////                });
+////                Log.d("btn실행", "btn실행");
+////
+////                Map<String, List<OrderMenu>> map = new HashMap();
+////                List<OrderMenu> omList = new ArrayList<>();
+////
+////                OrderMenu om1 = new OrderMenu().builder()
+////                        .orderId("1622108941558")
+////                        .shopId("0532552288")
+////                        .menuId("51m20210408072439")
+////                        .quantity("3")
+////                        .build();
+////                omList.add(om1);
+////
+////                map.put("list", omList);
+//
+////                responseBodyCall = Server.getInstance().getApi().order_menus("Bearer " + jwt, map);
+////                responseBodyCall.enqueue(new Callback<ResponseBody>() {
+////                    @SneakyThrows
+////                    @Override
+////                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+////                        if (response.isSuccessful()) {
+////                            Log.d("성공","성공");
+////                        } else {
+////                            Log.d("실패","실패"+response.errorBody().string());
+////                        }
+////                    }
+////
+////                    @Override
+////                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+////                        Log.d("실패2","실패2");
+////                    }
+////                });
+//            }
+//        });
     }
+
+    private class LongOperation extends AsyncTask<String, Void, String> {
+        private StompClient mStompClient;
+        String TAG = "STOMP ?연결?";
+
+        @Override
+        protected String doInBackground(String... strings) {
+            Log.d("LongOperation시작", "LongOperation시작");
+            mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws:/3.34.55.186:8088/ws-stomp/websocket");
+            mStompClient.connect();
+
+            mStompClient.topic("/topic/chatting").subscribe(topicMessage -> {
+                Log.d("토픽","토픽");
+                Log.d(TAG, topicMessage.getPayload());
+            });
+
+            mStompClient.send("/app/hello", "world").subscribe(
+                    () -> Log.d(TAG, "Sent data!"),
+                    error -> Log.e(TAG, "Encountered error while sending data!", error)
+            );
+
+
+            mStompClient.lifecycle().subscribe(lifecycleEvent -> {
+                switch (lifecycleEvent.getType()) {
+
+                    case OPENED:
+                        Log.d(TAG, "Stomp connection opened");
+                        break;
+
+                    case ERROR:
+                        Log.e(TAG, "Error", lifecycleEvent.getException());
+                        break;
+
+                    case CLOSED:
+                        Log.d(TAG, "Stomp connection closed");
+                        break;
+                }
+            });
+            return "Executed";
+        }
+    }
+
+//    private void connectStomp() {
+//        StompClient client = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws:/3.34.55.186:8088/ws-stomp/websocket");
+//        //client.setHeartbeat(10000);
+//        client.connect();
+//        Log.d("connect after","after connection");///
+//
+//        client.topic("/topic/chatting").subscribe(message -> {
+//            Log.i("message","->");
+//            Log.i(TAG, "Received message: " + message.getPayload());
+//        }); // 받는거
+//
+////        client.send("/sub/7389801057/o/roomId", "world").subscribe(
+////                () -> Log.d(TAG, "Sent data!"),
+////                error -> Log.e(TAG, "Encountered error while sending data!", error)
+////        ); // 보내는거
+//        client.send("/app/file", "world").subscribe(
+//                () -> Log.d(TAG, "Sent data!"),
+//                error -> Log.e(TAG, "Encountered error while sending data!", error)
+//        ); // 보내는거
+//
+//        //client.disconnect();
+//
+//        client.lifecycle().subscribe(lifecycleEvent -> {
+//            switch (lifecycleEvent.getType()) {
+//                case OPENED:
+//                    Log.d(TAG, "Stomp connection opened");
+//                    break;
+//                case CLOSED:
+//                    Log.d(TAG, "Stomp connection closed");
+//                    break;
+//                case ERROR:
+//                    Log.e(TAG, "Stomp connection error", lifecycleEvent.getException());
+//                    break;
+//            }
+//        });
+//        return "Executed";
+//    }
+
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
