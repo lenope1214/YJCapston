@@ -3,6 +3,9 @@ import * as S from "./style";
 import { Link } from "react-router-dom";
 import mainpicture from "./img/사용자페이지메인.jpg";
 import yangtimjang from "./img/yangtimjang.png";
+import 'react-slideshow-image/dist/styles.css'
+import { Slide } from 'react-slideshow-image';
+import searchicon from './img/searchicon.png';
 
 const Shoplist = ({
     isLogin,
@@ -29,8 +32,9 @@ const Shoplist = ({
     showfastfood,
     showMarks,
     marklist
-    
+
 }) => {
+
     console.log(restaurant);
     let AWS_BASE_URL = "http://3.34.55.186:8088/";
     return (
@@ -53,10 +57,12 @@ const Shoplist = ({
                         <div class="center-nav">
                             <input
                                 type="text"
-                                placeholder="매장을 검색하세요."
+                                placeholder=" 매장을 검색하세요."
                                 class="search-box"
                             ></input>
-                            <button class="search-button">검색</button>
+                            <button class="search-button">
+                                <img src={searchicon} width='20px' className="search-icon"></img>
+                            </button>
                         </div>
                         {isLogin ? (
                             <div class="right-nav">
@@ -80,7 +86,10 @@ const Shoplist = ({
                         )}
                     </div>
                     <body>
-                        <div class="topCategory">
+                        <div className="topcatcat">
+
+                        </div>
+                        <div className="topCategory">
                             <button onClick={showkorean}>
                                 <li>한식</li>
                             </button>
@@ -112,7 +121,7 @@ const Shoplist = ({
                                 <li>패스트푸드</li>
                             </button>
                             <button onClick={showMarks}>
-                                <li class="cityreview">찜 목록</li>
+                                <li class="cityreview">찜목록</li>
                             </button>
                             <button onClick={showShoplist}>
                                 <li class="reviewevent">모두보기</li>
@@ -120,11 +129,45 @@ const Shoplist = ({
                         </div>
                         <div class="allbody">
                             <div class="mainimg">
-                                <img class="mainimg-img" src={mainpicture} />
+                                {/* <img class="mainimg-img" src={mainpicture} /> */}
+                                {/* <SimpleImageSlider 
+                                    width={'100%'}
+                                    height={504}
+                                    images={images}
+                                /> */}
+                                <div className="slide-container">
+                                    <Slide>
+                                    <div className="each-slide">
+                                            {/* <div style={{ 'backgroundImage': `url(${mainpicture})` }}> */}
+                                            <div className="slide-img">
+                                                <img src={mainpicture}></img>
+                                                
+                                            </div>
+                                            <div className="slide-text">Slide 1</div>
+                                        </div>
+                                        <div className="each-slide">
+                                            {/* <div style={{ 'backgroundImage': `url(${yangtimjang})` }}> */}
+                                            <div className="slide-img">
+                                                <img src={yangtimjang}></img>
+                                                {/* <span className="slide-text">Slide 2</span> */}
+                                            </div>
+                                            <div className="slide-text">Slide 2</div>
+                                        </div>
+                                        <div className="each-slide">
+                                            {/* <div style={{ 'backgroundImage': `url(${mainpicture})` }}> */}
+                                            <div className="slide-img">
+                                                <img src={mainpicture}></img>
+                                                {/* <span className="slide-text">Slide 3</span> */}
+                                            </div>
+                                            
+                                            <div className="slide-text">Slide 3</div>
+                                        </div>
+                                    </Slide>
+                                </div>
                             </div>
                             <div class="guidetext">
-                                
-                                <button className="all-category" onClick={showShoplist}>매장 목록</button>     
+
+                                <p className="shoplist">SHOP LIST</p>
                                 {/* <Link to="/Marklist"> */}
                                 {/* <button className="mark-category" onClick={showMarks}>찜 목록</button>  */}
                                 {/* </Link> */}
@@ -132,7 +175,7 @@ const Shoplist = ({
                                 {/* <hr class="hrstyle2" /> */}
                             </div>
                             <div clasName="menulist">
-                                <div class="leftCategory">
+                                {/* <div class="leftCategory">
                                     <select class="moneykind">
                                         <option value="예약 많은 순">
                                             예약 많은 순
@@ -143,7 +186,7 @@ const Shoplist = ({
                                         <option value="별점순">별점순</option>
                                     </select>
                                     <button>검색</button>
-                                </div>
+                                </div> */}
                                 <div class="list_shop">
                                     {!restaurant.length && (
                                         <div className="none-shop">매장이 없습니다.</div>
