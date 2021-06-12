@@ -38,6 +38,7 @@ public class Order implements Serializable {
     @Column(name = "pay_method")
     private String payMethod; // 결제방식
 
+
     private char accept = 'N';
 
 
@@ -49,9 +50,14 @@ public class Order implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore // 이거 없으면 fetchType lazy라서 json 변환중에 오류남.
     private User user;
+    @JoinColumn(name = "tab_id", updatable = false)@Setter
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore // 이거 없으면 fetchType lazy라서 json 변환중에 오류남.
+    private Tab tab;
     @JoinColumn
     @OneToOne(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Review review;
+
 
     @Builder
     public Order(Timestamp id, Shop shop, User user) {
@@ -94,6 +100,7 @@ public class Order implements Serializable {
         private String payMethod; // 결제방식
         private String shopId;
         private String userId;
+        private int tabNo;
         private List<OrderMenu> orderMenuList;
     }
 
@@ -117,6 +124,7 @@ public class Order implements Serializable {
         private String payMethod; // 결제방식
         private char accept;
         private char reviewed;
+        private Tab table;
         @Setter
         private List<OrderMenu.Response> orderMenuList;
 
@@ -145,6 +153,7 @@ public class Order implements Serializable {
             if (order.getPayTime() != null)
                 this.payTime = DateOperator.dateToYYYYMMDD(order.getPayTime(), true) + DateOperator.dateToHHMM(order.getPayTime(), true);
             this.compleAmount = order.getCompleAmount();
+            this.table = order.tab;
         }
         public void setReviewed(char v){
             this.reviewed = v;

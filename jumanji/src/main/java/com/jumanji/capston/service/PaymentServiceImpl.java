@@ -27,19 +27,45 @@ public class PaymentServiceImpl implements PaymentService {
     OrderRepository orderRepository;
 
 
-    public Statistics.betweenTotal getShopStatistics(String authorization, String shopId, String scope, String aDate, String bDate) {
+    public Statistics.SumPdRf getShopStatistics(String authorization, String shopId, String scope, String aDate, String bDate) {
         String loginId = userService.getMyId(authorization);
-        Statistics.betweenTotal statistics = null;
+        Statistics.SumPdRf statistics = null;
 
         // 유효성 체크
         if (shopId == null) throw new NullPointerException("Shop Id를 입력해 주세요.");
 //        shopService.isOwnShop(loginId, shopId); // 내 식당인지
         if (aDate == null) aDate = DateOperator.dateToYYYYMMDD(new Date(), false);
+        deleteSign(aDate, bDate);
         System.out.println("목표 식당 : " + shopId);
-        System.out.println("지정 월 : " + aDate);
-        statistics = orderRepository.getBetweenTotal(shopId, aDate);
+        System.out.println("지정 날짜 : " + aDate);
+        switch(scope){
+            case "between" :
+                statistics = orderRepository.getSumPdRfBetween(shopId, aDate, bDate);
+                break;
+            case "week" :
+                statistics = orderRepository.getSumPdRfWeek(shopId, aDate);
+                break;
+            case "month" :
+                statistics = orderRepository.getSumPdRfMonth(shopId, aDate);
+            default:
+                statistics = orderRepository.getSumPdRfDate(shopId, aDate);
+                break;
+        }
         System.out.println("====================\nstatistics.getSumPd() : " + statistics.getSumPd() + "\nstatistics.getSumRf() : " + statistics.getSumRf());
         return statistics;
+    }
+
+    private void deleteSign(String aDate, String bDate) {
+        if(aDate != null){
+            aDate = aDate.replace("-", "");
+            aDate = aDate.replace("/", "");
+            aDate = aDate.replace(",", "");
+        }
+        if(bDate != null){
+            bDate = bDate.replace("-", "");
+            bDate = bDate.replace("/", "");
+            bDate = bDate.replace(",", "");
+        }
     }
 
 

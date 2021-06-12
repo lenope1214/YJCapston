@@ -1,13 +1,14 @@
 package com.jumanji.capston.data;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 public class Statistics {
 
-    @Getter @NoArgsConstructor
-    public static class betweenTotal{
-        private int sumPd;
-        private int sumRf;
+    public interface SumPdRf{
+        Integer getSumPd();
+        Integer getSumRf();
     }
 }

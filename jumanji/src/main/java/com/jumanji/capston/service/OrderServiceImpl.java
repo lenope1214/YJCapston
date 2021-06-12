@@ -6,6 +6,7 @@ import com.jumanji.capston.repository.ReviewRepository;
 import com.jumanji.capston.service.exception.orderException.OrderHasExistException;
 import com.jumanji.capston.service.exception.orderException.OrderNotFoundException;
 import com.jumanji.capston.service.exception.shopException.ShopNotOpenException;
+import com.jumanji.capston.service.exception.tableException.TableAlreadUsingException;
 import com.jumanji.capston.service.interfaces.OrderService;
 import jdk.jfr.TransitionTo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class OrderServiceImpl implements OrderService {
     UserServiceImpl userService;
     @Autowired
     ShopServiceImpl shopService;
+    @Autowired
+    TableServiceImpl tableService;
 
 //    public ResponseEntity<?> getCartId() {
 //        @Getter
@@ -100,6 +103,7 @@ public class OrderServiceImpl implements OrderService {
         Order order;
         User user;
         Shop shop;
+        Tab table;
         // 주문번호가 같이 들어오면, 있는 주문번호를 수정하는것이기 때문에 그대로 검색해서 수정. 없으면 새로운 주문이므로 생성
 
         String loginId = userService.getMyId(authorization);
@@ -107,11 +111,19 @@ public class OrderServiceImpl implements OrderService {
         // 유효성 검사.
         user = userService.isPresent(loginId);
         shop = shopService.isPresent(request.getShopId());
+
         isOpen(shop);
         order = request.getOrderId() != null ? isOwnOrder(request.getOrderId(), loginId) : post(loginId, user, shop, request);
 
         order.patch(request);
         System.out.println("arrtime : " + order.getArriveTime());
+        if(request.getTabNo() != 0){
+            table = tableService.isPresent(request.getShopId() + String.format("%02d",request.getTabNo()));
+            if(table.getOrder() != null)throw new TableAlreadUsingException();
+            table.setOrder(order);
+            tableService.save(table);
+            order.setTab(table);
+        }
         order = orderRepository.saveAndFlush(order);
         return order;
     }

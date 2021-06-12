@@ -74,7 +74,7 @@ public class PaymentController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    //    @Transactional
+    //    @Transactional 결제시..
     @PostMapping("payments")
     public ResponseEntity<?> postPayment(@RequestHeader String authorization, @RequestBody Payment.Request request) {
         // response 형태로 바꿔줘야함.
@@ -92,7 +92,7 @@ public class PaymentController {
                                            @Nullable @RequestParam String scope,
                                            @Nullable @RequestParam String aDate,
                                            @Nullable @RequestParam String bDate) {
-        Statistics.betweenTotal statistics = paymentService.getShopStatistics(authorization, shopId, scope, aDate, bDate);
+        Statistics.SumPdRf statistics = paymentService.getShopStatistics(authorization, shopId, scope, aDate, bDate);
 //        statistics
         return new ResponseEntity<>(statistics, HttpStatus.OK);
     }

@@ -16,6 +16,7 @@ import com.jumanji.capston.service.exception.orderMenuOptionException.OrderMenuO
 import com.jumanji.capston.service.exception.orderMenuOptionException.OrderMenuOptionNotFoundException;
 import com.jumanji.capston.service.exception.reviewException.ReviewHasExistException;
 import com.jumanji.capston.service.exception.shopException.*;
+import com.jumanji.capston.service.exception.tableException.TableAlreadUsingException;
 import com.jumanji.capston.service.exception.userException.DoLoginExistException;
 import com.jumanji.capston.service.exception.userException.LoginFailedException;
 import com.jumanji.capston.service.exception.userException.UserHasExistException;
@@ -274,6 +275,13 @@ public class ApiExceptionHandler{
 
     @ExceptionHandler(OrderAmountCanNotZeroException.class)
     public ResponseEntity<ApiErrorResponse> orderAmountCanNotZeroException(OrderAmountCanNotZeroException ex) {
+        ApiErrorResponse response =
+                new ApiErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(TableAlreadUsingException.class)
+    public ResponseEntity<ApiErrorResponse> tableAlreadUsingException(TableAlreadUsingException ex) {
         ApiErrorResponse response =
                 new ApiErrorResponse(ex);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
