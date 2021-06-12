@@ -11,4 +11,8 @@ import lombok.Setter;
 public class CanNotBeZero extends RuntimeException{
     private String code = "error-zero";
     private String message = "can't be zero";
+
+    public CanNotBeZero(String message){
+        this.message = message;
+    }
 }

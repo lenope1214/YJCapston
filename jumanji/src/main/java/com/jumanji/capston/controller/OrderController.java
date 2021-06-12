@@ -89,6 +89,7 @@ public class OrderController {
 //        return new ResponseEntity<>(response, HttpStatus.CREATED);
 //    }
 
+    // 주문 등록 및 수정
     @RequestMapping(value = "orders", method = {RequestMethod.POST, RequestMethod.PATCH})
     public ResponseEntity<?> postOrder(@RequestHeader String authorization, @RequestBody Order.Request request){
         Order order = orderService.patch(authorization, request);
