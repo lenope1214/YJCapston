@@ -18,16 +18,34 @@ import java.util.Set;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-public class ChatController {
+public class
+ChatController {
     private static final Set<String> SESSION_IDS = new HashSet<>();
     private final SimpMessagingTemplate messagingTemplate;
 //    private final StompService stompService;
 
     @MessageMapping("/chat") // "/pub/chat"
     public void publishChat(StompMessage chatMessage) {
+        System.out.println("chat>>>>>>>>");
         log.info("publishChat : {}", chatMessage);
 
         messagingTemplate.convertAndSend("/sub/" + chatMessage.getShopId() + "/" + chatMessage.getType() + "/" + chatMessage.getRoomId(), chatMessage);
+    }
+
+    @MessageMapping("/pub/chat") // "/pub/chat"
+    public void publishChat2(StompMessage chatMessage) {
+        System.out.println("pub/chat>>>>>>>>");
+        log.info("publishChat : {}", chatMessage);
+
+        messagingTemplate.convertAndSend("/sub/" + chatMessage.getShopId() + "/" + chatMessage.getType() + "/" + chatMessage.getRoomId(), chatMessage);
+    }
+
+    @MessageMapping("/jmj") // "/pub/jmj"
+    public void publishChat3(String chatMessage) {
+        System.out.println("pub/jmj>>>>>>>>");
+        log.info("publishChat : {}", chatMessage);
+
+        messagingTemplate.convertAndSend("/sub/4850101906/o/roomId", chatMessage);
     }
 
     @MessageMapping("/test/chat")

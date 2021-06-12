@@ -19,7 +19,8 @@ public class TableController {
 
     @GetMapping("tables/{tabId}")
     public ResponseEntity<?> getTabById(@PathVariable String tabId){
-        Tab tab = tableService.get(tabId);
+        System.out.println("tabId :" + tabId);
+        Tab tab = tableService.get(null, tabId);
         Tab.Response response = new Tab.Response(tab);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }

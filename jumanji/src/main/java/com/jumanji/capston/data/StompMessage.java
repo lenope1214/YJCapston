@@ -1,20 +1,30 @@
 package com.jumanji.capston.data;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+import org.hibernate.annotations.Fetch;
+
+import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor @ToString
+@NoArgsConstructor @ToString @Getter
+@Entity
+@Table(name = "messages")
 public class StompMessage {
-    private Integer shopId;
+    @Id
+    private BigDecimal id;
     private String type;
-    private String roomId;
-    private String username;
     private String message;
-    private String orderList;
-    private String orderId;
-    private String orderNumber;
+    private String roomId;
+
+    @JoinColumn(name = "shop_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Shop shopId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User userId;
 }

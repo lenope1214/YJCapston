@@ -2,6 +2,7 @@ package com.jumanji.capston.controller;
 
 import com.jumanji.capston.data.Order;
 import com.jumanji.capston.data.Payment;
+import com.jumanji.capston.data.Statistics;
 import com.jumanji.capston.data.externalData.iamport.Iamport;
 import com.jumanji.capston.service.OrderServiceImpl;
 import com.jumanji.capston.service.PaymentServiceImpl;
@@ -36,7 +37,7 @@ public class PaymentController {
 
     @Transactional
     @GetMapping("payments/{orderId}")
-    public ResponseEntity<?> getPayment(@RequestHeader String authorization, @PathVariable Timestamp orderId){
+    public ResponseEntity<?> getPayment(@RequestHeader String authorization, @PathVariable Timestamp orderId) {
         Payment payment = paymentService.get(authorization, orderId);
         return new ResponseEntity<>(payment, HttpStatus.OK);
     }
@@ -45,55 +46,55 @@ public class PaymentController {
     @GetMapping("payments/complite")
     public ResponseEntity<?> complePayment(@RequestParam("imp_uid") String impUid, @RequestParam("merchant_uid") String merchantUid, HttpServletRequest request) throws Exception {
         System.out.println("request info" +
-                "request.getQueryString" + request.getQueryString()+"\n" +
+                "request.getQueryString" + request.getQueryString() + "\n" +
                 "merchantUid.substring(merchant_.length()) : " + merchantUid.substring("merchant_".length()));
         Iamport.IamportResponse<Iamport.Payment> response = null;
         String mId = merchantUid;
-        if(merchantUid.contains("_")){
-            mId = mId.substring(mId.indexOf('_')+1);
+        if (merchantUid.contains("_")) {
+            mId = mId.substring(mId.indexOf('_') + 1);
         }
         System.out.println("mid : " + mId);
-        if(merchantUid == null)throw new Exception("merchantUid is null");
+        if (merchantUid == null) throw new Exception("merchantUid is null");
         try {
 //            String m_id = merchantUid;
             response = iamportClientService.paymentByMerchantUid(merchantUid);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(response.getResponse().getStatus().equals("paid")){
+        if (response.getResponse().getStatus().equals("paid")) {
             System.out.println("요청 후mid : " + mId);
             int amount = orderService.isPresent(new Timestamp(Long.parseLong(mId))).getAmount();
             BigDecimal amountB = BigDecimal.valueOf(amount);
             System.out.println("response.getResponse().getAmount() : " + response.getResponse().getAmount());
             System.out.println("BigDecimal amount : " + amountB);
-            if(response.getResponse().getAmount() == amountB){
+            if (response.getResponse().getAmount() == amountB) {
                 return new ResponseEntity<>(HttpStatus.OK);
             }
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-//    @Transactional
+    //    @Transactional 결제시..
     @PostMapping("payments")
     public ResponseEntity<?> postPayment(@RequestHeader String authorization, @RequestBody Payment.Request request) {
         // response 형태로 바꿔줘야함.
         Payment payment = paymentService.post(authorization, request);
+        if (payment == null) return new ResponseEntity<>("Payment is completed", HttpStatus.OK);
         Payment.Response response = new Payment.Response(payment);
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
-    /**
-     *
-     * @param shopId 요청 식당 번호
-     * @param date  요청 일자 yyyyMMdd
-     * @return
-     */
+
     @Transactional
     @GetMapping("shops/{shopId}/payments/statistics")
-    public ResponseEntity<?> getStatistics(@RequestHeader String authorization, @PathVariable String shopId, @Nullable @RequestParam String date){
-        Payment.StatisticsDAO statistics = paymentService.getShopStatistics(authorization, shopId, date);
+    public ResponseEntity<?> getStatistics(@RequestHeader String authorization,
+                                           @PathVariable String shopId,
+                                           @Nullable @RequestParam String scope,
+                                           @Nullable @RequestParam String aDate,
+                                           @Nullable @RequestParam String bDate) {
+        Statistics.SumPdRf statistics = paymentService.getShopStatistics(authorization, shopId, scope, aDate, bDate);
 //        statistics
         return new ResponseEntity<>(statistics, HttpStatus.OK);
-
+    }
 
 }

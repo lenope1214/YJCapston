@@ -102,33 +102,12 @@ public class ShopServiceImpl implements ShopService {
 
 
     @Override
-    public ResponseEntity<?> getList(String category, String sortTarget) {
-        if (getShopListSize() != 0) {
-            List<Shop.Response> responseList = new ArrayList<>();
-//            sortTarget = sortTarget == null ? "" : toOracleChar(sortTarget);
-//            category = category == null ? "" : toOracleChar(category);
-            sortTarget = sortTarget == null ? "" : sortTarget;
-            category = category == null ? "" : category;
-            System.out.println("카테고리 : " + category);
-            System.out.println("정렬기준 : " + sortTarget);
-            return new ResponseEntity<>(shopRepository.getShopListByCategorySortTarget(category, sortTarget), HttpStatus.OK);
-//            switch (sortTarget) {
-//                case "score":
-//                    return new ResponseEntity<>(shopRepository.ShopOrderByScore(category), HttpStatus.OK);
-//                default:
-//                    List<Shop> shopList;
-//                    if(category.equals(""))shopList = shopRepository.findAll();
-//                    else shopList = shopRepository.findByCategory(category);
-//                    for (Shop shop : shopList) {
-//                        Shop.Response response = new Shop.Response(shop);
-//                        responseList.add(response);
-//                    }
-//                    break;
-//            }
-            // shop.response로 parsing 해서 보내기.
-
-        } else
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public List<Shop.Dao> getList(String category, String sortTarget) {
+        List<Shop> shopList = new ArrayList<>();
+        sortTarget = sortTarget == null ? "" : sortTarget;
+        category = category == null ? "" : category;
+        List<Shop.Dao> daoList = shopRepository.getShopListByCategorySortTarget(category, sortTarget);
+        return daoList;
     }
 
     @Override
@@ -149,7 +128,12 @@ public class ShopServiceImpl implements ShopService {
 
 
         if (request.getImg() != null && request.getImg().getSize() > 0) {
-            imgPath = storageService.store(request.getImg(), request.getImg().getName(), uri.split("/"));
+//            System.out.println("imgInfo >>>>>>>>>>>>>>>>>>>>>>>>>");
+//            System.out.println(request.getImg().getResource().getFilename());
+//            System.out.println(request.getImg().getResource().getFilename().replace(" ", "_"));
+//            System.out.println(request.getImg().getName());
+//            System.out.println("imgInfo >>>>>>>>>>>>>>>>>>>>>>>>>");
+            imgPath = storageService.store(request.getImg(), request.getImg().getResource().getFilename().replace(" ", "_"), uri.split("/"));
 //            try {
 //                s3Uploader.upload(request.getImg(), imgPath);
 //            } catch (IOException e) {
@@ -227,7 +211,7 @@ public class ShopServiceImpl implements ShopService {
         for (Shop shop : shopRepository.findByOwnerId(loginId)) {
             if (shop.getId().equals(shopId)) {
                 System.out.println("보유매장 매칭된 매장번호 : " + shop.getId());
-                return ;
+                return;
             }
         }
         throw new ForbiddenException();

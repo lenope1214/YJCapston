@@ -73,10 +73,10 @@ public class MenuServiceImpl {
 
         isEmpty(menuId, request.getName());
         shop = shopService.isPresent(request.getShopId());
-        String path = "shop/" + request.getShopId() + "/" + "menu";
+        String uri = "shop/" + request.getShopId() + "/" + "menu";
         String imgPath = null;
         if (request.getImg() != null && request.getImg().getSize() != 0)
-            imgPath = storageService.store(request.getImg(), request.getName().replace(" ", "_"), path.split("/"));
+            imgPath = storageService.store(request.getImg(), request.getImg().getResource().getFilename().replace(" ", "_"), uri.split("/"));
         menu = Menu.init()
                 .id(menuId)
                 .name(request.getName())
@@ -101,7 +101,7 @@ public class MenuServiceImpl {
     public Menu patch(String authorization, Menu.Request request) {
         // 변수
         String loginId = userService.getMyId(authorization);
-        String path = "shop/" + request.getShopId() + "/" + "menu";
+        String uri = "shop/" + request.getShopId() + "/" + "menu";
         String imgPath = null;
         Menu menu;
 
@@ -111,7 +111,7 @@ public class MenuServiceImpl {
 
         // 서비스
         if (request.getImg() != null && request.getImg().getSize() != 0)
-            imgPath = storageService.store(request.getImg(), request.getName().replace(" ", "_"), path.split("/"));
+            imgPath = storageService.store(request.getImg(), request.getImg().getResource().getFilename().replace(" ", "_"), uri.split("/"));
         menu.patch(request, imgPath);
         menuRepository.saveAndFlush(menu);
 

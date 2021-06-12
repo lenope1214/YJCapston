@@ -27,7 +27,9 @@ public class Payment implements Serializable {
     private String payTime; // 결제 일자 yyyyMMdd
     private String status; // 주문 상태 rd : 준비중, pd : 결제완료, rf : 환불됨
 //    @Column(length = 7)
-    private int amount; // 결제 금액
+    private int amount; // 정가합 금액
+    private int compleAmount; // 결제 완료된 금액
+    private int usePoint; // 사용한 총 포인트
 //    @Column(name = "pay_method")
     private String payMethod; // 결제방식
 //    @Column(length = 9)
@@ -39,6 +41,8 @@ public class Payment implements Serializable {
         this.payTime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(order.getPayTime());
         this.status = order.getStatus();
         this.amount = order.getAmount();
+        this.compleAmount = order.getCompleAmount();
+        this.usePoint = order.getUsePoint();
         this.payMethod = order.getPayMethod();
         this.pg = order.getPg();
     }
@@ -67,6 +71,8 @@ public class Payment implements Serializable {
         private String status;
         private String reason;
         private int amount;
+        private int compleAmount; // 결제 완료된 금액.
+        private int usePoint; // 사용한 총 포인트
         private String payMethod;
         private String pg;
 
@@ -76,6 +82,8 @@ public class Payment implements Serializable {
             this.payTime = getPayTime();
             this.status = payment.getStatus();
             this.amount = payment.getAmount();
+            this.compleAmount = payment.getCompleAmount();
+            this.usePoint = payment.getUsePoint();
             this.payMethod = payment.getPayMethod();
             this.pg = payment.getPg();
         }

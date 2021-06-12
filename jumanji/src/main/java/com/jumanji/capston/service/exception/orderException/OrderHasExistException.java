@@ -4,10 +4,7 @@ import com.jumanji.capston.service.exception.BasicException;
 
 public class OrderHasExistException extends BasicException {
     public OrderHasExistException(){
-        super("error-not-defined", "you have to request again !!");
-    }
-    public OrderHasExistException(String id){
-        super("error-not-defined", "you have to request again !! 요청시간 : " + id);
+        super("error-502", "해당 주문이 이미 있습니다.");
     }
     public OrderHasExistException(String code, String message) {
         super(code, message);

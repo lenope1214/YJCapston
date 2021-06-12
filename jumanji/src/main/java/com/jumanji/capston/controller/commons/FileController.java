@@ -25,14 +25,14 @@ public class FileController {
         this.storageService = storageService;
     }
 
-    @GetMapping(value={"", "/"})
-    public String files(Model model) throws IOException {
-        model.addAttribute("files", storageService.loadAll().map(
-                path -> MvcUriComponentsBuilder.fromMethodName(FileController.class,
-                        "serveFile", path.getFileName().toString()).build().toString())
-                .collect(Collectors.toList()));
-        return "uploadForm";
-    }
+//    @GetMapping(value={"", "/"})
+//    public String files(Model model) throws IOException {
+//        model.addAttribute("files", storageService.loadAll().map(
+//                path -> MvcUriComponentsBuilder.fromMethodName(FileController.class,
+//                        "serveFile", path.getFileName().toString()).build().toString())
+//                .collect(Collectors.toList()));
+//        return "uploadForm";
+//    }
 
     @ExceptionHandler(StorageFileNotFoundException.class)
     public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {
@@ -69,8 +69,9 @@ public class FileController {
     @GetMapping("/shop/{shopId}/review/{fileName:.+}")
     @ResponseBody
     public ResponseEntity<?> loadReviewImg(@PathVariable String shopId, @PathVariable String fileName) {
-        System.out.println("이미지 로드 요청 !!!");
+        System.out.println("이미지 로드 요청 !!! 요청 정보 : " + shopId + ", fileName : " + fileName);
         Resource img = storageService.loadImg("files", "shop", shopId, "review", fileName);
+        System.out.println("이미지 잘 가져와지니? 이미지 이름 : " + img.getFilename());
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE,
                 "image/jpeg; filename=\"" + img.getFilename() + "\"").body(img);
     }

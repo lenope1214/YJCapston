@@ -3,6 +3,7 @@ package com.jumanji.capston.service;
 import com.jumanji.capston.data.Order;
 import com.jumanji.capston.data.Tab;
 import com.jumanji.capston.repository.TableRepository;
+import com.jumanji.capston.service.exception.CanNotBeZero;
 import com.jumanji.capston.service.exception.tableException.TableHasExistException;
 import com.jumanji.capston.service.exception.tableException.TableNotFoundException;
 import com.jumanji.capston.service.interfaces.BasicService;
@@ -47,6 +48,7 @@ public class TableServiceImpl implements BasicService<Tab, Tab.Request, String> 
         System.out.println("request.getNo() : " + request.getNo());
         System.out.println("tabId : " + tabId);
         // 유효성 체크 --
+        if(request.getNo() == 0)throw new CanNotBeZero("Table No can not be zero");
         userService.isPresent(loginId); // 로그인 아이디가 존재하는지
         shopService.isOwnShop(loginId, request.getShopId()); // 내 매장이 맞는지
         isEmpty(tabId); // 전에 만들어둔 테이블과 겹치는지
@@ -121,5 +123,9 @@ public class TableServiceImpl implements BasicService<Tab, Tab.Request, String> 
 
     public String toTabId(String shopId, int tabNo) {
         return shopId + String.format("%02d", tabNo);
+    }
+
+    public void save(Tab table) {
+        tableRepository.save(table);
     }
 }

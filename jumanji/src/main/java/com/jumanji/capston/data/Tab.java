@@ -38,6 +38,7 @@ public class Tab implements Serializable {
         this.id = tabId;
         this.qrCode = qrCode;
         this.seatQty = seatQty;
+        this.using = 'N';
     }
 
     public void update(Request request) {
@@ -69,7 +70,7 @@ public class Tab implements Serializable {
         private int seatQty;
         private char using;
         private String qrCode;
-        private String orderId;
+        private Long orderId;
 
         public Response(Tab tab){
             this.tabId = tab.getId();
@@ -78,7 +79,7 @@ public class Tab implements Serializable {
             this.seatQty = tab.getSeatQty();
             this.using = tab.getUsing();
             this.qrCode = tab.getQrCode();
-            if(tab.getOrder() != null)this.orderId = tab.getOrder().getId().toString();
+            if(tab.getOrder() != null)this.orderId = tab.getOrder().getId().getTime();
         }
     }
 

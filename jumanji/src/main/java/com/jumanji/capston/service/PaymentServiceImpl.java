@@ -1,10 +1,8 @@
 package com.jumanji.capston.service;
 
-import com.jumanji.capston.data.DateOperator;
-import com.jumanji.capston.data.Order;
-import com.jumanji.capston.data.Payment;
-import com.jumanji.capston.data.User;
+import com.jumanji.capston.data.*;
 import com.jumanji.capston.repository.OrderRepository;
+import com.jumanji.capston.service.exception.orderException.PayAmountOverException;
 import com.jumanji.capston.service.exception.orderException.PayPointOverException;
 import com.jumanji.capston.service.interfaces.BasicService;
 import com.jumanji.capston.service.interfaces.PaymentService;
@@ -29,19 +27,45 @@ public class PaymentServiceImpl implements PaymentService {
     OrderRepository orderRepository;
 
 
-    public Payment.StatisticsDAO getShopStatistics(String authorization, String shopId, String date){
+    public Statistics.SumPdRf getShopStatistics(String authorization, String shopId, String scope, String aDate, String bDate) {
         String loginId = userService.getMyId(authorization);
-        Payment.StatisticsDAO statistics = null;
+        Statistics.SumPdRf statistics = null;
 
         // 유효성 체크
-        if(shopId == null)throw new NullPointerException("Shop Id를 입력해 주세요.");
+        if (shopId == null) throw new NullPointerException("Shop Id를 입력해 주세요.");
 //        shopService.isOwnShop(loginId, shopId); // 내 식당인지
-        if(date == null)date = DateOperator.dateToYYYYMMDD(new Date(), false);
+        if (aDate == null) aDate = DateOperator.dateToYYYYMMDD(new Date(), false);
+        deleteSign(aDate, bDate);
         System.out.println("목표 식당 : " + shopId);
-        System.out.println("지정 월 : " + date);
-        statistics = orderRepository.getStatistics(shopId, date);
+        System.out.println("지정 날짜 : " + aDate);
+        switch(scope){
+            case "between" :
+                statistics = orderRepository.getSumPdRfBetween(shopId, aDate, bDate);
+                break;
+            case "week" :
+                statistics = orderRepository.getSumPdRfWeek(shopId, aDate);
+                break;
+            case "month" :
+                statistics = orderRepository.getSumPdRfMonth(shopId, aDate);
+            default:
+                statistics = orderRepository.getSumPdRfDate(shopId, aDate);
+                break;
+        }
         System.out.println("====================\nstatistics.getSumPd() : " + statistics.getSumPd() + "\nstatistics.getSumRf() : " + statistics.getSumRf());
         return statistics;
+    }
+
+    private void deleteSign(String aDate, String bDate) {
+        if(aDate != null){
+            aDate = aDate.replace("-", "");
+            aDate = aDate.replace("/", "");
+            aDate = aDate.replace(",", "");
+        }
+        if(bDate != null){
+            bDate = bDate.replace("-", "");
+            bDate = bDate.replace("/", "");
+            bDate = bDate.replace(",", "");
+        }
     }
 
 
@@ -66,11 +90,17 @@ public class PaymentServiceImpl implements PaymentService {
         System.out.println("내 주문이 맞는지?");
         Order order = orderService.isOwnOrder(request.getOrderId(), loginId); // 해당 사용자의 주문이 맞는지
         System.out.println("맞는지 검사 후");
+        // 맞다면, 금액이 전액 지불 됐는지 확인.
+        if (order.getAmount() - order.getCompleAmount() - order.getUsePoint() <= 0) // 총 금액 - 결제 금액 - 사용 포인트가 0보다 작거나 같다면 결제가 완료 되었음.
+            return null;
+        if (order.getAmount() <  order.getCompleAmount() + request.getAmount() + request.getUsePoint()) throw new PayAmountOverException();
+
+
+
         order.pay(request);
-        System.out.println(order.toString());
         System.out.println("남은 포인트 : " + remainPoint);
-        if(remainPoint >= 0)
-            user.setPoint(remainPoint);
+        if (remainPoint >= 0)
+            user.setPoint((int)(remainPoint + request.getAmount() /100));
         else
             throw new PayPointOverException();
         Payment payment = new Payment(order);
