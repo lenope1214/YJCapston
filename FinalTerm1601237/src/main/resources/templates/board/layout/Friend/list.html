@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/layout/basic :: setContent( ~{this::content})}"></th:block>
+
+          <th:block th:fragment="content">
+              <h1 class="title">Friends list
+                  <span>
+                      <a th:href="@{/friends/register}">
+                          <button type="button" class="btn">REGISTER</button>
+                      </a>
+                  </span>
+              </h1>
+          </th:block>
+              <table class="table -1">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Birth Year</th>
+                        <th scope="col">Phone</th>
+                    </tr>
+                </thead>
+                  <tbody>
+                   <tr th:each="dto : ${list}">
+                       <th scope="row">
+                           <a th:href="@{/friends/read(id=${dto.id})}">
+                               [[${dto.id}]]
+                           </a>
+                       </th>
+                       <td th:text="${dto.name}"></td>
+                       <td th:text="${dto.birthYear}"></td>
+                       <td th:text="${dto.phone}"></td>
+
+                   </tr>
+                  </tbody>
+              </table>
+
+
+</th:block>
+
+
+
+</html>
