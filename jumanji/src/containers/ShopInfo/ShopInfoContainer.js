@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
+﻿import React, { useEffect, useState, useRef } from "react";
 import { useHistory } from "react-router";
 import Header from "../../components/Header/Header";
 import OwnerNavbar from "../../components/OwnerMenubar/OwnerNavbar";
-import ShopInfo from "../../components/ShopInfo/ShopInfo";
+import ShopInfo from "../../components/ShopInfo/Shopinfo";
 import {
     getShopInfo,
     putShopreserve,
