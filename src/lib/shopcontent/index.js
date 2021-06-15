@@ -1,5 +1,7 @@
 import { apiDefault } from "../client";
+
 export const postLogin = (id, password) => {
+    
     return apiDefault().post("/login", {
         id,
         password,
