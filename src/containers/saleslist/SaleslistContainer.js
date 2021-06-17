@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { getshoporder, getShopInfo,getmonsearch,getnowsearch, getnowweeksearch,getnowmonthsearch,getbeforesearch,getnextsearch,getweeksearch,getmonthsearch,gettermsearch,getdaysearch} from "../../lib/saleslist/index";
 import moment from 'moment';
 import 'moment/locale/ko';
+import { setApiKey } from "react-geocode";
 
 const SaleslistContainer = (props) => {
     const [shopId, setShopId] = useState(props.match.params.shopId);
@@ -30,6 +31,7 @@ const SaleslistContainer = (props) => {
     const [resultDate3, setresultDate3] = useState("");
     const [resultDate4, setresultDate4] = useState("");
     const [resultDate5, setresultDate5] = useState("");
+    const [pay, setPay] = useState("");
 
 
     // const [realTime, setRealTime] = useState(Date.now());
@@ -118,6 +120,7 @@ const SaleslistContainer = (props) => {
             nowDate,
             )
             .then((res) => {
+                setRSsales(res.data);
                 setsales(res.data);
                 // alert("오늘");
             })
@@ -133,9 +136,10 @@ const SaleslistContainer = (props) => {
             shopId,
             nowDate1,
         )
-        .then((res) => {
+        .then((res) => {       
             setRSsales(res.data);
-            setresultDate(nowDate1);
+            setresultDate(nowDate1+": 일 매출");
+            setPay(res.data);
         })
         .catch((err) => {
             alert(err);
@@ -184,6 +188,7 @@ const SaleslistContainer = (props) => {
             nowDate,
         )
         .then((res) => {
+            setRSsales1(res.data);
             setsales1(res.data);
             
         })
@@ -200,8 +205,8 @@ const SaleslistContainer = (props) => {
         )
         .then((res) => {
             setRSsales1(res.data);
-            setresultDate2(month3);
-            alert(month3);
+            setresultDate(month3 + ": 주 매출");
+            setPay(res.data);
         })
         .catch((err) => {
             alert(err);
@@ -215,6 +220,7 @@ const SaleslistContainer = (props) => {
             nowDate,
         )
         .then((res) => {
+            setRSsales2(res.data);  
             setsales2(res.data);          
         })
         .catch((err) => {
@@ -230,8 +236,8 @@ const SaleslistContainer = (props) => {
         )
         .then((res) => {
             setRSsales2(res.data);
-            setresultDate3(month4);
-            alert(month4);
+            setresultDate(month4 + ": 월 매출");
+            setPay(res.data);
         })
         .catch((err) => {
             alert(err);
@@ -247,9 +253,8 @@ const SaleslistContainer = (props) => {
         )
         .then((res) => {
             setsales3(res.data);
-            setresultDate4(month);
-            setresultDate5(month2);
-            alert(month+"~"+month2);
+            setresultDate(month + "~" + month2 + ": 기간 매출");
+            setPay(res.data);
         })
         .catch((err) => {
             alert(err);
@@ -299,6 +304,7 @@ const SaleslistContainer = (props) => {
                 RSsales={RSsales}
                 RSsales1={RSsales1}
                 RSsales2={RSsales2}
+                pay={pay}
             />
         </>
     );

@@ -47,6 +47,7 @@ const Pos = ({ shopId, name, num, handleNum, number, nowTime }) => {
                 </div>
                 <div className="right-container">
                     {/* 테이블추가 되는 영역 */}
+                    
                     <span className="groupbox"></span>
 
                     {/* 테이블추가 버튼 */}

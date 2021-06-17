@@ -15,7 +15,7 @@ const Saleslist = ({
         termsearch,
         nowdate,
         deleteSymbols,
-        
+        pay,
         nextsearch,
         month2,
         handlemonth2,
@@ -33,7 +33,7 @@ const Saleslist = ({
         beforesearch,
         handlenowDate,
         nowDate1,daysearch,
-        resultDate,resultDate2,resultDate3,resultDate4,resultDate5,
+        resultDate,resultDate2,resultDate3,resultDate4,
         RSsales,RSsales1,RSsales2
     }) => {
     const [thisShopId, setThisShopId] = useState("");
@@ -51,13 +51,13 @@ const Saleslist = ({
         ],
         datasets: [
             {
-                label: "기본(오늘, 이번 주, 이번 달)",
+                label: "매출 금액",
                 backgroundColor: "rgba(255,99,132,0.2)",
                 borderColor: "rgba(255,99,132,1)",
                 borderWidth: 1,
                 hoverBackgroundColor: "rgba(255,99,132,0.4)",
                 hoverBorderColor: "rgba(255,99,132,1)",
-                data: [sales.sumPd, sales1.sumPd, sales2.sumPd,sales3.sumPd],
+                data: [RSsales.sumPd, RSsales1.sumPd, RSsales2.sumPd,sales3.sumPd],
             },
         ],
     };
@@ -136,14 +136,25 @@ const Saleslist = ({
 
                         <br/>
 
-                        <div>{resultDate}:일 매출</div>
-                            <div>{RSsales.sumPd}</div>
-                        <div>{resultDate2}:주 매출</div>
-                            <div>{RSsales1.sumPd}</div> 
-                        <div>{resultDate3}:월 매출</div>
-                            <div>{RSsales2.sumPd}</div>
-                        <div>{resultDate4}~{resultDate5}:기간 매출</div>
-                            <div>{sales3.sumPd}</div>
+                        {/* 일매출  검색*/}
+                        {/* <div>{resultDate}</div>
+                            <div>{RSsales.sumPd}</div> */}
+
+                        {/* 주매출 검색     */}
+                        {/* <div>{resultDate2}</div>
+                            <div>{RSsales1.sumPd}</div>  */}
+
+                        {/* 월매출 검색     */}
+                        {/* <div>{resultDate3}</div>
+                            <div>{RSsales2.sumPd}</div> */}
+
+                        {/* 기간매출 검색     */}
+                        {/* <div>{resultDate4}</div>
+                            <div>{sales3.sumPd}</div> */}
+
+                        <div>{resultDate}</div>
+                            <div>{pay.sumPd}</div>
+                            
                     </div>
                     
                 </span>
