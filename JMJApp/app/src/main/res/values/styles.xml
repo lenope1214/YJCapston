@@ -16,4 +16,10 @@
         <item name="fontFamily">@font/we_regular</item>
     </style>
 
+    <style name="MyAlertDialogStyle" parent="@style/Theme.AppCompat.Dialog.Alert">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:typeface">monospace</item>
+        <item name="android:background">@color/colorEdittext</item>
+    </style>
+
 </resources>

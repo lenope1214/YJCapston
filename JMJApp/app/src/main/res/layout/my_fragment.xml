@@ -20,6 +20,7 @@
                 android:layout_marginTop="8dp"
                 android:textColor="#000"
                 android:layout_centerHorizontal="true"
+                android:fontFamily="@font/we_semibold"
                 android:layout_gravity="center"
                 android:text="내 정보" />
 

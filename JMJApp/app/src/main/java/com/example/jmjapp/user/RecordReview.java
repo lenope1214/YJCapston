@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -61,15 +62,22 @@ public class RecordReview extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.d("reviewList 성공", "reviewList 성공");
                     List<Review> reviewList = response.body();
-                    for(Review list : reviewList) {
-                        mItems.add(new Review(list.getReviewId(), list.getUserId(), list.getShopId(),
-                                list.getContent(), list.getParentId(), list.getRegDate(),
-                                list.getScore(), list.getImgUrl(), list.getOrderId()));
-                        Log.d("list", response.body().toString());
-                        rv_my_review_list.setHasFixedSize(true);
-                        adapter.setItems(mItems);
-                        rv_my_review_list.setLayoutManager(new LinearLayoutManager(getApplication()));
-                        rv_my_review_list.setAdapter(adapter);
+                    if (reviewList.size() == 0) {
+                        binding.constraintLayoutNoReview.setVisibility(View.VISIBLE);
+                        binding.constraintLayoutYesReview.setVisibility(View.GONE);
+                    } else {
+                        binding.constraintLayoutNoReview.setVisibility(View.GONE);
+                        binding.constraintLayoutYesReview.setVisibility(View.VISIBLE);
+                        for (Review list : reviewList) {
+                            mItems.add(new Review(list.getReviewId(), list.getUserId(), list.getShopId(),
+                                    list.getContent(), list.getParentId(), list.getRegDate(),
+                                    list.getScore(), list.getImgUrl(), list.getOrderId()));
+                            Log.d("list", response.body().toString());
+                            rv_my_review_list.setHasFixedSize(true);
+                            adapter.setItems(mItems);
+                            rv_my_review_list.setLayoutManager(new LinearLayoutManager(getApplication()));
+                            rv_my_review_list.setAdapter(adapter);
+                        }
                     }
                 } else {
                     Log.d("reviewList 실패1", "reviewList 실패1");

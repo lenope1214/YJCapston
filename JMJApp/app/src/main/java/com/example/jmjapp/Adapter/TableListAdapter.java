@@ -3,6 +3,7 @@ package com.example.jmjapp.Adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,27 +54,15 @@ public class TableListAdapter extends RecyclerView.Adapter<TableListAdapter.Item
         Tables item = items.get(position);
         holder.setItem(item);
 
-//        String tableNo = items.get(position).getTabId().substring(10,12);
-//
-//        Log.d("tableNo", tableNo);
-//        Log.d("first", String.valueOf(tableNo.charAt(0)));
-//
-//        if (tableNo.charAt(0) == '0') {
-//            holder.table_no.setText(tableNo.charAt(1) + "번 테이블");
-//        } else {
-//            holder.table_no.setText(tableNo + "번 테이블");
-//        }
-//
-//        Log.d("qwe", String.valueOf(mItems.get(position).getUsing()));
-//
         if (String.valueOf(items.get(position).getUsing()) != null) {
             if (items.get(position).getUsing() == 'Y') {
                 holder.table_isUse.setText("사용중");
+                holder.table_isUse.setTextColor(Color.parseColor("#33FA01"));
             } else if (items.get(position).getUsing() == 'N') {
                 holder.table_isUse.setText("비었음");
             }
         }
-//
+
         holder.table_constraint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,9 +73,9 @@ public class TableListAdapter extends RecyclerView.Adapter<TableListAdapter.Item
                 intent.putExtra("using", items.get(position).getUsing());
                 intent.putExtra("orderId", items.get(position).getOrderId());
                 context.startActivity(intent);
-                //Toast.makeText(context, "tabId" + MainActivity_O.shopNumber + items.get(position).getNo(), Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     public void addItem(Tables item) {

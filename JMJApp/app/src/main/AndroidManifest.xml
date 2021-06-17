@@ -34,8 +34,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-        <activity android:name=".user.MapActivity"></activity>
+        <activity android:name=".user.SearchShopList"></activity>
+        <activity android:name=".user.QrPaymentActivity" />
+        <activity android:name=".user.MapActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -47,7 +48,8 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBsOenPE-jI9_n_oVttc-uDoCFBb4Vdiis" />
-        <activity android:name=".owner.TableDetailActivity"></activity>
+
+        <activity android:name=".owner.TableDetailActivity" />
         <activity android:name=".user.QrMenuActivity" />
         <activity android:name=".owner.ReviewOwnerActivity" />
         <activity android:name=".user.ReviewDetailActivity" />
@@ -90,10 +92,10 @@
         <activity android:name=".user.OperationGuideActivity" />
         <activity android:name=".user.CustomerServiceActivity" />
         <activity android:name=".user.NoticeActivity" />
-        <activity android:name=".owner.ChatbotSettingActivity"/>
-        <activity android:name=".owner.ChatbotManagementActivity"/>
-        <activity android:name=".user.ChatbotDetailActivity"/>
-        <activity android:name=".user.ChatbotListActivity"/>
+        <activity android:name=".owner.ChatbotSettingActivity" />
+        <activity android:name=".owner.ChatbotManagementActivity" />
+        <activity android:name=".user.ChatbotDetailActivity" />
+        <activity android:name=".user.ChatbotListActivity" />
 
         <uses-library android:name="com.google.android.maps" />
         <uses-library
@@ -111,19 +113,17 @@
             android:stopWithTask="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
-        </service>
-<!--        <service-->
-<!--            android:name=".user.push.UserFirebaseMessagingService"-->
-<!--            android:enabled="true"-->
-<!--            android:exported="true"-->
-<!--            android:stopWithTask="false">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="com.google.firebase.MESSAGING_EVENT" />-->
-<!--            </intent-filter>-->
-<!--        </service>-->
-
+        </service> <!-- <service -->
+        <!-- android:name=".user.push.UserFirebaseMessagingService" -->
+        <!-- android:enabled="true" -->
+        <!-- android:exported="true" -->
+        <!-- android:stopWithTask="false"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.google.firebase.MESSAGING_EVENT" /> -->
+        <!-- </intent-filter> -->
+        <!-- </service> -->
         <activity android:name=".user.MainActivity" />
         <activity android:name=".user.MenuActivity" />
         <activity android:name=".user.BellActivity" />

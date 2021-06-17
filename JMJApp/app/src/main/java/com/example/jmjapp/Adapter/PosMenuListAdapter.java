@@ -2,6 +2,7 @@ package com.example.jmjapp.Adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,23 +44,9 @@ public class PosMenuListAdapter extends RecyclerView.Adapter<PosMenuListAdapter.
     // View 의 내용을 해당 포지션의 데이터로 바꿉니다.
     @Override
     public void onBindViewHolder(final PosMenuListAdapter.ItemViewHolder holder, final int position) {
+
         holder.post_menu_name.setText(mItems.get(position).getMenuName());
         holder.post_menu_count.setText(mItems.get(position).getQuantity() + "개");
-
-//        SharedPreferences pref = context.getSharedPreferences("basket", Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = pref.edit();
-//
-//        int list_size = pref.getInt("list_size", 0);
-//        for (int i = 0; i < list_size; i++) {
-//            String[] list_name = new String[list_size];
-//
-//            list_name[i] = pref.getString("list_" + i + "_name", null);
-//
-//            if(list_name[i].equals(holder.post_menu_name.getText().toString())) {
-//                int menuCount1 = pref.getInt("list_" + i + "_count", 0);
-//                holder.post_menu_count.setText(String.valueOf(menuCount1)+"개");
-//            }
-//        }
     }
 
     // 데이터 셋의 크기

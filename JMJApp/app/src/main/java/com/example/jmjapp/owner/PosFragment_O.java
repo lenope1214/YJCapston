@@ -1,30 +1,26 @@
 package com.example.jmjapp.owner;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.jmjapp.Adapter.MenuListRecyclerAdapter;
 import com.example.jmjapp.Adapter.TableListAdapter;
 import com.example.jmjapp.R;
-import com.example.jmjapp.dto.Menu;
-import com.example.jmjapp.dto.OptionGroups;
-import com.example.jmjapp.dto.OrderMenu;
-import com.example.jmjapp.dto.Review;
 import com.example.jmjapp.dto.Tables;
 import com.example.jmjapp.network.Server;
-import com.example.jmjapp.user.MainActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -50,6 +46,11 @@ public class PosFragment_O extends Fragment {
     private String jwt;
     private FloatingActionButton table_floatingActionButton;
 
+    Thread thread;
+    boolean isThread = false;
+
+    private int numberOfColumn = 3;
+
     public PosFragment_O() {
 
     }
@@ -73,48 +74,70 @@ public class PosFragment_O extends Fragment {
     public void onStart() {
         super.onStart();
 
-        int numberOfColumn = 3;
-
         table_list.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumn));
 
         adapter = new TableListAdapter(getContext());
         table_list.setAdapter(adapter);
 
         Log.d("onStart실행", "onStart 실행");
-        mItems.clear();
 
         SharedPreferences pref = this.getActivity().getSharedPreferences("auth_o", Context.MODE_PRIVATE);
         jwt = pref.getString("token", "");
 
         //adapter = new TableListAdapter(getContext());
 
-        listTableCall = Server.getInstance().getApi().getTables("Bearer " + jwt, MainActivity_O.shopNumber);
-        listTableCall.enqueue(new Callback<List<Tables>>() {
-            @SneakyThrows
-            @Override
-            public void onResponse(Call<List<Tables>> call, Response<List<Tables>> response) {
-                if (response.isSuccessful()) {
-                    Log.d("getTable 성공", "getTable 성공");
-                    List<Tables> tablesList = response.body();
-                    for(Tables list : tablesList) {
-                        mItems.add(new Tables(list.getTabId(), list.getShopId(), list.getNo(),
-                                list.getSeatQty(), list.getUsing(), list.getQrCode(), list.getOrderId()));
-                        Log.d("list", response.body().toString());
-                        table_list.setHasFixedSize(true);
-                        adapter.setItems(mItems);
-                        table_list.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumn));
-                        table_list.setAdapter(adapter);
+        isThread = true;
+        thread = new Thread() {
+            public void run() {
+                while (isThread) {
+                    try {
+                        sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                } else {
-                    Log.d("getTable 실패1", "getTable 실패1"+response.errorBody().string());
+                    handler.sendEmptyMessage(0);
                 }
             }
+        };
+        thread.start();
 
-            @Override
-            public void onFailure(Call<List<Tables>> call, Throwable t) {
-                Log.d("getTable 실패2", "getTable 실패2"+t.getCause());
-            }
-        });
+//        mItems.clear();
+//        listTableCall = Server.getInstance().getApi().getTables("Bearer " + jwt, MainActivity_O.shopNumber);
+//        listTableCall.enqueue(new Callback<List<Tables>>() {
+//            @SneakyThrows
+//            @Override
+//            public void onResponse(Call<List<Tables>> call, Response<List<Tables>> response) {
+//                if (response.isSuccessful()) {
+//                    Log.d("getTable 성공", "getTable 성공");
+//                    List<Tables> tablesList = response.body();
+//                    for(Tables list : tablesList) {
+//                        mItems.add(new Tables(list.getTabId(), list.getShopId(), list.getNo(),
+//                                list.getSeatQty(), list.getUsing(), list.getQrCode(), list.getOrderId()));
+//                        Log.d("list", response.body().toString());
+//                        table_list.setHasFixedSize(true);
+//                        adapter.setItems(mItems);
+//                        table_list.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumn));
+//                        table_list.setAdapter(adapter);
+//                    }
+//                } else {
+//                    Log.d("getTable 실패1", "getTable 실패1"+response.errorBody().string());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Tables>> call, Throwable t) {
+//                Log.d("getTable 실패2", "getTable 실패2"+t.getCause());
+//            }
+//        });
+
+//        Handler handler = new Handler();
+//        final Runnable r = new Runnable() {
+//            @Override
+//            public void run() {
+//                adapter.notifyDataSetChanged();
+//            }
+//        };
+//        handler.post(r);
 
         table_floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,6 +168,41 @@ public class PosFragment_O extends Fragment {
         });
     }
 
+    @SuppressLint("HandlerLeak")
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            mItems.clear();
+            listTableCall = Server.getInstance().getApi().getTables("Bearer " + jwt, MainActivity_O.shopNumber);
+            listTableCall.enqueue(new retrofit2.Callback<List<Tables>>() {
+                @SneakyThrows
+                @Override
+                public void onResponse(Call<List<Tables>> call, Response<List<Tables>> response) {
+                    if (response.isSuccessful()) {
+                        Log.d("getTable 성공", "getTable 성공");
+                        List<Tables> tablesList = response.body();
+                        for(Tables list : tablesList) {
+                            mItems.add(new Tables(list.getTabId(), list.getShopId(), list.getNo(),
+                                    list.getSeatQty(), list.getUsing(), list.getQrCode(), list.getOrderId()));
+                            Log.d("list", response.body().toString());
+                            table_list.setHasFixedSize(true);
+                            adapter.setItems(mItems);
+                            table_list.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumn));
+                            table_list.setAdapter(adapter);
+                        }
+                    } else {
+                        Log.d("getTable 실패1", "getTable 실패1"+response.errorBody().string());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<Tables>> call, Throwable t) {
+                    Log.d("getTable 실패2", "getTable 실패2"+t.getCause());
+                }
+            });
+        }
+    };
+
     private void registerTable(int tableNo) {
         char isUse = 'N';
         Log.d("tableNo", String.valueOf(tableNo));
@@ -171,5 +229,13 @@ public class PosFragment_O extends Fragment {
                 Log.d("테이블 등록 실패2", "테이블 등록 실패2");
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d("destroy 실행", "destroy 실행");
+        isThread = false;
+        thread.interrupt();
     }
 }

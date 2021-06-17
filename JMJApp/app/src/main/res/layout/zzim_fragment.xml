@@ -24,7 +24,8 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_marginTop="9dp"
-            android:text="찜한가게"
+            android:fontFamily="@font/we_semibold"
+            android:text="주문내역"
             android:textColor="#000"
             android:textSize="18sp" />
 

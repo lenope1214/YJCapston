@@ -26,6 +26,8 @@ import com.example.jmjapp.network.Server;
 import com.google.android.gms.common.api.Api;
 import com.google.gson.Gson;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,7 +43,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import ua.naiksoftware.stomp.Stomp;
+import ua.naiksoftware.stomp.StompHeader;
 import ua.naiksoftware.stomp.client.StompClient;
+import ua.naiksoftware.stomp.client.StompMessage;
 
 public class ProfileUpdateActivity extends AppCompatActivity {
 
@@ -56,9 +60,10 @@ public class ProfileUpdateActivity extends AppCompatActivity {
     private Call<Order.OrderMenuList> getOrderMenus;
     private Call<Order> orderCall;
 
-    public static final String TAG="stomp좀 되라 시발";
+    public static final String TAG = "stomp좀 되라 시발";
     private StompClient mStompClient;
     private Button btn2;
+    private boolean isUnexpectedClosed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +82,8 @@ public class ProfileUpdateActivity extends AppCompatActivity {
         jwt = pref.getString("token", null);
         Log.d("jwt", "Bearer " + jwt);
         Log.d("jwt123", jwt);
+
+
 
         user_profile_id = findViewById(R.id.user_profile_id);
         user_profile_id.setText(id);
@@ -172,10 +179,12 @@ public class ProfileUpdateActivity extends AppCompatActivity {
                 });
             }
         });
+//        new LongOperation().execute("");
+        initStomp();
 
         Button btn = findViewById(R.id.testbtn);
         btn.setOnClickListener(v -> {
-            new LongOperation().execute("");
+            onClickBtn();
         });
 
         btn2 = findViewById(R.id.testbtn2);
@@ -290,59 +299,186 @@ public class ProfileUpdateActivity extends AppCompatActivity {
 ////                });
 //            }
 //        });
+    } // on create 끝 -------------------------
+
+    private StompClient stompClient;
+    private List<StompHeader> headerList;
+    public void onClickBtn(){
+        stompClient.send("/pub/jmj","데이터 간다").subscribe();
     }
 
+    public void initStomp(){
+        stompClient= Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://192.168.1.51:8088/ws-stomp/websocket");
 
+        stompClient.lifecycle().subscribe(lifecycleEvent -> {
+            switch (lifecycleEvent.getType()) {
+                case OPENED:
+                    Log.d(TAG, "Stomp connection opened");
+                    break;
+                case ERROR:
+                    Log.e(TAG, "Error", lifecycleEvent.getException());
+                    if(lifecycleEvent.getException().getMessage().contains("EOF")){
+                        isUnexpectedClosed=true;
+                    }
+                    break;
+                case CLOSED:
+                    Log.d(TAG, "Stomp connection closed");
+                    if(isUnexpectedClosed){
+                        /**
+                         * EOF Error
+                         */
+                        initStomp();
+                        isUnexpectedClosed=false;
+                    }
+                    break;
+            }
+        });
 
-    private class LongOperation extends AsyncTask<String, Void, String> {
-        private StompClient mStompClient;
-        String TAG = "STOMP ?연결?";
-        String shopId = "7389801057";
+        // add Header
+        headerList=new ArrayList<>();
+//        headerList.add(new StompHeader("Authorization", G.accessToken));
+        stompClient.connect(headerList);
+    }
 
-        @Override
-        protected String doInBackground(String... strings) {
-            Log.d("LongOperation시작", "LongOperation시작");
-            mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws:/192.168.1.51:8088/ws-stomp/websocket");
-            mStompClient.connect();
-            Log.d("연결","연결");
-
-//            mStompClient.topic("/sub/7389801057/o/roomId").subscribe(topicMessage -> {
-//                Log.d("토픽","토픽");
-//                Log.d(TAG, topicMessage.getPayload());
+//    @SneakyThrows
+//    private void initStomp() {
+//        //mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://192.168.1.51:8088/ws-stomp/websocket");
+//        mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://3.34.55.186:8088/ws-stomp/websocket");
+//
+//        mStompClient.lifecycle().subscribe(lifecycleEvent -> {
+//            switch (lifecycleEvent.getType()) {
+//                case OPENED:
+//                    Log.d(TAG, "Stomp connection opened???????????????1");
+//                    break;
+//                case ERROR:
+//                    Log.e(TAG, "Error", lifecycleEvent.getException());
+//                    if (lifecycleEvent.getException().getMessage().contains("EOF")) {
+//                        isUnexpectedClosed = true;
+//                    }
+//                    break;
+//                case CLOSED:
+//                    Log.d(TAG, "Stomp connection closed");
+//                    if (isUnexpectedClosed) {
+//                        /**
+//                         * EOF Error
+//                         */
+//                        initStomp();
+//                        isUnexpectedClosed = false;
+//                    }
+//                    break;
+//            }
+//        });
+////        headerList=new ArrayList<>();
+////        headerList.add(new StompHeader("Authorization", jwt));
+////        mStompClient.connect(headerList);
+//        mStompClient.connect();
+//
+//        mStompClient.topic("/sub/4850101906/u/2").subscribe(topicMessage -> {
+//            Log.d(TAG, topicMessage.getPayload());
+//        });
+//
+//        JSONObject obj = new JSONObject();
+//        obj.put("msg", "hello");
+//
+//        String jsonObject = obj.toString();
+//
+//
+//        mStompClient.send("/pub/chat", jsonObject).subscribe();
+//        mStompClient.send("/pub/chat", jsonObject).subscribe();
+//        mStompClient.send("/chat", jsonObject).subscribe();
+//        mStompClient.send("/chat", jsonObject);
+//
+//        mStompClient.send("pub", jsonObject).subscribe();
+//        mStompClient.send("/pub", jsonObject).subscribe();
+//        mStompClient.send("/pub/chat", jsonObject).subscribe();
+//        mStompClient.send("/pub/chat");
+//        mStompClient.send("/pub/chat").subscribe();
+//        mStompClient.send("/chat", "asdtasdtdfasdf").subscribe();
+//        mStompClient.send("/chat", "asdtasdtdfasdf");
+//
+//        mStompClient.send("/sub/4850101906/u/2", "My first STOMP message!1").subscribe();
+//        mStompClient.send("/pub", "My first STOMP message!2").subscribe();
+//        mStompClient.send("/pub/chat", "My first STOMP message!3").subscribe();
+//
+//
+//
+//        Log.d("qwert", "qwert");
+//    }
+//
+//
+//    private class LongOperation extends AsyncTask<String, Void, String> {
+//        private StompClient mStompClient;
+//        String TAG = "STOMP ?연결?";
+//        String shopId = "7389801057";
+//
+//        public LongOperation(){
+//            mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://192.168.1.51:8088/ws-stomp/websocket");
+//            mStompClient.setHeartbeat(4000);
+//            List<StompHeader> stompHeaders = new ArrayList<>();
+//            stompHeaders.add(new StompHeader(StompHeader.DESTINATION, "/pub/jmj"));
+//            mStompClient.connect(stompHeaders);
+//        }
+//
+//        @Override
+//        protected String doInBackground(String... strings) {
+//            //mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://3.34.55.186:8088/ws-stomp/websocket");
+//
+//            mStompClient.topic("/sub/jmj");
+//
+//            mStompClient.topic("/sub/jmj").subscribe(topicMessage -> {
+////                Log.d(TAG, topicMessage.getPayload());
+//                System.out.println("JMJ 구독 완료 !");
 //            });
-
-            btn2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d("qwe","qwe");
-                    Gson jsonObject = new Gson();
-                    mStompClient.send("/pub/jmj", String.valueOf(jsonObject)).subscribe();
-                    Log.d("qwer","qwer");
-                }
-            });
-
-            Log.d("연결2", "연결2");
-
-
-            mStompClient.lifecycle().subscribe(lifecycleEvent -> {
-                switch (lifecycleEvent.getType()) {
-
-                    case OPENED:
-                        Log.d(TAG, "Stomp connection opened");
-                        break;
-
-                    case ERROR:
-                        Log.e(TAG, "Error", lifecycleEvent.getException());
-                        break;
-
-                    case CLOSED:
-                        Log.d(TAG, "Stomp connection closed");
-                        break;
-                }
-            });
-            return "Executed";
-        }
-    }
+//            btn2.setOnClickListener(v -> {
+//                Log.d(mStompClient., "doInBackground: ");
+//                System.out.println("버튼 클릭!" + (mStompClient.isConnecting()));
+//                List<StompHeader> stompHeaders = new ArrayList<>();
+//                stompHeaders.add(new StompHeader(StompHeader.DESTINATION, "/pub/jmj"));
+//                stompHeaders.add(new StompHeader("simpMessageType", "MESSAGE"));
+//                StompMessage stm = new StompMessage("MESSAGE", stompHeaders, "데이터 20세기야" );
+//                mStompClient.connect(stompHeaders);
+////                mStompClient.send("/pub/chat", "ㄷㅊㅁㄴㅇㄻㄴㅇㄹ");
+////                mStompClient.send("/pub/chat", "ㅁㄴㅇㄻㄴㅇㄹ ㅁㄴ아ㅓ로민다 ㄷㅎ").subscribe();
+////                mStompClient.send("/pub/jmj", "ㄷㅊㅁㄴㅇㄻㄴㅇㄹ");
+////                mStompClient.send("/pub/jmj", "ㅁㄴㅇㄻㄴㅇㄹ ㅁㄴ아ㅓ로민다 ㄷㅎ").subscribe();
+//            });
+//
+//            mStompClient.lifecycle().subscribe(lifecycleEvent -> {
+//                switch (lifecycleEvent.getType()) {
+//
+//                    case OPENED:
+//                        Log.d(TAG, "Stomp connection opened");
+//                        System.out.println("나우 연결 ? " + (mStompClient.isConnecting()));
+////                        mStompClient.send("/pub/chat", "4");
+////                        System.out.println("4 전송 완료?");
+////
+////                        mStompClient.send("/pub/chat", "3").subscribe();
+////                        System.out.println("3 전송 완료?");
+////
+////                        mStompClient.send("/pub/jmj", "2");
+////                        System.out.println("2 전송 완료?");
+////
+////                        mStompClient.send("/pub/jmj", "1").subscribe();
+////                        System.out.println("1 전송 완료?");
+//                        break;
+//
+//                    case ERROR:
+//                        Log.e(TAG, "Error", lifecycleEvent.getException());
+//                        break;
+//
+//                    case CLOSED:
+//                        Log.d(TAG, "Stomp connection closed");
+//                        break;
+//                }
+//            });
+//            return "Executed";
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String result) {
+//
+//        }
+//    }
 
 
 //    private void connectStomp() {
@@ -382,8 +518,6 @@ public class ProfileUpdateActivity extends AppCompatActivity {
 //        });
 //        return "Executed";
 //    }
-
-
 
 
     @Override

@@ -79,8 +79,9 @@ public class QrReaderActivity extends AppCompatActivity {
                 Map<String, String> map = new HashMap();
                 map.put("shopId", shopnum2);
 
-                orderCall = Server.getInstance().getApi().updateOrder("Bearer " + jwt, map);
+                orderCall = Server.getInstance().getApi().order("Bearer " + jwt, map);
                 orderCall.enqueue(new Callback<Order>() {
+                    @SneakyThrows
                     @Override
                     public void onResponse(Call<Order> call, Response<Order> response) {
                         if (response.isSuccessful()) {
@@ -89,7 +90,7 @@ public class QrReaderActivity extends AppCompatActivity {
                             Log.d("orderId", orderId);
                             updateTable(orderId);
                         } else {
-                            Log.d("orderTable 실패1", "orderTable 실패1");
+                            Log.d("orderTable 실패1", "orderTable 실패1"+response.errorBody().string());
                         }
                     }
 

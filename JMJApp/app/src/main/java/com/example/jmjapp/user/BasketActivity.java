@@ -15,6 +15,7 @@ import com.example.jmjapp.*;
 import com.example.jmjapp.Adapter.BasketRecyclerAdapter;
 import com.example.jmjapp.dto.Basket;
 import com.example.jmjapp.dto.Menu;
+import com.example.jmjapp.dto.Order;
 import com.example.jmjapp.dto.OrderMenu;
 import com.example.jmjapp.network.Server;
 import com.google.android.material.snackbar.Snackbar;
@@ -39,8 +40,9 @@ public class BasketActivity extends AppCompatActivity {
     private ArrayList<Menu> mItems = new ArrayList();
 
     private String jwt;
+    private int sum;
     private Call<ResponseBody> responseBodyCall;
-
+    private Call<Order> orderCall;
 
     SharedPreferences orderNumber;
 
@@ -100,14 +102,18 @@ public class BasketActivity extends AppCompatActivity {
                     Log.d("orderId", QrReaderActivity.orderId);
 
                     SharedPreferences pref3 = getSharedPreferences("basket", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref3.edit();
                     int list_size2 = pref3.getInt("list_size", 0);
 
                     String[] list_id =  new String[list_size2];
                     int[] list_count = new int[list_size2];
+                    int[] list_price = new int[list_size2];
 
                     for (int i = 0; i < list_size2; i++) {
                         list_id[i] = pref3.getString("list_" + i + "_id", null);
                         list_count[i] = pref3.getInt("list_" + i + "_count", 0);
+                        list_price[i] = pref3.getInt("list_" + i + "_price", 0);
+                        sum = sum + list_price[i];
                     }
 
                     Map<String, List<OrderMenu>> map = new HashMap();
@@ -119,6 +125,7 @@ public class BasketActivity extends AppCompatActivity {
                                 .shopId(shopId)
                                 .menuId(list_id[i])
                                 .quantity(String.valueOf(list_count[i]))
+                                .tabNo(QrReaderActivity.tablenum)
                                 .build();
                         omList.add(om);
                     }
@@ -143,6 +150,32 @@ public class BasketActivity extends AppCompatActivity {
                             Log.d("orderMenu 실패2", "orderMenu 실패2");
                         }
                     });
+
+                    Map<String, String> map2 = new HashMap<>();
+                    map2.put("shopId", shopId);
+                    map2.put("orderId", QrReaderActivity.orderId);
+                    map2.put("amount", String.valueOf(sum));
+
+                    orderCall = Server.getInstance().getApi().updateOrder("Bearer " + jwt, map2);
+                    orderCall.enqueue(new Callback<Order>() {
+                        @SneakyThrows
+                        @Override
+                        public void onResponse(Call<Order> call, Response<Order> response) {
+                            if (response.isSuccessful()) {
+                                Log.d("updateOrder 성공", "updateOrder 성공");
+                            } else {
+                                Log.d("updateOrder 실패1", "updateOrder 실패1"+response.errorBody().string());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Order> call, Throwable t) {
+                            Log.d("updateOrder 실패2", "updateOrder 실패2"+t.getCause());
+                        }
+                    });
+
+                    editor.clear();
+                    editor.apply();
 
                     Intent intent = new Intent(BasketActivity.this, MainActivity.class);
                     intent.putExtra("QROrder","QROrder");

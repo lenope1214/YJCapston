@@ -36,7 +36,7 @@
                 android:textColor="#000"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
-                android:text="주소"/>
+                android:text="주문의 민족"/>
 
 
         <Button
