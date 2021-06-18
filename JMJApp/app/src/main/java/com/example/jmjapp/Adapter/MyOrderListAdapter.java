@@ -36,7 +36,7 @@ public class MyOrderListAdapter extends RecyclerView.Adapter<MyOrderListAdapter.
 
 //    public MyOrderListAdapter(Context context) {
 //        this.context = context;
-//    }
+//    } 
 //
 //    public void setItems(ArrayList<Order> myOrder) {
 //        this.mItems = myOrder;

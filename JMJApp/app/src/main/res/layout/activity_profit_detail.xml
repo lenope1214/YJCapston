@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".user.SearchShopList">
+    android:padding="10dp"
+    tools:context=".owner.ProfitDetailActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/search_shop_toolbar"
+        android:id="@+id/profit_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#FFFFFF"
-        android:gravity="center"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,24 +23,24 @@
             android:id="@+id/tv_bell"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center"
-            android:text="알림"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:text="매출현황"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold" />
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/search_shop_list"
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/barChart"
+        android:layout_marginTop="60dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:nestedScrollingEnabled="false"
-        android:scrollbars="vertical"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_shop_toolbar"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/profit_toolbar">
+
+    </com.github.mikephil.charting.charts.BarChart>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

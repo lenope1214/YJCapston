@@ -172,20 +172,18 @@ public class ShopDetailActivity extends AppCompatActivity {
                         @SneakyThrows
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                            System.out.println(jwt+"????????????????????"+shopNumber+"???????????????"+response.code());
-                            if (response.code() == 201) {
+                            if (response.isSuccessful()) {
+                                Log.d("찜 삭제 성공", "찜 삭제 성공");
                                 shop_detail_zzim_img.setImageResource(R.drawable.zzimblack);
-                                System.out.println("찜 삭제");
                                 zzim = true;
                             } else {
-                                System.out.println("찜 삭제 실패");
-                                System.out.println(response.errorBody().string()+"ggggggggggg");;
+                                Log.d("찜 삭제 실패1", "찜 삭제 실패1"+response.errorBody().string());
                             }
                         }
 
                         @Override
                         public void onFailure(Call<ResponseBody> call, Throwable t) {
-                            System.out.println("찜 삭제 네트워크 오류");
+                            Log.d("찜 삭제 실패2", "찜 삭제 실패2"+t.getCause());
                         }
                     });
                 }

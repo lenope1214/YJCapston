@@ -63,7 +63,7 @@ public class ReservationManagementActivity extends AppCompatActivity {
                                     list.getPeople(), list.getUsePoint(), list.getAmount(),
                                     list.getArriveTime(), list.getPayTime(), list.getPg(),
                                     list.getPayMethod(), list.getShopId(), list.getShopName(), list.getUserName(),
-                                    list.getReason(), list.getReviewed(), list.getUserId(), list.getAccept()));
+                                    list.getReason(), list.getReviewed(), list.getUserId(), list.getAccept(), list.getCompleAmount()));
                             Log.d("accept", String.valueOf(list.getAccept()));
                             res_manage_list.setHasFixedSize(true);
                             adapter = new ReservationManagementAdapter(getApplicationContext(), mItems);

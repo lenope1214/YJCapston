@@ -19,7 +19,7 @@ import com.example.jmjapp.owner.push.BellActivity_O;
 
 public class HomeFragment_O extends Fragment {
     ToggleButton toggle_Button;
-    TextView text_myshop_name;
+    TextView text_myshop_name, profit_detail_tv;
     Button bell_button;
 
     static public String shopNumber;
@@ -64,6 +64,15 @@ public class HomeFragment_O extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), BellActivity_O.class);
+                startActivity(intent);
+            }
+        });
+
+        profit_detail_tv = rootView.findViewById(R.id.profit_detail_tv);
+        profit_detail_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ProfitDetailActivity.class);
                 startActivity(intent);
             }
         });

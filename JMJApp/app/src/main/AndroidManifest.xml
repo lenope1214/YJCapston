@@ -34,7 +34,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".user.SearchShopList"></activity>
+        <activity android:name=".owner.ProfitDetailActivity"></activity>
+        <activity android:name=".user.SearchShopList" />
         <activity android:name=".user.QrPaymentActivity" />
         <activity android:name=".user.MapActivity" />
         <!--

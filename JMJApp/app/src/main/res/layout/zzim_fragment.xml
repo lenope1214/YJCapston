@@ -30,6 +30,7 @@
             android:textSize="18sp" />
 
         <ImageView
+            android:id="@+id/zzim_search_bar"
             android:layout_width="400dp"
             android:layout_height="30dp"
             android:layout_alignParentBottom="true"

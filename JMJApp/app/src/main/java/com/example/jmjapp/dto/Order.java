@@ -30,6 +30,7 @@ public class Order {
     private char reviewed;
     private String userId;
     private char accept;
+    private int compleAmount;
 
     @Data
     public static class OrderMenuList {
