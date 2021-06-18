@@ -6,6 +6,7 @@ import OwnerNavbar from "../../components/OwnerMenubar/OwnerNavbar";
 import Header from "../../components/Header/Header";
 import { removeMenues } from "../../lib/MenuList/index";
 import * as StompJs from "@stomp/stompjs";
+import Swal from 'sweetalert2';
 
 const ROOM_SEQ = 1;
 
@@ -113,7 +114,19 @@ const MenuListContainer = (props) => {
                         })
                 )
             ) {
-                alert("주문이 완료되었습니다!");
+                Swal.fire({
+                    title: '주문 완료',
+                    text: "주문에 성공했습니다.",
+                    icon: 'success',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                }).then((result) => {
+                    if (result.value) { 
+                    }
+                })
             }
             //  else {
             //     alert("환불하시겠어요?");

@@ -9,7 +9,7 @@ import {
     paymentservice,
 } from "../../lib/ShopOrder/index";
 import * as StompJs from "@stomp/stompjs";
-// import { jmthing } from "../shopcontent/shopcontentcontainer";
+import Swal from 'sweetalert2';
 
 const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
     const history = useHistory();
@@ -47,11 +47,29 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
         const value = e.target.value;
         setpointcheck(value);
         if (jmallprice - pointcheck < 0) {
-            alert("포인트를 너무 많이 사용하셨어요. 다시입력해주세요");
+            Swal.fire({
+                // title: '없는 계정이거나 아이디 비밀번호가 일치하지 않습니다.',
+                text: "포인트를 확인해주세요.",
+                icon: 'info',
+                // showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                confirmButtonText: '확인',
+                // cancelButtonText: '취소'
+              })
             setpointcheck("");
         }
         if (jmuserinfo.point < value) {
-            alert("보유한 포인트보다 많아요. 다시 입력해주세요");
+            Swal.fire({
+                // title: '없는 계정이거나 아이디 비밀번호가 일치하지 않습니다.',
+                text: "보유 포인트를 확인해주세요.",
+                icon: 'info',
+                // showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                confirmButtonText: '확인',
+                // cancelButtonText: '취소'
+              })
             setpointcheck("");
         }
     };
@@ -124,16 +142,36 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 handleLogin();
                 setModal(false);
                 sessionStorage.setItem("access_token", accessToken);
-                alert("처음부터 다시 진행해 주세요");
+                Swal.fire({
+                    // title: '없는 계정이거나 아이디 비밀번호가 일치하지 않습니다.',
+                    text: "처음부터 다시 진행해 주세요.",
+                    icon: 'info',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  }).then((result) => {
+                    if (result.value) {
+                        
                 history.push("/shoplist");
+                    }
+                  })
             })
             .catch((err) => {
                 const status = err?.response?.status;
 
                 if (status == 400) {
-                    alert(
-                        "없는 계정이거나 아이디 비밀번호가 일치하지 않습니다."
-                    );
+                    Swal.fire({
+                        // title: '없는 계정이거나 아이디 비밀번호가 일치하지 않습니다.',
+                        text: "없는 계정이거나 아이디 비밀번호가 일치하지 않습니다.",
+                        icon: 'info',
+                        // showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        // cancelButtonColor: '#d33',
+                        confirmButtonText: '확인',
+                        // cancelButtonText: '취소'
+                      })
                     sessionStorage.removeItem("access_token");
                     setModal(true);
                 } else if (status == 500) {
@@ -268,10 +306,32 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 publish();
             }, 1000);
 
-            alert("결제 성공");
+            Swal.fire({
+                title: '결제 완료!',
+                // text: "처음부터 다시 진행해 주세요.",
+                icon: 'success',
+                // showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                confirmButtonText: '확인',
+                // cancelButtonText: '취소'
+              }).then((result) => {
+                if (result.value) {
+                    
             history.push("/PaymentDone");
+                }
+              })
         } else {
-            alert(`결제 실패: ${error_msg}`);
+            Swal.fire({
+                title: '결제 실패!',
+                text: `에러 내용 : ${error_msg}`,
+                icon: 'error',
+                // showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                confirmButtonText: '확인',
+                // cancelButtonText: '취소'
+              })
         }
     };
 

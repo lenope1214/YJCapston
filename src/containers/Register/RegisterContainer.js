@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import Register from "../../components/Register/Register";
 import { postLogin } from "../../lib/Login";
 import { getLocation, postRegister, getIdCheck } from "../../lib/Register";
+import Swal from 'sweetalert2';
 
 const RegisterContainer = () => {
     const history = useHistory();
@@ -163,8 +164,20 @@ const RegisterContainer = () => {
             roadAddr
         )
             .then((res) => {
-                history.push("/");
-                alert("회원가입완료");
+                Swal.fire({
+                    title: '회원 등록 완료',
+                    text: "회원 가입을 축하합니다.",
+                    icon: 'success',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  }).then((result) => {
+                    if (result.value) {
+                        history.push("/");
+                    }
+                  })
             })
             .catch((err) => err);
     };
@@ -172,11 +185,28 @@ const RegisterContainer = () => {
     const IdCheck = () => {
         getIdCheck(id)
             .then((res) => {
-                alert("사용 가능한 아이디 입니다.");
+                Swal.fire({
+                    title: '사용 가능한 아이디입니다.',
+                    // text: "회원 가입을 축하합니다.",
+                    icon: 'info',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  })
             })
             .catch((err) => {
-                alert(err);
-                alert("이미 존재하는 아이디 입니다.");
+                Swal.fire({
+                    title: '이미 존재하는 아이디입니다.',
+                    // text: "회원 가입을 축하합니다.",
+                    icon: 'info',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  })
             });
     };
 
