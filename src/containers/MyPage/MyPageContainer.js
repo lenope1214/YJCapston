@@ -8,6 +8,7 @@ import {
     ordermenulist,
 } from "../../lib/MyPage";
 import { useHistory } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 const MyPageContainer = (props) => {
     const handleComplete = (data) => {

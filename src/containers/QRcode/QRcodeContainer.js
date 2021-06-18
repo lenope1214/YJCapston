@@ -6,6 +6,7 @@ import OwnerNavbar from "../../components/OwnerMenubar/OwnerNavbar";
 import { useHistory } from "react-router-dom";
 import { postQRcode, getAddQR, } from "../../lib/QRcode";
 import {removetables} from "../../lib/QRcode/index"
+import Swal from 'sweetalert2';
 
 const QRcodeContainer = (props) => {
     const [AddQR, setAddQR] = useState({});
@@ -93,12 +94,33 @@ const QRcodeContainer = (props) => {
     const removetable = (table) => {
         removetables(table)
         .then((res) => {
-            alert("테이블QR코드 삭제완료");
-            history.push(`/qrcode/${shopId}`);
-            window.location.reload();
+            Swal.fire({
+                title: 'QR코드 삭제 완료',
+                text: "테이블 QR코드 삭제에 성공했습니다.",
+                icon: 'success',
+                // showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                confirmButtonText: '확인',
+                // cancelButtonText: '취소'
+              }).then((result) => {
+                if (result.value) {
+                    history.push(`/qrcode/${shopId}`);
+                    window.location.reload();
+                }
+              })
         })
         .catch((err) => {
-            alert("테이블QR코드 삭제 에러");
+            Swal.fire({
+                title: 'QR코드 삭제 에러',
+                text: "테이블 QR코드 삭제에 실패했습니다.",
+                icon: 'error',
+                // showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                confirmButtonText: '확인',
+                // cancelButtonText: '취소'
+              })
         });
     };
 

@@ -4,6 +4,7 @@ import OwnerNavbar from "../../components/OwnerMenubar/OwnerNavbar";
 import Header from "../../components/Header/Header";
 import MenuRead from '../../components/MenuRead/MenuRead';
 import { getMenuRead, putMenuPopular, putMenuSale, putMenuRead } from '../../lib/MenuRead';
+import Swal from 'sweetalert2';
 
 export const MenuReadContainer = (props) => {
     const history = useHistory();
@@ -42,12 +43,36 @@ export const MenuReadContainer = (props) => {
             menuDuration,
             menuRead.shopId
         )
-            .then((res) => {
-                history.goBack();
-                alert("수정되었습니다.");
+            .then((res)=> {
+                Swal.fire({
+                    title: '메뉴 수정 성공',
+                    text: "메뉴 정보가 수정되었습니다.",
+                    icon: 'success',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  }).then((result) => {
+                    if (result.value) {
+                        history.goBack();
+                    }
+                  })
             })
-            .catch((err) => {
-                alert("putMenuRead Err");
+            .catch((err)=> {
+                Swal.fire({
+                    title: '메뉴 수정 실패',
+                    text: "메뉴 정보 수정에 실패했습니다.",
+                    icon: 'error',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  }).then((result) => {
+                    if (result.value) {
+                    }
+                  })
             });
     };
 
@@ -68,30 +93,77 @@ export const MenuReadContainer = (props) => {
                 alert("showMenuRead Err");
             });
     };
+
     const menu_v2 = () => {
         putMenuPopular(props.match.params.menuId,menuRead.shopId)
         .then((res)=> {
-            
-            alert("인기 여부 변경");
-            // history.goBack();
-            // history.push(`/menu/${menuId}`);
-            window.location.reload();
+            Swal.fire({
+                title: '인기 메뉴 설정',
+                text: "인기 메뉴 여부가 수정되었습니다.",
+                icon: 'success',
+                // showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                confirmButtonText: '확인',
+                // cancelButtonText: '취소'
+              }).then((result) => {
+                if (result.value) {
+                    window.location.reload();
+                }
+              })
         })
         .catch((err)=> {
-            alert("인기여부 변경 에러");
+            Swal.fire({
+                title: '인기 메뉴 설정 에러',
+                text: "인기 메뉴 여부 수정 에러.",
+                icon: 'error',
+                // showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                confirmButtonText: '확인',
+                // cancelButtonText: '취소'
+              }).then((result) => {
+                if (result.value) {
+                    window.location.reload();
+                }
+              })
         });
-
     };
     const menu_v3 = () => {
         putMenuSale(props.match.params.menuId,menuRead.shopId)
         .then((res)=> {
-            // history.push(`/menu/${menuId}`);
-            alert("판매 여부 변경");
-            // history.goBack();
-            window.location.reload();
+            Swal.fire({
+                title: '판매 메뉴 설정',
+                text: "판매 여부가 수정되었습니다.",
+                icon: 'success',
+                // showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                confirmButtonText: '확인',
+                // cancelButtonText: '취소'
+              }).then((result) => {
+                if (result.value) {
+                    //"삭제" 버튼을 눌렀을 때 작업할 내용을 이곳에 넣어주면 된다. 
+                    window.location.reload();
+                }
+              })
         })
         .catch((err)=> {
-            alert("판매 여부 변경 에러");
+            Swal.fire({
+                title: '판매 메뉴 설정 에러',
+                text: "판매 메뉴 여부 수정 에러.",
+                icon: 'error',
+                // showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                confirmButtonText: '확인',
+                // cancelButtonText: '취소'
+              }).then((result) => {
+                if (result.value) {
+                    //"삭제" 버튼을 눌렀을 때 작업할 내용을 이곳에 넣어주면 된다. 
+                    window.location.reload();
+                }
+              })
         });
 
     };

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Chatting from "../../components/Chatting/Chatting";
 import { getMyInfo, getShopInfo } from "../../lib/Chatting/index";
+import Swal from 'sweetalert2';
 
 const ChattingContainer = () => {
     const [id, SetId] = useState();
@@ -19,8 +20,21 @@ const ChattingContainer = () => {
             getUserId();
             getShopname();
             if (!sessionStorage.getItem("access_token")) {
-                alert("로그인을 부탁할게요");
-                window.close();
+                Swal.fire({
+                    title: '로그인을 해주세요.',
+                    text: "이용하기 위해서는 로그인이 필요합니다.",
+                    icon: 'warning',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                }).then((result) => {
+                    if (result.value) { 
+                        window.close();
+                    }
+                })
+                
             }
         }
     }, []);

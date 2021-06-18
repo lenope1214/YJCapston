@@ -10,6 +10,7 @@ import {
     putShopInfo,
 } from "../../lib/ShopInfo";
 import * as StompJs from "@stomp/stompjs";
+import Swal from 'sweetalert2';
 
 const ROOM_SEQ = 1;
 
@@ -113,11 +114,32 @@ const ShopInfoContainer = (props) => {
         putShopreserve(shopId)
             .then((res) => {
                 // history.push("/shopInfo/"+shopId)
-                history.push("/myshop");
-                alert("예약여부변경완료");
+                Swal.fire({
+                    title: '예약 여부 변경 완료',
+                    // text: "리뷰가 성공적으로 삭제됐습니다.",
+                    icon: 'success',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  }).then((result) => {
+                    if (result.value) {
+                        history.push("/myshop");
+                    }
+                  })
             })
             .catch((err) => {
-                alert("예약변경에러");
+                Swal.fire({
+                    title: '예약 여부 변경 에러',
+                    // text: "리뷰가 성공적으로 삭제됐습니다.",
+                    icon: 'error',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  })
             });
     };
 
@@ -125,8 +147,20 @@ const ShopInfoContainer = (props) => {
         putShopopen(shopId)
         .then((res) => {
             //history.push("/shopInfo/"+shopId)
-            history.push("/myshop");
-            alert("오픈여부변경완료+");
+            Swal.fire({
+                title: '오픈 여부 변경 완료',
+                // text: "리뷰가 성공적으로 삭제됐습니다.",
+                icon: 'success',
+                // showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                confirmButtonText: '확인',
+                // cancelButtonText: '취소'
+              }).then((result) => {
+                if (result.value) {
+                    history.push("/myshop");
+                }
+              })
         });
     };
 
@@ -144,11 +178,32 @@ const ShopInfoContainer = (props) => {
             // shopCategory
         )
             .then((res) => {
-                history.push("/myShop");
-                alert("수정되었습니다.");
+                Swal.fire({
+                    title: '수정 완료',
+                    // text: "리뷰가 성공적으로 삭제됐습니다.",
+                    icon: 'success',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  }).then((result) => {
+                    if (result.value) {
+                        history.push("/myshop");
+                    }
+                  })
             })
             .catch((err) => {
-                alert("putshopInfo err");
+                Swal.fire({
+                    title: '수정 에러',
+                    // text: "리뷰가 성공적으로 삭제됐습니다.",
+                    icon: 'error',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  })
             });
     };
 

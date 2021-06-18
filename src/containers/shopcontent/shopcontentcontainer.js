@@ -8,14 +8,13 @@ import {
     getshopmenu,
     postLogin,
     cartNumber,
-    jmthing,
     getReviewlist,
     postMark,
     deleteMark,
 } from "../../lib/shopcontent/index";
-import Geocode, { fromAddress } from "react-geocode";
-import { getMenuList } from "../../lib/MenuList";
+import Geocode from "react-geocode";
 import { removeReviews } from "../../lib/shopcontent/index";
+import Swal from 'sweetalert2';
 
 Geocode.setApiKey("AIzaSyBvpJoGP7dKHRovDgP4CSByczdZC7vrz18");
 Geocode.setLanguage("kr");
@@ -222,21 +221,51 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
     const removeReview = (id) => {
         removeReviews(id)
             .then((res) => {
-                alert("삭제되었습니다.");
-                window.location.reload();
+                Swal.fire({
+                    title: '리뷰 삭제 완료',
+                    text: "리뷰가 성공적으로 삭제됐습니다.",
+                    icon: 'success',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  }).then((result) => {
+                    if (result.value) {
+                        window.location.reload();
+                    }
+                  })
+                
             })
             .catch((err) => {
                 // alert(err.response.status);
                 if (err.response.status == 500) {
-                    // alert(err);
-                    alert("리뷰 작성자가 아닙니다.");
+                    Swal.fire({
+                        title: '리뷰 작성자가 아닙니다.',
+                        // text: "리뷰가 성공적으로 삭제됐습니다.",
+                        icon: 'error',
+                        // showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        // cancelButtonColor: '#d33',
+                        confirmButtonText: '확인',
+                        // cancelButtonText: '취소'
+                      })
                 } else alert("리뷰 삭제 에러");
             });
     };
 
     const order = () => {
         if (jmMenu.length === 0) {
-            alert("주문목록이 비어있습니다.");
+            Swal.fire({
+                title: '주문 목록이 비었습니다.',
+                // text: "리뷰가 성공적으로 삭제됐습니다.",
+                icon: 'info',
+                // showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                confirmButtonText: '확인',
+                // cancelButtonText: '취소'
+              })
             return;
         }
 
@@ -259,7 +288,16 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
                 console.log(err);
                 const status = err?.response?.status;
                 if (status == 500) {
-                    alert("로그인이 필요합니다.");
+                    Swal.fire({
+                        title: '로그인이 필요합니다.',
+                        // text: "리뷰가 성공적으로 삭제됐습니다.",
+                        icon: 'info',
+                        // showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        // cancelButtonColor: '#d33',
+                        confirmButtonText: '확인',
+                        // cancelButtonText: '취소'
+                      })
                     openmodal();
                 }
                 //  else if (status == 400) {
@@ -290,12 +328,30 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
        
             .then((res) => {
                 window.location.reload();
-                alert("찜등록 완료");
+                Swal.fire({
+                    title: '찜등록 완료',
+                    // text: "리뷰가 성공적으로 삭제됐습니다.",
+                    icon: 'success',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  })
             })
             .catch((err) => {
                 const status = err?.response?.status;
                     if(status== 400){
-                    alert("로그인후 이용해 주세요.");
+                        Swal.fire({
+                            title: '로그인 후 이용해주세요.',
+                            // text: "리뷰가 성공적으로 삭제됐습니다.",
+                            icon: 'info',
+                            // showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            // cancelButtonColor: '#d33',
+                            confirmButtonText: '확인',
+                            // cancelButtonText: '취소'
+                          })
                     }
             });
         }
@@ -303,10 +359,28 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
             deleteMark(shopId)
                 .then((res) => {
                     window.location.reload();
-                    alert("찜해제 완료");
+                    Swal.fire({
+                        title: '찜 해제 완료',
+                        // text: "리뷰가 성공적으로 삭제됐습니다.",
+                        icon: 'success',
+                        // showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        // cancelButtonColor: '#d33',
+                        confirmButtonText: '확인',
+                        // cancelButtonText: '취소'
+                      })
                 })
                 .catch((err) => {
-                    alert("찜 해제 에러");
+                    Swal.fire({
+                        title: '찜 해제 오류',
+                        // text: "리뷰가 성공적으로 삭제됐습니다.",
+                        icon: 'error',
+                        // showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        // cancelButtonColor: '#d33',
+                        confirmButtonText: '확인',
+                        // cancelButtonText: '취소'
+                      })
                 });
         }
     };

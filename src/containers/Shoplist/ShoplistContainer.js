@@ -16,7 +16,7 @@ import {
     getShoplistfastfood,
     getShoplistMarks,
 } from "../../lib/Shoplist/index";
-import Shopcontent from "../../components/shopcontent/shopcontent";
+import Swal from 'sweetalert2';
 
 const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
     const history = useHistory();
@@ -88,7 +88,16 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 console.log(rstrt);
             })
             .catch((err) => {
-                alert("매장이없습니다.");
+                Swal.fire({
+                    title: '매장이 없습니다.',
+                    // text: "리뷰가 성공적으로 삭제됐습니다.",
+                    icon: 'info',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  })
             });
     };
     //중식
@@ -111,7 +120,16 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 setRestaurant(rstrt);
             })
             .catch((err) => {
-                alert("매장이없습니다.");
+                Swal.fire({
+                    title: '매장이 없습니다.',
+                    // text: "리뷰가 성공적으로 삭제됐습니다.",
+                    icon: 'info',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  })
             });
     };
     //일식
@@ -134,7 +152,16 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 setRestaurant(rstrt);
             })
             .catch((err) => {
-                alert("매장이없습니다.");
+                Swal.fire({
+                    title: '매장이 없습니다.',
+                    // text: "리뷰가 성공적으로 삭제됐습니다.",
+                    icon: 'info',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  })
             });
     };
     //양식
@@ -156,8 +183,16 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 });
                 setRestaurant(rstrt);
             })
-            .catch((err) => {
-                alert("매장이없습니다.");
+            .catch((err) => {Swal.fire({
+                title: '매장이 없습니다.',
+                // text: "리뷰가 성공적으로 삭제됐습니다.",
+                icon: 'info',
+                // showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                confirmButtonText: '확인',
+                // cancelButtonText: '취소'
+              })
             });
     };
     //술집
@@ -180,7 +215,16 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 setRestaurant(rstrt);
             })
             .catch((err) => {
-                alert("매장이없습니다.");
+                Swal.fire({
+                    title: '매장이 없습니다.',
+                    // text: "리뷰가 성공적으로 삭제됐습니다.",
+                    icon: 'info',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  })
             });
     };
     //분식
@@ -203,7 +247,16 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 setRestaurant(rstrt);
             })
             .catch((err) => {
-                alert("매장이없습니다.");
+                Swal.fire({
+                    title: '매장이 없습니다.',
+                    // text: "리뷰가 성공적으로 삭제됐습니다.",
+                    icon: 'info',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  })
             });
     };
     //고기
@@ -226,7 +279,16 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 setRestaurant(rstrt);
             })
             .catch((err) => {
-                alert("매장이없습니다.");
+                Swal.fire({
+                    title: '매장이 없습니다.',
+                    // text: "리뷰가 성공적으로 삭제됐습니다.",
+                    icon: 'info',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  })
             });
     };
     //찜탕
@@ -249,7 +311,16 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 setRestaurant(rstrt);
             })
             .catch((err) => {
-                alert("매장이없습니다.");
+                Swal.fire({
+                    title: '매장이 없습니다.',
+                    // text: "리뷰가 성공적으로 삭제됐습니다.",
+                    icon: 'info',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  })
             });
     };
     //카페디저트
@@ -272,7 +343,16 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 setRestaurant(rstrt);
             })
             .catch((err) => {
-                alert("매장이없습니다.");
+                Swal.fire({
+                    title: '매장이 없습니다.',
+                    // text: "리뷰가 성공적으로 삭제됐습니다.",
+                    icon: 'info',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  })
             });
     };
     //패스트푸드
@@ -295,7 +375,16 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 setRestaurant(rstrt);
             })
             .catch((err) => {
-                alert("매장이없습니다.");
+                Swal.fire({
+                    title: '매장이 없습니다.',
+                    // text: "리뷰가 성공적으로 삭제됐습니다.",
+                    icon: 'info',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  })
             });
     };
     // 실시간리뷰
@@ -342,7 +431,16 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 setRestaurant(rstrt);
             })
             .catch((err) => {
-                alert("매장이없습니다.");
+                Swal.fire({
+                    title: '매장이 없습니다.',
+                    // text: "리뷰가 성공적으로 삭제됐습니다.",
+                    icon: 'info',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  })
             });
     };
 
@@ -359,9 +457,16 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 const status = err?.response?.status;
 
                 if (status == 400) {
-                    alert(
-                        "없는 계정이거나 아이디 비밀번호가 일치하지 않습니다."
-                    );
+                    Swal.fire({
+                        // title: '없는 계정이거나 아이디 비밀번호가 일치하지 않습니다.',
+                        text: "없는 계정이거나 아이디 비밀번호가 일치하지 않습니다.",
+                        icon: 'info',
+                        // showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        // cancelButtonColor: '#d33',
+                        confirmButtonText: '확인',
+                        // cancelButtonText: '취소'
+                      })
                     sessionStorage.removeItem("access_token");
                     setModal(true);
                 } else if (status == 500) {
@@ -394,7 +499,16 @@ const ShoplistContainer = ({ isLogin, handleLogin, handleLogout }) => {
             .catch((err) => {
                 const status = err?.response?.status;
                 if(status==400) {
-                    alert("로그인을 해주세요");
+                    Swal.fire({
+                        title: '로그인 오류.',
+                        // text: "없는 계정이거나 아이디 비밀번호가 일치하지 않습니다.",
+                        icon: 'error',
+                        // showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        // cancelButtonColor: '#d33',
+                        confirmButtonText: '확인',
+                        // cancelButtonText: '취소'
+                      })
                 }else {
                     alert("err");
                 }

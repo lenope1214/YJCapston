@@ -4,6 +4,7 @@ import OwnerNavbar from "../components/OwnerMenubar/OwnerNavbar";
 import { useHistory } from "react-router";
 import Header from "../components/Header/Header";
 import { apiDefault } from "../lib/client";
+import Swal from 'sweetalert2';
 
 const MenuRegisterFormContainer = (props) => {
     const history = useHistory();
@@ -95,11 +96,35 @@ const MenuRegisterFormContainer = (props) => {
             },
         }
         ).then((res) => {
-            history.goBack();
-            alert("메뉴가 추가되었습니다.");
+            Swal.fire({
+                title: '메뉴 추가 성공',
+                text: "메뉴가 추가되었습니다.",
+                icon: 'success',
+                // showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                confirmButtonText: '확인',
+                // cancelButtonText: '취소'
+              }).then((result) => {
+                if (result.value) {
+                    history.goBack();
+                }
+              })
         })
-        .catch((err) => {
-            alert("메뉴 추가 실패!");
+        .catch((err) => {Swal.fire({
+            title: '메뉴 추가 실패',
+            text: "메뉴 추가에 실패하였습니다.",
+            icon: 'error',
+            // showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            // cancelButtonColor: '#d33',
+            confirmButtonText: '확인',
+            // cancelButtonText: '취소'
+          }).then((result) => {
+            if (result.value) {
+                history.goBack();
+            }
+          })
         });
         console.log(res);
     };
