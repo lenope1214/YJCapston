@@ -12,12 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-
 import com.example.jmjapp.IntroScreen;
 import com.example.jmjapp.JMJApplication;
 import com.example.jmjapp.R;
@@ -33,10 +31,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class ShopDetailFragment_O extends Fragment {
+public class  ShopDetailFragment_O extends Fragment {
     Button toggle_button_on, toggle_button_off, toggle_button_res_on, toggle_button_res_off;
     TextView owner_logout_btn, owner_name_tv;
-    ConstraintLayout shop_detail_menu_button, shop_detail_update_button, move_employee_option, move_review_option, move_res_option, move_chat_option;
+    ConstraintLayout shop_detail_menu_button, shop_detail_update_button, move_employee_option, move_review_option, move_res_option,  move_chat_option;
     boolean is_check = true;
     boolean is_check2 = true;
     private android.app.AlertDialog dialog;
@@ -48,7 +46,6 @@ public class ShopDetailFragment_O extends Fragment {
     private Call<ResponseBody> responseBodyCall;
 
     Context context;
-
     public ShopDetailFragment_O() {
 
     }
@@ -73,7 +70,7 @@ public class ShopDetailFragment_O extends Fragment {
         move_chat_option = rootView.findViewById(R.id.move_chat_option);
 
         Bundle bundle = getArguments();
-        shopNumber = bundle.getString("shopNumber", "dwad");
+        shopNumber = bundle.getString("shopNumber","dwad");
 
         //jwt = ((JMJApplication) this.getActivity().getApplication()).getJwt();
 
@@ -107,8 +104,8 @@ public class ShopDetailFragment_O extends Fragment {
                         editor.apply();
 
                         // 앱 변수버리기
-                        ((JMJApplication) getContext().getApplicationContext()).setId(null);
-                        ((JMJApplication) getContext().getApplicationContext()).setJwt(null);
+                        ((JMJApplication)getContext().getApplicationContext()).setId(null);
+                        ((JMJApplication)getContext().getApplicationContext()).setJwt(null);
                     }
                 });
                 builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
@@ -125,14 +122,14 @@ public class ShopDetailFragment_O extends Fragment {
         shopCall.enqueue(new Callback<Shop>() {
             @Override
             public void onResponse(Call<Shop> call, Response<Shop> response) {
-                if (response.code() == 200) {
+                if(response.code() == 200) {
                     Log.d("re", "성공");
                     Log.d("RES", String.valueOf(response.body().getIsRsPos()));
                     Log.d("open", String.valueOf(response.body().getIsOpen()));
                     isOpen = String.valueOf(response.body().getIsOpen());
                     isRsPos = String.valueOf(response.body().getIsRsPos());
 
-                    if (isOpen.equals("Y")) {
+                    if(isOpen.equals("Y")) {
                         toggle_button_on.setBackgroundColor(Color.GREEN);
                         toggle_button_off.setBackgroundColor(Color.LTGRAY);
                         is_check = false;
@@ -142,7 +139,7 @@ public class ShopDetailFragment_O extends Fragment {
                         is_check = true;
                     }
 
-                    if (isRsPos.equals("Y")) {
+                    if(isRsPos.equals("Y")) {
                         toggle_button_res_on.setBackgroundColor(Color.GREEN);
                         toggle_button_res_off.setBackgroundColor(Color.LTGRAY);
                         is_check2 = false;
@@ -156,7 +153,6 @@ public class ShopDetailFragment_O extends Fragment {
 
                 }
             }
-
             @Override
             public void onFailure(Call<Shop> call, Throwable t) {
                 Log.d("re", "실패");
@@ -167,7 +163,7 @@ public class ShopDetailFragment_O extends Fragment {
         toggle_button_on.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (is_check == true) {
+                if(is_check == true) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                     builder.setTitle("알림");
                     builder.setMessage("매장을 열겠습니까?");
@@ -212,7 +208,7 @@ public class ShopDetailFragment_O extends Fragment {
         toggle_button_off.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (is_check == false) {
+                if(is_check == false) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                     builder.setTitle("알림");
                     builder.setMessage("매장을 닫겠습니까?");
@@ -257,7 +253,7 @@ public class ShopDetailFragment_O extends Fragment {
         toggle_button_res_on.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (is_check2 == true) {
+                if(is_check2 == true) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                     builder.setTitle("알림");
                     builder.setMessage("예약을 열겠습니까?");
@@ -302,7 +298,7 @@ public class ShopDetailFragment_O extends Fragment {
         toggle_button_res_off.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (is_check2 == false) {
+                if(is_check2 == false) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                     builder.setTitle("알림");
                     builder.setMessage("예약을 닫겠습니까?");
@@ -355,7 +351,7 @@ public class ShopDetailFragment_O extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         System.out.println("ㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂ");
                         Intent intent = new Intent(getActivity(), MenuDetailActivity.class);
-                        intent.putExtra("shopNumber", shopNumber);
+                        intent.putExtra("shopNumber",shopNumber);
                         startActivity(intent);
                         System.out.println("ㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅ");
                     }
@@ -375,7 +371,7 @@ public class ShopDetailFragment_O extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ShopUpdateActivity.class);
-                intent.putExtra("shopNumber", shopNumber);
+                intent.putExtra("shopNumber",shopNumber);
                 startActivity(intent);
             }
         });
@@ -385,45 +381,44 @@ public class ShopDetailFragment_O extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), EmployeesManagementActivity.class);
-                intent.putExtra("shopNumber", shopNumber);
+                intent.putExtra("shopNumber",shopNumber);
                 startActivity(intent);
             }
         });
 
-        move_chat_option.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), ChatbotManagementActivity.class);
-            intent.putExtra("shopNumber", shopNumber);
-            startActivity(intent);
-            });
+          move_chat_option.setOnClickListener(v -> {
+              Intent intent = new Intent(getActivity(), ChatbotManagementActivity.class);
+              intent.putExtra("shopNumber", shopNumber);
+              startActivity(intent);
 
-            move_review_option = rootView.findViewById(R.id.move_review_option);
-            move_review_option.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), ReviewOwnerActivity.class);
-                    startActivity(intent);
-                }
-            });
+        move_review_option = rootView.findViewById(R.id.move_review_option);
+        move_review_option.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ReviewOwnerActivity.class);
+                startActivity(intent);
+            }
+        });
 
-            move_res_option = rootView.findViewById(R.id.move_res_option);
-            move_res_option.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), ReservationManagementActivity.class);
-                    startActivity(intent);
-                }
-            });
+        move_res_option = rootView.findViewById(R.id.move_res_option);
+        move_res_option.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ReservationManagementActivity.class);
+                startActivity(intent);
+            }
+        });
 
-            return rootView;
-        }
-
-        @Override
-        public void onDestroy () {
-            super.onDestroy();
-            if (responseBodyCall != null)
-                responseBodyCall.cancel();
-            if (shopCall != null)
-                shopCall.cancel();
-        }
-
+        return rootView;
     }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if(responseBodyCall!=null)
+            responseBodyCall.cancel();
+        if(shopCall!=null)
+            shopCall.cancel();
+    }
+
+}

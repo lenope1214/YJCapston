@@ -234,6 +234,9 @@ public interface ServerApi {
     Call<ResponseBody> regzzim(@Header("Authorization")String jwt,
                                @Body Map<String, String> map);
 
+    @POST("marks")  // 찜 등록
+    Call<ResponseBody> regzzim(@Header("Authorization")String jwt, @Body Map<String, String> map);
+
     @POST("order-menus") // 주문 메뉴 등록
     Call<ResponseBody> order_menus(@Header("Authorization")String jwt,
                                    @Body Map<String, List<OrderMenu>> map);
