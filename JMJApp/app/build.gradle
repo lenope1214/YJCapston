@@ -1,9 +1,8 @@
 apply plugin: 'com.android.application'
-
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
-    viewBinding.enabled=true
+    buildFeatures { viewBinding = true }
 
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
@@ -98,3 +97,4 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.0'
 }
 apply plugin: 'com.google.gms.google-services'
+googleServices { disableVersionCheck = false }
