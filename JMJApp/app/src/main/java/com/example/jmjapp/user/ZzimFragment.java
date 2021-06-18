@@ -7,9 +7,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,6 +38,10 @@ public class ZzimFragment extends Fragment {
     private String jwt;
     private Call<List<Order>> listOrderCall;
 
+    MapFragment mapFragment;
+
+    FragmentManager manager;
+
     public ZzimFragment() {
 
     }
@@ -55,6 +61,18 @@ public class ZzimFragment extends Fragment {
 
         rs_order_list = rootView.findViewById(R.id.rs_order_list);
 
+        mapFragment = new MapFragment();
+        manager = getFragmentManager();
+
+        ImageView home_search_bar = rootView.findViewById(R.id.zzim_search_bar);
+        home_search_bar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.bottomNavigation.setSelectedItemId(R.id.tab2);
+                manager.beginTransaction().replace(R.id.container, mapFragment).commit();
+            }
+        });
+
         listOrderCall = Server.getInstance().getApi().myOrder("Bearer " + jwt);
         listOrderCall.enqueue(new Callback<List<Order>>() {
             @SneakyThrows
@@ -70,7 +88,7 @@ public class ZzimFragment extends Fragment {
                                 list.getPeople(), list.getUsePoint(), list.getAmount(),
                                 list.getArriveTime(), list.getPayTime(), list.getPg(),
                                 list.getPayMethod(), list.getShopId(), list.getShopName(), list.getUserName(),
-                                list.getReason(), list.getReviewed(), list.getUserId(), list.getAccept()));
+                                list.getReason(), list.getReviewed(), list.getUserId(), list.getAccept(), list.getCompleAmount()));
                         Log.d("accept", String.valueOf(list.getAccept()));
                         rs_order_list.setHasFixedSize(true);
                         adapter = new MyOrderListAdapter(getActivity(), mItems);

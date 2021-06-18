@@ -4,10 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter
 public class ApiErrorResponse{
     private String code;
     private String message;
+    private String sql;
 //    private String status;
 //    private String
 
@@ -27,6 +27,12 @@ public class ApiErrorResponse{
         this.message = message;
     }
 
+    public ApiErrorResponse(String code, String message, String sql) {
+        super();
+        this.code = code;
+        this.message = message;
+        this.sql = sql;
+    }
 //    public ApiErrorResponse(String code) {
 //        switch (code) {
 //            case "0000":

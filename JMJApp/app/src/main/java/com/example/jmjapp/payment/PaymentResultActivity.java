@@ -1,6 +1,7 @@
 package com.example.jmjapp.payment;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,6 +20,7 @@ import com.example.jmjapp.databinding.ActivityPaymentResultBinding;
 import com.example.jmjapp.network.Server;
 import com.example.jmjapp.user.MainActivity;
 import com.example.jmjapp.user.OrderActivity;
+import com.example.jmjapp.user.QrReaderActivity;
 import com.example.jmjapp.user.ShopDetailActivity;
 
 import org.json.JSONArray;
@@ -28,6 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import lombok.SneakyThrows;
+import lombok.val;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,7 +41,7 @@ public class PaymentResultActivity extends AppCompatActivity {
 
     static RequestQueue requestQueue;
     private String reqId, jwt, device_token, resTime,
-            resDate, orderRquest, resShop, ownerId, resId;
+            resDate, orderRquest, resShop, ownerId, resId, qr;
     private Long orderId;
     private int sum, count;
 
@@ -53,9 +56,8 @@ public class PaymentResultActivity extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
         jwt = pref.getString("token",   "tokenIsNull");
 
-        Log.d("jwt", jwt);
+        qr = QrReaderActivity.orderId;
         ownerId = ShopDetailActivity.ownerId;
-        Log.d("ownerid99",ownerId);
 
         resTime = OrderActivity.resTime;
         resDate = OrderActivity.resDate;
@@ -66,50 +68,50 @@ public class PaymentResultActivity extends AppCompatActivity {
         orderId = OrderActivity.orderId;
         resId = OrderActivity.resId;
 
-        Log.d("orderRequest123", orderRquest);
+        if (qr == null) {
+            binding.reservationQr.setVisibility(View.GONE);
+            binding.reservationComp.setVisibility(View.VISIBLE);
 
-        Map<String, String> map = new HashMap();
+            Map<String, String> map = new HashMap();
 //        map.put("resTime", resTime);
 //        map.put("resDate", resDate);
 //        map.put("sum", String.valueOf(sum));
 //        map.put("count", String.valueOf(count));
 //        map.put("orderRequest", orderRquest);
 //        map.put("resShop", resShop);
-        map.put("orderId", String.valueOf(orderId));
-        map.put("resId", resId);
-        map.put("status", "toOwner");
-        map.put("jwt", jwt);
+            map.put("orderId", String.valueOf(orderId));
+            map.put("resId", resId);
+            map.put("status", "toOwner");
+            map.put("jwt", jwt);
 
-        Log.d("qweasdd","qweasdd");
-
-        binding.reservationComp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                send(map);
-                Intent intent = new Intent(PaymentResultActivity.this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-            }
-        });
-
-        responseBodyCall = Server.getInstance().getApi().deviceToken(ownerId);
-        responseBodyCall.enqueue(new Callback<ResponseBody>() {
-            @SneakyThrows
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()) {
-                    device_token = response.body().string();
-                    Log.d("deviceToken!!!!!!!!!!", device_token);
-                } else {
-                    Log.d("실패1111", "실패1111");
+            binding.reservationComp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    send(map);
+                    Intent intent = new Intent(PaymentResultActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 }
-            }
+            });
 
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("실패2222", "실패2222");
-            }
-        });
+            responseBodyCall = Server.getInstance().getApi().deviceToken(ownerId);
+            responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                @SneakyThrows
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.isSuccessful()) {
+                        device_token = response.body().string();
+                        Log.d("deviceToken!!!!!!!!!!", device_token);
+                    } else {
+                        Log.d("실패1111", "실패1111");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Log.d("실패2222", "실패2222");
+                }
+            });
 
 
 //        Log.d("mapmpaap", map.get("resTime")+map.get("resDate")+map.get("sum")+map.get("count")+map.get("orderRequest")+map.get("resShop"));
@@ -121,10 +123,23 @@ public class PaymentResultActivity extends AppCompatActivity {
 //                send("안녕하세요.");
 //            }
 //        });
+            if (requestQueue == null) {
+                requestQueue = Volley.newRequestQueue(getApplicationContext());
+            }
 
+        } else {
+            binding.reservationQr.setVisibility(View.VISIBLE);
+            binding.reservationComp.setVisibility(View.GONE);
 
-        if (requestQueue == null) {
-            requestQueue = Volley.newRequestQueue(getApplicationContext());
+            binding.reservationQr.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finishAffinity();
+                    Intent intent = new Intent(PaymentResultActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    System.exit(0);
+                }
+            });
         }
     }
 

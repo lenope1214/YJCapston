@@ -44,6 +44,8 @@ public class TableDetailAdapter extends RecyclerView.Adapter<TableDetailAdapter.
     public void onBindViewHolder(final TableDetailAdapter.ItemViewHolder holder, final int position) {
         holder.table_detail_menu_name.setText(mItems.get(position).getMenuName());
         holder.table_detail_menu_count.setText(mItems.get(position).getQuantity() + "개");
+
+
     }
 
     // 데이터 셋의 크기

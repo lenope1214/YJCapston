@@ -1,73 +1,53 @@
 package com.jumanji.capston.service;
 
-import com.jumanji.capston.data.UserHasCoupon;
-import com.jumanji.capston.data.UserHasCouponId;
+import com.jumanji.capston.data.UserCoupon;
+import com.jumanji.capston.data.UserCouponId;
 import com.jumanji.capston.repository.UserHasCouponRepository;
 import com.jumanji.capston.service.interfaces.BasicService;
-import com.jumanji.capston.service.interfaces.UserHasCouponService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 
 @Service
-public class UserHasCouponServiceImpl implements UserHasCouponService, BasicService {
+public class UserHasCouponServiceImpl implements BasicService<UserCoupon, UserCoupon.Request, UserCouponId> {
     @Autowired
     UserHasCouponRepository userHasCouponRepository;
 
-    public UserHasCoupon findById(UserHasCouponId id) {
-        return userHasCouponRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("id를 확인해주세요!!!"));
-    }
-
-
-    public UserHasCoupon insert(UserHasCoupon _userHasCoupon) {
-        return userHasCouponRepository.save(_userHasCoupon);
-    }
-
-    public String delete(UserHasCouponId _userHasCouponId) {
-        UserHasCoupon userHasCoupon = userHasCouponRepository.findById(_userHasCouponId).orElseThrow(() -> new IllegalArgumentException("id를 확인해주세요!!!"));
-        userHasCouponRepository.delete(userHasCoupon);
-        return "ok";
-    }
-
-    public List<UserHasCoupon> findAll() {
-        return userHasCouponRepository.findAll();
-    }
-
     @Override
-    public ResponseEntity<?> get(String userCouponId) {
+    public UserCoupon get(@Nullable String authorization, String... str) {
         return null;
     }
 
     @Override
-    public ResponseEntity<?> getList() {
+    public List<UserCoupon> getList(@Nullable String authorization, String... str) {
         return null;
     }
 
     @Override
-    public ResponseEntity<?> post(UserHasCoupon.Request request) {
+    public UserCoupon post(@Nullable String authorization, UserCoupon.Request request) {
         return null;
     }
 
     @Override
-    public ResponseEntity<?> patch(UserHasCoupon.Request request) {
+    public UserCoupon patch(@Nullable String authorization, UserCoupon.Request request) {
         return null;
     }
 
     @Override
-    public ResponseEntity<?> delete(String userCouponId) {
+    public void delete(@Nullable String authorization, String... str) {
+
+    }
+
+    @Override
+    public UserCoupon isPresent(UserCouponId id) {
         return null;
     }
 
     @Override
-    public boolean isPresent(String id) {
-        return false;
-    }
-
-    @Override
-    public boolean isEmpty(String id) {
+    public boolean isEmpty(UserCouponId id) {
         return false;
     }
 }

@@ -31,6 +31,8 @@ import com.example.jmjapp.dto.OrderMenu;
 import com.example.jmjapp.dto.Shop;
 import com.example.jmjapp.network.Server;
 import com.example.jmjapp.payment.PaymentWebview;
+import com.google.android.gms.dynamic.IFragmentWrapper;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -57,7 +59,7 @@ public class OrderActivity extends AppCompatActivity {
     private AlertDialog dialog;
     private Call<MemberDTO> memberDTOCall;
     private Call<Shop> shopCall;
-    static public int sum = 0;
+    static public int sum, sum2 = 0;
     static public String resTime, resDate, resId, resName, resPhone, resAddr, resShop, jwt, userId, resDate2;
     static public Long orderId;
 
@@ -67,6 +69,7 @@ public class OrderActivity extends AppCompatActivity {
 
     private Call<ResponseBody> responseBodyCall;
     private Call<Order> orderCall;
+    private int point, usePoint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,27 +92,25 @@ public class OrderActivity extends AppCompatActivity {
         userId = pref.getString("user_id", "");
         Log.d("userid",userId);
 
-//        memberDTOCall = Server.getInstance().getApi().getUser("Bearer " + jwt);
-//        memberDTOCall.enqueue(new Callback<MemberDTO>() {
-//            @Override
-//            public void onResponse(Call<MemberDTO> call, Response<MemberDTO> response) {
-//                if (response.code() == 200) {
-//                    MemberDTO.User user = new MemberDTO.User();
-//                    user = response.body().getUser();
-//                    Log.d("rse", response.body().toString());
-//                    resName = user.getName();
-//                    resPhone = user.getPhone();
-//                    Log.d("result999 ", "성공" + resName + resPhone);
-//                } else {
-//                    Log.d("result ", "연결실패1" + response.code());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<MemberDTO> call, Throwable t) {
-//                Log.d("result ", "연결실패2");
-//            }
-//        });
+        memberDTOCall = Server.getInstance().getApi().getUser("Bearer " + jwt);
+        memberDTOCall.enqueue(new Callback<MemberDTO>() {
+            @SneakyThrows
+            @Override
+            public void onResponse(Call<MemberDTO> call, Response<MemberDTO> response) {
+                if (response.code() == 200) {
+                    Log.d("유저조회 성공 ", "유저조회 성공");
+                    point = response.body().getUser().getPoint();
+                    Log.d("point", String.valueOf(point));
+                } else {
+                    Log.d("유저조회 실패1 ", "유저조회 실패1"+response.errorBody().string());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MemberDTO> call, Throwable t) {
+                Log.d("유저조회 실패2 ", "유저조회 실패2"+t.getCause());
+            }
+        });
 
         shopCall = Server.getInstance().getApi().shop(ShopDetailActivity.shopNumber);
         shopCall.enqueue(new Callback<Shop>() {
@@ -234,14 +235,53 @@ public class OrderActivity extends AppCompatActivity {
         binding.orderPossibleCoupon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(OrderActivity.this, "no", Toast.LENGTH_SHORT).show();
+                Snackbar.make(v, "사용 가능한 쿠폰이 없습니다", Snackbar.LENGTH_SHORT).setAction("확인", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        return;
+                    }
+                }).show();
             }
         });
 
         binding.orderPossiblePoint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(OrderActivity.this, "no", Toast.LENGTH_SHORT).show();
+                Log.d("포인트클릭","포인트클릭");
+                if (point == 0) {
+                    Snackbar.make(v, "현재 소유한 포인트가 없습니다", Snackbar.LENGTH_SHORT).setAction("확인", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            return;
+                        }
+                    }).show();
+                } else {
+                    final EditText editText = new EditText(OrderActivity.this);
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(OrderActivity.this, R.style.MyAlertDialogStyle);
+                    builder.setTitle("포인트")
+                           .setMessage("사용할 포인트")
+                           .setCancelable(false)
+                           .setView(editText)
+                           .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    int value = Integer.parseInt(editText.getText().toString());
+                                    if (point < value) {
+                                        Snackbar.make(v, "현재 소유하신 포인트보다 작게 입력해주세요", Snackbar.LENGTH_SHORT).setAction("확인", new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                return;
+                                            }
+                                        }).show();
+                                    } else {
+                                        binding.orderPossiblePoint.setText(String.valueOf(value));
+                                        binding.orderPayMoney.setText(sum-Integer.parseInt(binding.orderPossiblePoint.getText().toString())+"원");
+                                    }
+                                }
+                            });
+                    builder.create();
+                    builder.show();
+                }
             }
         });
 
@@ -277,6 +317,7 @@ public class OrderActivity extends AppCompatActivity {
                     map.put("arriveTime", String.valueOf(dateSeongbok2));
                     map.put("orderRequest", binding.orderRequestEt.getText().toString());
                     map.put("people", String.valueOf(count));
+                    map.put("amount", String.valueOf(sum));
 
 //                    Log.d("orderId1", ShopDetailActivity.shopNumber);
 //                    Log.d("orderRequest1", binding.orderRequestEt.getText().toString());
@@ -350,15 +391,20 @@ public class OrderActivity extends AppCompatActivity {
     }
 
     private void payment(Long orderId) {
+        if (!binding.orderPossiblePoint.getText().toString().equals("")) {
+            if (binding.orderPossiblePoint.getText().toString().equals("0")) {
+                usePoint = 0;
+            } else {
+                usePoint = Integer.parseInt(binding.orderPossiblePoint.getText().toString());
+            }
+        }
+
         Map<String, String> map2 = new HashMap();
         map2.put("orderId", String.valueOf(orderId));
         map2.put("amount", String.valueOf(sum));
-        map2.put("usePoint", "0");
+        map2.put("usePoint", String.valueOf(usePoint));
         map2.put("pg", "inicis");
         map2.put("payMethod", "card");
-
-        Log.d("orderId2", String.valueOf(orderId));
-        Log.d("amount2", String.valueOf(sum));
 
         responseBodyCall = Server.getInstance().getApi().payment("Bearer " + jwt, map2);
         responseBodyCall.enqueue(new Callback<ResponseBody>() {
@@ -370,7 +416,7 @@ public class OrderActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(OrderActivity.this, PaymentWebview.class);
                     intent.putExtra("shopNumber", ShopDetailActivity.shopNumber);
-                    intent.putExtra("price", sum);
+                    intent.putExtra("price", sum-usePoint);
                     intent.putExtra("people", count);
                     intent.putExtra("resDate", resDate);
                     intent.putExtra("resTime", resTime);

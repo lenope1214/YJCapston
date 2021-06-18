@@ -1,13 +1,17 @@
 package com.example.jmjapp.owner;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.MenuItem;
 
@@ -46,6 +50,9 @@ public class TableDetailActivity extends AppCompatActivity {
     private TableDetailAdapter adapter;
     private ArrayList<OrderMenu> mItems = new ArrayList();
 
+    Thread thread;
+    boolean isThread = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,48 +78,79 @@ public class TableDetailActivity extends AppCompatActivity {
             tabNo = no;
         }
 
-        Log.d("tabId", tabId);
-        Log.d("shopId", shopId);
-        Log.d("no", no);
-        Log.d("tabNo", tabNo);
-        Log.d("using", String.valueOf(using));
-        Log.d("orderId", orderId);
+//        Log.d("tabId", tabId);
+//        Log.d("shopId", shopId);
+//        Log.d("no", no);
+//        Log.d("tabNo", tabNo);
+//        Log.d("using", String.valueOf(using));
+//        Log.d("orderId", orderId);
 
         binding.tableDetailNo.setText(tabNo + "번 테이블");
 
         rv_table_detail_list = binding.rvTableDetailList;
         adapter = new TableDetailAdapter(getApplicationContext());
 
-        getOrderMenus = Server.getInstance().getApi().orderOneMenu(orderId);
-        getOrderMenus.enqueue(new Callback<Order.OrderMenuList>() {
-            @SneakyThrows
-            @Override
-            public void onResponse(Call<Order.OrderMenuList> call, Response<Order.OrderMenuList> response) {
-                if (response.isSuccessful()) {
-                    Log.d("orderMenu 성공", "orderMenu 성공");
-                    List<OrderMenu> orderMenuList = response.body().getOrderMenuList();
-                    Log.d("qwe",orderMenuList.toString());
-
-                    for (OrderMenu list : orderMenuList) {
-                        mItems.add(new OrderMenu(list.getMenuName(), list.getQuantity()));
-                        Log.d("list", response.body().toString());
-                        rv_table_detail_list.setHasFixedSize(true);
-                        adapter.setItems(mItems);
-                        rv_table_detail_list.setLayoutManager(new LinearLayoutManager(getApplication()));
-                        rv_table_detail_list.setAdapter(adapter);
+        isThread = true;
+        thread = new Thread() {
+            public void run() {
+                while (isThread) {
+                    try {
+                        sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                } else {
-                    Log.d("orderMenu 실패1", "orderMenu 실패1"+response.errorBody().string());
+                    handler.sendEmptyMessage(0);
                 }
             }
+        };
+        thread.start();
+    }
 
-            @Override
-            public void onFailure(Call<Order.OrderMenuList> call, Throwable t) {
-                Log.d("orderMenu 실패2", "orderMenu 실패2");
-            }
-        });
+    @SuppressLint("HandlerLeak")
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            mItems.clear();
+            getOrderMenus = Server.getInstance().getApi().orderOneMenu(orderId);
+            getOrderMenus.enqueue(new retrofit2.Callback<Order.OrderMenuList>() {
+                @SneakyThrows
+                @Override
+                public void onResponse(Call<Order.OrderMenuList> call, Response<Order.OrderMenuList> response) {
+                    if (response.isSuccessful()) {
+                        Log.d("orderMenu 성공", "orderMenu 성공");
+                        List<OrderMenu> orderMenuList = response.body().getOrderMenuList();
+                        Log.d("qwe",orderMenuList.toString());
 
+                        for (OrderMenu list : orderMenuList) {
 
+                        }
+
+                        for (OrderMenu list : orderMenuList) {
+                            mItems.add(new OrderMenu(list.getMenuName(), list.getQuantity()));
+                            Log.d("list", response.body().toString());
+                            rv_table_detail_list.setHasFixedSize(true);
+                            adapter.setItems(mItems);
+                            rv_table_detail_list.setLayoutManager(new LinearLayoutManager(getApplication()));
+                            rv_table_detail_list.setAdapter(adapter);
+                        }
+                    } else {
+                        Log.d("orderMenu 실패1", "orderMenu 실패1"+response.errorBody().string());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Order.OrderMenuList> call, Throwable t) {
+                    Log.d("orderMenu 실패2", "orderMenu 실패2");
+                }
+            });
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        isThread = false;
+        thread.interrupt();
     }
 
     @Override

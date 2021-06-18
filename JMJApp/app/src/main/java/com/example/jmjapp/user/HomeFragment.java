@@ -37,6 +37,10 @@ public class HomeFragment extends Fragment {
     ImageButton tang;
     ImageButton desssert;
 
+    MapFragment mapFragment;
+
+    FragmentManager manager;
+
 
     public HomeFragment() {
 
@@ -59,6 +63,18 @@ public class HomeFragment extends Fragment {
         pager = (ViewPager)rootView.findViewById(R.id.viewPager2);
         pager.setAdapter(new MyPagerAdapter(getChildFragmentManager()));
         pager.setCurrentItem(0);
+
+        mapFragment = new MapFragment();
+        manager = getFragmentManager();
+
+        ImageView home_search_bar = rootView.findViewById(R.id.home_search_bar);
+        home_search_bar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.bottomNavigation.setSelectedItemId(R.id.tab2);
+                manager.beginTransaction().replace(R.id.container, mapFragment).commit();
+            }
+        });
 
         ImageView imageButton = rootView.findViewById(R.id.koreanfood);
         imageButton.setOnClickListener(new View.OnClickListener() {

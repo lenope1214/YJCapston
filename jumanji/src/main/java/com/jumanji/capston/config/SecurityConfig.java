@@ -66,22 +66,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("happydaddy")
-                .password("{noop}1234")
-                .roles("USER")
-                .and()
-                .withUser("angrydaddy")
-                .password("{noop}1234")
-                .roles("USER")
-                .and()
-                .withUser("guest")
-                .password("{noop}1234")
-                .roles("GUEST");
-        auth.jdbcAuthentication().dataSource(dataSource);
-        auth
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(bCryptPasswordEncoder());
+//        auth.inMemoryAuthentication()
+//                .withUser("happydaddy")
+//                .password("{noop}1234")
+//                .roles("USER")
+//                .and()
+//                .withUser("angrydaddy")
+//                .password("{noop}1234")
+//                .roles("USER")
+//                .and()
+//                .withUser("guest")
+//                .password("{noop}1234")
+//                .roles("GUEST");
+//        auth.jdbcAuthentication().dataSource(dataSource);
+//        auth
+//                .userDetailsService(userDetailsService)
+//                .passwordEncoder(bCryptPasswordEncoder());
     }
 
     @Bean
@@ -95,6 +95,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
+        http.cors().disable();
 //        http.addFilterBefore(new MyFilter3(), SecurityContextPersistenceFilter.class); // Security Filter Chain 의 BasicAuth...Filter 전에 추가한다는 뜻.
         http
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 세션을 사용하지 않겠다.

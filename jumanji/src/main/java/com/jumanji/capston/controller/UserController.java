@@ -1,63 +1,77 @@
 package com.jumanji.capston.controller;
 
-import com.jumanji.capston.DTO.PutUserDTO;
+import com.jumanji.capston.data.Order;
 import com.jumanji.capston.data.User;
+import com.jumanji.capston.service.OrderServiceImpl;
+import com.jumanji.capston.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/api/v1")
-public class UserController {
+@RequestMapping("/api/v1/")
+public class UserController  {
     @Autowired
-    com.jumanji.capston.service.UserService userService;
+    UserServiceImpl userService;
+    @Autowired
+    OrderServiceImpl orderService;
+
 
     @Transactional(readOnly = true)
-    @GetMapping("/user/{id}")
-    public ResponseEntity<?> getUserInfo(@PathVariable String id) throws Exception {
-        System.out.println("APIcon user/{id} 진입.");
-        final User userEntity = userService.findById(id);
-        System.out.println("로긘 유저 id : " + SecurityContextHolder.getContext().getAuthentication().getName());
-        System.out.println("찾을 유저 id : " + id + "\ngetUser : " + userEntity.getId());
+    @GetMapping("users")  // myInfo
+    public ResponseEntity<?> getMyInfo(@RequestHeader String authorization) {
+        String loginId = userService.getMyId(authorization);
+        User user = userService.isPresent(loginId);
+        System.out.println("user.info : " + user.toString() );
+        List<Order> orderList = orderService.getList(authorization);
+        User.MyInfo response = new User.MyInfo(user, orderList);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+//        return new ResponseEntity<>("is not match login id <-> request id.", HttpStatus.FORBIDDEN);
+    }
 
-        if (SecurityContextHolder.getContext().getAuthentication().getName().equals(userEntity.getId())) {
-            if (userEntity == null) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-            return new ResponseEntity<>(userEntity, HttpStatus.OK);
+
+    @Transactional(readOnly = true)
+    @GetMapping("users/list") // getUserList
+    public ResponseEntity<?> getUserList(@RequestHeader String authorization) {
+        String loginId = userService.getMyId(authorization);
+        String userRole = userService.isPresent(loginId).getRole();
+        userService.isAuth(userRole, "ADMIN");
+        List<User.Response> response = new ArrayList<>();
+        for (User user : userService.getList(authorization)) {
+            response.add(new User.Response(user));
         }
-
-
-        return new ResponseEntity<>("is not match login id <-> request id.", HttpStatus.FORBIDDEN);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+//    @Transactional(readOnly = true)
+//    @GetMapping("users/{id}")
+//    public ResponseEntity<?> selectUserInfo(@PathVariable String id) {
+//        return new ResponseEntity<>(userService.get(id), HttpStatus.OK);
+//    }
+
+//    @Transactional
+//    @DeleteMapping("usersDelAll")
+//    public ResponseEntity<?> userDelAll( @RequestHeader String authorization) {
+//        return userService.deleteAll(authorization);
+//    }
 
     @Transactional
-    @DeleteMapping("/userDelAll")
-    public ResponseEntity<?> userDelAll() {
-        return new ResponseEntity<>(userService.deleteAll(), HttpStatus.OK);
+    @PatchMapping("users") // patch user
+    public ResponseEntity<?> patchUser(@RequestHeader String authorization, @RequestBody User.Request request) {
+        User.Response response = new User.Response(userService.patch(authorization, request));
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Transactional
-    @PutMapping("/user")
-    public ResponseEntity<?> putUser(@RequestBody PutUserDTO putUserDTO){
-        User user = userService.put(putUserDTO);
-        return new ResponseEntity<>(user, HttpStatus.OK);
-    }
-
-    @Transactional(readOnly = true)
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/userList")
-    public ResponseEntity<?> getUserList() {
-        List<User> userList;
-        userList = userService.findAll();
-        return new ResponseEntity<>(userList, HttpStatus.OK);
+    @DeleteMapping("users") // delete user
+    public ResponseEntity<?> deleteUser(@RequestHeader String authorization){
+        userService.delete(authorization);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 삭제가 잘 되면 ok 반환.
     }
 }

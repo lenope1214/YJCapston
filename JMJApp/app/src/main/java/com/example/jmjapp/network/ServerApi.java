@@ -241,8 +241,12 @@ public interface ServerApi {
     Call<ResponseBody> order_menus(@Header("Authorization")String jwt,
                                    @Body Map<String, List<OrderMenu>> map);
 
+//    @POST("order-menus") // 주문 메뉴 등록
+//    Call<ResponseBody> order_menus(@Header("Authorization")String jwt,
+//                                   @Body List<OrderMenu> omLIST);
+
     @POST("orders") // 주문서 등록
-    Call<ResponseBody> order(@Header("Authorization")String jwt,
+    Call<Order> order(@Header("Authorization")String jwt,
                              @Body Map<String, String> map);
 
     @Multipart
@@ -272,8 +276,12 @@ public interface ServerApi {
     @GET("users") // 회원정보 조회
     Call<MemberDTO> getUser(@Header("Authorization") String jwt);
 
+    @GET("shops/list") // 매장 리스트 조회
+    Call<List<Shop>> shopList1();
+
     @GET("shops/list") // 매장 카테고리 조회
-    Call<List<Shop>> shopList2(@Query("category") String category);
+    Call<List<Shop>> shopList2(@Query("category") String category,
+                               @Query("shopName") String shopName);
 
     @GET("users/{userId}/device-token") // 기기토큰 받기
     Call<ResponseBody> deviceToken(@Path("userId") String userId);
@@ -297,6 +305,9 @@ public interface ServerApi {
 
     @GET("users/reviews") // 특정 유저의 리뷰 리스트
     Call<List<Review>> myReviewList(@Header("Authorization") String jwt);
+
+    @GET("menus/{menuId}") // 특정 메뉴 조회
+    Call<Menu> menuOne(@Path("menuId") String menuId);
 
     /**
      * update update update update

@@ -62,7 +62,7 @@ public class StorageServiceImpl{
 //            System.out.println("경로 내 파일 수 : " + (fileList.length));
 //            newFileName = (fileList.length+1) + "." + fileExtension;
             System.out.println("path : " + path);
-            destinationFile = Path.of((path +"\\"+ fileName + "." + fileExtension));
+            destinationFile = Path.of((path +"/"+ fileName + "." + fileExtension));
 //            Path destinationFile = Path.of((dirFile.toURI()));
 //                    .normalize().toAbsolutePath(); // file.getOriginalFilename() -> filename.filetype 이런 형태
 //            Path destinationFile = this.rootLocation.resolve(Paths.get(dirFile +"\\"+ newFileName))
@@ -92,7 +92,7 @@ public class StorageServiceImpl{
         File dirFile = null;
         String filePath = String.valueOf(rootLocation);
         for(int i=0; i<paths.length;i++){
-            filePath = filePath + "\\" + paths[i];
+            filePath = filePath + "/" + paths[i];
             dirFile = new File(filePath);
             System.out.println("now checking path : " + filePath);
             if(!dirFile.exists())Files.createDirectory(dirFile.toPath());
@@ -135,9 +135,9 @@ public class StorageServiceImpl{
         String path = "";
         try {
             for(int i =0; i< fullPath.length-1; i++){
-                path += (fullPath[i] + "\\");
+                path += (fullPath[i] + "/");
             }
-            System.out.println("-1 : " + fullPath[fullPath.length-1]);
+            System.out.println("loadImg -1 : " + fullPath[fullPath.length-1]);
             Path file = load(fullPath[fullPath.length-1], path);
             Resource resource = new UrlResource(file.toUri());
             System.out.println("loadAsResource's file.toUri() : " + file.toUri());

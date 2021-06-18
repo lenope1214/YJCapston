@@ -24,11 +24,13 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_marginTop="9dp"
-            android:text="찜한가게"
+            android:fontFamily="@font/we_semibold"
+            android:text="주문내역"
             android:textColor="#000"
             android:textSize="18sp" />
 
         <ImageView
+            android:id="@+id/zzim_search_bar"
             android:layout_width="400dp"
             android:layout_height="30dp"
             android:layout_alignParentBottom="true"

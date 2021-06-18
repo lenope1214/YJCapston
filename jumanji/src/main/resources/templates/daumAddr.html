@@ -21,7 +21,7 @@ function onReceivedPostMessage(event){
      var action = event.data.action;
      var params = event.data.params;
 
-     console.log("onReceivedPostMessage "+event);
+     // console.log("onReceivedPostMessage "+event);
 
 }
 
@@ -30,7 +30,7 @@ function onReceivedActivityMessageViaJavascriptInterface(json){
      var data = JSON.parse(json);
      var action = data.action;
      var params = data.params;
-       console.log("onReceivedActivityMessageViaJavascriptInterface "+event);
+       // console.log("onReceivedActivityMessageViaJavascriptInterface "+event);
 }
 
 

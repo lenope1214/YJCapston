@@ -88,8 +88,9 @@
               android:textColor="@color/colorBlack"
               android:layout_margin="10dp"/>
 
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:id="@+id/detail_button"
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/profit_detail_tv"
                   android:layout_marginTop="11dp"
                   android:textSize="10sp"
                   android:text="상세보기>"/>

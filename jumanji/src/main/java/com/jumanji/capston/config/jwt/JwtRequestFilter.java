@@ -27,7 +27,7 @@ import java.util.List;
 @Component
 @ResponseStatus(value = HttpStatus.UNAUTHORIZED, reason = "login required")
 public class JwtRequestFilter extends OncePerRequestFilter {
-
+    private static final String EXPATH = "/api/v1/";
     @Autowired
     private PrincipalDetailsService jwtUserDetailService;
 
@@ -38,17 +38,20 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private static final List<String> EXCLUDE_URL =
             List.of(
                     "login"
-                    , "authenticate"
                     , "join"
-                    , "shopList"
+                    , "authenticate"
                     , "validate"
                     , "validateDscNo"
+                    , "shops"
+                    , "shops/list"
+                    , "menus"
+                    , "menus/list"
+                    , "menus/options"
+                    , "reviews"
+                    , "payments/complite"
                     , "searchAddr"
-                    , "shop"
-                    , "shopList"
-                    , "menu"
-                    , "menuList"
             );
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -74,7 +77,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 response.sendError(400, "Unable to get JWT Token");
             } catch (ExpiredJwtException e) {
                 log.error("JWT Token has expired");
-                response.sendError(401, "JWT Token has expired"); // 401 =>
+                response.sendError(403, "JWT Token has expired"); // 401 => 인증안됨, 403 => 사용자 확인 불가?? 뭐 조수연 교수님이ㅣ 토큰 만료 403 준다함.
             } catch (NullPointerException e) {
                 log.error("Username is Null!");
                 response.sendError(400, "Username is Null!");
@@ -118,17 +121,24 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-//        System.out.println(request.getServletPath());
-//        for(String path :request.getServletPath().split("/") ){
+        System.out.println("요청 url : [" +request.getMethod() + "] " + request.getServletPath());
+//        for(String path :request.getServletPath().split("/") ){65
 //            System.out.println("-------> " + path);
 //        }
-//        System.out.println("비교할 context split res : " + request.getServletPath().split("/")[3]);
-//        System.out.print("exclude 결과 : ");
-//        System.out.println(EXCLUDE_URL.stream().anyMatch(exclude -> exclude.equalsIgnoreCase(request.getServletPath().split("/")[3])));
-        if(request.getServletPath().split("/").length > 2) {
-            return EXCLUDE_URL.stream().anyMatch(exclude -> exclude.equalsIgnoreCase(request.getServletPath().split("/")[3]));
+        String path =  request.getServletPath();
+        if(path.startsWith("/ws-stomp") || path.startsWith("/start")){
+            return true;
+        }
+        if(path.startsWith("/api/v1/")) {
+            final String PATH = path.substring(path.indexOf("EXPATH") + EXPATH.length()+1);
+//            System.out.println("잘라낸 패스 : "  + PATH + "참 거짓 ? " + EXCLUDE_URL.stream().anyMatch(exclude -> exclude.startsWith(PATH.split("/")[0])));
+
+//            for(Object str : EXCLUDE_URL.toArray()){
+//                System.out.println(str);
+//            }
+//            System.out.println(EXCLUDE_URL.stream().anyMatch(exclude -> exclude.startsWith(PATH)));
+            return EXCLUDE_URL.stream().anyMatch(exclude -> exclude.startsWith(PATH.split("/")[0]));
         }
         return false;
     }
-
 }

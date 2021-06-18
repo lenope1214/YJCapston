@@ -1,4 +1,4 @@
-package com.jumanji.capston.service.exception.TableException;
+package com.jumanji.capston.service.exception.tableException;
 
 import com.jumanji.capston.service.exception.BasicException;
 

@@ -1,0 +1,219 @@
+
+public String[] week_time(int size) {
+		String 유저명[] = new String[size];
+		int 주간시간[] = new int[size];
+
+		Date 현재시간 = new Date();
+		int now_hour = 현재시간.getHours();
+		int now_day = 현재시간.getDay();  // 0~6 일~토
+
+
+		String query = "select usr_name, sum(nvl(rec_time, 0))\r\n" +
+				"from t_record, t_user\r\n" +
+				"where rec_id = usr_id and\r\n" +
+				"rec_date between to_char((next_day(sysdate-7, '월요일')),'yyMMdd') || '06' and to_char(next_day(sysdate, '월요일'),'yyMMdd') || '06'\r\n" +
+				"group by usr_name\r\n" +
+				"order by sum(rec_time) desc";
+
+		if(now_day==1) {
+			if(now_hour<24 && now_hour>06) {
+				query = "select usr_name, sum(nvl(rec_time, 0))\r\n" +
+					"from t_record, t_user\r\n" +
+					"where rec_id = usr_id and\r\n" +
+					"rec_date between to_char((next_day(sysdate-8, '월요일')),'yyMMdd') || '06' and to_char(next_day(sysdate-2, '월요일'),'yyMMdd') || '06'\r\n" +
+					"group by usr_name\r\n" +
+					"order by sum(rec_time) desc";
+			}
+		}
+
+		int count = 0;
+		try {
+			System.out.println("쿼리 : " + query);
+
+			conn = DBConnection.getConnection();
+			pstm = conn.prepareStatement(query);
+			rs = pstm.executeQuery();
+
+			while (rs.next()) {
+//				System.out.println("현재 count" + count);
+				유저명[count] = rs.getString(1);
+				주간시간[count++] = rs.getInt(2);
+			}
+			// System.out.println(id + "님의 총 시간 : " + tot_t);
+		} catch (SQLException sqle) {
+			System.out.println("SELECT문에서 예외 발생");
+			sqle.printStackTrace();
+		}finally{
+			try {
+				conn.close();
+				pstm.close();
+				rs.close();
+			    } catch (SQLException e) {
+			    	e.printStackTrace();
+			    }
+		}
+
+
+		System.out.println("us : " + size);
+		String 공부시간문자열 = "";
+		String 공부학생문자열 = "========공부한 학생 목록========\n";
+		if (count <= 0) {
+			공부시간문자열 = "이번 주 공부한 학생이 없습니다.";
+			공부학생문자열 += "없습니다.";
+		} else {
+			공부학생문자열 += 유저명[0];
+			공부시간문자열 += 유저명[0] + "님의 주간시간 : " + 주간시간[0]/3600 + "h" + (주간시간[0]/60)%60 + "m" + 주간시간[0]%60 + "s" + "\n";
+			for (int i = 1; i < count; i++) {
+				long hour = 주간시간[i]/3600;
+				long min = (주간시간[i]/60)%60;
+				long sec = 주간시간[i]%60;
+
+				공부시간문자열 += 유저명[i] + "님의 주간시간 : " + hour + "h" + min + "m" + sec + "s" + "\n";
+				if(i%5!=0) {
+					공부학생문자열 += ", ";
+				}
+				공부학생문자열 += 유저명[i];
+				if (i % 5 == 4 && i != count-1) {
+					공부학생문자열 += "\n";
+				}
+			}
+		}
+
+		String[] 출력문 = new String[2];
+		출력문[0] = 공부학생문자열;
+		출력문[0] += "\n===========================";
+
+		출력문[1] += "\n===========================";
+		출력문[1] = 공부시간문자열;
+		출력문[1] += "===========================";
+
+		return 출력문;
+	}
+
+	public String today_times(ArrayList<user> user_arr) {
+		// TODO Auto-generated method stub
+		Date 현재시간 = new Date();
+		ArrayList<String> 유저목록 = new ArrayList<String>();
+		int hour = 현재시간.getHours();
+		//System.out.println(hour);
+		int now_users = user_arr.size();
+		String query;
+		if(hour<24 && hour>06) {
+			query = "select usr_name, sum(rec_time)\r\n" +
+					"from t_record, t_user\r\n" +
+					"where rec_id = usr_id and\r\n" +
+					"rec_date between to_number(to_char(sysdate,'yyMMdd')|| '06') and to_number(to_char(sysdate+1, 'yyMMdd') || '06')\r\n" +
+					"group by usr_name\r\n" +
+					"order by sum(rec_time) desc";
+		}else {
+			query = "select usr_name, sum(rec_time)\r\n" +
+					"from t_record, t_user\r\n" +
+					"where rec_id = usr_id and\r\n" +
+					"rec_date between to_number(to_char(sysdate-1,'yyMMdd')|| '06') and to_number(to_char(sysdate, 'yyMMdd') || '06')\r\n" +
+					"group by usr_name\r\n" +
+					"order by sum(rec_time) desc";
+		}
+		// 저녁 12시 지난 후에는 바꿔야함.
+
+
+		String 출력문  = ">>>" + (현재시간.getMonth()+1) + "월 " + 현재시간.getDate() + "일" + " 일일시간보기";
+		출력문 += "\n";
+
+
+		//System.out.println("현재 users : " + now_users);
+
+		try {
+			System.out.println("쿼리 : " + query);
+
+			conn = DBConnection.getConnection();
+			pstm = conn.prepareStatement(query);
+			rs = pstm.executeQuery();
+
+			int count = 0;
+
+			while (rs.next()) {
+				String name = rs.getString(1);
+//				System.out.println(유저명[count]);
+				int time = rs.getInt(2);
+				출력문 += (name + " : ");
+				출력문 +=   (int)time/3600 + "h " +
+						(time/60)%60 + "m " +
+						 time%60 + "s\n";
+				유저목록.add(name);
+				//count ++;
+				//System.out.println("데이터 읽어들이는중..");
+			}
+			if(유저목록.size() == 0) {
+				return "> 아무도없음.";
+			}
+
+			// 출석을 안한 학생이 있음. 따로 0초 추가해주기.
+
+			//System.out.println("유저목록.size() : " + 유저목록.size());
+			if (유저목록.size() < now_users) {
+				for(int i=0;i < now_users; i++) {  // 0 ~ 15번까지 돌면서 유저이름 훑어.
+					for(int j=0; j<유저목록.size();j++) { // 0 ~ size만큼 돌면서
+						if(j==유저목록.size()-1 && !유저목록.get(j).equals(user_arr.get(i).getname())) { // 마지막 까지 왔는데 매칭이 안되면, 추가.
+							유저목록.add(user_arr.get(i).getname());
+							출력문 += user_arr.get(i).getname() + " : 0s\n";
+						}else if(유저목록.get(j).equals(user_arr.get(i).getname())) {
+							break;
+						}
+					}// for j
+				}// for i
+			}
+
+
+		} catch (SQLException sqle) {
+			System.out.println("SELECT문에서 예외 발생");
+			sqle.printStackTrace();
+		}finally{
+			try {
+				conn.close();
+				pstm.close();
+				rs.close();
+			    } catch (SQLException e) {
+			    	e.printStackTrace();
+			    }
+		}
+
+		return 출력문;
+	}
+
+
+
+
+
+-- what is want?
+-- day 0 ~ 23 ...
+-- week time monday 00 ~ sunday 23:59 ..
+-- http://mopsi.egloos.com/v/10574117
+-- https://jdm.kr/blog/71
+select TRUNC(sysdate, 'IW')     주간_첫날,
+       TRUNC(sysdate - 7, 'IW') 이전주간_첫날,
+       NEXT_DAY(sysdate, '월요일') 다음주간_첫날
+from dual;
+-- day
+-- where orderId == date
+select o.id , o.PAY_TIME,
+       to_char(to_date(:date), 'yyyyMMdd')
+from orders o
+where to_char(o.id, 'yyyyMMdd') = to_char(to_date(:date), 'yyyyMMdd');
+
+-- week
+-- 저번 주 일요일, 다음 주 월요일. 이 사이의 값이면 이번 주 월~일 값이 나옴.
+select o.id , o.PAY_TIME,
+       to_char(o.id, 'yyyyMMdd'),
+       TRUNC(sysdate, 'IW'),
+       trunc(NEXT_DAY(sysdate, '월요일'))
+from orders o
+where o.id > TRUNC(sysdate, 'IW') and
+      o.id < trunc(NEXT_DAY(sysdate, '월요일'))
+order by o.id desc;
+-- select :date,
+--        to_char((next_day(sysdate - 8, '월요일')), 'yyyyMMdd'),
+--        to_char(next_day(sysdate - 2, '월요일'), 'yyyyMMdd')
+-- from dual;
+
+-- month
+

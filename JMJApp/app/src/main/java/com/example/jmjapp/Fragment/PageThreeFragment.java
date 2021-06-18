@@ -59,7 +59,7 @@ public class PageThreeFragment extends Fragment {
     }
 
     private void showList(String category) {
-        listShopCall = Server.getInstance().getApi().shopList2(category);
+        listShopCall = Server.getInstance().getApi().shopList2(category, null);
         listShopCall.enqueue(new Callback<List<Shop>>() {
             @Override
             public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response) {

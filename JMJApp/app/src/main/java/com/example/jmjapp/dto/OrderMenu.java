@@ -13,7 +13,8 @@ public class OrderMenu {
     private String shopId;
     private String menuName;
     private String quantity;
-    private int tableNo;
+    private String tabNo;
+    private int menuPrice;
 
     private String orderId;
     private String menuId;

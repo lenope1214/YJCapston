@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     MyFragment myFragment;
     ZzimFragment zzimFragment;
 
-    BottomNavigationView bottomNavigation;
+    static public BottomNavigationView bottomNavigation;
     SharedPreferences orderNumber;
     String QR = null;
 
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 //            return;
 //        }
 
-        final BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation = findViewById(R.id.bottom_navigation);
 
 
         if (QrReaderActivity.orderCheck.equals("1")){

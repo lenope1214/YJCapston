@@ -1,31 +1,29 @@
 package com.jumanji.capston.service;
 
-import com.jumanji.capston.data.Order;
-import com.jumanji.capston.data.Shop;
-import com.jumanji.capston.data.User;
+import com.jumanji.capston.data.*;
 import com.jumanji.capston.repository.OrderRepository;
-import com.jumanji.capston.service.exception.OrderException.OrderHasExistException;
-import com.jumanji.capston.service.exception.OrderException.OrderNotFoundException;
-import com.jumanji.capston.service.interfaces.BasicService;
+import com.jumanji.capston.repository.ReviewRepository;
+import com.jumanji.capston.service.exception.orderException.OrderHasExistException;
+import com.jumanji.capston.service.exception.orderException.OrderNotFoundException;
+import com.jumanji.capston.service.exception.shopException.ShopNotOpenException;
 import com.jumanji.capston.service.interfaces.OrderService;
-import lombok.Getter;
-import lombok.Setter;
+import jdk.jfr.TransitionTo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
-public class OrderServiceImpl implements OrderService, BasicService {
+public class OrderServiceImpl implements OrderService {
     @Autowired
     OrderRepository orderRepository;
+    @Autowired
+    ReviewRepository reviewRepository;
     @Autowired
     UserServiceImpl userService;
     @Autowired
@@ -42,31 +40,38 @@ public class OrderServiceImpl implements OrderService, BasicService {
 //        return new ResponseEntity<>(response, HttpStatus.OK);
 //    }
 
-    public Order getOrderInfo(Timestamp orderId){
-        return orderRepository.findById(orderId).get();
+    public Order get(Timestamp orderId){
+        return isPresent(orderId);
     }
 
-    @Override
-    public Order get(String authorization, Timestamp orderId) {
-        isPresent(orderId);
-//        Timestamp cartIdTime = DateOperator.stringToTimestamp(cartId);
-        Order order = orderRepository.findById(orderId).get();
-        return order;
+    public Order get(String authorization, Timestamp orderId){
+        String userId = userService.getMyId(authorization);
+        isOwnOrder(orderId, userId);
+        return isPresent(orderId);
     }
 
     public List<Order> getList(String authorization) {
         String loginId = userService.getMyId(authorization);
         List<Order> orderList = new ArrayList<>();
-        for (Order order : orderRepository.findALLByUser_Id(loginId)) {
-            orderList.add(order);
+        Order o;
+        Shop shop;
+        for (Order.MyInfo order : orderRepository.myOrderListContainsReviewed(loginId)) {
+            shop = shopService.isPresent(order.getShopId());
+            o = new Order(order.getId(), shop, null);
+            o.init(order);
+            orderList.add(o);
         }
+
         return orderList;
     }
+
+
+
 
     @Override
     public List<Order> getList(String authorization, String userId) {
         String loginId = userService.getMyId(authorization);
-        User user = userService.get(loginId);
+        User user = userService.isPresent(loginId);
         userService.isAuth(user.getRole(), "ADMIN");
 
         List<Order> orderList = new ArrayList<>();
@@ -76,19 +81,8 @@ public class OrderServiceImpl implements OrderService, BasicService {
         return orderList;
     }
 
-    @Override
-    public Order post(String authorization, Order.Request request) {
+    public Order post(String loginId, User user, Shop shop, Order.Request request) {
         Order order;
-        Shop shop;
-        User user;
-        String loginId = userService.getMyId(authorization);
-        userService.isPresent(loginId);
-        shopService.isPresent(request.getShopId());
-
-        //isEmpty 는 필요 x 주문은 매번 새로운 애기 때문.
-        shop = shopService.get(request.getShopId());
-        user = userService.get(loginId);
-
         order = Order.builder()
                 .id(new Timestamp(System.currentTimeMillis()))
 //                .orderRequest(request.getOrderRequest()) // 얘와 밑의 얘네 둘은 결제 완료 후에 들어갈 예정
@@ -101,21 +95,29 @@ public class OrderServiceImpl implements OrderService, BasicService {
     }
 
     @Override
+    @Transactional
     public Order patch(String authorization, Order.Request request) {
         Order order;
-        System.out.println("request info \nrequest.getOrderId()" + request.getOrderId() + "\n" +
-                "request.getPeople" + request.getPeople() + "\n" +
-                "request.getOrderRequest" + request.getOrderRequest());
+        User user;
+        Shop shop;
+        // 주문번호가 같이 들어오면, 있는 주문번호를 수정하는것이기 때문에 그대로 검색해서 수정. 없으면 새로운 주문이므로 생성
+
         String loginId = userService.getMyId(authorization);
 
         // 유효성 검사.
-        userService.isPresent(loginId);
-        isPresent(request.getOrderId()); // 있는지~
+        user = userService.isPresent(loginId);
+        shop = shopService.isPresent(request.getShopId());
+        isOpen(shop);
+        order = request.getOrderId() != null ? isOwnOrder(request.getOrderId(), loginId) : post(loginId, user, shop, request);
 
-        order = getOrderInfo(request.getOrderId());
-        order.update(request);
-        orderRepository.save(order);
+        order.patch(request);
+        System.out.println("arrtime : " + order.getArriveTime());
+        order = orderRepository.saveAndFlush(order);
         return order;
+    }
+
+    private void isOpen(Shop shop) {
+        if(shop.getIsOpen() == 'N')throw new ShopNotOpenException();
     }
 
 //    @Override
@@ -125,23 +127,69 @@ public class OrderServiceImpl implements OrderService, BasicService {
 //        orderRepository.delete(order);
 //    }
 
-    public boolean isPresent(Timestamp id) {
-        if (orderRepository.findById(id).isPresent()) return true;
+    public Order isPresent(Timestamp orderId) {
+        Optional<Order> order =orderRepository.findById(orderId);
+        if (order.isPresent()) return order.get();
         throw new OrderNotFoundException();
     }
 
-    public boolean isEmpty(Timestamp id) {
-        if (orderRepository.findById(id).isEmpty()) return true;
+    public boolean isEmpty(Timestamp orderId) {
+        if (orderRepository.findById(orderId).isEmpty()) return true;
         throw new OrderHasExistException();
     }
 
-    @Override
-    public boolean isPresent(String id) {
-        return false;
+    public Order isOwnOrder(Timestamp orderId, String userId){
+        Order order = isPresent(orderId);
+        String _uId =order.getUser().getId();
+        if(_uId.equals(userId))return order;
+        else throw new OrderNotFoundException(""+orderId.getTime());
     }
 
-    @Override
-    public boolean isEmpty(String id) {
-        return false;
+    public List<Order> getListByShopId(String authorization, String shopId) {
+        String loginId;
+
+        // 유효성 검사
+        loginId = userService.getMyId(authorization);
+        shopService.isOwnShop(loginId, shopId);
+
+        List<Order> orderList;
+        orderList = orderRepository.findAllByShop_Id(shopId);
+        System.out.println("해당 매장의 주문목록");
+        for(Order order: orderList){
+            System.out.println("getOrderRequest : " + order.getOrderRequest() + "\n");
+            System.out.println("getUser().getName()" + order.getUser().getName());
+        }
+        return orderList;
     }
+
+    public Order orderAccept(String authorization, Order.Request request) {
+        // 변수
+        String loginId;
+        Order order;
+
+        // 값 체크
+
+        // 유효성 체크
+        loginId = userService.getMyId(authorization);
+        shopService.isOwnShop(loginId, request.getShopId());
+        order = isPresent(request.getOrderId());
+
+        // 서비스
+        order.accept();
+
+
+        // 값 체크
+        return orderRepository.save(order);
+    }
+
+    public void statusUpdate(Order order) {
+        orderRepository.save(order);
+    }
+
+    public Object getList() {
+        return orderRepository.findAll();
+    }
+
+
+
 }

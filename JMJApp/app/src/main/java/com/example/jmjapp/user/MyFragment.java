@@ -8,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.jmjapp.JMJApplication;
 import com.example.jmjapp.R;
@@ -35,6 +37,11 @@ public class MyFragment extends Fragment {
     private String user_id;
     Context context;
 
+    MapFragment mapFragment;
+
+    FragmentManager manager;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.my_fragment, container, false);
@@ -48,6 +55,18 @@ public class MyFragment extends Fragment {
         visit_record = rootView.findViewById(R.id.visit_record);
         review_record = rootView.findViewById(R.id.review_record);
         zzim_record = rootView.findViewById(R.id.zzim_record);
+
+        mapFragment = new MapFragment();
+        manager = getFragmentManager();
+
+        ImageView home_search_bar = rootView.findViewById(R.id.my_search_bar);
+        home_search_bar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.bottomNavigation.setSelectedItemId(R.id.tab2);
+                manager.beginTransaction().replace(R.id.container, mapFragment).commit();
+            }
+        });
 
         login_btn = rootView.findViewById(R.id.login_btn);
         login_btn.setOnClickListener(new View.OnClickListener() {

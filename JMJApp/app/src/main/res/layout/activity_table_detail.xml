@@ -73,18 +73,20 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_table_detail_list"
-        android:layout_width="386dp"
-        android:layout_height="646dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="112dp"
+        android:layout_marginRight="10dp"
         android:nestedScrollingEnabled="false"
         android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/table_detail_no"
         tools:ignore="MissingConstraints" />
 
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
 <!--        android:id="@+id/constraintLayout15"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="2dp"-->
