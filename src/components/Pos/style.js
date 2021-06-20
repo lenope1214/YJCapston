@@ -232,4 +232,7 @@ export const PosWrap = styled.div`
         top: 50%;
         left: 10%;
     }
+    .table {
+        position: relative;
+    }
 `;

@@ -83,7 +83,7 @@ const ShopsocketlistContainer = (props) => {
             // }
         });
     };
-    console.log(list);
+
     const publish = (message) => {
         if (!client.current.connected) {
             return;

@@ -36,12 +36,11 @@ const ShopInfoContainer = (props) => {
         },
     ]);
 
-        //-------선택한 아이디정보 가져오기
-        useEffect(() => {
-            ShowShopInfo(props.match.params.shopId);
-            setShopId(props.match.params.shopId);
-        }, []);
-    
+    //-------선택한 아이디정보 가져오기
+    useEffect(() => {
+        ShowShopInfo(props.match.params.shopId);
+        setShopId(props.match.params.shopId);
+    }, []);
 
     const phone = phone1 + phone2 + phone3;
 
@@ -56,18 +55,18 @@ const ShopInfoContainer = (props) => {
     const handlePhone1 = (e) => {
         const value = e.target.value;
         setPhone1(value);
-    }
+    };
 
     const handlePhone2 = (e) => {
         const value = e.target.value;
         setPhone2(value);
-    }
+    };
 
     const handlePhone3 = (e) => {
         const value = e.target.value;
         setPhone3(value);
-    }
-    
+    };
+
     const handleShopOpenTime = (e) => {
         const value = e.target.value;
         setShopOpenTime(value);
@@ -122,8 +121,7 @@ const ShopInfoContainer = (props) => {
     };
 
     const Shop_v3 = () => {
-        putShopopen(shopId)
-        .then((res) => {
+        putShopopen(shopId).then((res) => {
             //history.push("/shopInfo/"+shopId)
             history.push("/myshop");
             alert("오픈여부변경완료+");
@@ -152,14 +150,12 @@ const ShopInfoContainer = (props) => {
             });
     };
 
-
     const ShowShopInfo = () => {
         getShopInfo(props.match.params.shopId)
             .then((res) => {
                 setShopInfo(res.data);
                 setRoadAddr(res.data.address);
                 console.log(res.data);
-                
             })
             .catch((err) => {
                 alert("showshopInfo err");
@@ -240,7 +236,7 @@ const ShopInfoContainer = (props) => {
                 )
             ) {
                 alert("주문이 완료되었습니다!");
-            } 
+            }
             // else {
             //     alert("환불하시겠어요?");
             // }
@@ -260,7 +256,6 @@ const ShopInfoContainer = (props) => {
         setMessage("");
     };
 
-    
     return (
         <>
             <Header />

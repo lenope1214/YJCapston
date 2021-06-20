@@ -29,6 +29,7 @@ import EmptimelistContainer from "./containers/Emptimelist/EmptimelistContainer"
 import ShopsocketlistContainer from "./containers/Shopsocketlist/ShopsocketlistContainer";
 import SaleslistContainer from "./containers/saleslist/SaleslistContainer";
 import ChattingContainer from "./containers/Chatting/ChattingContainer";
+import TableContainer from "./containers/Table/TableContainer";
 
 const ROOM_SEQ = 1;
 
@@ -74,7 +75,6 @@ const App = () => {
                         component={SaleslistContainer}
                         path="/saleslist/:shopId"
                     />
-
                     <Route
                         component={EmployeeContainer}
                         path="/Employee/:shopId"
@@ -158,6 +158,10 @@ const App = () => {
                         path="/chat/:shopId"
                         component={ChattingContainer}
                     ></Route>
+                    <Route
+                        component={TableContainer}
+                        path="/table/:shopId/:tableamount"
+                    />
                     <Route
                         path="/"
                         component={() => (
