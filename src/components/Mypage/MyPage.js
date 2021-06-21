@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import * as S from "./style";
 
 import DaumPostcode from "react-daum-postcode";
-import topimg from "../Main/img/QR코드사진2.png";
+import topimg from "../Main/img/QRcode2.png";
 import { ordermenulist, requirelist} from "../../lib/MyPage";
 import {getOrderId} from "../../containers/MyPage/MyPageContainer";
 
@@ -39,6 +39,8 @@ const MyPage = ({
         border: "1px",
     };
     const [orderid, setorderid] = useState();
+
+    let a = null;
 
     return (
         <>
@@ -177,7 +179,11 @@ const MyPage = ({
 
                             {jmlist.map((jmlist2) => {
                                 console.log(jmlist2);
-
+                                if(jmlist2.jmstatus == "rf"){
+                                    a = "환불완료";
+                                }else{
+                                    a = "결제완료";
+                                }
                                 return (
                                     <div className="orderlist-item">
                                         <tr>
@@ -192,7 +198,7 @@ const MyPage = ({
                                                 <span className="won">명</span>
                                             </td>
                                             <td className="orderitem4">
-                                                결제완료
+                                                {a}
                                             </td>
                                             <td className="orderitem5">
                                                 <Link to={`/addreview/${jmlist2.jmshopId}/${jmlist2.jmid}`}>

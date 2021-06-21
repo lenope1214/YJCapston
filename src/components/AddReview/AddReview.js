@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import * as S from "./style";
-import topimg from "../Main/img/QR코드사진2.png";
+import topimg from "../Main/img/QRcode2.png";
+
+//npm install --save sweetalert2 설치하기
 
 const AddReview = ({
     handleImg,
@@ -38,11 +40,11 @@ const AddReview = ({
                             <div className="score">
                                 <div className="label">평점</div>
                                 <div>
-                                    <select 
-                                    className="scorebox"
-                                    value={score}
-                                    id="score"
-                                    onChange={handleScore}
+                                    <select
+                                        className="scorebox"
+                                        value={score}
+                                        id="score"
+                                        onChange={handleScore}
                                     >
                                         <option value="">::선택::</option>
                                         <option value="5">★★★★★</option>
@@ -67,7 +69,9 @@ const AddReview = ({
                         </div>
                     </form>
                     <div className="button-box">
-                        <button onClick={review_v1} className="button3">추가</button>
+                        <button onClick={review_v1} className="button3">
+                            추가
+                        </button>
                         <Link to={"/mypage"} className="button">
                             <button className="button4">취소</button>
                         </Link>
@@ -76,6 +80,6 @@ const AddReview = ({
             </S.AddReviewWrap>
         </>
     );
-}
+};
 
 export default AddReview;

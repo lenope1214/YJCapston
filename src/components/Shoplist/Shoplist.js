@@ -1,11 +1,12 @@
 import React from "react";
 import * as S from "./style";
 import { Link } from "react-router-dom";
-import mainpicture from "./img/사용자페이지메인.jpg";
+import mainpicture from "./img/usermain.jpg";
 import yangtimjang from "./img/yangtimjang.png";
 import 'react-slideshow-image/dist/styles.css'
 import { Slide } from 'react-slideshow-image';
 import searchicon from './img/searchicon.png';
+// npm i react-slideshow-image --save 설치하기
 
 const Shoplist = ({
     isLogin,

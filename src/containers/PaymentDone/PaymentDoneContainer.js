@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import PaymentDone from "../../components/PaymentDone/PaymentDone";
 import { postLogin, requirepay } from "../../lib/PaymentDone/index";
+import Swal from 'sweetalert2';
+
 const PaymentDoneContainer = ({ isLogin, handleLogin, handleLogout }) => {
     const history = useHistory();
     const [id, setId] = useState("");

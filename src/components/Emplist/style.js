@@ -108,7 +108,7 @@ export const EmplistWrap = styled.div`
     background-color:black;
 }
  .delete-button{
-    padding: 8px;
+    padding: 11px 17px 11px 21px;
     background-color: gray;
     color: white;
     // border-radius: 7px;

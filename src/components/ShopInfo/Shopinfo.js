@@ -81,7 +81,7 @@ console.log(shopphone1);
     }
 
     let b = null;
-    if (isRsPos == "Y"){
+    if (isOpen == "Y"){
         b="매장오픈";
     }else{
         b="매장미오픈";

@@ -1,11 +1,9 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import OwnerNavbar from "../../components/OwnerMenubar/OwnerNavbar";
 import Header from "../../components/Header/Header";
 import Shop from "../../components/Shop/Shop";
 import { apiDefault } from "../../lib/client";
-import { postShop } from "../../lib/Shop";
+import Swal from 'sweetalert2';
 
 const ShopContainer = () => {
     const history = useHistory();

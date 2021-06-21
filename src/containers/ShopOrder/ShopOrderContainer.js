@@ -100,7 +100,8 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
     }, []);
 
     const patchcontent = () => {
-        patchorder(request, people, jmshopId)
+        const amount = jmallprice - pointcheck
+        patchorder(request, people, jmshopId,amount)
             .then((res) => {
                 console.log(res);
                 localStorage.setItem("orderId", res.data.orderId);

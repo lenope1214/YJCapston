@@ -7,9 +7,7 @@ export const TablebarWrap = styled.div`
     // padding-left: 550px;
     // transform: translateX(-27%);
     width: 100%;    
-    
-    // text-align: center;
-    // border-bottom: solid 1px black;
+
 }
 
 .header{
@@ -42,14 +40,14 @@ export const TablebarWrap = styled.div`
 }
 .menu-3{
     position: fixed;
-    background-color:#282828;
+    background-color:#444444;
     color:white;
     border:white;
     position:absolute;
     left:0px;
     top:353px;
     width:100px;
-   height:150px;
+   height:500px;
 }
 .menu-4{
     position: fixed;
@@ -64,9 +62,10 @@ export const TablebarWrap = styled.div`
 }
 button:hover{
     // background-color:#8AC1F2;
-    background-color:#41D1E1;
+    background-color: black;
 } 
 .menu-bar{
     position:fixed;
+    
 }
 `

@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./style";
 import { Link } from "react-router-dom";
-import topimg from "../Main/img/QR코드사진2.png";
+import topimg from "../Main/img/QRcode2.png";
 
 const ShopOrder = ({
     isLogin,
@@ -228,8 +228,8 @@ const ShopOrder = ({
                             <button className="button2" onClick={goBack}>
                                 취소
                             </button>
-                            <button onClick={connect}> test1</button>
-                            <button onClick={publish}>test2</button>
+                            {/* <button onClick={connect}> test1</button>
+                            <button onClick={publish}>test2</button> */}
                         </div>
                     </body>
                 </div>

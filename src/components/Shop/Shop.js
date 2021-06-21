@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import * as S from "./style";
 import DaumPostcode from "react-daum-postcode";
-import topimg from "../Main/img/QR코드사진2.png";
+import topimg from "../Main/img/QRcode2.png";
 
 const Shop = ({
     shopId,
@@ -60,7 +60,7 @@ const Shop = ({
                 <div className="topimg-text">
                     <p>매장 등록하기</p>
                 </div>
-                    <body>
+                <body>
                     <div className="total-body">
                         <div className="label">사업자아이디</div>
                         <input
@@ -147,7 +147,6 @@ const Shop = ({
                             name="open_time"
                             placeholder="00:00"
                             onChange={handleOpen_time}
-
                             className="input-box"
                             value={open_time}
                         />
@@ -171,7 +170,7 @@ const Shop = ({
                         >
                             <option value="" disable={true}>
                                 선택
-                        </option>
+                            </option>
                             <option value="한식">한식</option>
                             <option value="일식">일식</option>
                             <option value="중식">중식</option>
@@ -193,26 +192,34 @@ const Shop = ({
                             className="input-box"
                             disabled
                         />
-                        <button onClick={openModal} className="button1">검색</button>
+                        <button onClick={openModal} className="button1">
+                            검색
+                        </button>
                         <div>
-                        <input
-                            type="text"
-                            id="address1"
-                            placeholder="상세 주소를 입력하세요"
-                            onChange={handleAddress1}
-                            value={address1}
-                            className="input-box"
-                        />
+                            <input
+                                type="text"
+                                id="address1"
+                                placeholder="상세 주소를 입력하세요"
+                                onChange={handleAddress1}
+                                value={address1}
+                                className="input-box"
+                            />
                         </div>
                         <div className="button-box">
-                            <button onClick={shop_v1} className="button3">등록</button>
-                            <Link to="/myshop" onClick={() => { window.scrollTo(0, 0) }}>
-                                <button className="button4" >취소</button>
+                            <button onClick={shop_v1} className="button3">
+                                등록
+                            </button>
+                            <Link
+                                to="/myshop"
+                                onClick={() => {
+                                    window.scrollTo(0, 0);
+                                }}
+                            >
+                                <button className="button4">취소</button>
                             </Link>
                         </div>
-                        </div>
-                    </body>
-                
+                    </div>
+                </body>
             </S.ShopsWrap>
             {modal && (
                 <DaumPostcode
