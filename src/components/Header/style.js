@@ -22,15 +22,25 @@ export const headerWrap = styled.div`
         position: fixed;
         background-color: white;
         z-index: 10;
+        width: 100%;
     }
     a {
         text-decoration: none;
         color: black;
     }
+
+    .left-nav {
+        width: 100%;
+    }
+
     .date{
-        margin-left:900px;
+        margin-left: 1300px;
+        font-size: 20px;
+        
     }
     .time{
-        margin-left:40px;
+        margin-left: 30px;
+        font-size: 20px;
+        
     }
 `;

@@ -10,16 +10,22 @@ export const MenuReadContainer = (props) => {
     const history = useHistory();
     const [shopId, setShopId] = useState("");
     const [menuRead, setMenuRead] = useState([]);
+    const [menuName, setMenuName] = useState(null);
     const [menuPrice, setMenuPrice] = useState(null);
     const [menuImg, setMenuImg] = useState(null);
     const [menuIntro, setMenuIntro] = useState(null);
     const [menuId, setMenuId] = useState("");
     const [menuDuration, setMenuDuration] = useState(null);
 
+    const handleMenuName = (e) => {
+        const value = e.target.value;
+        setMenuName(value)
+    }
     const handleMenuPrice = (e) => {
         const value = e.target.value;
         setMenuPrice(value)
     }
+    
     const handleMenuIntro = (e) => {
         const value = e.target.value;
         setMenuIntro(value)
@@ -37,6 +43,7 @@ export const MenuReadContainer = (props) => {
 
     const ReadMenu = () => {
         putMenuRead(
+            menuName,
             menuPrice,
             menuIntro,
             menuRead.menuId,
@@ -71,6 +78,7 @@ export const MenuReadContainer = (props) => {
                     // cancelButtonText: '취소'
                   }).then((result) => {
                     if (result.value) {
+
                     }
                   })
             });
@@ -199,7 +207,9 @@ export const MenuReadContainer = (props) => {
                 isPopular={menuRead.isPopular}
                 isSale={menuRead.isSale}
                 menu_v2={menu_v2}
-                menu_v3={menu_v3}           
+                menu_v3={menu_v3}
+                handleMenuName={handleMenuName} 
+                menuName={menuName}          
             />
         </div>
     );

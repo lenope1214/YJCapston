@@ -24,13 +24,13 @@ const PosNavbar = ({ shopId }) => {
                             to={"/pos/" + thisShopId}
                             activeClassName="active"
                         >
-                            <li className="pos-item">테이블현황</li>
+                            <li className="pos-item why1">테이블현황</li>
                         </NavLink>
                         <NavLink
                             to={"/emplist/" + thisShopId}
                             activeClassName="active"
                         >
-                            <li className="pos-item">직원관리</li>
+                            <li className="pos-item why2">직원관리</li>
                         </NavLink>
                         {/* <NavLink to={"/"} activeClassName="active"> */}
 
@@ -56,7 +56,7 @@ const PosNavbar = ({ shopId }) => {
                             to={"/saleslist/" + shopId}
                             activeClassName="active"
                         >
-                            <li className="pos-item">매출관리</li>
+                            <li className="pos-item why3">매출관리</li>
                         </NavLink>
                     </ul>
                 </nav>

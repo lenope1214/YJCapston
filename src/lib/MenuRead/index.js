@@ -27,6 +27,7 @@ export const putMenuSale = (menuId,shopId) => {
 };
 
 export const putMenuRead = (
+    menuName,
     menuPrice,
     menuIntro,
     menuId,
@@ -34,7 +35,8 @@ export const putMenuRead = (
     shopId,
 ) => {
     return apiDefault().patch("/menus"
-        , {           
+        , {         
+            menuId: menuName,  
             price: menuPrice,
             intro: menuIntro,
             menuId: menuId,

@@ -122,6 +122,8 @@ const SaleslistContainer = (props) => {
             .then((res) => {
                 setRSsales(res.data);
                 setsales(res.data);
+                setresultDate(nowDate + " 당일 매출");
+                setPay(res.data);
                 // alert("오늘");
             })
             .catch((err) => {
@@ -138,7 +140,7 @@ const SaleslistContainer = (props) => {
         )
         .then((res) => {       
             setRSsales(res.data);
-            setresultDate(nowDate1+": 일 매출");
+            setresultDate(nowDate1+" 매출");
             setPay(res.data);
         })
         .catch((err) => {
@@ -205,7 +207,7 @@ const SaleslistContainer = (props) => {
         )
         .then((res) => {
             setRSsales1(res.data);
-            setresultDate(month3 + ": 주 매출");
+            setresultDate(month3 + " 해당 주 매출");
             setPay(res.data);
         })
         .catch((err) => {
@@ -236,7 +238,7 @@ const SaleslistContainer = (props) => {
         )
         .then((res) => {
             setRSsales2(res.data);
-            setresultDate(month4 + ": 월 매출");
+            setresultDate(`${month4}\n 해당 월 매출`);
             setPay(res.data);
         })
         .catch((err) => {
@@ -253,7 +255,7 @@ const SaleslistContainer = (props) => {
         )
         .then((res) => {
             setsales3(res.data);
-            setresultDate(month + "~" + month2 + ": 기간 매출");
+            setresultDate("조회 기간 매출");
             setPay(res.data);
         })
         .catch((err) => {

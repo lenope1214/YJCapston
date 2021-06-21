@@ -132,11 +132,13 @@ export const PosWrap = styled.div`
     // }
 
     .table {
-        width: 100px;
-        height: 100px;
+        width: 120px;
+        height: 162px;
         border: 1px solid black;
         display: inline-block;
         margin-left: 40px;
+        background: #333333;
+        color: white;
     }
 
     .left-container {
@@ -144,11 +146,11 @@ export const PosWrap = styled.div`
         margin-top: 53px;
         margin-left: 100px;
         width: 45%;
-        height: 620px;
+        height: 700px;
     }
     .right-container {
         // border-left:1px solid black;
-        margin-top: -620px;
+        margin-top: -670px;
         width: 49%;
         margin-left: 51%;
         height: 620px;
@@ -167,42 +169,7 @@ export const PosWrap = styled.div`
         // border:1px solid black;
         margin-top: 20px;
     }
-    .line-1 {
-        width: 100px;
-        height: 100px;
-        border: 1px solid black;
-        display: inline-block;
-        margin-left: 50px;
-        margin-top: 30px;
-    }
-    .line-2 {
-        width: 100px;
-        height: 100px;
-        border: 1px solid black;
-        display: inline-block;
-        margin-left: 40px;
-    }
-    .line-3 {
-        width: 100px;
-        height: 100px;
-        border: 1px solid black;
-        display: inline-block;
-        margin-left: 40px;
-    }
-    .line-4 {
-        width: 100px;
-        height: 100px;
-        border: 1px solid black;
-        display: inline-block;
-        margin-left: 40px;
-    }
-    .line-5 {
-        width: 100px;
-        height: 100px;
-        border: 1px solid black;
-        display: inline-block;
-        margin-left: 40px;
-    }
+    
     .input-box {
         width: 30px;
     }
@@ -231,5 +198,25 @@ export const PosWrap = styled.div`
         position: relative;
         top: 50%;
         left: 10%;
+    }
+    .table {
+        position: relative;
+        margin: 15px 15px 15px 15px;
+    }
+    .tables {
+        margin-top: 4px;
+        width: 120px;
+        height: 110px;
+        overflow-y: scroll;
+        background: white;
+        color: black;
+    }
+    .tables-price {
+        bottom: 0;
+        position: absolute;
+        width: 120px;
+        text-align: center;
+        color: white;
+        margin-bottom: 2px;
     }
 `;

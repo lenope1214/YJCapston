@@ -129,6 +129,9 @@ body {
     color: white;
     cursor: pointer;
 }
+.p {
+    margin-top: 36px;
+}
 .adimg {
     position: absolute;
     margin-top: 0px;

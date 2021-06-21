@@ -25,7 +25,11 @@ const Main = ({
     login,
     closeModal,
     modal,
+    name,
 }) => {
+    let delay = false;
+    let currentPage = 1;
+    let pageCount = $(".section").length;
     // function getWindowDimensions() {
     //     const { innerWidth: width, innerHeight: height } = window;
     //     return {
@@ -53,9 +57,7 @@ const Main = ({
     // const { height, width } = useWindowDimensions();
 
     // $(document).ready(function() {
-    //     var delay = false;
-    //     var currentPage = 1;
-    //     var pageCount = $(".section").length;
+
     //     var swipe = document.getElementsByTagName('.section');
 
     //     $(document).on('mousewheel DOMMouseScroll', function(event) {
@@ -79,7 +81,7 @@ const Main = ({
     //               }
     //           }
     //           if (currentPage == 1) {
-    //               window.scrollTo({top:0, left: 0, behavior: "smooth"})
+    //               document.scrollTo({top:0, left: 0, behavior: "smooth"})
     //               $('.scroll-down').removeClass('none');
     //               $('.title').removeClass('black');
     //               $('.link').removeClass('black');
@@ -133,13 +135,13 @@ const Main = ({
                             {isLogin ? (
                                 <>
                                     <Link to="/mypage">
-                                        <button
-                                            className="log-but"
+                                       <button
+                                            className="log-but p"
                                             onClick={() => {
                                                 window.scrollTo(0, 0);
                                             }}
                                         >
-                                            MY PAGE
+                                            {name}
                                         </button>
                                     </Link>
                                     <button
@@ -171,11 +173,11 @@ const Main = ({
                             )}
                         </div>
                     </div>
-                    <ul class="ul">
+                    {/* <ul class="ul">
                         <li id="tag1" class="active"></li>
                         <li id="tag2"></li>
                         <li id="tag3"></li>
-                    </ul>
+                    </ul> */}
                     <div className="scroll-down">∨</div>
                     <div className="section" id="sec1">
                         <div className="adimg">
@@ -185,8 +187,8 @@ const Main = ({
                             <div className="videotext">
                                 <p className="vt0">THE</p>
                                 <p className="vt1">
-                                    PEOPLE<span className="of"> OF</span> THE
-                                    ORDER
+                                    PEOPLE<span className="of"> OF</span>
+                                     ORDER
                                 </p>
                                 <img
                                     src={dia}
@@ -207,9 +209,9 @@ const Main = ({
                                         </button>
                                     </Link>
                                     <br />
-                                    <button className="link-button3">
+                                    {/* <button className="link-button3">
                                         어플다운
-                                    </button>
+                                    </button> */}
                                     <br />
                                 </div>
                             </div>
@@ -310,9 +312,9 @@ const Main = ({
                                     로그인하러 가기
                                 </button>
                                 <br />
-                                <button className="button-1">
+                                {/* <button className="button-1">
                                     어플다운하러 가기
-                                </button>
+                                </button> */}
                             </div>
                         </div>
                     </div>
