@@ -40,7 +40,7 @@ const QRcodeContainer = (props) => {
     }
     
 
-    const qrCode = `https://chart.apis.google.com/chart?cht=qr&chs=350x350&chl=http://3.34.55.186:3000/shopcontent/${shopId}/${tabno}`;
+    const qrCode = `https://chart.apis.google.com/chart?cht=qr&chs=350x350&chl=http://jumanji.홈페이지.한국/shopcontent/${shopId}/${tabno}`;
 
 
     const QR = () => {
