@@ -1,8 +1,11 @@
 import React from "react";
 import * as S from "./style";
 import { Link } from "react-router-dom";
-import mainpicture from "./img/usermain.jpg";
-import yangtimjang from "./img/yangtimjang.png";
+import banner4 from "./img/banner4.jpg"
+import banner6 from "./img/banner6.PNG"
+import banner7 from "./img/banner7.jpg"
+import banner8 from "./img/banner8.png"
+import banner9 from "./img/banner9.png"
 import 'react-slideshow-image/dist/styles.css'
 import { Slide } from 'react-slideshow-image';
 import searchicon from './img/searchicon.png';
@@ -141,7 +144,7 @@ const Shoplist = ({
                                     <div className="each-slide">
                                             {/* <div style={{ 'backgroundImage': `url(${mainpicture})` }}> */}
                                             <div className="slide-img">
-                                                <img src={mainpicture}></img>
+                                                <img src={banner9}></img>
                                                 
                                             </div>
                                             <div className="slide-text">Slide 1</div>
@@ -149,7 +152,7 @@ const Shoplist = ({
                                         <div className="each-slide">
                                             {/* <div style={{ 'backgroundImage': `url(${yangtimjang})` }}> */}
                                             <div className="slide-img">
-                                                <img src={yangtimjang}></img>
+                                                <img src={banner6}></img>
                                                 {/* <span className="slide-text">Slide 2</span> */}
                                             </div>
                                             <div className="slide-text">Slide 2</div>
@@ -157,7 +160,7 @@ const Shoplist = ({
                                         <div className="each-slide">
                                             {/* <div style={{ 'backgroundImage': `url(${mainpicture})` }}> */}
                                             <div className="slide-img">
-                                                <img src={mainpicture}></img>
+                                                <img src={banner8}></img>
                                                 {/* <span className="slide-text">Slide 3</span> */}
                                             </div>
                                             

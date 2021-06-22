@@ -254,7 +254,6 @@ const MyPage = ({
                                                     취소
                                                 </button>
                                             </td>
-
                                             {/* 디자인 수정 */}
                                             {/* <td>{jmlist2.jmorderRequest}</td> */}
                                         </tr>

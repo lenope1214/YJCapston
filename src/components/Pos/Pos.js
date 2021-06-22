@@ -26,11 +26,12 @@ const Pos = ({
     return (
         <>
             <S.PosWrap>
-                <div className="left-container">
-                    <div className="shopName">{name}</div>
-
-                </div>
+                {/* <div className="left-container"> */}
+                    
+{/* 
+                </div> */}
                 <div className="right-container">
+                <div className="shopName">{name} 테이블 현황</div>
                     <span className="groupbox"></span>
 
                     {tableamount.map((tableamountlist) => {
