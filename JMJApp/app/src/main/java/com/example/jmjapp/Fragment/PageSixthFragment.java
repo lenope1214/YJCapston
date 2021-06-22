@@ -74,7 +74,7 @@ public class PageSixthFragment extends Fragment {
                             mItems.add(new Shop(list.getShopId(), list.getName(), list.getIntro(),
                                     list.getCloseTime(), list.getOpenTime(), list.getAddress(),
                                     list.getAddressDetail(), list.getIsRsPos(), list.getCategory(),
-                                    list.getIsOpen(), list.getImgPath(), list.getOwnerId()));
+                                    list.getIsOpen(), list.getImgPath(), list.getOwnerId(), list.getPhone()));
                             rv_restaurant_list.setHasFixedSize(true);
                             adapter.setItems(mItems);
                             rv_restaurant_list.setLayoutManager(new LinearLayoutManager(getActivity()));

@@ -1,21 +1,29 @@
 package com.example.jmjapp.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Order;
+import com.example.jmjapp.dto.OrderMenu;
+import com.example.jmjapp.network.Server;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
+import lombok.SneakyThrows;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ReservationManagementAdapter extends RecyclerView.Adapter<ReservationManagementAdapter.ItemViewHolder> {
     Context context;
@@ -24,6 +32,8 @@ public class ReservationManagementAdapter extends RecyclerView.Adapter<Reservati
     private Call<ResponseBody> responseBodyCall;
     private String device_token, userId, orderId, jwt, orderRequest;
     private Long arriveTime;
+    private Call<Order.OrderMenuList> getOrderMenus;
+    private String sum = "";
 
     public ReservationManagementAdapter(Context context, ArrayList<Order> resManage) {
         this.context = context;
@@ -69,6 +79,51 @@ public class ReservationManagementAdapter extends RecyclerView.Adapter<Reservati
         } else {
             holder.rs_mg_request.setText(orderRequest);
         }
+
+        holder.rs_mg_menuList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getOrderMenus = Server.getInstance().getApi().orderOneMenu(orderId);
+                getOrderMenus.enqueue(new Callback<Order.OrderMenuList>() {
+                    @SneakyThrows
+                    @Override
+                    public void onResponse(Call<Order.OrderMenuList> call, Response<Order.OrderMenuList> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("orderMenu 성공", "orderMenu 성공");
+                            List<OrderMenu> orderMenuList = response.body().getOrderMenuList();
+
+                            String[] list_menuName = new String[orderMenuList.size()];
+                            int[] list_menuCount = new int[orderMenuList.size()];
+
+                            int index = 0;
+
+                            for (OrderMenu list : orderMenuList) {
+                                list_menuName[index] = list.getMenuName();
+                                list_menuCount[index] = Integer.parseInt(list.getQuantity());
+                                index++;
+                            }
+
+                            for (int i = 0; i < orderMenuList.size(); i++) {
+                                String value = list_menuName[i] + "\t\t\t\t" + list_menuCount[i] + "개\n";
+                                sum = sum + value;
+                            }
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                            builder.setTitle("주문메뉴");
+                            builder.setMessage(sum).setPositiveButton("확인", null).create();
+                            builder.show();
+                        } else {
+                            Log.d("orderMenu 실패1", "orderMenu 실패1"+response.errorBody().string());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Order.OrderMenuList> call, Throwable t) {
+                        Log.d("orderMenu 실패2", "orderMenu 실패2");
+                    }
+                });
+            }
+        });
     }
 
     // 데이터 셋의 크기

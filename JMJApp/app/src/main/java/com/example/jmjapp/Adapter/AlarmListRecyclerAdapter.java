@@ -25,6 +25,7 @@ import com.example.jmjapp.dto.Menu;
 import com.example.jmjapp.dto.Order;
 import com.example.jmjapp.dto.OrderMenu;
 import com.example.jmjapp.network.Server;
+import com.example.jmjapp.network.Server2;
 import com.example.jmjapp.payment.PaymentResultActivity;
 import com.example.jmjapp.user.OrderActivity;
 import com.example.jmjapp.user.ShopDetailActivity;
@@ -53,15 +54,16 @@ public class AlarmListRecyclerAdapter extends RecyclerView.Adapter<AlarmListRecy
     private Call<ResponseBody> responseBodyCall;
     private Call<List<OrderMenu>> orderMenuCall;
     private AlertDialog dialog;
-    private String device_token, userId, orderId, jwt, orderRequest, jwtUser;
+    private String device_token, userId, orderId, jwt, orderRequest, jwtUser, resId;
     private String sum = "";
     private Long arriveTime;
     private Call<Order.OrderMenuList> getOrderMenus;
 
-    public AlarmListRecyclerAdapter(Context context, ArrayList<Order> alarm, String jwtUser1) {
+    public AlarmListRecyclerAdapter(Context context, ArrayList<Order> alarm, String jwtUser1, String resId) {
         this.context = context;
         mItems = alarm;
         this.jwtUser = jwtUser1;
+        this.resId = resId;
     }
 
 //    public AlarmListRecyclerAdapter(Context context) {
@@ -98,15 +100,17 @@ public class AlarmListRecyclerAdapter extends RecyclerView.Adapter<AlarmListRecy
         orderRequest = mItems.get(position).getOrderRequest();
         Log.d("arc", String.valueOf(arriveTime));
 
-        String resTime = String.valueOf(new Timestamp(arriveTime));
-        String year = resTime.substring(0,4);
-        String month = resTime.substring(5,7);
-        String day = resTime.substring(8,10);
+        if (arriveTime != null) {
+            String resTime = String.valueOf(new Timestamp(arriveTime));
+            String year = resTime.substring(0, 4);
+            String month = resTime.substring(5, 7);
+            String day = resTime.substring(8, 10);
 
-        String hour = resTime.substring(11,13);
-        String min = resTime.substring(14,16);
+            String hour = resTime.substring(11, 13);
+            String min = resTime.substring(14, 16);
 
-        holder.resTime.setText(year+"년"+month+"월"+day+"일 " +hour+"시"+min+"분");
+            holder.resTime.setText(year + "년" + month + "월" + day + "일 " + hour + "시" + min + "분");
+        }
 
         if (orderRequest == null) {
             holder.orderRequest.setText("요청사항이 없습니다.");
@@ -247,15 +251,32 @@ public class AlarmListRecyclerAdapter extends RecyclerView.Adapter<AlarmListRecy
                 builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        mItems.remove(position);
-                        notifyItemRemoved(position);
-                        notifyItemRangeChanged(position, mItems.size());
+                        responseBodyCall = Server2.getInstance2().getApi2().ownerRefund("Bearer " + jwt, resId , orderId);
+                        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                            @SneakyThrows
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                if (response.isSuccessful()) {
+                                    Log.d("사업자 측 환불 성공", "사업자 측 환불 성공");
+                                    mItems.remove(position);
+                                    notifyItemRemoved(position);
+                                    notifyItemRangeChanged(position, mItems.size());
 
-                        Map<String, String> map = new HashMap();
-                        map.put("orderId2", orderId);
-                        map.put("msg", rejectMsg);
-                        map.put("status", "toUser");
-                        send(map);
+                                    Map<String, String> map = new HashMap();
+                                    map.put("orderId2", orderId);
+                                    map.put("msg", rejectMsg);
+                                    map.put("status", "toUser");
+                                    send(map);
+                                } else {
+                                    Log.d("사업자 측 환불 실패1", "사업자 측 환불 실패1"+response.errorBody().string());
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                Log.d("사업자 측 환불 실패2", "사업자 측 환불 실패2"+t.getCause());
+                            }
+                        });
                     }
                 });
                 builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {

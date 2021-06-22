@@ -31,187 +31,214 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="230dp"
-            tools:ignore="MissingConstraints"
-            android:layout_margin="15dp"
-            android:background="@drawable/shop_detail_background"
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/shop_detail_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shop_detail_toolbar"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/shop_detail_shopname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/we_semibold"
+            android:text="매장이름"
+            android:textColor="#000000"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shop_detail_toolbar"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/constraintLayout">
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--        <ImageView-->
+        <!--                android:id="@+id/start_rating1"-->
+        <!--                android:background="@drawable/starrating"-->
+        <!--                android:layout_width="20dp"-->
+        <!--                android:layout_height="20dp"-->
+        <!--                app:layout_constraintEnd_toStartOf="@+id/start_rating2"-->
+        <!--                app:layout_constraintStart_toStartOf="parent"-->
+        <!--                app:layout_constraintHorizontal_bias="1.0"-->
+        <!--                android:layout_marginTop="17dp"-->
+        <!--                app:layout_constraintTop_toBottomOf="@+id/shop_detail_shopname"/>-->
+        <!--        <ImageView-->
+        <!--                android:id="@+id/start_rating2"-->
+        <!--                android:background="@drawable/starrating"-->
+        <!--                android:layout_width="20dp"-->
+        <!--                android:layout_height="20dp"-->
+        <!--                app:layout_constraintEnd_toStartOf="@+id/start_rating3"-->
+        <!--                android:layout_marginTop="17dp"-->
+        <!--                app:layout_constraintTop_toBottomOf="@+id/shop_detail_shopname"/>-->
+        <!--        <ImageView-->
+        <!--                android:id="@+id/start_rating3"-->
+        <!--                android:background="@drawable/starrating"-->
+        <!--                android:layout_width="20dp"-->
+        <!--                android:layout_height="20dp"-->
+        <!--                app:layout_constraintEnd_toStartOf="@+id/start_rating4"-->
+        <!--                android:layout_marginTop="17dp"-->
+        <!--                app:layout_constraintTop_toBottomOf="@+id/shop_detail_shopname"/>-->
+        <!--        <ImageView-->
+        <!--                android:id="@+id/start_rating4"-->
+        <!--                android:background="@drawable/starrating"-->
+        <!--                android:layout_width="20dp"-->
+        <!--                android:layout_height="20dp"-->
+        <!--                app:layout_constraintEnd_toStartOf="@+id/start_rating5"-->
+        <!--                android:layout_marginTop="17dp"-->
+        <!--                app:layout_constraintTop_toBottomOf="@+id/shop_detail_shopname"/>-->
+        <!--        <ImageView-->
+        <!--                android:id="@+id/start_rating5"-->
+        <!--                android:background="@drawable/starrating"-->
+        <!--                android:layout_width="20dp"-->
+        <!--                android:layout_height="20dp"-->
+        <!--                app:layout_constraintStart_toStartOf="parent"-->
+        <!--                app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                app:layout_constraintHorizontal_bias="0.522"-->
+        <!--                android:layout_marginTop="17dp"-->
+        <!--                app:layout_constraintTop_toBottomOf="@+id/shop_detail_shopname"/>-->
+
+        <RatingBar
+            android:id="@+id/shop_detail_ratingBar"
+            style="@style/Widget.AppCompat.RatingBar.Indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginLeft="64dp"
+            android:layout_marginTop="20dp"
+            android:isIndicator="false"
+            android:numStars="5"
+            android:rating="5"
+            android:stepSize="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shop_detail_shopname" />
 
         <TextView
-                android:id="@+id/shop_detail_shopname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="매장이름"
-                android:textSize="30sp"
-                android:textColor="#000000"
-                android:fontFamily="@font/we_semibold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="16dp"/>
-
-        <ImageView
-                android:id="@+id/start_rating1"
-                android:background="@drawable/starrating"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                app:layout_constraintEnd_toStartOf="@+id/start_rating2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                android:layout_marginTop="17dp"
-                app:layout_constraintTop_toBottomOf="@+id/shop_detail_shopname"/>
-        <ImageView
-                android:id="@+id/start_rating2"
-                android:background="@drawable/starrating"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                app:layout_constraintEnd_toStartOf="@+id/start_rating3"
-                android:layout_marginTop="17dp"
-                app:layout_constraintTop_toBottomOf="@+id/shop_detail_shopname"/>
-        <ImageView
-                android:id="@+id/start_rating3"
-                android:background="@drawable/starrating"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                app:layout_constraintEnd_toStartOf="@+id/start_rating4"
-                android:layout_marginTop="17dp"
-                app:layout_constraintTop_toBottomOf="@+id/shop_detail_shopname"/>
-        <ImageView
-                android:id="@+id/start_rating4"
-                android:background="@drawable/starrating"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                app:layout_constraintEnd_toStartOf="@+id/start_rating5"
-                android:layout_marginTop="17dp"
-                app:layout_constraintTop_toBottomOf="@+id/shop_detail_shopname"/>
-        <ImageView
-                android:id="@+id/start_rating5"
-                android:background="@drawable/starrating"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.522"
-                android:layout_marginTop="17dp"
-                app:layout_constraintTop_toBottomOf="@+id/shop_detail_shopname"/>
-        <TextView
-                android:id="@+id/start_rating_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="별점"
-                android:textColor="#000000"
-                android:textSize="25sp"
-                app:layout_constraintStart_toEndOf="@+id/start_rating5"
-                app:layout_constraintTop_toTopOf="@+id/start_rating5"
-                app:layout_constraintBottom_toBottomOf="@+id/start_rating5"
-                android:layout_marginStart="20dp"/>
+            android:id="@+id/start_rating_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/we_semibold"
+            android:text="별점"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/shop_detail_ratingBar"
+            app:layout_constraintTop_toBottomOf="@+id/shop_detail_shopname" />
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="리뷰"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="124dp"
-                android:layout_marginStart="96dp"
-                android:id="@+id/textView22"/>
-        <TextView
-                android:id="@+id/shop_detail_review"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text=""
-                android:textColor="#000000"
-                app:layout_constraintStart_toEndOf="@+id/textView22"
-                app:layout_constraintBottom_toBottomOf="@+id/textView22"
-                app:layout_constraintTop_toTopOf="@+id/textView22"
-                app:layout_constraintVertical_bias="0.0"/>
-        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="96dp"
+            android:layout_marginTop="124dp"
+            android:text="리뷰"
+            android:fontFamily="@font/we_semibold"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="리뷰답글"
-                android:textSize="20sp"
-                android:textColor="#000000"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="124dp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="200dp"
-                android:id="@+id/textView23"/>
         <TextView
-                android:id="@+id/shop_detail_reply"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="#000000"
-                android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/textView23"
-                app:layout_constraintBottom_toBottomOf="@+id/textView23"
-                app:layout_constraintTop_toTopOf="@+id/textView23"/>
+            android:id="@+id/shop_detail_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="리뷰개수"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:fontFamily="@font/we_semibold"
+            app:layout_constraintBottom_toBottomOf="@+id/textView22"
+            app:layout_constraintStart_toEndOf="@+id/textView22"
+            app:layout_constraintTop_toTopOf="@+id/textView22"
+            app:layout_constraintVertical_bias="0.0" />
+        <!--        <TextView-->
+
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="리뷰답글"-->
+        <!--                android:textSize="20sp"-->
+        <!--                android:textColor="#000000"-->
+        <!--                app:layout_constraintTop_toTopOf="parent"-->
+        <!--                android:layout_marginTop="124dp"-->
+        <!--                app:layout_constraintStart_toStartOf="parent"-->
+        <!--                android:layout_marginStart="200dp"-->
+        <!--                android:id="@+id/textView23"/>-->
+        <TextView
+            android:id="@+id/shop_detail_reply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView23"
+            app:layout_constraintStart_toEndOf="@+id/textView23"
+            app:layout_constraintTop_toTopOf="@+id/textView23" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/shop_detail_phonecall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView22"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="108dp">
+            android:id="@+id/shop_detail_phonecall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="108dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView22">
 
             <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/phonecall"
-                    android:id="@+id/shop_detail_phonecall_img"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                android:id="@+id/shop_detail_phonecall_img"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/phonecall"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                    android:text="전화"
-                    android:textSize="23sp"
-                    android:textColor="#000000"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/shop_detail_phonecall_img"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="전화"
+                android:textColor="#000000"
+                android:textSize="23sp"
+                android:fontFamily="@font/we_semibold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/shop_detail_phonecall_img"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/shop_detail_zzim"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toEndOf="@+id/shop_detail_phonecall"
-                app:layout_constraintTop_toBottomOf="@+id/textView23"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="52dp">
+            android:id="@+id/shop_detail_zzim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginLeft="48dp"
+            app:layout_constraintBottom_toBottomOf="@+id/shop_detail_phonecall"
+            app:layout_constraintStart_toEndOf="@+id/shop_detail_phonecall"
+            app:layout_constraintTop_toTopOf="@+id/shop_detail_phonecall"
+            app:layout_constraintVertical_bias="1.0">
 
             <ImageView
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:background="@drawable/zzimblack"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:id="@+id/shop_detail_zzim_img"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                android:id="@+id/shop_detail_zzim_img"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:background="@drawable/zzimblack"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
-                    android:text="찜"
-                    android:textSize="23sp"
-                    android:textColor="#000000"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="@+id/shop_detail_zzim_img"
-                    app:layout_constraintTop_toTopOf="@+id/shop_detail_zzim_img"
-                    app:layout_constraintStart_toEndOf="@+id/shop_detail_zzim_img"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="찜"
+                android:textColor="#000000"
+                android:textSize="23sp"
+                android:fontFamily="@font/we_semibold"
+                app:layout_constraintBottom_toBottomOf="@+id/shop_detail_zzim_img"
+                app:layout_constraintStart_toEndOf="@+id/shop_detail_zzim_img"
+                app:layout_constraintTop_toTopOf="@+id/shop_detail_zzim_img"
+                app:layout_constraintVertical_bias="0.444" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

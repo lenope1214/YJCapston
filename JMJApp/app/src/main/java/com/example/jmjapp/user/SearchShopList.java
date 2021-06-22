@@ -77,7 +77,7 @@ public class SearchShopList extends AppCompatActivity {
                             mItems.add(new Shop(list.getShopId(), list.getName(), list.getIntro(),
                                     list.getCloseTime(), list.getOpenTime(),
                                     list.getAddress(), list.getAddressDetail(), list.getIsRsPos(),
-                                    list.getCategory(), list.getIsOpen(), list.getImgPath(), list.getOwnerId()));
+                                    list.getCategory(), list.getIsOpen(), list.getImgPath(), list.getOwnerId(), list.getPhone()));
                             search_shop_list.setHasFixedSize(true);
                             adapter.setItems(mItems);
                             search_shop_list.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

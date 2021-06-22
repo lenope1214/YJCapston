@@ -67,13 +67,10 @@
                   android:background="@drawable/edge5"/>
 
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
-        <androidx.viewpager.widget.ViewPager
-                android:id="@+id/viewPager3"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+        <ViewFlipper
+            android:id="@+id/owner_img_slide"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"/>
     </LinearLayout>
 
     <LinearLayout android:layout_width="match_parent"
@@ -104,10 +101,14 @@
                   android:background="@drawable/edge5"/>
 
     <TextView android:layout_width="match_parent"
-              android:layout_height="60dp"
+              android:layout_height="wrap_content"
               android:gravity="center"
               android:textSize="30sp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:fontFamily="@font/we_semibold"
               android:textColor="@color/colorBlack"
+              android:id="@+id/profit_today"
               android:text="0"/>
 
     <LinearLayout android:layout_width="match_parent"

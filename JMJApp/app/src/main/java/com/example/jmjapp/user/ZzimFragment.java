@@ -72,7 +72,14 @@ public class ZzimFragment extends Fragment {
                 manager.beginTransaction().replace(R.id.container, mapFragment).commit();
             }
         });
+        return rootView;
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d("onStart", "onStart 실행");
+        mItems.clear();
         listOrderCall = Server.getInstance().getApi().myOrder("Bearer " + jwt);
         listOrderCall.enqueue(new Callback<List<Order>>() {
             @SneakyThrows
@@ -82,18 +89,18 @@ public class ZzimFragment extends Fragment {
                     Log.d("myOrder 성공", "myOrder 성공");
                     List<Order> orderList = response.body();
                     Log.d("or", String.valueOf(orderList));
-                    mItems.clear();
                     for(Order list : orderList) {
-                        mItems.add(new Order(list.getOrderId(), list.getStatus(), list.getOrderRequest(),
-                                list.getPeople(), list.getUsePoint(), list.getAmount(),
-                                list.getArriveTime(), list.getPayTime(), list.getPg(),
-                                list.getPayMethod(), list.getShopId(), list.getShopName(), list.getUserName(),
-                                list.getReason(), list.getReviewed(), list.getUserId(), list.getAccept(), list.getCompleAmount()));
-                        Log.d("accept", String.valueOf(list.getAccept()));
-                        rs_order_list.setHasFixedSize(true);
-                        adapter = new MyOrderListAdapter(getActivity(), mItems);
-                        rs_order_list.setLayoutManager(new LinearLayoutManager(getActivity()));
-                        rs_order_list.setAdapter(adapter);
+                        if (list.getPayTime() != null && !(list.getStatus().equals("rf"))) {
+                            mItems.add(new Order(list.getOrderId(), list.getStatus(), list.getOrderRequest(),
+                                    list.getPeople(), list.getUsePoint(), list.getAmount(),
+                                    list.getArriveTime(), list.getPayTime(), list.getPg(),
+                                    list.getPayMethod(), list.getShopId(), list.getShopName(), list.getUserName(),
+                                    list.getReason(), list.getReviewed(), list.getUserId(), list.getAccept(), list.getCompleAmount()));
+                            rs_order_list.setHasFixedSize(true);
+                            adapter = new MyOrderListAdapter(getActivity(), mItems, jwt);
+                            rs_order_list.setLayoutManager(new LinearLayoutManager(getActivity()));
+                            rs_order_list.setAdapter(adapter);
+                        }
                     }
                 } else {
                     Log.d("myOrder 실패1", "myOrder 실패1"+response.errorBody().string());
@@ -105,14 +112,6 @@ public class ZzimFragment extends Fragment {
                 Log.d("myOrder 실패2", "myOrder 실패2"+t.getCause());
             }
         });
-
-        return rootView;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d("onStart", "onStart 실행");
     }
 
     @Override

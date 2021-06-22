@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ViewFlipper;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -41,6 +43,7 @@ public class HomeFragment extends Fragment {
 
     FragmentManager manager;
 
+    ViewFlipper viewFlipper;
 
     public HomeFragment() {
 
@@ -56,13 +59,17 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.home_fragment2, container, false);
 
-        advFragment1 = new AdvFragment1();
-        advFragment2 = new AdvFragment2();
-        advFragment3 = new AdvFragment3();
+        int images[] = {
+                R.drawable.adv1,
+                R.drawable.adv2,
+                R.drawable.adv3
+        };
 
-        pager = (ViewPager)rootView.findViewById(R.id.viewPager2);
-        pager.setAdapter(new MyPagerAdapter(getChildFragmentManager()));
-        pager.setCurrentItem(0);
+        viewFlipper = rootView.findViewById(R.id.user_img_slide);
+
+        for (int image : images) {
+            slideImage(image);
+        }
 
         mapFragment = new MapFragment();
         manager = getFragmentManager();
@@ -187,6 +194,18 @@ public class HomeFragment extends Fragment {
         initUI(rootView);
 
         return rootView;
+    }
+
+    private void slideImage(int image) {
+        ImageView imageView = new ImageView(getActivity());
+        imageView.setBackgroundResource(image);
+
+        viewFlipper.addView(imageView);
+        viewFlipper.setFlipInterval(4000);
+        viewFlipper.setAutoStart(true);
+
+        viewFlipper.setInAnimation(getActivity(),android.R.anim.slide_in_left);
+        viewFlipper.setOutAnimation(getActivity(),android.R.anim.slide_out_right);
     }
 
     private void initUI(ViewGroup rootView) {

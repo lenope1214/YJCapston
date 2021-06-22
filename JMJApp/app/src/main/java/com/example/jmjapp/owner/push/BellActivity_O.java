@@ -86,11 +86,6 @@ public class BellActivity_O extends AppCompatActivity {
         //binding.qwe123.setText(resTime);
 
         if (from != null) {
-            Log.d("from123", from);
-            Log.d("resId", resId);
-            Log.d("orderId", orderId);
-            Log.d("jwt", jwt);
-
             listOrderCall = Server.getInstance().getApi().orderList("Bearer " + jwt, resId);
             listOrderCall.enqueue(new Callback<List<Order>>() {
                 @SneakyThrows
@@ -100,15 +95,15 @@ public class BellActivity_O extends AppCompatActivity {
                         Log.d("bell성공", "bell성공");
                         List<Order> orderList = response.body();
                         for(Order list : orderList) {
-                            if (list.getAccept() == 'N') {
+                            if (list.getAccept() == 'N' && list.getPayTime() != null) {
                                 mItems.add(new Order(list.getOrderId(), list.getStatus(), list.getOrderRequest(),
                                         list.getPeople(), list.getUsePoint(), list.getAmount(),
                                         list.getArriveTime(), list.getPayTime(), list.getPg(),
                                         list.getPayMethod(), list.getShopId(), list.getShopName(), list.getUserName(),
                                         list.getReason(), list.getReviewed(), list.getUserId(), list.getAccept(), list.getCompleAmount()));
-                                Log.d("accept", String.valueOf(list.getAccept()));
+                                Log.d("arrvieTime", String.valueOf(list.getArriveTime()));
                                 alarm_list.setHasFixedSize(true);
-                                adapter = new AlarmListRecyclerAdapter(getApplicationContext(), mItems, jwtUser);
+                                adapter = new AlarmListRecyclerAdapter(getApplicationContext(), mItems, jwtUser, resId);
                                 alarm_list.setLayoutManager(new LinearLayoutManager(getApplication()));
                                 alarm_list.setAdapter(adapter);
                                 Log.d("awdawd", list.getOrderId());

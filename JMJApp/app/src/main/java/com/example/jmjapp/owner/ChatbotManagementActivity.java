@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,6 +52,7 @@ public class ChatbotManagementActivity extends AppCompatActivity {
         jwt = pref.getString("token", null);
 
         shopId = MainActivity_O.shopNumber;
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.chatbot_toolbar);
         toolbar.setTitle(""); // 이거 없으면 JMJApplication 뜸.
         setSupportActionBar(toolbar);
@@ -124,4 +127,11 @@ public class ChatbotManagementActivity extends AppCompatActivity {
         Log.d("onStop", "onStop 실행");
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

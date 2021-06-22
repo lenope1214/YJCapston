@@ -79,13 +79,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/viewPager2"
-                android:layout_width="0dp"
-                android:layout_height="150dp"
+            <ViewFlipper
+                android:id="@+id/user_img_slide"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,6 +1,7 @@
 package com.example.jmjapp.Adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
@@ -10,28 +11,39 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Order;
+import com.example.jmjapp.network.Server;
+import com.example.jmjapp.network.Server2;
 import com.example.jmjapp.user.LoginActivity;
 import com.example.jmjapp.user.ReservationOrderDetailActivity;
 
+import java.sql.SQLOutput;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MyOrderListAdapter extends RecyclerView.Adapter<MyOrderListAdapter.ItemViewHolder> {
     Context context;
     ArrayList<Order> mItems;
-    
-    private String payTime;
+
+
+    private String payTime, jwt, orderId;
     private char my_order_list_isAccept;
 
-    public MyOrderListAdapter(Context context, ArrayList<Order> myOrder) {
+    public MyOrderListAdapter(Context context, ArrayList<Order> myOrder, String jwt) {
         this.context = context;
         mItems = myOrder;
+        this.jwt = jwt;
     }
 
 //    public MyOrderListAdapter(Context context) {
@@ -54,15 +66,16 @@ public class MyOrderListAdapter extends RecyclerView.Adapter<MyOrderListAdapter.
     public void onBindViewHolder(final MyOrderListAdapter.ItemViewHolder holder, final int position) {
         payTime = mItems.get(position).getPayTime();
         my_order_list_isAccept = mItems.get(position).getAccept();
+        orderId = mItems.get(position).getOrderId();
 
 //        String year = resTime.substring(0,4);
-        String month = payTime.substring(5,7);
-        String day = payTime.substring(8,10);
+        String month = payTime.substring(5, 7);
+        String day = payTime.substring(8, 10);
 //
 //        String hour = resTime.substring(11,13);
 //        String min = resTime.substring(14,16);
 //
-        holder.my_order_list_date.setText(month+"월"+day+"일");
+        holder.my_order_list_date.setText(month + "월" + day + "일");
         holder.my_order_list_shopName.setText(mItems.get(position).getShopName());
         holder.my_order_list_detail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,15 +103,16 @@ public class MyOrderListAdapter extends RecyclerView.Adapter<MyOrderListAdapter.
     // 커스텀 뷰홀더
     // item layout 에 존재하는 위젯들을 바인딩합니다.
     class ItemViewHolder extends RecyclerView.ViewHolder {
-        private TextView my_order_list_date, my_order_list_shopName, my_order_list_isAccept;
+        private TextView my_order_list_date, my_order_list_shopName, my_order_list_isAccept, cancel_order;
         private ConstraintLayout my_order_list_detail;
-        
+
         public ItemViewHolder(View itemView) {
             super(itemView);
             my_order_list_date = (TextView) itemView.findViewById(R.id.my_order_list_date);
             my_order_list_shopName = (TextView) itemView.findViewById(R.id.my_order_list_shopName);
             my_order_list_detail = (ConstraintLayout) itemView.findViewById(R.id.my_order_list_detail);
             my_order_list_isAccept = (TextView) itemView.findViewById(R.id.my_order_list_isAccept);
+            cancel_order = (TextView) itemView.findViewById(R.id.cancel_order);
         }
     }
 }

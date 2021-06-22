@@ -20,7 +20,7 @@ public class  Shop {
     private char isOpen;
     private String imgPath;
     private String ownerId;
-
+    private String phone;
 
     public Shop(String id) {
     }

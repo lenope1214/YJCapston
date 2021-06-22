@@ -2,11 +2,13 @@ package com.example.jmjapp.user;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +18,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.jmjapp.Adapter.DetailPagerAdapter;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Mark;
+import com.example.jmjapp.dto.Review;
 import com.example.jmjapp.dto.Shop;
 import com.example.jmjapp.network.Server;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -47,11 +50,13 @@ public class ShopDetailActivity extends AppCompatActivity {
     static public String shopDetailAddress;
     static public String shopImgPath;
     static public String ownerId;
+    static public String phone;
 
-    TextView shop_detail_shopname, shop_detail_review, shop_detail_reply, shop_detail_avgtext;
+    TextView shop_detail_shopname, shop_detail_review, shop_detail_reply, shop_detail_avgtext, start_rating_tv;
     ImageView shop_detail_avgstar, shop_detail_phonecall_img, shop_detail_zzim_img;
     ConstraintLayout shop_detail_phonecall, shop_detail_zzim;
     FloatingActionButton order_basket;
+    RatingBar ratingBar;
 
     SharedPreferences pref;
 
@@ -59,6 +64,7 @@ public class ShopDetailActivity extends AppCompatActivity {
     private Call<ResponseBody> regzzim;
     private Call<ResponseBody> delzzim;
     private Call<Mark.MarkList> getMarks;
+    private Call<List<Review>> reviewCall;
 
     private String jwt, userId;
 
@@ -81,7 +87,7 @@ public class ShopDetailActivity extends AppCompatActivity {
 
         shop_detail_shopname = (TextView)findViewById(R.id.shop_detail_shopname);
         shop_detail_review = (TextView) findViewById(R.id.shop_detail_review);
-        shop_detail_reply = (TextView) findViewById(R.id.shop_detail_reply);
+//        shop_detail_reply = (TextView) findViewById(R.id.shop_detail_reply);
         //shop_detail_avgtext = (TextView) findViewById(R.id.shop_detail_avgtext);
         //shop_detail_avgstar = (ImageView) findViewById(R.id.shop_detail_avgstar);
         shop_detail_phonecall = (ConstraintLayout) findViewById(R.id.shop_detail_phonecall);
@@ -89,6 +95,8 @@ public class ShopDetailActivity extends AppCompatActivity {
         shop_detail_phonecall_img = (ImageView) findViewById(R.id.shop_detail_phonecall_img);
         shop_detail_zzim_img = (ImageView) findViewById(R.id.shop_detail_zzim_img);
         order_basket = (FloatingActionButton) findViewById(R.id.order_basket);
+        start_rating_tv = findViewById(R.id.start_rating_tv);
+        ratingBar = findViewById(R.id.shop_detail_ratingBar);
 
         shopNumber = getIntent().getStringExtra("shopNumber");
         tableNumber = getIntent().getStringExtra("tableNumber");
@@ -210,6 +218,58 @@ public class ShopDetailActivity extends AppCompatActivity {
 
         showDetail();
 
+        showReviewGrade();
+    }
+
+    private void showReviewGrade() {
+        reviewCall = Server.getInstance().getApi().reviewList("Bearer " + jwt, shopNumber);
+        reviewCall.enqueue(new Callback<List<Review>>() {
+            @SneakyThrows
+            @Override
+            public void onResponse(Call<List<Review>> call, Response<List<Review>> response) {
+                if (response.isSuccessful()) {
+                    Log.d("reviewList 성공", "reviewList 성공");
+                    List<Review> reviewList = response.body();
+                    shop_detail_review.setText(" " + reviewList.size() + "개");
+
+                    int list_rating[] = new int[reviewList.size()];
+
+                    int index = 0;
+                    int sum = 0;
+
+                    for (Review list : reviewList) {
+                        if (String.valueOf(list.getScore()) == null) {
+                            list_rating[index] = 0;
+                        } else {
+                            list_rating[index] = list.getScore();
+                            index++;
+                        }
+                    }
+
+                    for (int i = 0; i < reviewList.size(); i++) {
+                        sum = sum + list_rating[i];
+                    }
+
+                    if (reviewList.size() != 0) {
+                        sum = sum / reviewList.size();
+
+                        start_rating_tv.setText(String.valueOf(sum) + "점");
+                        ratingBar.setRating(sum);
+                    } else {
+                        start_rating_tv.setText("0점");
+                        ratingBar.setRating(0);
+                    }
+
+                } else {
+                    Log.d("reviewList 실패1", "reviewList 실패1" + response.errorBody().string());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Review>> call, Throwable t) {
+                Log.d("reviewList 실패2", "reviewList 실패2" + t.getCause());
+            }
+        });
     }
 
     @Override
@@ -240,9 +300,20 @@ public class ShopDetailActivity extends AppCompatActivity {
                     shopDetailAddress = shop.getAddressDetail();
                     shopImgPath = shop.getImgPath();
                     ownerId = shop.getOwnerId();
+                    phone = shop.getPhone();
 
                     Log.d("rawa@@@@@@@@w",shopIntro + "@" + shopOpen + "@"  + shopClose + "@" + shopIsOpen + "@"
                             + shopIsRsPos + "@" + shopAddress + "@" + shopDetailAddress +"@" + ownerId);
+
+                    if (phone != null) {
+                        shop_detail_phonecall.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + phone));
+                                startActivity(intent);
+                            }
+                        });
+                    }
 
                     DetailPagerAdapter detailPagerAdapter = new DetailPagerAdapter(getSupportFragmentManager());
                     ViewPager viewPager = (ViewPager)findViewById(R.id.shop_detail_viewpager3);

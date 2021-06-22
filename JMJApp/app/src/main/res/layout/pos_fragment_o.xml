@@ -35,6 +35,7 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
+            android:fontFamily="@font/we_semibold"
             android:text="포스 관리 "
             android:textColor="#000"
             android:textSize="18sp" />
