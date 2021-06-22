@@ -91,12 +91,15 @@ background: #F2F2F2;
     border: 1px solid gray;
 }
 .button0{
-    
-    width: 140px;
-    height: 35px;
-    border-radius: 0px;
-    border:1px solid gray;
-    border-radius:0px 5px 5px 0px;
+    height: 40px;
+    width: 120px;
+    margin-right: 5px;
+    transform: translateY(2px);
+    transform: translateX(-120px);
+    border-radius: 0 5px 5px 0;
+    border: 1px solid gray;
+    background: #1785f2;
+    color: white;
 }
 .button3 {
     height: 50px;

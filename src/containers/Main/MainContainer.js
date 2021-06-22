@@ -40,7 +40,7 @@ const MainContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 setUser(res.data.user);                     
             })
             .catch((err) => {
-                alert(err);
+                
             });
     };
 

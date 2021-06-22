@@ -32,7 +32,7 @@ const MyPageContainer = (props) => {
     };
     
     const history = useHistory();
-    const [Pw, setPw] = useState("");
+    const [Pw, setPw] = useState(null);
     const [user, setUser] = useState({
         name: "",
         phone: "",
@@ -76,7 +76,10 @@ const MyPageContainer = (props) => {
     };
 
     const Mypage = () => {
-        putMypage(Pw, roadAddr, addressDetail)
+        putMypage(
+            Pw,
+            roadAddr,
+            addressDetail)
             .then((res) => {
                 history.push("/main");
             })
@@ -136,6 +139,8 @@ const MyPageContainer = (props) => {
                         jmamount: orderjmlist.totalAmount,
                         jmshopName: orderjmlist.shopName,
                         jmshopId: orderjmlist.shopId,
+                        jmamount: orderjmlist.amount,
+                        jmstatus: orderjmlist.status,
                     };
                 });
                 setJmlist(orderjmlist);

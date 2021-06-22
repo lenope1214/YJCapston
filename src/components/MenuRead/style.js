@@ -80,5 +80,8 @@ text-align: left;
     position: absolute;
     height: 46px;
     transform: translateX(-92px);
+    background: #1785f2;
+    color: white;
+    border: 1px solid gray;
 }
 `;

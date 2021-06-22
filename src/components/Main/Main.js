@@ -130,7 +130,7 @@ const Main = ({
                         </div>
                         <span className="link">사업자</span>
                         <span className="link">사용자</span>
-                        <span className="link">어플다운</span>
+                        {/* <span className="link">어플다운</span> */}
                         <div className="log-box">
                             {isLogin ? (
                                 <>
@@ -188,7 +188,7 @@ const Main = ({
                                 <p className="vt0">THE</p>
                                 <p className="vt1">
                                     PEOPLE<span className="of"> OF</span>
-                                     ORDER
+                                    &nbsp;ORDER
                                 </p>
                                 <img
                                     src={dia}

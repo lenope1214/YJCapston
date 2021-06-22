@@ -283,9 +283,9 @@ console.log(shopphone1);
                 id="rspos"
                 // value={isRsPos}
                 value={a}
-                className="input-box1"
+                className="input-box"
                 />
-            <button onClick={Shop_v2} className="button0">예약여부변경하기</button>
+            <button onClick={Shop_v2} className="button0">예약여부변경</button>
             {/* <span className="open">{isRsPos}</span> */}
         </div>
             
@@ -298,9 +298,9 @@ console.log(shopphone1);
                 id="open"
                 // value={isOpen}
                 value={b}
-                className="input-box1"
+                className="input-box"
                 />
-            <button onClick={Shop_v3} className="button0">오픈여부변경하기</button>
+            <button onClick={Shop_v3} className="button0">오픈여부변경</button>
             {/* <span className="open">{isOpen}</span>                 */}
         </div>    
 

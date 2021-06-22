@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import Table from "../../components/Table/Table";
 import { getshopmenu, postorder, getorderlist } from "../../lib/Table/index";
+import Header from "../../components/Header/Header";
 
 const TableContainer = () => {
     const param = useParams();
@@ -137,6 +138,8 @@ const TableContainer = () => {
         history.push(`/pos/${param.shopId}`);
     };
     return (
+        <>
+        <Header />
         <Table
             menu={menu}
             handleMenu={handleMenu}
@@ -150,6 +153,7 @@ const TableContainer = () => {
             tablepeople={tablepeople}
             orderId={orderId}
         />
+        </>
     );
 };
 

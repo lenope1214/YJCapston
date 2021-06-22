@@ -132,12 +132,12 @@ const PaymentDone = ({
                                             매장 목록으로
                                         </button>
                                     </Link>
-                                    <button
+                                    {/* <button
                                         className="button"
                                         onClick={require}
                                     >
                                         취소하기
-                                    </button>
+                                    </button> */}
                                 </div>
                             </div>
                         </div>

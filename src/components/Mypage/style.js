@@ -229,4 +229,11 @@ background: #F2F2F2;
     button:hover {
         cursor:pointer;
     }
+    .review-button-none {
+        display: none;
+    }
+    .delete-button-none {
+        display: none;
+    }
+
 `;

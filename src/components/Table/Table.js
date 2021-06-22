@@ -7,6 +7,7 @@ import {
     postorder1,
     paymentdone,
 } from "../../lib/Table/index";
+import * as S from "./style";
 
 const Table = ({
     menu,
@@ -39,187 +40,222 @@ const Table = ({
         setAllPrice(a);
     }, [jmMenu]);
     return (
-        <div>
-            <div>
-                {" "}
-                <div>{param.tableamount}번 테이블</div>
-                <button onClick={plus}>+</button>
-                <span>인원수 : {count}</span>
-                <button onClick={minus}>-</button>
-                {menu.map((menulist) => {
-                    return (
-                        <div>
-                            <span>
-                                <button
-                                    onClick={() =>
-                                        handleMenu(
-                                            menulist.name,
-                                            menulist.price,
-                                            menulist.menuId
-                                        )
-                                    }
-                                >
-                                    <img
-                                        width=" 100px"
-                                        src={AWS_BASE_URL + menulist.img}
-                                    />
-                                    {menulist.name}
-                                </button>
-                            </span>
+        <S.tableWrap>
+            <div className="all-container">
+                <div className="left-container">
+                    <div className="left-1">
+                        <br></br>
+                        <div class="left-title1">주문 목록</div>
+                        <div class="left-content1">
+                            <table>
+                                <thead>
+                                    <th>메뉴</th>
+                                    <th>수량</th>
+                                    <th>가격</th>
+                                    <th></th>
+                                </thead>
+                                <tbody>
+
+                                    {jmMenu.map((jmlist) => {
+                                        return (
+                                            <tr>
+                                                <td>{jmlist.name}</td>
+                                                <td>
+                                                    {jmlist.count}
+                                                </td>
+                                                <td>
+                                                    {jmlist.price}원
+                                                </td>
+                                                <td>
+                                                    <button
+                                                        class="del-but"
+                                                        onClick={() =>
+                                                            handleDeleteMenu(jmlist.name)
+                                                        }
+                                                    >
+                                                        삭제
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
+
                         </div>
-                    );
-                })}
-            </div>
-            <div class="showjm">
-                <br></br>
+                        <div class="total-box">
+                            <div class="total-price">Total : {allPrice}원</div>
+                        </div>
+                        <div className="button-box">
+                            <button
+                                class="button1"
+                                onClick={async () => {
+                                    const res = await postorder1(
+                                        param.shopId,
+                                        param.tableamount,
+                                        count,
+                                        allPrice
+                                    )
+                                        .then((res) => {
+                                            const postlist2 = jmMenu.map((menu) => {
+                                                return {
+                                                    orderId: res.data.orderId,
+                                                    shopId: param.shopId,
+                                                    quantity: menu.count,
+                                                    menuId: menu.menuId,
+                                                    tabNo: param.tableamount,
+                                                };
+                                            });
 
-                <div class="jmlist">주문 목록</div>
-                <div class="jmcontent">
-                    {jmMenu.map((jmlist) => {
+                                            if (!(res.data.orderId == null)) {
+                                                postordermenu(postlist2).then((res) => {
+                                                    history.push(`/pos/${param.shopId}`);
+                                                });
+                                                // async () => {
+                                                //     const res = await postordermenu(
+                                                //         postlist
+                                                //     ).then((res) => {
+                                                //         console.log(res);
+                                                //         history.push(`/pos/${param.shopId}`);
+                                                //     });
+                                                // };
+                                            }
+                                        })
+                                        .catch((err) => {
+                                            console.log(err);
+                                        });
+                                }}
+                            >
+                                주문하기
+                            </button>
+                            <button
+                                class="button2"
+                                onClick={async () => {
+                                    const res = await postorder(
+                                        param.shopId,
+                                        param.tableamount,
+                                        count,
+                                        allPrice,
+                                        orderId
+                                    )
+                                        .then((res) => {
+                                            const postlist2 = jmMenu.map((menu) => {
+                                                return {
+                                                    orderId: res.data.orderId,
+                                                    shopId: param.shopId,
+                                                    quantity: menu.count,
+                                                    menuId: menu.menuId,
+                                                    tabNo: param.tableamount,
+                                                };
+                                            });
+
+                                            if (!(res.data.orderId == null)) {
+                                                postordermenu(postlist2).then((res) => {
+                                                    history.push(`/pos/${param.shopId}`);
+                                                });
+                                                // async () => {
+                                                //     const res = await postordermenu(
+                                                //         postlist
+                                                //     ).then((res) => {
+                                                //         console.log(res);
+                                                //         history.push(`/pos/${param.shopId}`);
+                                                //     });
+                                                // };
+                                            }
+                                        })
+                                        .catch((err) => {
+                                            console.log(err);
+                                        });
+                                }}
+                            >
+                                추가 주문하기
+                            </button>
+                        </div>
+                    </div>
+                    <div className="left-2">
+                        <br />
+                        <div className="left-title2">이전 주문 목록</div>
+                        <div className="left-content2">
+                            <table>
+                                <thead>
+                                    <th>메뉴</th>
+                                    <th>수량</th>
+                                    <th>가격</th>
+                                </thead>
+                                <tbody>
+                                    {yetjmMenu.map((yetjmMenu) => {
+                                        return (
+                                            <tr>
+                                                <td>
+                                                    {yetjmMenu.name}
+                                                </td>
+                                                <td>
+                                                    {yetjmMenu.count}
+                                                </td>
+                                                <td>
+                                                    {yetjmMenu.price}
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div className="button-box">
+                        <button
+                            className="button3"
+                            onClick={async () => {
+                                const res = await paymentdone(orderId)
+                                    .then((res) => {
+                                        history.push(`/pos/${param.shopId}`);
+                                    })
+                                    .catch((err) => {
+                                        console.log(err);
+                                    });
+                            }}
+                        >
+                            결제하기
+                        </button>
+                        {/* <button >취소하기</button> */}
+                    </div>
+                </div>
+                <div className="right-container">
+                    {" "}
+                    <div className="table-num">{param.tableamount}번 테이블</div>
+                    <div className="people-num">
+                        <button onClick={minus}>-</button>
+                        <span>인원수 : {count}</span>
+                        <button onClick={plus}>+</button>
+                    </div>
+                    <div className="item-box">
+                    {menu.map((menulist) => {
                         return (
-                            <div>
-                                <div class="jmList_all">
-                                    <span class="jmList_1">{jmlist.name}</span>
-                                    <span class="jmList_3">
-                                        {jmlist.count}개
-                                    </span>
-                                    <span class="jmList_2">
-                                        {jmlist.price}원
-                                    </span>
-
+                            <div className="item">
                                     <button
-                                        class="jmList_4"
+                                     className="item"
                                         onClick={() =>
-                                            handleDeleteMenu(jmlist.name)
+                                            handleMenu(
+                                                menulist.name,
+                                                menulist.price,
+                                                menulist.menuId
+                                            )
                                         }
                                     >
-                                        삭제
+                                        <img
+                                            width=" 100px"
+                                            src={AWS_BASE_URL + menulist.img}
+                                        />
+                                        <br/>
+                                        {menulist.name}
                                     </button>
-                                    <br></br>
-                                </div>
                             </div>
                         );
                     })}
+                    </div>
                 </div>
-                <div class="jmallprice">
-                    <span>합계</span>
-                    <div class="jmprice8">{allPrice}원</div>
-                </div>
-
-                <button
-                    class="gojm"
-                    onClick={async () => {
-                        const res = await postorder1(
-                            param.shopId,
-                            param.tableamount,
-                            count,
-                            allPrice
-                        )
-                            .then((res) => {
-                                const postlist2 = jmMenu.map((menu) => {
-                                    return {
-                                        orderId: res.data.orderId,
-                                        shopId: param.shopId,
-                                        quantity: menu.count,
-                                        menuId: menu.menuId,
-                                        tabNo: param.tableamount,
-                                    };
-                                });
-
-                                if (!(res.data.orderId == null)) {
-                                    postordermenu(postlist2).then((res) => {
-                                        history.push(`/pos/${param.shopId}`);
-                                    });
-                                    // async () => {
-                                    //     const res = await postordermenu(
-                                    //         postlist
-                                    //     ).then((res) => {
-                                    //         console.log(res);
-                                    //         history.push(`/pos/${param.shopId}`);
-                                    //     });
-                                    // };
-                                }
-                            })
-                            .catch((err) => {
-                                console.log(err);
-                            });
-                    }}
-                >
-                    주문하기
-                </button>
-                <button
-                    class="gojm"
-                    onClick={async () => {
-                        const res = await postorder(
-                            param.shopId,
-                            param.tableamount,
-                            count,
-                            allPrice,
-                            orderId
-                        )
-                            .then((res) => {
-                                const postlist2 = jmMenu.map((menu) => {
-                                    return {
-                                        orderId: res.data.orderId,
-                                        shopId: param.shopId,
-                                        quantity: menu.count,
-                                        menuId: menu.menuId,
-                                        tabNo: param.tableamount,
-                                    };
-                                });
-
-                                if (!(res.data.orderId == null)) {
-                                    postordermenu(postlist2).then((res) => {
-                                        history.push(`/pos/${param.shopId}`);
-                                    });
-                                    // async () => {
-                                    //     const res = await postordermenu(
-                                    //         postlist
-                                    //     ).then((res) => {
-                                    //         console.log(res);
-                                    //         history.push(`/pos/${param.shopId}`);
-                                    //     });
-                                    // };
-                                }
-                            })
-                            .catch((err) => {
-                                console.log(err);
-                            });
-                    }}
-                >
-                    추가주문하기
-                </button>
             </div>
-            <div>
-                <br />
-                <div>이전 주문 목록</div>
-                {yetjmMenu.map((yetjmMenu) => {
-                    return (
-                        <div>
-                            메뉴이름 : {yetjmMenu.name + " "} {yetjmMenu.count}{" "}
-                            가격:
-                            {yetjmMenu.price + " "}
-                        </div>
-                    );
-                })}
-            </div>
-            <div>
-                <button
-                    onClick={async () => {
-                        const res = await paymentdone(orderId)
-                            .then((res) => {
-                                history.push(`/pos/${param.shopId}`);
-                            })
-                            .catch((err) => {
-                                console.log(err);
-                            });
-                    }}
-                >
-                    결제하기
-                </button>
-                <button>취소하기</button>
-            </div>
-        </div>
+        </S.tableWrap>
     );
 };
 

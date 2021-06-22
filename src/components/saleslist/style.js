@@ -174,20 +174,24 @@ export const saleslistWrap = styled.div`
         padding: 5px;
         border-radius: 10px;
     }
+    
     .type {
         margin-top: 5px;
         text-align: left;
         margin-left: 10px;
         font-size: 15px;
     }
+
     .money {
         margin-top: 24px;
         font-size: 30px;
         font-family: 'LAB디지털';
     }
+
     .but-box {
         margin-bottom: 12px;
     }
+
     .sub-title {
         margin-top: 15px;
         margin-left: 20px;
