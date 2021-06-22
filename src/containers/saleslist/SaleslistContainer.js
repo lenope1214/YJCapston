@@ -120,8 +120,8 @@ const SaleslistContainer = (props) => {
             nowDate,
             )
             .then((res) => {
-                setRSsales(res.data);
-                setsales(res.data);
+                setRSsales(res.data.sumPdRf);
+                setsales(res.data.sumPdRf);
                 setresultDate(nowDate + " 당일 매출");
                 setPay(res.data);
                 // alert("오늘");
@@ -139,9 +139,9 @@ const SaleslistContainer = (props) => {
             nowDate1,
         )
         .then((res) => {       
-            setRSsales(res.data);
+            setRSsales(res.data.sumPdRf);
             setresultDate(nowDate1+" 매출");
-            setPay(res.data);
+            setPay(res.data.sumPdRf);
         })
         .catch((err) => {
             alert(err);
@@ -190,8 +190,8 @@ const SaleslistContainer = (props) => {
             nowDate,
         )
         .then((res) => {
-            setRSsales1(res.data);
-            setsales1(res.data);
+            setRSsales1(res.data.sumPdRf);
+            setsales1(res.data.sumPdRf);
             
         })
         .catch((err) => {
@@ -206,9 +206,9 @@ const SaleslistContainer = (props) => {
             month3,
         )
         .then((res) => {
-            setRSsales1(res.data);
+            setRSsales1(res.data.sumPdRf);
             setresultDate(month3 + " 해당 주 매출");
-            setPay(res.data);
+            setPay(res.data.sumPdRf);
         })
         .catch((err) => {
             alert(err);
@@ -222,11 +222,11 @@ const SaleslistContainer = (props) => {
             nowDate,
         )
         .then((res) => {
-            setRSsales2(res.data);  
-            setsales2(res.data);          
+            setRSsales2(res.data.sumPdRf);  
+            setsales2(res.data.sumPdRf);          
         })
         .catch((err) => {
-            alert("해당월 조회 에러");
+            alert("이번 달 조회 에러");
         });
     };
 
@@ -237,9 +237,9 @@ const SaleslistContainer = (props) => {
             month4,
         )
         .then((res) => {
-            setRSsales2(res.data);
+            setRSsales2(res.data.sumPdRf);
             setresultDate(`${month4}\n 해당 월 매출`);
-            setPay(res.data);
+            setPay(res.data.sumPdRf);
         })
         .catch((err) => {
             alert(err);
@@ -254,9 +254,9 @@ const SaleslistContainer = (props) => {
             month2,
         )
         .then((res) => {
-            setsales3(res.data);
+            setsales3(res.data.sumPdRf);
             setresultDate("조회 기간 매출");
-            setPay(res.data);
+            setPay(res.data.sumPdRf);
         })
         .catch((err) => {
             alert(err);

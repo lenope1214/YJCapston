@@ -207,7 +207,7 @@ const Shopcontent = ({
                                                 <button className="chatbut"
                                                     onClick={() =>
                                                         window.open(
-                                                            `http://3.34.55.186:3000/chat/${shopIntro.shopId}`,
+                                                            `http://jumanji.홈페이지.한국/chat/${shopIntro.shopId}`,
                                                             "_blank",
                                                             "location = no, toolbars= no, status= no, width = 400, height = 500 , scrollbars = no"
                                                         )

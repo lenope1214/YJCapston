@@ -25,7 +25,7 @@ const Tablebar = ({ shopId }) => {
                                 class="menu-2"
                                 onClick={() =>
                                     window.open(
-                                        `http://3.34.55.186:3000/chat/${shopId}`,
+                                        `http://jumanji.홈페이지.한국/chat/${shopId}`,
                                         "_blank",
                                         "location = no, toolbars= no, status= no, width = 400, height = 500 , scrollbars = no"
                                     )
