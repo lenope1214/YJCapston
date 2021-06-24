@@ -2,6 +2,8 @@ import React from "react";
 import * as S from "./style";
 import { Link } from "react-router-dom";
 import topimg from "../Main/img/QRcode2.png";
+import moment from 'moment';
+import 'moment/locale/ko';
 
 const ShopOrder = ({
     isLogin,
@@ -30,7 +32,22 @@ const ShopOrder = ({
     lastprcie,
     publish,
     connect,
+    rsYear,
+    handlersYear,
+    rsMonth,
+    handlersMonth,
+    rsDate,
+    handlersDate,
+    rsHour,
+    handlersHour,
+    rsMinute,
+    handlersMinute,
 }) => {
+
+    const nowYear = moment().format('YYYY');
+    const nextYear = moment().add(1,'year').format('YYYY');
+    
+
     return (
         <>
             <S.shopOrder>
@@ -109,17 +126,119 @@ const ShopOrder = ({
                                 </div>
                                 <div className="subtitle">예약 시간</div>
                                 <div>
-                                    <input
-                                        className="input-box"
-                                        type="date"
-                                    ></input>
+                                    <select
+                                    className="input-box1"
+                                        value={rsYear}
+                                        onChange={handlersYear}
+                                    >
+                                        <option value="">년도</option>
+                                        
+                                        <option value="2021">{nowYear}년</option>
+                                        <option vlaue="2022">{nextYear}년</option>
+                                    </select>
+
+                                    <select
+                                    className="input-box2"
+                                        value={rsMonth}
+                                        onChange={handlersMonth}
+                                    >
+                                        <option value="">월</option>
+                                        <option value="1">1월</option>
+                                        <option value="2">2월</option>
+                                        <option value="3">3월</option>
+                                        <option value="4">4월</option>
+                                        <option value="5">5월</option>
+                                        <option value="6">6월</option>
+                                        <option value="7">7월</option>
+                                        <option value="8">8월</option>
+                                        <option value="9">9월</option>
+                                        <option value="10">10월</option>
+                                        <option value="11">11월</option>
+                                        <option value="12">12월</option>
+                                    </select>
+                                    
+                                    <select
+                                    className="input-box2"
+                                        value={rsDate}
+                                        onChange={handlersDate}
+                                    >
+                                        <option value="">일</option>
+                                        <option value="1">1일</option>
+                                        <option value="2">2일</option>
+                                        <option value="3">3일</option>
+                                        <option value="4">4일</option>
+                                        <option value="5">5일</option>
+                                        <option value="6">6일</option>
+                                        <option value="7">7일</option>
+                                        <option value="8">8일</option>
+                                        <option value="9">9일</option>
+                                        <option value="10">10일</option>
+                                        <option value="11">11일</option>
+                                        <option value="12">12일</option>
+                                        <option value="13">13일</option>
+                                        <option value="14">14일</option>
+                                        <option value="15">15일</option>
+                                        <option value="16">16일</option>
+                                        <option value="17">17일</option>
+                                        <option value="18">18일</option>
+                                        <option value="19">19일</option>
+                                        <option value="20">20일</option>
+                                        <option value="21">21일</option>
+                                        <option value="22">22일</option>
+                                        <option value="23">23일</option>
+                                        <option value="24">24일</option>
+                                        <option value="25">25일</option>
+                                        <option value="26">26일</option>
+                                        <option value="27">27일</option>
+                                        <option value="28">28일</option>
+                                        <option value="29">29일</option>
+                                        <option value="30">30일</option>
+                                        <option value="31">31일</option>
+                                    </select>
+                                    <br/>
+                                    <select
+                                    className="input-box1"
+                                        value={rsHour}
+                                        onChange={handlersHour}
+                                    >
+                                        <option value="">시</option>
+                                        <option value="1">1시</option>
+                                        <option value="2">2시</option>
+                                        <option value="3">3시</option>
+                                        <option value="4">4시</option>
+                                        <option value="5">5시</option>
+                                        <option value="6">6시</option>
+                                        <option value="7">7시</option>
+                                        <option value="8">8시</option>
+                                        <option value="9">9시</option>
+                                        <option value="10">10시</option>
+                                        <option value="11">11시</option>
+                                        <option value="12">12시</option>
+                                        <option value="13">13시</option>
+                                        <option value="14">14시</option>
+                                        <option value="15">15시</option>
+                                        <option value="16">16시</option>
+                                        <option value="17">17시</option>
+                                        <option value="18">18시</option>
+                                        <option value="19">19시</option>
+                                        <option value="20">20시</option>
+                                        <option value="21">21시</option>
+                                        <option value="22">22시</option>
+                                        <option value="23">23시</option>
+                                        <option value="24">24시</option>
+                                    </select>
+                                    
+                                    <select
+                                    className="input-box2"
+                                        value={rsMinute}
+                                        onChange={handlersMinute}    
+                                    >
+                                        <option value="">분</option>
+                                        <option value="00">0분</option>
+                                        <option value="30">30분</option>
+                                    </select>
                                 </div>
-                                <div>
-                                    <input
-                                        className="input-box"
-                                        type="time"
-                                    ></input>
-                                </div>
+                                
                                 <div className="subtitle">요청 사항</div>
                                 <input
                                     type="text"

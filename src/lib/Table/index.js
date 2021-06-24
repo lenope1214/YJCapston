@@ -81,16 +81,26 @@ export const patchordermenu = (postmenulist) => {
     );
 };
 
+// export const paymentdone = (orderId) => {
+//     return apiDefault().post(
+//         "/payments/complite",
+//         { orderId: orderId },
+//         {
+//             headers: {
+//                 Authorization: `Bearer ${sessionStorage.getItem(
+//                     "access_token"
+//                 )}`,
+//             },
+//         }
+//     );
+// };
+
 export const paymentdone = (orderId) => {
-    return apiDefault().post(
-        "/payments/complite",
-        { orderId: orderId },
-        {
-            headers: {
-                Authorization: `Bearer ${sessionStorage.getItem(
-                    "access_token"
-                )}`,
-            },
-        }
-    );
+    return apiDefault().post("/payments/complete",{
+        orderId:orderId
+    },{
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        },  
+    });
 };

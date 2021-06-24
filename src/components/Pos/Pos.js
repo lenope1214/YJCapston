@@ -23,16 +23,15 @@ const Pos = ({
         setThisShopId(shopId);
     });
 
-    let i = 0;
-    let g = 0;
-
     return (
         <>
             <S.PosWrap>
-                <div className="left-container">
-                    <div className="shopName">{name}</div>
-                </div>
+                {/* <div className="left-container"> */}
+                    
+{/* 
+                </div> */}
                 <div className="right-container">
+                <div className="shopName">{name} 테이블 현황</div>
                     <span className="groupbox"></span>
 
                     {tableamount.map((tableamountlist) => {
@@ -52,41 +51,34 @@ const Pos = ({
                                                     ) {
                                                         return (
                                                             <>
-                                                            <div>
-                                                                {ordershowlist.menulist.map(
-                                                                    (
-                                                                        menulist
-                                                                    ) => {
-                                                                        return (
-                                                                            <div>
-                                                                                {
-                                                                                    menulist.menuName
-                                                                                }
-                                                                                {
-                                                                                    menulist.quantity
-                                                                                }
-                                                                            </div>
-                                                                        );
-                                                                    }
-                                                                )}
-                                                                {/* 가격:{" "}
-                                                                {
-                                                                    ordershowlist.amount
-                                                                } */}
-                                                                
-                                                            </div>
-                                                            <div className="tables-price">
-                                                                {ordershowlist.amount}\
+                                                                <div>
+                                                                    {ordershowlist.menulist.map(
+                                                                        (
+                                                                            menulist
+                                                                        ) => {
+                                                                            return (
+                                                                                <div>
+                                                                                    {
+                                                                                        menulist.menuName
+                                                                                    }
+                                                                                    {
+                                                                                        menulist.quantity
+                                                                                    }
+                                                                                </div>
+                                                                            );
+                                                                        }
+                                                                    )}
                                                                 </div>
-                                                                </>
+                                                                <div className="tables-price">
+                                                                    {ordershowlist.amount}\
+                                                                </div>
+                                                            </>
                                                         );
                                                     }
-                                                    
+
                                                 }
                                             )}
-                                            
                                         </div>
-                                                                    
                                     </span>
                                 </Link>
                             );

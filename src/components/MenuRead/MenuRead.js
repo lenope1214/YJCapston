@@ -21,9 +21,7 @@ const MenuRead = ({
     isPopular,
     isSale,
     menu_v2,
-    menu_v3,
-    handleMenuName,
-    menuName,
+    menu_v3
 }) => {
     return (
         <>
@@ -51,8 +49,6 @@ const MenuRead = ({
                                         // value={shopId}
                                         className="input-box"
                                         placeholder={name}
-                                        value={menuName}
-                                        onChange={handleMenuName}
                                         // readOnly
                                     />
                                 </td>

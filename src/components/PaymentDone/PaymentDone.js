@@ -2,6 +2,8 @@ import React from "react";
 import * as S from "./style";
 import { Link } from "react-router-dom";
 import topimg from "../Main/img/QRcode2.png";
+import { useHistory } from 'react-router';
+import {paymentdone} from "../../lib/Table/index";
 
 const PaymentDone = ({
     isLogin,
@@ -16,8 +18,16 @@ const PaymentDone = ({
     modal,
     paymentlist,
     require,
+    
 }) => {
     console.log(paymentlist);
+    
+    const history = useHistory();
+
+    const orderId = localStorage.getItem(
+        "orderId"
+    );
+
     return (
         <>
             <S.PaymentDoneWrap>
@@ -118,26 +128,34 @@ const PaymentDone = ({
                                         </td>
                                         <td>
                                             <p>
-                                                {localStorage.getItem(
-                                                    "orderId"
-                                                )}
+                                                {orderId}
                                             </p>
                                         </td>
                                     </tbody>
                                     <tr></tr>
                                 </table>
                                 <div className="button-div">
-                                    <Link to="/shoplist">
-                                        <button className="button">
+                                    {/* <Link to="/shoplist"> */}
+                                        <button className="button"
+                                        onClick={async () => {
+                                            const res = await paymentdone(orderId)
+                                            .then((res) => {
+                                                history.push(`/shoplist`);
+                                            })
+                                            .catch((err) => {
+                                                alert(err);
+                                            });
+                                        }}
+                                        >
                                             매장 목록으로
                                         </button>
-                                    </Link>
-                                    <button
+                                    {/* </Link> */}
+                                    {/* <button
                                         className="button"
                                         onClick={require}
                                     >
                                         취소하기
-                                    </button>
+                                    </button> */}
                                 </div>
                             </div>
                         </div>

@@ -147,7 +147,7 @@ const Register = ({
                                 onChange={handlePhone3}
                                 value={phone3}
                             />
-                            <button onClick={phoneauth}>번호인증</button>
+                            {/* <button onClick={phoneauth}>번호인증</button> */}
                         </div>
                         <div className="label">이메일</div>
                         <input

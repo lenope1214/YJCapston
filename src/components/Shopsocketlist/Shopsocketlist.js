@@ -1,5 +1,5 @@
 import React from "react";
-import { requirelist } from "../../lib/MyPage";
+import { requirelist, requirelist2 } from "../../lib/MyPage";
 import * as S from "./style";
 
 const Shopsocketlist = ({ list }) => {
@@ -39,7 +39,7 @@ const Shopsocketlist = ({ list }) => {
                                 <button className="but1">수락</button>
                                 <button
                                     onClick={async () => {
-                                        const res = await requirelist(
+                                        const res = await requirelist2(
                                             list.ordernumber,
                                             list.shopId
                                         ).then((res) => {

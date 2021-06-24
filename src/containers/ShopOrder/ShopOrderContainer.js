@@ -29,6 +29,40 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
     const [people, setPeople] = useState();
     const [pointcheck, setpointcheck] = useState(0);
     const [jmshopId, setjmshopId] = useState("");
+    const [rsYear, setrsYear] = useState("");
+    const [rsMonth, setrsMonth] = useState("");
+    const [rsDate, setrsDate] = useState("");
+    const [rsHour, setrsHour] = useState("");
+    const [rsMinute, setrsMinute] = useState("");
+
+    // const arriveTime = rsDate + rsTime;
+    const arriveTime = new Date(rsYear, rsMonth-1, rsDate, rsHour, rsMinute).getTime();
+console.log(arriveTime);
+
+    const handlersYear = (e) => {
+        const value = e.target.value;
+        setrsYear(value);
+    }
+
+    const handlersMonth = (e) => {
+        const value = e.target.value;
+        setrsMonth(value);
+    }
+
+    const handlersDate = (e) => {
+        const value = e.target.value;
+        setrsDate(value);
+    }
+
+    const handlersHour = (e) => {
+        const value = e.target.value;
+        setrsHour(value);
+    }
+
+    const handlersMinute = (e) => {
+        const value = e.target.value;
+        setrsMinute(value);
+    }
 
     const openmodal = () => {
         setModal(true);
@@ -101,7 +135,7 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
 
     const patchcontent = () => {
         const amount = jmallprice - pointcheck
-        patchorder(request, people, jmshopId,amount)
+        patchorder(request, people, arriveTime, jmshopId,amount)
             .then((res) => {
                 console.log(res);
                 localStorage.setItem("orderId", res.data.orderId);
@@ -370,6 +404,19 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
                 pointcheck={pointcheck}
                 connect={connect}
                 publish={publish}
+                rsDate={rsDate}
+                handlersDate={handlersDate}
+                
+                rsYear={rsYear}
+                handlersYear={handlersYear}
+                rsMonth={rsMonth}
+                handlersMonth={handlersMonth}
+                rsDate={rsDate}
+                handlersDate={handlersDate}
+                rsHour={rsHour}
+                handlersHour={handlersHour}
+                rsMinute={rsMinute}
+                handlersMinute={handlersMinute}
             />
         </>
     );
