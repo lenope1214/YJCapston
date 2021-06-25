@@ -3,19 +3,23 @@ package com.example.jmjapp.owner;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.jmjapp.Adapter.ChatbotListAdapter;
 import com.example.jmjapp.R;
 import com.example.jmjapp.databinding.ActivityChatbotManagementBinding;
 import com.example.jmjapp.dto.Chatbot;
 import com.example.jmjapp.network.Server;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import lombok.SneakyThrows;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -129,7 +133,7 @@ public class ChatbotManagementActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);

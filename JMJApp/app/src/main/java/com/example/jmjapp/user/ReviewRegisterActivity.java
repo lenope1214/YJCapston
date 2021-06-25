@@ -65,22 +65,16 @@ public class ReviewRegisterActivity extends AppCompatActivity {
 
         ratingBarr = findViewById(R.id.review_ratingBar);
 
-        ratingBarr.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                if (ratingBarr.getRating()<1.0f){
-                    ratingBarr.setRating(1);
-                }
+        ratingBarr.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
+            if (ratingBarr.getRating() < 1.0f) {
+                ratingBarr.setRating(1);
             }
         });
 
-        binding.reviewRegisterImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-                startActivityForResult(intent, GET_GALLERY_IMAGE);
-            }
+        binding.reviewRegisterImg.setOnClickListener(v -> {
+            Intent intent1 = new Intent(Intent.ACTION_PICK);
+            intent1.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+            startActivityForResult(intent1, GET_GALLERY_IMAGE);
         });
     }
 
@@ -110,61 +104,53 @@ public class ReviewRegisterActivity extends AppCompatActivity {
 
     private void registerMenu(String path) {
         File file = new File(path);
-        binding.reviewRegisterBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int rating = Math.round(ratingBarr.getRating());
-                Log.d("RA", String.valueOf(rating));
+        binding.reviewRegisterBtn.setOnClickListener(v -> {
+            int rating = Math.round(ratingBarr.getRating());
+            Log.d("RA", String.valueOf(rating));
 
-                RequestBody shopIdBody = RequestBody.create(MediaType.parse("text/plain"), shopId);
-                RequestBody orderIdBody = RequestBody.create(MediaType.parse("text/plain"), orderId);
-                RequestBody contentBody = RequestBody.create(MediaType.parse("text/plain"), binding.reviewContent.getText().toString());
-                RequestBody scoreBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(rating));
-                RequestBody imgBody = RequestBody.create(MediaType.parse("image/jpeg"), file);
+            RequestBody shopIdBody = RequestBody.create(MediaType.parse("text/plain"), shopId);
+            RequestBody orderIdBody = RequestBody.create(MediaType.parse("text/plain"), orderId);
+            RequestBody contentBody = RequestBody.create(MediaType.parse("text/plain"), binding.reviewContent.getText().toString());
+            RequestBody scoreBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(rating));
+            RequestBody imgBody = RequestBody.create(MediaType.parse("image/jpeg"), file);
 
-                MultipartBody.Part body = MultipartBody.Part.createFormData("img", file.getName(), imgBody);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("img", file.getName(), imgBody);
 
-                Map<String, RequestBody> map = new HashMap();
-                map.put("shopId", shopIdBody);
-                map.put("orderId", orderIdBody);
-                map.put("content", contentBody);
-                map.put("score", scoreBody);
+            Map<String, RequestBody> map = new HashMap();
+            map.put("shopId", shopIdBody);
+            map.put("orderId", orderIdBody);
+            map.put("content", contentBody);
+            map.put("score", scoreBody);
 
-                Log.d("register", shopId+orderId+binding.reviewContent.getText().toString()+ratingBarr.getRating());
+            Log.d("register", shopId + orderId + binding.reviewContent.getText().toString() + ratingBarr.getRating());
 
-                reviewCall = Server.getInstance().getApi().review("Bearer " + jwt, map, body);
-                reviewCall.enqueue(new Callback<Review>() {
-                    @SneakyThrows
-                    @Override
-                    public void onResponse(Call<Review> call, Response<Review> response) {
-                        if (response.isSuccessful()) {
-                            Log.d("review 등록성공", "review 등록성공");
-                            AlertDialog.Builder builder = new AlertDialog.Builder(ReviewRegisterActivity.this);
-                            dialog = builder.setMessage("리뷰가 등록되었습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    finish();
-                                }
-                            }).create();
-                            builder.setCancelable(false);
-                            dialog.show();
-                        } else {
-                            Log.d("review 등록실패1", "review 등록실패1"+response.errorBody().string());
-                        }
+            reviewCall = Server.getInstance().getApi().review("Bearer " + jwt, map, body);
+            reviewCall.enqueue(new Callback<Review>() {
+                @SneakyThrows
+                @Override
+                public void onResponse(Call<Review> call, Response<Review> response) {
+                    if (response.isSuccessful()) {
+                        Log.d("review 등록성공", "review 등록성공");
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ReviewRegisterActivity.this);
+                        dialog = builder.setMessage("리뷰가 등록되었습니다.").setPositiveButton("확인", (dialog, which) -> finish()).create();
+                        builder.setCancelable(false);
+                        dialog.show();
+                    } else {
+                        Log.d("review 등록실패1", "review 등록실패1" + response.errorBody().string());
                     }
+                }
 
-                    @Override
-                    public void onFailure(Call<Review> call, Throwable t) {
-                        Log.d("review 등록실패2", "review 등록실패2"+t.getCause());
-                    }
-                });
-            }
+                @Override
+                public void onFailure(Call<Review> call, Throwable t) {
+                    Log.d("review 등록실패2", "review 등록실패2" + t.getCause());
+                }
+            });
         });
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);

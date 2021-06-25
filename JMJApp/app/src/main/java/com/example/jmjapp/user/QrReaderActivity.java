@@ -12,8 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Order;
 import com.example.jmjapp.network.Server;
@@ -51,7 +53,7 @@ public class QrReaderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_qr_reader);
 
         SharedPreferences pref = getSharedPreferences("auth", MODE_PRIVATE);
-        jwt = pref.getString("token","");
+        jwt = pref.getString("token", "");
 
         scanCode();
     }
@@ -68,13 +70,18 @@ public class QrReaderActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null) {
+        if (result != null) {
             //QRcode 결과가 있으면
-            if(result.getContents() != null) {
+            if (result.getContents() != null) {
                 String str = result.getContents();
-                shopnum1 = str.substring(str.lastIndexOf("shopcontent/")+12);
-                shopnum2 = shopnum1.substring(0,10);
-                tablenum = shopnum1.substring(11,12);
+                shopnum1 = str.substring(str.lastIndexOf("shopcontent/") + 12);
+                shopnum2 = shopnum1.substring(0, 10);
+
+                if (shopnum1.length() == 12) {
+                    tablenum = shopnum1.substring(11, 12);
+                } else if (shopnum1.length() == 13) {
+                    tablenum = shopnum1.substring(11, 13);
+                }
 
                 Map<String, String> map = new HashMap();
                 map.put("shopId", shopnum2);
@@ -90,51 +97,42 @@ public class QrReaderActivity extends AppCompatActivity {
                             Log.d("orderId", orderId);
                             updateTable(orderId);
                         } else {
-                            Log.d("orderTable 실패1", "orderTable 실패1"+response.errorBody().string());
+                            Log.d("orderTable 실패1", "orderTable 실패1" + response.errorBody().string());
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Order> call, Throwable t) {
-                        Log.d("orderTable 실패2", "orderTable 실패2"+t.getCause());
+                        Log.d("orderTable 실패2", "orderTable 실패2" + t.getCause());
                     }
                 });
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage("어서오세요!");
                 builder.setTitle("알림");
-                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @SneakyThrows
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        try {
-                            System.out.println(result.getContents());
-                            System.out.println(shopnum1+"3333333333333333");
-                            System.out.println(shopnum2);
-                            System.out.println(tablenum);
+                builder.setPositiveButton("확인", (dialog, which) -> {
+                    try {
+                        System.out.println(result.getContents());
+                        System.out.println(shopnum1);
+                        System.out.println(shopnum2);
+                        System.out.println(tablenum);
 
-                            finish();
+                        finish();
 
-//                            pref = getSharedPreferences("orderCheck", MODE_PRIVATE);
-//                            editor = pref.edit();
-//                            editor.putInt("OrderNumber",1);
-//                            editor.apply();
+                        orderCheck = "1";
 
-                            orderCheck = "1";
+                        Intent intent = new Intent(QrReaderActivity.this, MainActivity.class);
+                        intent.putExtra("shopNumber", shopnum2);
+                        intent.putExtra("tableNumber", tablenum);
+                        intent.putExtra("orderCheck", orderCheck);
+                        intent.putExtra("QR", "order");
+                        intent.putExtra("orderId", orderId);
 
-                            Intent intent = new Intent(QrReaderActivity.this, MainActivity.class);
-                            intent.putExtra("shopNumber",shopnum2);
-                            intent.putExtra("tableNumber", tablenum);
-                            intent.putExtra("orderCheck", orderCheck);
-                            intent.putExtra("QR", "order");
-                            intent.putExtra("orderId", orderId);
-
-                            startActivity(intent);
-                        } catch (Exception e ) {
-                            e.getStackTrace();
-                        }
-
+                        startActivity(intent);
+                    } catch (Exception e) {
+                        e.getStackTrace();
                     }
+
                 });
                 AlertDialog dialog = builder.create();
                 dialog.show();
@@ -165,13 +163,13 @@ public class QrReaderActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.d("updateTable 성공", "updateTable 성공");
                 } else {
-                    Log.d("updateTable 실패1", "updateTable 실패1"+response.errorBody().string());
+                    Log.d("updateTable 실패1", "updateTable 실패1" + response.errorBody().string());
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("updateTable 실패2", "updateTable 실패2"+t.getCause());
+                Log.d("updateTable 실패2", "updateTable 실패2" + t.getCause());
             }
         });
     }

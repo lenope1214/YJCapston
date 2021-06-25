@@ -64,14 +64,14 @@ public class EmployeesManagementActivity extends AppCompatActivity {
     }
 
     private void showEmpList() {
-        listEmpCall = Server.getInstance().getApi().empList("Bearer "+jwt,MainActivity_O.shopNumber);
+        listEmpCall = Server.getInstance().getApi().empList("Bearer " + jwt, MainActivity_O.shopNumber);
         listEmpCall.enqueue(new Callback<List<Employee>>() {
             @Override
             public void onResponse(Call<List<Employee>> call, Response<List<Employee>> response) {
                 if (response.isSuccessful()) {
-                    if(response.code() == 200) {
+                    if (response.code() == 200) {
                         List<Employee> employeeList = response.body();
-                        for (Employee list : employeeList){
+                        for (Employee list : employeeList) {
                             mItems.add(new Employee(list.getShopId(), list.getEmpNo(),
                                     list.getEmpName(), list.getBirthday(), list.getHiredate(),
                                     list.getPhone(), list.getGender()));
@@ -96,9 +96,9 @@ public class EmployeesManagementActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
-        if(listEmpCall!=null)
+        if (listEmpCall != null)
             listEmpCall.cancel();
     }
 

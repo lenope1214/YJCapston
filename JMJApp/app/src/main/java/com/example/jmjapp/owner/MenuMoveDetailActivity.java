@@ -64,8 +64,8 @@ public class MenuMoveDetailActivity extends AppCompatActivity {
         ImageView img = findViewById(R.id.menu_move_img);
 
         binding.menuMoveName.setText(menuName);
-        binding.menuMovePrice.setText(menuPrice+"원");
-        Glide.with(this).load("http://3.34.55.186:8088/" + imgPath).override(500,500).into(img);
+        binding.menuMovePrice.setText(menuPrice + "원");
+        Glide.with(this).load("http://3.34.55.186:8088/" + imgPath).override(500, 500).into(img);
         //Glide.with(this).load("http://3.34.55.186:8088/" + menuImage).override(500,500).into(menu_choosed_img);
 
         menu_move_option_list = binding.menuMoveOptionList;
@@ -99,7 +99,7 @@ public class MenuMoveDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);

@@ -57,7 +57,7 @@ public class ReservationManagementActivity extends AppCompatActivity {
             public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
                 if (response.isSuccessful()) {
                     List<Order> orderList = response.body();
-                    for(Order list : orderList) {
+                    for (Order list : orderList) {
                         if (list.getAccept() == 'Y') {
                             mItems.add(new Order(list.getOrderId(), list.getStatus(), list.getOrderRequest(),
                                     list.getPeople(), list.getUsePoint(), list.getAmount(),
@@ -85,7 +85,7 @@ public class ReservationManagementActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);

@@ -41,7 +41,7 @@ import retrofit2.Response;
 public class TableDetailActivity extends AppCompatActivity {
     private ActivityTableDetailBinding binding;
 
-    private String tabId, shopId, no, tabNo ,orderId;
+    private String tabId, shopId, no, tabNo, orderId;
     private char using;
     private Call<Order.OrderMenuList> getOrderMenus;
     private int sum = 0;
@@ -72,18 +72,11 @@ public class TableDetailActivity extends AppCompatActivity {
         using = intent.getCharExtra("using", 'p');
         orderId = intent.getStringExtra("orderId");
 
-        if (no.substring(0,1).equals("0")) {
-            tabNo = no.substring(1,2);
+        if (no.substring(0, 1).equals("0")) {
+            tabNo = no.substring(1, 2);
         } else {
             tabNo = no;
         }
-
-//        Log.d("tabId", tabId);
-//        Log.d("shopId", shopId);
-//        Log.d("no", no);
-//        Log.d("tabNo", tabNo);
-//        Log.d("using", String.valueOf(using));
-//        Log.d("orderId", orderId);
 
         binding.tableDetailNo.setText(tabNo + "번 테이블");
 
@@ -119,11 +112,6 @@ public class TableDetailActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         Log.d("orderMenu 성공", "orderMenu 성공");
                         List<OrderMenu> orderMenuList = response.body().getOrderMenuList();
-                        Log.d("qwe",orderMenuList.toString());
-
-                        for (OrderMenu list : orderMenuList) {
-
-                        }
 
                         for (OrderMenu list : orderMenuList) {
                             mItems.add(new OrderMenu(list.getMenuName(), list.getQuantity()));
@@ -134,7 +122,7 @@ public class TableDetailActivity extends AppCompatActivity {
                             rv_table_detail_list.setAdapter(adapter);
                         }
                     } else {
-                        Log.d("orderMenu 실패1", "orderMenu 실패1"+response.errorBody().string());
+                        Log.d("orderMenu 실패1", "orderMenu 실패1" + response.errorBody().string());
                     }
                 }
 
@@ -155,7 +143,7 @@ public class TableDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);

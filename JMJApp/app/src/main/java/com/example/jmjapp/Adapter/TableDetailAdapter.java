@@ -9,8 +9,6 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jmjapp.R;
-import com.example.jmjapp.dto.Menu;
-import com.example.jmjapp.dto.Order;
 import com.example.jmjapp.dto.OrderMenu;
 
 import java.util.ArrayList;
@@ -28,7 +26,7 @@ public class TableDetailAdapter extends RecyclerView.Adapter<TableDetailAdapter.
         this.context = context;
     }
 
-    public void setItems(ArrayList<OrderMenu> menus){
+    public void setItems(ArrayList<OrderMenu> menus) {
         this.mItems = menus;
     }
 
@@ -51,13 +49,14 @@ public class TableDetailAdapter extends RecyclerView.Adapter<TableDetailAdapter.
     // 데이터 셋의 크기
     @Override
     public int getItemCount() {
-        return mItems==null? 0:mItems.size();
+        return mItems == null ? 0 : mItems.size();
     }
 
     // 커스텀 뷰홀더
     // item layout 에 존재하는 위젯들을 바인딩합니다.
-    class ItemViewHolder extends RecyclerView.ViewHolder{
+    class ItemViewHolder extends RecyclerView.ViewHolder {
         TextView table_detail_menu_name, table_detail_menu_count;
+
         public ItemViewHolder(View itemView) {
             super(itemView);
             table_detail_menu_name = itemView.findViewById(R.id.table_detail_menu_name);

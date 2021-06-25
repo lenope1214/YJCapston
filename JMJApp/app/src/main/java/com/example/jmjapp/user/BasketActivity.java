@@ -7,10 +7,12 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.jmjapp.*;
 import com.example.jmjapp.Adapter.BasketRecyclerAdapter;
 import com.example.jmjapp.dto.Basket;
@@ -44,8 +46,6 @@ public class BasketActivity extends AppCompatActivity {
     private Call<ResponseBody> responseBodyCall;
     private Call<Order> orderCall;
 
-    SharedPreferences orderNumber;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,13 +56,6 @@ public class BasketActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.arrowback);
-
-
-
-//        shopNumber = ShopDetailActivity.shopNumber;
-//        tableNumber = getIntent().getStringExtra("tableNumber");
-//        orderNumber = getSharedPreferences("orderCheck",MODE_PRIVATE);
-//        orderCheck = orderNumber.getInt("OrderNumber", 0);
 
         Intent intent = getIntent();
         String qr = intent.getStringExtra("qr");
@@ -79,7 +72,7 @@ public class BasketActivity extends AppCompatActivity {
         int list_size = pref.getInt("list_size", 0);
         jwt = pref2.getString("token", null);
 
-        for(int i = list_size - 1; i >= 0; i--) {
+        for (int i = list_size - 1; i >= 0; i--) {
             mItems.add(new Menu(i, pref.getString("list_" + i + "_name", "메뉴이름"),
                     pref.getInt("list_" + i + "_price", 0)));
         }
@@ -88,158 +81,112 @@ public class BasketActivity extends AppCompatActivity {
         rv_basket_list.setLayoutManager(new LinearLayoutManager(getApplication()));
         rv_basket_list.setAdapter(adapter);
 
-        basket_reservation_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        basket_reservation_btn.setOnClickListener(v -> {
 
-//                try {
-//                    ShopDetailActivity.orderCheck.equals("1");
-//                } catch (Exception e) {
-//                    ShopDetailActivity.orderCheck = "0";
-//                }
+            if (qr != null) {
+                Log.d("qr주문", "qr주문");
+                Log.d("shopId", shopId);
+                Log.d("orderId", QrReaderActivity.orderId);
 
-                if(qr != null){
-                    Log.d("qr주문","qr주문");
-                    Log.d("shopId", shopId);
-                    Log.d("orderId", QrReaderActivity.orderId);
+                SharedPreferences pref3 = getSharedPreferences("basket", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref3.edit();
+                int list_size2 = pref3.getInt("list_size", 0);
 
-                    SharedPreferences pref3 = getSharedPreferences("basket", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = pref3.edit();
-                    int list_size2 = pref3.getInt("list_size", 0);
+                String[] list_id = new String[list_size2];
+                int[] list_count = new int[list_size2];
+                int[] list_price = new int[list_size2];
 
-                    String[] list_id =  new String[list_size2];
-                    int[] list_count = new int[list_size2];
-                    int[] list_price = new int[list_size2];
-
-                    for (int i = 0; i < list_size2; i++) {
-                        list_id[i] = pref3.getString("list_" + i + "_id", null);
-                        list_count[i] = pref3.getInt("list_" + i + "_count", 0);
-                        list_price[i] = pref3.getInt("list_" + i + "_price", 0);
-                        sum = sum + list_price[i];
-                    }
-
-                    Map<String, List<OrderMenu>> map = new HashMap();
-                    List<OrderMenu> omList = new ArrayList<>();
-
-                    for (int i = 0; i < list_size2; i++) {
-                        OrderMenu om = new OrderMenu().builder()
-                                .orderId(String.valueOf(QrReaderActivity.orderId))
-                                .shopId(shopId)
-                                .menuId(list_id[i])
-                                .quantity(String.valueOf(list_count[i]))
-                                .tabNo(QrReaderActivity.tablenum)
-                                .build();
-                        omList.add(om);
-                    }
-
-                    map.put("list", omList);
-
-                    responseBodyCall = Server.getInstance().getApi().order_menus("Bearer " + jwt, map);
-                    responseBodyCall.enqueue(new Callback<ResponseBody>() {
-                        @SneakyThrows
-                        @Override
-                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                            if (response.isSuccessful()) {
-                                Log.d("orderMenu 성공", "orderMenu 성공");
-                                Log.d("qweasd", response.body().string());
-                            } else {
-                                Log.d("orderMenu 실패1", "orderMenu 실패1"+response.errorBody().string());
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-                            Log.d("orderMenu 실패2", "orderMenu 실패2");
-                        }
-                    });
-
-                    Map<String, String> map2 = new HashMap<>();
-                    map2.put("shopId", shopId);
-                    map2.put("orderId", QrReaderActivity.orderId);
-                    map2.put("amount", String.valueOf(sum));
-
-                    orderCall = Server.getInstance().getApi().updateOrder("Bearer " + jwt, map2);
-                    orderCall.enqueue(new Callback<Order>() {
-                        @SneakyThrows
-                        @Override
-                        public void onResponse(Call<Order> call, Response<Order> response) {
-                            if (response.isSuccessful()) {
-                                Log.d("updateOrder 성공", "updateOrder 성공");
-                            } else {
-                                Log.d("updateOrder 실패1", "updateOrder 실패1"+response.errorBody().string());
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<Order> call, Throwable t) {
-                            Log.d("updateOrder 실패2", "updateOrder 실패2"+t.getCause());
-                        }
-                    });
-
-                    editor.clear();
-                    editor.apply();
-
-                    Intent intent = new Intent(BasketActivity.this, MainActivity.class);
-                    intent.putExtra("QROrder","QROrder");
-                    intent.putExtra("shopNumber", shopId);
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(BasketActivity.this, OrderActivity.class);
-                    startActivity(intent);
-//                    Map<String, String> map = new HashMap();
-//                    map.put("shopId", ShopDetailActivity.shopNumber);
-//
-//                    if (jwt != null) {
-//                        responseBodyCall = Server.getInstance().getApi().order("Bearer " + jwt, map);
-//                        responseBodyCall.enqueue(new Callback<ResponseBody>() {
-//                            @SneakyThrows
-//                            @Override
-//                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                                if (response.code() == 201) {
-//                                    Log.d("성공", "성공");
-//                                    JSONObject jsonObject = new JSONObject(response.body().string());
-//                                    Log.d("result ", String.valueOf(jsonObject));
-//                                    Long orderId = (Long) jsonObject.get("orderId");
-//                                    System.out.println(orderId);
-//
-//                                    Intent intent = new Intent(BasketActivity.this, OrderActivity.class);
-//                                    intent.putExtra("orderId", orderId);
-//                                    startActivity(intent);
-//                                } else {
-//                                    Log.d("실패", "실패" + response.code());
-//                                }
-//                            }
-//
-//                            @Override
-//                            public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                                Log.d("연결실패", "연결실패");
-//                            }
-//                        });
-//                    } else {
-//                        Snackbar.make(v, "로그인이 필요한 서비스입니다.", Snackbar.LENGTH_SHORT).setAction("확인", new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                return;
-//                            }
-//                        }).show();
-//                    }
+                for (int i = 0; i < list_size2; i++) {
+                    list_id[i] = pref3.getString("list_" + i + "_id", null);
+                    list_count[i] = pref3.getInt("list_" + i + "_count", 0);
+                    list_price[i] = pref3.getInt("list_" + i + "_price", 0);
+                    sum = sum + list_price[i];
                 }
+
+                Map<String, List<OrderMenu>> map = new HashMap();
+                List<OrderMenu> omList = new ArrayList<>();
+
+                for (int i = 0; i < list_size2; i++) {
+                    OrderMenu om = new OrderMenu().builder()
+                            .orderId(String.valueOf(QrReaderActivity.orderId))
+                            .shopId(shopId)
+                            .menuId(list_id[i])
+                            .quantity(String.valueOf(list_count[i]))
+                            .tabNo(QrReaderActivity.tablenum)
+                            .build();
+                    omList.add(om);
+                }
+
+                map.put("list", omList);
+
+                responseBodyCall = Server.getInstance().getApi().order_menus("Bearer " + jwt, map);
+                responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                    @SneakyThrows
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("orderMenu 성공", "orderMenu 성공");
+                            Log.d("qweasd", response.body().string());
+                        } else {
+                            Log.d("orderMenu 실패1", "orderMenu 실패1" + response.errorBody().string());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.d("orderMenu 실패2", "orderMenu 실패2");
+                    }
+                });
+
+                Map<String, String> map2 = new HashMap<>();
+                map2.put("shopId", shopId);
+                map2.put("orderId", QrReaderActivity.orderId);
+                map2.put("amount", String.valueOf(sum));
+
+                orderCall = Server.getInstance().getApi().updateOrder("Bearer " + jwt, map2);
+                orderCall.enqueue(new Callback<Order>() {
+                    @SneakyThrows
+                    @Override
+                    public void onResponse(Call<Order> call, Response<Order> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("updateOrder 성공", "updateOrder 성공");
+                        } else {
+                            Log.d("updateOrder 실패1", "updateOrder 실패1" + response.errorBody().string());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Order> call, Throwable t) {
+                        Log.d("updateOrder 실패2", "updateOrder 실패2" + t.getCause());
+                    }
+                });
+
+                editor.clear();
+                editor.apply();
+
+                Intent intent1 = new Intent(BasketActivity.this, MainActivity.class);
+                intent1.putExtra("QROrder", "QROrder");
+                intent1.putExtra("shopNumber", shopId);
+                startActivity(intent1);
+            } else {
+                Intent intent1 = new Intent(BasketActivity.this, OrderActivity.class);
+                startActivity(intent1);
             }
         });
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
-        if(responseBodyCall!=null)
+        if (responseBodyCall != null)
             responseBodyCall.cancel();
     }
 

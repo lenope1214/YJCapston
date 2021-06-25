@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
@@ -59,7 +60,7 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter<BasketRecyclerAd
 
                 SharedPreferences pref = context.getSharedPreferences("basket", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
-                int list_size = pref.getInt("list_size",0);
+                int list_size = pref.getInt("list_size", 0);
 
                 if (list_size - 1 == 0) {
                     SharedPreferences pref2 = context.getSharedPreferences("basket_shop", Context.MODE_PRIVATE);
@@ -87,7 +88,7 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter<BasketRecyclerAd
                     menu_img_list.add(list_img[i]);
                     menu_id_list.add(list_id[i]);
 
-                    if(list_name[i] == holder.tv_menu_name.getText().toString()) {
+                    if (list_name[i] == holder.tv_menu_name.getText().toString()) {
                         menu_name_list.remove(i);
                         menu_price_list.remove(i);
                         menu_count_list.remove(i);
@@ -127,7 +128,7 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter<BasketRecyclerAd
             list_name[i] = pref.getString("list_" + i + "_name", null);
             list_price[i] = pref.getInt("list_" + i + "_price", 0);
 
-            if(list_name[i].equals(holder.tv_menu_name.getText().toString())) {
+            if (list_name[i].equals(holder.tv_menu_name.getText().toString())) {
                 int menuCount1 = pref.getInt("list_" + i + "_count", 0);
                 int menuPrice1 = pref.getInt("list_" + i + "_price", 0);
                 String menuImg1 = pref.getString("list_" + i + "_img", "nope");
@@ -137,43 +138,37 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter<BasketRecyclerAd
             }
         }
 
-        holder.menu_minus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                for (int i = 0; i < list_size; i++) {
-                    String[] list_name = new String[list_size];
-                    int[] list_price = new int[list_size];
-                    list_name[i] = pref.getString("list_" + i + "_name", null);
-                    list_price[i] = pref.getInt("list_" + i + "_price", 0);
-                    if(list_name[i].equals(holder.tv_menu_name.getText().toString())) {
-                        int menuCount1 = pref.getInt("list_" + i + "_count", 0);
-                        if (menuCount1 > 1) {
-                            editor.putInt("list_" + i + "_price", list_price[i] - list_price[i]/menuCount1);
-                            editor.putInt("list_" + i + "_count", menuCount1 - 1);
-                            editor.apply();
-                            notifyDataSetChanged();
-                        }
+        holder.menu_minus.setOnClickListener(v -> {
+            for (int i = 0; i < list_size; i++) {
+                String[] list_name = new String[list_size];
+                int[] list_price = new int[list_size];
+                list_name[i] = pref.getString("list_" + i + "_name", null);
+                list_price[i] = pref.getInt("list_" + i + "_price", 0);
+                if (list_name[i].equals(holder.tv_menu_name.getText().toString())) {
+                    int menuCount1 = pref.getInt("list_" + i + "_count", 0);
+                    if (menuCount1 > 1) {
+                        editor.putInt("list_" + i + "_price", list_price[i] - list_price[i] / menuCount1);
+                        editor.putInt("list_" + i + "_count", menuCount1 - 1);
+                        editor.apply();
+                        notifyDataSetChanged();
                     }
                 }
             }
         });
 
-        holder.menu_plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                for (int i = 0; i < list_size; i++) {
-                    String[] list_name = new String[list_size];
-                    int[] list_price = new int[list_size];
-                    list_name[i] = pref.getString("list_" + i + "_name", null);
-                    list_price[i] = pref.getInt("list_" + i + "_price", 0);
-                    if (list_name[i].equals(holder.tv_menu_name.getText().toString())) {
-                        int menuCount1 = pref.getInt("list_" + i + "_count", 0);
-                        if (menuCount1 < 10) {
-                            editor.putInt("list_" + i + "_price", list_price[i] + list_price[i]/menuCount1);
-                            editor.putInt("list_" + i + "_count", menuCount1 + 1);
-                            editor.apply();
-                            notifyDataSetChanged();
-                        }
+        holder.menu_plus.setOnClickListener(v -> {
+            for (int i = 0; i < list_size; i++) {
+                String[] list_name = new String[list_size];
+                int[] list_price = new int[list_size];
+                list_name[i] = pref.getString("list_" + i + "_name", null);
+                list_price[i] = pref.getInt("list_" + i + "_price", 0);
+                if (list_name[i].equals(holder.tv_menu_name.getText().toString())) {
+                    int menuCount1 = pref.getInt("list_" + i + "_count", 0);
+                    if (menuCount1 < 10) {
+                        editor.putInt("list_" + i + "_price", list_price[i] + list_price[i] / menuCount1);
+                        editor.putInt("list_" + i + "_count", menuCount1 + 1);
+                        editor.apply();
+                        notifyDataSetChanged();
                     }
                 }
             }
@@ -183,22 +178,23 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter<BasketRecyclerAd
     // 데이터 셋의 크기
     @Override
     public int getItemCount() {
-        return mItems==null? 0:mItems.size();
+        return mItems == null ? 0 : mItems.size();
     }
 
     // 커스텀 뷰홀더
     // item layout 에 존재하는 위젯들을 바인딩합니다.
-    class ItemViewHolder extends RecyclerView.ViewHolder{
+    class ItemViewHolder extends RecyclerView.ViewHolder {
         private ConstraintLayout layout_menu;
         private ImageView iv_menu_img, menu_delete, menu_plus, menu_minus;
         private TextView tv_menu_name, menu_count;
         private TextView tv_menu_price;
+
         public ItemViewHolder(View itemView) {
             super(itemView);
-            layout_menu = (ConstraintLayout)itemView.findViewById(R.id.layout_menu2);
+            layout_menu = (ConstraintLayout) itemView.findViewById(R.id.layout_menu2);
             iv_menu_img = (ImageView) itemView.findViewById(R.id.iv_menu_img2);
-            tv_menu_name = (TextView)itemView.findViewById(R.id.tv_menu_name2);
-            tv_menu_price = (TextView)itemView.findViewById(R.id.tv_menu_price2);
+            tv_menu_name = (TextView) itemView.findViewById(R.id.tv_menu_name2);
+            tv_menu_price = (TextView) itemView.findViewById(R.id.tv_menu_price2);
             menu_delete = (ImageView) itemView.findViewById(R.id.menu_delete);
             menu_count = (TextView) itemView.findViewById(R.id.menu_count);
             menu_plus = (ImageView) itemView.findViewById(R.id.menu_plus);

@@ -80,7 +80,7 @@ public class MenuChooseOptionGroupsAdapter extends RecyclerView.Adapter<MenuChoo
                     for (Options list : optionsList) {
                         holder.listItem.add(list.getName() + "\t\t" + "+" + list.getPrice());
                         for (int i = 0; i < optionsList.size(); i++) {
-                            str[i] =list.getOptionId();
+                            str[i] = list.getOptionId();
                         }
                     }
 
@@ -95,7 +95,7 @@ public class MenuChooseOptionGroupsAdapter extends RecyclerView.Adapter<MenuChoo
                     }
 
                 } else {
-                    Log.d("OptionsList 실패1", "OptionsList 실패1"+response.errorBody().string()+response.code());
+                    Log.d("OptionsList 실패1", "OptionsList 실패1" + response.errorBody().string() + response.code());
                 }
             }
 
@@ -106,7 +106,7 @@ public class MenuChooseOptionGroupsAdapter extends RecyclerView.Adapter<MenuChoo
         });
 
         if (ogMax == 1) { // radio 일때
-            Log.d("radio실행","radio실행");
+            Log.d("radio실행", "radio실행");
 
             SharedPreferences prefOptions = context.getSharedPreferences("options", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = prefOptions.edit();
@@ -114,18 +114,15 @@ public class MenuChooseOptionGroupsAdapter extends RecyclerView.Adapter<MenuChoo
             int list_size = prefOptions.getInt("list_size", 0);
 //            // 옵션그룹아이디 + 옵션아이디
 
-            holder.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    editor.putString("list_" + list_size + "_menuName", menuName);
-                    editor.putString("list_" + list_size + "_optionGroupId", optionsList.get(i).getOptionGroupId());
-                    editor.putString("list_" + list_size + "_optionId", optionsList.get(i).getOptionId());
-                    editor.putInt("list_size", list_size + 1);
-                    editor.apply();
-                }
+            holder.listView.setOnItemClickListener((adapterView, view, i, l) -> {
+                editor.putString("list_" + list_size + "_menuName", menuName);
+                editor.putString("list_" + list_size + "_optionGroupId", optionsList.get(i).getOptionGroupId());
+                editor.putString("list_" + list_size + "_optionId", optionsList.get(i).getOptionId());
+                editor.putInt("list_size", list_size + 1);
+                editor.apply();
             });
         } else if (ogMax > 1) { // check 일때
-            Log.d("check실행","check실행");
+            Log.d("check실행", "check실행");
         }
 
     }

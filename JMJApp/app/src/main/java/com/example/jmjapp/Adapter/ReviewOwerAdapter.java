@@ -28,7 +28,7 @@ public class ReviewOwerAdapter extends RecyclerView.Adapter<ReviewOwerAdapter.It
         this.context = context;
     }
 
-    public void setItems(ArrayList<Review> reviews){
+    public void setItems(ArrayList<Review> reviews) {
         this.mItems = reviews;
     }
 
@@ -46,28 +46,29 @@ public class ReviewOwerAdapter extends RecyclerView.Adapter<ReviewOwerAdapter.It
         holder.review_owner_content.setText(mItems.get(position).getContent());
 
         String regDate = mItems.get(position).getRegDate();
-        String year = regDate.substring(0,4);
-        String month = regDate.substring(5,7);
-        String day = regDate.substring(8,10);
-        String hour = regDate.substring(11,13);
-        String min = regDate.substring(14,16);
-        holder.review_owner_regDate.setText(month + "월" + day + "일 " + hour + "시" + min +"분");
+        String year = regDate.substring(0, 4);
+        String month = regDate.substring(5, 7);
+        String day = regDate.substring(8, 10);
+        String hour = regDate.substring(11, 13);
+        String min = regDate.substring(14, 16);
+        holder.review_owner_regDate.setText(month + "월" + day + "일 " + hour + "시" + min + "분");
 
-        Glide.with(context).load("http://3.34.55.186:8088/" + mItems.get(position).getImgUrl()).override(500,500).into(holder.review_owner_img);
+        Glide.with(context).load("http://3.34.55.186:8088/" + mItems.get(position).getImgUrl()).override(500, 500).into(holder.review_owner_img);
 
     }
 
     // 데이터 셋의 크기
     @Override
     public int getItemCount() {
-        return mItems==null? 0:mItems.size();
+        return mItems == null ? 0 : mItems.size();
     }
 
     // 커스텀 뷰홀더
     // item layout 에 존재하는 위젯들을 바인딩합니다.
-    class ItemViewHolder extends RecyclerView.ViewHolder{
+    class ItemViewHolder extends RecyclerView.ViewHolder {
         TextView review_owner_userId, review_owner_regDate, review_owner_content;
         ImageView review_owner_img;
+
         public ItemViewHolder(View itemView) {
             super(itemView);
             review_owner_userId = itemView.findViewById(R.id.review_owner_userId);

@@ -236,38 +236,38 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/visit_record"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:background="@drawable/edge6"
-                    android:layout_weight="1">
-
+                android:id="@+id/zzim_record"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="@drawable/edge6"
+                android:layout_weight="1">
                 <ImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_gravity="center"
-                        android:layout_marginHorizontal="30dp"
-                        android:src="@drawable/visit"
-                        tools:ignore="MissingConstraints"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:id="@+id/imageView"/>
+                    android:layout_width="46dp"
+                    android:layout_height="52dp"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="30dp"
+                    android:src="@drawable/like"
+                    tools:ignore="MissingConstraints"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:id="@+id/imageView4" android:layout_marginStart="36dp"/>
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="방문기록"
-                        android:fontFamily="@font/we_semibold"
-                        android:textSize="17sp"
-                        tools:ignore="MissingConstraints"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginEnd="24dp"
-                        app:layout_constraintStart_toEndOf="@+id/imageView"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="찜한가게"
+                    android:fontFamily="@font/we_semibold"
+                    android:textSize="17sp"
+                    tools:ignore="MissingConstraints"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginEnd="19dp"
+                    app:layout_constraintStart_toEndOf="@+id/imageView4"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
 
         <LinearLayout android:layout_width="match_parent"
@@ -309,35 +309,36 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/zzim_record"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:background="@drawable/edge6"
-                    android:layout_weight="1">
-                <ImageView
-                        android:layout_width="46dp"
-                        android:layout_height="52dp"
-                        android:layout_gravity="center"
-                        android:layout_marginHorizontal="30dp"
-                        android:src="@drawable/like"
-                        tools:ignore="MissingConstraints"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:id="@+id/imageView4" android:layout_marginStart="36dp"/>
+                android:id="@+id/visit_record"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="@drawable/edge6"
+                android:layout_weight="1">
 
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="찜한가게"
-                        android:fontFamily="@font/we_semibold"
-                        android:textSize="17sp"
-                        tools:ignore="MissingConstraints"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginEnd="19dp"
-                        app:layout_constraintStart_toEndOf="@+id/imageView4"/>
+<!--                <ImageView-->
+<!--                    android:layout_width="60dp"-->
+<!--                    android:layout_height="60dp"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_marginHorizontal="30dp"-->
+<!--                    android:src="@drawable/visit"-->
+<!--                    tools:ignore="MissingConstraints"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    android:id="@+id/imageView"/>-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="방문기록"-->
+<!--                    android:fontFamily="@font/we_semibold"-->
+<!--                    android:textSize="17sp"-->
+<!--                    tools:ignore="MissingConstraints"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    android:layout_marginEnd="24dp"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/imageView"/>-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

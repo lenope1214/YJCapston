@@ -3,7 +3,8 @@ package com.example.jmjapp.dto;
 import lombok.*;
 
 @Data
-@AllArgsConstructor @Builder
+@AllArgsConstructor
+@Builder
 @NoArgsConstructor
 public class Chatbot {
     private Long chatbotId;

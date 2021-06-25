@@ -8,11 +8,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.OptionGroups;
+
 import java.util.ArrayList;
 
-public class MenuOptionGroupAdapter extends RecyclerView.Adapter<MenuOptionGroupAdapter.ItemViewHolder>  {
+public class MenuOptionGroupAdapter extends RecyclerView.Adapter<MenuOptionGroupAdapter.ItemViewHolder> {
     ArrayList<OptionGroups> items = new ArrayList<>();
 
     // 새로운 뷰 홀더 생성
@@ -55,8 +57,8 @@ public class MenuOptionGroupAdapter extends RecyclerView.Adapter<MenuOptionGroup
         @SuppressLint("SetTextI18n")
         public void setItem(OptionGroups item) {
             menu_option_group_name.setText(item.getOgName());
-            menu_option_group_min_tv.setText("최소 선택 개수 " + item.getOgMin()+"개");
-            menu_option_group_max_tv.setText("최대 선택 개수 " + item.getOgMax()+"개");
+            menu_option_group_min_tv.setText("최소 선택 개수 " + item.getOgMin() + "개");
+            menu_option_group_max_tv.setText("최대 선택 개수 " + item.getOgMax() + "개");
         }
     }
 

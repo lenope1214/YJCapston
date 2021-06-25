@@ -10,9 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import com.example.jmjapp.JMJApplication;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Shop;
@@ -20,7 +22,9 @@ import com.example.jmjapp.network.Server;
 
 import lombok.SneakyThrows;
 import okhttp3.ResponseBody;
+
 import org.json.JSONObject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -59,14 +63,14 @@ public class OwnerLoginActivity extends AppCompatActivity {
         owner_login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(et_owner_id.getText().toString().length() == 0 || et_owner_pw.getText().toString().length() == 0) {
+                if (et_owner_id.getText().toString().length() == 0 || et_owner_pw.getText().toString().length() == 0) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(OwnerLoginActivity.this);
                     dialog = builder.setMessage("아이디와 비밀번호를 확인해 주세요.").setPositiveButton("확인", null).create();
                     dialog.show();
                 } else {
                     String id = et_owner_id.getText().toString();
                     String password = et_owner_pw.getText().toString();
-                    Map<String ,String> map = new HashMap();
+                    Map<String, String> map = new HashMap();
                     map.put("id", id);
                     map.put("password", password);
 
@@ -76,7 +80,7 @@ public class OwnerLoginActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                             Log.d("Raawdawdw", String.valueOf(response.code()));
-                            if(response.code() == 200) {
+                            if (response.code() == 200) {
                                 JSONObject jsonObject = new JSONObject(response.body().string());
                                 Log.d("result ", String.valueOf(jsonObject));
                                 String jwt = (String) jsonObject.get("access_token");
@@ -85,7 +89,7 @@ public class OwnerLoginActivity extends AppCompatActivity {
                                 Log.d("jsonobject :: role >> ", role);
                                 Log.d("jsonobject :: userid >> ", et_owner_id.getText().toString());
 
-                                if(role.equals("ROLE_OWNER")) {
+                                if (role.equals("ROLE_OWNER")) {
                                     SharedPreferences pref = getSharedPreferences("auth_o", MODE_PRIVATE);
                                     SharedPreferences.Editor editor = pref.edit();
                                     editor.putString("token", jwt);
@@ -93,41 +97,38 @@ public class OwnerLoginActivity extends AppCompatActivity {
                                     editor.putString("role", "ROLE_OWNER");
                                     editor.apply();
 
-                                    ((JMJApplication)getApplication()).setId(et_owner_id.getText().toString());
-                                    ((JMJApplication)getApplication()).setJwt(jwt);
+                                    ((JMJApplication) getApplication()).setId(et_owner_id.getText().toString());
+                                    ((JMJApplication) getApplication()).setJwt(jwt);
 
                                     Log.d("result : ", "사업자 로그인 성공");
                                     listShopCall = Server.getInstance().getApi().myShop2("Bearer " + jwt);
                                     listShopCall.enqueue(new Callback<List<Shop>>() {
                                         @Override
                                         public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response) {
-                                            if(response.code() == 200) {
+                                            if (response.code() == 200) {
                                                 Log.d("result : ", "매장있음" + response.body().size());
                                                 String[] shopId = new String[response.body().size()];
-                                                for(int i =0; i < response.body().size(); i++) {
+                                                for (int i = 0; i < response.body().size(); i++) {
                                                     Log.d("result : ", "매장있음" + response.body().get(i).getShopId());
                                                     shopId[i] = response.body().get(i).getShopId();
                                                 }
                                                 AlertDialog.Builder builder = new AlertDialog.Builder(OwnerLoginActivity.this);
-                                                dialog = builder.setMessage("로그인되었습니다").setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialog, int which) {
-                                                        Intent intent = new Intent(OwnerLoginActivity.this, ListShopActivity.class);
-                                                        intent.putExtra("owner_number_size", response.body().size());
-                                                        intent.putExtra("owner_id", et_owner_id.getText().toString());
-                                                        for (int i=0; i<response.body().size(); i++) {
-                                                            intent.putExtra("owner_number" + i, response.body().get(i).getShopId());
-                                                        }
-                                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                        startActivity(intent);
-                                                        finish();
+                                                dialog = builder.setMessage("로그인되었습니다").setPositiveButton("확인", (dialog, which) -> {
+                                                    Intent intent = new Intent(OwnerLoginActivity.this, ListShopActivity.class);
+                                                    intent.putExtra("owner_number_size", response.body().size());
+                                                    intent.putExtra("owner_id", et_owner_id.getText().toString());
+                                                    for (int i = 0; i < response.body().size(); i++) {
+                                                        intent.putExtra("owner_number" + i, response.body().get(i).getShopId());
                                                     }
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                    startActivity(intent);
+                                                    finish();
                                                 }).create();
                                                 builder.setCancelable(false);
                                                 dialog.show();
-                                            } else if(response.code() == 404) {
-                                                Log.d("result : " , response.message());
+                                            } else if (response.code() == 404) {
+                                                Log.d("result : ", response.message());
                                                 Log.d("result : ", "매장없음");
                                                 Intent intent = new Intent(OwnerLoginActivity.this, ListShopActivity.class);
                                                 intent.putExtra("owner_id", et_owner_id.getText().toString());
@@ -145,21 +146,21 @@ public class OwnerLoginActivity extends AppCompatActivity {
                                         }
                                     });
                                 } else {
-                                    Log.d("result : " , response.message());
-                                    Log.d("result : " , "로그인실패");
+                                    Log.d("result : ", response.message());
+                                    Log.d("result : ", "로그인실패");
                                     AlertDialog.Builder builder = new AlertDialog.Builder(OwnerLoginActivity.this);
                                     dialog = builder.setMessage("아이디와 비밀번호를 확인해 주세요.").setPositiveButton("확인", null).create();
                                     dialog.show();
                                 }
-                            } else if(response.code() == 400) {
-                                Log.d("result : " , response.errorBody().string());
-                                Log.d("result : " , "로그인실패");
+                            } else if (response.code() == 400) {
+                                Log.d("result : ", response.errorBody().string());
+                                Log.d("result : ", "로그인실패");
                                 AlertDialog.Builder builder = new AlertDialog.Builder(OwnerLoginActivity.this);
                                 dialog = builder.setMessage("아이디와 비밀번호를 확인해 주세요.").setPositiveButton("확인", null).create();
                                 dialog.show();
                             } else {
-                                Log.d("result : " , response.errorBody().string());
-                                Log.d("result : " , "연결실패");
+                                Log.d("result : ", response.errorBody().string());
+                                Log.d("result : ", "연결실패");
                             }
                         }
 
@@ -172,29 +173,26 @@ public class OwnerLoginActivity extends AppCompatActivity {
             }
         });
 
-        et_owner_join.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(OwnerLoginActivity.this, OwnerJoinActivity.class);
-                startActivity(intent);
-            }
+        et_owner_join.setOnClickListener(v -> {
+            Intent intent = new Intent(OwnerLoginActivity.this, OwnerJoinActivity.class);
+            startActivity(intent);
         });
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
-        if(responseBodyCall!=null)
+        if (responseBodyCall != null)
             responseBodyCall.cancel();
-        if(listShopCall!=null)
+        if (listShopCall != null)
             listShopCall.cancel();
     }
 }

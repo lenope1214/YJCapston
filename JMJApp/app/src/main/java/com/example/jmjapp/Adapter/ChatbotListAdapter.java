@@ -7,8 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Chatbot;
 import com.example.jmjapp.owner.ChatbotSettingActivity;
@@ -51,16 +53,16 @@ public class ChatbotListAdapter extends RecyclerView.Adapter<ChatbotListAdapter.
 //
 ////
 
-            holder.question.setText(question);
-            holder.answer.setText(answer);
-            holder.clChatbot.setOnClickListener(v -> { // 챗봇 리스트를 누르면 수정 화면으로 넘어 가야겠네요?
-                Intent intent = new Intent(context, ChatbotSettingActivity.class);
-                intent.putExtra("chatbotId", mItems.get(position).getChatbotId());
-                intent.putExtra("question", mItems.get(position).getQuestion());
-                intent.putExtra("answer", mItems.get(position).getAnswer());
-                intent.putExtra("isAdd", false);
-                context.startActivity(intent);
-            });
+        holder.question.setText(question);
+        holder.answer.setText(answer);
+        holder.clChatbot.setOnClickListener(v -> { // 챗봇 리스트를 누르면 수정 화면으로 넘어 가야겠네요?
+            Intent intent = new Intent(context, ChatbotSettingActivity.class);
+            intent.putExtra("chatbotId", mItems.get(position).getChatbotId());
+            intent.putExtra("question", mItems.get(position).getQuestion());
+            intent.putExtra("answer", mItems.get(position).getAnswer());
+            intent.putExtra("isAdd", false);
+            context.startActivity(intent);
+        });
 
 
     }

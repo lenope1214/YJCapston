@@ -47,6 +47,7 @@ public class MenuMoveOptionOptionAdapter extends RecyclerView.Adapter<MenuMoveOp
     // item layout 에 존재하는 위젯들을 바인딩합니다.
     class ItemViewHolder extends RecyclerView.ViewHolder {
         TextView menu_move_option_option_name, menu_move_option_option_price;
+
         public ItemViewHolder(View itemView) {
             super(itemView);
             menu_move_option_option_name = itemView.findViewById(R.id.menu_move_option_option_name);

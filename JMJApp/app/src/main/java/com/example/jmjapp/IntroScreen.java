@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.jmjapp.owner.ListShopActivity;
 import com.example.jmjapp.owner.OwnerLoginActivity;
 import com.example.jmjapp.user.MainActivity;
@@ -42,13 +43,13 @@ public class IntroScreen extends AppCompatActivity {
         loginId2 = pref2.getString("owner_id", null);
         role2 = pref2.getString("role", null);
 
-        if(loginId != null && role != null) {
+        if (loginId != null && role != null) {
             Intent intent = new Intent(IntroScreen.this, MainActivity.class);
             intent.putExtra("user_id", loginId);
             startActivity(intent);
             finish();
             //Log.d("결과@@#!@#", loginId + "님 일반회원 로그인 성공!");
-        } else if(loginId2 != null && role2 != null) {
+        } else if (loginId2 != null && role2 != null) {
             Intent intent = new Intent(IntroScreen.this, ListShopActivity.class);
             intent.putExtra("owner_id", loginId2);
             startActivity(intent);
@@ -58,33 +59,24 @@ public class IntroScreen extends AppCompatActivity {
         tv_ownerLogIn = findViewById(R.id.tv_ownerLogIn);
         tv_userLogIn = findViewById(R.id.tv_userLogIn);
 
-        tv_userLogIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(IntroScreen.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
+        tv_userLogIn.setOnClickListener(v -> {
+            Intent intent = new Intent(IntroScreen.this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         });
 
-        tv_ownerLogIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(IntroScreen.this, OwnerLoginActivity.class);
-                startActivity(intent);
-            }
+        tv_ownerLogIn.setOnClickListener(v -> {
+            Intent intent = new Intent(IntroScreen.this, OwnerLoginActivity.class);
+            startActivity(intent);
         });
 
     }
 
     private void makeDeviceToken() {
-        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this, new OnSuccessListener<InstanceIdResult>() {
-            @Override
-            public void onSuccess(InstanceIdResult result) {
-                newToken = result.getToken();
-                Log.d("이 기기의 토큰 ::: ", newToken);
-            }
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this, result -> {
+            newToken = result.getToken();
+            Log.d("이 기기의 토큰 ::: ", newToken);
         });
     }
 
@@ -93,17 +85,9 @@ public class IntroScreen extends AppCompatActivity {
         AlertDialog.Builder alBuilder = new AlertDialog.Builder(this);
         alBuilder.setMessage("앱을 종료하시겠습니까?");
 
-        alBuilder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-            }
-        });
-        alBuilder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                return;
-            }
+        alBuilder.setPositiveButton("예", (dialog, which) -> finish());
+        alBuilder.setNegativeButton("아니오", (dialog, which) -> {
+            return;
         });
         alBuilder.setTitle("앱 종료");
         alBuilder.show();

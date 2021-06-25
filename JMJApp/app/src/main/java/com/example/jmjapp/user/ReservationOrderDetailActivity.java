@@ -58,12 +58,7 @@ public class ReservationOrderDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         orderId = intent.getStringExtra("orderId");
 
-        binding.resOrderDetailMenuWatch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(ReservationOrderDetailActivity.this, "h2", Toast.LENGTH_SHORT).show();
-            }
-        });
+        binding.resOrderDetailMenuWatch.setOnClickListener(v -> Toast.makeText(ReservationOrderDetailActivity.this, "h2", Toast.LENGTH_SHORT).show());
 
         orderCall = Server.getInstance().getApi().orderOne("Bearer " + jwt, orderId);
         orderCall.enqueue(new Callback<Order>() {
@@ -115,17 +110,17 @@ public class ReservationOrderDetailActivity extends AppCompatActivity {
                     String hour = payTime.substring(10, 12);
                     String min = payTime.substring(13, 15);
 
-                    binding.resOrderDetailPayTime.setText(year+"년 "+month+"월 "+day+"일 "+hour+"시 "+min+"분");
+                    binding.resOrderDetailPayTime.setText(year + "년 " + month + "월 " + day + "일 " + hour + "시 " + min + "분");
 
                     String resTime = String.valueOf(new Timestamp(response.body().getArriveTime()));
-                    String year1 = resTime.substring(0,4);
-                    String month1 = resTime.substring(5,7);
-                    String day1 = resTime.substring(8,10);
+                    String year1 = resTime.substring(0, 4);
+                    String month1 = resTime.substring(5, 7);
+                    String day1 = resTime.substring(8, 10);
 
-                    String hour1 = resTime.substring(11,13);
-                    String min1 = resTime.substring(14,16);
+                    String hour1 = resTime.substring(11, 13);
+                    String min1 = resTime.substring(14, 16);
 
-                    binding.resOrderDetailResTime.setText(year1+"년 "+month1+"월 "+day1+"일 "+hour1+"시 "+min1+"분");
+                    binding.resOrderDetailResTime.setText(year1 + "년 " + month1 + "월 " + day1 + "일 " + hour1 + "시 " + min1 + "분");
                 } else {
                     Log.d("orderOne 실패1", "orderOne 실패1");
                 }
@@ -137,26 +132,23 @@ public class ReservationOrderDetailActivity extends AppCompatActivity {
             }
         });
 
-        binding.cancelOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                builder.setTitle("알림");
-                builder.setMessage("주문 취소(환불) 하시겠습니까?");
-                builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        userRefund();
-                    }
-                });
-                builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        System.out.println("주문취소 안함");
-                    }
-                });
-                builder.show();
-            }
+        binding.cancelOrder.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+            builder.setTitle("알림");
+            builder.setMessage("주문 취소(환불) 하시겠습니까?");
+            builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    userRefund();
+                }
+            });
+            builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    System.out.println("주문취소 안함");
+                }
+            });
+            builder.show();
         });
 
     }
@@ -168,6 +160,8 @@ public class ReservationOrderDetailActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     Log.d("사용자 측 환불 성공", "사용자 측 환불 성공");
+                    Intent intent = new Intent(ReservationOrderDetailActivity.this, MainActivity.class);
+                    startActivity(intent);
                     finish();
                 } else {
                     Log.d("사용자 측 환불 실패1", "사용자 측 환불 실패1");

@@ -125,7 +125,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         String CHANNEL_ID = "my_channel_02";
 
-        try{
+        try {
             if (msg.equals("accept")) {
                 Notification notification = new Notification.Builder(MyFirebaseMessagingService.this)
                         .setContentTitle(URLDecoder.decode("주문의 민족", "UTF-8"))
@@ -155,8 +155,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
                 mNotificationManager.notify(notifyID, notification);
             }
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         //////////////////////////// 포그라운드 및 백그라운드 푸시알림 처리 ////////////////////////////
@@ -182,7 +181,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void sendNotification(String messageBody, String messageTitle, String from,
-                                   String orderId, String resId, String jwt)  {
+                                  String orderId, String resId, String jwt) {
         //////////////////////////// 포그라운드 및 백그라운드 푸시알림 처리 ////////////////////////////
         Intent intent = new Intent(this, BellActivity_O.class);
         intent.putExtra("from", from);
@@ -206,7 +205,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         String CHANNEL_ID = "my_channel_02";
 
-        try{
+        try {
             Notification notification = new Notification.Builder(MyFirebaseMessagingService.this)
                     .setContentTitle(URLDecoder.decode("주문의 민족", "UTF-8"))
                     .setContentText(URLDecoder.decode("예약주문 요청이 왔습니다!", "UTF-8"))
@@ -216,12 +215,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     .setAutoCancel(true)
                     .build();
 
-            mediaPlayer = MediaPlayer.create(this,R.raw.alarm);
+            mediaPlayer = MediaPlayer.create(this, R.raw.alarm);
             mediaPlayer.start();
 
             mNotificationManager.notify(notifyID, notification);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         //////////////////////////// 포그라운드 및 백그라운드 푸시알림 처리 ////////////////////////////

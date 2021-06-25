@@ -57,7 +57,7 @@ public class MenuOptionGroupActivity extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences("auth_o", MODE_PRIVATE);
         jwt = pref.getString("token", "");
 
-        Log.d("jwt",jwt);
+        Log.d("jwt", jwt);
         Log.d("menuId", menuId);
         RecyclerView recyclerView = binding.menuOptionGroupList;
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -66,70 +66,63 @@ public class MenuOptionGroupActivity extends AppCompatActivity {
         final MenuOptionGroupAdapter adapter = new MenuOptionGroupAdapter();
         recyclerView.setAdapter(adapter);
 
-        binding.menuOptionGroupAdd.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onClick(View v) {
-                String optionGroupName = binding.menuOptionGroupName.getText().toString();
-                String min = binding.menuOptionGroupMinChoose.getText().toString();
-                String max = binding.menuOptionGroupMaxChoose.getText().toString();
+        binding.menuOptionGroupAdd.setOnClickListener(v -> {
+            String optionGroupName = binding.menuOptionGroupName.getText().toString();
+            String min = binding.menuOptionGroupMinChoose.getText().toString();
+            String max = binding.menuOptionGroupMaxChoose.getText().toString();
 
-                adapter.addItem(new OptionGroups(optionGroupName, Integer.parseInt(min), Integer.parseInt(max)));
-                adapter.notifyDataSetChanged();
-                binding.menuOptionGroupCount.setText(adapter.getItemCount() + "개");
+            adapter.addItem(new OptionGroups(optionGroupName, Integer.parseInt(min), Integer.parseInt(max)));
+            adapter.notifyDataSetChanged();
+            binding.menuOptionGroupCount.setText(adapter.getItemCount() + "개");
 
-                Map<String, String> map = new HashMap();
-                map.put("shopId", MainActivity_O.shopNumber);
-                map.put("menuId", menuId);
-                map.put("name", binding.menuOptionGroupName.getText().toString());
-                map.put("min", binding.menuOptionGroupMinChoose.getText().toString());
-                map.put("max", binding.menuOptionGroupMaxChoose.getText().toString());
+            Map<String, String> map = new HashMap();
+            map.put("shopId", MainActivity_O.shopNumber);
+            map.put("menuId", menuId);
+            map.put("name", binding.menuOptionGroupName.getText().toString());
+            map.put("min", binding.menuOptionGroupMinChoose.getText().toString());
+            map.put("max", binding.menuOptionGroupMaxChoose.getText().toString());
 
-                optionGroupsCall = Server.getInstance().getApi().registerOptionGroups("Bearer " + jwt, map);
-                optionGroupsCall.enqueue(new Callback<OptionGroups>() {
-                    @SneakyThrows
-                    @Override
-                    public void onResponse(Call<OptionGroups> call, Response<OptionGroups> response) {
-                        if (response.isSuccessful()) {
-                            Log.d("optionGroup 성공", "optionGroup 성공");
-                            optionGroupId = response.body().getOptionGroupId();
-                            Log.d("optionGroupId", optionGroupId);
-                        } else {
-                            Log.d("optionGroup 실패1", "optionGroup 실패1"+response.errorBody().string());
-                        }
+            optionGroupsCall = Server.getInstance().getApi().registerOptionGroups("Bearer " + jwt, map);
+            optionGroupsCall.enqueue(new Callback<OptionGroups>() {
+                @SneakyThrows
+                @Override
+                public void onResponse(Call<OptionGroups> call, Response<OptionGroups> response) {
+                    if (response.isSuccessful()) {
+                        Log.d("optionGroup 성공", "optionGroup 성공");
+                        optionGroupId = response.body().getOptionGroupId();
+                        Log.d("optionGroupId", optionGroupId);
+                    } else {
+                        Log.d("optionGroup 실패1", "optionGroup 실패1" + response.errorBody().string());
                     }
+                }
 
-                    @Override
-                    public void onFailure(Call<OptionGroups> call, Throwable t) {
-                        Log.d("optionGroup 실패2", "optionGroup 실패2"+t.getCause()+t.getMessage());
-                    }
-                });
-            }
+                @Override
+                public void onFailure(Call<OptionGroups> call, Throwable t) {
+                    Log.d("optionGroup 실패2", "optionGroup 실패2" + t.getCause() + t.getMessage());
+                }
+            });
         });
 
-        binding.menuOptionGroupBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MenuOptionGroupActivity.this, MenuOptionActivity.class);
-                intent.putExtra("menuId", menuId);
-                intent.putExtra("optionGroupId", optionGroupId);
-                startActivity(intent);
-            }
+        binding.menuOptionGroupBtn.setOnClickListener(v -> {
+            Intent intent1 = new Intent(MenuOptionGroupActivity.this, MenuOptionActivity.class);
+            intent1.putExtra("menuId", menuId);
+            intent1.putExtra("optionGroupId", optionGroupId);
+            startActivity(intent1);
         });
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
-        if(optionGroupsCall!=null)
+        if (optionGroupsCall != null)
             optionGroupsCall.cancel();
     }
 }

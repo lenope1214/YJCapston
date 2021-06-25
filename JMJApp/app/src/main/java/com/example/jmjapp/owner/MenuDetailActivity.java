@@ -7,14 +7,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.jmjapp.Adapter.MenuListRecyclerAdapter;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Menu;
 import com.example.jmjapp.network.Server;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,13 +50,10 @@ public class MenuDetailActivity extends AppCompatActivity {
         //Log.d("awd",shopNumber);
 
         menu_register = findViewById(R.id.menu_register);
-        menu_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MenuDetailActivity.this, MenuRegisterActivity.class);
-                intent.putExtra("shopNumber", shopNumber);
-                startActivity(intent);
-            }
+        menu_register.setOnClickListener(v -> {
+            Intent intent1 = new Intent(MenuDetailActivity.this, MenuRegisterActivity.class);
+            intent1.putExtra("shopNumber", shopNumber);
+            startActivity(intent1);
         });
 
         menu_list = findViewById(R.id.menu_list);
@@ -73,13 +73,13 @@ public class MenuDetailActivity extends AppCompatActivity {
         listMenuCall.enqueue(new Callback<List<Menu>>() {
             @Override
             public void onResponse(Call<List<Menu>> call, Response<List<Menu>> response) {
-                if(response.isSuccessful()) {
-                    if(response.code() == 200) {
+                if (response.isSuccessful()) {
+                    if (response.code() == 200) {
                         List<Menu> menuList = response.body();
                         mItems.clear();
-                        for(Menu list : menuList) {
+                        for (Menu list : menuList) {
                             mItems.add(new Menu(list.getMenuId(), list.getName(), list.getIntro(),
-                                    list.getIsSale(), list.getIsPopular(),list.getPrice(),
+                                    list.getIsSale(), list.getIsPopular(), list.getPrice(),
                                     list.getDuration(), list.getImgPath()));
                             menu_list.setHasFixedSize(true);
                             adapter.setItems(mItems);
@@ -87,7 +87,7 @@ public class MenuDetailActivity extends AppCompatActivity {
                             menu_list.setAdapter(adapter);
                         }
                     } else {
-                        Log.d("qwe","Qwe");
+                        Log.d("qwe", "Qwe");
                     }
                 }
             }
@@ -101,16 +101,16 @@ public class MenuDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
-        if(listMenuCall!=null)
+        if (listMenuCall != null)
             listMenuCall.cancel();
     }
 

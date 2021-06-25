@@ -77,13 +77,10 @@ public class MyOrderListAdapter extends RecyclerView.Adapter<MyOrderListAdapter.
 //
         holder.my_order_list_date.setText(month + "월" + day + "일");
         holder.my_order_list_shopName.setText(mItems.get(position).getShopName());
-        holder.my_order_list_detail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, ReservationOrderDetailActivity.class);
-                intent.putExtra("orderId", mItems.get(position).getOrderId());
-                context.startActivity(intent);
-            }
+        holder.my_order_list_detail.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ReservationOrderDetailActivity.class);
+            intent.putExtra("orderId", mItems.get(position).getOrderId());
+            context.startActivity(intent);
         });
 
         if (my_order_list_isAccept == 'N') {
@@ -91,6 +88,8 @@ public class MyOrderListAdapter extends RecyclerView.Adapter<MyOrderListAdapter.
         } else if (my_order_list_isAccept == 'Y') {
             holder.my_order_list_isAccept.setText("주문완료");
             holder.my_order_list_isAccept.setTextColor(Color.parseColor("#33FA01"));
+        } else if (mItems.get(position).getStatus().equals("rf")) {
+            holder.my_order_list_isAccept.setText("주문취소(환불)");
         }
     }
 
@@ -103,7 +102,7 @@ public class MyOrderListAdapter extends RecyclerView.Adapter<MyOrderListAdapter.
     // 커스텀 뷰홀더
     // item layout 에 존재하는 위젯들을 바인딩합니다.
     class ItemViewHolder extends RecyclerView.ViewHolder {
-        private TextView my_order_list_date, my_order_list_shopName, my_order_list_isAccept, cancel_order;
+        private TextView my_order_list_date, my_order_list_shopName, my_order_list_isAccept;
         private ConstraintLayout my_order_list_detail;
 
         public ItemViewHolder(View itemView) {
@@ -112,7 +111,6 @@ public class MyOrderListAdapter extends RecyclerView.Adapter<MyOrderListAdapter.
             my_order_list_shopName = (TextView) itemView.findViewById(R.id.my_order_list_shopName);
             my_order_list_detail = (ConstraintLayout) itemView.findViewById(R.id.my_order_list_detail);
             my_order_list_isAccept = (TextView) itemView.findViewById(R.id.my_order_list_isAccept);
-            cancel_order = (TextView) itemView.findViewById(R.id.cancel_order);
         }
     }
 }

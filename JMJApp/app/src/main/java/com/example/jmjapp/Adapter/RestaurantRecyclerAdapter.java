@@ -2,14 +2,17 @@ package com.example.jmjapp.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Shop;
@@ -30,7 +33,7 @@ public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRe
         this.context = context;
     }
 
-    public void setItems(ArrayList<Shop> shopss){
+    public void setItems(ArrayList<Shop> shopss) {
         this.mItems = shopss;
     }
 
@@ -46,29 +49,27 @@ public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRe
     public void onBindViewHolder(final ItemViewHolder holder, final int position) {
         holder.tv_restaurant_name.setText(mItems.get(position).getName());
         holder.tv_restaurant_menu.setText(mItems.get(position).getAddress());
-        Glide.with(context).load("http://3.34.55.186:8088/" + mItems.get(position).getImgPath()).override(500,500).into(holder.riv_restaurant_img);
+        Glide.with(context).load("http://3.34.55.186:8088/" + mItems.get(position).getImgPath()).override(500, 500).into(holder.riv_restaurant_img);
 
-        if(mItems.get(position).getIsOpen() == 'Y') {
+        if (mItems.get(position).getIsOpen() == 'Y') {
             holder.tv_status.setText("영업 중");
+            holder.tv_status.setTextColor(Color.GREEN);
         } else {
             holder.tv_status.setText("영업아님");
         }
 
-        holder.layout_restaurant.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, ShopDetailActivity.class);
-                intent.putExtra("shopNumber", mItems.get(position).getShopId());
-                Log.d("result : ", mItems.get(position).getShopId());
-                context.startActivity(intent);
-            }
+        holder.layout_restaurant.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ShopDetailActivity.class);
+            intent.putExtra("shopNumber", mItems.get(position).getShopId());
+            Log.d("result : ", mItems.get(position).getShopId());
+            context.startActivity(intent);
         });
     }
 
     // 데이터 셋의 크기
     @Override
     public int getItemCount() {
-        return mItems==null? 0:mItems.size();
+        return mItems == null ? 0 : mItems.size();
     }
 
     // 커스텀 뷰홀더
@@ -79,6 +80,7 @@ public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRe
         private TextView tv_restaurant_name;
         private TextView tv_restaurant_menu;
         private TextView tv_status;
+
         public ItemViewHolder(View itemView) {
             super(itemView);
             layout_restaurant = (ConstraintLayout) itemView.findViewById(R.id.layout_restaurant);

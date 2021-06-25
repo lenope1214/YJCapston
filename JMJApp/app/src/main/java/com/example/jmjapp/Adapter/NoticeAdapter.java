@@ -17,7 +17,7 @@ import com.example.jmjapp.user.OnViewHolderItemClickListener;
 import java.util.ArrayList;
 
 //RecyclerViewAdapter
-public class NoticeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class NoticeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     //adapter에 들어갈 list
     private ArrayList<Notice> arrayList = new ArrayList<>();
@@ -32,7 +32,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     // listView 가 처음으로 생성될 때 생명주기
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_notice_item, parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_notice_item, parent, false);
         return new ItemViewHolder(view);
     }
 
@@ -40,25 +40,22 @@ public class NoticeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     // listView 가 추가될 때 생명주기
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
-        itemViewHolder.onBind(arrayList.get(position),position,selectedItems);
-        itemViewHolder.setOnViewHolderItemClickListener(new OnViewHolderItemClickListener() {
-            @Override
-            public void onViewHolderItemClick() {
-                if (selectedItems.get(position)) {
-                    // 펼쳐진 Item을 클릭 시
-                    selectedItems.delete(position);
-                } else {
-                    // 직전의 클릭됐던 Item의 클릭상태를 지움
-                    selectedItems.delete(prePosition);
-                    // 클릭한 Item의 position을 저장
-                    selectedItems.put(position, true);
-                }
-                // 해당 포지션의 변화를 알림
-                if (prePosition != -1) notifyItemChanged(prePosition);
-                notifyItemChanged(position);
-                // 클릭된 position 저장
-                prePosition = position;
+        itemViewHolder.onBind(arrayList.get(position), position, selectedItems);
+        itemViewHolder.setOnViewHolderItemClickListener(() -> {
+            if (selectedItems.get(position)) {
+                // 펼쳐진 Item을 클릭 시
+                selectedItems.delete(position);
+            } else {
+                // 직전의 클릭됐던 Item의 클릭상태를 지움
+                selectedItems.delete(prePosition);
+                // 클릭한 Item의 position을 저장
+                selectedItems.put(position, true);
             }
+            // 해당 포지션의 변화를 알림
+            if (prePosition != -1) notifyItemChanged(prePosition);
+            notifyItemChanged(position);
+            // 클릭된 position 저장
+            prePosition = position;
         });
     }
 
@@ -67,7 +64,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return arrayList.size();
     }
 
-    public void addItem(Notice notice){
+    public void addItem(Notice notice) {
         arrayList.add(notice);
 
     }

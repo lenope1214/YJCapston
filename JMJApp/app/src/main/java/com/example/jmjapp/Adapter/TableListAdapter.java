@@ -1,22 +1,17 @@
 package com.example.jmjapp.Adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jmjapp.R;
-import com.example.jmjapp.dto.Menu;
-import com.example.jmjapp.dto.OptionGroups;
 import com.example.jmjapp.dto.Tables;
 import com.example.jmjapp.owner.MainActivity_O;
 import com.example.jmjapp.owner.TableDetailActivity;
@@ -63,17 +58,14 @@ public class TableListAdapter extends RecyclerView.Adapter<TableListAdapter.Item
             }
         }
 
-        holder.table_constraint.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, TableDetailActivity.class);
-                intent.putExtra("tabId", items.get(position).getTabId());
-                intent.putExtra("shopId", MainActivity_O.shopNumber);
-                intent.putExtra("no", items.get(position).getNo());
-                intent.putExtra("using", items.get(position).getUsing());
-                intent.putExtra("orderId", items.get(position).getOrderId());
-                context.startActivity(intent);
-            }
+        holder.table_constraint.setOnClickListener(v -> {
+            Intent intent = new Intent(context, TableDetailActivity.class);
+            intent.putExtra("tabId", items.get(position).getTabId());
+            intent.putExtra("shopId", MainActivity_O.shopNumber);
+            intent.putExtra("no", items.get(position).getNo());
+            intent.putExtra("using", items.get(position).getUsing());
+            intent.putExtra("orderId", items.get(position).getOrderId());
+            context.startActivity(intent);
         });
 
     }
@@ -102,7 +94,7 @@ public class TableListAdapter extends RecyclerView.Adapter<TableListAdapter.Item
             table_constraint = itemView.findViewById(R.id.table_constraint);
         }
 
-        public void setItem(Tables item){
+        public void setItem(Tables item) {
             table_no.setText(item.getNo() + "번 테이블");
 //            table_isUse.setText(item.getUsing());
         }

@@ -8,8 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Shop;
@@ -69,10 +71,11 @@ public class RestaurantListRecyclerAdapter extends RecyclerView.Adapter<Restaura
         private TextView tv_restaurant_name;
         private TextView tv_restaurant_menu;
         private TextView tv_status;
+
         public ItemViewHolder(View itemView) {
             super(itemView);
             layout_restaurant = (ConstraintLayout) itemView.findViewById(R.id.layout_restaurant_list);
-            riv_restaurant_img = (ImageView) itemView.findViewById (R.id.res_list_image);
+            riv_restaurant_img = (ImageView) itemView.findViewById(R.id.res_list_image);
             tv_restaurant_name = (TextView) itemView.findViewById(R.id.res_list_name);
             tv_status = (TextView) itemView.findViewById(R.id.tv_status);
         }

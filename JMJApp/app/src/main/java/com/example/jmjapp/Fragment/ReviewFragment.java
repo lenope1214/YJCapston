@@ -15,14 +15,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.jmjapp.Adapter.MenuRecyclerAdapter;
 import com.example.jmjapp.Adapter.ReviewRecyclerAdapter;
 import com.example.jmjapp.R;
-import com.example.jmjapp.dto.Menu;
 import com.example.jmjapp.dto.Order;
 import com.example.jmjapp.dto.Review;
 import com.example.jmjapp.network.Server;
-import com.example.jmjapp.payment.PaymentResultActivity;
 import com.example.jmjapp.user.ReviewRegisterActivity;
 import com.example.jmjapp.user.ShopDetailActivity;
 
@@ -61,11 +58,10 @@ public class ReviewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if(view == null) {
+        if (view == null) {
             view = inflater.inflate(R.layout.fragment_review, container, false);
 
         }
-
 
 
         return view;
@@ -87,7 +83,7 @@ public class ReviewFragment extends Fragment {
                 if (response.isSuccessful()) {
                     Log.d("myOrder 성공", "myOrder 성공");
                     orderList = response.body();
-                    for(Order list : orderList) {
+                    for (Order list : orderList) {
                         str = new String[orderList.size()];
                         for (int i = 0; i < orderList.size(); i++) {
                             str[i] = list.getShopId();
@@ -109,27 +105,24 @@ public class ReviewFragment extends Fragment {
         });
 
         review_btn = view.findViewById(R.id.review_btn);
-        review_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (orderList.size() == 0) {
-                    Toast.makeText(getActivity(), "주문 후 리뷰작성이 가능합니다.", Toast.LENGTH_SHORT).show();
-                } else {
-                    for (int i = 0; i < orderList.size(); i++) {
-                        if (shopNumber.equals(str[i])) {
-                            Log.d("주문됨", "ㅈ무ㅜㄴ됨");
-                            Intent intent = new Intent(getActivity(), ReviewRegisterActivity.class);
-                            intent.putExtra("shopId", shopId);
-                            intent.putExtra("orderId", orderId);
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(getActivity(), "주문 후 리뷰작성이 가능합니다.", Toast.LENGTH_SHORT).show();
-                            Log.d("주문안됨", "ㅈ무ㅜㄴ안됨");
-                        }
+        review_btn.setOnClickListener(v -> {
+            if (orderList.size() == 0) {
+                Toast.makeText(getActivity(), "주문 후 리뷰작성이 가능합니다.", Toast.LENGTH_SHORT).show();
+            } else {
+                for (int i = 0; i < orderList.size(); i++) {
+                    if (shopNumber.equals(str[i])) {
+                        Log.d("주문됨", "ㅈ무ㅜㄴ됨");
+                        Intent intent = new Intent(getActivity(), ReviewRegisterActivity.class);
+                        intent.putExtra("shopId", shopId);
+                        intent.putExtra("orderId", orderId);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getActivity(), "주문 후 리뷰작성이 가능합니다.", Toast.LENGTH_SHORT).show();
+                        Log.d("주문안됨", "ㅈ무ㅜㄴ안됨");
                     }
                 }
-
             }
+
         });
 
     }
@@ -149,10 +142,10 @@ public class ReviewFragment extends Fragment {
                 if (response.isSuccessful()) {
                     Log.d("reviewList 성공", "reviewList 성공");
                     List<Review> reviewList = response.body();
-                    for(Review list : reviewList) {
+                    for (Review list : reviewList) {
                         mItems.add(new Review(list.getReviewId(), list.getUserId(), list.getShopId(),
-                                            list.getContent(), list.getParentId(), list.getRegDate(),
-                                            list.getScore(), list.getImgUrl(), list.getOrderId()));
+                                list.getContent(), list.getParentId(), list.getRegDate(),
+                                list.getScore(), list.getImgUrl(), list.getOrderId()));
                         Log.d("list", response.body().toString());
                         rv_review_list.setHasFixedSize(true);
                         adapter.setItems(mItems);

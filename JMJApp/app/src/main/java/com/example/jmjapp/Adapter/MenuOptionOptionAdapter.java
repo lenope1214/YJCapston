@@ -60,51 +60,45 @@ public class MenuOptionOptionAdapter extends RecyclerView.Adapter<MenuOptionOpti
 
         Log.d("123qwe", optionGroupId);
 
-        holder.option_option_save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("클릭","클릭");
+        holder.option_option_save.setOnClickListener(v -> {
+            Log.d("클릭", "클릭");
 
-                //holder.optionGroupId = MenuOptionGroupActivity.optionGroupId;
-                holder.jwt = MenuOptionGroupActivity.jwt;
+            //holder.optionGroupId = MenuOptionGroupActivity.optionGroupId;
+            holder.jwt = MenuOptionGroupActivity.jwt;
 
 //                SharedPreferences pref = context.getSharedPreferences("auth_o", Context.MODE_PRIVATE);
 //                holder.jwt = pref.getString("token", "");
-                Log.d("jwt", holder.jwt);
+            Log.d("jwt", holder.jwt);
 
-                holder.map.put("name", holder.option_option_name.getText().toString());
-                holder.map.put("price", holder.option_option_price.getText().toString());
-                holder.map.put("max", holder.option_option_max.getText().toString());
-                holder.map.put("no", holder.option_option_no.getText().toString());
-                holder.map.put("optionGroupId", optionGroupId);
+            holder.map.put("name", holder.option_option_name.getText().toString());
+            holder.map.put("price", holder.option_option_price.getText().toString());
+            holder.map.put("max", holder.option_option_max.getText().toString());
+            holder.map.put("no", holder.option_option_no.getText().toString());
+            holder.map.put("optionGroupId", optionGroupId);
 
-                holder.optionsCall = Server.getInstance().getApi().registerOption("Bearer " + holder.jwt, holder.map);
-                holder.optionsCall.enqueue(new Callback<Options>() {
-                    @SneakyThrows
-                    @Override
-                    public void onResponse(Call<Options> call, Response<Options> response) {
-                        if (response.isSuccessful()) {
-                            Log.d("Options 성공", "Options 성공");
-                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                            holder.dialog = builder.setMessage("옵션이 추가되었습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
+            holder.optionsCall = Server.getInstance().getApi().registerOption("Bearer " + holder.jwt, holder.map);
+            holder.optionsCall.enqueue(new Callback<Options>() {
+                @SneakyThrows
+                @Override
+                public void onResponse(Call<Options> call, Response<Options> response) {
+                    if (response.isSuccessful()) {
+                        Log.d("Options 성공", "Options 성공");
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        holder.dialog = builder.setMessage("옵션이 추가되었습니다.").setPositiveButton("확인", (dialog, which) -> {
 
-                                }
-                            }).create();
-                            builder.setCancelable(false);
-                            holder.dialog.show();
-                        } else {
-                            Log.d("Options 실패1", "Options 실패1"+response.errorBody().string());
-                        }
+                        }).create();
+                        builder.setCancelable(false);
+                        holder.dialog.show();
+                    } else {
+                        Log.d("Options 실패1", "Options 실패1" + response.errorBody().string());
                     }
+                }
 
-                    @Override
-                    public void onFailure(Call<Options> call, Throwable t) {
-                        Log.d("Options 실패2", "Options 실패2");
-                    }
-                });
-            }
+                @Override
+                public void onFailure(Call<Options> call, Throwable t) {
+                    Log.d("Options 실패2", "Options 실패2");
+                }
+            });
         });
 
     }
@@ -132,11 +126,11 @@ public class MenuOptionOptionAdapter extends RecyclerView.Adapter<MenuOptionOpti
 
         public ItemViewHolder(View itemView) {
             super(itemView);
-            option_option_name = (EditText)itemView.findViewById(R.id.option_option_name);
-            option_option_save = (TextView)itemView.findViewById(R.id.option_option_save);
-            option_option_price = (EditText)itemView.findViewById(R.id.option_option_price);
-            option_option_no = (EditText)itemView.findViewById(R.id.option_option_no);
-            option_option_max = (EditText)itemView.findViewById(R.id.option_option_max);
+            option_option_name = (EditText) itemView.findViewById(R.id.option_option_name);
+            option_option_save = (TextView) itemView.findViewById(R.id.option_option_save);
+            option_option_price = (EditText) itemView.findViewById(R.id.option_option_price);
+            option_option_no = (EditText) itemView.findViewById(R.id.option_option_no);
+            option_option_max = (EditText) itemView.findViewById(R.id.option_option_max);
         }
 
         public void setItem(Options item) {

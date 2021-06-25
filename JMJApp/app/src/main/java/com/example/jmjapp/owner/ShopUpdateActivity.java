@@ -12,10 +12,14 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
+
 import androidx.appcompat.widget.Toolbar;
+
 import com.bumptech.glide.Glide;
 import com.example.jmjapp.JMJApplication;
 import com.example.jmjapp.R;
@@ -72,13 +76,10 @@ public class ShopUpdateActivity extends AppCompatActivity {
         shop_update_btn = findViewById(R.id.shop_update_btn);
         shop_update_cancle_btn = findViewById(R.id.shop_update_cancle_btn);
 
-        shop_update_img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-                startActivityForResult(intent, GET_GALLERY_IMAGE);
-            }
+        shop_update_img.setOnClickListener(v -> {
+            Intent intent1 = new Intent(Intent.ACTION_PICK);
+            intent1.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+            startActivityForResult(intent1, GET_GALLERY_IMAGE);
         });
 
         shopCall = Server.getInstance().getApi().shop(HomeFragment_O.shopNumber);
@@ -101,144 +102,109 @@ public class ShopUpdateActivity extends AppCompatActivity {
             }
         });
 
-        shop_update_opentime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TimePickerDialog timePickerDialog = new TimePickerDialog(
-                        ShopUpdateActivity.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        new TimePickerDialog.OnTimeSetListener() {
-                            @SneakyThrows
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                t1Hour = hourOfDay;
-                                t1Minute = minute;
+        shop_update_opentime.setOnClickListener(v -> {
+            TimePickerDialog timePickerDialog = new TimePickerDialog(
+                    ShopUpdateActivity.this,
+                    android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                    new TimePickerDialog.OnTimeSetListener() {
+                        @SneakyThrows
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                            t1Hour = hourOfDay;
+                            t1Minute = minute;
 
-                                String time = t1Hour + ":" + t1Minute;
-                                Log.d("daw", String.valueOf(t1Minute));
+                            String time = t1Hour + ":" + t1Minute;
+                            Log.d("daw", String.valueOf(t1Minute));
 
 
-                                time(time, t1Minute, t1Hour, shop_update_opentime);
-                            }
-                        }, 12, 0, true
-                );
-                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                timePickerDialog.updateTime(t1Hour, t1Minute);
-                timePickerDialog.show();
-            }
+                            time(time, t1Minute, t1Hour, shop_update_opentime);
+                        }
+                    }, 12, 0, true
+            );
+            timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            timePickerDialog.updateTime(t1Hour, t1Minute);
+            timePickerDialog.show();
         });
 
-        shop_update_closetime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TimePickerDialog timePickerDialog = new TimePickerDialog(
-                        ShopUpdateActivity.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        new TimePickerDialog.OnTimeSetListener() {
-                            @SneakyThrows
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                t2Hour = hourOfDay;
-                                t2Minute = minute;
+        shop_update_closetime.setOnClickListener(v -> {
+            TimePickerDialog timePickerDialog = new TimePickerDialog(
+                    ShopUpdateActivity.this,
+                    android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                    new TimePickerDialog.OnTimeSetListener() {
+                        @SneakyThrows
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                            t2Hour = hourOfDay;
+                            t2Minute = minute;
 
-                                String time = t2Hour + ":" + t2Minute;
-                                time(time, t2Minute, t2Hour, shop_update_closetime);
-                            }
-                        }, 12, 0, true
-                );
-                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                timePickerDialog.updateTime(t2Hour, t2Minute);
-                timePickerDialog.show();
-            }
+                            String time = t2Hour + ":" + t2Minute;
+                            time(time, t2Minute, t2Hour, shop_update_closetime);
+                        }
+                    }, 12, 0, true
+            );
+            timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            timePickerDialog.updateTime(t2Hour, t2Minute);
+            timePickerDialog.show();
         });
 
-        shop_update_cancle_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(ShopUpdateActivity.this);
-                builder.setTitle("알림");
-                builder.setMessage("변경사항이 저장되지 않습니다. 나가시겠습니까?");
-                builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                });
-                builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+        shop_update_cancle_btn.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(ShopUpdateActivity.this);
+            builder.setTitle("알림");
+            builder.setMessage("변경사항이 저장되지 않습니다. 나가시겠습니까?");
+            builder.setPositiveButton("예", (dialog, which) -> finish());
+            builder.setNegativeButton("아니오", (dialog, which) -> {
 
-                    }
-                });
-                builder.show();
-            }
+            });
+            builder.show();
         });
 
-        shop_update_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                builder.setTitle("알림");
-                builder.setMessage("수정하시겠습니까?");
-                builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+        shop_update_btn.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+            builder.setTitle("알림");
+            builder.setMessage("수정하시겠습니까?");
+            builder.setPositiveButton("예", (dialog, which) -> {
+                Map<String, String> map = new HashMap();
+                map.put("shopId", shopNumber);
+                map.put("intro", shop_update_intro.getText().toString());
+                map.put("openTime", shop_update_opentime.getText().toString());
+                map.put("closeTime", shop_update_closetime.getText().toString());
+
+                Log.d("adw", shop_update_opentime.getText().toString() + "$" + shop_update_closetime.getText().toString());
+                Log.d("token", shopNumber + jwt);
+
+                responseBodyCall = Server.getInstance().getApi().updateShop("Bearer " + jwt, map);
+                responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                    @SneakyThrows
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Map<String, String> map = new HashMap();
-                        map.put("shopId", shopNumber);
-                        map.put("intro", shop_update_intro.getText().toString());
-                        map.put("openTime", shop_update_opentime.getText().toString());
-                        map.put("closeTime", shop_update_closetime.getText().toString());
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        Log.d("re", "re");
+                        if (response.code() == 200) {
+                            Toast.makeText(ShopUpdateActivity.this, "수정되었습니다.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.d("tv", "연결실패" + response.errorBody().string());
+                        }
+                    }
 
-                        Log.d("adw",shop_update_opentime.getText().toString()+"$"+shop_update_closetime.getText().toString());
-                        Log.d("token", shopNumber+jwt);
-
-                        responseBodyCall = Server.getInstance().getApi().updateShop("Bearer " + jwt, map);
-                        responseBodyCall.enqueue(new Callback<ResponseBody>() {
-                            @SneakyThrows
-                            @Override
-                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                Log.d("re","re");
-                                if (response.code() == 200) {
-                                    Toast.makeText(ShopUpdateActivity.this, "수정되었습니다.", Toast.LENGTH_SHORT).show();
-//                                    AlertDialog.Builder builder = new AlertDialog.Builder(ShopUpdateActivity.this);
-//                                    builder.setMessage("수정되었습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
-//                                        @Override
-//                                        public void onClick(DialogInterface dialog, int which) {
-//                                            finish();
-//                                        }
-//                                    }).create();
-//                                    builder.setCancelable(false);
-//                                    builder.show();
-                                } else {
-                                    Log.d("tv", "연결실패" + response.errorBody().string());
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                Log.d("tv", "연결실패2");
-                            }
-                        });
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.d("tv", "연결실패2");
                     }
                 });
-                builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+            });
+            builder.setNegativeButton("아니오", (dialog, which) -> {
 
-                    }
-                });
-                builder.show();
-            }
+            });
+            builder.show();
         });
     }
 
     private void time(String time, int t2Minute, int t2Hour, TextView shop_update_closetime) {
         if (String.valueOf(t2Minute).toString().length() == 1 && String.valueOf(t2Hour).toString().length() == 1) {
-            shop_update_closetime.setText("0"+ t2Hour + ":" + "0"+ t2Minute);
-        } else if(String.valueOf(t2Hour).toString().length() == 1) {
-            shop_update_closetime.setText("0"+ t2Hour + ":" + t2Minute);
-        } else if(String.valueOf(t2Minute).toString().length() == 1) {
-            shop_update_closetime.setText(t2Hour + ":" + "0"+ t2Minute);
+            shop_update_closetime.setText("0" + t2Hour + ":" + "0" + t2Minute);
+        } else if (String.valueOf(t2Hour).toString().length() == 1) {
+            shop_update_closetime.setText("0" + t2Hour + ":" + t2Minute);
+        } else if (String.valueOf(t2Minute).toString().length() == 1) {
+            shop_update_closetime.setText(t2Hour + ":" + "0" + t2Minute);
         } else {
             shop_update_closetime.setText(time);
         }
@@ -283,11 +249,11 @@ public class ShopUpdateActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
-        if(responseBodyCall!=null)
+        if (responseBodyCall != null)
             responseBodyCall.cancel();
-        if(shopCall!=null)
+        if (shopCall != null)
             shopCall.cancel();
     }
 }

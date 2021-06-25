@@ -76,6 +76,10 @@ public interface ServerApi {
                           @PartMap Map<String, RequestBody> map,
                           @Part MultipartBody.Part file);
 
+    @POST("payments/complete") // rd -> pd
+    Call<ResponseBody> rdToPd(@Header("Authorization") String jwt,
+                              @Body Map<String, String> map);
+
     /**
      * read read read read
      */

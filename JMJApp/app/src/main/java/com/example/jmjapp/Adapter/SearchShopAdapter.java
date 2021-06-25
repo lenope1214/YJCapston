@@ -32,7 +32,7 @@ public class SearchShopAdapter extends RecyclerView.Adapter<SearchShopAdapter.It
         this.context = context;
     }
 
-    public void setItems(ArrayList<Shop> shopss){
+    public void setItems(ArrayList<Shop> shopss) {
         this.mItems = shopss;
     }
 
@@ -48,29 +48,26 @@ public class SearchShopAdapter extends RecyclerView.Adapter<SearchShopAdapter.It
     public void onBindViewHolder(final SearchShopAdapter.ItemViewHolder holder, final int position) {
         holder.tv_restaurant_name.setText(mItems.get(position).getName());
         holder.tv_restaurant_menu.setText(mItems.get(position).getAddress());
-        Glide.with(context).load("http://3.34.55.186:8088/" + mItems.get(position).getImgPath()).override(500,500).into(holder.riv_restaurant_img);
+        Glide.with(context).load("http://3.34.55.186:8088/" + mItems.get(position).getImgPath()).override(500, 500).into(holder.riv_restaurant_img);
 
-        if(mItems.get(position).getIsOpen() == 'Y') {
+        if (mItems.get(position).getIsOpen() == 'Y') {
             holder.tv_status.setText("영업 중");
         } else {
             holder.tv_status.setText("영업아님");
         }
 
-        holder.layout_restaurant.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, ShopDetailActivity.class);
-                intent.putExtra("shopNumber", mItems.get(position).getShopId());
-                Log.d("result : ", mItems.get(position).getShopId());
-                context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-            }
+        holder.layout_restaurant.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ShopDetailActivity.class);
+            intent.putExtra("shopNumber", mItems.get(position).getShopId());
+            Log.d("result : ", mItems.get(position).getShopId());
+            context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         });
     }
 
     // 데이터 셋의 크기
     @Override
     public int getItemCount() {
-        return mItems==null? 0:mItems.size();
+        return mItems == null ? 0 : mItems.size();
     }
 
     // 커스텀 뷰홀더
@@ -81,6 +78,7 @@ public class SearchShopAdapter extends RecyclerView.Adapter<SearchShopAdapter.It
         private TextView tv_restaurant_name;
         private TextView tv_restaurant_menu;
         private TextView tv_status;
+
         public ItemViewHolder(View itemView) {
             super(itemView);
             layout_restaurant = (ConstraintLayout) itemView.findViewById(R.id.layout_restaurant);

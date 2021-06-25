@@ -7,20 +7,17 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jmjapp.Adapter.AlarmListRecyclerAdapter;
-import com.example.jmjapp.Adapter.BasketRecyclerAdapter;
-import com.example.jmjapp.Adapter.MenuRecyclerAdapter;
 import com.example.jmjapp.R;
 import com.example.jmjapp.databinding.ActivityMain4Binding;
-import com.example.jmjapp.dto.Menu;
 import com.example.jmjapp.dto.Order;
 import com.example.jmjapp.network.Server;
-import com.example.jmjapp.owner.MainActivity_O;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
@@ -59,14 +56,11 @@ public class BellActivity_O extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.arrowback);
 
         //textView = binding.textView;
-        Log.d("bellactivity_o","oncreate");
+        Log.d("bellactivity_o", "oncreate");
 
-        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this, new OnSuccessListener<InstanceIdResult>() {
-            @Override
-            public void onSuccess(InstanceIdResult result) {
-                String newToken = result.getToken();
-                Log.d("se", newToken);
-            }
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this, result -> {
+            String newToken = result.getToken();
+            Log.d("se", newToken);
         });
 
         SharedPreferences pref = getSharedPreferences("auth_o", MODE_PRIVATE);
@@ -94,7 +88,7 @@ public class BellActivity_O extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         Log.d("bell성공", "bell성공");
                         List<Order> orderList = response.body();
-                        for(Order list : orderList) {
+                        for (Order list : orderList) {
                             if (list.getAccept() == 'N' && list.getPayTime() != null) {
                                 mItems.add(new Order(list.getOrderId(), list.getStatus(), list.getOrderRequest(),
                                         list.getPeople(), list.getUsePoint(), list.getAmount(),
@@ -108,11 +102,12 @@ public class BellActivity_O extends AppCompatActivity {
                                 alarm_list.setAdapter(adapter);
                                 Log.d("awdawd", list.getOrderId());
                             }
-                       }
+                        }
                     } else {
                         Log.d("bell실패", "bell실패");
                     }
                 }
+
                 @Override
                 public void onFailure(Call<List<Order>> call, Throwable t) {
                     Log.d("bell실패2", "bell실패2");
@@ -124,7 +119,7 @@ public class BellActivity_O extends AppCompatActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         if (intent != null) {
-            Log.d("bellactivity_o","onnewintent");
+            Log.d("bellactivity_o", "onnewintent");
             processIntent(intent);
         }
         super.onNewIntent(intent);
@@ -145,7 +140,7 @@ public class BellActivity_O extends AppCompatActivity {
         String resShop = intent.getStringExtra("resShop");
 
         //binding.qwer123.setText(resTime);
-        Log.d("qwe","qweqweqwe");
+        Log.d("qwe", "qweqweqwe");
         editor.putString("resTime", resTime);
         editor.putString("resDate", resDate);
         editor.putString("count", count);
@@ -168,7 +163,7 @@ public class BellActivity_O extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);

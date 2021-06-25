@@ -8,8 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Chatbot;
 import com.example.jmjapp.owner.ChatbotSettingActivity;
@@ -22,8 +24,8 @@ public class ChatbotListUserAdapter extends RecyclerView.Adapter<ChatbotListUser
     ArrayList<Chatbot> mItems;
     int postion;
 
-   // private String question;
-   // private String answer;
+    // private String question;
+    // private String answer;
     private String chatbot_answer2;
 
 
@@ -52,7 +54,7 @@ public class ChatbotListUserAdapter extends RecyclerView.Adapter<ChatbotListUser
     @Override
     public void onBindViewHolder(final ChatbotListUserAdapter.ItemViewHolder holder, int position) {
         Chatbot chatbot = mItems.get(position);
-      //  answer = mItems.get(position).getAnswer();
+        //  answer = mItems.get(position).getAnswer();
 
 //
 //
@@ -79,12 +81,7 @@ public class ChatbotListUserAdapter extends RecyclerView.Adapter<ChatbotListUser
 //
 //
 //        });
-        holder.question.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onItemClick.click(holder.clChatbot, position);
-            }
-        });
+        holder.question.setOnClickListener(v -> onItemClick.click(holder.clChatbot, position));
     }
 
     // 데이터 셋의 크기
@@ -116,17 +113,17 @@ public class ChatbotListUserAdapter extends RecyclerView.Adapter<ChatbotListUser
         }
     }
 
-    public void addOnClick(OnItemClick onItemClick){
+    public void addOnClick(OnItemClick onItemClick) {
         this.onItemClick = onItemClick;
     }
 
     public OnItemClick onItemClick;
 
-    public interface OnItemClick{
+    public interface OnItemClick {
         void click(View view, int position);
     }
 
-    public Chatbot getItem(int position){
+    public Chatbot getItem(int position) {
         return mItems.get(position);
     }
 }

@@ -75,12 +75,12 @@ public class MenuOptionActivity extends AppCompatActivity {
         Intent intent = getIntent();
         menuId = intent.getStringExtra("menuId");
         optionGroupId = intent.getStringExtra("optionGroupId");
-        Log.d("qweasdzxc", jwt+menuId+optionGroupId);
+        Log.d("qweasdzxc", jwt + menuId + optionGroupId);
 
         menu_option_list = binding.menuOptionList;
 
         optionGroupsCall = Server.getInstance().getApi().optionGroupsList("Bearer " + jwt, menuId);
-        optionGroupsCall.enqueue(new Callback <List<OptionGroups>>() {
+        optionGroupsCall.enqueue(new Callback<List<OptionGroups>>() {
             @SneakyThrows
             @Override
             public void onResponse(Call<List<OptionGroups>> call, Response<List<OptionGroups>> response) {
@@ -97,47 +97,41 @@ public class MenuOptionActivity extends AppCompatActivity {
                         menu_option_list.setAdapter(adapter);
                     }
                 } else {
-                    Log.d("OptionGroupsList 실패1", "OptionGroupsList 실패1"+response.errorBody().string());
+                    Log.d("OptionGroupsList 실패1", "OptionGroupsList 실패1" + response.errorBody().string());
                 }
             }
 
             @Override
             public void onFailure(Call<List<OptionGroups>> call, Throwable t) {
-                Log.d("OptionGroupsList 실패2", "OptionGroupsList 실패2"+t.getCause()+t.getMessage());
+                Log.d("OptionGroupsList 실패2", "OptionGroupsList 실패2" + t.getCause() + t.getMessage());
             }
         });
 
-        
-        binding.menuOptionBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(MenuOptionActivity.this);
-                dialog = builder.setMessage("메뉴가 등록되었습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mo.finish();
-                        mog.finish();
-                        mr.finish();
-                    }
-                }).create();
-                builder.setCancelable(false);
-                dialog.show();
-            }
+
+        binding.menuOptionBtn.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(MenuOptionActivity.this);
+            dialog = builder.setMessage("메뉴가 등록되었습니다.").setPositiveButton("확인", (dialog, which) -> {
+                mo.finish();
+                mog.finish();
+                mr.finish();
+            }).create();
+            builder.setCancelable(false);
+            dialog.show();
         });
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
-        if(optionGroupsCall!=null)
+        if (optionGroupsCall != null)
             optionGroupsCall.cancel();
     }
 }

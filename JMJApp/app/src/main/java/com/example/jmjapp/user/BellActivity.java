@@ -63,7 +63,7 @@ public class BellActivity extends AppCompatActivity {
         orderId = intent.getStringExtra("orderId");
         msg = intent.getStringExtra("msg");
 
-        Log.d("qweqwe",jwt+"$$"+orderId);
+        Log.d("qweqwe", jwt + "$$" + orderId);
 
         user_alarm_shopName = binding.userAlarmShopName;
         user_alarm_result = binding.userAlarmResult;
@@ -89,11 +89,11 @@ public class BellActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Order> call, Throwable t) {
-                Log.d("orderOne실패2", "orderOne실패2" + t.getMessage() +"%%%%"+t.getCause());
+                Log.d("orderOne실패2", "orderOne실패2" + t.getMessage() + "%%%%" + t.getCause());
             }
         });
-        
-        if(msg != null) {
+
+        if (msg != null) {
             if (msg.equals("accept")) {
                 user_alarm_result.setText("예약주문이 수락되었습니다!");
             } else if (msg.equals("reject")) {
@@ -104,7 +104,7 @@ public class BellActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);

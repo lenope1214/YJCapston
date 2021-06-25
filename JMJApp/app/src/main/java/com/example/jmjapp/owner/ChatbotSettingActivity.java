@@ -7,13 +7,17 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
+
 import com.example.jmjapp.R;
 import com.example.jmjapp.databinding.ActivitySettingChatbotBinding;
 import com.example.jmjapp.databinding.ActivityChatbotManagementBinding;
 import com.example.jmjapp.network.Server;
+
 import lombok.SneakyThrows;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -32,12 +36,12 @@ public class ChatbotSettingActivity extends AppCompatActivity {
     private Call<ResponseBody> deleteChatbot;
     SharedPreferences pref;
 
-    private void submitSw(boolean isAdd){
+    private void submitSw(boolean isAdd) {
         System.out.println("isAdd : " + isAdd);
-        if(isAdd){
+        if (isAdd) {
             submitBtn.setText("추가");
             deleteBtn.setText("취소");
-        }else{
+        } else {
             submitBtn.setText("수정");
             deleteBtn.setText("삭제");
         }
@@ -73,14 +77,14 @@ public class ChatbotSettingActivity extends AppCompatActivity {
             pref = getSharedPreferences("auth_o", MODE_PRIVATE);
             String jwt = pref.getString("token", null);
             Map<String, Object> map = new HashMap();
-            if(!isAdd)map.put("chatbotId" , chatbotId);
+            if (!isAdd) map.put("chatbotId", chatbotId);
             map.put("shopId", MainActivity_O.shopNumber);
             map.put("question", questionET.getText().toString());
             map.put("answer", answerET.getText().toString());
 
             postChatbot = isAdd ?
                     Server.getInstance().getApi().insertChatbot("Bearer " + jwt, map)
-                    : Server.getInstance().getApi().patchChatbot("Bearer " + jwt, map)  ;
+                    : Server.getInstance().getApi().patchChatbot("Bearer " + jwt, map);
             postChatbot.enqueue(new Callback<ResponseBody>() {
                 @SneakyThrows
                 @Override
@@ -114,7 +118,8 @@ public class ChatbotSettingActivity extends AppCompatActivity {
             }
             pref = getSharedPreferences("auth_o", MODE_PRIVATE);
             String jwt = pref.getString("token", null);
-            if(!isAdd) deleteChatbot = Server.getInstance().getApi().deleteChatbot("Bearer " + jwt, chatbotId.toString());
+            if (!isAdd)
+                deleteChatbot = Server.getInstance().getApi().deleteChatbot("Bearer " + jwt, chatbotId.toString());
             deleteChatbot.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

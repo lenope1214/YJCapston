@@ -8,10 +8,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.jmjapp.Adapter.RestaurantListRecyclerAdapter;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Shop;
@@ -49,9 +51,9 @@ public class ListShopActivity extends AppCompatActivity {
         jwt = pref.getString("token", null);
 
         String[] shopId = new String[owner_number_size];
-        for (int i=0; i < owner_number_size; i++) {
+        for (int i = 0; i < owner_number_size; i++) {
             shopId[i] = intent.getStringExtra("owner_number" + i);
-            Log.d("result", "shopId"+i+" : " + shopId[i]);
+            Log.d("result", "shopId" + i + " : " + shopId[i]);
         }
         System.out.println(owner_id);
         System.out.println(jwt);
@@ -76,10 +78,10 @@ public class ListShopActivity extends AppCompatActivity {
         listShopCall.enqueue(new Callback<List<Shop>>() {
             @Override
             public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response) {
-                if(response.isSuccessful()) {
-                    if(response.code() == 200) {
+                if (response.isSuccessful()) {
+                    if (response.code() == 200) {
                         List<Shop> shopList = response.body();
-                        for(Shop list : shopList) {
+                        for (Shop list : shopList) {
                             mItems.add(new Shop(list.getShopId(), list.getName(),
                                     list.getIntro(), list.getCloseTime(),
                                     list.getOpenTime(), list.getAddress(),
@@ -89,7 +91,7 @@ public class ListShopActivity extends AppCompatActivity {
                             adapter = new RestaurantListRecyclerAdapter(getApplicationContext(), mItems);
                             rv_restaurant_list.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                             rv_restaurant_list.setAdapter(adapter);
-                            Log.d("s@@@@",list.getName());
+                            Log.d("s@@@@", list.getName());
                         }
                     } else {
                         Toast.makeText(getApplicationContext(), "조회 실패", Toast.LENGTH_LONG).show();
@@ -109,26 +111,18 @@ public class ListShopActivity extends AppCompatActivity {
         AlertDialog.Builder alBuilder = new AlertDialog.Builder(this);
         alBuilder.setMessage("앱을 종료하시겠습니까?");
 
-        alBuilder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-            }
-        });
-        alBuilder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                return;
-            }
+        alBuilder.setPositiveButton("예", (dialog, which) -> finish());
+        alBuilder.setNegativeButton("아니오", (dialog, which) -> {
+            return;
         });
         alBuilder.setTitle("앱 종료");
         alBuilder.show();
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
-        if(listShopCall!=null)
+        if (listShopCall != null)
             listShopCall.cancel();
     }
 }

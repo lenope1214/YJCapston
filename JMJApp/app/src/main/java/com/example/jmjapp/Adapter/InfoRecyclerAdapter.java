@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Shop;
 
@@ -42,13 +44,14 @@ public class InfoRecyclerAdapter extends RecyclerView.Adapter<InfoRecyclerAdapte
 
     // 커스텀 뷰홀더
     // item layout 에 존재하는 위젯들을 바인딩합니다.
-    class ItemViewHolder extends RecyclerView.ViewHolder{
+    class ItemViewHolder extends RecyclerView.ViewHolder {
         private TextView tv_info_name;
         private TextView tv_info_content;
+
         public ItemViewHolder(View itemView) {
             super(itemView);
-            tv_info_name = (TextView)itemView.findViewById(R.id.tv_info_name);
-            tv_info_content = (TextView)itemView.findViewById(R.id.tv_info_content);
+            tv_info_name = (TextView) itemView.findViewById(R.id.tv_info_name);
+            tv_info_content = (TextView) itemView.findViewById(R.id.tv_info_content);
         }
     }
 

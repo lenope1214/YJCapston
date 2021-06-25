@@ -39,9 +39,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PosFragment extends Fragment {
-    Button btn_order,btn_payment;
+    Button btn_order, btn_payment, btn_chatbot;
     TextView tv_tablenum, tv_tableName, qr_menu_price;
-    private String shopId, orderId, jwt;
+    private String shopId, jwt, shopName;
     RecyclerView pos_menu_list;
     private PosMenuListAdapter adapter;
     private ArrayList<OrderMenu> mItems = new ArrayList();
@@ -50,7 +50,7 @@ public class PosFragment extends Fragment {
     private Call<Shop> shopCall;
     private Call<Menu> menuCall;
     static public int sum = 0;
-
+    static public String orderId;
     private ConstraintLayout constraintLayout10, constraintLayout20;
 
     @Override
@@ -60,16 +60,6 @@ public class PosFragment extends Fragment {
 
         constraintLayout10 = rootView.findViewById(R.id.constraintLayout10);
         constraintLayout20 = rootView.findViewById(R.id.constraintLayout20);
-
-//        try {
-//            if(!(shopNumber.equals(null))) shopNumber = getArguments().getString("shopNumber");
-//            System.out.println(shopNumber+"nnnnnnnnnnnnn");
-//        } catch (NullPointerException e) {
-//            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//            HomeFragment mf = new HomeFragment();
-//            transaction.replace(R.id.MainActivity, mf);
-//            transaction.commit();
-//        }
 
         shopId = QrReaderActivity.shopnum2;
         orderId = QrReaderActivity.orderId;
@@ -88,6 +78,7 @@ public class PosFragment extends Fragment {
                 if (response.isSuccessful()) {
                     Log.d("shop 조회 성공", "shop 조회 성공");
                     tv_tableName.setText(response.body().getName());
+                    shopName = response.body().getName();
                 } else {
                     Log.d("shop 조회 실패1", "shop 조회 실패1");
                 }
@@ -99,38 +90,24 @@ public class PosFragment extends Fragment {
             }
         });
 
-//        SharedPreferences pref2 = getActivity().getSharedPreferences("basket", Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = pref2.edit();
-//        int list_size = pref2.getInt("list_size",0);
-//
-//        for(int i = list_size - 1; i >= 0; i--) {
-//            mItems.add(new Menu(i, pref2.getString("list_" + i + "_name", "메뉴이름"),
-//                    pref2.getInt("list_" + i + "_price", 0)));
-//        }
-//        pos_menu_list.setHasFixedSize(true);
-//        adapter = new PosMenuListAdapter(getContext(), mItems);
-//        pos_menu_list.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        pos_menu_list.setAdapter(adapter);
-
         tv_tablenum = rootView.findViewById(R.id.tv_tablenum);
         tv_tablenum.setText("테이블 번호");
 
         try {
-            if (QrReaderActivity.tablenum.equals("null")){
+            if (QrReaderActivity.tablenum.equals("null")) {
                 tv_tablenum.setText("테이블 번호");
             } else {
-                tv_tablenum.setText(QrReaderActivity.tablenum+"번 테이블");
+                tv_tablenum.setText(QrReaderActivity.tablenum + "번 테이블");
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             tv_tablenum.setText("테이블 번호");
         }
 
         btn_order = rootView.findViewById(R.id.btn_order);
         btn_order.setOnClickListener(v -> {
-            Toast.makeText(this.getActivity(), "h2", Toast.LENGTH_SHORT).show();
-           Intent intent = new Intent(getActivity(), QrMenuActivity.class);
-           intent.putExtra("shopId", shopId);
-           startActivity(intent);
+            Intent intent = new Intent(getActivity(), QrMenuActivity.class);
+            intent.putExtra("shopId", shopId);
+            startActivity(intent);
         });
 
         btn_payment = rootView.findViewById(R.id.btn_payment);
@@ -141,15 +118,24 @@ public class PosFragment extends Fragment {
             startActivity(intent);
         });
 
+        btn_chatbot = rootView.findViewById(R.id.btn_chatbot);
+        btn_chatbot.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), ChatbotListActivity.class);
+            intent.putExtra("shopId", shopId);
+            intent.putExtra("shopName", shopName);
+            intent.putExtra("qr", "qr");
+            startActivity(intent);
+        });
+
         return rootView;
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         Log.d("onStart", "onStart");
 
-        if(orderId == null) {
+        if (orderId == null) {
             constraintLayout10.setVisibility(View.GONE);
             constraintLayout20.setVisibility(View.VISIBLE);
         } else {
@@ -165,7 +151,6 @@ public class PosFragment extends Fragment {
                     if (response.isSuccessful()) {
                         Log.d("order_orderMenu 성공3", "order_orderMenu 성공3");
                         List<OrderMenu> orderMenuList = response.body();
-                        Log.d("ordermenuist", orderMenuList.toString());
 
                         for (OrderMenu list : orderMenuList) {
                             mItems.add(new OrderMenu(list.getMenuName(), list.getQuantity()));
@@ -175,38 +160,8 @@ public class PosFragment extends Fragment {
                             pos_menu_list.setLayoutManager(new LinearLayoutManager(getActivity()));
                             pos_menu_list.setAdapter(adapter);
 
-                            sum = sum + list.getMenuPrice();
+                            sum = sum + (list.getMenuPrice() * Integer.parseInt(list.getQuantity()));
                         }
-
-//                        for (OrderMenu list : orderMenuList) {
-//                            list_menuId[index] = list.getMenuId();
-//                            Log.d("listmeni", list_menuId[index]);
-//                            index++;
-//                        }
-
-
-//                        if (index != 0) {
-//                            for (int i = 0; i < orderMenuList.size(); i++) {
-//                                menuCall = Server.getInstance().getApi().menuOne(list_menuId[i]);
-//                                menuCall.enqueue(new Callback<Menu>() {
-//                                    @SneakyThrows
-//                                    @Override
-//                                    public void onResponse(Call<Menu> call, Response<Menu> response) {
-//                                        if (response.isSuccessful()) {
-//                                            Log.d("menuOne 성공", "menuOne 성공");
-//                                            sum = sum + response.body().getPrice();
-//                                        } else {
-//                                            Log.d("menuOne 실패1", "menuOne 실패1" + response.errorBody().string());
-//                                        }
-//                                    }
-//
-//                                    @Override
-//                                    public void onFailure(Call<Menu> call, Throwable t) {
-//                                        Log.d("menuOne 실패2", "menuOne 실패2" + t.getCause());
-//                                    }
-//                                });
-//                            }
-//                        }
                         qr_menu_price.setText(String.valueOf(sum) + "원");
 
                     } else {
@@ -219,33 +174,6 @@ public class PosFragment extends Fragment {
                     Log.d("order_orderMenu 실패2", "order_orderMenu 실패2" + t.getCause());
                 }
             });
-
-//        getOrderMenus = Server.getInstance().getApi().orderOneMenu(orderId);
-//        getOrderMenus.enqueue(new Callback<Order.OrderMenuList>() {
-//            @SneakyThrows
-//            @Override
-//            public void onResponse(Call<Order.OrderMenuList> call, Response<Order.OrderMenuList> response) {
-//                if (response.isSuccessful()) {
-//                    Log.d("orderMenu 성공", "orderMenu 성공");
-//                    List<OrderMenu> orderMenuList = response.body().getOrderMenuList();
-//                    Log.d("listlist", orderMenuList.toString());
-//
-//                    String[] list_menuId = new String[orderMenuList.size()];
-//
-//                    int index = 0;
-//
-//
-//
-//                } else {
-//                    Log.d("orderMenu 실패1", "orderMenu 실패1"+response.errorBody().string());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Order.OrderMenuList> call, Throwable t) {
-//                Log.d("orderMenu 실패2", "orderMenu 실패2");
-//            }
-//        });
         }
     }
 }

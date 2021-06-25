@@ -1,8 +1,5 @@
 package com.example.jmjapp.network;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -24,8 +21,8 @@ public class Server {
     }
 
     public static Server getInstance() {
-        if(instance==null)
-            instance=new Server();
+        if (instance == null)
+            instance = new Server();
         return instance;
     }
 

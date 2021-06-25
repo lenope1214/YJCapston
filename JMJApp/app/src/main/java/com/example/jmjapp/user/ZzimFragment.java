@@ -65,12 +65,9 @@ public class ZzimFragment extends Fragment {
         manager = getFragmentManager();
 
         ImageView home_search_bar = rootView.findViewById(R.id.zzim_search_bar);
-        home_search_bar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity.bottomNavigation.setSelectedItemId(R.id.tab2);
-                manager.beginTransaction().replace(R.id.container, mapFragment).commit();
-            }
+        home_search_bar.setOnClickListener(v -> {
+            MainActivity.bottomNavigation.setSelectedItemId(R.id.tab2);
+            manager.beginTransaction().replace(R.id.container, mapFragment).commit();
         });
         return rootView;
     }
@@ -89,8 +86,8 @@ public class ZzimFragment extends Fragment {
                     Log.d("myOrder 성공", "myOrder 성공");
                     List<Order> orderList = response.body();
                     Log.d("or", String.valueOf(orderList));
-                    for(Order list : orderList) {
-                        if (list.getPayTime() != null && !(list.getStatus().equals("rf"))) {
+                    for (Order list : orderList) {
+                        if (list.getPayTime() != null) {
                             mItems.add(new Order(list.getOrderId(), list.getStatus(), list.getOrderRequest(),
                                     list.getPeople(), list.getUsePoint(), list.getAmount(),
                                     list.getArriveTime(), list.getPayTime(), list.getPg(),
@@ -103,13 +100,13 @@ public class ZzimFragment extends Fragment {
                         }
                     }
                 } else {
-                    Log.d("myOrder 실패1", "myOrder 실패1"+response.errorBody().string());
+                    Log.d("myOrder 실패1", "myOrder 실패1" + response.errorBody().string());
                 }
             }
 
             @Override
             public void onFailure(Call<List<Order>> call, Throwable t) {
-                Log.d("myOrder 실패2", "myOrder 실패2"+t.getCause());
+                Log.d("myOrder 실패2", "myOrder 실패2" + t.getCause());
             }
         });
     }

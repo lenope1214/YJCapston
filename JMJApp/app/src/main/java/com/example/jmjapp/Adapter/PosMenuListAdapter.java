@@ -1,8 +1,6 @@
 package com.example.jmjapp.Adapter;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +8,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.jmjapp.R;
-import com.example.jmjapp.dto.Menu;
 import com.example.jmjapp.dto.OrderMenu;
 
 import java.util.ArrayList;
@@ -52,17 +48,19 @@ public class PosMenuListAdapter extends RecyclerView.Adapter<PosMenuListAdapter.
     // 데이터 셋의 크기
     @Override
     public int getItemCount() {
-        return mItems==null? 0:mItems.size();
+        return mItems == null ? 0 : mItems.size();
     }
 
     // 커스텀 뷰홀더
     // item layout 에 존재하는 위젯들을 바인딩합니다.
-    class ItemViewHolder extends RecyclerView.ViewHolder{
+    class ItemViewHolder extends RecyclerView.ViewHolder {
         TextView post_menu_name, post_menu_count;
+
         public ItemViewHolder(View itemView) {
             super(itemView);
             post_menu_name = itemView.findViewById(R.id.post_menu_name);
             post_menu_count = itemView.findViewById(R.id.post_menu_count);
         }
+
     }
 }

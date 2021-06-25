@@ -1,7 +1,6 @@
 package com.example.jmjapp.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,22 +9,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.jmjapp.R;
-import com.example.jmjapp.dto.Mark;
 import com.example.jmjapp.dto.Shop;
-import com.example.jmjapp.network.Server;
 
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
 
 public class ZzimAdapter extends RecyclerView.Adapter<ZzimAdapter.ItemViewHolder> {
 
@@ -34,7 +26,7 @@ public class ZzimAdapter extends RecyclerView.Adapter<ZzimAdapter.ItemViewHolder
 
     private String jwt;
 
-    public ZzimAdapter(Context context, ArrayList<Shop> recordData){
+    public ZzimAdapter(Context context, ArrayList<Shop> recordData) {
         this.context = context;
         this.recordData = recordData;
     }
@@ -70,7 +62,7 @@ public class ZzimAdapter extends RecyclerView.Adapter<ZzimAdapter.ItemViewHolder
 
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
-        Glide.with(context).load("http://3.34.55.186:8088/" + recordData.get(position).getImgPath()).override(100,100).into(holder.iv_zzimImg);
+        Glide.with(context).load("http://3.34.55.186:8088/" + recordData.get(position).getImgPath()).override(100, 100).into(holder.iv_zzimImg);
         holder.tv_zzimName.setText(recordData.get(position).getName());
         holder.tv_zzimAddress.setText(recordData.get(position).getAddress());
         holder.tv_zzimCategory.setText(recordData.get(position).getCategory());
@@ -78,13 +70,11 @@ public class ZzimAdapter extends RecyclerView.Adapter<ZzimAdapter.ItemViewHolder
         SharedPreferences pref = context.getSharedPreferences("auth", Context.MODE_PRIVATE);
         jwt = pref.getString("token", null);
 
-        System.out.println(recordData.get(position).getShopId()+"gggggggggggggggggg");
+        System.out.println(recordData.get(position).getShopId() + "gggggggggggggggggg");
 
         holder.cl_zzimItem.setOnClickListener(v -> {
-            Toast.makeText(context, "잘 눌립니다", Toast.LENGTH_SHORT).show();
         });
     }
-
 
 
 }

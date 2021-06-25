@@ -60,7 +60,7 @@ public class ReviewOwnerActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.d("reviewList 성공", "reviewList 성공");
                     List<Review> reviewList = response.body();
-                    for(Review list : reviewList) {
+                    for (Review list : reviewList) {
                         mItems.add(new Review(list.getReviewId(), list.getUserId(), list.getShopId(),
                                 list.getContent(), list.getParentId(), list.getRegDate(),
                                 list.getScore(), list.getImgUrl(), list.getOrderId()));
@@ -84,7 +84,7 @@ public class ReviewOwnerActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);

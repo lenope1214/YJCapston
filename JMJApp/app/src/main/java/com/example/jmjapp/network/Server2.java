@@ -1,7 +1,5 @@
 package com.example.jmjapp.network;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -12,7 +10,7 @@ public class Server2 {
 
     private Server2() {
         String url = "http://3.34.55.186:8088/"; // aws
-         //String url = "http://192.168.1.51:8088/"; // 로컬
+        //String url = "http://192.168.1.51:8088/"; // 로컬
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
@@ -24,8 +22,8 @@ public class Server2 {
     }
 
     public static Server2 getInstance2() {
-        if(instance2==null)
-            instance2=new Server2();
+        if (instance2 == null)
+            instance2 = new Server2();
         return instance2;
     }
 

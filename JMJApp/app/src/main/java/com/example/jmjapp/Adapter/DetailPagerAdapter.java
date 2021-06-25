@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+
 import com.example.jmjapp.Fragment.InfoFragment;
 import com.example.jmjapp.Fragment.MenuFragment;
 import com.example.jmjapp.Fragment.ReviewFragment;
@@ -17,7 +18,7 @@ public class DetailPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        switch (position){
+        switch (position) {
             case 0:
                 return MenuFragment.newInstance();
             case 1:
@@ -37,7 +38,7 @@ public class DetailPagerAdapter extends FragmentPagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        switch (position){
+        switch (position) {
             case 0:
                 return "메뉴";
             case 1:

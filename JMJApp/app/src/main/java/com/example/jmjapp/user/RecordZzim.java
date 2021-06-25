@@ -51,19 +51,19 @@ public class RecordZzim extends AppCompatActivity {
     }
 
     private void showZzimList() {
-        getMarks = Server.getInstance().getApi().getMarks("Bearer "+jwt);
+        getMarks = Server.getInstance().getApi().getMarks("Bearer " + jwt);
         getMarks.enqueue(new Callback<Mark.MarkList>() {
             @Override
             public void onResponse(Call<Mark.MarkList> call, Response<Mark.MarkList> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     List<Shop> markList = response.body().getShopList();
 
                     for (Shop list : markList) {
-                        System.out.println(list+"qqqqqqqqqqqqqq");
-                        mItems.add(new Shop(list.getImgPath(),list.getName(),list.getAddress(),list.getCategory()));
-                        System.out.println(mItems+"qqqqqqqqqqqqqqq");
+                        System.out.println(list + "qqqqqqqqqqqqqq");
+                        mItems.add(new Shop(list.getImgPath(), list.getName(), list.getAddress(), list.getCategory()));
+                        System.out.println(mItems + "qqqqqqqqqqqqqqq");
                         rv_zzim.setHasFixedSize(true);
-                        adapter = new ZzimAdapter(getApplicationContext(),mItems);
+                        adapter = new ZzimAdapter(getApplicationContext(), mItems);
                         rv_zzim.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                         rv_zzim.setAdapter(adapter);
                     }
@@ -81,9 +81,9 @@ public class RecordZzim extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
-        if(getMarks!=null)
+        if (getMarks != null)
             getMarks.cancel();
     }
 

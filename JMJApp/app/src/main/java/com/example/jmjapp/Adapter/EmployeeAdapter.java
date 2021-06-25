@@ -41,6 +41,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ItemVi
         TextView sw_empitemwork;
         TextView tv_empno;
         View v_emp;
+
         public ItemViewHolder(View itemView) {
             super(itemView);
             cl_empItem = itemView.findViewById(R.id.cl_zzimItem);
@@ -55,11 +56,10 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ItemVi
     }
 
 
-
     // 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_employees_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_employees_item, parent, false);
         ItemViewHolder holder = new ItemViewHolder(view);
         return holder;
     }
@@ -81,10 +81,8 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ItemVi
         jwt = pref.getString("token", null);
 
         holder.cl_empItem.setOnClickListener(v -> {
-            Toast.makeText(context, "잘 눌립니다", Toast.LENGTH_SHORT).show();
         });
     }
-
 
 
 }

@@ -92,129 +92,109 @@ public class AddEmployeesActivity extends AppCompatActivity {
 
 
         //birthDate
-        et_empbirth.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                    DatePickerDialog datePickerDialog = new DatePickerDialog(
-                            AddEmployeesActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth
-                            , setListener, year, month, day);
-                    datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                    datePickerDialog.show();
-                }
+        et_empbirth.setOnClickListener(v -> {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        AddEmployeesActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth
+                        , setListener, year, month, day);
+                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                datePickerDialog.show();
             }
         });
 
-        setListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int day) {
-                month = month + 1;
-                String date = null;
+        setListener = (view, year1, month1, day1) -> {
+            month1 = month1 + 1;
+            String date = null;
 
-                if (month < 10 && day < 10) {
-                    date = year + "/0" + month + "/0" + day;
-                } else if (day < 10) {
-                    date = year + "/" + month + "/0" + day;
-                } else if (month < 10) {
-                    date = year + "/0" + month + "/" + day;
-                } else {
-                    date = year + "/" + month + "/" + day;
-                }
-                et_empbirth.setText(date);
+            if (month1 < 10 && day1 < 10) {
+                date = year1 + "/0" + month1 + "/0" + day1;
+            } else if (day1 < 10) {
+                date = year1 + "/" + month1 + "/0" + day1;
+            } else if (month1 < 10) {
+                date = year1 + "/0" + month1 + "/" + day1;
+            } else {
+                date = year1 + "/" + month1 + "/" + day1;
             }
+            et_empbirth.setText(date);
         };
 
-        et_empbirth.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        AddEmployeesActivity.this, new DatePickerDialog.OnDateSetListener() {
+        et_empbirth.setOnClickListener(v -> {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(
+                    AddEmployeesActivity.this, new DatePickerDialog.OnDateSetListener() {
 
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int day) {
-                        month = month + 1;
-                        String date = null;
+                @Override
+                public void onDateSet(DatePicker view, int year12, int month12, int day12) {
+                    month12 = month12 + 1;
+                    String date = null;
 
-                        if (month < 10 && day < 10) {
-                            date = year + "/0" + month + "/0" + day;
-                        } else if (day < 10) {
-                            date = year + "/" + month + "/0" + day;
-                        } else if (month < 10) {
-                            date = year + "/0" + month + "/" + day;
-                        } else {
-                            date = year + "/" + month + "/" + day;
-                        }
-                        et_empbirth.setText(date);
+                    if (month12 < 10 && day12 < 10) {
+                        date = year12 + "/0" + month12 + "/0" + day12;
+                    } else if (day12 < 10) {
+                        date = year12 + "/" + month12 + "/0" + day12;
+                    } else if (month12 < 10) {
+                        date = year12 + "/0" + month12 + "/" + day12;
+                    } else {
+                        date = year12 + "/" + month12 + "/" + day12;
                     }
-                }, year, month, day);
-                datePickerDialog.show();
-            }
+                    et_empbirth.setText(date);
+                }
+            }, year, month, day);
+            datePickerDialog.show();
         });
 
         //hireDate
-        et_emphire.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                    DatePickerDialog datePickerDialog = new DatePickerDialog(
-                            AddEmployeesActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth
-                            , setListener, year, month, day);
-                    datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                    datePickerDialog.show();
-                }
+        et_emphire.setOnClickListener(v -> {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        AddEmployeesActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth
+                        , setListener, year, month, day);
+                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                datePickerDialog.show();
             }
         });
 
-        setListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int day) {
-                month = month + 1;
-                String date = null;
+        setListener = (view, year13, month13, day13) -> {
+            month13 = month13 + 1;
+            String date = null;
 
-                if (month < 10 && day < 10) {
-                    date = year + "/0" + month + "/0" + day;
-                } else if (day < 10) {
-                    date = year + "/" + month + "/0" + day;
-                } else if (month < 10) {
-                    date = year + "/0" + month + "/" + day;
-                } else {
-                    date = year + "/" + month + "/" + day;
-                }
-
-                et_emphire.setText(date);
+            if (month13 < 10 && day13 < 10) {
+                date = year13 + "/0" + month13 + "/0" + day13;
+            } else if (day13 < 10) {
+                date = year13 + "/" + month13 + "/0" + day13;
+            } else if (month13 < 10) {
+                date = year13 + "/0" + month13 + "/" + day13;
+            } else {
+                date = year13 + "/" + month13 + "/" + day13;
             }
+
+            et_emphire.setText(date);
         };
 
-        et_emphire.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        AddEmployeesActivity.this, new DatePickerDialog.OnDateSetListener() {
+        et_emphire.setOnClickListener(v -> {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(
+                    AddEmployeesActivity.this, new DatePickerDialog.OnDateSetListener() {
 
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int day) {
+                @Override
+                public void onDateSet(DatePicker view, int year14, int month14, int day14) {
 
-                        month = month + 1;
+                    month14 = month14 + 1;
 
-                        String date = null;
+                    String date = null;
 
-                        if (month < 10 && day < 10) {
-                            date = year + "/0" + month + "/0" + day;
-                        } else if (day < 10) {
-                            date = year + "/" + month + "/0" + day;
-                        } else if (month < 10) {
-                            date = year + "/0" + month + "/" + day;
-                        } else {
-                            date = year + "/" + month + "/" + day;
-                        }
-
-                        et_emphire.setText(date);
+                    if (month14 < 10 && day14 < 10) {
+                        date = year14 + "/0" + month14 + "/0" + day14;
+                    } else if (day14 < 10) {
+                        date = year14 + "/" + month14 + "/0" + day14;
+                    } else if (month14 < 10) {
+                        date = year14 + "/0" + month14 + "/" + day14;
+                    } else {
+                        date = year14 + "/" + month14 + "/" + day14;
                     }
-                }, year, month, day);
-                datePickerDialog.show();
-            }
+
+                    et_emphire.setText(date);
+                }
+            }, year, month, day);
+            datePickerDialog.show();
         });
 //
 //        rg_gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
@@ -269,9 +249,9 @@ public class AddEmployeesActivity extends AppCompatActivity {
 
                 Log.d("1111111", et_empname.getText().toString());
                 Log.d("2222222", et_empphone.getText().toString());
-                System.out.println("33333333"+birthday.getTime());
+                System.out.println("33333333" + birthday.getTime());
                 System.out.println("birthday : " + et_empbirth.getText().toString());
-                System.out.println("77777777"+hiredate.getTime());
+                System.out.println("77777777" + hiredate.getTime());
                 Log.d("4444444", et_emphire.getText().toString());
                 Log.d("5555555", gender);
                 Log.d("6666666", et_empno.getText().toString());
@@ -292,7 +272,7 @@ public class AddEmployeesActivity extends AppCompatActivity {
                     @SneakyThrows
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        if(response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(AddEmployeesActivity.this);
                             dialog = builder.setMessage("직원이 등록되었습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                 @Override
@@ -309,7 +289,7 @@ public class AddEmployeesActivity extends AppCompatActivity {
                         } else if (response.code() == 400) {
                             System.out.println(response.errorBody().string());
                             Log.d("result : ", "직원등록 실패");
-                        }else if (response.code() == 409) {
+                        } else if (response.code() == 409) {
                             System.out.println(response.errorBody().string());
                             Log.d("result : ", "이미 있는 직원이라 직원등록 실패");
                         } else {

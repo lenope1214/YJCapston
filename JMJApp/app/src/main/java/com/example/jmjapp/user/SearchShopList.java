@@ -61,7 +61,6 @@ public class SearchShopList extends AppCompatActivity {
         adapter = new SearchShopAdapter(getApplicationContext());
 
         showList(shopName);
-
     }
 
     private void showList(String shopName) {
@@ -69,10 +68,10 @@ public class SearchShopList extends AppCompatActivity {
         listShopCall.enqueue(new Callback<List<Shop>>() {
             @Override
             public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response) {
-                if(response.isSuccessful()) {
-                    if(response.code() == 200) {
+                if (response.isSuccessful()) {
+                    if (response.code() == 200) {
                         List<Shop> shopList = response.body();
-                        for(Shop list : shopList) {
+                        for (Shop list : shopList) {
                             Log.e("result : ", list.getCategory());
                             mItems.add(new Shop(list.getShopId(), list.getName(), list.getIntro(),
                                     list.getCloseTime(), list.getOpenTime(),
@@ -98,7 +97,7 @@ public class SearchShopList extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);

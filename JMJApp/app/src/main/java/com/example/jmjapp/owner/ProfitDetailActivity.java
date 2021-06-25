@@ -92,7 +92,7 @@ public class ProfitDetailActivity extends AppCompatActivity {
                             break;
                         }
                     }
-                    
+
                     if (isEmpty == false) {
                         binding.barChart.setVisibility(View.VISIBLE);
                         binding.noProfit.setVisibility(View.GONE);
@@ -157,20 +157,20 @@ public class ProfitDetailActivity extends AppCompatActivity {
                     }
 
                 } else {
-                    Log.d("orderList 실패1", "orderList 실패1"+response.errorBody().string());
+                    Log.d("orderList 실패1", "orderList 실패1" + response.errorBody().string());
                 }
             }
 
             @Override
             public void onFailure(Call<List<Order>> call, Throwable t) {
-                Log.d("orderList 실패2", "orderList 실패2"+t.getCause());
+                Log.d("orderList 실패2", "orderList 실패2" + t.getCause());
             }
         });
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);

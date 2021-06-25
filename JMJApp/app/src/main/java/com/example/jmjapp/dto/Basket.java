@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Basket {
-   private String name;
-   private int price;
+    private String name;
+    private int price;
 }

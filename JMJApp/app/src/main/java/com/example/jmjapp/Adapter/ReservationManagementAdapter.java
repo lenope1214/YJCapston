@@ -58,21 +58,21 @@ public class ReservationManagementAdapter extends RecyclerView.Adapter<Reservati
     // View 의 내용을 해당 포지션의 데이터로 바꿉니다.
     @Override
     public void onBindViewHolder(final ReservationManagementAdapter.ItemViewHolder holder, final int position) {
-        holder.rs_mg_userId.setText(mItems.get(position).getUserName()+"님 외"+mItems.get(position).getPeople()+"명");
+        holder.rs_mg_userId.setText(mItems.get(position).getUserName() + "님 외" + mItems.get(position).getPeople() + "명");
 
         orderId = mItems.get(position).getOrderId();
         arriveTime = mItems.get(position).getArriveTime();
         orderRequest = mItems.get(position).getOrderRequest();
 
         String resTime = String.valueOf(new Timestamp(arriveTime));
-        String year = resTime.substring(0,4);
-        String month = resTime.substring(5,7);
-        String day = resTime.substring(8,10);
+        String year = resTime.substring(0, 4);
+        String month = resTime.substring(5, 7);
+        String day = resTime.substring(8, 10);
 
-        String hour = resTime.substring(11,13);
-        String min = resTime.substring(14,16);
+        String hour = resTime.substring(11, 13);
+        String min = resTime.substring(14, 16);
 
-        holder.rs_mg_resTime.setText(year+"년"+month+"월"+day+"일 " +hour+"시"+min+"분");
+        holder.rs_mg_resTime.setText(year + "년" + month + "월" + day + "일 " + hour + "시" + min + "분");
 
         if (orderRequest.equals("")) {
             holder.rs_mg_request.setText("요청사항이 없습니다.");
@@ -80,49 +80,48 @@ public class ReservationManagementAdapter extends RecyclerView.Adapter<Reservati
             holder.rs_mg_request.setText(orderRequest);
         }
 
-        holder.rs_mg_menuList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getOrderMenus = Server.getInstance().getApi().orderOneMenu(orderId);
-                getOrderMenus.enqueue(new Callback<Order.OrderMenuList>() {
-                    @SneakyThrows
-                    @Override
-                    public void onResponse(Call<Order.OrderMenuList> call, Response<Order.OrderMenuList> response) {
-                        if (response.isSuccessful()) {
-                            Log.d("orderMenu 성공", "orderMenu 성공");
-                            List<OrderMenu> orderMenuList = response.body().getOrderMenuList();
+        holder.rs_mg_menuList.setOnClickListener(v -> {
+            getOrderMenus = Server.getInstance().getApi().orderOneMenu(orderId);
+            getOrderMenus.enqueue(new Callback<Order.OrderMenuList>() {
+                @SneakyThrows
+                @Override
+                public void onResponse(Call<Order.OrderMenuList> call, Response<Order.OrderMenuList> response) {
+                    if (response.isSuccessful()) {
+                        Log.d("orderMenu 성공", "orderMenu 성공");
+                        List<OrderMenu> orderMenuList = response.body().getOrderMenuList();
 
-                            String[] list_menuName = new String[orderMenuList.size()];
-                            int[] list_menuCount = new int[orderMenuList.size()];
+                        String[] list_menuName = new String[orderMenuList.size()];
+                        int[] list_menuCount = new int[orderMenuList.size()];
 
-                            int index = 0;
+                        int index = 0;
 
-                            for (OrderMenu list : orderMenuList) {
-                                list_menuName[index] = list.getMenuName();
-                                list_menuCount[index] = Integer.parseInt(list.getQuantity());
-                                index++;
-                            }
-
-                            for (int i = 0; i < orderMenuList.size(); i++) {
-                                String value = list_menuName[i] + "\t\t\t\t" + list_menuCount[i] + "개\n";
-                                sum = sum + value;
-                            }
-
-                            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                            builder.setTitle("주문메뉴");
-                            builder.setMessage(sum).setPositiveButton("확인", null).create();
-                            builder.show();
-                        } else {
-                            Log.d("orderMenu 실패1", "orderMenu 실패1"+response.errorBody().string());
+                        for (OrderMenu list : orderMenuList) {
+                            list_menuName[index] = list.getMenuName();
+                            list_menuCount[index] = Integer.parseInt(list.getQuantity());
+                            index++;
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<Order.OrderMenuList> call, Throwable t) {
-                        Log.d("orderMenu 실패2", "orderMenu 실패2");
+                        for (int i = 0; i < orderMenuList.size(); i++) {
+                            String value = list_menuName[i] + "\t\t\t\t" + list_menuCount[i] + "개\n";
+                            sum = sum + value;
+                        }
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                        builder.setTitle("주문메뉴");
+                        builder.setMessage(sum).setPositiveButton("확인", (dialog, which) -> {
+                            sum = "";
+                        }).create();
+                        builder.show();
+                    } else {
+                        Log.d("orderMenu 실패1", "orderMenu 실패1" + response.errorBody().string());
                     }
-                });
-            }
+                }
+
+                @Override
+                public void onFailure(Call<Order.OrderMenuList> call, Throwable t) {
+                    Log.d("orderMenu 실패2", "orderMenu 실패2");
+                }
+            });
         });
     }
 

@@ -101,70 +101,29 @@ public class PosFragment_O extends Fragment {
         };
         thread.start();
 
-//        mItems.clear();
-//        listTableCall = Server.getInstance().getApi().getTables("Bearer " + jwt, MainActivity_O.shopNumber);
-//        listTableCall.enqueue(new Callback<List<Tables>>() {
-//            @SneakyThrows
-//            @Override
-//            public void onResponse(Call<List<Tables>> call, Response<List<Tables>> response) {
-//                if (response.isSuccessful()) {
-//                    Log.d("getTable 성공", "getTable 성공");
-//                    List<Tables> tablesList = response.body();
-//                    for(Tables list : tablesList) {
-//                        mItems.add(new Tables(list.getTabId(), list.getShopId(), list.getNo(),
-//                                list.getSeatQty(), list.getUsing(), list.getQrCode(), list.getOrderId()));
-//                        Log.d("list", response.body().toString());
-//                        table_list.setHasFixedSize(true);
-//                        adapter.setItems(mItems);
-//                        table_list.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumn));
-//                        table_list.setAdapter(adapter);
-//                    }
-//                } else {
-//                    Log.d("getTable 실패1", "getTable 실패1"+response.errorBody().string());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Tables>> call, Throwable t) {
-//                Log.d("getTable 실패2", "getTable 실패2"+t.getCause());
-//            }
-//        });
+        table_floatingActionButton.setOnClickListener(v -> {
+            listTableCall = Server.getInstance().getApi().getTables("Bearer " + jwt, MainActivity_O.shopNumber);
+            listTableCall.enqueue(new Callback<List<Tables>>() {
+                @SneakyThrows
+                @Override
+                public void onResponse(Call<List<Tables>> call, Response<List<Tables>> response) {
+                    if (response.isSuccessful()) {
+                        Log.d("getTable 성공1", "getTable 성공1");
+                        List<Tables> tablesList = response.body();
+                        Log.d("tableListsize", String.valueOf(tablesList.size()));
+                        int tableNo = tablesList.size() + 1;
 
-//        Handler handler = new Handler();
-//        final Runnable r = new Runnable() {
-//            @Override
-//            public void run() {
-//                adapter.notifyDataSetChanged();
-//            }
-//        };
-//        handler.post(r);
-
-        table_floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listTableCall = Server.getInstance().getApi().getTables("Bearer " + jwt, MainActivity_O.shopNumber);
-                listTableCall.enqueue(new Callback<List<Tables>>() {
-                    @SneakyThrows
-                    @Override
-                    public void onResponse(Call<List<Tables>> call, Response<List<Tables>> response) {
-                        if (response.isSuccessful()) {
-                            Log.d("getTable 성공1", "getTable 성공1");
-                            List<Tables> tablesList = response.body();
-                            Log.d("tableListsize", String.valueOf(tablesList.size()));
-                            int tableNo = tablesList.size() + 1;
-
-                            registerTable(tableNo);
-                        } else {
-                            Log.d("getTable 실패1", "getTable 실패1"+response.errorBody().string());
-                        }
+                        registerTable(tableNo);
+                    } else {
+                        Log.d("getTable 실패1", "getTable 실패1" + response.errorBody().string());
                     }
+                }
 
-                    @Override
-                    public void onFailure(Call<List<Tables>> call, Throwable t) {
-                        Log.d("getTable 실패2", "getTable 실패2"+t.getCause());
-                    }
-                });
-            }
+                @Override
+                public void onFailure(Call<List<Tables>> call, Throwable t) {
+                    Log.d("getTable 실패2", "getTable 실패2" + t.getCause());
+                }
+            });
         });
     }
 
@@ -181,7 +140,7 @@ public class PosFragment_O extends Fragment {
                     if (response.isSuccessful()) {
                         Log.d("getTable 성공", "getTable 성공");
                         List<Tables> tablesList = response.body();
-                        for(Tables list : tablesList) {
+                        for (Tables list : tablesList) {
                             mItems.add(new Tables(list.getTabId(), list.getShopId(), list.getNo(),
                                     list.getSeatQty(), list.getUsing(), list.getQrCode(), list.getOrderId()));
                             Log.d("list", response.body().toString());
@@ -191,13 +150,13 @@ public class PosFragment_O extends Fragment {
                             table_list.setAdapter(adapter);
                         }
                     } else {
-                        Log.d("getTable 실패1", "getTable 실패1"+response.errorBody().string());
+                        Log.d("getTable 실패1", "getTable 실패1" + response.errorBody().string());
                     }
                 }
 
                 @Override
                 public void onFailure(Call<List<Tables>> call, Throwable t) {
-                    Log.d("getTable 실패2", "getTable 실패2"+t.getCause());
+                    Log.d("getTable 실패2", "getTable 실패2" + t.getCause());
                 }
             });
         }
@@ -220,7 +179,7 @@ public class PosFragment_O extends Fragment {
                     adapter.addItem(new Tables(String.valueOf(tableNo), isUse));
                     adapter.notifyDataSetChanged();
                 } else {
-                    Log.d("테이블 등록 실패1", "테이블 등록 실패1"+response.errorBody().string());
+                    Log.d("테이블 등록 실패1", "테이블 등록 실패1" + response.errorBody().string());
                 }
             }
 

@@ -6,44 +6,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import com.example.jmjapp.Adv.AdvFragment1;
 import com.example.jmjapp.Adv.AdvFragment2;
 import com.example.jmjapp.Adv.AdvFragment3;
 import com.example.jmjapp.R;
 
 public class HomeFragment extends Fragment {
-    int i = 0;
-
-    ViewPager pager;
-
     AdvFragment1 advFragment1;
     AdvFragment2 advFragment2;
     AdvFragment3 advFragment3;
-
-    ImageButton koreanfood;
-    ImageButton japanesefood;
-    ImageButton chinesefood;
-    ImageButton meat;
-    ImageButton bunsick;
-    ImageButton soju;
-    ImageButton fastfood;
-    ImageButton tang;
-    ImageButton desssert;
 
     MapFragment mapFragment;
 
     FragmentManager manager;
 
     ViewFlipper viewFlipper;
+
+    private AlertDialog dialog;
 
     public HomeFragment() {
 
@@ -186,8 +173,14 @@ public class HomeFragment extends Fragment {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), QrReaderActivity.class);
-                startActivity(intent);
+                if (PosFragment.orderId != null) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    dialog = builder.setMessage("이미 매장을 이용 중입니다.").setPositiveButton("확인", null).create();
+                    dialog.show();
+                } else {
+                    Intent intent = new Intent(getActivity(), QrReaderActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -215,7 +208,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
     }
 
     @Override

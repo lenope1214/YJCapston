@@ -84,24 +84,19 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
         String jwt = pref.getString("token", null);
         String menuId = mItems.get(position).getMenuId();
 
-        holder.menu_update_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                holder.menu_detail_list.setVisibility(View.GONE);
-                holder.menu_detail_update.setVisibility(View.VISIBLE);
-                holder.shop_menu_name_update.setText(mItems.get(position).getName());
-                holder.shop_menu_price_update.setText(String.valueOf(mItems.get(position).getPrice()));
-                holder.shop_menu_intro_update.setText(mItems.get(position).getIntro());
-                holder.shop_menu_duration_update.setText(String.valueOf(mItems.get(position).getDuration()));
-            }
+        holder.menu_update_btn.setOnClickListener(v -> {
+            holder.menu_detail_list.setVisibility(View.GONE);
+            holder.menu_detail_update.setVisibility(View.VISIBLE);
+            holder.shop_menu_name_update.setText(mItems.get(position).getName());
+            holder.shop_menu_price_update.setText(String.valueOf(mItems.get(position).getPrice()));
+            holder.shop_menu_intro_update.setText(mItems.get(position).getIntro());
+            holder.shop_menu_duration_update.setText(String.valueOf(mItems.get(position).getDuration()));
         });
 
-        holder.menu_update_btn_comp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String intro = holder.shop_menu_intro_update.getText().toString();
-                String price = holder.shop_menu_price_update.getText().toString();
-                String duration = holder.shop_menu_duration_update.getText().toString();
+        holder.menu_update_btn_comp.setOnClickListener(v -> {
+            String intro = holder.shop_menu_intro_update.getText().toString();
+            String price = holder.shop_menu_price_update.getText().toString();
+            String duration = holder.shop_menu_duration_update.getText().toString();
 
 //                RequestBody menuIdBody = RequestBody.create(MediaType.parse("text/plain"), menuId);
 //                RequestBody nameBody = RequestBody.create(MediaType.parse("text/plain"), name);
@@ -109,31 +104,121 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
 //                RequestBody priceBody = RequestBody.create(MediaType.parse("text/plain"), price);
 //                RequestBody durationBody = RequestBody.create(MediaType.parse("text/plain"), duration);
 
+            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+            builder.setTitle("알림");
+            builder.setMessage("수정하시겠습니까?");
+            builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Map<String, String> map = new HashMap();
+                    map.put("menuId", menuId);
+                    map.put("intro", intro);
+                    map.put("price", price);
+                    map.put("duration", duration);
+
+                    responseBodyCall = Server.getInstance().getApi().updateMenu("Bearer " + jwt, map);
+                    responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                        @SneakyThrows
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            if (response.isSuccessful()) {
+                                if (response.code() == 200) {
+                                    Log.d("메뉴수정", "성공");
+                                    holder.shop_menu_intro.setText(intro);
+                                    holder.shop_menu_price.setText(price + "원");
+                                    holder.shop_menu_duration.setText(duration + "분");
+                                } else {
+                                    Log.d("메뉴수정", "실패");
+                                }
+                            } else {
+                                response.errorBody().toString();
+                                Log.d("연결실패", response.errorBody().string());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Log.d("연결2", "실패2");
+                        }
+                    });
+                    holder.menu_detail_list.setVisibility(View.VISIBLE);
+                    holder.menu_detail_update.setVisibility(View.GONE);
+                }
+            });
+            builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Log.d("실행안함", "실행안함");
+                }
+            });
+            builder.show();
+        });
+
+        holder.menu_delete_btn.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+            builder.setTitle("알림");
+            builder.setMessage("삭제하시겠습니까?");
+            builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    responseBodyCall = Server.getInstance().getApi().deleteMenu("Bearer " + jwt, menuId);
+                    responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                        @SneakyThrows
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            if (response.isSuccessful()) {
+                                if (response.code() == 204) {
+                                    Log.d("메뉴삭제", "성공");
+                                    mItems.remove(position);
+                                    notifyDataSetChanged();
+                                } else {
+                                    Log.d("메뉴삭제", "실패");
+                                }
+                            } else {
+                                response.errorBody().toString();
+                                Log.d("연결실패", response.errorBody().string());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Log.d("연결2", "실패2");
+                        }
+                    });
+                }
+            });
+            builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Log.d("실행안함", "실행안함");
+                }
+            });
+            builder.show();
+        });
+
+        holder.menu_update_btn_cancel.setOnClickListener(v -> {
+            holder.menu_detail_list.setVisibility(View.VISIBLE);
+            holder.menu_detail_update.setVisibility(View.GONE);
+        });
+
+        holder.checkbox_soldout.setOnClickListener(v -> {
+            if (holder.checkbox_soldout.isChecked()) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                 builder.setTitle("알림");
-                builder.setMessage("수정하시겠습니까?");
+                builder.setMessage("품절 등록하시겠습니까?");
                 builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Map<String, String> map = new HashMap();
-                        map.put("menuId", menuId);
-                        map.put("intro", intro);
-                        map.put("price", price);
-                        map.put("duration", duration);
-
-                        responseBodyCall = Server.getInstance().getApi().updateMenu("Bearer " + jwt, map);
+                        responseBodyCall = Server.getInstance().getApi().updateSale("Bearer " + jwt, MainActivity_O.shopNumber, menuId);
                         responseBodyCall.enqueue(new Callback<ResponseBody>() {
                             @SneakyThrows
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                 if (response.isSuccessful()) {
                                     if (response.code() == 200) {
-                                        Log.d("메뉴수정", "성공");
-                                        holder.shop_menu_intro.setText(intro);
-                                        holder.shop_menu_price.setText(price + "원");
-                                        holder.shop_menu_duration.setText(duration + "분");
+                                        Log.d("품절", "성공");
                                     } else {
-                                        Log.d("메뉴수정", "실패");
+                                        Log.d("품절", "실패");
                                     }
                                 } else {
                                     response.errorBody().toString();
@@ -146,41 +231,69 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
                                 Log.d("연결2", "실패2");
                             }
                         });
-                        holder.menu_detail_list.setVisibility(View.VISIBLE);
-                        holder.menu_detail_update.setVisibility(View.GONE);
                     }
                 });
                 builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d("실행안함", "실행안함");
+                        holder.checkbox_soldout.setChecked(false);
                     }
                 });
                 builder.show();
-            }
-        });
-
-        holder.menu_delete_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            } else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                 builder.setTitle("알림");
-                builder.setMessage("삭제하시겠습니까?");
+                builder.setMessage("품절 해제하시겠습니까?");
                 builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        responseBodyCall = Server.getInstance().getApi().deleteMenu("Bearer " + jwt, menuId);
+                        responseBodyCall = Server.getInstance().getApi().updateSale("Bearer " + jwt, MainActivity_O.shopNumber, menuId);
                         responseBodyCall.enqueue(new Callback<ResponseBody>() {
                             @SneakyThrows
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                 if (response.isSuccessful()) {
-                                    if (response.code() == 204) {
-                                        Log.d("메뉴삭제", "성공");
-                                        mItems.remove(position);
-                                        notifyDataSetChanged();
+                                    if (response.code() == 200) {
+                                        Log.d("SS", "성공");
                                     } else {
-                                        Log.d("메뉴삭제", "실패");
+                                        Log.d("SS", "실패");
+                                    }
+                                } else {
+                                    response.errorBody().toString();
+                                    Log.d("연결실패", response.errorBody().string());
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                Log.d("연결2", "실패2");
+                            }
+                        });
+                    }
+                });
+                builder.setNegativeButton("아니오", (dialog, which) -> holder.checkbox_soldout.setChecked(true));
+                builder.show();
+            }
+        });
+
+        holder.checkbox_popular.setOnClickListener(v -> {
+            if (holder.checkbox_popular.isChecked()) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setTitle("알림");
+                builder.setMessage("인기메뉴로 등록하시겠습니까?");
+                builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        responseBodyCall = Server.getInstance().getApi().updatePopular("Bearer " + jwt, MainActivity_O.shopNumber, menuId);
+                        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                            @SneakyThrows
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                if (response.isSuccessful()) {
+                                    if (response.code() == 200) {
+                                        Log.d("SS", "성공");
+                                    } else {
+                                        Log.d("SS", "실패");
                                     }
                                 } else {
                                     response.errorBody().toString();
@@ -198,198 +311,54 @@ public class MenuListRecyclerAdapter extends RecyclerView.Adapter<MenuListRecycl
                 builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d("실행안함", "실행안함");
+                        holder.checkbox_popular.setChecked(false);
                     }
                 });
+                builder.show();
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setTitle("알림");
+                builder.setMessage("인기메뉴를 해제하시겠습니까?");
+                builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        responseBodyCall = Server.getInstance().getApi().updatePopular("Bearer " + jwt, MainActivity_O.shopNumber, menuId);
+                        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                            @SneakyThrows
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                if (response.isSuccessful()) {
+                                    if (response.code() == 200) {
+                                        Log.d("SS", "성공");
+                                    } else {
+                                        Log.d("SS", "실패");
+                                    }
+                                } else {
+                                    response.errorBody().toString();
+                                    Log.d("연결실패", response.errorBody().string());
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                Log.d("연결2", "실패2");
+                            }
+                        });
+                    }
+                });
+                builder.setNegativeButton("아니오", (dialog, which) -> holder.checkbox_popular.setChecked(true));
                 builder.show();
             }
         });
 
-        holder.menu_update_btn_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                holder.menu_detail_list.setVisibility(View.VISIBLE);
-                holder.menu_detail_update.setVisibility(View.GONE);
-            }
-        });
-
-        holder.checkbox_soldout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (holder.checkbox_soldout.isChecked()) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                    builder.setTitle("알림");
-                    builder.setMessage("품절 등록하시겠습니까?");
-                    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            responseBodyCall = Server.getInstance().getApi().updateSale("Bearer " + jwt, MainActivity_O.shopNumber, menuId);
-                            responseBodyCall.enqueue(new Callback<ResponseBody>() {
-                                @SneakyThrows
-                                @Override
-                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                    if (response.isSuccessful()) {
-                                        if (response.code() == 200) {
-                                            Log.d("품절", "성공");
-                                        } else {
-                                            Log.d("품절", "실패");
-                                        }
-                                    } else {
-                                        response.errorBody().toString();
-                                        Log.d("연결실패", response.errorBody().string());
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                    Log.d("연결2", "실패2");
-                                }
-                            });
-                        }
-                    });
-                    builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            holder.checkbox_soldout.setChecked(false);
-                        }
-                    });
-                    builder.show();
-                } else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                    builder.setTitle("알림");
-                    builder.setMessage("품절 해제하시겠습니까?");
-                    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            responseBodyCall = Server.getInstance().getApi().updateSale("Bearer " + jwt, MainActivity_O.shopNumber, menuId);
-                            responseBodyCall.enqueue(new Callback<ResponseBody>() {
-                                @SneakyThrows
-                                @Override
-                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                    if (response.isSuccessful()) {
-                                        if (response.code() == 200) {
-                                            Log.d("SS", "성공");
-                                        } else {
-                                            Log.d("SS", "실패");
-                                        }
-                                    } else {
-                                        response.errorBody().toString();
-                                        Log.d("연결실패", response.errorBody().string());
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                    Log.d("연결2", "실패2");
-                                }
-                            });
-                        }
-                    });
-                    builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            holder.checkbox_soldout.setChecked(true);
-                        }
-                    });
-                    builder.show();
-                }
-            }
-        });
-
-        holder.checkbox_popular.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (holder.checkbox_popular.isChecked()) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                    builder.setTitle("알림");
-                    builder.setMessage("인기메뉴로 등록하시겠습니까?");
-                    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            responseBodyCall = Server.getInstance().getApi().updatePopular("Bearer " + jwt, MainActivity_O.shopNumber, menuId);
-                            responseBodyCall.enqueue(new Callback<ResponseBody>() {
-                                @SneakyThrows
-                                @Override
-                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                    if (response.isSuccessful()) {
-                                        if (response.code() == 200) {
-                                            Log.d("SS", "성공");
-                                        } else {
-                                            Log.d("SS", "실패");
-                                        }
-                                    } else {
-                                        response.errorBody().toString();
-                                        Log.d("연결실패", response.errorBody().string());
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                    Log.d("연결2", "실패2");
-                                }
-                            });
-                        }
-                    });
-                    builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            holder.checkbox_popular.setChecked(false);
-                        }
-                    });
-                    builder.show();
-                } else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                    builder.setTitle("알림");
-                    builder.setMessage("인기메뉴를 해제하시겠습니까?");
-                    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            responseBodyCall = Server.getInstance().getApi().updatePopular("Bearer " + jwt, MainActivity_O.shopNumber, menuId);
-                            responseBodyCall.enqueue(new Callback<ResponseBody>() {
-                                @SneakyThrows
-                                @Override
-                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                    if (response.isSuccessful()) {
-                                        if (response.code() == 200) {
-                                            Log.d("SS", "성공");
-                                        } else {
-                                            Log.d("SS", "실패");
-                                        }
-                                    } else {
-                                        response.errorBody().toString();
-                                        Log.d("연결실패", response.errorBody().string());
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                    Log.d("연결2", "실패2");
-                                }
-                            });
-                        }
-                    });
-                    builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            holder.checkbox_popular.setChecked(true);
-                        }
-                    });
-                    builder.show();
-                }
-            }
-        });
-
-        holder.menu_move.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, MenuMoveDetailActivity.class);
-                intent.putExtra("menuId", mItems.get(position).getMenuId());
-                intent.putExtra("menuName", mItems.get(position).getName());
-                intent.putExtra("menuPrice", mItems.get(position).getPrice());
-                intent.putExtra("imgPath", mItems.get(position).getImgPath());
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
-            }
+        holder.menu_move.setOnClickListener(v -> {
+            Intent intent = new Intent(context, MenuMoveDetailActivity.class);
+            intent.putExtra("menuId", mItems.get(position).getMenuId());
+            intent.putExtra("menuName", mItems.get(position).getName());
+            intent.putExtra("menuPrice", mItems.get(position).getPrice());
+            intent.putExtra("imgPath", mItems.get(position).getImgPath());
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
         });
     }
 

@@ -52,7 +52,7 @@ public class MenuMoveOptionAdapter extends RecyclerView.Adapter<MenuMoveOptionAd
         holder.menu_move_option_name.setText(mItems.get(position).getOgName());
 
         holder.optionGroupId = mItems.get(position).getOptionGroupId();
-        Log.d("qwe", holder.optionGroupId+holder.jwt);
+        Log.d("qwe", holder.optionGroupId + holder.jwt);
 
         holder.optionsCall = Server.getInstance().getApi().optionsList("Bearer " + holder.jwt, holder.optionGroupId);
         holder.optionsCall.enqueue(new Callback<List<Options>>() {
@@ -71,7 +71,7 @@ public class MenuMoveOptionAdapter extends RecyclerView.Adapter<MenuMoveOptionAd
                         holder.menu_move_option_option_list.setAdapter(holder.adapter);
                     }
                 } else {
-                    Log.d("OptionsList 실패1", "OptionsList 실패1"+response.errorBody().string());
+                    Log.d("OptionsList 실패1", "OptionsList 실패1" + response.errorBody().string());
                 }
             }
 

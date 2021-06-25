@@ -2,9 +2,11 @@ package com.example.jmjapp.user;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
+
 import com.example.jmjapp.Adapter.MenuPagerAdapter;
 import com.example.jmjapp.R;
 import com.google.android.material.tabs.TabLayout;
@@ -33,7 +35,7 @@ public class MenuActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);

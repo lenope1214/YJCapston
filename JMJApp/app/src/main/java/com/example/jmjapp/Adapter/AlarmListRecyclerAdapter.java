@@ -89,7 +89,7 @@ public class AlarmListRecyclerAdapter extends RecyclerView.Adapter<AlarmListRecy
         SharedPreferences pref = context.getSharedPreferences("auth_o", Context.MODE_PRIVATE);
         jwt = pref.getString("token", "");
 
-        holder.userId.setText(mItems.get(position).getUserName()+"님 외"+mItems.get(position).getPeople()+"명");
+        holder.userId.setText(mItems.get(position).getUserName() + "님 외" + mItems.get(position).getPeople() + "명");
 
 
         holder.orderRequest.setText(mItems.get(position).getOrderRequest());
@@ -98,7 +98,6 @@ public class AlarmListRecyclerAdapter extends RecyclerView.Adapter<AlarmListRecy
         orderId = mItems.get(position).getOrderId();
         arriveTime = mItems.get(position).getArriveTime();
         orderRequest = mItems.get(position).getOrderRequest();
-        Log.d("arc", String.valueOf(arriveTime));
 
         if (arriveTime != null) {
             String resTime = String.valueOf(new Timestamp(arriveTime));
@@ -141,152 +140,131 @@ public class AlarmListRecyclerAdapter extends RecyclerView.Adapter<AlarmListRecy
         String acceptMsg = "accept";
         String rejectMsg = "reject";
 
-        Log.d("jwt", jwt+orderId);
+        holder.orderMenu.setOnClickListener(v -> {
+            getOrderMenus = Server.getInstance().getApi().orderOneMenu(orderId);
+            getOrderMenus.enqueue(new Callback<Order.OrderMenuList>() {
+                @SneakyThrows
+                @Override
+                public void onResponse(Call<Order.OrderMenuList> call, Response<Order.OrderMenuList> response) {
+                    if (response.isSuccessful()) {
+                        Log.d("orderMenu 성공", "orderMenu 성공");
+                        List<OrderMenu> orderMenuList = response.body().getOrderMenuList();
 
-        holder.orderMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getOrderMenus = Server.getInstance().getApi().orderOneMenu(orderId);
-                getOrderMenus.enqueue(new Callback<Order.OrderMenuList>() {
+                        String[] list_menuName = new String[orderMenuList.size()];
+                        int[] list_menuCount = new int[orderMenuList.size()];
+
+                        int index = 0;
+
+                        for (OrderMenu list : orderMenuList) {
+                            list_menuName[index] = list.getMenuName();
+                            list_menuCount[index] = Integer.parseInt(list.getQuantity());
+                            index++;
+                        }
+
+                        for (int i = 0; i < orderMenuList.size(); i++) {
+                            String value = list_menuName[i] + "\t\t\t\t" + list_menuCount[i] + "개\n";
+                            sum = sum + value;
+                        }
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                        builder.setTitle("주문메뉴");
+                        builder.setMessage(sum).setPositiveButton("확인", (dialog, which) -> {
+                            sum = "";
+                        }).create();
+                        builder.show();
+                    } else {
+                        Log.d("orderMenu 실패1", "orderMenu 실패1" + response.errorBody().string());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Order.OrderMenuList> call, Throwable t) {
+                    Log.d("orderMenu 실패2", "orderMenu 실패2");
+                }
+            });
+
+
+        });
+
+        holder.accept.setOnClickListener(v -> {
+            Map<String, String> map = new HashMap();
+            map.put("shopId", mItems.get(position).getShopId());
+            map.put("orderId", mItems.get(position).getOrderId());
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+            builder.setTitle("알림");
+            builder.setMessage("수락하시겠습니까?");
+            builder.setPositiveButton("예", (dialog, which) -> {
+                responseBodyCall = Server.getInstance().getApi().orderAccept("Bearer " + jwt, map);
+                responseBodyCall.enqueue(new Callback<ResponseBody>() {
                     @SneakyThrows
                     @Override
-                    public void onResponse(Call<Order.OrderMenuList> call, Response<Order.OrderMenuList> response) {
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful()) {
-                            Log.d("orderMenu 성공", "orderMenu 성공");
-                            List<OrderMenu> orderMenuList = response.body().getOrderMenuList();
+                            Log.d("accept성공", "accept성공");
+                            mItems.remove(position);
+                            notifyItemRemoved(position);
+                            notifyItemRangeChanged(position, mItems.size());
 
-                            String[] list_menuName = new String[orderMenuList.size()];
-                            int[] list_menuCount = new int[orderMenuList.size()];
-
-                            int index = 0;
-
-                            for (OrderMenu list : orderMenuList) {
-                                list_menuName[index] = list.getMenuName();
-                                list_menuCount[index] = Integer.parseInt(list.getQuantity());
-                                index++;
-                            }
-
-                            for (int i = 0; i < orderMenuList.size(); i++) {
-                                String value = list_menuName[i] + "\t\t\t\t" + list_menuCount[i] + "개\n";
-                                sum = sum + value;
-                            }
-
-                            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                            builder.setTitle("주문메뉴");
-                            builder.setMessage(sum).setPositiveButton("확인", null).create();
-                            builder.show();
+                            Map<String, String> map1 = new HashMap();
+                            map1.put("orderId2", orderId);
+                            map1.put("msg", acceptMsg);
+                            map1.put("status", "toUser");
+                            send(map1);
                         } else {
-                            Log.d("orderMenu 실패1", "orderMenu 실패1"+response.errorBody().string());
+                            Log.d("accept실패1", "accept실패1" + response.errorBody().string());
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<Order.OrderMenuList> call, Throwable t) {
-                        Log.d("orderMenu 실패2", "orderMenu 실패2");
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.d("accept실패2", "accept실패2");
                     }
                 });
 
+            });
+            builder.setNegativeButton("아니오", (dialog, which) -> {
 
-            }
+            });
+            builder.show();
         });
 
-        holder.accept.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Map<String, String> map = new HashMap();
-                map.put("shopId", mItems.get(position).getShopId());
-                map.put("orderId", mItems.get(position).getOrderId());
-                Log.d("jwt",jwt+mItems.get(position).getShopId());
-                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                builder.setTitle("알림");
-                builder.setMessage("수락하시겠습니까?");
-                builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+        holder.reject.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+            builder.setTitle("알림");
+            builder.setMessage("거절하시겠습니까?");
+            builder.setPositiveButton("예", (dialog, which) -> {
+                responseBodyCall = Server2.getInstance2().getApi2().ownerRefund("Bearer " + jwt, resId, orderId);
+                responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                    @SneakyThrows
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        responseBodyCall = Server.getInstance().getApi().orderAccept("Bearer " + jwt, map);
-                        responseBodyCall.enqueue(new Callback<ResponseBody>() {
-                            @SneakyThrows
-                            @Override
-                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                if (response.isSuccessful()) {
-                                    Log.d("accept성공", "accept성공");
-                                    mItems.remove(position);
-                                    notifyItemRemoved(position);
-                                    notifyItemRangeChanged(position, mItems.size());
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("사업자 측 환불 성공", "사업자 측 환불 성공");
+                            mItems.remove(position);
+                            notifyItemRemoved(position);
+                            notifyItemRangeChanged(position, mItems.size());
 
-                                    Map<String, String> map = new HashMap();
-                                    map.put("orderId2", orderId);
-                                    map.put("msg", acceptMsg);
-                                    map.put("status", "toUser");
-                                    send(map);
-                                } else {
-                                    Log.d("accept실패1", "accept실패1"+response.errorBody().string());
-                                }
-                            }
+                            Map<String, String> map = new HashMap();
+                            map.put("orderId2", orderId);
+                            map.put("msg", rejectMsg);
+                            map.put("status", "toUser");
+                            send(map);
+                        } else {
+                            Log.d("사업자 측 환불 실패1", "사업자 측 환불 실패1" + response.errorBody().string());
+                        }
+                    }
 
-                            @Override
-                            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                Log.d("accept실패2", "accept실패2");
-                            }
-                        });
-
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.d("사업자 측 환불 실패2", "사업자 측 환불 실패2" + t.getCause());
                     }
                 });
-                builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+            });
+            builder.setNegativeButton("아니오", (dialog, which) -> {
 
-                    }
-                });
-                builder.show();
-            }
-        });
-
-        holder.reject.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                builder.setTitle("알림");
-                builder.setMessage("거절하시겠습니까?");
-                builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        responseBodyCall = Server2.getInstance2().getApi2().ownerRefund("Bearer " + jwt, resId , orderId);
-                        responseBodyCall.enqueue(new Callback<ResponseBody>() {
-                            @SneakyThrows
-                            @Override
-                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                if (response.isSuccessful()) {
-                                    Log.d("사업자 측 환불 성공", "사업자 측 환불 성공");
-                                    mItems.remove(position);
-                                    notifyItemRemoved(position);
-                                    notifyItemRangeChanged(position, mItems.size());
-
-                                    Map<String, String> map = new HashMap();
-                                    map.put("orderId2", orderId);
-                                    map.put("msg", rejectMsg);
-                                    map.put("status", "toUser");
-                                    send(map);
-                                } else {
-                                    Log.d("사업자 측 환불 실패1", "사업자 측 환불 실패1"+response.errorBody().string());
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                Log.d("사업자 측 환불 실패2", "사업자 측 환불 실패2"+t.getCause());
-                            }
-                        });
-                    }
-                });
-                builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                builder.show();
-            }
+            });
+            builder.show();
         });
 
         if (requestQueue == null) {
@@ -311,7 +289,7 @@ public class AlarmListRecyclerAdapter extends RecyclerView.Adapter<AlarmListRecy
             requestData.put("data", dataObj);
             JSONArray idArray = new JSONArray();
 
-            idArray.put(0, "dBQhgexlcJ0:APA91bGYorRaPqrOSnu8V1YIJWUp1YjNbIxQRpkXKno2bPISev8H0j9IGVnVxp7_yaTf6r26PC056hOpw0ok2lrJftrkDjOCprZUD36Z-n4cCVQkQdjznKdBNr8T9razUkQemycgL1eB");
+            idArray.put(0, "e2U0YJ5oWqc:APA91bEZoL2QEKKfNoNpXtYhT5tqxlSTl2H2vTtnsUo-G9eBXeLoiPTtMay_JLg6dDAHELs-UTqNFj62ZZiflBDdcbNQf-Lva6bFTrJbC8ueGtzGX6M5mGCSTVkDHO9_yPbGj8GZsfDD");
             requestData.put("registration_ids", idArray);
         } catch (Exception e) {
             e.printStackTrace();
@@ -319,24 +297,26 @@ public class AlarmListRecyclerAdapter extends RecyclerView.Adapter<AlarmListRecy
         sendData(requestData, new SendResponseListener() {
             @Override
             public void onRequestCompleted() {
-                Log.d("onRequestCompleted()","onRequestCompleted() 호출됨.");
+                Log.d("onRequestCompleted()", "onRequestCompleted() 호출됨.");
             }
 
             @Override
             public void onRequestStarted() {
-                Log.d("onRequestStarted()","onRequestStarted() 호출됨.");
+                Log.d("onRequestStarted()", "onRequestStarted() 호출됨.");
             }
 
             @Override
             public void onRequestWithError(VolleyError error) {
-                Log.d("onRequestWithError()","onRequestWithError() 호출됨.");
+                Log.d("onRequestWithError()", "onRequestWithError() 호출됨.");
             }
         });
     }
 
     public interface SendResponseListener {
         public void onRequestStarted();
+
         public void onRequestCompleted();
+
         public void onRequestWithError(VolleyError error);
     }
 
@@ -348,12 +328,7 @@ public class AlarmListRecyclerAdapter extends RecyclerView.Adapter<AlarmListRecy
             public void onResponse(JSONObject response) {
                 listener.onRequestCompleted();
             }
-        }, new com.android.volley.Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onRequestWithError(error);
-            }
-        }) {
+        }, error -> listener.onRequestWithError(error)) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
@@ -389,6 +364,7 @@ public class AlarmListRecyclerAdapter extends RecyclerView.Adapter<AlarmListRecy
     class ItemViewHolder extends RecyclerView.ViewHolder {
         private TextView resTime, resDate, userId, orderRequest, orderMenu;
         private Button accept, reject;
+
         public ItemViewHolder(View itemView) {
             super(itemView);
 

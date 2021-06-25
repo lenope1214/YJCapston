@@ -11,15 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.jmjapp.Adapter.BasketRecyclerAdapter;
 import com.example.jmjapp.Adapter.FilterAdapter;
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Shop;
@@ -29,17 +26,31 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import okhttp3.WebSocket;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class MapFragment extends Fragment  {
+public class MapFragment extends Fragment {
     private FilterAdapter filterAdapter;
     ArrayList<String> mItems = new ArrayList<>();
     private Call<List<Shop>> listShopCall;
     Context context;
+
+    /**********
+     * Map이 아니라 검색창Fragment임
+     */
+    /**********
+     * Map이 아니라 검색창Fragment임
+     */
+    /**********
+     * Map이 아니라 검색창Fragment임
+     */
+
+    /**********
+     * Map이 아니라 검색창Fragment임
+     */
+
 
     public MapFragment() {
 
@@ -104,19 +115,16 @@ public class MapFragment extends Fragment  {
             }
         });
 
-        searchBar.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int i, KeyEvent keyEvent) {
-                switch (i) {
-                    case KeyEvent.KEYCODE_ENTER:
-                        Intent intent = new Intent(getActivity(), SearchShopList.class);
-                        intent.putExtra("shopName", searchBar.getText().toString());
-                        Log.d("shopName", searchBar.getText().toString());
-                        startActivity(intent);
-                        break;
-                }
-                return true;
+        searchBar.setOnKeyListener((v, i, keyEvent) -> {
+            switch (i) {
+                case KeyEvent.KEYCODE_ENTER:
+                    Intent intent = new Intent(getActivity(), SearchShopList.class);
+                    intent.putExtra("shopName", searchBar.getText().toString());
+                    Log.d("shopName", searchBar.getText().toString());
+                    startActivity(intent);
+                    break;
             }
+            return true;
         });
         return rootView;
     }

@@ -51,7 +51,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ItemViewHo
     // 데이터 셋의 크기
     @Override
     public int getItemCount() {
-        return filterList==null? 0:filterList.size();
+        return filterList == null ? 0 : filterList.size();
     }
 
     @Override

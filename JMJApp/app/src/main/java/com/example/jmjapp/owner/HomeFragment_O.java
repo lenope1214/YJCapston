@@ -5,6 +5,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
@@ -26,14 +27,18 @@ import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.jmjapp.R;
 import com.example.jmjapp.dto.Order;
+import com.example.jmjapp.dto.Shop;
 import com.example.jmjapp.network.Server;
 import com.example.jmjapp.owner.push.BellActivity_O;
 import com.example.jmjapp.user.MainActivity;
+import com.example.jmjapp.user.MembershipWithdrawal;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -45,15 +50,15 @@ import java.util.Date;
 import java.util.List;
 
 import lombok.SneakyThrows;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
 public class HomeFragment_O extends Fragment {
-    ToggleButton toggle_Button;
     TextView text_myshop_name, profit_detail_tv, profit_today;
-    Button bell_button;
+    Button bell_button, pos_button, toggle_on_Button, toggle_off_Button;
     ViewFlipper viewFlipper;
 
     private String jwt, orderId;
@@ -66,6 +71,14 @@ public class HomeFragment_O extends Fragment {
 
     Thread thread;
     boolean isThread = false;
+
+    FragmentManager manager;
+    PosFragment_O posFragment_o;
+
+    private String toastMessage;
+
+    private Call<Shop> shopCall;
+    private Call<ResponseBody> responseBodyCall;
 
     public HomeFragment_O() {
 
@@ -89,26 +102,38 @@ public class HomeFragment_O extends Fragment {
         text_myshop_name.setText("현재 매장 : " + shopName);
 
         profit_today = rootView.findViewById(R.id.profit_today);
+        toggle_on_Button = rootView.findViewById(R.id.toggle_on_button);
+        toggle_off_Button = rootView.findViewById(R.id.toggle_off_button);
 
-//        isThread = true;
-//        thread = new Thread() {
-//            public void run() {
-//                while (isThread) {
-//                    try {
-//                        sleep(1000);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                    handler.sendEmptyMessage(0);
-//                }
-//            }
-//        };
-//        thread.start();
+        /**
+         *
+         * 웹에서 주문하면 앱에서 알림 기능
+         *
+         * 1회용임(한번하면 재시작하고 해야함)
+         *
+         * 할려면 밑에 스레드 주석풀고
+         *
+         *
+         */
+        isThread = true;
+        thread = new Thread() {
+            public void run() {
+                while (isThread) {
+                    try {
+                        sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    handler.sendEmptyMessage(0);
+                }
+            }
+        };
+        thread.start();
 
         int images[] = {
-            R.drawable.adv1,
-            R.drawable.adv2,
-            R.drawable.adv3
+                R.drawable.adv1,
+                R.drawable.adv2,
+                R.drawable.adv3
         };
 
         viewFlipper = rootView.findViewById(R.id.owner_img_slide);
@@ -117,36 +142,29 @@ public class HomeFragment_O extends Fragment {
             slideImage(image);
         }
 
-        toggle_Button = rootView.findViewById(R.id.toggle_button);
-        toggle_Button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                String toastMessage;
-                if(isChecked) {
-                    toastMessage = "매장 On";
-                } else {
-                    toastMessage = "매장 Off";
-                }
-                Toast.makeText(getActivity().getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
-            }
+        posFragment_o = new PosFragment_O();
+        manager = getFragmentManager();
+
+        toggle_on_Button.setOnClickListener(v -> clickToggleOnBtn());
+
+        toggle_off_Button.setOnClickListener(v -> clickToggleOffBtn());
+
+        pos_button = rootView.findViewById(R.id.pos_button);
+        pos_button.setOnClickListener(v -> {
+            MainActivity_O.bottomNavigation.setSelectedItemId(R.id.o_tab1);
+            manager.beginTransaction().replace(R.id.container, posFragment_o).commit();
         });
 
         bell_button = rootView.findViewById(R.id.bell_button);
-        bell_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), BellActivity_O.class);
-                startActivity(intent);
-            }
+        bell_button.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), BellActivity_O.class);
+            startActivity(intent);
         });
 
         profit_detail_tv = rootView.findViewById(R.id.profit_detail_tv);
-        profit_detail_tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ProfitDetailActivity.class);
-                startActivity(intent);
-            }
+        profit_detail_tv.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), ProfitDetailActivity.class);
+            startActivity(intent);
         });
 
         SharedPreferences pref = getActivity().getSharedPreferences("auth_o", Context.MODE_PRIVATE);
@@ -157,6 +175,93 @@ public class HomeFragment_O extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        System.out.println("onStart 실행");
+
+        shopCall = Server.getInstance().getApi().shop(shopNumber);
+        shopCall.enqueue(new Callback<Shop>() {
+            @Override
+            public void onResponse(Call<Shop> call, Response<Shop> response) {
+                if (response.isSuccessful()) {
+                    Log.d("매장 조회 성공", "매장 조회 성공");
+                    System.out.println("isOpen : " + response.body().getIsOpen());
+                    if (response.body().getIsOpen() == 'Y') {
+                        toggle_on_Button.setVisibility(View.VISIBLE);
+                        toggle_off_Button.setVisibility(View.GONE);
+                    } else if (response.body().getIsOpen() == 'N') {
+                        toggle_on_Button.setVisibility(View.GONE);
+                        toggle_off_Button.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    Log.d("매장 조회 실패1", "매장 조회 실패1");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Shop> call, Throwable t) {
+                Log.d("매장 조회 실패2", "매장 조회 실패2");
+            }
+        });
+    }
+
+    private void clickToggleOnBtn() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("알림");
+        builder.setMessage("매장을 닫겠습니까?");
+        builder.setPositiveButton("예", (dialog, which) -> {
+            responseBodyCall = Server.getInstance().getApi().updateOpen("Bearer " + jwt, shopNumber);
+            responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.isSuccessful()) {
+                        Log.d("updateOpen 성공", "updateOpen 성공");
+                        toggle_on_Button.setVisibility(View.GONE);
+                        toggle_off_Button.setVisibility(View.VISIBLE);
+                    } else {
+                        Log.d("updateOpen 실패1", "updateOpen 실패1");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Log.d("updateOpen 실패2", "updateOpen 실패2");
+                }
+            });
+        });
+        builder.setNegativeButton("아니오", (dialog, which) -> System.out.println("아니오"));
+        builder.show();
+    }
+
+    private void clickToggleOffBtn() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("알림");
+        builder.setMessage("매장을 열겠습니까?");
+        builder.setPositiveButton("예", (dialog, which) -> {
+            responseBodyCall = Server.getInstance().getApi().updateOpen("Bearer " + jwt, shopNumber);
+            responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.isSuccessful()) {
+                        Log.d("updateOpen 성공", "updateOpen 성공");
+                        toggle_on_Button.setVisibility(View.VISIBLE);
+                        toggle_off_Button.setVisibility(View.GONE);
+                    } else {
+                        Log.d("updateOpen 실패1", "updateOpen 실패1");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Log.d("updateOpen 실패2", "updateOpen 실패2");
+                }
+            });
+        });
+        builder.setNegativeButton("아니오", (dialog, which) -> System.out.println("아니오"));
+        builder.show();
+    }
+
     private void slideImage(int image) {
         ImageView imageView = new ImageView(getActivity());
         imageView.setBackgroundResource(image);
@@ -165,8 +270,8 @@ public class HomeFragment_O extends Fragment {
         viewFlipper.setFlipInterval(4000);
         viewFlipper.setAutoStart(true);
 
-        viewFlipper.setInAnimation(getActivity(),android.R.anim.slide_in_left);
-        viewFlipper.setOutAnimation(getActivity(),android.R.anim.slide_out_right);
+        viewFlipper.setInAnimation(getActivity(), android.R.anim.slide_in_left);
+        viewFlipper.setOutAnimation(getActivity(), android.R.anim.slide_out_right);
     }
 
     private void todayProfit() {
@@ -238,13 +343,13 @@ public class HomeFragment_O extends Fragment {
                         profit_today.setText("0원");
                     }
                 } else {
-                    Log.d("orderList 실패1", "orderList 실패1"+response.errorBody().string());
+                    Log.d("orderList 실패1", "orderList 실패1" + response.errorBody().string());
                 }
             }
 
             @Override
             public void onFailure(Call<List<Order>> call, Throwable t) {
-                Log.d("orderList 실패2", "orderList 실패2"+t.getCause());
+                Log.d("orderList 실패2", "orderList 실패2" + t.getCause());
             }
         });
     }
@@ -263,8 +368,8 @@ public class HomeFragment_O extends Fragment {
                         Date date1 = null;
                         List<Order> orderList = response.body();
 
-                        String list_orderId[] = new String[orderList.size()];
-                        String list_payTime[] = new String[orderList.size()];
+                        String[] list_orderId = new String[orderList.size()];
+                        String[] list_payTime = new String[orderList.size()];
 
                         int index = 0;
 
@@ -275,8 +380,8 @@ public class HomeFragment_O extends Fragment {
                                 String sDate = list.getPayTime();
 
                                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                                date1 = sdf.parse(sDate.substring(0,4) + "-" + sDate.substring(5,7) + "-" + sDate.substring(8,10)
-                                                        + " " + sDate.substring(10,15));
+                                date1 = sdf.parse(sDate.substring(0, 4) + "-" + sDate.substring(5, 7) + "-" + sDate.substring(8, 10)
+                                        + " " + sDate.substring(10, 15));
 
                                 list_payTime[index] = sdf.format(date1);
 
@@ -287,35 +392,43 @@ public class HomeFragment_O extends Fragment {
                             }
                         }
 
-                        for (int i = 0; i < orderList.size(); i++) {
-                            // 현재날짜
-                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                            Date time = new Date();
-                            String time1 = simpleDateFormat.format(time);
+                        for (int j = 0; j < orderList.size(); j++) {
 
-                            Calendar cal = Calendar.getInstance();
+                            if (list_payTime[j] != null) {
 
-                            cal.setTime(time);
+                                for (int i = 0; i < orderList.size(); i++) {
+                                    // 현재날짜
+                                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                                    Date time = new Date();
+                                    String time1 = simpleDateFormat.format(time);
 
-                            String today = null;
+                                    Calendar cal = Calendar.getInstance();
 
-                            cal.add(Calendar.MINUTE, -1);
-                            today = simpleDateFormat.format(cal.getTime());
+                                    cal.setTime(time);
 
+                                    String today = null;
 
-                            if ((simpleDateFormat.parse(list_payTime[i]).equals(time) || simpleDateFormat.parse(list_payTime[i]).before(time))
-                                    && simpleDateFormat.parse(list_payTime[i]).after(simpleDateFormat.parse(today))){
-                                System.out.println("페이타임이 현재시간보다 과거입니다.");
-                                System.out.println("현재시간 : " + time1);
-                                System.out.println("1분 전 : " + today);
-                                System.out.println("페이타임 : " + list_payTime[i]);
-                                sendNotification(list_orderId[i]);
-                                isThread = false;
-                            } else {
-                                System.out.println("오류");
-                                System.out.println("현재시간 : " + time1);
-                                System.out.println("1분 전 : " + today);
-                                System.out.println("페이타임 : " + list_payTime[i]);
+                                    cal.add(Calendar.MINUTE, -1);
+                                    today = simpleDateFormat.format(cal.getTime());
+
+//                            sendNotification(list_orderId[i]);
+//                            isThread = false;
+
+                                    if ((simpleDateFormat.parse(list_payTime[i]).equals(time) || simpleDateFormat.parse(list_payTime[i]).before(time))
+                                            && simpleDateFormat.parse(list_payTime[i]).after(simpleDateFormat.parse(today))) {
+                                        System.out.println("페이타임이 현재시간보다 과거입니다.");
+                                        System.out.println("현재시간 : " + time1);
+                                        System.out.println("1분 전 : " + today);
+                                        System.out.println("페이타임 : " + list_payTime[i]);
+                                        sendNotification(list_orderId[i]);
+                                        isThread = false;
+                                    } else {
+                                        System.out.println("오류");
+                                        System.out.println("현재시간 : " + time1);
+                                        System.out.println("1분 전 : " + today);
+                                        System.out.println("페이타임 : " + list_payTime[i]);
+                                    }
+                                }
                             }
                         }
 
@@ -349,7 +462,7 @@ public class HomeFragment_O extends Fragment {
         builder.setAutoCancel(true);
         builder.setContentIntent(pendingIntent);
 
-        mediaPlayer = MediaPlayer.create(getActivity(),R.raw.alarm);
+        mediaPlayer = MediaPlayer.create(getActivity(), R.raw.alarm);
         mediaPlayer.start();
 
         // 알림 표시

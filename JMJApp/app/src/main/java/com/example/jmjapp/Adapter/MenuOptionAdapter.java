@@ -17,7 +17,7 @@ import com.example.jmjapp.dto.Options;
 
 import java.util.ArrayList;
 
-public class MenuOptionAdapter extends RecyclerView.Adapter<MenuOptionAdapter.ItemViewHolder>{
+public class MenuOptionAdapter extends RecyclerView.Adapter<MenuOptionAdapter.ItemViewHolder> {
     Context context;
     ArrayList<OptionGroups> mItems;
     ArrayList<Options> optionsItems;
@@ -54,13 +54,10 @@ public class MenuOptionAdapter extends RecyclerView.Adapter<MenuOptionAdapter.It
         holder.adapter = new MenuOptionOptionAdapter(optionGroupId);
         holder.menu_option_option_list.setAdapter(holder.adapter);
 
-        holder.option_option_group_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("add실행","add실행");
-                holder.adapter.addItem(new Options());
-                holder.adapter.notifyDataSetChanged();
-            }
+        holder.option_option_group_add.setOnClickListener(v -> {
+            Log.d("add실행", "add실행");
+            holder.adapter.addItem(new Options());
+            holder.adapter.notifyDataSetChanged();
         });
 
     }
@@ -68,12 +65,12 @@ public class MenuOptionAdapter extends RecyclerView.Adapter<MenuOptionAdapter.It
     // 데이터 셋의 크기
     @Override
     public int getItemCount() {
-        return mItems==null? 0:mItems.size();
+        return mItems == null ? 0 : mItems.size();
     }
 
     // 커스텀 뷰홀더
     // item layout 에 존재하는 위젯들을 바인딩합니다.
-    class ItemViewHolder extends RecyclerView.ViewHolder{
+    class ItemViewHolder extends RecyclerView.ViewHolder {
         TextView option_option_group_name, option_option_group_add;
         RecyclerView menu_option_option_list;
         private LinearLayoutManager layoutManager;

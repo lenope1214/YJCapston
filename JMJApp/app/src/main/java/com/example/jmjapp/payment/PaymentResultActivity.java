@@ -20,6 +20,7 @@ import com.example.jmjapp.databinding.ActivityPaymentResultBinding;
 import com.example.jmjapp.network.Server;
 import com.example.jmjapp.user.MainActivity;
 import com.example.jmjapp.user.OrderActivity;
+import com.example.jmjapp.user.QrPaymentActivity;
 import com.example.jmjapp.user.QrReaderActivity;
 import com.example.jmjapp.user.ShopDetailActivity;
 
@@ -43,7 +44,7 @@ public class PaymentResultActivity extends AppCompatActivity {
     private String reqId, jwt, device_token, resTime,
             resDate, orderRquest, resShop, ownerId, resId, qr;
     private Long orderId;
-    private int sum, count;
+    private int sum, count, usePoint;
 
     private Call<ResponseBody> responseBodyCall;
 
@@ -67,6 +68,7 @@ public class PaymentResultActivity extends AppCompatActivity {
         resShop = OrderActivity.resShop;
         orderId = OrderActivity.orderId;
         resId = OrderActivity.resId;
+        usePoint = OrderActivity.usePoint;
 
         if (qr == null) {
             binding.reservationQr.setVisibility(View.GONE);
@@ -84,14 +86,68 @@ public class PaymentResultActivity extends AppCompatActivity {
             map.put("status", "toOwner");
             map.put("jwt", jwt);
 
-            binding.reservationComp.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    send(map);
-                    Intent intent = new Intent(PaymentResultActivity.this, MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                }
+            binding.reservationComp.setOnClickListener(v -> {
+                Map<String, String> map2 = new HashMap<>();
+                map2.put("orderId", String.valueOf(orderId));
+                map2.put("amount", String.valueOf(sum));
+                map2.put("usePoint", String.valueOf(usePoint));
+                map2.put("pg", "inicis");
+                map2.put("payMethod", "card");
+
+                System.out.println(orderId + "@" + sum + "@" + usePoint);
+
+                responseBodyCall = Server.getInstance().getApi().payment("Bearer " + jwt, map2);
+                responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                    @SneakyThrows
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("결제 성공", "결제 성공");
+
+                            Map<String, String> map3 = new HashMap<>();
+                            map3.put("orderId", String.valueOf(orderId));
+
+                            responseBodyCall = Server.getInstance().getApi().rdToPd("Bearer " + jwt, map3);
+                            responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                                @Override
+                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                    if (response.isSuccessful()) {
+                                        Log.d("rdToPd 성공", "rdToPd 성공");
+
+                                        SharedPreferences pref1 = getSharedPreferences("basket", MODE_PRIVATE);
+                                        SharedPreferences.Editor editor1 = pref1.edit();
+                                        editor1.clear();
+                                        editor1.apply();
+
+                                        SharedPreferences pref2 = getSharedPreferences("basket_shop", MODE_PRIVATE);
+                                        SharedPreferences.Editor editor2 = pref2.edit();
+                                        editor2.clear();
+                                        editor2.apply();
+
+                                        send(map);
+                                        Intent intent = new Intent(PaymentResultActivity.this, MainActivity.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        startActivity(intent);
+                                    } else {
+                                        Log.d("rdToPd 실패1", "rdToPd 실패1");
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                    Log.d("rdToPd 실패2", "rdToPd 실패2");
+                                }
+                            });
+                        } else {
+                            Log.d("결제 실패1", "결제 실패1"+response.errorBody().string());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.d("결제 실패2", "결제 실패2"+t.getCause());
+                    }
+                });
             });
 
             responseBodyCall = Server.getInstance().getApi().deviceToken(ownerId);
@@ -113,16 +169,6 @@ public class PaymentResultActivity extends AppCompatActivity {
                 }
             });
 
-
-//        Log.d("mapmpaap", map.get("resTime")+map.get("resDate")+map.get("sum")+map.get("count")+map.get("orderRequest")+map.get("resShop"));
-
-//        binding.btnbtn2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String input = binding.btnbtn.getText().toString();
-//                send("안녕하세요.");
-//            }
-//        });
             if (requestQueue == null) {
                 requestQueue = Volley.newRequestQueue(getApplicationContext());
             }
@@ -131,14 +177,61 @@ public class PaymentResultActivity extends AppCompatActivity {
             binding.reservationQr.setVisibility(View.VISIBLE);
             binding.reservationComp.setVisibility(View.GONE);
 
-            binding.reservationQr.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finishAffinity();
-                    Intent intent = new Intent(PaymentResultActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    System.exit(0);
-                }
+            binding.reservationQr.setOnClickListener(v -> {
+                Map<String, String> map4 = new HashMap();
+                map4.put("orderId", QrPaymentActivity.orderId);
+                map4.put("amount", String.valueOf(QrPaymentActivity.sum));
+                map4.put("usePoint", String.valueOf(QrPaymentActivity.usePoint));
+                map4.put("pg", "inicis");
+                map4.put("payMethod", "card");
+
+                responseBodyCall = Server.getInstance().getApi().payment("Bearer " + jwt, map4);
+                responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("결제 성공", "결제 성공");
+
+                            Map<String, String> map5 = new HashMap<>();
+                            map5.put("orderId", QrPaymentActivity.orderId);
+
+                            responseBodyCall = Server.getInstance().getApi().rdToPd("Bearer " + jwt, map5);
+                            responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                                @Override
+                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                    if (response.isSuccessful()) {
+                                        Log.d("rdToPd 성공", "rdToPd 성공");
+
+                                        SharedPreferences pref3 = getSharedPreferences("basket_shop", MODE_PRIVATE);
+                                        SharedPreferences.Editor editor3 = pref3.edit();
+                                        editor3.clear();
+                                        editor3.apply();
+
+                                        finishAffinity();
+                                        Intent intent = new Intent(PaymentResultActivity.this, MainActivity.class);
+                                        startActivity(intent);
+                                        System.exit(0);
+
+                                    } else {
+                                        Log.d("rdToPd 실패1", "rdToPd 실패1");
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                    Log.d("rdToPd 실패2", "rdToPd 실패2");
+                                }
+                            });
+                        } else {
+                            Log.d("결제 실패1", "결제 실패1");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.d("결제 실패2", "결제 실패2");
+                    }
+                });
             });
         }
     }
@@ -165,7 +258,7 @@ public class PaymentResultActivity extends AppCompatActivity {
 
             Log.d("qweasd","Qweasd");
 
-            idArray.put(0, "ewIN6gpFW0Q:APA91bHWR_vXHyPwoYmQFnlprfz4jEir7k3GUhylIZHxiuQRneXp19UHWAFirXqQmEwkd3up7uxbtWsv5Y9o04mrDv9br1a1Ci8bEQ_N5L-9ZkHbD5XByxjijilc5QNZzahPWUFD94hQ");
+            idArray.put(0, "cYaNDpf1TZI:APA91bEkwmKV3ZmwPsv6TPg99NpeeaqyFWxjsjJfJiRcjmI6R1Ap66v3kPa5enm9M2WdRf-nB7v5ATJxjxLOJ6xMZ1wPNy5cNNdIX76A6vFGlYow_FRJ_N_sF_ADb3khb1pj73onDKoh");
             requestData.put("registration_ids", idArray);
         } catch (Exception e) {
             e.printStackTrace();
