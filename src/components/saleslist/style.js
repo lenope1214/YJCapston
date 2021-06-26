@@ -1,11 +1,25 @@
 import styled from "styled-components";
 
 export const saleslistWrap = styled.div`
-    .abc {
-        padding-top: 200px;
-        width: 500px;
-        height: 500px;
+    .left-container{
+        position:absolute;
+        margin-top:200px;
+        width:35%;
+        height:630px;
+        background-color:white;
+        border-right:10px solid #DDDDDD;
     }
+    .right-container {
+        border-left:10px solid #DDDDDD;
+        position:absolute;
+        margin-left:35%;
+        margin-top:200px;
+        background-color:white;
+        padding-top:0px;
+        width: 59%;
+        height:630px;
+    }
+    
     .emp-container {
         padding-top: 80px;
         margin-left: 550px;
@@ -97,5 +111,28 @@ export const saleslistWrap = styled.div`
         font-weight: bold;
         margin-left: 60%;
         padding-bottom: 20px;
+    }
+    .left-head{
+        // font-weight:bold;
+        // text-align:center;
+        // font-size:25px;
+        border-bottom:7px solid #DDDDDD;
+        padding-top:10px;
+        padding-bottom:10px;
+    }
+    .shopname{
+        
+        font-weight:bold;
+        text-align:center;
+        font-size:25px;
+        // border-bottom:7px solid #DDDDDD;
+        padding-top:10px;
+        padding-bottom:30px;
+    }
+    .chart{
+        margin-left:10%;
+       
+        width:80%;
+        height:70%;
     }
 `;

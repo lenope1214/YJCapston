@@ -56,13 +56,16 @@ const ShopsocketlistContainer = (props) => {
             });
             let orderphone = JSON.parse(body).orderid.phone;
             let shopId = JSON.parse(body).ordershopId;
+            let request = JSON.parse(body).request;
+            let orderdate = JSON.parse(body).orderdate;
+            let ordertime = JSON.parse(body).ordertime;
 
             // console.log(JSON.parse(body).ordernumber);
 
             setlist((prev) => {
                 return [
                     ...prev,
-                    { ordernumber, orderid, orderlist, orderphone, shopId },
+                    { ordernumber, orderid, orderlist, orderphone, shopId, request,ordertime,orderdate },
                 ];
             });
 
@@ -83,7 +86,7 @@ const ShopsocketlistContainer = (props) => {
             // }
         });
     };
-
+    console.log(list);
     const publish = (message) => {
         if (!client.current.connected) {
             return;

@@ -100,7 +100,6 @@ export const ShoplistWrap = styled.div`
         position: fixed;
         z-index: 8;
         background-color: white;
-        min-width: 80%;
     }
     .adimg {
         position: relative;
@@ -134,25 +133,22 @@ export const ShoplistWrap = styled.div`
         opacity: 1;
     }
     .center-nav input {
-        width: 356px;
-        border-radius: 5px 0 0 5px;
+        width: 290px;
         background-color: white;
-        height: 40px;
+        height: 34px;
         opacity: 1;
-        border: 1px solid #a7a7a7;
+        border: 0px;
+        border-bottom: 1px solid #a7a7a7;
     }
 
     .center-nav button {
-        border-color: #a7a7a7;
         width: 50px;
-        border-left: 0;
-        border-radius: 0 5px 5px 0;
-        background-color: black;
-        color: white;
-        height: 44px;
+        height: 34px;
+        border: 0px;
+        background: none;
         opacity: 1;
         border: none;
-        transform: translateX(-44px);
+        transform: translateX(-42px);
     }
 
     .right1-nav {
@@ -185,7 +181,10 @@ export const ShoplistWrap = styled.div`
         font-weight: bold;
     }
     .right-nav {
-        padding-right: 2%;
+        padding-right: 4%;
+    }
+    .search-icon {
+        margin-top: 10px;
     }
 
     .but-item1 {
@@ -350,7 +349,6 @@ export const ShoplistWrap = styled.div`
 
     .App-header {
         background-color: #282c34;
-        min-height: 100vh;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -391,6 +389,7 @@ export const ShoplistWrap = styled.div`
     body {
         padding-top: 100px;
         color: black;
+        width:100%;
     }
     .mainimg {
         margin: 0 auto;
@@ -403,37 +402,45 @@ export const ShoplistWrap = styled.div`
     }
     .yangtimjang {
         margin: 0 auto;
-        width: 240px;
-        height: 260px;
+        width: 220px;
+        height: 240px;
         object-fit: cover;
         border: 0;
     }
 
+    .topcatcat {
+        width: 100%;
+        height: 45px;
+        background: white;
+        z-index: 10;
+        position: fixed;
+        transform: translateY(-5px);
+    }
+
+    .topCategory {
+        position: fixed;
+        z-index: 10;
+        display: block;
+        transform: translateY(-5px);
+        width: 100%;
+    }
+
     .topCategory li {
         display: inline-block;
-        font-size: 14px;
+        font-size: 13px;
         margin: 0 auto;
-        font-size: 15px;
         text-align: center;
         padding-top: 4px;
         padding-bottom: 4px;
     }
     .topCategory button {
-        width: 8%;
         padding-top: 4px;
         padding-bottom: 4px;
+        
     }
 
     .topCategory {
-        box-shadow: 0px 0, 0 1px #a7a7a7, 0px 0 #a7a7a7, 0 -1px #a7a7a7;
-        min-width: 1590px;
         margin: 0 auto;
-    }
-    .cityreview {
-        color: blue;
-    }
-    .reviewevent {
-        color: red;
     }
     .leftCategory {
         position: absolute;
@@ -485,7 +492,7 @@ export const ShoplistWrap = styled.div`
         border: 0;
     }
     .list_shop {
-        width: 65%;
+        width: 80%;
         margin: 0 auto;
         padding-top: 10px;
     }
@@ -502,10 +509,11 @@ export const ShoplistWrap = styled.div`
     }
     .testname {
         width: 270px;
-        padding: 5px;
+        padding: 10px;
         position: relative;
         color: black;
         cursor: pointer;
+        margin-bottom: 20px;
     }
 
     .listname {
@@ -513,8 +521,7 @@ export const ShoplistWrap = styled.div`
         font-size: 18px;
         font-weight: bold;
     }
-    .linesetting {
-    }
+
     .topCategory button {
         outline: 0;
         border: 0;
@@ -523,10 +530,14 @@ export const ShoplistWrap = styled.div`
         display: inline-block;
         font-size: 14px;
         margin: 0 auto;
-        padding: 0.5% 1% 0.5% 2%;
+        padding-left: 2%;
+        padding-right: 2%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        
     }
     .topCategory button:hover{
-        font-weight:900;
+        color: brown;
     }
 
     .listcategory {
@@ -547,27 +558,25 @@ export const ShoplistWrap = styled.div`
         padding-top: 80px;
     }
     .guidetext {
-        margin-top: 40px;
+        margin-top: 60px;
         width: 100%;
         font-family: "Wemakeprice-Regular";
         font-size: 24px;
         font-weight: bold;
-        text-align: left;
-        margin-left: 20%;
     }
     .hrstyle {
         margin-top: 16px;
         height:2px;
-        width: 150px;
-        margin-bottom: 10px;
-        // display:inline;
-        
+        width: 26px;
+        margin-bottom: 40px;
+        display: block;
+        margin-left: 50%;
+        transform: translateX(-13px);
     }
-    // .hrstyle2 {
-    //     margin-top: 16px;
-    //     width: 140px;
-    //     margin-bottom: 10px;
-    // }
+    .shoplist {
+        font-family: Arial;
+    }
+    
     .all-category{
         // position: relative;
         font-weight:bold;
@@ -576,10 +585,7 @@ export const ShoplistWrap = styled.div`
         border:0px;
         margin-right:20px;
     }
-    // .all-category:hover{
-    //     // background-color:gray;
-    //     font-size:35px;
-    // }
+
     .mark-category{
         font-weight:bold;
         font-size:30px;
@@ -594,10 +600,16 @@ export const ShoplistWrap = styled.div`
         background-color:black;
         height:30px;
     }
-    .isrspos{
-        color:red;
+    .slide-container {
+        height: 504px;
     }
-    .isopen{
-        color:red;
+
+    .each-slide {
+        height: 504px;
     }
+
+    .slide-img {
+        position: relative;
+    }
+    
 `;

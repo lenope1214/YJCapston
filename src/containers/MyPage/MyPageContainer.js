@@ -8,6 +8,7 @@ import {
     ordermenulist,
 } from "../../lib/MyPage";
 import { useHistory } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 const MyPageContainer = (props) => {
     const handleComplete = (data) => {
@@ -135,8 +136,6 @@ const MyPageContainer = (props) => {
                         jmamount: orderjmlist.totalAmount,
                         jmshopName: orderjmlist.shopName,
                         jmshopId: orderjmlist.shopId,
-                        jmstatus: orderjmlist.status,
-                        
                     };
                 });
                 setJmlist(orderjmlist);

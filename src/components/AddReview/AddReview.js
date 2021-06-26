@@ -3,6 +3,8 @@ import React from "react";
 import * as S from "./style";
 import topimg from "../Main/img/QRcode2.png";
 
+//npm install --save sweetalert2 설치하기
+
 const AddReview = ({
     handleImg,
     menudesc,

@@ -1,8 +1,12 @@
 import React from "react";
 import * as S from "./style";
 import { Link } from "react-router-dom";
-import mainpicture from "./img/userpagemain.jpg";
+import mainpicture from "./img/usermain.jpg";
 import yangtimjang from "./img/yangtimjang.png";
+import 'react-slideshow-image/dist/styles.css'
+import { Slide } from 'react-slideshow-image';
+import searchicon from './img/searchicon.png';
+// npm i react-slideshow-image --save 설치하기
 
 const Shoplist = ({
     isLogin,
@@ -28,14 +32,12 @@ const Shoplist = ({
     showcafe,
     showfastfood,
     showMarks,
-    marklist,
+    marklist
+
 }) => {
+
     console.log(restaurant);
     let AWS_BASE_URL = "http://3.34.55.186:8088/";
-
-    let isrspos = null;
-    let isopen = null;
-
     return (
         <>
             <S.ShoplistWrap>
@@ -56,10 +58,12 @@ const Shoplist = ({
                         <div class="center-nav">
                             <input
                                 type="text"
-                                placeholder="매장을 검색하세요."
+                                placeholder=" 매장을 검색하세요."
                                 class="search-box"
                             ></input>
-                            <button class="search-button">검색</button>
+                            <button class="search-button">
+                                <img src={searchicon} width='20px' className="search-icon"></img>
+                            </button>
                         </div>
                         {isLogin ? (
                             <div class="right-nav">
@@ -83,7 +87,10 @@ const Shoplist = ({
                         )}
                     </div>
                     <body>
-                        <div class="topCategory">
+                        <div className="topcatcat">
+
+                        </div>
+                        <div className="topCategory">
                             <button onClick={showkorean}>
                                 <li>한식</li>
                             </button>
@@ -115,7 +122,7 @@ const Shoplist = ({
                                 <li>패스트푸드</li>
                             </button>
                             <button onClick={showMarks}>
-                                <li class="cityreview">찜 목록</li>
+                                <li class="cityreview">찜목록</li>
                             </button>
                             <button onClick={showShoplist}>
                                 <li class="reviewevent">모두보기</li>
@@ -123,15 +130,45 @@ const Shoplist = ({
                         </div>
                         <div class="allbody">
                             <div class="mainimg">
-                                <img class="mainimg-img" src={mainpicture} />
+                                {/* <img class="mainimg-img" src={mainpicture} /> */}
+                                {/* <SimpleImageSlider 
+                                    width={'100%'}
+                                    height={504}
+                                    images={images}
+                                /> */}
+                                <div className="slide-container">
+                                    <Slide>
+                                    <div className="each-slide">
+                                            {/* <div style={{ 'backgroundImage': `url(${mainpicture})` }}> */}
+                                            <div className="slide-img">
+                                                <img src={mainpicture}></img>
+                                                
+                                            </div>
+                                            <div className="slide-text">Slide 1</div>
+                                        </div>
+                                        <div className="each-slide">
+                                            {/* <div style={{ 'backgroundImage': `url(${yangtimjang})` }}> */}
+                                            <div className="slide-img">
+                                                <img src={yangtimjang}></img>
+                                                {/* <span className="slide-text">Slide 2</span> */}
+                                            </div>
+                                            <div className="slide-text">Slide 2</div>
+                                        </div>
+                                        <div className="each-slide">
+                                            {/* <div style={{ 'backgroundImage': `url(${mainpicture})` }}> */}
+                                            <div className="slide-img">
+                                                <img src={mainpicture}></img>
+                                                {/* <span className="slide-text">Slide 3</span> */}
+                                            </div>
+                                            
+                                            <div className="slide-text">Slide 3</div>
+                                        </div>
+                                    </Slide>
+                                </div>
                             </div>
                             <div class="guidetext">
-                                <button
-                                    className="all-category"
-                                    onClick={showShoplist}
-                                >
-                                    매장 목록
-                                </button>
+
+                                <p className="shoplist">SHOP LIST</p>
                                 {/* <Link to="/Marklist"> */}
                                 {/* <button className="mark-category" onClick={showMarks}>찜 목록</button>  */}
                                 {/* </Link> */}
@@ -139,7 +176,7 @@ const Shoplist = ({
                                 {/* <hr class="hrstyle2" /> */}
                             </div>
                             <div clasName="menulist">
-                                <div class="leftCategory">
+                                {/* <div class="leftCategory">
                                     <select class="moneykind">
                                         <option value="예약 많은 순">
                                             예약 많은 순
@@ -150,87 +187,54 @@ const Shoplist = ({
                                         <option value="별점순">별점순</option>
                                     </select>
                                     <button>검색</button>
-                                </div>
+                                </div> */}
                                 <div class="list_shop">
                                     {!restaurant.length && (
-                                        <div className="none-shop">
-                                            매장이 없습니다.
-                                        </div>
+                                        <div className="none-shop">매장이 없습니다.</div>
                                     )}
-                                    {!!restaurant.length &&
-                                        restaurant.map((shop) => {
-                                            if (shop.isRsPos == "N") {
-                                                isrspos = "예약불가능";
-                                            } else {
-                                                isrspos = "";
-                                            }
+                                    {!!restaurant.length && restaurant.map((shop) => {
+                                        return (
+                                            <Link
+                                                to={`/shopcontent/${shop.id}`}
+                                            >
+                                                <button>
+                                                    <div class="testname">
+                                                        <div class="image">
+                                                            <img
+                                                                class="yangtimjang"
+                                                                src={
+                                                                    AWS_BASE_URL +
+                                                                    shop.img
+                                                                }
+                                                            />
+                                                        </div>
 
-                                            if (shop.isOpen == "N") {
-                                                isopen = "미오픈";
-                                            } else {
-                                                isopen = "";
-                                            }
-
-                                            return (
-                                                <Link
-                                                    to={`/shopcontent/${shop.id}`}
-                                                >
-                                                    <button>
-                                                        <div class="testname">
-                                                            <div class="image">
-                                                                <img
-                                                                    class="yangtimjang"
-                                                                    src={
-                                                                        AWS_BASE_URL +
-                                                                        shop.img
-                                                                    }
-                                                                />
-                                                            </div>
-
-                                                            <div class="listcontent">
-                                                                <div class="linesetting">
-                                                                    <div>
-                                                                        <span class="listname">
-                                                                            {
-                                                                                shop.name
-                                                                            }
-                                                                        </span>
-                                                                        <span class="isrspos">
-                                                                            {
-                                                                                isrspos
-                                                                            }
-                                                                        </span>
-                                                                    </div>
-                                                                    {/* <div class="listcategory">
+                                                        <div class="listcontent">
+                                                            <div class="linesetting">
+                                                                <div class="listname">
+                                                                    {shop.name}
+                                                                </div>
+                                                                {/* <div class="listcategory">
                                                                     {
                                                                         shop.category
                                                                     }
                                                                 </div> */}
-                                                                </div>
-                                                                <div class="listAddress">
-                                                                    평점 ★{" "}
-                                                                    {shop.score}{" "}
-                                                                    (
-                                                                    {
-                                                                        shop.reviews
-                                                                    }
-                                                                    )
-                                                                    <span class="isopen">
-                                                                        {isopen}
-                                                                    </span>
-                                                                </div>
+                                                            </div>
+                                                            <div class="listAddress">
+                                                                평점 ★ {shop.score} ({shop.reviews})
+                                                            </div>
 
-                                                                {/* <div>
+                                                            {/* <div>
                                                                 {
                                                                     shop.addressDetail
                                                                 }
                                                             </div> */}
-                                                            </div>
                                                         </div>
-                                                    </button>
-                                                </Link>
-                                            );
-                                        })}
+                                                    </div>
+                                                </button>
+                                            </Link>
+                                        );
+                                    })}
                                 </div>
                                 {/* {restaurant.map((test, i) => {
                                     return <div test={i}>{test.intro}</div>;

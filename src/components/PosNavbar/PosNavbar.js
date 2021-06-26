@@ -42,7 +42,7 @@ const PosNavbar = ({ shopId }) => {
                                     sessionStorage.getItem("access_token")
                                 );
                                 window.open(
-                                    `http://3.34.55.186:3000/Shopsocketlist/${shopId}`,
+                                    `http://localhost:3000/Shopsocketlist/${shopId}`,
                                     "_blank",
                                     "location = no, toolbars= no, status= no, width = 500, height = 500 , scrollbars = no"
                                 );

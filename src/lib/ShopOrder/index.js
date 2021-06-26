@@ -19,7 +19,7 @@ export const getMyInfo = () => {
     });
 };
 
-export const patchorder = (request, people, shopId) => {
+export const patchorder = (request, people, shopId,amount) => {
     return apiDefault().patch(
         "/orders",
         {
@@ -27,6 +27,7 @@ export const patchorder = (request, people, shopId) => {
             orderRequest: request,
             people: people,
             shopId: shopId,
+            amount:amount,
         },
         {
             headers: {

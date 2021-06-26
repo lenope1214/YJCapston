@@ -5,6 +5,7 @@ import { useHistory } from "react-router";
 import Header from "../../components/Header/Header";
 import { ShopsWrap } from "../../components/Shop/style";
 import { removeShops } from "../../lib/MyShop/index";
+import Swal from 'sweetalert2';
 
 const MyShopContainer = (props) => {
     const history = useState();
@@ -48,13 +49,47 @@ const MyShopContainer = (props) => {
                 const status = err?.response?.status;
                 console.log(status);
                 if (status == 400) {
-                    alert("로그인이 필요합니다!");
-                    history.push("/");
+                Swal.fire({
+                    title: '로그인 오류',
+                    text: "로그인이 필요합니다.",
+                    icon: 'info',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  }).then((result) => {
+                    if (result.value) {
+                        history.push("/");
+                    }
+                  })
+                    
                 } else if (status == 404) {
-                    alert("등록된 매장이 없습니다.");
-                    history.push("/");
+                    Swal.fire({
+                        title: '매장 로드 오류',
+                        text: "등록하신 매장이 없습니다.",
+                        icon: 'error',
+                        // showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        // cancelButtonColor: '#d33',
+                        confirmButtonText: '확인',
+                        // cancelButtonText: '취소'
+                      }).then((result) => {
+                        if (result.value) {
+                            history.push("/");
+                        }
+                      })
                 } else {
-                    alert("로그인서버문제");
+                    Swal.fire({
+                        title: '서버 문제',
+                        text: "로그인 서버 에러",
+                        icon: 'error',
+                        // showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        // cancelButtonColor: '#d33',
+                        confirmButtonText: '확인',
+                        // cancelButtonText: '취소'
+                      })
                 }
             });
     };

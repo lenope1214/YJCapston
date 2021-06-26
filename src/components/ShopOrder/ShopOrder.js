@@ -30,6 +30,10 @@ const ShopOrder = ({
     lastprcie,
     publish,
     connect,
+    orderdate,
+    ordertime,
+    handleOrdertime,
+    handleOrderdate
 }) => {
     return (
         <>
@@ -112,13 +116,17 @@ const ShopOrder = ({
                                     <input
                                         className="input-box"
                                         type="date"
-                                    ></input>
+                                        value={orderdate}
+                                        onChange={handleOrderdate}
+                                    />
                                 </div>
                                 <div>
                                     <input
                                         className="input-box"
                                         type="time"
-                                    ></input>
+                                        value={ordertime}
+                                        onChange={handleOrdertime}
+                                    />
                                 </div>
                                 <div className="subtitle">요청 사항</div>
                                 <input

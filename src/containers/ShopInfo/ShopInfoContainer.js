@@ -10,6 +10,7 @@ import {
     putShopInfo,
 } from "../../lib/ShopInfo";
 import * as StompJs from "@stomp/stompjs";
+import Swal from 'sweetalert2';
 
 const ROOM_SEQ = 1;
 
@@ -36,11 +37,12 @@ const ShopInfoContainer = (props) => {
         },
     ]);
 
-    //-------선택한 아이디정보 가져오기
-    useEffect(() => {
-        ShowShopInfo(props.match.params.shopId);
-        setShopId(props.match.params.shopId);
-    }, []);
+        //-------선택한 아이디정보 가져오기
+        useEffect(() => {
+            ShowShopInfo(props.match.params.shopId);
+            setShopId(props.match.params.shopId);
+        }, []);
+    
 
     const phone = phone1 + phone2 + phone3;
 
@@ -55,18 +57,18 @@ const ShopInfoContainer = (props) => {
     const handlePhone1 = (e) => {
         const value = e.target.value;
         setPhone1(value);
-    };
+    }
 
     const handlePhone2 = (e) => {
         const value = e.target.value;
         setPhone2(value);
-    };
+    }
 
     const handlePhone3 = (e) => {
         const value = e.target.value;
         setPhone3(value);
-    };
-
+    }
+    
     const handleShopOpenTime = (e) => {
         const value = e.target.value;
         setShopOpenTime(value);
@@ -112,19 +114,53 @@ const ShopInfoContainer = (props) => {
         putShopreserve(shopId)
             .then((res) => {
                 // history.push("/shopInfo/"+shopId)
-                history.push("/myshop");
-                alert("예약여부변경완료");
+                Swal.fire({
+                    title: '예약 여부 변경 완료',
+                    // text: "리뷰가 성공적으로 삭제됐습니다.",
+                    icon: 'success',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  }).then((result) => {
+                    if (result.value) {
+                        history.push("/myshop");
+                    }
+                  })
             })
             .catch((err) => {
-                alert("예약변경에러");
+                Swal.fire({
+                    title: '예약 여부 변경 에러',
+                    // text: "리뷰가 성공적으로 삭제됐습니다.",
+                    icon: 'error',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  })
             });
     };
 
     const Shop_v3 = () => {
-        putShopopen(shopId).then((res) => {
+        putShopopen(shopId)
+        .then((res) => {
             //history.push("/shopInfo/"+shopId)
-            history.push("/myshop");
-            alert("오픈여부변경완료+");
+            Swal.fire({
+                title: '오픈 여부 변경 완료',
+                // text: "리뷰가 성공적으로 삭제됐습니다.",
+                icon: 'success',
+                // showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                confirmButtonText: '확인',
+                // cancelButtonText: '취소'
+              }).then((result) => {
+                if (result.value) {
+                    history.push("/myshop");
+                }
+              })
         });
     };
 
@@ -142,13 +178,35 @@ const ShopInfoContainer = (props) => {
             // shopCategory
         )
             .then((res) => {
-                history.push("/myShop");
-                alert("수정되었습니다.");
+                Swal.fire({
+                    title: '수정 완료',
+                    // text: "리뷰가 성공적으로 삭제됐습니다.",
+                    icon: 'success',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  }).then((result) => {
+                    if (result.value) {
+                        history.push("/myshop");
+                    }
+                  })
             })
             .catch((err) => {
-                alert("putshopInfo err");
+                Swal.fire({
+                    title: '수정 에러',
+                    // text: "리뷰가 성공적으로 삭제됐습니다.",
+                    icon: 'error',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                  })
             });
     };
+
 
     const ShowShopInfo = () => {
         getShopInfo(props.match.params.shopId)
@@ -156,6 +214,7 @@ const ShopInfoContainer = (props) => {
                 setShopInfo(res.data);
                 setRoadAddr(res.data.address);
                 console.log(res.data);
+                
             })
             .catch((err) => {
                 alert("showshopInfo err");
@@ -236,7 +295,7 @@ const ShopInfoContainer = (props) => {
                 )
             ) {
                 alert("주문이 완료되었습니다!");
-            }
+            } 
             // else {
             //     alert("환불하시겠어요?");
             // }
@@ -256,6 +315,7 @@ const ShopInfoContainer = (props) => {
         setMessage("");
     };
 
+    
     return (
         <>
             <Header />
