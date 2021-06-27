@@ -29,6 +29,8 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
     const [people, setPeople] = useState();
     const [pointcheck, setpointcheck] = useState(0);
     const [jmshopId, setjmshopId] = useState("");
+    // const [orderdate, setOrderdate]= useState("");
+    // const [ordertime, setOrdertime] = useState("");
     const [rsYear, setrsYear] = useState("");
     const [rsMonth, setrsMonth] = useState("");
     const [rsDate, setrsDate] = useState("");
@@ -38,6 +40,20 @@ const ShopOrderContainer = ({ isLogin, handleLogin, handleLogout }) => {
     // const arriveTime = rsDate + rsTime;
     const arriveTime = new Date(rsYear, rsMonth-1, rsDate, rsHour, rsMinute).getTime();
 console.log(arriveTime);
+    
+    const orderdate = rsYear + "-" + rsMonth + "-" + rsDate;
+    const ordertime = rsHour + "시" + rsMinute + "분";
+
+// const handleOrderdate= (e)=> {
+//     const value = e.target.value;
+//     setOrderdate(value);
+   
+// }
+// const handleOrdertime= (e)=> {
+//     const value = e.target.value;
+//     setOrdertime(value);
+   
+// }
 
     const handlersYear = (e) => {
         const value = e.target.value;
@@ -288,6 +304,9 @@ console.log(arriveTime);
                 orderid: jmuserinfo,
                 ordernumber: localStorage.getItem("orderId"),
                 ordershopId: jmshopId,
+                request: request,
+                orderdate: orderdate,
+                ordertime: ordertime,
                 // orderlist: jmorderlist,
                 // jmid : jmid,
             }),
@@ -404,6 +423,11 @@ console.log(arriveTime);
                 pointcheck={pointcheck}
                 connect={connect}
                 publish={publish}
+                // handleOrderdate={handleOrderdate}
+                // handleOrdertime={handleOrdertime}
+                // ordertime={ordertime}
+                // orderdate={orderdate}
+
                 rsDate={rsDate}
                 handlersDate={handlersDate}
                 

@@ -35,6 +35,14 @@ const Shopsocketlist = ({ list }) => {
                                     <span className="label">● 예약메뉴 : &nbsp;</span>
                                     {list.orderlist}
                                 </div>
+                                <div className="item">
+                                    <span className="label">● 요청사항 : &nbsp;</span>
+                                    {list.request}
+                                </div>
+                                <div className="item">
+                                    <span className="label">● 예약일자 : &nbsp;</span>
+                                    {list.orderdate} {list.ordertime}
+                                </div>
                                 </div>
                                 <button className="but1">수락</button>
                                 <button

@@ -42,6 +42,10 @@ const ShopOrder = ({
     handlersHour,
     rsMinute,
     handlersMinute,
+    // orderdate,
+    // ordertime,
+    // handleOrdertime,
+    // handleOrderdate
 }) => {
 
     const nowYear = moment().format('YYYY');
@@ -127,7 +131,7 @@ const ShopOrder = ({
                                 <div className="subtitle">예약 시간</div>
                                 <div>
                                     <select
-                                    className="input-box1"
+                                        className="input-box1"
                                         value={rsYear}
                                         onChange={handlersYear}
                                     >
