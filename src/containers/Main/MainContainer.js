@@ -85,6 +85,7 @@ const MainContainer = ({ isLogin, handleLogin, handleLogout }) => {
             openModal={openmodal}
             closeModal={closemodal}
             name={user.name}
+            role={user.role}
         />
     );
 };

@@ -32,6 +32,7 @@ const Shopcontent = ({
     Mark,
     MarkDelete,
     removeReview,
+    phone,
 }) => {
     var x = (lat *= 1);
     var y = (lag *= 1);
@@ -79,7 +80,9 @@ const Shopcontent = ({
         isopen_n = "미오픈";
     }
     
-
+    const shopphone1 = phone ? phone.substring(0,3) : '';
+    const shopphone2 = phone ? phone.substring(3, 7) : '';
+    const shopphone3 = phone ? phone.substring(7, 11) : '';
 
     return (
         <>
@@ -190,6 +193,11 @@ const Shopcontent = ({
                                             <div class="shopother7">
                                                 클로즈 시간 :{" "}
                                                 {shopIntro.closeTime}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="shopother9">  
+                                                전화번호 : {shopphone1}-{shopphone2}-{shopphone3}
                                             </div>
                                         </div>
                                         <div>

@@ -447,7 +447,7 @@ export const shopcontentWrap = styled.div`
         margin: 20px auto;
         display: block;
         background-color: white;
-        height: 620px;
+        height: 720px;
     }
     .shopcon_2 {
         position: relative;
@@ -544,6 +544,14 @@ export const shopcontentWrap = styled.div`
         padding-top: 3%;
         padding-bottom: 3%;
         border-bottom: 5px solid #555;
+    }
+    .shopother9 {
+        padding-left: 2%;
+        width: 98%;
+        text-align: left;
+        border-top: 1px solid #e8e8e8;
+        padding-top: 3%;
+        padding-bottom: 3%;
     }
     .menulist {
         position: relative;
