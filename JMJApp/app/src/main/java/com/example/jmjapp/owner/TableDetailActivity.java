@@ -44,6 +44,7 @@ public class TableDetailActivity extends AppCompatActivity {
     private String tabId, shopId, no, tabNo, orderId;
     private char using;
     private Call<Order.OrderMenuList> getOrderMenus;
+    private Call<List<OrderMenu>> listOrderMenuCall;
     private int sum = 0;
 
     private RecyclerView rv_table_detail_list;
@@ -113,14 +114,32 @@ public class TableDetailActivity extends AppCompatActivity {
                         Log.d("orderMenu 성공", "orderMenu 성공");
                         List<OrderMenu> orderMenuList = response.body().getOrderMenuList();
 
+                        int[] menu_price1 = new int[orderMenuList.size()];
+
+                        int index = 0;
+                        int sum = 0;
+
                         for (OrderMenu list : orderMenuList) {
+
+                            if (String.valueOf(list.getMenuPrice()) != null) {
+                                menu_price1[index] = list.getMenuPrice();
+                            }
+
                             mItems.add(new OrderMenu(list.getMenuName(), list.getQuantity()));
                             Log.d("list", response.body().toString());
                             rv_table_detail_list.setHasFixedSize(true);
                             adapter.setItems(mItems);
                             rv_table_detail_list.setLayoutManager(new LinearLayoutManager(getApplication()));
                             rv_table_detail_list.setAdapter(adapter);
+
+                            index++;
                         }
+
+                        for (int i = 0; i < menu_price1.length; i++) {
+                            sum = sum + menu_price1[i];
+                        }
+
+                        binding.tableDetailMenuPrice.setText(String.valueOf(sum) + "원");
                     } else {
                         Log.d("orderMenu 실패1", "orderMenu 실패1" + response.errorBody().string());
                     }
@@ -131,6 +150,23 @@ public class TableDetailActivity extends AppCompatActivity {
                     Log.d("orderMenu 실패2", "orderMenu 실패2");
                 }
             });
+
+//            listOrderMenuCall = Server.getInstance().getApi().order_orderMenu("Bearer " + jwt, orderId);
+//            listOrderMenuCall.enqueue(new retrofit2.Callback<List<OrderMenu>>() {
+//                @Override
+//                public void onResponse(Call<List<OrderMenu>> call, Response<List<OrderMenu>> response) {
+//                    if (response.isSuccessful()) {
+//                        Log.d("주문가격 성공", "주문가격 성공");
+//                    } else {
+//                        Log.d("주문가격 실패1", "주문가격 실패1");
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<List<OrderMenu>> call, Throwable t) {
+//                    Log.d("주문가격 실패2", "주문가격 실패2");
+//                }
+//            });
         }
     };
 

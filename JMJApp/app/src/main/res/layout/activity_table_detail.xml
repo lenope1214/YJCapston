@@ -31,32 +31,32 @@
     </androidx.appcompat.widget.Toolbar>
 
     <!--        <TextView-->
-<!--            android:id="@+id/table_detail_menu_name"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="16dp"-->
-<!--            android:layout_marginLeft="16dp"-->
-<!--            android:layout_marginTop="44dp"-->
-<!--            android:fontFamily="@font/we_semibold"-->
-<!--            android:text="메뉴이름"-->
-<!--            android:textSize="25sp"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/table_detail_no"-->
-<!--            tools:ignore="MissingConstraints" />-->
+    <!--            android:id="@+id/table_detail_menu_name"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginStart="16dp"-->
+    <!--            android:layout_marginLeft="16dp"-->
+    <!--            android:layout_marginTop="44dp"-->
+    <!--            android:fontFamily="@font/we_semibold"-->
+    <!--            android:text="메뉴이름"-->
+    <!--            android:textSize="25sp"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toBottomOf="@+id/table_detail_no"-->
+    <!--            tools:ignore="MissingConstraints" />-->
 
-<!--        <TextView-->
-<!--            android:id="@+id/table_detail_menu_count"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="44dp"-->
-<!--            android:layout_marginEnd="16dp"-->
-<!--            android:layout_marginRight="16dp"-->
-<!--            android:fontFamily="@font/we_semibold"-->
-<!--            android:text="메뉴개수"-->
-<!--            android:textSize="25sp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/table_detail_no"-->
-<!--            tools:ignore="MissingConstraints" />-->
+    <!--        <TextView-->
+    <!--            android:id="@+id/table_detail_menu_count"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="44dp"-->
+    <!--            android:layout_marginEnd="16dp"-->
+    <!--            android:layout_marginRight="16dp"-->
+    <!--            android:fontFamily="@font/we_semibold"-->
+    <!--            android:text="메뉴개수"-->
+    <!--            android:textSize="25sp"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintTop_toBottomOf="@+id/table_detail_no"-->
+    <!--            tools:ignore="MissingConstraints" />-->
 
     <TextView
         android:id="@+id/table_detail_no"
@@ -74,43 +74,45 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_table_detail_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="500dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="8dp"
         android:layout_marginRight="10dp"
         android:nestedScrollingEnabled="false"
         android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout15"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/table_detail_no"
+        app:layout_constraintVertical_bias="0.043"
         tools:ignore="MissingConstraints" />
 
-    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:id="@+id/constraintLayout15"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="2dp"-->
-<!--        android:layout_marginLeft="20dp"-->
-<!--        android:layout_marginRight="20dp"-->
-<!--        android:layout_marginBottom="92dp"-->
-<!--        android:background="@drawable/edge8"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.6"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout15"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="92dp"
+        android:background="@drawable/edge8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/table_detail_menu_price"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="28dp"-->
-<!--        android:layout_marginEnd="16dp"-->
-<!--        android:layout_marginRight="16dp"-->
-<!--        android:fontFamily="@font/we_semibold"-->
-<!--        android:text="메뉴가격"-->
-<!--        android:textSize="25sp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/constraintLayout15"-->
-<!--        tools:ignore="MissingConstraints" />-->
+    <TextView
+        android:id="@+id/table_detail_menu_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:fontFamily="@font/we_semibold"
+        android:text="메뉴가격"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout15"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
