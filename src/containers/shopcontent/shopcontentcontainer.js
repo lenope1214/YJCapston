@@ -412,6 +412,7 @@ const Shopcontentcontainer = ({ isLogin, handleLogin, handleLogout }) => {
             reviewList={reviewList}
             removeReview={removeReview}
             Mark={Mark}
+            phone={shopIntro.phone}
         />
     );
 };

@@ -162,12 +162,16 @@ const Register = ({
                             <div className="label">
                                 사업자체크<span></span>
                                 <input
+                                    title="* 사업자일 경우에만 꼭 체크 해주세요."
                                     type="checkbox"
                                     id="owner"
                                     onChange={handleOwner}
                                     value={owner}
                                     className="check-box"
                                 />
+                            </div>
+                            <div className="owner">
+                                * 사업자일 경우에만 꼭 체크 해주세요.
                             </div>
                         </div>
                         <div className="label">생년월일</div>

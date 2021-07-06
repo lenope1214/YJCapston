@@ -154,4 +154,7 @@ export const RegisterWrap = styled.div`
         height: 25px;
         transform: translateY(5px);
     }
+    .owner{
+        color:red;
+    }
 `;

@@ -26,6 +26,7 @@ const Main = ({
     closeModal,
     modal,
     name,
+    role,
 }) => {
     let delay = false;
     let currentPage = 1;
@@ -197,17 +198,26 @@ const Main = ({
                                     className="dia"
                                 ></img>
                                 <div className="but-box">
+                                    {role=="ROLE_OWNER" ? (
+                                    <>
                                     <Link to="/myshop">
                                         <button className="link-button1">
                                             식당관리
                                         </button>
                                     </Link>
-                                    <br />
-                                    <Link to="/shoplist">
-                                        <button className="link-button2">
+                                    </>
+                                    ) : (
+                                        <>
+                                        <Link to="/shoplist">
+                                        <button className="link-button1">
                                             예약하기
                                         </button>
                                     </Link>
+                                        </>
+                                    )}
+                                    
+                                    <br />
+                                    
                                     <br />
                                     {/* <button className="link-button3">
                                         어플다운
@@ -358,8 +368,9 @@ const Main = ({
                     <footer>
                         <div className="remeber">
                             <label>
-                                <input type="checkbox" />
-                                <span>기억하기</span>
+                                <button className="google-btn">
+                                <a href="3.34.55.186:8088/oauth2/authorization/google" className="google">구글로그인</a>
+                                </button>
                             </label>
                         </div>
                         <div className="login-but-box">

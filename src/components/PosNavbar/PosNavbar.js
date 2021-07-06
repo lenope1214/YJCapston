@@ -9,7 +9,7 @@ const PosNavbar = ({ shopId }) => {
     });
     const openwindow = () => {
         window.open(
-            `http://3.34.55.186:3000/Shopsocketlist/${shopId}`,
+            `http://jumanji.홈페이지.한국/Shopsocketlist/${shopId}`,
             "_blank",
             "location = no, toolbars= no, status= no, width = 500, height = 500 , scrollbars = no"
         );
@@ -42,7 +42,7 @@ const PosNavbar = ({ shopId }) => {
                                     sessionStorage.getItem("access_token")
                                 );
                                 window.open(
-                                    `http://3.34.55.186:3000/Shopsocketlist/${shopId}`,
+                                    `http://jumanji.홈페이지.한국/Shopsocketlist/${shopId}`,
                                     "_blank",
                                     "location = no, toolbars= no, status= no, width = 500, height = 500 , scrollbars = no"
                                 );

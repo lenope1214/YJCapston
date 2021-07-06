@@ -43,7 +43,8 @@ const Login = ({ id, pw, handleId, handlePw, login, isLogin }) => {
                             <div>
                                 <label>
                                     <input type="checkbox" />
-                                    <span>기억하기</span>
+                                    <span>?</span>
+                                    <a href="3.34.55.186:8088/oauth2/authorization/google">구글로그인</a>
                                 </label>
                             </div>
                             <button onClick={login}>로그인</button>

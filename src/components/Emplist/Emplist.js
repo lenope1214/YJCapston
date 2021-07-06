@@ -15,6 +15,9 @@ nowTime,
 removeemp,
 realTime
 }) => {
+
+    let a = null;
+
     
     return(
         <>
@@ -45,6 +48,11 @@ realTime
                     )}
 
                     {!!emps.length && emps.map((emp) => {
+                        if(emp.gender == "M"){
+                            a = "남자";
+                       }else {
+                           a = "여자";
+                       }
                         return (
                             <tr>
                                 <td className="body-item-2">{emp.empNo}</td>
@@ -56,7 +64,7 @@ realTime
                                 <td className="body-item-3">{emp.birthday}</td>
                                 <td className="body-item-4">{emp.hiredate}</td>
                                 <td className="body-item-5">{emp.phone}</td>
-                                <td className="body-item-6">{emp.gender}</td>
+                                <td className="body-item-6">{a}</td>
                               
                                 <td className="body-item-7" onClick={async () => {
                                                     const res = await removeemps(

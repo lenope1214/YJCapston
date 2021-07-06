@@ -195,6 +195,32 @@ export const shopOrder = styled.div`
         font-size: 17px;
         margin-bottom: 10px;
     }
+    .input-box1{
+        width: 100px;
+        height: 36px;
+        border-radius: 5px;
+        border: 1px solid gray;
+        font-size: 17px;
+        margin-bottom: 10px;
+    }
+    .input-box2 {
+        width: 100px;
+        height: 36px;
+        border-radius: 5px;
+        border: 1px solid gray;
+        font-size: 17px;
+        margin-bottom: 10px;
+        margin-left:10px;
+    }
+    .input-box3 {
+        width: 300px;
+        height: 36px;
+        border-radius: 5px;
+        border: 1px solid gray;
+        font-size: 17px;
+        margin-bottom: 10px;
+        margin-left:20px;
+    }
     .subtitle {
         font-size: 18px;
     }

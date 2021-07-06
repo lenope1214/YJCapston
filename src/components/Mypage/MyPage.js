@@ -7,7 +7,8 @@ import DaumPostcode from "react-daum-postcode";
 import topimg from "../Main/img/QRcode2.png";
 import { ordermenulist, requirelist} from "../../lib/MyPage";
 import {getOrderId} from "../../containers/MyPage/MyPageContainer";
-
+import moment from 'moment';
+import 'moment/locale/ko';
 const MyPage = ({
     Pw,
     handlePw,
@@ -181,7 +182,9 @@ const MyPage = ({
                                 </div> */}
 
                             {jmlist.map((jmlist2) => {
-                                console.log(jmlist2);
+                                const arriveTime = new Date (jmlist2.jmarriveTime);
+                                const arriveTime2 = moment(arriveTime).format("YYYY-MM-DD HH:mm");
+                                console.log(arriveTime2);
                                 if(jmlist2.jmstatus == "rf"){
                                     a = "환불완료";
                                     b = 'review-button-none';
@@ -198,8 +201,9 @@ const MyPage = ({
                                                 {jmlist2.jmid}
                                             </td>
                                             <td className="orderitem2">
-                                                {/* 00:00 */}
+                                            {arriveTime2}
                                             </td>
+                                          
                                             <td className="orderitem3">
                                                 {jmlist2.jmpeople}
                                                 <span className="won">명</span>
