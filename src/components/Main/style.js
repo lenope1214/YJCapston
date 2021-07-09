@@ -58,6 +58,19 @@ export const LoginWrap = styled.div`
         background: gray;
         color: white;
     }
+    a {
+        text-decoration: none;
+        color: white;
+    }
+    .google-btn {
+        width: 245px;
+        margin-left: 8px;
+        height: 40px;
+        color: white;
+        background: #1785f2;
+        border: none;
+        margin-bottom: -10px;
+    }
 `;
 
 export const MainWrap = styled.div`
@@ -417,6 +430,9 @@ ul{
       display: block;
       float:right;
       margin-right: 20%;
+  }
+  .google-btn {
+      width: 600px;
   }
 
 `;

@@ -200,8 +200,11 @@ const PaymentDone = ({
                     <footer>
                         <div className="remeber">
                             <label>
-                                <input type="checkbox" />
-                                <span>기억하기</span>
+                            <label>
+                                <button className="google-btn">
+                                <a href="3.34.55.186:8088/oauth2/authorization/google" className="google">구글로그인</a>
+                                </button>
+                            </label>
                             </label>
                         </div>
                         <div className="login-but-box">
