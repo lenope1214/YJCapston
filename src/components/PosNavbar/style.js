@@ -21,9 +21,9 @@ export const PosNavbarWrap = styled.div`
         top: 0;
         left: 0;
         right: 0;
-        padding: 1rem;
+        padding: 16px;
         font-weight: bold;
-        background-color: #41d1e1;
+        background-color: #555555;
         height: 20px;
         color: white;
         margin-top: 146px;
@@ -34,12 +34,14 @@ export const PosNavbarWrap = styled.div`
         list-style: none;
         height: 100%;
         margin-left: -20px;
+        color: white;
     }
     .pos-item {
         position: relative;
         height: 100%;
         width: 25%;
         float: left;
+        color: white;
         text-align: center;
     }
     .pos-item1 {
@@ -47,10 +49,16 @@ export const PosNavbarWrap = styled.div`
         height: 100%;
         width: 25%;
         float: left;
-        color: black;
+        color: white;
         text-align: center;
+        cursor: pointer;
     }
     pos-item1:hover {
         color: darkgray;
+        cursor: pointer;
+    }
+
+    .why1 {
+        margin-left: -10px;
     }
 `;

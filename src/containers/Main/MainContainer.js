@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import Main from "../../components/Main/Main";
 import { useHistory } from "react-router-dom";
 import { postLogin } from "../../lib/Main/index";
+import { getMyInfo } from "../../lib/ShopOrder";
 
 const MainContainer = ({ isLogin, handleLogin, handleLogout }) => {
     const history = useHistory();
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
     const [modal, setModal] = useState(false);
+    const [user, setUser] = useState("");
 
     const openmodal = () => {
         setModal(true);
@@ -27,6 +29,20 @@ const MainContainer = ({ isLogin, handleLogin, handleLogout }) => {
         setPw(value);
     };
     console.log(isLogin);
+
+    useEffect(() => {
+        getMyPage();
+    }, []);
+
+    const getMyPage = () => {
+        getMyInfo()
+            .then((res) => {
+                setUser(res.data.user);                     
+            })
+            .catch((err) => {
+                
+            });
+    };
 
     const login = () => {
         postLogin(id, pw)
@@ -68,6 +84,8 @@ const MainContainer = ({ isLogin, handleLogin, handleLogout }) => {
             login={login}
             openModal={openmodal}
             closeModal={closemodal}
+            name={user.name}
+            role={user.role}
         />
     );
 };

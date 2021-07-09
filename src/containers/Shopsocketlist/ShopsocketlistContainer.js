@@ -59,13 +59,14 @@ const ShopsocketlistContainer = (props) => {
             let request = JSON.parse(body).request;
             let orderdate = JSON.parse(body).orderdate;
             let ordertime = JSON.parse(body).ordertime;
+            
 
             // console.log(JSON.parse(body).ordernumber);
 
             setlist((prev) => {
                 return [
                     ...prev,
-                    { ordernumber, orderid, orderlist, orderphone, shopId, request,ordertime,orderdate },
+                    { ordernumber, orderid, orderlist, orderphone, shopId, request,ordertime,orderdate},
                 ];
             });
 

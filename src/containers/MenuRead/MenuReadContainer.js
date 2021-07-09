@@ -71,6 +71,7 @@ export const MenuReadContainer = (props) => {
                     // cancelButtonText: '취소'
                   }).then((result) => {
                     if (result.value) {
+
                     }
                   })
             });

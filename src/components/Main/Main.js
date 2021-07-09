@@ -11,9 +11,11 @@ import item1 from "./img/C_QRITEM.png";
 import item2 from "./img/C_RESITEM.png";
 import item3 from "./img/C_CHATITEM.png";
 import $ from "jquery";
-//npm install --save jquery 설치하기
+import GoogleLogin from 'react-google-login';
+// npm i react-google-login 
+// yarn add react-google-login
 window.$ = $;
-
+const clientId = "1048529450072-biomd2b5ak4h1l94m0sqvmgvcc7eilf7.apps.googleusercontent.com";
 const Main = ({
     isLogin,
     logout,
@@ -25,7 +27,30 @@ const Main = ({
     login,
     closeModal,
     modal,
+    name,
+    role,
+    onSocial
 }) => {
+    let delay = false;
+    let currentPage = 1;
+    let pageCount = $(".section").length;
+
+    const onSuccess = async(response) => {
+    	console.log(response);
+    
+        const { googleId, profileObj : { email, name } } = response;
+        
+        await onSocial({
+            socialId : googleId,
+            socialType : 'google',
+            email,
+            nickname : name
+        });
+    }
+
+    const onFailure = (error) => {
+        console.log(error);
+    }
     // function getWindowDimensions() {
     //     const { innerWidth: width, innerHeight: height } = window;
     //     return {
@@ -53,9 +78,7 @@ const Main = ({
     // const { height, width } = useWindowDimensions();
 
     // $(document).ready(function() {
-    //     var delay = false;
-    //     var currentPage = 1;
-    //     var pageCount = $(".section").length;
+
     //     var swipe = document.getElementsByTagName('.section');
 
     //     $(document).on('mousewheel DOMMouseScroll', function(event) {
@@ -79,7 +102,7 @@ const Main = ({
     //               }
     //           }
     //           if (currentPage == 1) {
-    //               window.scrollTo({top:0, left: 0, behavior: "smooth"})
+    //               document.scrollTo({top:0, left: 0, behavior: "smooth"})
     //               $('.scroll-down').removeClass('none');
     //               $('.title').removeClass('black');
     //               $('.link').removeClass('black');
@@ -128,18 +151,18 @@ const Main = ({
                         </div>
                         <span className="link">사업자</span>
                         <span className="link">사용자</span>
-                        <span className="link">어플다운</span>
+                        {/* <span className="link">어플다운</span> */}
                         <div className="log-box">
                             {isLogin ? (
                                 <>
                                     <Link to="/mypage">
-                                        <button
-                                            className="log-but"
+                                       <button
+                                            className="log-but p"
                                             onClick={() => {
                                                 window.scrollTo(0, 0);
                                             }}
                                         >
-                                            MY PAGE
+                                            {name}
                                         </button>
                                     </Link>
                                     <button
@@ -171,11 +194,11 @@ const Main = ({
                             )}
                         </div>
                     </div>
-                    <ul class="ul">
+                    {/* <ul class="ul">
                         <li id="tag1" class="active"></li>
                         <li id="tag2"></li>
                         <li id="tag3"></li>
-                    </ul>
+                    </ul> */}
                     <div className="scroll-down">∨</div>
                     <div className="section" id="sec1">
                         <div className="adimg">
@@ -185,8 +208,8 @@ const Main = ({
                             <div className="videotext">
                                 <p className="vt0">THE</p>
                                 <p className="vt1">
-                                    PEOPLE<span className="of"> OF</span> THE
-                                    ORDER
+                                    PEOPLE<span className="of"> OF</span>
+                                    &nbsp;ORDER
                                 </p>
                                 <img
                                     src={dia}
@@ -195,21 +218,30 @@ const Main = ({
                                     className="dia"
                                 ></img>
                                 <div className="but-box">
+                                    {role=="ROLE_OWNER" ? (
+                                    <>
                                     <Link to="/myshop">
                                         <button className="link-button1">
                                             식당관리
                                         </button>
                                     </Link>
-                                    <br />
-                                    <Link to="/shoplist">
-                                        <button className="link-button2">
+                                    </>
+                                    ) : (
+                                        <>
+                                        <Link to="/shoplist">
+                                        <button className="link-button1">
                                             예약하기
                                         </button>
                                     </Link>
+                                        </>
+                                    )}
+                                    
                                     <br />
-                                    <button className="link-button3">
+                                    
+                                    <br />
+                                    {/* <button className="link-button3">
                                         어플다운
-                                    </button>
+                                    </button> */}
                                     <br />
                                 </div>
                             </div>
@@ -310,9 +342,9 @@ const Main = ({
                                     로그인하러 가기
                                 </button>
                                 <br />
-                                <button className="button-1">
+                                {/* <button className="button-1">
                                     어플다운하러 가기
-                                </button>
+                                </button> */}
                             </div>
                         </div>
                     </div>
@@ -355,18 +387,20 @@ const Main = ({
                     </main>
                     <footer>
                         <div className="remeber">
-                            <label>
-                                <input type="checkbox" />
-                                <span>기억하기</span>
-                            </label>
+                        <GoogleLogin
+                clientId={clientId}
+                responseType={"id_token"}
+                onSuccess={onSuccess}
+                onFailure={onFailure}/>
+                            <button onClick={closeModal} className="login-but">
+                                닫기
+                            </button>
                         </div>
                         <div className="login-but-box">
                             <button onClick={login} className="login-but">
                                 로그인
                             </button>
-                            <button onClick={closeModal} className="login-but">
-                                닫기
-                            </button>
+                            
                         </div>
                     </footer>
                 </S.LoginWrap>

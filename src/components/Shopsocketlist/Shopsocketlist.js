@@ -1,9 +1,19 @@
 import React from "react";
-import { requirelist2 } from "../../lib/MyPage";
+import { requirelist, requirelist2 } from "../../lib/MyPage";
 import * as S from "./style";
+import $ from "jquery";
+//npm install --save jquery 설치하기
+window.$ = $;
 
 const Shopsocketlist = ({ list }) => {
-    
+    $('.but-box').removeClass('hidden');
+    $('.card').removeClass('hidden');
+    // $(document).ready(function(){
+
+    // })
+    const accept = () => {
+        $('.but-box').addClass('hidden');
+    }
     return (
         <>
         <S.SocketListWrap>
@@ -36,16 +46,12 @@ const Shopsocketlist = ({ list }) => {
                                     <span className="label">● 예약메뉴 : &nbsp;</span>
                                     {list.orderlist}
                                 </div>
-                                <div className="item">
-                                    <span className="label">● 요청사항 : &nbsp;</span>
-                                    {list.request}
                                 </div>
-                                <div className="item">
-                                    <span className="label">● 예약일자 : &nbsp;</span>
-                                    {list.orderdate} {list.ordertime}
-                                </div>
-                                </div>
-                                <button className="but1">수락</button>
+                                <div className="but-box">
+
+                                <button className="but1"
+                                onClick={async () => {accept()}}>수락</button>
+
                                 <button
                                     onClick={async () => {
                                         const res = await requirelist2(
@@ -53,17 +59,15 @@ const Shopsocketlist = ({ list }) => {
                                             list.shopId
                                         ).then((res) => {
                                             alert("취소 완료");
-                                            console.log(res.data.response.status);
-                                            if (res.data.response.merchantUid){
-                                                
-                                            }
-                                            
+                                            $('.card').addClass('hidden');
+                                            console.log(res.data);
                                         });
                                     }}
                                     className="but2"
                                 >
                                     거절
                                 </button>
+                                </div>
                             </div>
                         );
                     })}

@@ -44,7 +44,16 @@ const MenuListContainer = (props) => {
                 console.log(menu.id);
             })
             .catch((err) => {
-                alert("MenuListContainer Err");
+                Swal.fire({
+                    title: '등록된 메뉴가 없습니다.',
+                    text: "메뉴를 추가해주세요!",
+                    icon: 'info',
+                    // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
+                    confirmButtonText: '확인',
+                    // cancelButtonText: '취소'
+                })
             });
     };
 

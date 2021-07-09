@@ -53,14 +53,14 @@ export const EmpbarWrap = styled.div`
 }
 .menu-4{
     position: fixed;
-    background-color:#282828;
+    background-color:#444444;
     color:white;
     border:white;
     position:absolute;
     left:0px;
     top:503px;
     width:100px;
-   height:150px;
+   height:400px;
 }
 button:hover{
     // background-color:#8AC1F2;

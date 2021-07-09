@@ -396,7 +396,7 @@ export const ShoplistWrap = styled.div`
     }
     .mainimg img {
         width: 100%;
-        height: 550px;
+        height: 500px;
         margin: 0 auto;
         margin-bottom: 0;
     }
@@ -601,11 +601,12 @@ export const ShoplistWrap = styled.div`
         height:30px;
     }
     .slide-container {
-        height: 504px;
+        margin-top: 50px;
+        height: 500px;
     }
 
     .each-slide {
-        height: 504px;
+        height: 500px;
     }
 
     .slide-img {

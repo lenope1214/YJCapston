@@ -1,6 +1,13 @@
 import styled from "styled-components";
 
 export const saleslistWrap = styled.div`
+
+@font-face {
+    font-family: 'LAB디지털';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/LAB디지털.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
     .left-container{
         position:absolute;
         margin-top:200px;
@@ -10,7 +17,7 @@ export const saleslistWrap = styled.div`
         border-right:10px solid #DDDDDD;
     }
     .right-container {
-        border-left:10px solid #DDDDDD;
+        border-left:5px solid #DDDDDD;
         position:absolute;
         margin-left:35%;
         margin-top:200px;
@@ -134,5 +141,64 @@ export const saleslistWrap = styled.div`
        
         width:80%;
         height:70%;
+    }
+    .search-box {
+        margin-left: 20px;
+    }
+
+    .input-box {
+        width: 130px;
+        padding: 2px;
+    }
+
+    .button {
+        background: #333333;
+        color: white;
+        border: 0;
+        padding: 5px;
+        margin-top: 4px;
+        transform: translateY(2px);
+        margin-left: 1px;
+        width: 137px;
+    }
+
+    .result-box {
+        text-align: center;
+        border: 1px solid black;
+        margin: 0 20px 0 20px;
+        margin-top: 80px;
+        height: 120px;
+        color: white;
+        border: 0px;
+        background: #333333;
+        padding: 5px;
+        border-radius: 10px;
+    }
+    
+    .type {
+        margin-top: 5px;
+        text-align: left;
+        margin-left: 10px;
+        font-size: 15px;
+    }
+
+    .money {
+        margin-top: 24px;
+        font-size: 30px;
+        font-family: 'LAB디지털';
+    }
+
+    .but-box {
+        margin-bottom: 12px;
+    }
+
+    .sub-title {
+        margin-top: 15px;
+        margin-left: 20px;
+        font-size: 18px;
+        margin-bottom: -20px;
+        border-bottom: 1px solid gray;
+        width: 80px;
+        padding-bottom: 5px;
     }
 `;

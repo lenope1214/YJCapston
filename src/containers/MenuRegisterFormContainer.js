@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import MenuRegisterForm from "../components/MenuRegisterForm/MenuRegisterForm";
-import OwnerNavbar from "../components/OwnerMenubar/OwnerNavbar";
 import { useHistory } from "react-router";
 import Header from "../components/Header/Header";
 import { apiDefault } from "../lib/client";
+import Swal from 'sweetalert2';
 
 const MenuRegisterFormContainer = (props) => {
     const history = useHistory();

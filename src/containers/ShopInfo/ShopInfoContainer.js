@@ -29,6 +29,7 @@ const ShopInfoContainer = (props) => {
     const [shopAddressDetail, setShopAddressDetail] = useState(null);
     const [shopIsRsPos, setShopIsRsPos] = useState(null);
     const [shopCategory, setShopCategory] = useState(null);
+    const [Phone, setPhone] =useState(null);
     const [roadAddr, setRoadAddr] = useState("주소를 입력하세요.");
     const [modal, setModal] = useState(false);
     const [showLocation, setShowLocation] = useState([
@@ -54,6 +55,10 @@ const ShopInfoContainer = (props) => {
         const value = e.target.value;
         setShopIntro(value);
     };
+    const handlePhone = (e) => {
+        const value = e.target.value;
+        setPhone(value);
+    }
     const handlePhone1 = (e) => {
         const value = e.target.value;
         setPhone1(value);
@@ -172,7 +177,7 @@ const ShopInfoContainer = (props) => {
             shopOpenTime,
             shopCloseTime,
             // shopAddress,
-            phone,
+            Phone,
             roadAddr,
             shopAddressDetail
             // shopCategory
@@ -359,6 +364,7 @@ const ShopInfoContainer = (props) => {
                 modal={modal}
                 openModal={openmodal}
                 closeModal={closemodal}
+                handlePhone={handlePhone}
                 handlePhone1={handlePhone1}
                 handlePhone2={handlePhone2}
                 handlePhone3={handlePhone3}

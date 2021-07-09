@@ -111,7 +111,8 @@ const MenuRegisterFormContainer = (props) => {
                 }
               })
         })
-        .catch((err) => {Swal.fire({
+        .catch((err) => {
+            Swal.fire({
             title: '메뉴 추가 실패',
             text: "메뉴 추가에 실패하였습니다.",
             icon: 'error',

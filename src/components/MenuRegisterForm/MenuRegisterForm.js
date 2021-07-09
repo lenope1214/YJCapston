@@ -23,41 +23,41 @@ const MenuRegisterForm = ({
     let i = 0;
     let g = 0;
 
-    // 그룹 추가 버튼 이벤트
-    const addGroup = () => {
-        $(document).ready(function(){
-            $('.addGroupbut').unbind("click");
-            $('.addGroupbut').bind("click",function(){
-                i++;
-                $(".groupbox").append("<hr width='400px'/>")
-                $(".groupbox").append("<div class='label'>그룹명</div>")
-                $(".groupbox").append("<input type='text' id='g"+i+"'/><br/>")
-                // $(".groupbox").append("<div class='label'>옵션 추가</div>")
-                // $(".groupbox").append("<div class='inputbox"+i+"'></div><br/>")
-                // $(".groupbox").append("<input type='button' value='추가' class='addinputbut" + i +"' /><br/>")   
-                // console.log("그룹 i = "+i);
-            });
-        });
-    }
+    // // 그룹 추가 버튼 이벤트
+    // const addGroup = () => {
+    //     $(document).ready(function(){
+    //         $('.addGroupbut').unbind("click");
+    //         $('.addGroupbut').bind("click",function(){
+    //             i++;
+    //             $(".groupbox").append("<hr width='400px'/>")
+    //             $(".groupbox").append("<div class='label'>그룹명</div>")
+    //             $(".groupbox").append("<input type='text' id='g"+i+"'/><br/>")
+    //             // $(".groupbox").append("<div class='label'>옵션 추가</div>")
+    //             // $(".groupbox").append("<div class='inputbox"+i+"'></div><br/>")
+    //             // $(".groupbox").append("<input type='button' value='추가' class='addinputbut" + i +"' /><br/>")   
+    //             // console.log("그룹 i = "+i);
+    //         });
+    //     });
+    // }
 
-    // 옵션 추가 버튼 이벤트      
-        $('.groupbox').off('click').on("click", ".addinputbut1", function(){
-            g++
-                $(".inputbox1").append("<input type='text' id='v"+g+"'/><br/>")
-        })
+    // // 옵션 추가 버튼 이벤트      
+    //     $('.groupbox').off('click').on("click", ".addinputbut1", function(){
+    //         g++
+    //             $(".inputbox1").append("<input type='text' id='v"+g+"'/><br/>")
+    //     })
 
-        $('.groupbox').on("click", ".addinputbut2", function(){
-            g++
-                $(".inputbox2").append("<input type='text' id='v"+g+"'/><br/>")
-        })
-        $('.groupbox').on("click", ".addinputbut3", function(){
-            g++
-                $(".inputbox3").append("<input type='text' id='v"+g+"'/><br/>")
-        })
-        $('.groupbox').on("click", ".addinputbut4", function(){
-            g++
-                $(".inputbox4").append("<input type='text' id='v"+g+"'/><br/>")
-        })
+    //     $('.groupbox').on("click", ".addinputbut2", function(){
+    //         g++
+    //             $(".inputbox2").append("<input type='text' id='v"+g+"'/><br/>")
+    //     })
+    //     $('.groupbox').on("click", ".addinputbut3", function(){
+    //         g++
+    //             $(".inputbox3").append("<input type='text' id='v"+g+"'/><br/>")
+    //     })
+    //     $('.groupbox').on("click", ".addinputbut4", function(){
+    //         g++
+    //             $(".inputbox4").append("<input type='text' id='v"+g+"'/><br/>")
+    //     })
 
     return (
         <>
@@ -132,24 +132,24 @@ const MenuRegisterForm = ({
                                     </div>
                                     </div>
                                     
-                                    <div className="label">그룹 추가</div>
+                                    {/* <div className="label">그룹 추가</div> */}
 
                                     {/* 그룹추가 되는 영역 */}
-                                    <div className="groupbox">
+                                    {/* <div className="groupbox">
                                         
-                                    </div>
+                                    </div> */}
 
                                     {/* 그룹추가 버튼 */}
-                                    <input type="button" value="그룹추가" className="addGroupbut" onClick={addGroup()}/>
+                                    {/* <input type="button" value="그룹추가" className="addGroupbut" onClick={addGroup()}/> */}
                                     
-                                    <div className="label">옵션 추가</div>
+                                    {/* <div className="label">옵션 추가</div> */}
                                     
                                     {/* 옵션추가 영역 */}
-                                    <div className="inputbox">
-                                    </div>
+                                    {/* <div className="inputbox">
+                                    </div> */}
 
                                     {/* 옵션추가 버튼 */}
-                                    <input type="button" value="추가" className="addinputbut"/>
+                                    {/* <input type="button" value="추가" className="addinputbut"/> */}
                     </form>
                     <div className="button-box">
                         <button onClick={menu_v1} className="button3">추가</button>

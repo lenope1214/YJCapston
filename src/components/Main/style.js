@@ -58,6 +58,19 @@ export const LoginWrap = styled.div`
         background: gray;
         color: white;
     }
+    a {
+        text-decoration: none;
+        color: white;
+    }
+    .google-btn {
+        width: 245px;
+        margin-left: 8px;
+        height: 40px;
+        color: white;
+        background: #1785f2;
+        border: none;
+        margin-bottom: -10px;
+    }
 `;
 
 export const MainWrap = styled.div`
@@ -129,6 +142,9 @@ body {
     color: white;
     cursor: pointer;
 }
+.p {
+    margin-top: 36px;
+}
 .adimg {
     position: absolute;
     margin-top: 0px;
@@ -163,19 +179,19 @@ body {
 .vt0 {
     color: white;
     text-align: center;
-    font-size: 32px;
+    font-size: 36px;
 }
 
 .vt1 {
     transform: translateY(-40px);
-    font-size: 60px;
+    font-size: 64px;
     color: white;
     font-weight: bold;
 }
 
 .vt2 {
     transform: translateY(-5vh);
-    font-size: 24px;
+    font-size: 28px;
     color: white;
 }
 .dia {
@@ -203,8 +219,8 @@ body {
 .link-button1 {
     transform: translateY(-50px);
     margin-top: 10px;
-    width: 360px;
-    height: 48px;
+    width: 410px;
+    height: 68px;
     background: #FF5050;
     border: 2px solid #FF5050;
     color: white;
@@ -216,9 +232,9 @@ body {
 
 .link-button2 {
     transform: translateY(-50px);
-    margin-top: 10px;
-    width: 360px;
-    height: 48px;
+    margin-top: 20px;
+    width: 410px;
+    height: 68px;
     background: none;
     border: 2px solid white;
     color: white;
@@ -385,7 +401,7 @@ ul{
     font-size: 30px;
     font-weight: bold;
     margin-left: 20px;
-    margin-bottom: 5vh;
+    margin-bottom: 4vh;
   }
   .left11 {
       margin-left: 50px;
@@ -405,15 +421,18 @@ ul{
       height: 80px;
       background: none;
       border: 2px solid black;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
       font-size: 18px;
       cursor: pointer;
   }
   .right {
-      transform: translateY(-35vh);
+      transform: translateY(-28vh);
       display: block;
       float:right;
       margin-right: 20%;
+  }
+  .google-btn {
+      width: 600px;
   }
 
 `;

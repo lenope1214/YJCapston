@@ -32,6 +32,7 @@ const Shopcontent = ({
     Mark,
     MarkDelete,
     removeReview,
+    phone,
 }) => {
     var x = (lat *= 1);
     var y = (lag *= 1);
@@ -79,7 +80,9 @@ const Shopcontent = ({
         isopen_n = "미오픈";
     }
     
-
+    const shopphone1 = phone ? phone.substring(0,3) : '';
+    const shopphone2 = phone ? phone.substring(3, 7) : '';
+    const shopphone3 = phone ? phone.substring(7, 11) : '';
 
     return (
         <>
@@ -193,6 +196,11 @@ const Shopcontent = ({
                                             </div>
                                         </div>
                                         <div>
+                                            <div class="shopother9">  
+                                                전화번호 : {shopphone1}-{shopphone2}-{shopphone3}
+                                            </div>
+                                        </div>
+                                        <div>
                                             <div class="shopother8">
                                                 주소 : {shopIntro.address}{" "}
                                                 {shopIntro.addressDetail}
@@ -207,7 +215,7 @@ const Shopcontent = ({
                                                 <button className="chatbut"
                                                     onClick={() =>
                                                         window.open(
-                                                            `http://3.34.55.186:3000/chat/${shopIntro.shopId}`,
+                                                            `http://jumanji.홈페이지.한국/chat/${shopIntro.shopId}`,
                                                             "_blank",
                                                             "location = no, toolbars= no, status= no, width = 400, height = 500 , scrollbars = no"
                                                         )
@@ -475,8 +483,9 @@ const Shopcontent = ({
                     <footer>
                         <div className="remeber">
                             <label>
-                                <input type="checkbox" />
-                                <span>기억하기</span>
+                                <button className="google-btn">
+                                <a href="3.34.55.186:8088/oauth2/authorization/google" className="google">구글로그인</a>
+                                </button>
                             </label>
                         </div>
                         <div className="login-but-box">

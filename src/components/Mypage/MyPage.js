@@ -7,7 +7,8 @@ import DaumPostcode from "react-daum-postcode";
 import topimg from "../Main/img/QRcode2.png";
 import { ordermenulist, requirelist} from "../../lib/MyPage";
 import {getOrderId} from "../../containers/MyPage/MyPageContainer";
-
+import moment from 'moment';
+import 'moment/locale/ko';
 const MyPage = ({
     Pw,
     handlePw,
@@ -41,6 +42,9 @@ const MyPage = ({
     const [orderid, setorderid] = useState();
 
     let a = null;
+    let b = null;
+    let c = null;
+    let d = null;
 
     return (
         <>
@@ -178,11 +182,17 @@ const MyPage = ({
                                 </div> */}
 
                             {jmlist.map((jmlist2) => {
-                                console.log(jmlist2);
+                                const arriveTime = new Date (jmlist2.jmarriveTime);
+                                const arriveTime2 = moment(arriveTime).format("YYYY-MM-DD HH:mm");
+                                console.log(arriveTime2);
                                 if(jmlist2.jmstatus == "rf"){
                                     a = "환불완료";
+                                    b = 'review-button-none';
+                                    c = 'delete-button-none';
                                 }else{
                                     a = "결제완료";
+                                    b = 'review-button';
+                                    c = 'delete-button';
                                 }
                                 return (
                                     <div className="orderlist-item">
@@ -191,8 +201,9 @@ const MyPage = ({
                                                 {jmlist2.jmid}
                                             </td>
                                             <td className="orderitem2">
-                                                00:00
+                                            {arriveTime2}
                                             </td>
+                                          
                                             <td className="orderitem3">
                                                 {jmlist2.jmpeople}
                                                 <span className="won">명</span>
@@ -202,7 +213,7 @@ const MyPage = ({
                                             </td>
                                             <td className="orderitem5">
                                                 <Link to={`/addreview/${jmlist2.jmshopId}/${jmlist2.jmid}`}>
-                                                <button className="review-button"
+                                                <button className={b}
                                                 >리뷰쓰기</button>
                                                 </Link>
                                             </td>
@@ -232,7 +243,7 @@ const MyPage = ({
 
                                             <td className="orderitem4-button">
                                                 <button
-                                                    className="delete-button"
+                                                    className={c}
                                                     onClick={async () => {
                                                         const res = await requirelist(
                                                             jmlist2.jmid
@@ -247,6 +258,8 @@ const MyPage = ({
                                                     취소
                                                 </button>
                                             </td>
+                                            {/* 디자인 수정 */}
+                                            {/* <td>{jmlist2.jmorderRequest}</td> */}
                                         </tr>
                                     </div>
                                 );

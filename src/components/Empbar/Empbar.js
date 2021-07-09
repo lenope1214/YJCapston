@@ -28,6 +28,7 @@ const Empbar = ({shopId}) => {
             <NavLink to={"/emptimelist/"+thisShopId}>
             <button className="menu-3">근무시간<br/> 리스트</button>
             </NavLink>
+            <div className="menu-4"></div>
         </div>    
          </div> 
 
