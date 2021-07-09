@@ -258,7 +258,7 @@ public class PaymentResultActivity extends AppCompatActivity {
 
             Log.d("qweasd","Qweasd");
 
-            idArray.put(0, "cYaNDpf1TZI:APA91bEkwmKV3ZmwPsv6TPg99NpeeaqyFWxjsjJfJiRcjmI6R1Ap66v3kPa5enm9M2WdRf-nB7v5ATJxjxLOJ6xMZ1wPNy5cNNdIX76A6vFGlYow_FRJ_N_sF_ADb3khb1pj73onDKoh");
+            idArray.put(0, "cc2AJr2H-MI:APA91bFjpQu8I_QdOr1wepmi2xCh-UqdGA4iJKkUEZZtwdDmXob1KYL7-5zGpuJ-pnLhn72usaEINLr3NZzGuGkiifzsnz8L82vLMGHHdN_vHmFMJ_MOmnbVOhcW8EK5BD5Cbg19ZM-W");
             requestData.put("registration_ids", idArray);
         } catch (Exception e) {
             e.printStackTrace();

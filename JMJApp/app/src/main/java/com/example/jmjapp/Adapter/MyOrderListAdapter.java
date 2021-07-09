@@ -83,12 +83,12 @@ public class MyOrderListAdapter extends RecyclerView.Adapter<MyOrderListAdapter.
             context.startActivity(intent);
         });
 
-        if (my_order_list_isAccept == 'N') {
+        if (my_order_list_isAccept == 'N' && mItems.get(position).getStatus().equals("pd")) {
             holder.my_order_list_isAccept.setText("주문 대기 중");
-        } else if (my_order_list_isAccept == 'Y') {
+        } else if (my_order_list_isAccept == 'Y' && mItems.get(position).getStatus().equals("pd")) {
             holder.my_order_list_isAccept.setText("주문완료");
             holder.my_order_list_isAccept.setTextColor(Color.parseColor("#33FA01"));
-        } else if (mItems.get(position).getStatus().equals("rf")) {
+        } else if (my_order_list_isAccept == 'N' && mItems.get(position).getStatus().equals("rf")) {
             holder.my_order_list_isAccept.setText("주문취소(환불)");
         }
     }

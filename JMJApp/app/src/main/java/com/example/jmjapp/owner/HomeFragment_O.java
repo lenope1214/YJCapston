@@ -411,8 +411,8 @@ public class HomeFragment_O extends Fragment {
                                     cal.add(Calendar.MINUTE, -1);
                                     today = simpleDateFormat.format(cal.getTime());
 
-//                            sendNotification(list_orderId[i]);
-//                            isThread = false;
+                            sendNotification(list_orderId[i]);
+                            isThread = false;
 
                                     if ((simpleDateFormat.parse(list_payTime[i]).equals(time) || simpleDateFormat.parse(list_payTime[i]).before(time))
                                             && simpleDateFormat.parse(list_payTime[i]).after(simpleDateFormat.parse(today))) {

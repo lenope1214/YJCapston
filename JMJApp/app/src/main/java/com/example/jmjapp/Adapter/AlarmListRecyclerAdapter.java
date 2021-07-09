@@ -289,7 +289,7 @@ public class AlarmListRecyclerAdapter extends RecyclerView.Adapter<AlarmListRecy
             requestData.put("data", dataObj);
             JSONArray idArray = new JSONArray();
 
-            idArray.put(0, "e2U0YJ5oWqc:APA91bEZoL2QEKKfNoNpXtYhT5tqxlSTl2H2vTtnsUo-G9eBXeLoiPTtMay_JLg6dDAHELs-UTqNFj62ZZiflBDdcbNQf-Lva6bFTrJbC8ueGtzGX6M5mGCSTVkDHO9_yPbGj8GZsfDD");
+            idArray.put(0, "dBQhgexlcJ0:APA91bGYorRaPqrOSnu8V1YIJWUp1YjNbIxQRpkXKno2bPISev8H0j9IGVnVxp7_yaTf6r26PC056hOpw0ok2lrJftrkDjOCprZUD36Z-n4cCVQkQdjznKdBNr8T9razUkQemycgL1eB");
             requestData.put("registration_ids", idArray);
         } catch (Exception e) {
             e.printStackTrace();
