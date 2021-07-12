@@ -11,9 +11,11 @@ import item1 from "./img/C_QRITEM.png";
 import item2 from "./img/C_RESITEM.png";
 import item3 from "./img/C_CHATITEM.png";
 import $ from "jquery";
-//npm install --save jquery 설치하기
+import GoogleLogin from 'react-google-login';
+// npm i react-google-login 
+// yarn add react-google-login
 window.$ = $;
-
+const clientId = "1048529450072-biomd2b5ak4h1l94m0sqvmgvcc7eilf7.apps.googleusercontent.com";
 const Main = ({
     isLogin,
     logout,
@@ -27,10 +29,28 @@ const Main = ({
     modal,
     name,
     role,
+    onSocial
 }) => {
     let delay = false;
     let currentPage = 1;
     let pageCount = $(".section").length;
+
+    const onSuccess = async(response) => {
+    	console.log(response);
+    
+        const { googleId, profileObj : { email, name } } = response;
+        
+        await onSocial({
+            socialId : googleId,
+            socialType : 'google',
+            email,
+            nickname : name
+        });
+    }
+    sessionStorage.setItem("accesstoken", "googleId");
+    const onFailure = (error) => {
+        console.log(error);
+    }
     // function getWindowDimensions() {
     //     const { innerWidth: width, innerHeight: height } = window;
     //     return {
@@ -367,11 +387,12 @@ const Main = ({
                     </main>
                     <footer>
                         <div className="remeber">
-                            <label>
-                                <button className="google-btn">
-                                <a href="3.34.55.186:8088/oauth2/authorization/google" className="google">구글로그인</a>
-                                </button>
-                            </label>
+                            <GoogleLogin
+                                clientId={clientId}
+                                responseType={"id_token"}
+                                onSuccess={onSuccess}
+                                onFailure={onFailure}
+                            />
                         </div>
                         <div className="login-but-box">
                             <button onClick={login} className="login-but">

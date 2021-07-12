@@ -44,7 +44,8 @@ export const LoginWrap = styled.div`
         margin-left: 20px;
     }
     .remeber {
-        margin: 10px 0 20px 20px;
+        margin: 10px 0px 20px 20px;
+        padding-left: 35px;
     }
     .login-but-box {
         width: 100%;
