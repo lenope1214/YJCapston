@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as S from "./style";
 import { Link } from "react-router-dom";
+import {onSocial} from "../../lib/Main/index";
 import { debounce, throttle } from "lodash";
 import steak from "./img/backvideo.mp4";
 import dia from "./img/dia.png";
@@ -28,8 +29,7 @@ const Main = ({
     closeModal,
     modal,
     name,
-    role,
-    onSocial
+    role
 }) => {
     let delay = false;
     let currentPage = 1;
@@ -51,6 +51,8 @@ const Main = ({
     const onFailure = (error) => {
         console.log(error);
     }
+
+    
     // function getWindowDimensions() {
     //     const { innerWidth: width, innerHeight: height } = window;
     //     return {
