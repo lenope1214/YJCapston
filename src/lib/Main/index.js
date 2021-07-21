@@ -6,3 +6,9 @@ export const postLogin = (id, pw) => {
         password: pw,
     });
 };
+export const postSNSLogin = (profile_id) => {
+    return apiDefault().post("/oauth/login", {
+        provider: 'google',
+        providerId: profile_id,
+    });
+};

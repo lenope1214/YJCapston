@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as S from "./style";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { debounce, throttle } from "lodash";
 import steak from "./img/backvideo.mp4";
 import dia from "./img/dia.png";
@@ -12,9 +12,16 @@ import item2 from "./img/C_RESITEM.png";
 import item3 from "./img/C_CHATITEM.png";
 import $ from "jquery";
 import GoogleLogin from 'react-google-login';
+import { KAKAO_AUTH_URL } from "./OAuth";
+import KaKaoLogin from 'react-kakao-login';
+import axios from "axios";
+import KakaoLogin from "react-kakao-login";
+import { postSNSLogin } from "../../lib/Main";
 // npm i react-google-login 
 // yarn add react-google-login
+//npm install react-kakao-login
 window.$ = $;
+
 const clientId = "1048529450072-biomd2b5ak4h1l94m0sqvmgvcc7eilf7.apps.googleusercontent.com";
 const Main = ({
     isLogin,
@@ -31,114 +38,59 @@ const Main = ({
     role,
     onSocial
 }) => {
-    let delay = false;
-    let currentPage = 1;
-    let pageCount = $(".section").length;
+    const { Kakao } = window;
+    const onSuccess = async ({ response, profile }) => {
+        console.log(response);
+        console.log(profile);
+        console.log(profile.id);
+        console.log(response.access_token);
+        postSNSLogin(profile.id);
+        // await axios.post('http://3.34.55.186:8088/api/v1/oauth/login')
+        // const { googleId, profileObj : { email, name } } = response;
 
-    const onSuccess = async(response) => {
-    	console.log(response);
-    
-        const { googleId, profileObj : { email, name } } = response;
-        
-        await onSocial({
-            socialId : googleId,
-            socialType : 'google',
-            email,
-            nickname : name
-        });
+        // await onSocial({
+        //     socialId : googleId,
+        //     socialType : 'google',
+        //     email,
+        //     nickname : name
+        // });
     }
     sessionStorage.setItem("accesstoken", "googleId");
+    const _clickSnsLoginKakao = (e) => {
+        let kakaoid = e.profile.id; // 카카오에서 제공한 ID
+    };
     const onFailure = (error) => {
         console.log(error);
     }
-    // function getWindowDimensions() {
-    //     const { innerWidth: width, innerHeight: height } = window;
-    //     return {
-    //         width,
-    //         height,
-    //     };
-    // }
-    // function useWindowDimensions() {
-    //     const [windowDimensions, setWindowDimensions] = useState(
-    //         getWindowDimensions()
-    //     );
 
-    //     useEffect(() => {
-    //         function handleResize() {
-    //             setWindowDimensions(getWindowDimensions());
-    //         }
+    const history = useHistory();
 
-    //         window.addEventListener("resize", handleResize);
-    //         return () => window.removeEventListener("resize", handleResize);
-    //     }, []);
-
-    //     return windowDimensions;
-    // }
-
-    // const { height, width } = useWindowDimensions();
-
-    // $(document).ready(function() {
-
-    //     var swipe = document.getElementsByTagName('.section');
-
-    //     $(document).on('mousewheel DOMMouseScroll', function(event) {
-    //           event.preventDefault();
-    //           if (delay) return;
-    //           delay = true;
-    //           setTimeout(function() { delay = false }, 100)
-
-    //           var wd = event.originalEvent.wheelDelta || -event.originalEvent.detail;
-    //           console.log(wd);
-
-    //           if (wd < 0) {
-    //               if (currentPage < pageCount) {
-    //                   currentPage++;
-    //                   console.log(currentPage);
-    //               }
-    //           } else {
-    //               if (1 < currentPage) {
-    //                   currentPage--;
-    //                   console.log(currentPage);
-    //               }
-    //           }
-    //           if (currentPage == 1) {
-    //               document.scrollTo({top:0, left: 0, behavior: "smooth"})
-    //               $('.scroll-down').removeClass('none');
-    //               $('.title').removeClass('black');
-    //               $('.link').removeClass('black');
-    //               $('.log-but').removeClass('black');
-    //               $('#tag1').removeClass('black2');
-    //             $('#tag2').removeClass('black2');
-    //             $('#tag3').removeClass('black2');
-    //           } else if (currentPage == 2) {
-    //               window.scrollTo({top: height, left: 0, behavior: "smooth"})
-    //               $('.scroll-down').removeClass('none');
-    //               $('.title').removeClass('black');
-    //               $('.link').removeClass('black');
-    //               $('.log-but').removeClass('black');
-    //               $('#tag1').removeClass('black2');
-    //             $('#tag2').removeClass('black2');
-    //             $('#tag3').removeClass('black2');
-    //           } else if (currentPage == 3) {
-    //             window.scrollTo({top: height*2.1, left: 0, behavior: "smooth"})
-    //             $('.scroll-down').addClass('none');
-    //             $('.title').addClass('black');
-    //             $('.link').addClass('black');
-    //             $('.log-but').addClass('black');
-    //             $('#tag1').addClass('black2');
-    //             $('#tag2').addClass('black2');
-    //             $('#tag3').addClass('black2');
-    //         }
-
-    //           $('#tag' + currentPage).addClass('active');
-    //           for (var i = 1; i <= pageCount; i++) {
-    //               if (i != currentPage) {
-    //                   $('#tag' + i).removeClass('active');
-    //               }
-    //           }
-    //       });
-    //   });
-
+    const kakaoLoginClickHandler = () => {
+        Kakao.Auth.login({
+            success: function (authObj) {
+                axios('http://3.34.55.186:8088/api/v1/oauth/login', {
+                    method: "POST",
+                    body: JSON.stringify({
+                        access_token: authObj.access_token,
+                    }),
+                })
+                    .then(res => res.json())
+                    .then(res => {
+                        localStorage.setItem("Kakao_token", res.access_token);
+                        console.log(res.access_token)
+                        if (res.access_token) {
+                            alert("소셜 로그인 성공");
+                            history.push("/");
+                        }
+                    })
+                console.log("성공" + authObj);
+            },
+            fail: function (err) {
+                alert(JSON.stringify(err))
+                console.log("실패" + err);
+            },
+        })
+    }
     return (
         <>
             <S.MainWrap>
@@ -156,7 +108,7 @@ const Main = ({
                             {isLogin ? (
                                 <>
                                     <Link to="/mypage">
-                                       <button
+                                        <button
                                             className="log-but p"
                                             onClick={() => {
                                                 window.scrollTo(0, 0);
@@ -218,26 +170,26 @@ const Main = ({
                                     className="dia"
                                 ></img>
                                 <div className="but-box">
-                                    {role=="ROLE_OWNER" ? (
-                                    <>
-                                    <Link to="/myshop">
-                                        <button className="link-button1">
-                                            식당관리
-                                        </button>
-                                    </Link>
-                                    </>
+                                    {role == "ROLE_OWNER" ? (
+                                        <>
+                                            <Link to="/myshop">
+                                                <button className="link-button1">
+                                                    식당관리
+                                                </button>
+                                            </Link>
+                                        </>
                                     ) : (
                                         <>
-                                        <Link to="/shoplist">
-                                        <button className="link-button1">
-                                            예약하기
-                                        </button>
-                                    </Link>
+                                            <Link to="/shoplist">
+                                                <button className="link-button1">
+                                                    예약하기
+                                                </button>
+                                            </Link>
                                         </>
                                     )}
-                                    
+
                                     <br />
-                                    
+
                                     <br />
                                     {/* <button className="link-button3">
                                         어플다운
@@ -345,7 +297,7 @@ const Main = ({
                                 {/* <button className="button-1">
                                     어플다운하러 가기
                                 </button> */}
-                            </div>
+                            </div>ll
                         </div>
                     </div>
                 </div>
@@ -387,12 +339,24 @@ const Main = ({
                     </main>
                     <footer>
                         <div className="remeber">
-                            <GoogleLogin
+                            {/* <GoogleLogin
                                 clientId={clientId}
                                 responseType={"id_token"}
                                 onSuccess={onSuccess}
                                 onFailure={onFailure}
-                            />
+                            /> */}
+                            <KakaoLogin
+                                jsKey='5e39040caa05ad9f5d76f83af56e5b21'
+                                onSuccess={onSuccess}
+                                onFailure={onFailure}
+                            >
+                            </KakaoLogin>
+                            {/* <button>
+                                <a href={KAKAO_AUTH_URL}>카카오계정 로그인</a>
+                            </button>
+                            <article className="socialLogin">
+                                <button onClick={kakaoLoginClickHandler}>카톡 로그인</button>
+                            </article> */}
                         </div>
                         <div className="login-but-box">
                             <button onClick={login} className="login-but">
